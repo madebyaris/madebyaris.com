@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'madebyaris.com',
+        hostname: 'wp.madebyaris.com',
         port: '',
         pathname: '/wp-content/uploads/**',
       },
