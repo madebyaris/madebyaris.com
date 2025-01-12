@@ -6,6 +6,8 @@ import { Footer } from "@/components/footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
 import "./globals.css";
+import { SpeedInsights } from "@vercel/speed-insights/next"
+
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -70,6 +72,7 @@ export default function RootLayout({
             <Footer />
           </div>
         </ThemeProvider>
+        <SpeedInsights/>
       </body>
     </html>
   );
