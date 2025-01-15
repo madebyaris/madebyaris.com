@@ -72,7 +72,7 @@ export async function getPosts(params: PaginationParams = {}): Promise<Post[]> {
 
 export async function getProjects(params: PaginationParams = {}): Promise<Project[]> {
   try {
-    return await fetchAPI<Project[]>('mba_project', {
+    return await fetchAPI<Project[]>('project', {
       _embed: '1',
       per_page: params.per_page || 9,
       page: params.page || 1

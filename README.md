@@ -1,108 +1,109 @@
-# Madebyaris.com - Open Source Personal Portfolio
+# 🚀 Madebyaris.com - Open Source Portfolio
 
-## 🌟 Portfolio Purpose
+✨ A modern, high-performance personal portfolio built with cutting-edge web technologies. Showcasing professional skills, projects, and technical expertise.
 
-This open-source portfolio is a showcase of my professional journey, technical skills, and passion for web development. Built with modern web technologies, it serves multiple purposes:
+## 🌟 Features
 
-### 🚀 Professional Branding
-- Demonstrate technical expertise in Next.js, React, and modern web technologies
-- Provide a comprehensive view of my projects, skills, and professional identity
-- Create an interactive and visually appealing representation of my work
+### 🎨 Stunning Visuals
+- 🌓 Dark/Light mode with system preference
+- ✨ Aurora background animations
+- 🎆 Sparkles effects
+- 🖼️ Responsive image optimization
 
-### 🔍 Key Features
-- Responsive design with mobile-first approach
-- Dark/light mode support
-- Serverless architecture
-- Dynamic project and blog content
-- Optimized performance and accessibility
+### ⚡ Performance
+- 🚀 Next.js 15 with Turbopack
+- 📦 Optimized bundle size
+- ⏱️ Instant page transitions
+- 📊 Vercel Speed Insights
 
-### 💡 Technology Showcase
+### 🛠️ Tech Stack
 - **Framework**: Next.js 15 (App Router)
 - **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **UI Components**: Radix UI, Shadcn UI
-- **State Management**: React Hooks
+- **Styling**: Tailwind CSS + Tailwind Animate
+- **UI Components**: Radix UI + Shadcn UI
 - **Animations**: Framer Motion
+- **CMS**: WordPress REST API
+- **Fonts**: Geist + Plus Jakarta Sans
 
-## 🛠 Prerequisites
+### 📚 Content Management
+- 🖋️ Blog posts integration
+- 🏗️ Projects showcase
+- 🔗 Custom post types
+- 🔄 Automatic content revalidation
 
-Before you begin, ensure you have the following installed:
-- Node.js (v20+)
-- pnpm (v9.15.3+)
+## 🛠️ Development Setup
 
-## 🚀 Installation
+### 📋 Prerequisites
+- Node.js v20+
+- pnpm v9.15.3+
 
-### 1. Clone the Repository
-
+### 🚀 Quick Start
 ```bash
+# Clone repository
 git clone https://github.com/madebyaris/madebyaris.com.git
 cd madebyaris.com
-```
 
-### 2. Install Dependencies
-
-```bash
-# Install pnpm globally (if not already installed)
-npm install -g pnpm
-
-# Install project dependencies
+# Install dependencies
 pnpm install
-```
 
-### 3. Environment Setup
-
-Create a `.env.local` file for environment variables:
-
-```bash
-touch .env.local
-```
-
-Add any required environment configurations to this file.
-
-### 4. Run Development Server
-
-```bash
-# Start development server with Turbopack
+# Start development server
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+### 🔧 Environment Variables
+Create `.env.local` with:
+```bash
+NEXT_PUBLIC_WP_API_URL="your-wordpress-api-url"
+```
 
-## 📦 Available Scripts
+## 📦 Scripts
+| Command       | Description                          |
+|---------------|--------------------------------------|
+| `pnpm dev`    | Start development server             |
+| `pnpm build`  | Create production build              |
+| `pnpm start`  | Start production server              |
+| `pnpm lint`   | Run ESLint                           |
+| `pnpm format` | Format code with Prettier            |
 
-- `pnpm dev`: Start development server
-- `pnpm build`: Create production build
-- `pnpm start`: Start production server
-- `pnpm lint`: Run ESLint
+## 🏗️ Project Structure
+```
+madebyaris.com/
+├── app/                # App router pages
+│   ├── about/          # About page
+│   ├── blog/           # Blog section
+│   ├── projects/       # Projects showcase
+│   └── contact/        # Contact page
+├── components/         # Reusable components
+├── lib/                # Utilities and API clients
+├── public/             # Static assets
+└── styles/             # Global styles
+```
 
 ## 🌐 Deployment
-
-Recommended platforms:
-- Vercel (Recommended)
-- Netlify
-- Cloudflare Pages
+### Recommended Platforms:
+- 🚀 [Vercel](https://vercel.com)
+- 🕸️ [Netlify](https://netlify.com)
+- ☁️ [Cloudflare Pages](https://pages.cloudflare.com)
 
 ## 🤝 Contributing
+We welcome contributions! Please follow these steps:
+1. 🍴 Fork the repository
+2. 🌿 Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. 💾 Commit changes (`git commit -m 'Add some AmazingFeature'`)
+4. 📤 Push to branch (`git push origin feature/AmazingFeature`)
+5. 🔀 Open a Pull Request
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📄 License
-
-Distributed under the MIT License.
+## 📜 License
+MIT License - See [LICENSE](LICENSE) for more information.
 
 ## 📬 Contact
+Aris - [arissetia.m@gmail.com](mailto:arissetia.m@gmail.com)
 
-Aris - [Your Contact Information]
+**Project Link**: [https://github.com/madebyaris/madebyaris.com](https://github.com/madebyaris/madebyaris.com)
 
-**Project Link**: [https://github.com/madebyaris/madebyaris.com](https://github.com/yourusername/madebyaris.com)
-
-## 🙏 Acknowledgements
-
-- [Next.js](https://nextjs.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Radix UI](https://www.radix-ui.com/)
-- [Shadcn UI](https://ui.shadcn.com/)
+## 🙏 Acknowledgments
+- [Next.js](https://nextjs.org/) - The React Framework
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [Radix UI](https://www.radix-ui.com/) - Primitives for building UIs
+- [Shadcn UI](https://ui.shadcn.com/) - Beautifully designed components
+- [Framer Motion](https://www.framer.com/motion/) - Animation library
