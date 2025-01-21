@@ -73,6 +73,7 @@ export interface Project {
 }
 
 export interface PaginationParams {
-  page?: number
   per_page?: number
+  page?: number
+  _fields?: string[]
 }

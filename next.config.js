@@ -1,14 +1,20 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['wp.madebyaris.com', 'wp.madebyaris.com'], // Add your WordPress domain
-    // Optional: Add more granular configuration
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'wp.madebyaris.com',
-        pathname: '/wp-content/uploads/**',
+        port: '',
+        pathname: '/**',
       },
+      // Add any other domains you need to support
+      {
+        protocol: 'https',
+        hostname: 'secure.gravatar.com',
+        port: '',
+        pathname: '/**',
+      }
     ],
   },
 }
