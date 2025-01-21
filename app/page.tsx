@@ -3,12 +3,14 @@ import { Suspense } from 'react'
 import { getPosts } from '@/lib/wordpress'
 import { HomeContent } from '@/components/home-content'
 import { ClientHero } from '@/components/client-hero'
-import CaseStudiesCarousel  from '@/components/case-studies-carousel'
+import { CaseStudiesWrapper } from '@/components/case-studies-wrapper'
 
-// Server Components
+// Optimize Posts component
 async function Posts() {
   try {
-    const posts = await getPosts({ per_page: 3 })
+    const posts = await getPosts({ 
+      per_page: 3
+    })
     return <HomeContent type="posts" initialData={posts} />
   } catch (error) {
     console.error('Failed to load posts:', error)
@@ -16,26 +18,24 @@ async function Posts() {
   }
 }
 
-// Server Component
 export default function HomePage() {
   return (
     <main className="flex flex-col w-full">
-      {/* Hero Section - Full width background with contained content */}
-      <ClientHero />
+      <Suspense fallback={<div className="h-[calc(100vh-4rem)]" />}>
+        <ClientHero />
+      </Suspense>
       
-      {/* Case Studies Carousel Section */}
       <section className="w-full py-3">
         <div className="w-full max-w-[980px] mx-auto px-4 sm:px-6 lg:px-8">
-          <CaseStudiesCarousel />
+          <Suspense fallback={<div className="h-[300px]" />}>
+            <CaseStudiesWrapper />
+          </Suspense>
         </div>
       </section>
 
-      {/* Spacer Section */}
-      <section className="w-full h-[500px]"></section>
+      <section className="w-full h-[500px]" />
 
-      {/* Main content */}
       <div className="w-full max-w-[980px] px-4 sm:px-6 lg:px-8 py-8 md:py-12 lg:py-24 mx-auto">
-        {/* Latest Posts Section */}
         <section>
           <div className="mb-8 flex items-center justify-between gap-4">
             <div>

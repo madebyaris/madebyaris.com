@@ -9,6 +9,7 @@ if (!WP_API_URL) {
 export interface PaginationParams {
   page?: number
   per_page?: number
+  _fields?: string[]
 }
 
 async function fetchAPI<T>(endpoint: string, params: Record<string, string | number> = {}): Promise<T> {
@@ -59,11 +60,32 @@ export async function getPost(slug: string): Promise<Post | null> {
 
 export async function getPosts(params: PaginationParams = {}): Promise<Post[]> {
   try {
-    return await fetchAPI<Post[]>('posts', {
-      _embed: '1',
-      per_page: params.per_page || 9,
-      page: params.page || 1
-    })
+    const searchParams = new URLSearchParams()
+    
+    if (params.per_page) {
+      searchParams.set('per_page', params.per_page.toString())
+    }
+    
+    if (params.page) {
+      searchParams.set('page', params.page.toString())
+    }
+
+    if (params._fields) {
+      searchParams.set('_fields', params._fields.join(','))
+    }
+
+    searchParams.set('_embed', 'true')
+
+    const response = await fetch(
+      `${WP_API_URL}/wp/v2/posts?${searchParams.toString()}`,
+      { next: { revalidate: 3600 } }
+    )
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch posts')
+    }
+
+    return response.json()
   } catch (error) {
     console.error('Failed to fetch posts:', error)
     return []
