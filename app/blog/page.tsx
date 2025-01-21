@@ -34,8 +34,8 @@ export default async function BlogPage() {
   }
 
   return (
-    <div className="container">
-      <div className="mx-auto max-w-[980px] py-8 md:py-12 lg:py-24">
+    <div className="container mx-auto max-w-[980px] px-4 sm:px-6 lg:px-8">
+      <div className="py-8 md:py-12 lg:py-24">
         <div className="flex flex-col gap-4">
           <h1 className="text-3xl font-bold leading-tight tracking-tighter md:text-5xl">
             Blog

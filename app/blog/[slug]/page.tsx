@@ -72,8 +72,8 @@ export default async function BlogPostPage(props: { params: Promise<{ slug: stri
     const featuredImage = post._embedded?.['wp:featuredmedia']?.[0]
 
     return (
-      <article className="container">
-        <div className="mx-auto max-w-[780px] py-8 md:py-12 lg:py-24">
+      <article className="container mx-auto max-w-[980px] px-4 sm:px-6 lg:px-8">
+        <div className="py-8 md:py-12 lg:py-24">
           <Link
             href="/blog"
             className="mb-8 inline-flex items-center text-sm text-muted-foreground hover:text-foreground"

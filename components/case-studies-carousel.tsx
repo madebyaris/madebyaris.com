@@ -16,7 +16,7 @@ interface CaseStudy {
 const caseStudies: CaseStudy[] = [
   {
     title: "Building Once UI, a Customizable Design System",
-    description: "Development of a flexible and highly customizable design system using Next.js for front-end and Figma for design collaboration.",
+    description: "Development of a flexible and highly customizable design system using Next.js.",
     image: "/case-1.png",
     authors: [
       { avatar: "/aris.png" },
@@ -89,7 +89,7 @@ const CaseStudiesCarousel = () => {
                 </div>
                 <div className="grid md:grid-cols-2 gap-8 md:gap-16">
                   <div>
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+                    <h2 className="text-2xl md:text-3xl lg:text-3xl font-bold dark:text-white text-black mb-4">
                       {study.title}
                     </h2>
                   </div>
