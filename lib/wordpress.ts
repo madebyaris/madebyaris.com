@@ -18,7 +18,7 @@ async function fetchAPI<T>(endpoint: string, params: Record<string, string | num
       queryString.append(key, String(value))
     })
 
-    const url = `${WP_API_URL}/wp/v2/${endpoint}${queryString.toString() ? `?${queryString}` : ''}`
+    const url = `${WP_API_URL}/wp/v2/${endpoint}/${queryString.toString() ? `?${queryString}` : ''}`
     console.log('Fetching URL:', url) // Debug log
 
     const response = await fetch(url, { 

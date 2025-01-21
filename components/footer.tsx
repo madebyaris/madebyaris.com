@@ -4,7 +4,7 @@ import Link from 'next/link'
 export function Footer() {
   return (
     <footer className="border-t">
-      <div className="container flex h-16 items-center justify-between py-4">
+      <div className="container flex h-16 items-center justify-between py-4 w-full max-w-[980px] mx-auto">
         <div className="flex items-center justify-start gap-4">
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} MadeByAris. All rights reserved.
