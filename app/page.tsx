@@ -20,20 +20,23 @@ async function Posts() {
 export default function HomePage() {
   return (
     <main className="flex flex-col w-full">
+      {/* Hero Section - Full width background with contained content */}
       <ClientHero />
       
       {/* Case Studies Carousel Section */}
-      <section className="w-full py-3 bg-muted relative z-10">
-        <div className="w-full max-w-[980px] mx-auto px-4">
+      <section className="w-full py-3">
+        <div className="w-full max-w-[980px] mx-auto px-4 sm:px-6 lg:px-8">
           <CaseStudiesCarousel />
         </div>
-        <div className="w-full max-w-[980px] mx-auto pb-10 relative z-10"></div>
       </section>
 
+      {/* Spacer Section */}
+      <section className="w-full h-[500px]"></section>
+
       {/* Main content */}
-      <div className="w-full max-w-[980px] px-4 py-8 md:py-12 lg:py-24 mx-auto md:mt-[15%]">
+      <div className="w-full max-w-[980px] px-4 sm:px-6 lg:px-8 py-8 md:py-12 lg:py-24 mx-auto">
         {/* Latest Posts Section */}
-        <section className="mt-20">
+        <section>
           <div className="mb-8 flex items-center justify-between gap-4">
             <div>
               <h2 className="text-2xl font-bold tracking-tighter md:text-3xl">
