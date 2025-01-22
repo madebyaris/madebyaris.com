@@ -11,8 +11,8 @@ export function transformWordPressContent(content: string, baseUrl: string = 'ht
   // Transform headings
   transformedContent = transformedContent.replace(
     /<h([1-6])[^>]*>(.*?)<\/h\1>/g,
-    (_, level, text) => {
-      const sizes = {
+    (_, level: string, text) => {
+      const sizes: Record<string, string> = {
         '1': 'text-4xl mb-6 mt-8',
         '2': 'text-3xl mb-5 mt-8',
         '3': 'text-2xl mb-4 mt-6',
@@ -33,11 +33,11 @@ export function transformWordPressContent(content: string, baseUrl: string = 'ht
   // Transform lists
   transformedContent = transformedContent
     .replace(
-      /<ul[^>]*>(.*?)<\/ul>/gs,
+      /<ul[^>]*>(.*?)<\/ul>/g,
       '<ul class="list-disc pl-6 mb-4 space-y-2">$1</ul>'
     )
     .replace(
-      /<ol[^>]*>(.*?)<\/ol>/gs,
+      /<ol[^>]*>(.*?)<\/ol>/g,
       '<ol class="list-decimal pl-6 mb-4 space-y-2">$1</ol>'
     )
 
@@ -60,14 +60,14 @@ export function transformWordPressContent(content: string, baseUrl: string = 'ht
 
   // Transform blockquotes
   transformedContent = transformedContent.replace(
-    /<blockquote[^>]*>(.*?)<\/blockquote>/gs,
+    /<blockquote[^>]*>(.*?)<\/blockquote>/g,
     '<blockquote class="border-l-4 border-primary pl-4 italic my-6">$1</blockquote>'
   )
 
   // Transform code blocks
   transformedContent = transformedContent
     .replace(
-      /<pre[^>]*>(.*?)<\/pre>/gs,
+      /<pre[^>]*>(.*?)<\/pre>/g,
       '<pre class="bg-muted p-4 rounded-lg overflow-x-auto my-6">$1</pre>'
     )
     .replace(
@@ -77,8 +77,8 @@ export function transformWordPressContent(content: string, baseUrl: string = 'ht
 
   // Transform tables
   transformedContent = transformedContent
-    .replace(
-      /<table[^>]*>(.*?)<\/table>/gs,
+      .replace(
+        /<table[^>]*>(.*?)<\/table>/g,
       '<table class="w-full border-collapse my-6">$1</table>'
     )
     .replace(
