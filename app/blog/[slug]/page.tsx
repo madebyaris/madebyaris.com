@@ -8,15 +8,15 @@ import { getPost } from '@/lib/wordpress'
 import { transformWordPressContent } from '@/lib/utils'
 
 interface BlogPostPageProps {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
-export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const params = await props.params;
+export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+  const { slug } = await params
   try {
-    const post = await getPost(params.slug)
+    const post = await getPost(slug)
     
     if (!post) {
       return {
@@ -28,29 +28,11 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
     const seo = post.rank_math_seo
     const featuredImage = post._embedded?.['wp:featuredmedia']?.[0]?.source_url
 
-    if (seo) {
-      return {
-        title: seo.title || post.title.rendered,
-        description: seo.description || post.excerpt.rendered,
-        openGraph: {
-          images: [
-            {
-              url: featuredImage || '/og.png',
-            },
-          ],
-        },
-      }
-    }
-
     return {
-      title: post.title.rendered,
-      description: post.excerpt.rendered,
+      title: seo?.title || post.title.rendered,
+      description: seo?.description || post.excerpt.rendered,
       openGraph: {
-        images: [
-          {
-            url: featuredImage || '/og.png',
-          },
-        ],
+        images: [{ url: featuredImage || '/og.png' }],
       },
     }
   } catch (error) {
@@ -61,8 +43,9 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
   }
 }
 
-export default async function BlogPost({ params }: { params: { slug: string } }) {
-  const post = await getPost(params.slug)
+export default async function BlogPost({ params }: BlogPostPageProps) {
+  const { slug } = await params
+  const post = await getPost(slug)
   
   if (!post) {
     notFound()
