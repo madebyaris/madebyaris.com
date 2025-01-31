@@ -63,12 +63,18 @@ export async function sendContactEmail(formData: FormData) {
     })
 
     if (!result?.data?.id) {
+      console.error('Resend API Response:', result)
       throw new Error('Failed to send email: No confirmation ID received')
     }
 
     return { success: true }
   } catch (error) {
     console.error('Error sending email:', error)
+    console.error('Environment variables:', {
+      hasApiKey: !!process.env.RESEND_API_KEY,
+      hasEmailTo: !!process.env.EMAIL_TO,
+      emailToValue: process.env.EMAIL_TO
+    })
     return {
       error: 'Failed to send email. Please try again later.'
     }
