@@ -158,8 +158,8 @@ export default function AboutPage() {
       <div className="py-8 md:py-12 lg:py-24">
         <div className="flex flex-col gap-8">
           {/* Hero Section */}
-          <div className="flex flex-col-reverse md:flex-row gap-8 items-center">
-            <div className="flex-1">
+          <div className="flex flex-col md:flex-row gap-8 items-center">
+            <div className="flex-1 text-center md:text-left">
               <h1 className="text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/50">
                 Full Stack Developer
               </h1>
@@ -167,17 +167,19 @@ export default function AboutPage() {
                 Crafting robust web solutions with Next.js and modern backend technologies
               </p>
             </div>
-            <Sparkles>
-              <div className="relative w-48 h-48 rounded-full overflow-hidden border-4 border-primary/20">
-                <Image
-                  src="/astro.png"
-                  alt="Aris Setiawan"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </div>
-            </Sparkles>
+            <div className="mb-8 md:mb-0">
+              <Sparkles>
+                <div className="relative w-48 h-48 rounded-full overflow-hidden border-4 border-primary/20 md:transform-none transform scale-x-[-1] translate-x-[-1rem]">
+                  <Image
+                    src="/astro.png"
+                    alt="Aris Setiawan"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                </div>
+              </Sparkles>
+            </div>
           </div>
 
           <div className="prose prose-gray dark:prose-invert max-w-none">

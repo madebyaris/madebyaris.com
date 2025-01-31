@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2025-01-16
+
+### Added
+- Integrated Resend for secure email handling
+- Implemented rate limiting for contact form submissions
+- Added input validation for contact form
+- Enhanced real-time form status feedback
+
+### Security
+- Added secure email submission handling
+- Implemented rate limiting protection
+- Enhanced input validation for contact form
+
 ## [1.1.0] - 2025-01-15
 
 ### Changed

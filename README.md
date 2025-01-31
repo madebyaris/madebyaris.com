@@ -54,7 +54,14 @@ pnpm dev
 Create `.env.local` with:
 ```bash
 NEXT_PUBLIC_WP_API_URL="your-wordpress-api-url"
+RESEND_API_KEY="your-resend-api-key"
 ```
+
+### 📧 Contact Form
+- 📨 Secure email submission via Resend
+- 🔒 Rate limiting protection
+- ✅ Input validation
+- 🚦 Real-time form status
 
 ## 📦 Scripts
 | Command       | Description                          |

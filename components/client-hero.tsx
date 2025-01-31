@@ -22,7 +22,7 @@ export function ClientHero() {
           className="relative flex flex-col w-full max-w-[980px] mx-auto px-4 sm:px-6 lg:px-8"
         >
           <div className="flex flex-col gap-6 max-w-3xl">
-            <div className="flex items-start justify-between gap-8">
+            <div className="flex  flex-col-reverse items-center md:items-start md:flex-row md:justify-between gap-8">
               <div className="flex-1">
                 <h1 className="text-5xl md:text-8xl font-bold tracking-tight dark:text-white">
                   Next.js ✨ WordPress Engineer
