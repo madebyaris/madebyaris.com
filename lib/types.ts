@@ -45,6 +45,16 @@ export interface Post {
   rank_math_title?: string
   rank_math_description?: string
   rank_math_seo?: RankMathSEO
+  tags?: Array<{
+    id: number
+    name: string
+    slug: string
+  }>
+  categories?: Array<{
+    id: number
+    name: string
+    slug: string
+  }>
 }
 
 export interface Project {
