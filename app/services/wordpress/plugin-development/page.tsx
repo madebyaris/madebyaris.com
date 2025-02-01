@@ -60,7 +60,7 @@ const processSteps = [
 // Structured Data
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": "Service",
+  "@type": "WebPage",
   "name": "WordPress Plugin Development Services",
   "description": "Custom WordPress plugin development services for unique business needs. Expert in creating secure, scalable, and maintainable WordPress plugins.",
   "provider": {
@@ -69,33 +69,93 @@ const structuredData = {
     "jobTitle": "WordPress Plugin Developer",
     "url": "https://madebyaris.com"
   },
-  "serviceType": "WordPress Plugin Development",
-  "areaServed": "Worldwide",
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "WordPress Plugin Services",
-    "itemListElement": [
-      {
-        "@type": "Offer",
-        "name": "Custom Plugin Development",
-        "description": "Tailored WordPress plugins"
-      },
-      {
-        "@type": "Offer",
-        "name": "Plugin Maintenance",
-        "description": "Updates and support"
-      },
-      {
-        "@type": "Offer",
-        "name": "Plugin Integration",
-        "description": "Third-party integrations"
-      },
-      {
-        "@type": "Offer",
-        "name": "Plugin Optimization",
-        "description": "Performance tuning"
-      }
-    ]
+  "mainEntity": {
+    "@type": "Service",
+    "name": "WordPress Plugin Development",
+    "serviceType": "WordPress Plugin Development",
+    "areaServed": "Worldwide",
+    "provider": {
+      "@type": "Person",
+      "name": "Aris Setiawan",
+      "jobTitle": "WordPress Plugin Developer",
+      "url": "https://madebyaris.com"
+    },
+    "offers": {
+      "@type": "Offer",
+      "description": "Professional WordPress plugin development services",
+      "availability": "https://schema.org/InStock"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "WordPress Plugin Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Custom Plugin Development",
+            "description": "Tailored WordPress plugins for specific business needs"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Plugin Maintenance",
+            "description": "Regular updates and support for WordPress plugins"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Plugin Integration",
+            "description": "Third-party API and service integrations"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Plugin Optimization",
+            "description": "Performance tuning and code optimization"
+          }
+        }
+      ]
+    }
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "WordPress Plugin Development",
+    "description": "Professional WordPress plugin development services including custom development, maintenance, integration, and optimization."
+  },
+  "keywords": [
+    "WordPress Plugin Development",
+    "Custom WordPress Plugins",
+    "Plugin Integration",
+    "WordPress Development",
+    "Plugin Maintenance",
+    "WordPress Solutions",
+    "Plugin Expert",
+    "WordPress Extensions",
+    "Plugin Optimization",
+    "Enterprise WordPress"
+  ],
+  "url": "https://madebyaris.com/services/wordpress/plugin-development",
+  "potentialAction": {
+    "@type": "LearnAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://madebyaris.com/contact",
+      "actionPlatform": [
+        "http://schema.org/DesktopWebPlatform",
+        "http://schema.org/MobileWebPlatform"
+      ]
+    },
+    "result": {
+      "@type": "ContactPage",
+      "name": "Contact for WordPress Plugin Development"
+    }
   }
 }
 
@@ -193,14 +253,18 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       canonical: 'https://madebyaris.com/services/wordpress/plugin-development'
     },
-    other: {
-      'structured-data': JSON.stringify(structuredData)
-    }
   }
 }
 
 export default function WordPressPluginDevelopmentPage() {
   return (
+<>
+
+<script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+
     <div className="relative min-h-screen">
       {/* Background Pattern */}
       <div className="fixed inset-0 -z-10">
@@ -313,5 +377,6 @@ export default function WordPressPluginDevelopmentPage() {
         </div>
       </div>
     </div>
+    </>
   )
 }

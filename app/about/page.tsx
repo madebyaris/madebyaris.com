@@ -148,7 +148,77 @@ const timelineData = [
   },
 ]
 
-// Generate OG Image
+// Structured Data
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Aris Setiawan",
+  "jobTitle": "Senior Full Stack Developer",
+  "description": "Senior Full Stack Developer with 12+ years of experience in Next.js, React, WordPress, and enterprise web architecture.",
+  "url": "https://madebyaris.com",
+  "image": "https://madebyaris.com/astro.png",
+  "sameAs": [
+    "https://www.linkedin.com/in/arissetia/",
+    "https://github.com/arissetyawan",
+    "https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe"
+  ],
+  "worksFor": {
+    "@type": "Organization",
+    "name": "SAB Digital Marketing Agency",
+    "url": "https://madebyaris.com"
+  },
+  "knowsAbout": [
+    "Next.js Development",
+    "React Development",
+    "WordPress Development",
+    "Full Stack Development",
+    "Web Architecture",
+    "Enterprise Solutions",
+    "Performance Optimization",
+    "Technical Leadership"
+  ],
+  "hasOccupation": {
+    "@type": "Occupation",
+    "name": "Full Stack Developer",
+    "occupationLocation": {
+      "@type": "City",
+      "name": "Sidoarjo",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "Indonesia"
+      }
+    },
+    "skills": [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "WordPress",
+      "PHP",
+      "MySQL",
+      "Node.js",
+      "GraphQL"
+    ]
+  },
+  "alumniOf": [
+    {
+      "@type": "Organization",
+      "name": "SAB Digital Marketing Agency",
+      "url": "https://madebyaris.com"
+    },
+    {
+      "@type": "Organization",
+      "name": "Raja Kreatif Asia",
+      "url": "https://rajakreatif.com"
+    },
+    {
+      "@type": "Organization",
+      "name": "Hongkiat.com",
+      "url": "https://www.hongkiat.com"
+    }
+  ]
+}
+
+// Generate Metadata and Structured Data
 export async function generateMetadata(): Promise<Metadata> {
   const ogImage = new ImageResponse(
     (
@@ -256,11 +326,18 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function AboutPage() {
   // Function to generate structured data
-
+  function generateStructuredData() {
+    return {
+      __html: JSON.stringify(structuredData)
+    }
+  }
 
   return (
     <>
-
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={generateStructuredData()}
+      />
       <div className="container mx-auto max-w-[980px] px-4 sm:px-6 lg:px-8">
         <div className="py-8 md:py-12 lg:py-24">
           <div className="flex flex-col gap-8">

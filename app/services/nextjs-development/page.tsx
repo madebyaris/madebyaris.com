@@ -7,16 +7,72 @@ import { ImageResponse } from 'next/og'
 // Structured Data
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": "Service",
+  "@type": "WebPage",
   "name": "Next.js Development Services",
-  "description": "Professional Next.js development services for modern web applications",
-  "provider": {
-    "@type": "Person",
-    "name": "Aris Setiawan",
-    "url": "https://madebyaris.com"
+  "description": "Professional Next.js development services specializing in building high-performance, SEO-optimized web applications with modern architecture and enterprise-grade solutions.",
+  "url": "https://madebyaris.com/services/nextjs-development",
+  "keywords": [
+    "Next.js Development",
+    "React Development",
+    "TypeScript Development",
+    "Full Stack Development",
+    "Enterprise Web Apps",
+    "Server-Side Rendering",
+    "Static Site Generation",
+    "API Integration",
+    "Performance Optimization",
+    "Modern Web Development"
+  ],
+  "mainEntity": {
+    "@type": "Service",
+    "name": "Next.js Development Services",
+    "serviceType": "Web Development",
+    "provider": {
+      "@type": "Person",
+      "name": "Aris Setiawan",
+      "url": "https://madebyaris.com"
+    },
+    "areaServed": "Worldwide",
+    "description": "Expert Next.js development services for building modern, high-performance web applications with React and TypeScript.",
+    "offers": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "price": "Contact for pricing",
+      "priceCurrency": "USD"
+    },
+    "itemOffered": [
+      {
+        "@type": "Service",
+        "name": "Modern Next.js Development",
+        "description": "Building fast, modern web applications using the latest Next.js features and best practices, including App Router, Server Components, and Edge Runtime."
+      },
+      {
+        "@type": "Service",
+        "name": "Performance Optimization",
+        "description": "Implementing server-side rendering, static site generation, and edge caching for optimal performance and user experience."
+      },
+      {
+        "@type": "Service",
+        "name": "API Development & Integration",
+        "description": "Creating robust API routes and seamlessly integrating with external services and databases."
+      },
+      {
+        "@type": "Service",
+        "name": "Enterprise Solutions",
+        "description": "Developing scalable, type-safe applications with TypeScript and modern architectural patterns for enterprise clients."
+      }
+    ]
   },
-  "serviceType": "Web Development",
-  "areaServed": "Worldwide"
+  "about": {
+    "@type": "Thing",
+    "name": "Next.js Development Expertise",
+    "description": "Professional Next.js development services focusing on building modern web applications with optimal performance, SEO, and user experience. Specializing in server-side rendering, static generation, and enterprise-grade solutions."
+  },
+  "potentialAction": {
+    "@type": "ContactAction",
+    "name": "Contact for Next.js Development",
+    "target": "https://madebyaris.com/contact"
+  }
 }
 
 // Generate Metadata and Structured Data

@@ -84,10 +84,44 @@ const structuredData = {
   "description": "Portfolio of web development projects showcasing expertise in Next.js, React, and WordPress.",
   "url": "https://madebyaris.com/projects",
   "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": projects.map((project, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "WebSite",
+        "name": project.title,
+        "description": project.description,
+        "url": project.link,
+        "image": `https://madebyaris.com${project.logo}`,
+        "creator": {
+          "@type": "Person",
+          "name": "Aris Setiawan",
+          "jobTitle": "Senior Full Stack Developer",
+          "url": "https://madebyaris.com"
+        },
+        "about": {
+          "@type": "Thing",
+          "name": "Web Development Project",
+          "description": project.description
+        },
+        "keywords": project.tags.join(", "),
+        "applicationCategory": "WebApplication",
+        "operatingSystem": "Any"
+      }
+    })),
+    "numberOfItems": projects.length
+  },
+  "provider": {
     "@type": "Person",
     "name": "Aris Setiawan",
-    "jobTitle": "Full Stack Developer",
+    "jobTitle": "Senior Full Stack Developer",
     "url": "https://madebyaris.com"
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "Web Development Portfolio",
+    "description": "Collection of enterprise-level web development projects showcasing expertise in Next.js, React, WordPress, and modern web technologies."
   }
 }
 
