@@ -11,12 +11,22 @@ import { motion } from 'framer-motion'
 interface NavigationItem {
   href: string
   label: string
+  children?: NavigationItem[]
 }
 
 const navigationItems: NavigationItem[] = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
   { href: '/projects', label: 'Projects' },
+  { 
+    href: '/services', 
+    label: 'Services',
+    children: [
+      { href: '/services/nextjs-development', label: 'Next.js Development' },
+      { href: '/services/wordpress', label: 'WordPress Development' },
+      { href: '/services/php-development', label: 'PHP Development' },
+    ]
+  },
   { href: '/blog', label: 'Blog' },
   { href: '/contact', label: 'Contact' },
   { href: 'https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe', label: 'Hire Me' },
@@ -43,18 +53,55 @@ export function Navigation() {
       {/* Desktop Navigation */}
       <nav className="hidden md:flex items-center space-x-6">
         {navigationItems.slice(0, -1).map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className={cn(
-              'text-sm font-medium transition-colors hover:text-foreground/80',
-              pathname === item.href
-                ? 'text-foreground'
-                : 'text-foreground/60'
+          <div key={item.href} className="relative group">
+            <Link
+              href={item.href}
+              className={cn(
+                'text-sm font-medium transition-colors hover:text-foreground/80 flex items-center',
+                pathname === item.href
+                  ? 'text-foreground'
+                  : 'text-foreground/60'
+              )}
+            >
+              {item.label}
+              {item.children && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="w-4 h-4 ml-1"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              )}
+            </Link>
+
+            {item.children && (
+              <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-background border opacity-0 group-hover:opacity-100 transition-all duration-300 invisible group-hover:visible">
+                <div className="absolute -top-2 left-0 right-0 h-2 bg-transparent" />
+                {item.children.map((child) => (
+                  <Link
+                    key={child.href}
+                    href={child.href}
+                    className={cn(
+                      'block px-4 py-2 text-sm transition-colors hover:text-foreground/80 hover:bg-accent',
+                      pathname === child.href
+                        ? 'text-foreground'
+                        : 'text-foreground/60'
+                    )}
+                  >
+                    {child.label}
+                  </Link>
+                ))}
+              </div>
             )}
-          >
-            {item.label}
-          </Link>
+          </div>
         ))}
       </nav>
 
@@ -110,19 +157,55 @@ export function Navigation() {
               <div className="w-full max-w-[980px] mx-auto px-4 sm:px-6 lg:px-8">
                 <nav className="flex flex-col items-center justify-center space-y-8">
                   {navigationItems.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      onClick={() => setIsOpen(false)}
-                      className={cn(
-                        'text-3xl font-medium transition-colors hover:text-foreground/80',
-                        pathname === item.href
-                          ? 'text-foreground'
-                          : 'text-foreground/60'
+                    <div key={item.href} className="w-full text-center">
+                      <Link
+                        href={item.href}
+                        onClick={() => !item.children && setIsOpen(false)}
+                        className={cn(
+                          'text-3xl font-medium transition-colors hover:text-foreground/80 inline-flex items-center',
+                          pathname === item.href
+                            ? 'text-foreground'
+                            : 'text-foreground/60'
+                        )}
+                      >
+                        {item.label}
+                        {item.children && (
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="w-6 h-6 ml-2"
+                          >
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                          </svg>
+                        )}
+                      </Link>
+                      {item.children && (
+                        <div className="mt-4 space-y-4">
+                          {item.children.map((child) => (
+                            <Link
+                              key={child.href}
+                              href={child.href}
+                              onClick={() => setIsOpen(false)}
+                              className={cn(
+                                'block text-2xl font-medium transition-colors hover:text-foreground/80',
+                                pathname === child.href
+                                  ? 'text-foreground'
+                                  : 'text-foreground/60'
+                              )}
+                            >
+                              {child.label}
+                            </Link>
+                          ))}
+                        </div>
                       )}
-                    >
-                      {item.label}
-                    </Link>
+                    </div>
                   ))}
                 </nav>
               </div>

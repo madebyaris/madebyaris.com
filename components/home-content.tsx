@@ -118,6 +118,7 @@ export function HomeContent({ type, initialData }: HomeContentProps) {
                 />
               </div>
             )}
+            
             <div className="p-4">
               <h2
                 className="line-clamp-2 text-xl font-semibold"

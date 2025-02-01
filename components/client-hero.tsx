@@ -6,8 +6,19 @@ import { AuroraBackground } from "@/components/ui/aurora-background"
 import { UpworkIcon } from "@/components/icons/upwork"
 import Image from "next/image"
 import { Sparkles } from "@/components/ui/sparkles"
+import { ReactNode } from 'react'
 
-export function ClientHero() {
+interface ClientHeroProps {
+  badge?: string;
+  title?: string;
+  description?: ReactNode;
+}
+
+export function ClientHero({ 
+  badge = "Next.js ✨ WordPress Engineer",
+  title = "Next.js ✨ WordPress Engineer",
+  description = "Hi! I'm Aris, a WordPress Senior Engineer delivering innovative backend solutions for industry leaders."
+}: ClientHeroProps) {
   return (
     <section className="w-full">
       <AuroraBackground>
@@ -22,11 +33,17 @@ export function ClientHero() {
           className="relative flex flex-col w-full max-w-[980px] mx-auto px-4 sm:px-6 lg:px-8"
         >
           <div className="flex flex-col gap-6 max-w-3xl">
-            <div className="flex  flex-col-reverse items-center md:items-start md:flex-row md:justify-between gap-8">
+            <div className="flex flex-col-reverse items-center md:items-start md:flex-row md:justify-between gap-8">
               <div className="flex-1">
-                <h1 className="text-5xl md:text-8xl font-bold tracking-tight dark:text-white">
-                  Next.js ✨ WordPress Engineer
-                </h1>
+                {badge && (
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-800 text-white dark:bg-white dark:text-black mb-4">
+                    <span className="text-sm font-medium">{badge}</span>
+                  </div>
+                )}
+                <h1 className="text-[9px]  dark:text-white text-black pl-1">Nextjs Agency Indonesia</h1>
+                <h2 className="text-2xl md:text-5xl font-bold tracking-tight dark:text-white">
+                  {title}
+                </h2>
               </div>
               <Sparkles colors={{ first: "#FF6B6B", second: "#4ECDC4" }} sparklesCount={6}>
                 <motion.div
@@ -50,16 +67,14 @@ export function ClientHero() {
               </Sparkles>
             </div>
             <p className="text-xl md:text-3xl text-muted-foreground font-light">
-              Hi! I&apos;m <span className="font-bold dark:text-white text-black">Aris</span>, a WordPress Senior Engineer delivering innovative{" "}
-              <span className="bg-neutral-800 text-white dark:bg-white dark:text-black px-2 py-1 rounded-md inline-flex items-center">
-                backend solutions
-              </span> 
-               &nbsp; for industry leaders.
+              {description}
             </p>
             <div className="flex gap-4 pt-4">
-              <button className="bg-black dark:bg-white rounded-full w-fit text-white dark:text-black px-6 py-3 text-lg font-medium">
-                Contact Me 👋
-              </button>
+              <Link href="/contact">
+                <button className="bg-black dark:bg-white rounded-full w-fit text-white dark:text-black px-6 py-3 text-lg font-medium">
+                  Contact Me 👋
+                </button>
+              </Link>
               <Link href="https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe" target="_blank">
                 <button className="bg-[#14a800] hover:bg-[#14a800]/90 rounded-full w-fit text-white px-6 py-3 text-lg font-medium flex items-center gap-2">
                   <span>UPWORK</span>
