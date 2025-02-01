@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
-import { Code2, Layout, Server, Rocket, Zap, FileCode } from 'lucide-react'
+import { Code2, Layout, Server, Rocket, Zap, FileCode, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import { Button } from '../../components/ui/button'
 
 export const metadata: Metadata = {
   title: 'Services - Aris Setiawan',
@@ -87,15 +88,14 @@ export default function ServicesPage() {
             {/* Main Services Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
               {services.map((service, index) => (
-                <Link 
-                  key={service.title} 
-                  href={service.href}
-                  className="group animate-in fade-in slide-in-from-bottom duration-1000"
+                <div 
+                  key={service.title}
+                  className="animate-in fade-in slide-in-from-bottom duration-1000"
                   style={{ animationDelay: `${(index + 1) * 200}ms` }}
                 >
                   <div className="h-full p-6 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm rounded-lg border border-zinc-200 dark:border-zinc-800 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] hover:border-zinc-300 dark:hover:border-zinc-700">
                     <div className="flex flex-col gap-4">
-                      <div className="w-12 h-12 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-900 dark:text-zinc-50 transition-transform group-hover:scale-110 group-hover:bg-zinc-900 dark:group-hover:bg-zinc-50 group-hover:text-zinc-50 dark:group-hover:text-zinc-900">
+                      <div className="w-12 h-12 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-900 dark:text-zinc-50 transition-transform hover:scale-110">
                         {service.icon}
                       </div>
                       <h2 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-50">{service.title}</h2>
@@ -107,9 +107,17 @@ export default function ServicesPage() {
                           </span>
                         ))}
                       </div>
+                      <div className="mt-6">
+                        <Link href={service.href}>
+                          <Button className="w-full group bg-zinc-900 dark:bg-zinc-50 text-zinc-50 dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200">
+                            Learn More
+                            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                          </Button>
+                        </Link>
+                      </div>
                     </div>
                   </div>
-                </Link>
+                </div>
               ))}
             </div>
 
@@ -120,15 +128,14 @@ export default function ServicesPage() {
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {wordPressServices.map((service, index) => (
-                  <Link 
-                    key={service.title} 
-                    href={service.href}
-                    className="group animate-in fade-in slide-in-from-bottom duration-1000"
+                  <div 
+                    key={service.title}
+                    className="animate-in fade-in slide-in-from-bottom duration-1000"
                     style={{ animationDelay: `${(index + 1) * 200}ms` }}
                   >
                     <div className="h-full p-6 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm rounded-lg border border-zinc-200 dark:border-zinc-800 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] hover:border-zinc-300 dark:hover:border-zinc-700">
                       <div className="flex flex-col gap-4">
-                        <div className="w-12 h-12 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-900 dark:text-zinc-50 transition-transform group-hover:scale-110 group-hover:bg-zinc-900 dark:group-hover:bg-zinc-50 group-hover:text-zinc-50 dark:group-hover:text-zinc-900">
+                        <div className="w-12 h-12 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-900 dark:text-zinc-50 transition-transform hover:scale-110">
                           {service.icon}
                         </div>
                         <h2 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-50">{service.title}</h2>
@@ -140,9 +147,17 @@ export default function ServicesPage() {
                             </span>
                           ))}
                         </div>
+                        <div className="mt-6">
+                          <Link href={service.href}>
+                            <Button className="w-full group bg-zinc-900 dark:bg-zinc-50 text-zinc-50 dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200">
+                              Learn More
+                              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                            </Button>
+                          </Link>
+                        </div>
                       </div>
                     </div>
-                  </Link>
+                  </div>
                 ))}
               </div>
             </div>
