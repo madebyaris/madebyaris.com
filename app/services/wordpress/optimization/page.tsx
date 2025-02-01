@@ -2,11 +2,7 @@ import type { Metadata } from 'next'
 import { Zap, ArrowRight, Shield, Globe, Gauge } from 'lucide-react'
 import { Button } from '../../../../components/ui/button'
 import { Card } from '../../../../components/ui/card'
-
-export const metadata: Metadata = {
-  title: 'WordPress Performance Optimization - Aris Setiawan',
-  description: 'Expert WordPress optimization services to boost your website speed, security, and overall performance',
-}
+import { ImageResponse } from 'next/og'
 
 const features = [
   {
@@ -60,6 +56,152 @@ const processSteps = [
     description: 'Ongoing performance monitoring and continuous optimization.',
   },
 ]
+
+// Structured Data
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "WordPress Optimization Services",
+  "description": "Expert WordPress optimization services for improved performance, security, and user experience. Comprehensive optimization solutions for enterprise WordPress sites.",
+  "provider": {
+    "@type": "Person",
+    "name": "Aris Setiawan",
+    "jobTitle": "WordPress Performance Expert",
+    "url": "https://madebyaris.com"
+  },
+  "serviceType": "WordPress Optimization",
+  "areaServed": "Worldwide",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "WordPress Optimization Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "name": "Performance Optimization",
+        "description": "Speed and loading optimization"
+      },
+      {
+        "@type": "Offer",
+        "name": "Security Hardening",
+        "description": "WordPress security enhancement"
+      },
+      {
+        "@type": "Offer",
+        "name": "Database Optimization",
+        "description": "Database cleanup and optimization"
+      },
+      {
+        "@type": "Offer",
+        "name": "Caching Implementation",
+        "description": "Advanced caching solutions"
+      }
+    ]
+  }
+}
+
+// Generate OG Image
+export async function generateMetadata(): Promise<Metadata> {
+  const ogImage = new ImageResponse(
+    (
+      <div
+        style={{
+          background: 'linear-gradient(to right, #000000, #1a1a1a)',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '40px',
+        }}
+      >
+        <h1
+          style={{
+            fontSize: '60px',
+            fontWeight: 'bold',
+            color: 'white',
+            marginBottom: '20px',
+            textAlign: 'center',
+          }}
+        >
+          WordPress Optimization Services
+        </h1>
+        <p
+          style={{
+            fontSize: '30px',
+            color: '#888888',
+            marginBottom: '40px',
+            textAlign: 'center',
+            maxWidth: '800px',
+          }}
+        >
+          Performance • Security • Speed • Optimization
+        </p>
+        <div
+          style={{
+            display: 'flex',
+            gap: '20px',
+            marginTop: '20px',
+          }}
+        >
+          <div style={{ background: '#0073AA', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            Performance Expert
+          </div>
+          <div style={{ background: '#333333', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            Security Hardening
+          </div>
+          <div style={{ background: '#14a800', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            Enterprise Solutions
+          </div>
+        </div>
+      </div>
+    ),
+    {
+      width: 1200,
+      height: 630,
+    }
+  )
+
+  return {
+    title: 'WordPress Optimization Services | Performance & Security',
+    description: 'Expert WordPress optimization services for improved performance, security, and user experience. Comprehensive optimization solutions for enterprise WordPress sites.',
+    keywords: [
+      'WordPress Optimization',
+      'WordPress Performance',
+      'WordPress Security',
+      'Speed Optimization',
+      'WordPress Caching',
+      'Database Optimization',
+      'WordPress Expert',
+      'Site Performance',
+      'WordPress Security Hardening',
+      'Enterprise WordPress'
+    ],
+    openGraph: {
+      title: 'WordPress Optimization Services | Expert Solutions',
+      description: 'Professional WordPress optimization for maximum performance.',
+      type: 'website',
+      locale: 'en_US',
+      images: [ogImage]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'WordPress Optimization Services | Expert Solutions',
+      description: 'Professional WordPress optimization for maximum performance.',
+      images: [ogImage]
+    },
+    alternates: {
+      canonical: 'https://madebyaris.com/services/wordpress/optimization'
+    }
+  }
+}
+
+// Add script tag for structured data
+export function generateStructuredData() {
+  return {
+    __html: JSON.stringify(structuredData)
+  }
+}
 
 export default function WordPressOptimizationPage() {
   return (

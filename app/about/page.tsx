@@ -14,6 +14,7 @@ import {
   Server,
   Globe
 } from "lucide-react"
+import { ImageResponse } from 'next/og'
 
 // Define timeline data
 const timelineData = [
@@ -147,149 +148,299 @@ const timelineData = [
   },
 ]
 
-export const metadata: Metadata = {
-  title: 'About - Aris Setiawan',
-  description: 'Full Stack Web Developer specializing in Next.js and Backend Development',
+// Structured Data
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Aris Setiawan",
+  "jobTitle": "Senior Full-Stack Developer",
+  "description": "Full Stack Web Developer with over 12 years of experience in building scalable web applications.",
+  "image": "https://madebyaris.com/astro.png",
+  "url": "https://madebyaris.com",
+  "sameAs": [
+    "https://www.linkedin.com/in/arissetia/",
+    "https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe"
+  ],
+  "worksFor": {
+    "@type": "Organization",
+    "name": "SAB Digital Marketing Agency"
+  },
+  "alumniOf": {
+    "@type": "Organization",
+    "name": "Raja Kreatif Asia",
+    "url": "https://rajakreatif.com"
+  },
+  "knowsAbout": [
+    "Next.js",
+    "React",
+    "WordPress",
+    "PHP",
+    "TypeScript",
+    "Node.js",
+    "Web Architecture",
+    "Full Stack Development",
+    "Enterprise Solutions",
+    "Web Performance Optimization"
+  ]
+}
+
+// Generate OG Image
+export async function generateMetadata(): Promise<Metadata> {
+  const ogImage = new ImageResponse(
+    (
+      <div
+        style={{
+          background: 'linear-gradient(to right, #000000, #1a1a1a)',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '40px',
+        }}
+      >
+        <img
+          src="https://madebyaris.com/astro.png"
+          alt="Aris Setiawan"
+          width="200"
+          height="200"
+          style={{
+            borderRadius: '50%',
+            marginBottom: '20px',
+          }}
+        />
+        <h1
+          style={{
+            fontSize: '60px',
+            fontWeight: 'bold',
+            color: 'white',
+            marginBottom: '10px',
+            textAlign: 'center',
+          }}
+        >
+          Aris Setiawan
+        </h1>
+        <p
+          style={{
+            fontSize: '30px',
+            color: '#888888',
+            marginBottom: '20px',
+            textAlign: 'center',
+          }}
+        >
+          Senior Full-Stack Developer & Web Architect
+        </p>
+        <div
+          style={{
+            display: 'flex',
+            gap: '10px',
+            marginTop: '20px',
+          }}
+        >
+          <div style={{ background: '#007acc', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            Next.js
+          </div>
+          <div style={{ background: '#61dafb', padding: '10px 20px', borderRadius: '20px', color: 'black' }}>
+            React
+          </div>
+          <div style={{ background: '#21759b', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            WordPress
+          </div>
+        </div>
+      </div>
+    ),
+    {
+      width: 1200,
+      height: 630,
+    }
+  )
+
+  return {
+    title: 'About Aris Setiawan | Senior Full-Stack Developer & Web Architect',
+    description: 'With 12+ years of experience, I specialize in building enterprise-scale web applications using Next.js, React, and WordPress. Learn about my journey, expertise, and development philosophy.',
+    keywords: [
+      'Senior Full-Stack Developer',
+      'Web Architecture Expert',
+      'Next.js Developer',
+      'WordPress Developer',
+      'React Specialist',
+      'Enterprise Solutions Architect',
+      'PHP Expert',
+      'JavaScript Developer',
+      'TypeScript Developer',
+      'Headless CMS Expert'
+    ],
+    openGraph: {
+      title: 'About Aris Setiawan | Senior Full-Stack Developer',
+      description: 'Senior Full-Stack Developer with 12+ years of experience in Next.js, React, WordPress, and enterprise web architecture.',
+      type: 'profile',
+      locale: 'en_US',
+      images: [ogImage]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'About Aris Setiawan | Senior Full-Stack Developer',
+      description: 'Senior Full-Stack Developer with 12+ years of experience in Next.js, React, WordPress, and enterprise web architecture.',
+      images: [ogImage]
+    },
+    alternates: {
+      canonical: 'https://madebyaris.com/about'
+    }
+  }
+}
+
+// Add script tag for structured data
+export function generateStructuredData() {
+  return {
+    __html: JSON.stringify(structuredData)
+  }
 }
 
 export default function AboutPage() {
   return (
-    <div className="container mx-auto max-w-[980px] px-4 sm:px-6 lg:px-8">
-      <div className="py-8 md:py-12 lg:py-24">
-        <div className="flex flex-col gap-8">
-          {/* Hero Section */}
-          <div className="flex flex-col md:flex-row gap-8 items-center">
-            <div className="flex-1 text-center md:text-left">
-              <h1 className="text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/50">
-                Full Stack Developer
-              </h1>
-              <p className="mt-4 text-xl text-muted-foreground">
-                Crafting robust web solutions with Next.js and modern backend technologies
-              </p>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={generateStructuredData()}
+      />
+      <div className="container mx-auto max-w-[980px] px-4 sm:px-6 lg:px-8">
+        <div className="py-8 md:py-12 lg:py-24">
+          <div className="flex flex-col gap-8">
+            {/* Hero Section */}
+            <div className="flex flex-col md:flex-row gap-8 items-center">
+              <div className="flex-1 text-center md:text-left">
+                <h1 className="text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/50">
+                  Full Stack Developer
+                </h1>
+                <p className="mt-4 text-xl text-muted-foreground">
+                  Crafting robust web solutions with Next.js and modern backend technologies
+                </p>
+              </div>
+              <div className="mb-8 md:mb-0">
+                <Sparkles>
+                  <div className="relative w-48 h-48 rounded-full overflow-hidden border-4 border-primary/20 md:transform-none transform scale-x-[-1] translate-x-[-1rem]">
+                    <Image
+                      src="/astro.png"
+                      alt="Aris Setiawan"
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+                  </div>
+                </Sparkles>
+              </div>
             </div>
-            <div className="mb-8 md:mb-0">
-              <Sparkles>
-                <div className="relative w-48 h-48 rounded-full overflow-hidden border-4 border-primary/20 md:transform-none transform scale-x-[-1] translate-x-[-1rem]">
-                  <Image
-                    src="/astro.png"
-                    alt="Aris Setiawan"
-                    fill
-                    className="object-cover"
-                    priority
-                  />
+
+            <div className="prose prose-gray dark:prose-invert max-w-none">
+              {/* Introduction */}
+              <div className="bg-primary/5 rounded-lg p-6 border border-primary/10">
+                <p className="text-lg leading-relaxed mb-0">
+                  Hi! I&apos;m Aris Setiawan, a Full Stack Web Developer with over <b>12 years</b> of experience in building scalable web applications. 
+                  Currently, I&apos;m focused on creating high-performance applications using Next.js while maintaining robust backend architectures.
+                </p>
+                <p className="text-lg leading-relaxed mt-4 mb-0">
+                  I&apos;m <b>open to new opportunities</b>
+                </p>
+              </div>
+
+              {/* Connect Section */}
+              <div className="flex flex-wrap gap-4 mt-12">
+                <Link 
+                  href="https://www.linkedin.com/in/arissetia/"
+                  target="_blank"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+                >
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                  </svg>
+                  LinkedIn
+                </Link>
+                <Link
+                  href="https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe"
+                  target="_blank"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#14a800] hover:bg-[#14a800]/90 text-white transition-colors"
+                >
+                  <span>UPWORK</span>
+                  <UpworkIcon className="w-5 h-5" />
+                </Link>
+                <Link 
+                  href="/contact"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+                >
+                  Get in Touch
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </Link>
+              </div>
+
+              {/* Expertise */}
+              <h2 className="text-2xl font-bold mt-12 mb-6">Technical Expertise</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-primary flex items-center gap-2">
+                    <Layout className="w-5 h-5" />
+                    Frontend Development
+                  </h3>
+                  <ul className="space-y-2">
+                    <li className="flex items-center gap-2">
+                      <Code2 className="w-4 h-4 text-primary" />
+                      Next.js & React
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <FileCode className="w-4 h-4 text-primary" />
+                      TypeScript
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Palette className="w-4 h-4 text-primary" />
+                      TailwindCSS & Framer Motion
+                    </li>
+                  </ul>
                 </div>
-              </Sparkles>
-            </div>
-          </div>
-
-          <div className="prose prose-gray dark:prose-invert max-w-none">
-            {/* Introduction */}
-            <div className="bg-primary/5 rounded-lg p-6 border border-primary/10">
-              <p className="text-lg leading-relaxed mb-0">
-                Hi! I&apos;m Aris Setiawan, a Full Stack Web Developer with over <b>12 years</b> of experience in building scalable web applications. 
-                Currently, I&apos;m focused on creating high-performance applications using Next.js while maintaining robust backend architectures.
-              </p>
-              <p className="text-lg leading-relaxed mt-4 mb-0">
-                I&apos;m <b>open to new opportunities</b>
-              </p>
-            </div>
-
-            {/* Connect Section */}
-            <div className="flex flex-wrap gap-4 mt-12">
-              <Link 
-                href="https://www.linkedin.com/in/arissetia/"
-                target="_blank"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
-              >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                </svg>
-                LinkedIn
-              </Link>
-              <Link
-                href="https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe"
-                target="_blank"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#14a800] hover:bg-[#14a800]/90 text-white transition-colors"
-              >
-                <span>UPWORK</span>
-                <UpworkIcon className="w-5 h-5" />
-              </Link>
-              <Link 
-                href="/contact"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
-              >
-                Get in Touch
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </Link>
-            </div>
-
-            {/* Expertise */}
-            <h2 className="text-2xl font-bold mt-12 mb-6">Technical Expertise</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-primary flex items-center gap-2">
-                  <Layout className="w-5 h-5" />
-                  Frontend Development
-                </h3>
-                <ul className="space-y-2">
-                  <li className="flex items-center gap-2">
-                    <Code2 className="w-4 h-4 text-primary" />
-                    Next.js & React
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <FileCode className="w-4 h-4 text-primary" />
-                    TypeScript
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <Palette className="w-4 h-4 text-primary" />
-                    TailwindCSS & Framer Motion
-                  </li>
-                </ul>
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-primary flex items-center gap-2">
+                    <Server className="w-5 h-5" />
+                    Backend Development
+                  </h3>
+                  <ul className="space-y-2">
+                    <li className="flex items-center gap-2">
+                      <Terminal className="w-4 h-4 text-primary" />
+                      Node.js & Python
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Globe className="w-4 h-4 text-primary" />
+                      WordPress REST API
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Database className="w-4 h-4 text-primary" />
+                      Database Design & ORM
+                    </li>
+                  </ul>
+                </div>
               </div>
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-primary flex items-center gap-2">
-                  <Server className="w-5 h-5" />
-                  Backend Development
-                </h3>
-                <ul className="space-y-2">
-                  <li className="flex items-center gap-2">
-                    <Terminal className="w-4 h-4 text-primary" />
-                    Node.js & Python
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <Globe className="w-4 h-4 text-primary" />
-                    WordPress REST API
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <Database className="w-4 h-4 text-primary" />
-                    Database Design & ORM
-                  </li>
-                </ul>
+
+              {/* Professional Journey */}
+              <div className="bg-primary/5 rounded-lg p-6 mt-12 border border-primary/10">
+                <h2 className="text-2xl font-bold mb-6">Professional Journey</h2>
+                <p>
+                I began my career as a junior developer, specializing in CodeIgniter to build system applications.
+                 Over time, I gained extensive experience in WordPress development, which I worked on for nearly a decade. 
+                 Recently, I have shifted my focus to Next.js and backend technologies, 
+                 where I now concentrate on building high-performance applications that deliver exceptional user experiences and scalability.
+              </p>
+              </div>  
+
+              {/* Timeline Section */}
+              <div className="-mx-4 sm:-mx-6 lg:-mx-8">
+                <Timeline data={timelineData} />
               </div>
+
+
             </div>
-
-            {/* Professional Journey */}
-            <div className="bg-primary/5 rounded-lg p-6 mt-12 border border-primary/10">
-              <h2 className="text-2xl font-bold mb-6">Professional Journey</h2>
-              <p>
-              I began my career as a junior developer, specializing in CodeIgniter to build system applications.
-               Over time, I gained extensive experience in WordPress development, which I worked on for nearly a decade. 
-               Recently, I have shifted my focus to Next.js and backend technologies, 
-               where I now concentrate on building high-performance applications that deliver exceptional user experiences and scalability.
-            </p>
-            </div>  
-
-            {/* Timeline Section */}
-            <div className="-mx-4 sm:-mx-6 lg:-mx-8">
-              <Timeline data={timelineData} />
-            </div>
-
-
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }

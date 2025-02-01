@@ -4,24 +4,146 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { getPosts } from '@/lib/wordpress'
 import type { Post } from '@/lib/types'
+import { ImageResponse } from 'next/og'
+import { HomeContent } from '@/components/home-content'
+import { Suspense } from 'react'
 
-export const metadata: Metadata = {
-  title: 'Blog - MadeByAris',
-  description: 'Articles and insights about web development, design, and technology.',
-  openGraph: {
-    title: 'Blog - MadeByAris',
-    description: 'Articles and insights about web development, design, and technology.',
-    type: 'website',
-    locale: 'en_US',
+// Structured Data
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Web Development Insights & Tutorials",
+  "description": "Expert insights on Next.js, React, WordPress, and modern web development practices. Technical tutorials and industry best practices.",
+  "url": "https://madebyaris.com/blog",
+  "author": {
+    "@type": "Person",
+    "name": "Aris Setiawan",
+    "url": "https://madebyaris.com"
   },
-  twitter: {
-    card: 'summary',
-    title: 'Blog - MadeByAris',
-    description: 'Articles and insights about web development, design, and technology.',
+  "publisher": {
+    "@type": "Organization",
+    "name": "MadeByAris",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://madebyaris.com/logo.png"
+    }
   },
-  alternates: {
-    canonical: 'https://madebyaris.com/blog',
-  },
+  "keywords": [
+    "Web Development",
+    "Next.js",
+    "React",
+    "WordPress",
+    "TypeScript",
+    "JavaScript",
+    "Full Stack Development",
+    "Frontend Development",
+    "Backend Development",
+    "Web Performance"
+  ]
+}
+
+// Generate OG Image
+export async function generateMetadata(): Promise<Metadata> {
+  const ogImage = new ImageResponse(
+    (
+      <div
+        style={{
+          background: 'linear-gradient(to right, #000000, #1a1a1a)',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '40px',
+        }}
+      >
+        <h1
+          style={{
+            fontSize: '60px',
+            fontWeight: 'bold',
+            color: 'white',
+            marginBottom: '20px',
+            textAlign: 'center',
+          }}
+        >
+          Web Development Insights
+        </h1>
+        <p
+          style={{
+            fontSize: '30px',
+            color: '#888888',
+            marginBottom: '20px',
+            textAlign: 'center',
+            maxWidth: '800px',
+          }}
+        >
+          Expert tutorials and insights on Next.js, React, WordPress, and modern web development
+        </p>
+        <div
+          style={{
+            display: 'flex',
+            gap: '10px',
+            marginTop: '20px',
+          }}
+        >
+          <div style={{ background: '#007acc', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            Next.js
+          </div>
+          <div style={{ background: '#61dafb', padding: '10px 20px', borderRadius: '20px', color: 'black' }}>
+            React
+          </div>
+          <div style={{ background: '#21759b', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            WordPress
+          </div>
+        </div>
+      </div>
+    ),
+    {
+      width: 1200,
+      height: 630,
+    }
+  )
+
+  return {
+    title: 'Web Development Blog | Next.js, React & WordPress Insights',
+    description: 'Expert tutorials and insights on Next.js, React, WordPress, and modern web development practices. Learn from real-world enterprise development experience.',
+    keywords: [
+      'Web Development Blog',
+      'Next.js Tutorials',
+      'React Development',
+      'WordPress Development',
+      'TypeScript Guides',
+      'JavaScript Tips',
+      'Full Stack Development',
+      'Web Performance',
+      'Enterprise Solutions',
+      'Development Best Practices'
+    ],
+    openGraph: {
+      title: 'Web Development Blog | Next.js, React & WordPress Insights',
+      description: 'Expert tutorials and insights on modern web development practices.',
+      type: 'website',
+      locale: 'en_US',
+      images: [ogImage]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Web Development Blog | Next.js, React & WordPress Insights',
+      description: 'Expert tutorials and insights on modern web development practices.',
+      images: [ogImage]
+    },
+    alternates: {
+      canonical: 'https://madebyaris.com/blog'
+    }
+  }
+}
+
+// Add script tag for structured data
+export function generateStructuredData() {
+  return {
+    __html: JSON.stringify(structuredData)
+  }
 }
 
 export default async function BlogPage() {
@@ -34,80 +156,35 @@ export default async function BlogPage() {
   }
 
   return (
-    <div className="container mx-auto max-w-[980px] px-4 sm:px-6 lg:px-8">
-      <div className="py-8 md:py-12 lg:py-24">
-        <div className="flex flex-col gap-4">
-          <h1 className="text-3xl font-bold leading-tight tracking-tighter md:text-5xl">
-            Blog
-          </h1>
-          <p className="text-xl text-muted-foreground">
-            Thoughts, tutorials, and insights about web development.
-          </p>
-        </div>
-
-        {posts.length > 0 ? (
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {posts.map((post) => {
-              const featuredImage = post._embedded?.['wp:featuredmedia']?.[0]
-              const seo = post.rank_math_seo
-
-              return (
-                <article
-                  key={post.id}
-                  className="group relative overflow-hidden rounded-lg border bg-background transition-colors hover:bg-accent"
-                >
-                  {featuredImage && (
-                    <div className="aspect-video overflow-hidden">
-                      <Image
-                        src={featuredImage.source_url}
-                        alt={featuredImage.alt_text || ''}
-                        width={600}
-                        height={400}
-                        className="object-cover transition-transform duration-300 group-hover:scale-105"
-                      />
-                    </div>
-                  )}
-                  <div className="p-4">
-                    <time className="text-sm text-muted-foreground">
-                      {new Date(post.date).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                      })}
-                    </time>
-                    <h2 className="mt-2 text-xl font-semibold group-hover:text-primary">
-                      <Link href={`/blog/${post.slug}`}>
-                        <span dangerouslySetInnerHTML={{ __html: post.rank_math_title || post.title.rendered }} />
-                      </Link>
-                    </h2>
-                    <div
-                      className="mt-2 text-sm text-muted-foreground"
-                      dangerouslySetInnerHTML={{ 
-                        __html: post.rank_math_description || post.excerpt.rendered 
-                      }}
-                    />
-                    <Link
-                      href={`/blog/${post.slug}`}
-                      className="mt-4 inline-block text-sm font-medium text-primary hover:text-primary/80"
-                    >
-                      Read More →
-                    </Link>
-                  </div>
-                </article>
-              )
-            })}
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={generateStructuredData()}
+      />
+      <main className="container mx-auto max-w-[980px] px-4 sm:px-6 lg:px-8 py-8 md:py-12 lg:py-24">
+        <div className="flex flex-col gap-8">
+          {/* Hero Section */}
+          <div className="text-center">
+            <h1 className="text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/50 mb-4">
+              Web Development Insights
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-[700px] mx-auto">
+              Expert tutorials and insights on Next.js, React, WordPress, and modern web development practices.
+            </p>
           </div>
-        ) : (
-          <div className="mt-8 flex min-h-[400px] items-center justify-center rounded-lg border bg-background/50 p-8 text-center">
-            <div className="max-w-[500px] space-y-4">
-              <h2 className="text-xl font-semibold">No Blog Posts Yet</h2>
-              <p className="text-muted-foreground">
-                Blog posts will be added soon. Check back later!
-              </p>
+
+          {/* Blog Posts Grid */}
+          <Suspense fallback={
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {[...Array(6)].map((_, i) => (
+                <div key={i} className="h-[300px] animate-pulse rounded-lg bg-muted" />
+              ))}
             </div>
-          </div>
-        )}
-      </div>
-    </div>
+          }>
+            <HomeContent type="posts" initialData={posts} />
+          </Suspense>
+        </div>
+      </main>
+    </>
   )
 }

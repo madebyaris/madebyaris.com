@@ -145,5 +145,18 @@ export const techLogos = [
         className="object-contain"
       />
     )
+  },
+  { 
+    name: "Mama Sewa", 
+    id: 12, 
+    img: () => (
+      <Image
+        src="/images/clients/mama-sewa.png"
+        alt="Mama Sewa"
+        width={180}
+        height={60}
+        className="object-contain"
+      />
+    )
   }
 ]; 

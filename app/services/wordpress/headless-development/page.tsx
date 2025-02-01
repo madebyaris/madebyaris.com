@@ -2,11 +2,7 @@ import type { Metadata } from 'next'
 import { Rocket, ArrowRight, Globe, Zap, Code2 } from 'lucide-react'
 import { Button } from '../../../../components/ui/button'
 import { Card } from '../../../../components/ui/card'
-
-export const metadata: Metadata = {
-  title: 'Headless WordPress Development - Aris Setiawan',
-  description: 'Modern headless WordPress development with Next.js for superior performance and flexibility',
-}
+import { ImageResponse } from 'next/og'
 
 const features = [
   {
@@ -60,6 +56,152 @@ const processSteps = [
     description: 'Comprehensive testing and optimized deployment setup.',
   },
 ]
+
+// Structured Data
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Headless WordPress Development Services",
+  "description": "Expert headless WordPress development with Next.js. Modern, fast, and secure web applications using WordPress as a headless CMS.",
+  "provider": {
+    "@type": "Person",
+    "name": "Aris Setiawan",
+    "jobTitle": "Senior Headless WordPress Developer",
+    "url": "https://madebyaris.com"
+  },
+  "serviceType": "Headless WordPress Development",
+  "areaServed": "Worldwide",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Headless WordPress Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "name": "Next.js Frontend",
+        "description": "Modern React-based frontends"
+      },
+      {
+        "@type": "Offer",
+        "name": "WordPress API Development",
+        "description": "Custom REST API endpoints"
+      },
+      {
+        "@type": "Offer",
+        "name": "Performance Optimization",
+        "description": "Optimized headless setup"
+      },
+      {
+        "@type": "Offer",
+        "name": "Content Architecture",
+        "description": "Structured content modeling"
+      }
+    ]
+  }
+}
+
+// Generate OG Image
+export async function generateMetadata(): Promise<Metadata> {
+  const ogImage = new ImageResponse(
+    (
+      <div
+        style={{
+          background: 'linear-gradient(to right, #000000, #1a1a1a)',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '40px',
+        }}
+      >
+        <h1
+          style={{
+            fontSize: '60px',
+            fontWeight: 'bold',
+            color: 'white',
+            marginBottom: '20px',
+            textAlign: 'center',
+          }}
+        >
+          Headless WordPress Development
+        </h1>
+        <p
+          style={{
+            fontSize: '30px',
+            color: '#888888',
+            marginBottom: '40px',
+            textAlign: 'center',
+            maxWidth: '800px',
+          }}
+        >
+          Next.js • WordPress API • Modern Architecture
+        </p>
+        <div
+          style={{
+            display: 'flex',
+            gap: '20px',
+            marginTop: '20px',
+          }}
+        >
+          <div style={{ background: '#0073AA', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            Headless Expert
+          </div>
+          <div style={{ background: '#0070F3', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            Next.js Frontend
+          </div>
+          <div style={{ background: '#14a800', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            Enterprise Solutions
+          </div>
+        </div>
+      </div>
+    ),
+    {
+      width: 1200,
+      height: 630,
+    }
+  )
+
+  return {
+    title: 'Headless WordPress Development | Next.js & Modern Architecture',
+    description: 'Expert headless WordPress development services combining WordPress CMS with Next.js frontend. Fast, secure, and modern web applications.',
+    keywords: [
+      'Headless WordPress',
+      'Next.js WordPress',
+      'WordPress API Development',
+      'Modern WordPress',
+      'Jamstack WordPress',
+      'Headless CMS',
+      'WordPress REST API',
+      'React WordPress',
+      'Enterprise WordPress',
+      'Content Architecture'
+    ],
+    openGraph: {
+      title: 'Headless WordPress Development | Modern Solutions',
+      description: 'Expert headless WordPress development with Next.js frontend.',
+      type: 'website',
+      locale: 'en_US',
+      images: [ogImage]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Headless WordPress Development | Modern Solutions',
+      description: 'Expert headless WordPress development with Next.js frontend.',
+      images: [ogImage]
+    },
+    alternates: {
+      canonical: 'https://madebyaris.com/services/wordpress/headless-development'
+    }
+  }
+}
+
+// Add script tag for structured data
+export function generateStructuredData() {
+  return {
+    __html: JSON.stringify(structuredData)
+  }
+}
 
 export default function HeadlessWordPressPage() {
   return (

@@ -3,11 +3,7 @@ import { Layout, Globe, FileCode, Code2, ArrowRight, Brush, Rocket, Zap } from '
 import { Button } from '../../../components/ui/button'
 import { Card } from '../../../components/ui/card'
 import Link from 'next/link'
-
-export const metadata: Metadata = {
-  title: 'WordPress Development Services - Aris Setiawan',
-  description: 'Expert WordPress development services including custom themes, plugins, headless CMS, and optimization solutions.',
-}
+import { ImageResponse } from 'next/og'
 
 const services = [
   {
@@ -62,6 +58,152 @@ const benefits = [
     icon: <Globe className="w-6 h-6" />,
   },
 ]
+
+// Structured Data
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "WordPress Development Services",
+  "description": "Expert WordPress development services including custom themes, plugins, headless solutions, and performance optimization. 12+ years of WordPress expertise.",
+  "provider": {
+    "@type": "Person",
+    "name": "Aris Setiawan",
+    "jobTitle": "Senior WordPress Developer",
+    "url": "https://madebyaris.com"
+  },
+  "serviceType": "WordPress Development",
+  "areaServed": "Worldwide",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "WordPress Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "name": "Custom Theme Development",
+        "description": "Pixel-perfect custom WordPress themes"
+      },
+      {
+        "@type": "Offer",
+        "name": "Plugin Development",
+        "description": "Custom WordPress plugins and extensions"
+      },
+      {
+        "@type": "Offer",
+        "name": "Headless WordPress",
+        "description": "Modern headless WordPress with Next.js"
+      },
+      {
+        "@type": "Offer",
+        "name": "Performance Optimization",
+        "description": "Speed and security optimization"
+      }
+    ]
+  }
+}
+
+// Generate OG Image
+export async function generateMetadata(): Promise<Metadata> {
+  const ogImage = new ImageResponse(
+    (
+      <div
+        style={{
+          background: 'linear-gradient(to right, #000000, #1a1a1a)',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '40px',
+        }}
+      >
+        <h1
+          style={{
+            fontSize: '60px',
+            fontWeight: 'bold',
+            color: 'white',
+            marginBottom: '20px',
+            textAlign: 'center',
+          }}
+        >
+          WordPress Development Services
+        </h1>
+        <p
+          style={{
+            fontSize: '30px',
+            color: '#888888',
+            marginBottom: '40px',
+            textAlign: 'center',
+            maxWidth: '800px',
+          }}
+        >
+          Custom Themes • Plugins • Headless • Optimization
+        </p>
+        <div
+          style={{
+            display: 'flex',
+            gap: '20px',
+            marginTop: '20px',
+          }}
+        >
+          <div style={{ background: '#0073AA', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            WordPress Expert
+          </div>
+          <div style={{ background: '#333333', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            12+ Years Experience
+          </div>
+          <div style={{ background: '#14a800', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            Enterprise Solutions
+          </div>
+        </div>
+      </div>
+    ),
+    {
+      width: 1200,
+      height: 630,
+    }
+  )
+
+  return {
+    title: 'WordPress Development Services | Expert Solutions & Optimization',
+    description: 'Professional WordPress development services including custom themes, plugins, headless solutions, and performance optimization. 12+ years of WordPress expertise.',
+    keywords: [
+      'WordPress Development',
+      'Custom WordPress Themes',
+      'WordPress Plugin Development',
+      'Headless WordPress',
+      'WordPress Optimization',
+      'WordPress Security',
+      'Enterprise WordPress',
+      'WordPress Expert',
+      'WordPress Consultant',
+      'WooCommerce Development'
+    ],
+    openGraph: {
+      title: 'WordPress Development Services | Expert Solutions',
+      description: 'Professional WordPress development services with 12+ years of expertise.',
+      type: 'website',
+      locale: 'en_US',
+      images: [ogImage]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'WordPress Development Services | Expert Solutions',
+      description: 'Professional WordPress development services with 12+ years of expertise.',
+      images: [ogImage]
+    },
+    alternates: {
+      canonical: 'https://madebyaris.com/services/wordpress'
+    }
+  }
+}
+
+// Add script tag for structured data
+export function generateStructuredData() {
+  return {
+    __html: JSON.stringify(structuredData)
+  }
+}
 
 export default function WordPressPage() {
   return (

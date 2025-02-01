@@ -2,11 +2,7 @@ import type { Metadata } from 'next'
 import { FileCode, ArrowRight, Database, Lock, Rocket } from 'lucide-react'
 import { Button } from '../../../../components/ui/button'
 import { Card } from '../../../../components/ui/card'
-
-export const metadata: Metadata = {
-  title: 'WordPress Plugin Development - Aris Setiawan',
-  description: 'Custom WordPress plugin development services to extend your website functionality with secure and scalable solutions',
-}
+import { ImageResponse } from 'next/og'
 
 const features = [
   {
@@ -60,6 +56,152 @@ const processSteps = [
     description: 'Smooth installation process and ongoing maintenance support.',
   },
 ]
+
+// Structured Data
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "WordPress Plugin Development Services",
+  "description": "Custom WordPress plugin development services for unique business needs. Expert in creating secure, scalable, and maintainable WordPress plugins.",
+  "provider": {
+    "@type": "Person",
+    "name": "Aris Setiawan",
+    "jobTitle": "WordPress Plugin Developer",
+    "url": "https://madebyaris.com"
+  },
+  "serviceType": "WordPress Plugin Development",
+  "areaServed": "Worldwide",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "WordPress Plugin Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "name": "Custom Plugin Development",
+        "description": "Tailored WordPress plugins"
+      },
+      {
+        "@type": "Offer",
+        "name": "Plugin Maintenance",
+        "description": "Updates and support"
+      },
+      {
+        "@type": "Offer",
+        "name": "Plugin Integration",
+        "description": "Third-party integrations"
+      },
+      {
+        "@type": "Offer",
+        "name": "Plugin Optimization",
+        "description": "Performance tuning"
+      }
+    ]
+  }
+}
+
+// Generate OG Image
+export async function generateMetadata(): Promise<Metadata> {
+  const ogImage = new ImageResponse(
+    (
+      <div
+        style={{
+          background: 'linear-gradient(to right, #000000, #1a1a1a)',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '40px',
+        }}
+      >
+        <h1
+          style={{
+            fontSize: '60px',
+            fontWeight: 'bold',
+            color: 'white',
+            marginBottom: '20px',
+            textAlign: 'center',
+          }}
+        >
+          WordPress Plugin Development
+        </h1>
+        <p
+          style={{
+            fontSize: '30px',
+            color: '#888888',
+            marginBottom: '40px',
+            textAlign: 'center',
+            maxWidth: '800px',
+          }}
+        >
+          Custom Plugins • Integrations • Maintenance
+        </p>
+        <div
+          style={{
+            display: 'flex',
+            gap: '20px',
+            marginTop: '20px',
+          }}
+        >
+          <div style={{ background: '#0073AA', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            Plugin Expert
+          </div>
+          <div style={{ background: '#333333', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            Custom Solutions
+          </div>
+          <div style={{ background: '#14a800', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            Enterprise Grade
+          </div>
+        </div>
+      </div>
+    ),
+    {
+      width: 1200,
+      height: 630,
+    }
+  )
+
+  return {
+    title: 'WordPress Plugin Development | Custom Solutions & Integration',
+    description: 'Expert WordPress plugin development services for custom business needs. Secure, scalable, and maintainable WordPress plugins with professional support.',
+    keywords: [
+      'WordPress Plugin Development',
+      'Custom WordPress Plugins',
+      'Plugin Integration',
+      'WordPress Development',
+      'Plugin Maintenance',
+      'WordPress Solutions',
+      'Plugin Expert',
+      'WordPress Extensions',
+      'Plugin Optimization',
+      'Enterprise WordPress'
+    ],
+    openGraph: {
+      title: 'WordPress Plugin Development | Custom Solutions',
+      description: 'Expert WordPress plugin development for your unique needs.',
+      type: 'website',
+      locale: 'en_US',
+      images: [ogImage]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'WordPress Plugin Development | Custom Solutions',
+      description: 'Expert WordPress plugin development for your unique needs.',
+      images: [ogImage]
+    },
+    alternates: {
+      canonical: 'https://madebyaris.com/services/wordpress/plugin-development'
+    }
+  }
+}
+
+// Add script tag for structured data
+export function generateStructuredData() {
+  return {
+    __html: JSON.stringify(structuredData)
+  }
+}
 
 export default function WordPressPluginDevelopmentPage() {
   return (

@@ -2,10 +2,152 @@ import type { Metadata } from 'next'
 import { Code2, ArrowRight, Rocket, Globe, Zap } from 'lucide-react'
 import { Button } from '../../../components/ui/button'
 import { Card } from '../../../components/ui/card'
+import { ImageResponse } from 'next/og'
 
-export const metadata: Metadata = {
-  title: 'Next.js Development Services - Aris Setiawan',
-  description: 'Expert Next.js development services for modern, high-performance web applications',
+// Structured Data
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Next.js Development Services",
+  "description": "Expert Next.js development services for modern web applications. Full-stack solutions with React, TypeScript, and enterprise-grade architecture.",
+  "provider": {
+    "@type": "Person",
+    "name": "Aris Setiawan",
+    "jobTitle": "Senior Next.js Developer",
+    "url": "https://madebyaris.com"
+  },
+  "serviceType": "Next.js Development",
+  "areaServed": "Worldwide",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Next.js Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "name": "Full-Stack Next.js Development",
+        "description": "End-to-end Next.js applications"
+      },
+      {
+        "@type": "Offer",
+        "name": "Enterprise Architecture",
+        "description": "Scalable Next.js solutions"
+      },
+      {
+        "@type": "Offer",
+        "name": "Performance Optimization",
+        "description": "Next.js app optimization"
+      },
+      {
+        "@type": "Offer",
+        "name": "Headless CMS Integration",
+        "description": "Next.js with headless CMS"
+      }
+    ]
+  }
+}
+
+// Generate OG Image
+export async function generateMetadata(): Promise<Metadata> {
+  const ogImage = new ImageResponse(
+    (
+      <div
+        style={{
+          background: 'linear-gradient(to right, #000000, #1a1a1a)',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '40px',
+        }}
+      >
+        <h1
+          style={{
+            fontSize: '60px',
+            fontWeight: 'bold',
+            color: 'white',
+            marginBottom: '20px',
+            textAlign: 'center',
+          }}
+        >
+          Next.js Development Services
+        </h1>
+        <p
+          style={{
+            fontSize: '30px',
+            color: '#888888',
+            marginBottom: '40px',
+            textAlign: 'center',
+            maxWidth: '800px',
+          }}
+        >
+          Modern Web Apps • React • TypeScript • Enterprise Solutions
+        </p>
+        <div
+          style={{
+            display: 'flex',
+            gap: '20px',
+            marginTop: '20px',
+          }}
+        >
+          <div style={{ background: '#0070F3', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            Next.js Expert
+          </div>
+          <div style={{ background: '#333333', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            Full-Stack Development
+          </div>
+          <div style={{ background: '#14a800', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            Enterprise Solutions
+          </div>
+        </div>
+      </div>
+    ),
+    {
+      width: 1200,
+      height: 630,
+    }
+  )
+
+  return {
+    title: 'Next.js Development Services | Modern Web Applications',
+    description: 'Expert Next.js development services for modern web applications. Full-stack solutions with React, TypeScript, and enterprise-grade architecture.',
+    keywords: [
+      'Next.js Development',
+      'React Development',
+      'TypeScript Development',
+      'Full Stack Development',
+      'Enterprise Web Apps',
+      'Modern Web Development',
+      'Next.js Expert',
+      'React Applications',
+      'SSR Applications',
+      'JAMstack Development'
+    ],
+    openGraph: {
+      title: 'Next.js Development Services | Modern Web Apps',
+      description: 'Expert Next.js development services for modern web applications.',
+      type: 'website',
+      locale: 'en_US',
+      images: [ogImage]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Next.js Development Services | Modern Web Apps',
+      description: 'Expert Next.js development services for modern web applications.',
+      images: [ogImage]
+    },
+    alternates: {
+      canonical: 'https://madebyaris.com/services/nextjs-development'
+    }
+  }
+}
+
+// Add script tag for structured data
+export function generateStructuredData() {
+  return {
+    __html: JSON.stringify(structuredData)
+  }
 }
 
 const features = [

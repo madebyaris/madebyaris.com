@@ -2,11 +2,7 @@ import type { Metadata } from 'next'
 import { Code2, Database, Server, Shield, ArrowRight, Wrench } from 'lucide-react'
 import { Button } from '../../../components/ui/button'
 import { Card } from '../../../components/ui/card'
-
-export const metadata: Metadata = {
-  title: 'PHP Development Services - Aris Setiawan',
-  description: 'Professional PHP development services for custom web applications and solutions',
-}
+import { ImageResponse } from 'next/og'
 
 const features = [
   {
@@ -60,6 +56,152 @@ const processSteps = [
     description: 'Smooth deployment process and ongoing technical support.',
   },
 ]
+
+// Structured Data
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "PHP Development Services",
+  "description": "Professional PHP development services for custom web applications, APIs, and enterprise solutions. Expert in modern PHP frameworks and best practices.",
+  "provider": {
+    "@type": "Person",
+    "name": "Aris Setiawan",
+    "jobTitle": "Senior PHP Developer",
+    "url": "https://madebyaris.com"
+  },
+  "serviceType": "PHP Development",
+  "areaServed": "Worldwide",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "PHP Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "name": "Custom PHP Applications",
+        "description": "Tailored PHP solutions"
+      },
+      {
+        "@type": "Offer",
+        "name": "API Development",
+        "description": "RESTful and GraphQL APIs"
+      },
+      {
+        "@type": "Offer",
+        "name": "Database Solutions",
+        "description": "Optimized database architecture"
+      },
+      {
+        "@type": "Offer",
+        "name": "Legacy Code Modernization",
+        "description": "PHP codebase upgrades"
+      }
+    ]
+  }
+}
+
+// Generate OG Image
+export async function generateMetadata(): Promise<Metadata> {
+  const ogImage = new ImageResponse(
+    (
+      <div
+        style={{
+          background: 'linear-gradient(to right, #000000, #1a1a1a)',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '40px',
+        }}
+      >
+        <h1
+          style={{
+            fontSize: '60px',
+            fontWeight: 'bold',
+            color: 'white',
+            marginBottom: '20px',
+            textAlign: 'center',
+          }}
+        >
+          PHP Development Services
+        </h1>
+        <p
+          style={{
+            fontSize: '30px',
+            color: '#888888',
+            marginBottom: '40px',
+            textAlign: 'center',
+            maxWidth: '800px',
+          }}
+        >
+          Custom Applications • APIs • Database Solutions
+        </p>
+        <div
+          style={{
+            display: 'flex',
+            gap: '20px',
+            marginTop: '20px',
+          }}
+        >
+          <div style={{ background: '#777BB3', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            PHP Expert
+          </div>
+          <div style={{ background: '#333333', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            Modern PHP
+          </div>
+          <div style={{ background: '#14a800', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            Enterprise Solutions
+          </div>
+        </div>
+      </div>
+    ),
+    {
+      width: 1200,
+      height: 630,
+    }
+  )
+
+  return {
+    title: 'PHP Development Services | Custom Applications & APIs',
+    description: 'Professional PHP development services for custom web applications, APIs, and enterprise solutions. Expert in modern PHP frameworks and best practices.',
+    keywords: [
+      'PHP Development',
+      'Custom PHP Applications',
+      'PHP API Development',
+      'Database Solutions',
+      'Enterprise PHP',
+      'Modern PHP Development',
+      'PHP Expert',
+      'PHP Frameworks',
+      'Legacy Code Modernization',
+      'PHP Consulting'
+    ],
+    openGraph: {
+      title: 'PHP Development Services | Custom Solutions',
+      description: 'Professional PHP development services for modern web applications.',
+      type: 'website',
+      locale: 'en_US',
+      images: [ogImage]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'PHP Development Services | Custom Solutions',
+      description: 'Professional PHP development services for modern web applications.',
+      images: [ogImage]
+    },
+    alternates: {
+      canonical: 'https://madebyaris.com/services/php-development'
+    }
+  }
+}
+
+// Add script tag for structured data
+export function generateStructuredData() {
+  return {
+    __html: JSON.stringify(structuredData)
+  }
+}
 
 export default function PhpDevelopmentPage() {
   return (
