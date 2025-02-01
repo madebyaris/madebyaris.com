@@ -16,10 +16,71 @@ const structuredData = {
   "description": "Get in touch with Aris Setiawan for web development projects and consultations.",
   "url": "https://madebyaris.com/contact",
   "mainEntity": {
-    "@type": "Person",
-    "name": "Aris Setiawan",
-    "jobTitle": "Full Stack Developer",
-    "url": "https://madebyaris.com"
+    "@type": "Organization",
+    "name": "MadeByAris",
+    "url": "https://madebyaris.com",
+    "logo": "https://madebyaris.com/logo.png",
+    "founder": {
+      "@type": "Person",
+      "name": "Aris Setiawan",
+      "jobTitle": "Senior Full Stack Developer",
+      "url": "https://madebyaris.com"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "email": "arissetia.m@gmail.com",
+      "availableLanguage": ["English", "Indonesian"],
+      "areaServed": "Worldwide",
+      "hoursAvailable": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "09:00",
+        "closes": "17:00"
+      }
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Sidoarjo",
+      "addressCountry": "Indonesia"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/in/arissetia/",
+      "https://github.com/arissetyawan",
+      "https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe"
+    ],
+    "makesOffer": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Enterprise Web Applications",
+          "description": "Scalable solutions with modern tech stack and robust architecture"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "E-commerce Solutions",
+          "description": "Custom online stores with seamless user experience and secure transactions"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Technical Consultation",
+          "description": "Expert advice on architecture, performance optimization, and best practices"
+        }
+      }
+    ]
   }
 }
 
