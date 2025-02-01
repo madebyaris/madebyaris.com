@@ -9,44 +9,17 @@ const structuredData = {
   "@context": "https://schema.org",
   "@type": "Service",
   "name": "Next.js Development Services",
-  "description": "Expert Next.js development services for modern web applications. Full-stack solutions with React, TypeScript, and enterprise-grade architecture.",
+  "description": "Professional Next.js development services for modern web applications",
   "provider": {
     "@type": "Person",
     "name": "Aris Setiawan",
-    "jobTitle": "Senior Next.js Developer",
     "url": "https://madebyaris.com"
   },
-  "serviceType": "Next.js Development",
-  "areaServed": "Worldwide",
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "Next.js Services",
-    "itemListElement": [
-      {
-        "@type": "Offer",
-        "name": "Full-Stack Next.js Development",
-        "description": "End-to-end Next.js applications"
-      },
-      {
-        "@type": "Offer",
-        "name": "Enterprise Architecture",
-        "description": "Scalable Next.js solutions"
-      },
-      {
-        "@type": "Offer",
-        "name": "Performance Optimization",
-        "description": "Next.js app optimization"
-      },
-      {
-        "@type": "Offer",
-        "name": "Headless CMS Integration",
-        "description": "Next.js with headless CMS"
-      }
-    ]
-  }
+  "serviceType": "Web Development",
+  "areaServed": "Worldwide"
 }
 
-// Generate OG Image
+// Generate Metadata and Structured Data
 export async function generateMetadata(): Promise<Metadata> {
   const ogImage = new ImageResponse(
     (
@@ -139,14 +112,10 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     alternates: {
       canonical: 'https://madebyaris.com/services/nextjs-development'
+    },
+    other: {
+      'structured-data': JSON.stringify(structuredData)
     }
-  }
-}
-
-// Add script tag for structured data
-export function generateStructuredData() {
-  return {
-    __html: JSON.stringify(structuredData)
   }
 }
 

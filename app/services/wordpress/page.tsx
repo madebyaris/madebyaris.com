@@ -64,44 +64,17 @@ const structuredData = {
   "@context": "https://schema.org",
   "@type": "Service",
   "name": "WordPress Development Services",
-  "description": "Expert WordPress development services including custom themes, plugins, headless solutions, and performance optimization. 12+ years of WordPress expertise.",
+  "description": "Professional WordPress development services including custom themes, plugins, and optimization",
   "provider": {
     "@type": "Person",
     "name": "Aris Setiawan",
-    "jobTitle": "Senior WordPress Developer",
     "url": "https://madebyaris.com"
   },
-  "serviceType": "WordPress Development",
-  "areaServed": "Worldwide",
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "WordPress Services",
-    "itemListElement": [
-      {
-        "@type": "Offer",
-        "name": "Custom Theme Development",
-        "description": "Pixel-perfect custom WordPress themes"
-      },
-      {
-        "@type": "Offer",
-        "name": "Plugin Development",
-        "description": "Custom WordPress plugins and extensions"
-      },
-      {
-        "@type": "Offer",
-        "name": "Headless WordPress",
-        "description": "Modern headless WordPress with Next.js"
-      },
-      {
-        "@type": "Offer",
-        "name": "Performance Optimization",
-        "description": "Speed and security optimization"
-      }
-    ]
-  }
+  "serviceType": "Web Development",
+  "areaServed": "Worldwide"
 }
 
-// Generate OG Image
+// Generate Metadata and Structured Data
 export async function generateMetadata(): Promise<Metadata> {
   const ogImage = new ImageResponse(
     (
@@ -165,47 +138,43 @@ export async function generateMetadata(): Promise<Metadata> {
   )
 
   return {
-    title: 'WordPress Development Services | Expert Solutions & Optimization',
-    description: 'Professional WordPress development services including custom themes, plugins, headless solutions, and performance optimization. 12+ years of WordPress expertise.',
+    title: 'WordPress Development Services | Custom Solutions',
+    description: 'Expert WordPress development services including custom themes, plugins, and optimization. Professional solutions for modern WordPress websites.',
     keywords: [
       'WordPress Development',
-      'Custom WordPress Themes',
-      'WordPress Plugin Development',
-      'Headless WordPress',
+      'Custom Themes',
+      'Plugin Development',
+      'WordPress Solutions',
+      'Theme Development',
+      'WordPress Expert',
+      'Custom WordPress',
       'WordPress Optimization',
       'WordPress Security',
-      'Enterprise WordPress',
-      'WordPress Expert',
-      'WordPress Consultant',
-      'WooCommerce Development'
+      'WordPress Consulting'
     ],
     openGraph: {
-      title: 'WordPress Development Services | Expert Solutions',
-      description: 'Professional WordPress development services with 12+ years of expertise.',
+      title: 'WordPress Development Services | Custom Solutions',
+      description: 'Expert WordPress development services for modern websites.',
       type: 'website',
       locale: 'en_US',
       images: [ogImage]
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'WordPress Development Services | Expert Solutions',
-      description: 'Professional WordPress development services with 12+ years of expertise.',
+      title: 'WordPress Development Services | Custom Solutions',
+      description: 'Expert WordPress development services for modern websites.',
       images: [ogImage]
     },
     alternates: {
       canonical: 'https://madebyaris.com/services/wordpress'
+    },
+    other: {
+      'structured-data': JSON.stringify(structuredData)
     }
   }
 }
 
-// Add script tag for structured data
-export function generateStructuredData() {
-  return {
-    __html: JSON.stringify(structuredData)
-  }
-}
-
-export default function WordPressPage() {
+export default function WordPressServicesPage() {
   return (
     <div className="relative min-h-screen">
       {/* Background Pattern */}

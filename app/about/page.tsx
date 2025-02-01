@@ -148,42 +148,6 @@ const timelineData = [
   },
 ]
 
-// Structured Data
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Aris Setiawan",
-  "jobTitle": "Senior Full-Stack Developer",
-  "description": "Full Stack Web Developer with over 12 years of experience in building scalable web applications.",
-  "image": "https://madebyaris.com/astro.png",
-  "url": "https://madebyaris.com",
-  "sameAs": [
-    "https://www.linkedin.com/in/arissetia/",
-    "https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe"
-  ],
-  "worksFor": {
-    "@type": "Organization",
-    "name": "SAB Digital Marketing Agency"
-  },
-  "alumniOf": {
-    "@type": "Organization",
-    "name": "Raja Kreatif Asia",
-    "url": "https://rajakreatif.com"
-  },
-  "knowsAbout": [
-    "Next.js",
-    "React",
-    "WordPress",
-    "PHP",
-    "TypeScript",
-    "Node.js",
-    "Web Architecture",
-    "Full Stack Development",
-    "Enterprise Solutions",
-    "Web Performance Optimization"
-  ]
-}
-
 // Generate OG Image
 export async function generateMetadata(): Promise<Metadata> {
   const ogImage = new ImageResponse(
@@ -200,7 +164,7 @@ export async function generateMetadata(): Promise<Metadata> {
           padding: '40px',
         }}
       >
-        <img
+        <Image
           src="https://madebyaris.com/astro.png"
           alt="Aris Setiawan"
           width="200"
@@ -290,20 +254,13 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-// Add script tag for structured data
-export function generateStructuredData() {
-  return {
-    __html: JSON.stringify(structuredData)
-  }
-}
-
 export default function AboutPage() {
+  // Function to generate structured data
+
+
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={generateStructuredData()}
-      />
+
       <div className="container mx-auto max-w-[980px] px-4 sm:px-6 lg:px-8">
         <div className="py-8 md:py-12 lg:py-24">
           <div className="flex flex-col gap-8">

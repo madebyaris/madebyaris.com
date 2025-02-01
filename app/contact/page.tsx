@@ -12,20 +12,14 @@ import { LogoCarousel } from '@/components/ui/logo-carousel'
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "ContactPage",
-  "name": "Contact Aris Setiawan - Senior Full-Stack Developer",
-  "description": "Get in touch for enterprise web development solutions, technical consultations, or project collaborations.",
+  "name": "Contact Aris Setiawan",
+  "description": "Get in touch with Aris Setiawan for web development projects and consultations.",
   "url": "https://madebyaris.com/contact",
   "mainEntity": {
     "@type": "Person",
     "name": "Aris Setiawan",
-    "jobTitle": "Senior Full-Stack Developer",
-    "email": "arissetia.m@gmail.com",
-    "url": "https://madebyaris.com",
-    "sameAs": [
-      "https://www.linkedin.com/in/arissetia/",
-      "https://github.com/madebyaris",
-      "https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe"
-    ]
+    "jobTitle": "Full Stack Developer",
+    "url": "https://madebyaris.com"
   }
 }
 
@@ -126,14 +120,14 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-// Add script tag for structured data
-export function generateStructuredData() {
-  return {
-    __html: JSON.stringify(structuredData)
-  }
-}
-
 export default function ContactPage() {
+  // Function to generate structured data
+  function generateStructuredData() {
+    return {
+      __html: JSON.stringify(structuredData)
+    }
+  }
+
   return (
     <>
       <script

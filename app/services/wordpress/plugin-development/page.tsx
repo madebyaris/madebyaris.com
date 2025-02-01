@@ -192,14 +192,10 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     alternates: {
       canonical: 'https://madebyaris.com/services/wordpress/plugin-development'
+    },
+    other: {
+      'structured-data': JSON.stringify(structuredData)
     }
-  }
-}
-
-// Add script tag for structured data
-export function generateStructuredData() {
-  return {
-    __html: JSON.stringify(structuredData)
   }
 }
 

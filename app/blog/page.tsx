@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { Metadata } from 'next'
-import Link from 'next/link'
-import Image from 'next/image'
 import { getPosts } from '@/lib/wordpress'
 import type { Post } from '@/lib/types'
 import { ImageResponse } from 'next/og'
@@ -139,13 +137,6 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-// Add script tag for structured data
-export function generateStructuredData() {
-  return {
-    __html: JSON.stringify(structuredData)
-  }
-}
-
 export default async function BlogPage() {
   let posts: Post[] = []
   
@@ -153,6 +144,13 @@ export default async function BlogPage() {
     posts = await getPosts({ per_page: 12 })
   } catch (error) {
     console.error('Failed to fetch posts:', error)
+  }
+
+  // Function to generate structured data
+  function generateStructuredData() {
+    return {
+      __html: JSON.stringify(structuredData)
+    }
   }
 
   return (

@@ -80,20 +80,15 @@ const projects = [
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  "name": "Client Projects Portfolio",
-  "description": "Showcase of enterprise-level web development projects by Aris Setiawan, featuring work for international clients across various industries.",
-  "author": {
+  "name": "Web Development Projects - Aris Setiawan",
+  "description": "Portfolio of web development projects showcasing expertise in Next.js, React, and WordPress.",
+  "url": "https://madebyaris.com/projects",
+  "mainEntity": {
     "@type": "Person",
     "name": "Aris Setiawan",
+    "jobTitle": "Full Stack Developer",
     "url": "https://madebyaris.com"
-  },
-  "itemListElement": projects.map((project, index) => ({
-    "@type": "WebSite",
-    "position": index + 1,
-    "name": project.title,
-    "description": project.description,
-    "url": project.link
-  }))
+  }
 }
 
 // Generate OG Image
@@ -196,14 +191,14 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-// Add script tag for structured data
-export function generateStructuredData() {
-  return {
-    __html: JSON.stringify(structuredData)
-  }
-}
-
 export default function ProjectsPage() {
+  // Function to generate structured data
+  function generateStructuredData() {
+    return {
+      __html: JSON.stringify(structuredData)
+    }
+  }
+
   return (
     <>
       <script

@@ -62,38 +62,19 @@ const wordPressServices = [
 // Structured Data
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "Professional Web Development Services | Full-Stack Solutions",
-  "description": "Expert web development services including Next.js, WordPress, PHP, and enterprise solutions. 12+ years of experience in delivering scalable web applications.",
+  "@type": "Service",
+  "name": "Web Development Services",
+  "description": "Professional web development services including Next.js, WordPress, and PHP development",
   "provider": {
     "@type": "Person",
     "name": "Aris Setiawan",
-    "jobTitle": "Senior Full-Stack Developer",
     "url": "https://madebyaris.com"
   },
-  "offers": {
-    "@type": "AggregateOffer",
-    "offers": [
-      {
-        "@type": "Offer",
-        "name": "Next.js Development",
-        "description": "Modern web applications with Next.js"
-      },
-      {
-        "@type": "Offer",
-        "name": "WordPress Solutions",
-        "description": "Custom WordPress development and optimization"
-      },
-      {
-        "@type": "Offer",
-        "name": "PHP Development",
-        "description": "Custom PHP applications and APIs"
-      }
-    ]
-  }
+  "serviceType": "Web Development",
+  "areaServed": "Worldwide"
 }
 
-// Generate OG Image
+// Generate Metadata and Structured Data
 export async function generateMetadata(): Promise<Metadata> {
   const ogImage = new ImageResponse(
     (
@@ -157,43 +138,39 @@ export async function generateMetadata(): Promise<Metadata> {
   )
 
   return {
-    title: 'Web Development Services | Next.js, WordPress & PHP Solutions',
-    description: 'Professional web development services specializing in Next.js, WordPress, and PHP. Enterprise-grade solutions with 12+ years of experience in building scalable applications.',
+    title: 'Web Development Services | Next.js, WordPress & PHP',
+    description: 'Professional web development services including Next.js, WordPress, and PHP development. Expert solutions for modern web applications.',
     keywords: [
       'Web Development Services',
       'Next.js Development',
       'WordPress Development',
       'PHP Development',
-      'Enterprise Web Solutions',
       'Full Stack Development',
-      'Custom Web Applications',
-      'Headless WordPress',
-      'Web Performance Optimization',
-      'Technical Consultation'
+      'Custom Web Solutions',
+      'Enterprise Development',
+      'Modern Web Apps',
+      'Web Architecture',
+      'Technical Consulting'
     ],
     openGraph: {
-      title: 'Professional Web Development Services | Full-Stack Solutions',
-      description: 'Expert web development services including Next.js, WordPress, PHP, and enterprise solutions.',
+      title: 'Web Development Services | Modern Solutions',
+      description: 'Professional web development services for modern businesses.',
       type: 'website',
       locale: 'en_US',
       images: [ogImage]
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Professional Web Development Services | Full-Stack Solutions',
-      description: 'Expert web development services including Next.js, WordPress, PHP, and enterprise solutions.',
+      title: 'Web Development Services | Modern Solutions',
+      description: 'Professional web development services for modern businesses.',
       images: [ogImage]
     },
     alternates: {
       canonical: 'https://madebyaris.com/services'
+    },
+    other: {
+      'structured-data': JSON.stringify(structuredData)
     }
-  }
-}
-
-// Add script tag for structured data
-export function generateStructuredData() {
-  return {
-    __html: JSON.stringify(structuredData)
   }
 }
 

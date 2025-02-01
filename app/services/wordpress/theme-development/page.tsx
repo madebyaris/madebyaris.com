@@ -62,41 +62,14 @@ const structuredData = {
   "@context": "https://schema.org",
   "@type": "Service",
   "name": "WordPress Theme Development Services",
-  "description": "Professional WordPress theme development services for unique, high-performance websites. Custom themes built with modern best practices and optimal user experience.",
+  "description": "Professional WordPress theme development services for custom and unique websites",
   "provider": {
     "@type": "Person",
     "name": "Aris Setiawan",
-    "jobTitle": "WordPress Theme Developer",
     "url": "https://madebyaris.com"
   },
-  "serviceType": "WordPress Theme Development",
-  "areaServed": "Worldwide",
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "WordPress Theme Services",
-    "itemListElement": [
-      {
-        "@type": "Offer",
-        "name": "Custom Theme Development",
-        "description": "Unique WordPress themes"
-      },
-      {
-        "@type": "Offer",
-        "name": "Theme Customization",
-        "description": "Existing theme modifications"
-      },
-      {
-        "@type": "Offer",
-        "name": "Child Theme Development",
-        "description": "Custom child themes"
-      },
-      {
-        "@type": "Offer",
-        "name": "Theme Optimization",
-        "description": "Performance tuning"
-      }
-    ]
-  }
+  "serviceType": "Web Development",
+  "areaServed": "Worldwide"
 }
 
 // Generate OG Image
@@ -192,14 +165,10 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     alternates: {
       canonical: 'https://madebyaris.com/services/wordpress/theme-development'
+    },
+    other: {
+      'structured-data': JSON.stringify(structuredData)
     }
-  }
-}
-
-// Add script tag for structured data
-export function generateStructuredData() {
-  return {
-    __html: JSON.stringify(structuredData)
   }
 }
 
