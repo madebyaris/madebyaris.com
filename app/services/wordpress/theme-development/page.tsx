@@ -2,11 +2,7 @@ import type { Metadata } from 'next'
 import { Layout, Palette, FileCode, Code2, ArrowRight, Brush } from 'lucide-react'
 import { Button } from '../../../../components/ui/button'
 import { Card } from '../../../../components/ui/card'
-
-export const metadata: Metadata = {
-  title: 'WordPress Theme Development - Aris Setiawan',
-  description: 'Custom WordPress theme development services for unique and performant websites',
-}
+import { ImageResponse } from 'next/og'
 
 const features = [
   {
@@ -60,6 +56,121 @@ const processSteps = [
     description: 'Performance optimization, security checks, and deployment to your live site.',
   },
 ]
+
+// Structured Data
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "WordPress Theme Development Services",
+  "description": "Professional WordPress theme development services for custom and unique websites",
+  "provider": {
+    "@type": "Person",
+    "name": "Aris Setiawan",
+    "url": "https://madebyaris.com"
+  },
+  "serviceType": "Web Development",
+  "areaServed": "Worldwide"
+}
+
+// Generate OG Image
+export async function generateMetadata(): Promise<Metadata> {
+  const ogImage = new ImageResponse(
+    (
+      <div
+        style={{
+          background: 'linear-gradient(to right, #000000, #1a1a1a)',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '40px',
+        }}
+      >
+        <h1
+          style={{
+            fontSize: '60px',
+            fontWeight: 'bold',
+            color: 'white',
+            marginBottom: '20px',
+            textAlign: 'center',
+          }}
+        >
+          WordPress Theme Development
+        </h1>
+        <p
+          style={{
+            fontSize: '30px',
+            color: '#888888',
+            marginBottom: '40px',
+            textAlign: 'center',
+            maxWidth: '800px',
+          }}
+        >
+          Custom Themes • Modern Design • Performance
+        </p>
+        <div
+          style={{
+            display: 'flex',
+            gap: '20px',
+            marginTop: '20px',
+          }}
+        >
+          <div style={{ background: '#0073AA', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            Theme Expert
+          </div>
+          <div style={{ background: '#333333', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            Custom Design
+          </div>
+          <div style={{ background: '#14a800', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            Enterprise Grade
+          </div>
+        </div>
+      </div>
+    ),
+    {
+      width: 1200,
+      height: 630,
+    }
+  )
+
+  return {
+    title: 'WordPress Theme Development | Custom Design & Development',
+    description: 'Professional WordPress theme development services for unique, high-performance websites. Custom themes built with modern best practices and optimal user experience.',
+    keywords: [
+      'WordPress Theme Development',
+      'Custom WordPress Themes',
+      'Theme Customization',
+      'WordPress Development',
+      'Child Theme Development',
+      'WordPress Design',
+      'Theme Expert',
+      'Custom Design',
+      'Theme Optimization',
+      'Enterprise WordPress'
+    ],
+    openGraph: {
+      title: 'WordPress Theme Development | Custom Solutions',
+      description: 'Expert WordPress theme development for unique websites.',
+      type: 'website',
+      locale: 'en_US',
+      images: [ogImage]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'WordPress Theme Development | Custom Solutions',
+      description: 'Expert WordPress theme development for unique websites.',
+      images: [ogImage]
+    },
+    alternates: {
+      canonical: 'https://madebyaris.com/services/wordpress/theme-development'
+    },
+    other: {
+      'structured-data': JSON.stringify(structuredData)
+    }
+  }
+}
 
 export default function WordPressThemeDevelopmentPage() {
   return (

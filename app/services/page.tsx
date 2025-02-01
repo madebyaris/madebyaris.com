@@ -2,11 +2,7 @@ import type { Metadata } from 'next'
 import { Code2, Layout, Server, Rocket, Zap, FileCode, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '../../components/ui/button'
-
-export const metadata: Metadata = {
-  title: 'Services - Aris Setiawan',
-  description: 'Professional web development services including Next.js, PHP, and WordPress development with focus on performance and modern solutions',
-}
+import { ImageResponse } from 'next/og'
 
 const services = [
   {
@@ -62,6 +58,121 @@ const wordPressServices = [
     benefits: ['Speed Optimization', 'Security Hardening', 'CDN Setup', 'Caching'],
   },
 ]
+
+// Structured Data
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Web Development Services",
+  "description": "Professional web development services including Next.js, WordPress, and PHP development",
+  "provider": {
+    "@type": "Person",
+    "name": "Aris Setiawan",
+    "url": "https://madebyaris.com"
+  },
+  "serviceType": "Web Development",
+  "areaServed": "Worldwide"
+}
+
+// Generate Metadata and Structured Data
+export async function generateMetadata(): Promise<Metadata> {
+  const ogImage = new ImageResponse(
+    (
+      <div
+        style={{
+          background: 'linear-gradient(to right, #000000, #1a1a1a)',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '40px',
+        }}
+      >
+        <h1
+          style={{
+            fontSize: '60px',
+            fontWeight: 'bold',
+            color: 'white',
+            marginBottom: '20px',
+            textAlign: 'center',
+          }}
+        >
+          Professional Web Development Services
+        </h1>
+        <p
+          style={{
+            fontSize: '30px',
+            color: '#888888',
+            marginBottom: '40px',
+            textAlign: 'center',
+            maxWidth: '800px',
+          }}
+        >
+          Next.js • WordPress • PHP • Enterprise Solutions
+        </p>
+        <div
+          style={{
+            display: 'flex',
+            gap: '20px',
+            marginTop: '20px',
+          }}
+        >
+          <div style={{ background: '#0077B5', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            12+ Years Experience
+          </div>
+          <div style={{ background: '#333333', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            Enterprise Solutions
+          </div>
+          <div style={{ background: '#14a800', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            Full-Stack Development
+          </div>
+        </div>
+      </div>
+    ),
+    {
+      width: 1200,
+      height: 630,
+    }
+  )
+
+  return {
+    title: 'Web Development Services | Next.js, WordPress & PHP',
+    description: 'Professional web development services including Next.js, WordPress, and PHP development. Expert solutions for modern web applications.',
+    keywords: [
+      'Web Development Services',
+      'Next.js Development',
+      'WordPress Development',
+      'PHP Development',
+      'Full Stack Development',
+      'Custom Web Solutions',
+      'Enterprise Development',
+      'Modern Web Apps',
+      'Web Architecture',
+      'Technical Consulting'
+    ],
+    openGraph: {
+      title: 'Web Development Services | Modern Solutions',
+      description: 'Professional web development services for modern businesses.',
+      type: 'website',
+      locale: 'en_US',
+      images: [ogImage]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Web Development Services | Modern Solutions',
+      description: 'Professional web development services for modern businesses.',
+      images: [ogImage]
+    },
+    alternates: {
+      canonical: 'https://madebyaris.com/services'
+    },
+    other: {
+      'structured-data': JSON.stringify(structuredData)
+    }
+  }
+}
 
 export default function ServicesPage() {
   return (

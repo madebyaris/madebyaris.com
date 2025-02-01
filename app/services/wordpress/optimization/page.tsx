@@ -2,11 +2,7 @@ import type { Metadata } from 'next'
 import { Zap, ArrowRight, Shield, Globe, Gauge } from 'lucide-react'
 import { Button } from '../../../../components/ui/button'
 import { Card } from '../../../../components/ui/card'
-
-export const metadata: Metadata = {
-  title: 'WordPress Performance Optimization - Aris Setiawan',
-  description: 'Expert WordPress optimization services to boost your website speed, security, and overall performance',
-}
+import { ImageResponse } from 'next/og'
 
 const features = [
   {
@@ -60,6 +56,121 @@ const processSteps = [
     description: 'Ongoing performance monitoring and continuous optimization.',
   },
 ]
+
+// Structured Data
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "WordPress Optimization Services",
+  "description": "Professional WordPress optimization services for improved performance and security",
+  "provider": {
+    "@type": "Person",
+    "name": "Aris Setiawan",
+    "url": "https://madebyaris.com"
+  },
+  "serviceType": "Web Development",
+  "areaServed": "Worldwide"
+}
+
+// Generate Metadata and Structured Data
+export async function generateMetadata(): Promise<Metadata> {
+  const ogImage = new ImageResponse(
+    (
+      <div
+        style={{
+          background: 'linear-gradient(to right, #000000, #1a1a1a)',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '40px',
+        }}
+      >
+        <h1
+          style={{
+            fontSize: '60px',
+            fontWeight: 'bold',
+            color: 'white',
+            marginBottom: '20px',
+            textAlign: 'center',
+          }}
+        >
+          WordPress Optimization Services
+        </h1>
+        <p
+          style={{
+            fontSize: '30px',
+            color: '#888888',
+            marginBottom: '40px',
+            textAlign: 'center',
+            maxWidth: '800px',
+          }}
+        >
+          Performance • Security • Speed • Optimization
+        </p>
+        <div
+          style={{
+            display: 'flex',
+            gap: '20px',
+            marginTop: '20px',
+          }}
+        >
+          <div style={{ background: '#0073AA', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            Performance Expert
+          </div>
+          <div style={{ background: '#333333', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            Security Hardening
+          </div>
+          <div style={{ background: '#14a800', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            Enterprise Solutions
+          </div>
+        </div>
+      </div>
+    ),
+    {
+      width: 1200,
+      height: 630,
+    }
+  )
+
+  return {
+    title: 'WordPress Optimization Services | Performance & Security',
+    description: 'Expert WordPress optimization services for improved speed, security, and user experience. Comprehensive optimization solutions for WordPress websites.',
+    keywords: [
+      'WordPress Optimization',
+      'Website Speed',
+      'Performance Tuning',
+      'Security Hardening',
+      'WordPress Security',
+      'Cache Setup',
+      'CDN Integration',
+      'Core Web Vitals',
+      'WordPress Expert',
+      'Site Optimization'
+    ],
+    openGraph: {
+      title: 'WordPress Optimization Services | Better Performance',
+      description: 'Expert WordPress optimization services for better performance.',
+      type: 'website',
+      locale: 'en_US',
+      images: [ogImage]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'WordPress Optimization Services | Better Performance',
+      description: 'Expert WordPress optimization services for better performance.',
+      images: [ogImage]
+    },
+    alternates: {
+      canonical: 'https://madebyaris.com/services/wordpress/optimization'
+    },
+    other: {
+      'structured-data': JSON.stringify(structuredData)
+    }
+  }
+}
 
 export default function WordPressOptimizationPage() {
   return (

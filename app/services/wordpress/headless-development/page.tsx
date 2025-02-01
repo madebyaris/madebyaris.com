@@ -2,11 +2,7 @@ import type { Metadata } from 'next'
 import { Rocket, ArrowRight, Globe, Zap, Code2 } from 'lucide-react'
 import { Button } from '../../../../components/ui/button'
 import { Card } from '../../../../components/ui/card'
-
-export const metadata: Metadata = {
-  title: 'Headless WordPress Development - Aris Setiawan',
-  description: 'Modern headless WordPress development with Next.js for superior performance and flexibility',
-}
+import { ImageResponse } from 'next/og'
 
 const features = [
   {
@@ -60,6 +56,121 @@ const processSteps = [
     description: 'Comprehensive testing and optimized deployment setup.',
   },
 ]
+
+// Structured Data
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Headless WordPress Development Services",
+  "description": "Professional headless WordPress development services combining WordPress CMS with modern frontends",
+  "provider": {
+    "@type": "Person",
+    "name": "Aris Setiawan",
+    "url": "https://madebyaris.com"
+  },
+  "serviceType": "Web Development",
+  "areaServed": "Worldwide"
+}
+
+// Generate Metadata and Structured Data
+export async function generateMetadata(): Promise<Metadata> {
+  const ogImage = new ImageResponse(
+    (
+      <div
+        style={{
+          background: 'linear-gradient(to right, #000000, #1a1a1a)',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '40px',
+        }}
+      >
+        <h1
+          style={{
+            fontSize: '60px',
+            fontWeight: 'bold',
+            color: 'white',
+            marginBottom: '20px',
+            textAlign: 'center',
+          }}
+        >
+          Headless WordPress Development
+        </h1>
+        <p
+          style={{
+            fontSize: '30px',
+            color: '#888888',
+            marginBottom: '40px',
+            textAlign: 'center',
+            maxWidth: '800px',
+          }}
+        >
+          Next.js • WordPress API • Modern Architecture
+        </p>
+        <div
+          style={{
+            display: 'flex',
+            gap: '20px',
+            marginTop: '20px',
+          }}
+        >
+          <div style={{ background: '#0073AA', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            Headless Expert
+          </div>
+          <div style={{ background: '#0070F3', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            Next.js Frontend
+          </div>
+          <div style={{ background: '#14a800', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            Enterprise Solutions
+          </div>
+        </div>
+      </div>
+    ),
+    {
+      width: 1200,
+      height: 630,
+    }
+  )
+
+  return {
+    title: 'Headless WordPress Development | Modern Web Solutions',
+    description: 'Expert headless WordPress development services combining the power of WordPress CMS with modern frontend technologies like Next.js.',
+    keywords: [
+      'Headless WordPress',
+      'WordPress Development',
+      'Next.js WordPress',
+      'Decoupled WordPress',
+      'WordPress API',
+      'Modern WordPress',
+      'JAMstack WordPress',
+      'WordPress REST API',
+      'WordPress Frontend',
+      'WordPress Architecture'
+    ],
+    openGraph: {
+      title: 'Headless WordPress Development | Modern Solutions',
+      description: 'Expert headless WordPress development services.',
+      type: 'website',
+      locale: 'en_US',
+      images: [ogImage]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Headless WordPress Development | Modern Solutions',
+      description: 'Expert headless WordPress development services.',
+      images: [ogImage]
+    },
+    alternates: {
+      canonical: 'https://madebyaris.com/services/wordpress/headless-development'
+    },
+    other: {
+      'structured-data': JSON.stringify(structuredData)
+    }
+  }
+}
 
 export default function HeadlessWordPressPage() {
   return (

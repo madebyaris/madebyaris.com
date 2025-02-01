@@ -31,11 +31,31 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "MadeByAris - Portfolio",
-  description: "Personal portfolio and blog of Aris, showcasing projects and thoughts on web development.",
-  keywords: ["portfolio", "web development", "frontend", "react", "nextjs"],
-  authors: [{ name: "Aris" }],
-  creator: "Aris",
+  title: {
+    default: "Senior Full-Stack Developer | Next.js, React & WordPress Architect | Aris Setiawan",
+    template: "%s | Aris Setiawan"
+  },
+  description: "Expert Full-Stack Developer specializing in enterprise-scale applications. Delivering high-performance solutions with Next.js, React, and WordPress. 12+ years of experience in architecting scalable web systems and headless CMS solutions.",
+  keywords: [
+    "Senior Next.js Developer",
+    "Enterprise React Development",
+    "Headless WordPress Expert",
+    "Full-Stack PHP Developer",
+    "Web Architecture Specialist",
+    "Enterprise Web Solutions",
+    "React Application Architect",
+    "WordPress Development Expert",
+    "API Integration Specialist",
+    "Performance Optimization",
+    "Scalable Web Applications",
+    "Technical Leadership",
+    "Modern Web Development",
+    "Custom WordPress Solutions",
+    "Next.js Architecture",
+    "Enterprise CMS Solutions"
+  ],
+  authors: [{ name: "Aris Setiawan" }],
+  creator: "Aris Setiawan",
   icons: {
     icon: '/aris.png',
     shortcut: '/aris.png',
@@ -49,24 +69,39 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://madebyaris.com",
-    title: "MadeByAris - Portfolio",
-    description: "Personal portfolio and blog of Aris, showcasing projects and thoughts on web development.",
-    siteName: "MadeByAris",
+    title: "Senior Full-Stack Developer | Next.js, React & WordPress Architect | Aris Setiawan",
+    description: "Senior Full-Stack Developer with 12+ years of experience specializing in Next.js, React, WordPress, and enterprise-scale web applications. Expert in headless CMS architecture and high-performance systems.",
+    siteName: "Aris Setiawan - Senior Full-Stack Developer",
     images: [
       {
         url: '/aris.png',
         width: 800,
         height: 800,
-        alt: 'MadeByAris',
+        alt: 'Aris Setiawan - Senior Full-Stack Developer',
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "MadeByAris - Portfolio",
-    description: "Personal portfolio and blog of Aris, showcasing projects and thoughts on web development.",
+    title: "Senior Full-Stack Developer | Next.js & WordPress Architect",
+    description: "12+ years of experience building enterprise-scale web applications with Next.js, React, and WordPress.",
     creator: "@madebyaris",
     images: ['/aris.png'],
+  },
+  metadataBase: new URL(process.env.NEXT_PUBLIC_URL || 'https://madebyaris.com'),
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: 'your-google-verification-code', // Add your Google verification code
   },
 };
 

@@ -3,11 +3,7 @@ import { Layout, Globe, FileCode, Code2, ArrowRight, Brush, Rocket, Zap } from '
 import { Button } from '../../../components/ui/button'
 import { Card } from '../../../components/ui/card'
 import Link from 'next/link'
-
-export const metadata: Metadata = {
-  title: 'WordPress Development Services - Aris Setiawan',
-  description: 'Expert WordPress development services including custom themes, plugins, headless CMS, and optimization solutions.',
-}
+import { ImageResponse } from 'next/og'
 
 const services = [
   {
@@ -63,7 +59,122 @@ const benefits = [
   },
 ]
 
-export default function WordPressPage() {
+// Structured Data
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "WordPress Development Services",
+  "description": "Professional WordPress development services including custom themes, plugins, and optimization",
+  "provider": {
+    "@type": "Person",
+    "name": "Aris Setiawan",
+    "url": "https://madebyaris.com"
+  },
+  "serviceType": "Web Development",
+  "areaServed": "Worldwide"
+}
+
+// Generate Metadata and Structured Data
+export async function generateMetadata(): Promise<Metadata> {
+  const ogImage = new ImageResponse(
+    (
+      <div
+        style={{
+          background: 'linear-gradient(to right, #000000, #1a1a1a)',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '40px',
+        }}
+      >
+        <h1
+          style={{
+            fontSize: '60px',
+            fontWeight: 'bold',
+            color: 'white',
+            marginBottom: '20px',
+            textAlign: 'center',
+          }}
+        >
+          WordPress Development Services
+        </h1>
+        <p
+          style={{
+            fontSize: '30px',
+            color: '#888888',
+            marginBottom: '40px',
+            textAlign: 'center',
+            maxWidth: '800px',
+          }}
+        >
+          Custom Themes • Plugins • Headless • Optimization
+        </p>
+        <div
+          style={{
+            display: 'flex',
+            gap: '20px',
+            marginTop: '20px',
+          }}
+        >
+          <div style={{ background: '#0073AA', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            WordPress Expert
+          </div>
+          <div style={{ background: '#333333', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            12+ Years Experience
+          </div>
+          <div style={{ background: '#14a800', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
+            Enterprise Solutions
+          </div>
+        </div>
+      </div>
+    ),
+    {
+      width: 1200,
+      height: 630,
+    }
+  )
+
+  return {
+    title: 'WordPress Development Services | Custom Solutions',
+    description: 'Expert WordPress development services including custom themes, plugins, and optimization. Professional solutions for modern WordPress websites.',
+    keywords: [
+      'WordPress Development',
+      'Custom Themes',
+      'Plugin Development',
+      'WordPress Solutions',
+      'Theme Development',
+      'WordPress Expert',
+      'Custom WordPress',
+      'WordPress Optimization',
+      'WordPress Security',
+      'WordPress Consulting'
+    ],
+    openGraph: {
+      title: 'WordPress Development Services | Custom Solutions',
+      description: 'Expert WordPress development services for modern websites.',
+      type: 'website',
+      locale: 'en_US',
+      images: [ogImage]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'WordPress Development Services | Custom Solutions',
+      description: 'Expert WordPress development services for modern websites.',
+      images: [ogImage]
+    },
+    alternates: {
+      canonical: 'https://madebyaris.com/services/wordpress'
+    },
+    other: {
+      'structured-data': JSON.stringify(structuredData)
+    }
+  }
+}
+
+export default function WordPressServicesPage() {
   return (
     <div className="relative min-h-screen">
       {/* Background Pattern */}
