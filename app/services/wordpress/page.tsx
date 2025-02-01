@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import { Layout, Globe, FileCode, Code2, ArrowRight, Brush, Rocket, Zap } from 'lucide-react'
 import { Button } from '../../../components/ui/button'
 import { Card } from '../../../components/ui/card'
-import { AuroraBackground } from '../../../components/ui/aurora-background'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -66,14 +65,11 @@ const benefits = [
 
 export default function WordPressPage() {
   return (
-    <div className="relative min-h-screen overflow-hidden">
-      {/* Hero Background */}
-      <AuroraBackground className="absolute top-0 left-0 w-full h-full opacity-30">
-        <div className="absolute inset-0" />
-      </AuroraBackground>
-      
-      <div className="absolute inset-0 -z-10 h-full w-full bg-background/90 [background:radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] backdrop-blur-sm">
-        <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/80 to-background/90" />
+    <div className="relative min-h-screen">
+      {/* Background Pattern */}
+      <div className="fixed inset-0 -z-10">
+        <div className="absolute inset-0 bg-zinc-50 dark:bg-zinc-950 [background:radial-gradient(#e5e7eb_1px,transparent_1px)] dark:[background:radial-gradient(#1f2937_1px,transparent_1px)] [background-size:32px_32px] opacity-40" />
+        <div className="absolute inset-0 bg-gradient-to-br from-zinc-100 via-transparent to-zinc-100/50 dark:from-zinc-900 dark:via-transparent dark:to-zinc-900/50" />
       </div>
 
       <div className="container relative mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8">

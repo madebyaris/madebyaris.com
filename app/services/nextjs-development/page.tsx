@@ -1,58 +1,73 @@
 import type { Metadata } from 'next'
-import { Code2, Layout, FileCode, Server, ArrowRight, Sparkles } from 'lucide-react'
+import { Code2, ArrowRight, Rocket, Globe, Zap } from 'lucide-react'
 import { Button } from '../../../components/ui/button'
 import { Card } from '../../../components/ui/card'
-import { AuroraBackground } from '../../../components/ui/aurora-background'
 
 export const metadata: Metadata = {
   title: 'Next.js Development Services - Aris Setiawan',
-  description: 'Professional Next.js development services for high-performance web applications',
+  description: 'Expert Next.js development services for modern, high-performance web applications',
 }
 
 const features = [
   {
-    title: 'Server Components',
-    description: 'Leverage React Server Components for optimal performance and reduced client-side JavaScript.',
-    icon: <Server className="w-6 h-6" />,
-  },
-  {
-    title: 'Static Site Generation',
-    description: 'Build blazing-fast static sites with incremental static regeneration.',
-    icon: <Layout className="w-6 h-6" />,
-  },
-  {
-    title: 'Full Stack Solutions',
-    description: 'End-to-end Next.js applications with integrated API routes and database connectivity.',
+    title: 'Modern Development',
+    description: 'Building fast, modern web applications using the latest Next.js features and best practices.',
     icon: <Code2 className="w-6 h-6" />,
   },
   {
-    title: 'TypeScript Integration',
-    description: 'Type-safe development with full TypeScript support.',
-    icon: <FileCode className="w-6 h-6" />,
+    title: 'Performance Focus',
+    description: 'Optimized for speed with server-side rendering and static site generation.',
+    icon: <Rocket className="w-6 h-6" />,
+  },
+  {
+    title: 'Global Deployment',
+    description: 'Seamless deployment to edge networks for optimal global performance.',
+    icon: <Globe className="w-6 h-6" />,
+  },
+  {
+    title: 'API Integration',
+    description: 'Building robust API routes and integrating with external services.',
+    icon: <Zap className="w-6 h-6" />,
   },
 ]
 
 const benefits = [
-  'Improved Performance',
-  'Better SEO',
-  'Enhanced User Experience',
-  'Faster Development',
-  'Scalable Architecture',
-  'Modern Development Stack',
-  'Optimized Loading',
-  'Enterprise-Ready',
+  'Fast Loading',
+  'SEO Optimized',
+  'Type Safe',
+  'Modern Stack',
+  'Edge Ready',
+  'API Routes',
+  'SSR Support',
+  'Easy Scaling',
 ]
 
-export default function NextJsDevelopmentPage() {
+const processSteps = [
+  {
+    title: 'Requirements Analysis',
+    description: 'Understanding your needs and planning the optimal Next.js architecture.',
+  },
+  {
+    title: 'Development',
+    description: 'Building your application with clean, efficient, and maintainable code.',
+  },
+  {
+    title: 'Testing & Optimization',
+    description: 'Comprehensive testing and performance optimization.',
+  },
+  {
+    title: 'Deployment & Support',
+    description: 'Setting up CI/CD and providing ongoing maintenance support.',
+  },
+]
+
+export default function NextjsDevelopmentPage() {
   return (
-    <div className="relative min-h-screen overflow-hidden">
-      {/* Hero Background */}
-      <AuroraBackground className="absolute top-0 left-0 w-full h-full opacity-30">
-        <div className="absolute inset-0" />
-      </AuroraBackground>
-      
-      <div className="absolute inset-0 -z-10 h-full w-full bg-background/90 [background:radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] backdrop-blur-sm">
-        <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/80 to-background/90" />
+    <div className="relative min-h-screen">
+      {/* Background Pattern */}
+      <div className="fixed inset-0 -z-10">
+        <div className="absolute inset-0 bg-zinc-50 dark:bg-zinc-950 [background:radial-gradient(#e5e7eb_1px,transparent_1px)] dark:[background:radial-gradient(#1f2937_1px,transparent_1px)] [background-size:32px_32px] opacity-40" />
+        <div className="absolute inset-0 bg-gradient-to-br from-zinc-100 via-transparent to-zinc-100/50 dark:from-zinc-900 dark:via-transparent dark:to-zinc-900/50" />
       </div>
 
       <div className="container relative mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8">
@@ -61,24 +76,23 @@ export default function NextJsDevelopmentPage() {
             {/* Hero Section */}
             <div className="text-center max-w-3xl mx-auto">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-50 mb-4">
-                <Sparkles className="w-4 h-4" />
+                <Code2 className="w-4 h-4" />
                 <span className="text-sm font-medium">Next.js Expert</span>
               </div>
               <h1 className="text-4xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-700 dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-300 mb-6 animate-in fade-in slide-in-from-bottom-4 duration-1000">
                 Next.js Development
               </h1>
               <p className="text-xl text-zinc-600 dark:text-zinc-400 max-w-[700px] mx-auto mb-8 animate-in fade-in slide-in-from-bottom-5 duration-1000 delay-200">
-                Building modern, performant web applications with Next.js and React. Let&apos;s create something exceptional together.
+                Modern web applications built with Next.js. Optimized for performance, SEO, and exceptional user experience.
               </p>
             </div>
 
             {/* Introduction */}
             <div className="mt-8 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm rounded-lg p-8 border border-zinc-200 dark:border-zinc-800 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-300">
               <p className="text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
-                Next.js is the leading React framework for production-ready applications. 
-                I specialize in building high-performance web applications using Next.js, 
-                leveraging its powerful features like Server Components, static site generation, 
-                and API routes to deliver exceptional user experiences.
+                My Next.js development service focuses on creating modern, high-performance web 
+                applications. Using the latest features and best practices, I build solutions that 
+                are not only fast and reliable but also maintainable and scalable for future growth.
               </p>
             </div>
 
@@ -101,10 +115,34 @@ export default function NextJsDevelopmentPage() {
               ))}
             </div>
 
+            {/* Development Process */}
+            <div className="mt-16 animate-in fade-in slide-in-from-bottom duration-1000 delay-400">
+              <h2 className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-700 dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-300">
+                Development Process
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {processSteps.map((step, index) => (
+                  <div 
+                    key={step.title}
+                    className="p-6 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm rounded-lg border border-zinc-200 dark:border-zinc-800 transition-all duration-300 hover:shadow-lg"
+                    style={{ animationDelay: `${(index + 1) * 200}ms` }}
+                  >
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-8 h-8 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-900 dark:text-zinc-50 font-semibold">
+                        {index + 1}
+                      </div>
+                      <h3 className="font-semibold text-zinc-900 dark:text-zinc-50">{step.title}</h3>
+                    </div>
+                    <p className="text-zinc-600 dark:text-zinc-400">{step.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
             {/* Benefits Section */}
             <div className="mt-16 animate-in fade-in slide-in-from-bottom duration-1000 delay-500">
               <h2 className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-700 dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-300">
-                Why Choose Next.js?
+                Benefits of Next.js Development
               </h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {benefits.map((benefit, index) => (
@@ -125,7 +163,7 @@ export default function NextJsDevelopmentPage() {
                 Ready to Build Your Next.js Project?
               </h2>
               <p className="text-xl text-zinc-600 dark:text-zinc-400 max-w-[600px] mx-auto mb-8">
-                Let&apos;s discuss how we can create a fast, modern, and user-friendly web application for your business.
+                Let&apos;s discuss how Next.js can help you build a faster, more efficient web application.
               </p>
               <Button size="lg" className="min-w-[200px] group bg-zinc-900 dark:bg-zinc-50 text-zinc-50 dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200 hover:scale-105 transition-all duration-300">
                 Start Your Project

@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import { Code2, Database, Server, Shield, ArrowRight, Wrench } from 'lucide-react'
 import { Button } from '../../../components/ui/button'
 import { Card } from '../../../components/ui/card'
-import { AuroraBackground } from '../../../components/ui/aurora-background'
 
 export const metadata: Metadata = {
   title: 'PHP Development Services - Aris Setiawan',
@@ -64,14 +63,11 @@ const processSteps = [
 
 export default function PhpDevelopmentPage() {
   return (
-    <div className="relative min-h-screen overflow-hidden">
-      {/* Hero Background */}
-      <AuroraBackground className="absolute top-0 left-0 w-full h-full opacity-30">
-        <div className="absolute inset-0" />
-      </AuroraBackground>
-      
-      <div className="absolute inset-0 -z-10 h-full w-full bg-background/90 [background:radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] backdrop-blur-sm">
-        <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/80 to-background/90" />
+    <div className="relative min-h-screen">
+      {/* Background Pattern */}
+      <div className="fixed inset-0 -z-10">
+        <div className="absolute inset-0 bg-zinc-50 dark:bg-zinc-950 [background:radial-gradient(#e5e7eb_1px,transparent_1px)] dark:[background:radial-gradient(#1f2937_1px,transparent_1px)] [background-size:32px_32px] opacity-40" />
+        <div className="absolute inset-0 bg-gradient-to-br from-zinc-100 via-transparent to-zinc-100/50 dark:from-zinc-900 dark:via-transparent dark:to-zinc-900/50" />
       </div>
 
       <div className="container relative mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8">
@@ -147,7 +143,7 @@ export default function PhpDevelopmentPage() {
             {/* Benefits Section */}
             <div className="mt-16 animate-in fade-in slide-in-from-bottom duration-1000 delay-500">
               <h2 className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-700 dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-300">
-                Benefits of Custom PHP Development
+                Benefits of PHP Development
               </h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {benefits.map((benefit, index) => (
