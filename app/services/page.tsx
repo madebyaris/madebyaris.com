@@ -62,16 +62,111 @@ const wordPressServices = [
 // Structured Data
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": "Service",
-  "name": "Web Development Services",
-  "description": "Professional web development services including Next.js, WordPress, and PHP development",
-  "provider": {
-    "@type": "Person",
-    "name": "Aris Setiawan",
-    "url": "https://madebyaris.com"
+  "@type": "WebPage",
+  "@id": "https://madebyaris.com/services/#webpage",
+  "url": "https://madebyaris.com/services",
+  "name": "Professional Web Development Services | Next.js, WordPress & PHP",
+  "description": "Expert development services focused on modern technologies and best practices. From blazing-fast Next.js applications to powerful WordPress solutions.",
+  "isPartOf": {
+    "@type": "WebSite",
+    "@id": "https://madebyaris.com/#website"
   },
-  "serviceType": "Web Development",
-  "areaServed": "Worldwide"
+  "about": {
+    "@type": "Service",
+    "name": "Professional Web Development Services",
+    "description": "Expert development services focused on modern technologies and best practices. From blazing-fast Next.js applications to powerful WordPress solutions.",
+    "provider": {
+      "@type": "Person",
+      "name": "Aris Setiawan",
+      "jobTitle": "Senior Full-Stack Developer",
+      "url": "https://madebyaris.com"
+    },
+    "serviceType": "Web Development",
+    "areaServed": "Worldwide",
+    "offers": {
+      "@type": "AggregateOffer",
+      "offers": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Next.js Development",
+            "description": "Modern web applications built with Next.js for optimal performance, SEO, and exceptional user experience.",
+            "url": "https://madebyaris.com/services/nextjs-development"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "PHP Development",
+            "description": "Custom PHP applications and solutions built with modern practices and robust architecture.",
+            "url": "https://madebyaris.com/services/php-development"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "WordPress Development",
+            "description": "Professional WordPress development including custom themes, plugins, and headless solutions.",
+            "url": "https://madebyaris.com/services/wordpress"
+          }
+        }
+      ]
+    }
+  },
+  "mainEntity": {
+    "@type": "Service",
+    "name": "WordPress Development Services",
+    "description": "Comprehensive WordPress development services including custom themes, plugins, headless solutions, and optimization.",
+    "provider": {
+      "@type": "Person",
+      "name": "Aris Setiawan",
+      "url": "https://madebyaris.com"
+    },
+    "offers": {
+      "@type": "AggregateOffer",
+      "offers": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Custom Theme Development",
+            "description": "Pixel-perfect WordPress themes that capture your unique style and meet your specific requirements.",
+            "url": "https://madebyaris.com/services/wordpress/theme-development"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Plugin Development",
+            "description": "Custom WordPress plugins that add exactly the features you need, built with security and performance in mind.",
+            "url": "https://madebyaris.com/services/wordpress/plugin-development"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Headless WordPress",
+            "description": "Modern headless WordPress solutions with Next.js frontends, combining the best of both worlds.",
+            "url": "https://madebyaris.com/services/wordpress/headless-development"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "WordPress Optimization",
+            "description": "Comprehensive WordPress optimization for peak performance, security, and user experience.",
+            "url": "https://madebyaris.com/services/wordpress/optimization"
+          }
+        }
+      ]
+    }
+  }
 }
 
 // Generate Metadata and Structured Data
@@ -168,77 +263,39 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       canonical: 'https://madebyaris.com/services'
     },
-    other: {
-      'structured-data': JSON.stringify(structuredData)
-    }
   }
 }
 
 export default function ServicesPage() {
   return (
-    <div className="relative min-h-screen">
-      {/* Background Pattern */}
-      <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-zinc-50 dark:bg-zinc-950 [background:radial-gradient(#e5e7eb_1px,transparent_1px)] dark:[background:radial-gradient(#1f2937_1px,transparent_1px)] [background-size:32px_32px] opacity-40" />
-        <div className="absolute inset-0 bg-gradient-to-br from-zinc-100 via-transparent to-zinc-100/50 dark:from-zinc-900 dark:via-transparent dark:to-zinc-900/50" />
-      </div>
+    <>
+      <script 
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <div className="relative min-h-screen">
+        {/* Background Pattern */}
+        <div className="fixed inset-0 -z-10">
+          <div className="absolute inset-0 bg-zinc-50 dark:bg-zinc-950 [background:radial-gradient(#e5e7eb_1px,transparent_1px)] dark:[background:radial-gradient(#1f2937_1px,transparent_1px)] [background-size:32px_32px] opacity-40" />
+          <div className="absolute inset-0 bg-gradient-to-br from-zinc-100 via-transparent to-zinc-100/50 dark:from-zinc-900 dark:via-transparent dark:to-zinc-900/50" />
+        </div>
 
-      <div className="container relative mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8">
-        <div className="py-12 md:py-16 lg:py-24">
-          <div className="flex flex-col gap-12">
-            {/* Hero Section */}
-            <div className="text-center max-w-3xl mx-auto">
-              <h1 className="text-4xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-700 dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-300 mb-6 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-                Professional Web Development Services
-              </h1>
-              <p className="text-xl text-zinc-600 dark:text-zinc-400 max-w-[700px] mx-auto mb-8 animate-in fade-in slide-in-from-bottom-5 duration-1000 delay-200">
-                Expert development services focused on modern technologies and best practices. From blazing-fast Next.js applications to powerful WordPress solutions.
-              </p>
-            </div>
+        <div className="container relative mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8">
+          <div className="py-12 md:py-16 lg:py-24">
+            <div className="flex flex-col gap-12">
+              {/* Hero Section */}
+              <div className="text-center max-w-3xl mx-auto">
+                <h1 className="text-4xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-700 dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-300 mb-6 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+                  Professional Web Development Services
+                </h1>
+                <p className="text-xl text-zinc-600 dark:text-zinc-400 max-w-[700px] mx-auto mb-8 animate-in fade-in slide-in-from-bottom-5 duration-1000 delay-200">
+                  Expert development services focused on modern technologies and best practices. From blazing-fast Next.js applications to powerful WordPress solutions.
+                </p>
+              </div>
 
-            {/* Main Services Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-              {services.map((service, index) => (
-                <div 
-                  key={service.title}
-                  className="animate-in fade-in slide-in-from-bottom duration-1000"
-                  style={{ animationDelay: `${(index + 1) * 200}ms` }}
-                >
-                  <div className="h-full p-6 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm rounded-lg border border-zinc-200 dark:border-zinc-800 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] hover:border-zinc-300 dark:hover:border-zinc-700">
-                    <div className="flex flex-col gap-4">
-                      <div className="w-12 h-12 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-900 dark:text-zinc-50 transition-transform hover:scale-110">
-                        {service.icon}
-                      </div>
-                      <h2 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-50">{service.title}</h2>
-                      <p className="text-zinc-600 dark:text-zinc-400">{service.description}</p>
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {service.features.map((feature) => (
-                          <span key={feature} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200">
-                            {feature}
-                          </span>
-                        ))}
-                      </div>
-                      <div className="mt-6">
-                        <Link href={service.href}>
-                          <Button className="w-full group bg-zinc-900 dark:bg-zinc-50 text-zinc-50 dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200">
-                            Learn More
-                            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                          </Button>
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* WordPress Services Section */}
-            <div className="mt-24">
-              <h2 className="text-3xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-700 dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-300">
-                WordPress Development Services
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {wordPressServices.map((service, index) => (
+              {/* Main Services Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+                {services.map((service, index) => (
                   <div 
                     key={service.title}
                     className="animate-in fade-in slide-in-from-bottom duration-1000"
@@ -252,9 +309,9 @@ export default function ServicesPage() {
                         <h2 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-50">{service.title}</h2>
                         <p className="text-zinc-600 dark:text-zinc-400">{service.description}</p>
                         <div className="mt-4 flex flex-wrap gap-2">
-                          {service.benefits.map((benefit) => (
-                            <span key={benefit} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200">
-                              {benefit}
+                          {service.features.map((feature) => (
+                            <span key={feature} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200">
+                              {feature}
                             </span>
                           ))}
                         </div>
@@ -271,10 +328,51 @@ export default function ServicesPage() {
                   </div>
                 ))}
               </div>
+
+              {/* WordPress Services Section */}
+              <div className="mt-24">
+                <h2 className="text-3xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-700 dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-300">
+                  WordPress Development Services
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {wordPressServices.map((service, index) => (
+                    <div 
+                      key={service.title}
+                      className="animate-in fade-in slide-in-from-bottom duration-1000"
+                      style={{ animationDelay: `${(index + 1) * 200}ms` }}
+                    >
+                      <div className="h-full p-6 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm rounded-lg border border-zinc-200 dark:border-zinc-800 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] hover:border-zinc-300 dark:hover:border-zinc-700">
+                        <div className="flex flex-col gap-4">
+                          <div className="w-12 h-12 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-900 dark:text-zinc-50 transition-transform hover:scale-110">
+                            {service.icon}
+                          </div>
+                          <h2 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-50">{service.title}</h2>
+                          <p className="text-zinc-600 dark:text-zinc-400">{service.description}</p>
+                          <div className="mt-4 flex flex-wrap gap-2">
+                            {service.benefits.map((benefit) => (
+                              <span key={benefit} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200">
+                                {benefit}
+                              </span>
+                            ))}
+                          </div>
+                          <div className="mt-6">
+                            <Link href={service.href}>
+                              <Button className="w-full group bg-zinc-900 dark:bg-zinc-50 text-zinc-50 dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200">
+                                Learn More
+                                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                              </Button>
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }

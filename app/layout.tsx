@@ -112,6 +112,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Preconnect to critical third-party domains */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://cdn.vercel-insights.com" />
+        <link rel="preconnect" href="https://va.vercel-scripts.com" />
+      </head>
       <body className={cn("min-h-screen font-sans antialiased", geistSans.variable, geistMono.variable, jakarta.variable)}>
         <ThemeProvider
           attribute="class"
