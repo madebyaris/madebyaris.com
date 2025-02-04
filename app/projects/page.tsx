@@ -89,30 +89,31 @@ const structuredData = {
       "@type": "ListItem",
       "position": index + 1,
       "item": {
-        "@type": "WebSite",
+        "@type": "CreativeWork",
         "name": project.title,
         "description": project.description,
         "url": project.link,
         "image": `https://madebyaris.com${project.logo}`,
-        "creator": {
+        "author": {
           "@type": "Person",
           "name": "Aris Setiawan",
           "jobTitle": "Senior Full Stack Developer",
           "url": "https://madebyaris.com"
         },
-        "about": {
-          "@type": "Thing",
-          "name": "Web Development Project",
-          "description": project.description
-        },
         "keywords": project.tags.join(", "),
-        "applicationCategory": "WebApplication",
-        "operatingSystem": "Any"
+        "genre": "Web Development",
+        "datePublished": "2024",
+        "inLanguage": "en",
+        "isPartOf": {
+          "@type": "CreativeWorkSeries",
+          "name": "Enterprise Web Development Portfolio",
+          "url": "https://madebyaris.com/projects"
+        }
       }
     })),
     "numberOfItems": projects.length
   },
-  "provider": {
+  "creator": {
     "@type": "Person",
     "name": "Aris Setiawan",
     "jobTitle": "Senior Full Stack Developer",
