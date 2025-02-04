@@ -42,12 +42,41 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     {
+      url: `${baseUrl}/nextjs-development-indonesia`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
+    {
       url: `${baseUrl}/services/wordpress`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     },
-    
+    {
+      url: `${baseUrl}/services/wordpress/theme-development`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/services/wordpress/plugin-development`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/services/wordpress/headless-development`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/services/wordpress/optimization`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
     {
       url: `${baseUrl}/services/php-development`,
       lastModified: new Date(),
