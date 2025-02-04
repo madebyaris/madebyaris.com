@@ -3,30 +3,35 @@ import { Code2, ArrowRight, Rocket, Globe, Zap } from 'lucide-react'
 import { Button } from '../../components/ui/button'
 import { Card } from '../../components/ui/card'
 import { ImageResponse } from 'next/og'
+import Link from 'next/link'
 
 // Structured Data
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "name": "Jasa Pengembangan Next.js Profesional di Indonesia",
-  "description": "Layanan pengembangan Next.js profesional untuk membangun aplikasi web yang cepat, SEO-friendly, dan skalabel. Fokus pada performa tinggi dan optimalisasi SEO dengan arsitektur modern.",
+  "name": "Jasa Pengembangan Next.js Expert Indonesia | Modern Web Development",
+  "description": "Bangun website modern Anda dengan Next.js bersama expert developer Indonesia. Dapatkan solusi web yang cepat, SEO-friendly, dan skalabel untuk bisnis Anda. Konsultasi gratis!",
   "url": "https://madebyaris.com/nextjs-development-indonesia",
   "keywords": [
-    "Jasa Next.js Indonesia",
-    "Pengembangan Next.js Profesional",
-    "Developer Next.js Indonesia",
-    "Jasa React.js Indonesia",
-    "Pengembangan Web Modern",
-    "Next.js Indonesia",
-    "Full Stack Development Indonesia",
-    "Aplikasi Web Enterprise",
-    "Optimasi Performa Web",
-    "Jasa Pembuatan Website Next.js"
+    "nextjs indonesia",
+    "nextjs development indonesia",
+    "nextjs agency indonesia",
+    "jasa pembuatan nextjs",
+    "nextjs expert indonesia",
+    "react js indonesia",
+    "website development indonesia",
+    "custom web development indonesia",
+    "seo friendly websites indonesia",
+    "performance websites indonesia",
+    "nextjs for business indonesia",
+    "enterprise nextjs indonesia",
+    "headless website indonesia",
+    "nextjs optimization indonesia"
   ],
   "mainEntity": {
     "@type": "Service",
-    "name": "Jasa Pengembangan Next.js Profesional",
-    "serviceType": "Pengembangan Web",
+    "name": "Jasa Pengembangan Next.js Expert Indonesia",
+    "serviceType": "Web Development",
     "provider": {
       "@type": "Person",
       "name": "Aris Setiawan",
@@ -36,12 +41,12 @@ const structuredData = {
       "@type": "Country",
       "name": "Indonesia"
     },
-    "description": "Layanan pengembangan Next.js expert untuk membangun aplikasi web modern yang cepat, SEO-friendly, dan skalabel di Indonesia.",
+    "description": "Solusi pengembangan website modern dengan Next.js untuk bisnis Anda. Kami membantu membangun website yang cepat, SEO-friendly, dan skalabel dengan teknologi terkini.",
     "offers": {
       "@type": "Offer",
       "availability": "https://schema.org/InStock",
-      "price": "Hubungi untuk penawaran",
-      "priceCurrency": "IDR"
+      "priceCurrency": "IDR",
+      "price": "Hubungi untuk penawaran"
     }
   }
 }
@@ -71,7 +76,7 @@ export async function generateMetadata(): Promise<Metadata> {
             textAlign: 'center',
           }}
         >
-          Jasa Pengembangan Next.js
+          Next.js Expert Indonesia
         </h1>
         <p
           style={{
@@ -82,7 +87,7 @@ export async function generateMetadata(): Promise<Metadata> {
             maxWidth: '800px',
           }}
         >
-          Aplikasi Web Modern • React • TypeScript • Solusi Enterprise
+          Website Cepat • SEO-Friendly • Skalabel • Enterprise Ready
         </p>
         <div
           style={{
@@ -110,31 +115,31 @@ export async function generateMetadata(): Promise<Metadata> {
   )
 
   return {
-    title: 'Jasa Pengembangan Next.js Indonesia | Aplikasi Web Modern',
-    description: 'Layanan pengembangan Next.js expert untuk aplikasi web modern di Indonesia. Solusi full-stack dengan React, TypeScript, dan arsitektur kelas enterprise.',
+    title: 'Jasa Pengembangan Next.js Expert Indonesia | Website Modern',
+    description: 'Bangun website modern dengan Next.js bersama expert developer Indonesia. Solusi web cepat, SEO-friendly & skalabel untuk bisnis Anda. Mulai konsultasi gratis!',
     keywords: [
-      'Jasa Next.js',
-      'Pengembangan Next.js',
-      'Developer Next.js Indonesia',
-      'Jasa React.js',
-      'Pengembangan Web Modern',
-      'Next.js Indonesia',
-      'Full Stack Development',
-      'Aplikasi Web Enterprise',
-      'Optimasi Performa Web',
-      'Jasa Pembuatan Website'
+      'nextjs indonesia',
+      'nextjs development indonesia',
+      'nextjs expert indonesia',
+      'react js indonesia',
+      'website development indonesia',
+      'seo friendly websites indonesia',
+      'nextjs for business indonesia',
+      'enterprise nextjs indonesia',
+      'headless website indonesia',
+      'nextjs optimization indonesia'
     ],
     openGraph: {
-      title: 'Jasa Pengembangan Next.js Indonesia | Aplikasi Web Modern',
-      description: 'Layanan pengembangan Next.js expert untuk aplikasi web modern di Indonesia.',
+      title: 'Next.js Expert Indonesia | Solusi Website Modern untuk Bisnis Anda',
+      description: 'Bangun website modern dengan Next.js. Cepat, SEO-friendly & skalabel. Mulai konsultasi gratis sekarang!',
       type: 'website',
       locale: 'id_ID',
       images: [ogImage]
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Jasa Pengembangan Next.js Indonesia | Aplikasi Web Modern',
-      description: 'Layanan pengembangan Next.js expert untuk aplikasi web modern di Indonesia.',
+      title: 'Next.js Expert Indonesia | Solusi Website Modern',
+      description: 'Bangun website modern dengan Next.js. Cepat, SEO-friendly & skalabel. Mulai konsultasi gratis!',
       images: [ogImage]
     },
     alternates: {
@@ -145,23 +150,23 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const features = [
   {
-    title: 'Pengembangan Aplikasi Modern',
-    description: 'Membangun aplikasi web modern yang cepat dan handal menggunakan fitur Next.js terbaru dan praktik terbaik industri.',
+    title: 'Website Super Cepat & Modern',
+    description: 'Optimalkan performa bisnis Anda dengan website Next.js yang cepat, responsif, dan modern menggunakan teknologi terkini.',
     icon: <Code2 className="w-6 h-6" />,
   },
   {
-    title: 'Fokus pada Performa Optimal',
-    description: 'Dioptimalkan untuk kecepatan maksimal dengan server-side rendering dan static site generation yang efisien.',
+    title: 'SEO-Friendly & Performa Optimal',
+    description: 'Tingkatkan visibilitas online dengan website yang SEO-friendly dan performa tinggi berkat server-side rendering Next.js.',
     icon: <Rocket className="w-6 h-6" />,
   },
   {
-    title: 'Deployment Global untuk Performa Terbaik',
-    description: 'Deployment lancar ke jaringan edge global untuk memastikan performa optimal di seluruh dunia.',
+    title: 'Skalabel & Enterprise Ready',
+    description: 'Siap berkembang bersama bisnis Anda dengan arsitektur Next.js yang skalabel dan siap untuk kebutuhan enterprise.',
     icon: <Globe className="w-6 h-6" />,
   },
   {
-    title: 'Integrasi API yang Handal',
-    description: 'Membangun dan mengintegrasikan API routes yang handal untuk konektivitas sistem yang sempurna.',
+    title: 'Integrasi API & Headless CMS',
+    description: 'Integrasikan dengan berbagai sistem dan CMS untuk solusi website yang fleksibel dan mudah dikelola.',
     icon: <Zap className="w-6 h-6" />,
   },
 ]
@@ -169,30 +174,30 @@ const features = [
 const benefits = [
   'Performa Super Cepat',
   'SEO Teroptimasi',
-  'Type Safe & Aman',
-  'Stack Modern Terkini',
-  'Siap untuk Edge',
-  'API Routes Handal',
-  'Dukungan SSR Optimal',
-  'Mudah Dikembangkan',
+  'Mobile-First Design',
+  'Enterprise Ready',
+  'Headless CMS',
+  'API Integration',
+  'Full-Stack Solution',
+  'Support 24/7',
 ]
 
 const processSteps = [
   {
-    title: 'Analisis Kebutuhan & Rencana Pengembangan',
-    description: 'Memahami kebutuhan bisnis Anda dan merencanakan arsitektur Next.js yang optimal untuk kesuksesan proyek.',
+    title: 'Konsultasi & Analisis Kebutuhan',
+    description: 'Pahami kebutuhan bisnis Anda dan rencanakan solusi Next.js yang tepat untuk kesuksesan proyek.',
   },
   {
-    title: 'Pengembangan Aplikasi dengan Next.js',
-    description: 'Membangun aplikasi Anda dengan kode yang bersih, efisien, dan mudah dikelola menggunakan praktik terbaik.',
+    title: 'Pengembangan Website Modern',
+    description: 'Bangun website Anda dengan kode yang bersih, efisien, dan mudah dikelola menggunakan Next.js.',
   },
   {
-    title: 'Testing Komprehensif & Optimalisasi Performa',
-    description: 'Melakukan testing menyeluruh dan optimasi performa untuk memastikan kualitas terbaik.',
+    title: 'Optimasi & Testing',
+    description: 'Pastikan website Anda cepat, SEO-friendly, dan siap untuk traffic tinggi melalui testing menyeluruh.',
   },
   {
-    title: 'Deployment Global & Dukungan Berkelanjutan',
-    description: 'Setup CI/CD profesional dan memberikan dukungan pemeliharaan berkelanjutan untuk kesuksesan jangka panjang.',
+    title: 'Deployment & Support',
+    description: 'Launch website Anda dengan aman dan dapatkan dukungan berkelanjutan untuk kesuksesan jangka panjang.',
   },
 ]
 
@@ -231,6 +236,53 @@ export default function NextjsDevelopmentIndonesiaPage() {
                   Dapatkan Konsultasi Gratis
                 </Button>
               </div>
+            </div>
+
+            {/* Introduction Section */}
+            <div className="prose dark:prose-invert max-w-none">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <h2 className="text-2xl font-bold mb-4">Mengenal Next.js untuk Website Modern</h2>
+                  <p className="text-zinc-600 dark:text-zinc-400">
+                    Next.js adalah framework React modern yang dirancang khusus untuk membangun website dan aplikasi web yang powerful. 
+                    Keunggulannya tidak tertandingi dalam hal performa, optimasi SEO, dan skalabilitas. Framework ini menjadi pilihan 
+                    terbaik untuk bisnis yang menginginkan website handal dan berkinerja tinggi.
+                  </p>
+                  <p className="text-zinc-600 dark:text-zinc-400">
+                    Baik untuk website company profile, toko online, atau aplikasi web kompleks, Next.js menjamin 
+                    website Anda tampil optimal di mesin pencari, memiliki performa tinggi di semua perangkat, dan mudah 
+                    dikembangkan seiring pertumbuhan bisnis Anda.
+                  </p>
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold mb-4">Mengapa Memilih Next.js?</h2>
+                  <p className="text-zinc-600 dark:text-zinc-400">
+                    Di MadeByAris, kami memiliki keahlian khusus dalam pengembangan website menggunakan Next.js. 
+                    Fokus kami adalah membantu bisnis di Indonesia dan internasional membangun website yang cepat, 
+                    mudah berkembang, dan optimal untuk SEO.
+                  </p>
+                  <p className="text-zinc-600 dark:text-zinc-400">
+                    Dengan Next.js, website Anda mendapatkan keunggulan teknologi terkini seperti server-side rendering (SSR), 
+                    static site generation, dan integrasi API yang handal. Kami memastikan website Anda tampil sempurna di 
+                    seluruh dunia dengan pengalaman pengguna yang optimal.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Process Overview Section */}
+            <div className="prose dark:prose-invert max-w-none">
+              <h2 className="text-2xl font-bold mb-4">Proses Pengembangan Website Next.js</h2>
+              <p className="text-zinc-600 dark:text-zinc-400">
+                Kami mengutamakan tujuan bisnis Anda sebagai landasan pengembangan website. Setelah memahami kebutuhan 
+                dan target Anda, kami mulai membangun website dengan Next.js untuk memastikan kecepatan loading yang 
+                instant, peringkat tinggi di mesin pencari, dan pengalaman pengguna yang maksimal.
+              </p>
+              <p className="text-zinc-600 dark:text-zinc-400">
+                Dari tahap deployment hingga maintenance berkelanjutan, kami menjamin website Anda selalu berkinerja 
+                optimal dan siap berkembang. Dengan menggunakan tools dan teknik terbaik di industri, kami berkomitmen 
+                untuk kesuksesan website Anda jangka panjang.
+              </p>
             </div>
 
             {/* Features Section */}
@@ -285,14 +337,16 @@ export default function NextjsDevelopmentIndonesiaPage() {
 
             {/* CTA Section */}
             <div className="text-center bg-zinc-100 dark:bg-zinc-800 rounded-2xl p-8 md:p-12">
-              <h2 className="text-3xl font-bold mb-4">Siap Bangun Proyek Next.js Anda?</h2>
+              <h2 className="text-3xl font-bold mb-4">Sudah siap untuk membangun proyek Next.js Anda?</h2>
               <p className="text-xl text-zinc-600 dark:text-zinc-400 mb-8">
-                Hubungi Kami dan Mulai Membangun Aplikasi Web Cepat, SEO-Friendly, dan Scalable
+                Hubungi Kami dan Mulai Membuat Website yang Cepat, SEO-Friendly, dan Scalable
               </p>
-              <Button size="lg" className="bg-zinc-900 text-white hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200">
-                Hubungi Kami Sekarang
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
+              <Link href="/contact">
+                <Button size="lg" className="bg-zinc-900 text-white hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200">
+                  Hubungi Kami Sekarang
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

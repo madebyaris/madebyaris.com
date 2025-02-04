@@ -117,18 +117,18 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* DNS Prefetch */}
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-        
         {/* Preconnect */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
+        {/* DNS Prefetch */}
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        
+        {/* Other preconnects */}
         <link rel="preconnect" href="https://cdn.vercel-insights.com" />
         <link rel="preconnect" href="https://va.vercel-scripts.com" />
         
         {/* Preload critical assets */}
-        <link rel="preload" href="/fonts/GeistVF.woff" as="font" type="font/woff" crossOrigin="anonymous" />
         <link rel="preload" href="/aris.png" as="image" />
         
         {/* Meta tags for performance */}
