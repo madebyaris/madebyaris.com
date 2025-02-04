@@ -60,46 +60,6 @@ const structuredData = {
   "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/"
 }
 
-// Function to generate blog posts structured data
-function generateBlogPostsStructuredData(posts: Post[]) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "itemListElement": posts.map((post, index) => ({
-      "@type": "ListItem",
-      "position": index + 1,
-      "item": {
-        "@type": "BlogPosting",
-        "headline": post.title.rendered,
-        "description": post.excerpt.rendered.replace(/<[^>]*>/g, ''),
-        "url": `https://madebyaris.com/blog/${post.slug}`,
-        "author": {
-          "@type": "Person",
-          "name": "Aris Setiawan",
-          "url": "https://madebyaris.com"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "MadeByAris",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://madebyaris.com/logo.png"
-          }
-        },
-        "datePublished": post.date,
-        "dateModified": post.modified,
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": `https://madebyaris.com/blog/${post.slug}`
-        },
-        "keywords": post.tags?.map((tag) => tag.name).join(", ") || "",
-        "articleSection": post.categories?.map((cat) => cat.name).join(", ") || "Web Development"
-      }
-    })),
-    "numberOfItems": posts.length
-  }
-}
-
 // Generate OG Image
 export async function generateMetadata(): Promise<Metadata> {
   const ogImage = new ImageResponse(
@@ -208,11 +168,52 @@ export default async function BlogPage() {
 
   // Function to generate structured data
   function generateStructuredData() {
-    return {
-      __html: JSON.stringify([
+    // Combine both schemas into a single object with @graph
+    const combinedSchema = {
+      "@context": "https://schema.org",
+      "@graph": [
         structuredData,
-        generateBlogPostsStructuredData(posts)
-      ])
+        {
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          "itemListElement": posts.map((post, index) => ({
+            "@type": "ListItem",
+            "position": index + 1,
+            "item": {
+              "@type": "BlogPosting",
+              "headline": post.title.rendered,
+              "description": post.excerpt.rendered.replace(/<[^>]*>/g, ''),
+              "url": `https://madebyaris.com/blog/${post.slug}`,
+              "author": {
+                "@type": "Person",
+                "name": "Aris Setiawan",
+                "url": "https://madebyaris.com"
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "MadeByAris",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://madebyaris.com/logo.png"
+                }
+              },
+              "datePublished": post.date,
+              "dateModified": post.modified,
+              "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": `https://madebyaris.com/blog/${post.slug}`
+              },
+              "keywords": post.tags?.map((tag) => tag.name).join(", ") || "",
+              "articleSection": post.categories?.map((cat) => cat.name).join(", ") || "Web Development"
+            }
+          })),
+          "numberOfItems": posts.length
+        }
+      ]
+    }
+
+    return {
+      __html: JSON.stringify(combinedSchema)
     }
   }
 
