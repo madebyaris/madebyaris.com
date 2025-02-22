@@ -150,9 +150,16 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {/* Light mode gradient - Optimized with will-change */}
+          {/* Gradients - Moved to after main content */}
+          <div className="relative flex min-h-screen flex-col">
+            <Header />
+            <div className="flex-1">{children}</div>
+            <Footer />
+          </div>
+
+          {/* Light mode gradient - Deferred loading */}
           <div 
-            className="fixed inset-0 -z-10 h-full w-full dark:hidden"
+            className="fixed inset-0 -z-10 h-full w-full opacity-0 animate-fade-in dark:hidden"
             style={{
               background: "radial-gradient(100% 50% at 50% 0%, rgba(0,163,255,0.13) 0, rgba(0,163,255,0) 50%, rgba(0,163,255,0) 100%)",
               willChange: "transform",
@@ -161,9 +168,9 @@ export default function RootLayout({
             aria-hidden="true"
           />
           
-          {/* Dark mode gradient - Optimized with will-change */}
+          {/* Dark mode gradient - Deferred loading */}
           <div 
-            className="fixed inset-0 -z-10 hidden h-full w-full bg-neutral-950 dark:block"
+            className="fixed inset-0 -z-10 hidden h-full w-full bg-neutral-950 opacity-0 animate-fade-in dark:block"
             style={{
               background: "radial-gradient(ellipse 80% 80% at 50% -20%, rgba(120,119,198,0.3), rgba(255,255,255,0))",
               willChange: "transform",
@@ -171,12 +178,6 @@ export default function RootLayout({
             }}
             aria-hidden="true"
           />
-
-          <div className="relative flex min-h-screen flex-col">
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </div>
         </ThemeProvider>
         <AnalyticsWrapper />
       </body>
