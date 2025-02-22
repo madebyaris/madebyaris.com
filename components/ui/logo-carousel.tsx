@@ -1,7 +1,7 @@
 "use client"
 
-import React, { useCallback, useEffect, useState } from "react"
-import { AnimatePresence, motion } from "framer-motion"
+import React, { useCallback, useEffect, useState, useMemo } from "react"
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
 import type { SVGProps } from "react"
 
 interface Logo {
@@ -45,16 +45,50 @@ const distributeLogos = (allLogos: Logo[], columnCount: number): Logo[][] => {
 }
 
 const LogoColumn = React.memo(({ logos, index, currentTime }: LogoColumnProps) => {
-  const cycleInterval = 3000 // Increased duration for each logo
-  const columnDelay = index * 500 // Increased delay between columns
+  const shouldReduceMotion = useReducedMotion()
+  const cycleInterval = 3000
+  const columnDelay = index * 500
   const adjustedTime = (currentTime + columnDelay) % (cycleInterval * logos.length)
   const currentIndex = Math.floor(adjustedTime / cycleInterval)
   const CurrentLogo = logos[currentIndex].img
 
+  const animationProps = useMemo(() => ({
+    initial: shouldReduceMotion 
+      ? { opacity: 0 }
+      : { y: "30%", opacity: 0, filter: "blur(4px)" },
+    animate: shouldReduceMotion
+      ? { opacity: 1 }
+      : {
+          y: "0%",
+          opacity: 1,
+          filter: "blur(0px)",
+          transition: {
+            type: "spring",
+            stiffness: 150,
+            damping: 25,
+            mass: 1,
+            bounce: 0.2,
+            duration: 0.6,
+          },
+        },
+    exit: shouldReduceMotion
+      ? { opacity: 0 }
+      : {
+          y: "-30%",
+          opacity: 0,
+          filter: "blur(4px)",
+          transition: {
+            type: "tween",
+            ease: "easeIn",
+            duration: 0.4,
+          },
+        }
+  }), [shouldReduceMotion])
+
   return (
     <motion.div
       className="relative h-16 w-28 overflow-hidden md:h-28 md:w-56 flex items-center justify-center"
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{
         delay: index * 0.2,
@@ -66,30 +100,7 @@ const LogoColumn = React.memo(({ logos, index, currentTime }: LogoColumnProps) =
         <motion.div
           key={`${logos[currentIndex].id}-${currentIndex}`}
           className="absolute inset-0 flex items-center justify-center"
-          initial={{ y: "30%", opacity: 0, filter: "blur(10px)" }}
-          animate={{
-            y: "0%",
-            opacity: 1,
-            filter: "blur(0px)",
-            transition: {
-              type: "spring",
-              stiffness: 200,
-              damping: 20,
-              mass: 1,
-              bounce: 0.3,
-              duration: 0.8,
-            },
-          }}
-          exit={{
-            y: "-30%",
-            opacity: 0,
-            filter: "blur(8px)",
-            transition: {
-              type: "tween",
-              ease: "easeIn",
-              duration: 0.5,
-            },
-          }}
+          {...animationProps}
         >
           <CurrentLogo className="w-full h-full text-zinc-900 dark:text-zinc-100 transform hover:scale-110 transition-transform duration-200" />
         </motion.div>
@@ -110,7 +121,7 @@ export function LogoCarousel({ columnCount = 2, logos }: LogoCarouselProps) {
   const [currentTime, setCurrentTime] = useState(0)
 
   const updateTime = useCallback(() => {
-    setCurrentTime((prevTime) => prevTime + 100)
+    setCurrentTime(t => t + 100)
   }, [])
 
   useEffect(() => {
@@ -119,16 +130,15 @@ export function LogoCarousel({ columnCount = 2, logos }: LogoCarouselProps) {
   }, [updateTime])
 
   useEffect(() => {
-    const distributedLogos = distributeLogos(logos, columnCount)
-    setLogoSets(distributedLogos)
+    setLogoSets(distributeLogos(logos, columnCount))
   }, [logos, columnCount])
 
   return (
     <div className="flex items-center justify-center gap-8 md:gap-12">
-      {logoSets.map((logos, index) => (
+      {logoSets.map((columnLogos, index) => (
         <LogoColumn
           key={index}
-          logos={logos}
+          logos={columnLogos}
           index={index}
           currentTime={currentTime}
         />

@@ -1,8 +1,11 @@
 import { type Config } from "tailwindcss";
+import flattenColorPalette from "tailwindcss/lib/util/flattenColorPalette";
+import animatePlugin from "tailwindcss-animate";
 
-const {
-  default: flattenColorPalette,
-} = require("tailwindcss/lib/util/flattenColorPalette");
+interface TailwindPluginUtils {
+  addBase: (base: Record<string, Record<string, string>>) => void;
+  theme: (path: string) => Record<string, string>;
+}
 
 const config: Config = {
   darkMode: ["class"],
@@ -70,14 +73,15 @@ const config: Config = {
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		animation: {
-  			aurora: 'aurora 60s linear infinite'
+  			'aurora': 'aurora 60s linear infinite',
+  			'aurora-optimized': 'aurora 120s cubic-bezier(0.4, 0, 0.2, 1) infinite'
   		},
   		keyframes: {
   			aurora: {
-  				from: {
+  				'0%, 100%': {
   					backgroundPosition: '50% 50%, 50% 50%'
   				},
-  				to: {
+  				'50%': {
   					backgroundPosition: '350% 50%, 350% 50%'
   				}
   			}
@@ -85,10 +89,10 @@ const config: Config = {
   	}
   },
   plugins: [
-    require("tailwindcss-animate"),
-    function ({ addBase, theme }: any) {
-      let allColors = flattenColorPalette(theme("colors"));
-      let newVars = Object.fromEntries(
+    animatePlugin,
+    function ({ addBase, theme }: TailwindPluginUtils) {
+      const allColors = flattenColorPalette(theme("colors"));
+      const newVars = Object.fromEntries(
         Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
       );
       addBase({
