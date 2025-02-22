@@ -35,13 +35,13 @@ export function HomeContent({ type, initialData }: HomeContentProps) {
               className="group relative overflow-hidden rounded-lg border bg-background transition-colors hover:bg-accent"
             >
               {project.acf?.featured_image && (
-                <div className="aspect-video overflow-hidden">
+                <div className="aspect-video overflow-hidden group-hover:scale-105 transition-transform duration-300">
                   <Image
                     src={project.acf.featured_image.url}
                     alt={project.acf.featured_image.alt}
                     width={600}
                     height={400}
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    className="object-cover w-full h-full"
                   />
                 </div>
               )}
@@ -102,19 +102,22 @@ export function HomeContent({ type, initialData }: HomeContentProps) {
   return (
     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {posts.length > 0 ? (
-        posts.map((post) => (
+        posts.map((post, index) => (
           <article
             key={post.id}
             className="group relative overflow-hidden rounded-lg border bg-background transition-colors hover:bg-accent"
           >
             {post._embedded?.['wp:featuredmedia']?.[0] && (
-              <div className="aspect-video overflow-hidden">
+              <div className="aspect-video overflow-hidden group-hover:scale-105 transition-transform duration-300">
                 <Image
                   src={post._embedded['wp:featuredmedia'][0].source_url}
                   alt={post._embedded['wp:featuredmedia'][0].alt_text || ''}
-                  width={600}
-                  height={400}
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  width={index === 0 ? 400 : 600}
+                  height={index === 0 ? 225 : 400}
+                  priority={index === 0}
+                  loading={index === 0 ? "eager" : "lazy"}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover w-full h-full"
                 />
               </div>
             )}

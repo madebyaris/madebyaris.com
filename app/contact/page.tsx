@@ -196,64 +196,68 @@ export default function ContactPage() {
         dangerouslySetInnerHTML={generateStructuredData()}
       />
       <main className="container mx-auto max-w-[980px] px-4 sm:px-6 lg:px-8 py-8 md:py-12 lg:py-24">
-        <div className="flex flex-col gap-8">
-          {/* Hero Section */}
-          <div className="text-center">
-            <h1 className="text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/50 mb-4">
-              Let&apos;s Build Something Amazing
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-[700px] mx-auto">
-              Whether you need enterprise-level solutions or technical consultation, I&apos;m here to help turn your vision into reality.
+        {/* Critical Path Content */}
+        <div className="text-center">
+          <h1 className="text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/50 mb-4">
+            Let&apos;s Build Something Amazing
+          </h1>
+          <div className="max-w-[700px] mx-auto">
+            <p className="text-xl text-muted-foreground">
+              Enterprise-level solutions & technical consultation 
+              <noscript>to help turn your vision into reality.</noscript>
+              <span className="inline-block">to help turn your vision into reality.</span>
             </p>
           </div>
+        </div>
 
-          {/* Contact Form and Info Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
-            {/* Contact Form */}
+        {/* Contact Form - Critical Path */}
+        <div className="mt-8">
+          <Card className="p-6 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm max-w-[600px] mx-auto">
+            <ContactForm />
+          </Card>
+        </div>
+
+        {/* Non-critical content */}
+        <div className="mt-12 space-y-12">
+          {/* Contact Info */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Card className="p-6 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm">
-              <ContactForm />
+              <div className="flex flex-col items-center text-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Mail className="w-6 h-6 text-primary" />
+                </div>
+                <h2 className="font-semibold">Email</h2>
+                <p className="text-muted-foreground">
+                  <Link href="mailto:arissetia.m@gmail.com" className="hover:text-primary">
+                    arissetia.m@gmail.com
+                  </Link>
+                </p>
+              </div>
             </Card>
-
-            {/* Contact Info */}
-            <div className="space-y-6">
-              <Card className="p-6 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm">
-                <div className="flex flex-col items-center text-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Mail className="w-6 h-6 text-primary" />
-                  </div>
-                  <h2 className="font-semibold">Email</h2>
-                  <p className="text-muted-foreground">
-                    <Link href="mailto:arissetia.m@gmail.com" className="hover:text-primary">
-                      arissetia.m@gmail.com
-                    </Link>
-                  </p>
+            
+            <Card className="p-6 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm">
+              <div className="flex flex-col items-center text-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                  <MapPin className="w-6 h-6 text-primary" />
                 </div>
-              </Card>
-              
-              <Card className="p-6 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm">
-                <div className="flex flex-col items-center text-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                    <MapPin className="w-6 h-6 text-primary" />
-                  </div>
-                  <h2 className="font-semibold">Location</h2>
-                  <p className="text-muted-foreground">Sidoarjo, Indonesia</p>
+                <h2 className="font-semibold">Location</h2>
+                <p className="text-muted-foreground">Sidoarjo, Indonesia</p>
+              </div>
+            </Card>
+            
+            <Card className="p-6 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm">
+              <div className="flex flex-col items-center text-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Clock className="w-6 h-6 text-primary" />
                 </div>
-              </Card>
-              
-              <Card className="p-6 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm">
-                <div className="flex flex-col items-center text-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Clock className="w-6 h-6 text-primary" />
-                  </div>
-                  <h2 className="font-semibold">Availability</h2>
-                  <p className="text-muted-foreground">Mon - Fri, 9:00 - 17:00 WIB</p>
-                </div>
-              </Card>
-            </div>
+                <h2 className="font-semibold">Availability</h2>
+                <p className="text-muted-foreground">Mon - Fri, 9:00 - 17:00 WIB</p>
+              </div>
+            </Card>
           </div>
 
           {/* Professional Profiles */}
-          <div className="mt-12">
+          <div>
             <h2 className="text-2xl font-bold text-center mb-8">Professional Profiles</h2>
             <div className="flex flex-wrap justify-center gap-4">
               <Link href="https://www.linkedin.com/in/arissetia/" target="_blank">
@@ -278,7 +282,7 @@ export default function ContactPage() {
           </div>
 
           {/* Client List */}
-          <div className="mt-16">
+          <div>
             <h2 className="text-2xl font-bold text-center mb-8">Trusted By</h2>
             <div className="relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-zinc-100/80 to-transparent dark:via-zinc-900/10 backdrop-blur-xl" />
@@ -293,9 +297,9 @@ export default function ContactPage() {
           </div>
 
           {/* Project Types */}
-          <div className="mt-16">
+          <div>
             <h2 className="text-2xl font-bold text-center mb-8">Types of Projects I Take On</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <Card className="p-6 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm">
                 <h3 className="font-semibold mb-2">Enterprise Web Applications</h3>
                 <p className="text-muted-foreground">Scalable solutions with modern tech stack and robust architecture</p>
@@ -312,7 +316,7 @@ export default function ContactPage() {
           </div>
 
           {/* CTA Section */}
-          <div className="mt-16 text-center">
+          <div className="text-center">
             <Card className="p-8 bg-primary/5 border-primary/10">
               <h2 className="text-2xl font-bold mb-4">Ready to Start Your Project?</h2>
               <p className="text-muted-foreground mb-6 max-w-[600px] mx-auto">

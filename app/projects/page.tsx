@@ -247,9 +247,13 @@ export default function ProjectsPage() {
             <h1 className="text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/50 mb-4">
               Client Projects Portfolio
             </h1>
-            <p className="text-xl text-muted-foreground max-w-[700px] mx-auto">
-              Explore our showcase of enterprise-level web development solutions, delivering exceptional results for clients worldwide.
-            </p>
+            <div className="max-w-[700px] mx-auto">
+              <p className="text-xl text-muted-foreground">
+                Explore our showcase of enterprise-level web development solutions, 
+                <noscript>delivering exceptional results for clients worldwide.</noscript>
+                <span className="inline-block">delivering exceptional results for clients worldwide.</span>
+              </p>
+            </div>
           </div>
 
           {/* Projects Grid */}
