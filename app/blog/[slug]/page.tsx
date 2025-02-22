@@ -75,14 +75,16 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
         </div>
 
         {post._embedded?.['wp:featuredmedia']?.[0] && (
-          <div className="my-8 overflow-hidden rounded-lg">
+          <div className="relative my-8 overflow-hidden rounded-lg aspect-[16/9]">
             <Image
               src={post._embedded?.['wp:featuredmedia']?.[0].source_url}
               alt={post._embedded?.['wp:featuredmedia']?.[0].alt_text || ''}
-              width={1200}
-              height={630}
-              className="w-full"
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 980px, 980px"
+              className="object-cover"
               priority
+              loading="eager"
+              quality={90}
             />
           </div>
         )}

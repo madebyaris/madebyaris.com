@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Code2, Database, Server, Shield, ArrowRight, Wrench } from 'lucide-react'
+import { Code2, Database, Server, Shield, ArrowRight } from 'lucide-react'
 import { Button } from '../../../components/ui/button'
 import { Card } from '../../../components/ui/card'
 import { ImageResponse } from 'next/og'
@@ -208,35 +208,40 @@ export default function PhpDevelopmentPage() {
         <div className="absolute inset-0 bg-gradient-to-br from-zinc-100 via-transparent to-zinc-100/50 dark:from-zinc-900 dark:via-transparent dark:to-zinc-900/50" />
       </div>
 
-      <div className="container relative mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8">
+      <div className="container relative mx-auto max-w-[980px] px-4 sm:px-6 lg:px-8">
         <div className="py-12 md:py-16 lg:py-24">
-          <div className="flex flex-col gap-12">
-            {/* Hero Section */}
-            <div className="text-center max-w-3xl mx-auto">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-50 mb-4">
-                <Wrench className="w-4 h-4" />
-                <span className="text-sm font-medium">PHP Expert</span>
-              </div>
-              <h1 className="text-4xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-700 dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-300 mb-6 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-                PHP Development
-              </h1>
-              <p className="text-xl text-zinc-600 dark:text-zinc-400 max-w-[700px] mx-auto mb-8 animate-in fade-in slide-in-from-bottom-5 duration-1000 delay-200">
-                Custom PHP solutions that scale with your business. From web applications to APIs, I create reliable and secure solutions.
+          {/* Hero Section - Critical Path */}
+          <div className="text-center max-w-3xl mx-auto">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-50 mb-4">
+              <Server className="w-4 h-4" />
+              <span className="text-sm font-medium">PHP Expert</span>
+            </div>
+            <h1 className="text-4xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-700 dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-300 mb-6">
+              PHP Development
+            </h1>
+            <div className="max-w-[700px] mx-auto">
+              <p className="text-xl text-zinc-600 dark:text-zinc-400">
+                Custom PHP solutions built with modern practices 
+                <noscript>and robust architecture for scalable web applications.</noscript>
+                <span className="inline-block">and robust architecture for scalable web applications.</span>
               </p>
             </div>
+          </div>
 
-            {/* Introduction */}
-            <div className="mt-8 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm rounded-lg p-8 border border-zinc-200 dark:border-zinc-800 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-300">
-              <p className="text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
-                My PHP development service focuses on creating robust, scalable web applications 
-                and solutions. Whether you need a custom web application, API integration, or 
-                database solution, I have the expertise to deliver high-quality results that meet 
-                your business objectives.
-              </p>
-            </div>
+          {/* Introduction - Critical Path */}
+          <div className="mt-8 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm rounded-lg p-8 border border-zinc-200 dark:border-zinc-800">
+            <p className="text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
+              My PHP development service focuses on creating robust, scalable web applications 
+              and solutions. Whether you need a custom web application, API integration, or 
+              database solution, I have the expertise to deliver high-quality results that meet 
+              your business objectives.
+            </p>
+          </div>
 
+          {/* Non-critical content */}
+          <div className="flex flex-col gap-12 mt-12">
             {/* Features Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {features.map((feature, index) => (
                 <Card 
                   key={feature.title}
