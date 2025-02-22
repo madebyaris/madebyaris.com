@@ -4,7 +4,7 @@ import animatePlugin from "tailwindcss-animate";
 
 interface TailwindPluginUtils {
   addBase: (base: Record<string, Record<string, string>>) => void;
-  theme: (path: string) => Record<string, string>;
+  theme: (path: string) => Record<string, unknown>;
 }
 
 const config: Config = {
@@ -100,6 +100,6 @@ const config: Config = {
       });
     },
   ],
-};
+} satisfies Config;
 
 export default config;
