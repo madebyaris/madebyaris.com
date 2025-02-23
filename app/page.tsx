@@ -9,7 +9,6 @@ import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { LogoCarousel } from '@/components/ui/logo-carousel'
 import { techLogos } from '@/components/ui/tech-logos'
-export const dynamic = 'force-dynamic'
 
 // Structured Data
 const structuredData = {
