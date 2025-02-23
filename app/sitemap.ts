@@ -1,5 +1,6 @@
 import { getPosts, getProjects } from '@/lib/wordpress'
 import type { MetadataRoute } from 'next'
+export const dynamic = 'force-dynamic'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'

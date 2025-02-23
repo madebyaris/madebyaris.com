@@ -5,6 +5,7 @@ import type { Post } from '@/lib/types'
 import { ImageResponse } from 'next/og'
 import { HomeContent } from '@/components/home-content'
 import { Suspense } from 'react'
+export const dynamic = 'force-dynamic'
 
 // Structured Data
 const structuredData = {
