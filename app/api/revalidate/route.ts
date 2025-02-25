@@ -1,24 +1,34 @@
-import { revalidatePath } from 'next/cache'
-import { NextRequest, NextResponse} from 'next/server'
+import { NextRequest, NextResponse } from 'next/server';
+import { revalidateTag } from 'next/cache';
 
 export async function POST(request: NextRequest) {
-    try {
+  try {
+    const { searchParams } = new URL(request.url);
+    const secret = searchParams.get('secret');
+    const tag = searchParams.get('tag');
 
-        const token = request.headers.get('x-webhook-secret')
-
-        // validate the secret token
-        if ( token !== process.env.REVALIDATION_TOKEN) {
-            return NextResponse.json({ error: 'Invalid token' }, { status: 401 })
-        }
-
-        revalidatePath('/')
-        revalidatePath('/blog')
-        revalidatePath('/sitemap.xml')
-        
-        
-        return NextResponse.json({ message: 'Revalidation triggered' }, { status: 200 })
-    } catch (err) {
-        console.error('Revalidation error:', err)
-        return NextResponse.json({ error: 'Error revalidating' }, { status: 500 })
+    // Check for secret to confirm this is a valid request
+    if (secret !== process.env.REVALIDATION_SECRET) {
+      return NextResponse.json({ message: 'Invalid token' }, { status: 401 });
     }
+
+    if (!tag) {
+      return NextResponse.json({ message: 'Missing tag parameter' }, { status: 400 });
+    }
+
+    // Revalidate the tag
+    revalidateTag(tag);
+
+    return NextResponse.json({
+      revalidated: true,
+      message: `Revalidated tag: ${tag}`,
+      timestamp: Date.now()
+    });
+  } catch (error) {
+    console.error('Revalidation error:', error);
+    return NextResponse.json(
+      { message: 'Error revalidating', error: (error as Error).message },
+      { status: 500 }
+    );
+  }
 }

@@ -23,7 +23,10 @@ async function fetchAPI<T>(endpoint: string, params: Record<string, string | num
     console.log('Fetching URL:', url) // Debug log
 
     const response = await fetch(url, { 
-      next: { revalidate: 3600 },
+      next: { 
+        revalidate: 3600, // Revalidate every 3600 seconds
+        tags: [`wp-${endpoint}`], // Add cache tags for targeted revalidation
+      },
       headers: {
         'Accept': 'application/json',
       }

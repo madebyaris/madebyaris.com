@@ -114,3 +114,53 @@ Aris - [arissetia.m@gmail.com](mailto:arissetia.m@gmail.com)
 - [Radix UI](https://www.radix-ui.com/) - Primitives for building UIs
 - [Shadcn UI](https://ui.shadcn.com/) - Beautifully designed components
 - [Framer Motion](https://www.framer.com/motion/) - Animation library
+
+## Incremental Static Regeneration (ISR)
+
+This project uses Next.js 15's Incremental Static Regeneration (ISR) to optimize performance while keeping content fresh.
+
+### How ISR Works in This Project
+
+1. **Static Generation with Revalidation**:
+   - Pages are statically generated at build time
+   - Content is automatically revalidated after a specified time period (60 seconds by default)
+   - Stale content is served while revalidation happens in the background
+
+2. **Cache Tags**:
+   - We use cache tags (`wp-posts`, `wp-projects`, etc.) to target specific content for revalidation
+   - This allows for more granular control over what gets revalidated
+
+3. **On-Demand Revalidation**:
+   - The `/api/revalidate` endpoint allows for on-demand revalidation of specific content
+   - This is useful for webhooks from WordPress when content changes
+
+### Using the Revalidation API
+
+To revalidate content on-demand, make a POST request to the revalidation API:
+
+```bash
+curl -X POST "https://yourdomain.com/api/revalidate?secret=your-secret-token&tag=wp-posts"
+```
+
+Parameters:
+- `secret`: Your revalidation secret token (set in environment variables)
+- `tag`: The cache tag to revalidate (e.g., `wp-posts`, `wp-projects`)
+
+### WordPress Webhook Setup
+
+To automatically revalidate content when it changes in WordPress, set up a webhook:
+
+1. Install a webhook plugin in WordPress
+2. Configure it to send a POST request to your revalidation endpoint when content is published or updated
+3. Include your secret token and the appropriate tag
+
+Example webhook URL:
+```
+https://yourdomain.com/api/revalidate?secret=your-secret-token&tag=wp-posts
+```
+
+### Environment Variables
+
+Make sure to set these environment variables:
+- `NEXT_PUBLIC_WP_API_URL`: Your WordPress API URL
+- `REVALIDATION_SECRET`: A secret token for the revalidation API
