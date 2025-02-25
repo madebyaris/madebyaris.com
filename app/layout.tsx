@@ -61,12 +61,12 @@ export const metadata: Metadata = {
   authors: [{ name: "Aris Setiawan" }],
   creator: "Aris Setiawan",
   icons: {
-    icon: '/aris.png',
-    shortcut: '/aris.png',
-    apple: '/aris.png',
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
     other: {
       rel: 'apple-touch-icon-precomposed',
-      url: '/aris.png',
+      url: '/favicon.ico',
     },
   },
   openGraph: {
@@ -78,7 +78,7 @@ export const metadata: Metadata = {
     siteName: "Aris Setiawan - Senior Full-Stack Developer",
     images: [
       {
-        url: '/aris.png',
+        url: '/favicon.ico',
         width: 800,
         height: 800,
         alt: 'Aris Setiawan - Senior Full-Stack Developer',
@@ -90,7 +90,7 @@ export const metadata: Metadata = {
     title: "Senior Full-Stack Developer | Next.js & WordPress Architect",
     description: "12+ years of experience building enterprise-scale web applications with Next.js, React, and WordPress.",
     creator: "@madebyaris",
-    images: ['/aris.png'],
+    images: ['/favicon.ico'],
   },
   metadataBase: new URL(process.env.NEXT_PUBLIC_URL || 'https://madebyaris.com'),
   robots: {

@@ -1,170 +1,20 @@
 import Link from 'next/link'
 import { Suspense } from 'react'
 import { getPosts } from '@/lib/wordpress'
-import { HomeContent } from '@/components/home-content'
-import { ClientHero } from '@/components/client-hero'
-import { CaseStudiesWrapper } from '@/components/case-studies-wrapper'
+import dynamic from 'next/dynamic'
 import { Code2, Layout, Server, FileCode, ArrowRight } from 'lucide-react'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { LogoCarousel } from '@/components/ui/logo-carousel'
 import { techLogos } from '@/components/ui/tech-logos'
+import { structuredData } from '@/lib/structured-data'
 
-// Structured Data
-const structuredData = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Person",
-      "@id": "https://madebyaris.com/#person",
-      "name": "Aris Setiawan",
-      "jobTitle": "Senior Full-Stack Developer & Web Architecture Specialist",
-      "description": "Senior Full-Stack Developer with 12+ years of enterprise experience, specializing in Next.js, React, WordPress, and PHP development.",
-      "url": "https://madebyaris.com",
-      "sameAs": [
-        "https://github.com/madebyaris",
-        "https://www.linkedin.com/in/arissetia"
-      ],
-      "knowsAbout": [
-        "Next.js Development",
-        "React Architecture",
-        "WordPress Development",
-        "PHP Development",
-        "Full Stack Development",
-        "Web Architecture",
-        "Enterprise Solutions",
-        "Headless CMS",
-        "API Integration",
-        "Performance Optimization"
-      ],
-      "worksFor": {
-        "@type": "Organization",
-        "@id": "https://madebyaris.com/about"
-      },
-      "award": "12+ Years of Enterprise Experience"
-    },
-    {
-      "@type": "Organization",
-      "@id": "https://madebyaris.com/#organization",
-      "name": "Made by Aris",
-      "url": "https://madebyaris.com",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://madebyaris.com/logo.png"
-      },
-      "description": "Enterprise web development services specializing in Next.js, React, WordPress, and modern web architecture.",
-      "founder": {
-        "@type": "Person",
-        "@id": "https://madebyaris.com/#person"
-      },
-      "slogan": "Architecting scalable solutions with Next.js, React, and WordPress for enterprise clients"
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://madebyaris.com/#website",
-      "url": "https://madebyaris.com",
-      "name": "Made by Aris - Senior Full-Stack Developer",
-      "description": "Professional web development services by Aris Setiawan, specializing in enterprise-scale web applications",
-      "publisher": {
-        "@type": "Organization",
-        "@id": "https://madebyaris.com/#organization"
-      }
-    },
-    {
-      "@type": "WebPage",
-      "@id": "https://madebyaris.com/#webpage",
-      "url": "https://madebyaris.com",
-      "name": "Senior Full-Stack Developer | Next.js, React & WordPress Architect | Aris Setiawan",
-      "description": "Senior Full-Stack Developer with 12+ years of experience in Next.js, React, WordPress, and PHP. Specializing in enterprise-scale web applications and headless CMS architecture.",
-      "isPartOf": {
-        "@type": "WebSite",
-        "@id": "https://madebyaris.com/#website"
-      },
-      "about": {
-        "@type": "Person",
-        "@id": "https://madebyaris.com/#person"
-      },
-      "provider": {
-        "@type": "Organization",
-        "@id": "https://madebyaris.com/#organization"
-      },
-      "mainContentOfPage": {
-        "@type": "WebPageElement",
-        "cssSelector": ".w-full"
-      }
-    },
-    {
-      "@type": "Service",
-      "@id": "https://madebyaris.com/#services",
-      "name": "Enterprise Web Development Services",
-      "provider": {
-        "@type": "Organization",
-        "@id": "https://madebyaris.com/#organization"
-      },
-      "areaServed": "Worldwide",
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Expert Web Development Services",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Next.js Development",
-              "description": "Modern web applications built with Next.js for optimal performance and scalability.",
-              "url": "https://madebyaris.com/services/nextjs-development"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "WordPress Solutions",
-              "description": "Expert WordPress development including custom themes, plugins, and headless solutions.",
-              "url": "https://madebyaris.com/services/wordpress"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "PHP Development",
-              "description": "Custom PHP applications and solutions built with modern practices and robust architecture.",
-              "url": "https://madebyaris.com/services/php-development"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Headless CMS Development",
-              "description": "Modern headless WordPress solutions with Next.js frontends for superior performance.",
-              "url": "https://madebyaris.com/services/wordpress/headless-development"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "@type": "Blog",
-      "@id": "https://madebyaris.com/#blog",
-      "name": "Latest Posts",
-      "description": "Recent thoughts and insights about web development",
-      "url": "https://madebyaris.com/blog",
-      "publisher": {
-        "@type": "Organization",
-        "@id": "https://madebyaris.com/#organization"
-      }
-    },
-    {
-      "@type": "ContactPoint",
-      "@id": "https://madebyaris.com/#contact",
-      "contactType": "customer service",
-      "url": "https://madebyaris.com/contact",
-      "description": "Let's work together to build your next project"
-    }
-  ]
-}
+// Dynamically import heavy components
+const ClientHeroLazy = dynamic(() => import('@/components/client-hero').then(mod => ({ default: mod.ClientHero })), { ssr: true })
+const CaseStudiesWrapperLazy = dynamic(() => import('@/components/case-studies-wrapper').then(mod => ({ default: mod.CaseStudiesWrapper })), { ssr: true })
+
+// Dynamically import HomeContent for Posts
+const HomeContentLazy = dynamic(() => import('@/components/home-content').then(mod => ({ default: mod.HomeContent })), { ssr: true })
 
 export const metadata = {
   title: 'Senior Full-Stack Developer | Next.js, React & WordPress Architect | Aris Setiawan',
@@ -188,10 +38,10 @@ async function Posts() {
     const posts = await getPosts({ 
       per_page: 3
     })
-    return <HomeContent type="posts" initialData={posts} />
+    return <HomeContentLazy type="posts" initialData={posts} />
   } catch (error) {
     console.error('Failed to load posts:', error)
-    return <HomeContent type="posts" initialData={[]} />
+    return <HomeContentLazy type="posts" initialData={[]} />
   }
 }
 
@@ -201,7 +51,7 @@ export default function HomePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <main className="flex flex-col w-full">
         <Suspense fallback={<div className="h-[calc(100vh-4rem)]" />}>
-          <ClientHero 
+          <ClientHeroLazy 
             badge="12+ Years of Enterprise Experience"
             title="Senior Full-Stack Developer & Web Architecture Specialist"
             description={
@@ -219,7 +69,7 @@ export default function HomePage() {
         <section className="w-full py-3 ">
           <div className="w-full max-w-[980px] mx-auto px-4 sm:px-6 lg:px-8">
             <Suspense fallback={<div className="h-[300px]" />}>
-              <CaseStudiesWrapper />
+              <CaseStudiesWrapperLazy />
             </Suspense>
           </div>
         </section>

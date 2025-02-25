@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getPost } from '@/lib/wordpress'
+import { getPost, getPosts } from '@/lib/wordpress'
 import { transformWordPressContent } from '@/lib/utils'
 
 interface BlogPostPageProps {
@@ -40,6 +40,18 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       title: 'Error',
       description: 'There was an error loading the blog post.'
     }
+  }
+}
+
+export async function generateStaticParams() {
+  try {
+    const posts = await getPosts({ per_page: 20 });
+    return posts.map((post) => ({
+      slug: post.slug,
+    }));
+  } catch (error) {
+    console.error('Error generating static params:', error);
+    return [];
   }
 }
 

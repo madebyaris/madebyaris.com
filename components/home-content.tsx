@@ -103,10 +103,12 @@ export function HomeContent({ type, initialData }: HomeContentProps) {
     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {posts.length > 0 ? (
         posts.map((post, index) => (
+          
           <article
             key={post.id}
             className="group relative overflow-hidden rounded-lg border bg-background transition-colors hover:bg-accent"
           >
+            <Link href={`/blog/${post.slug}`} key={post.id}>
             {post._embedded?.['wp:featuredmedia']?.[0] && (
               <div className="aspect-video overflow-hidden group-hover:scale-105 transition-transform duration-300">
                 <Image
@@ -140,7 +142,9 @@ export function HomeContent({ type, initialData }: HomeContentProps) {
                 </Link>
               </div>
             </div>
+            </Link>
           </article>
+
         ))
       ) : (
         <EmptyState type={type} />
