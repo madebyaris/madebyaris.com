@@ -6,6 +6,9 @@ import { ImageResponse } from 'next/og'
 import { HomeContent } from '@/components/home-content'
 import { Suspense } from 'react'
 
+export const revalidate = 3600
+
+
 // Structured Data
 const structuredData = {
   "@context": "https://schema.org",
