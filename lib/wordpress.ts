@@ -26,7 +26,7 @@ async function fetchAPI<T>(endpoint: string, params: Record<string, string | num
 
     const response = await fetch(url, { 
       next: { 
-        revalidate: 0, // Revalidate every 3600 seconds
+        revalidate: 3600, // Set to a positive value for revalidation
         tags: [`wp-${endpoint}`], // Add cache tags for targeted revalidation
       },
       headers: {
@@ -83,7 +83,7 @@ export async function getPosts(params: PaginationParams = {}): Promise<Post[]> {
 
     const response = await fetch(
       `${WP_API_URL}/wp/v2/posts?${searchParams.toString()}`,
-      { next: { revalidate: 0 } }
+      { next: { revalidate: 3600 } }
     )
 
     if (!response.ok) {
