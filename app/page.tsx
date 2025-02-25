@@ -9,6 +9,9 @@ import { LogoCarousel } from '@/components/ui/logo-carousel'
 import { techLogos } from '@/components/ui/tech-logos'
 import { structuredData } from '@/lib/structured-data'
 
+export const revalidate = 3600
+
+
 // Dynamically import heavy components
 const ClientHeroLazy = dynamic(() => import('@/components/client-hero').then(mod => ({ default: mod.ClientHero })), { ssr: true })
 const CaseStudiesWrapperLazy = dynamic(() => import('@/components/case-studies-wrapper').then(mod => ({ default: mod.CaseStudiesWrapper })), { ssr: true })

@@ -103,48 +103,44 @@ export function HomeContent({ type, initialData }: HomeContentProps) {
     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {posts.length > 0 ? (
         posts.map((post, index) => (
-          
-          <article
-            key={post.id}
-            className="group relative overflow-hidden rounded-lg border bg-background transition-colors hover:bg-accent"
-          >
-            <Link href={`/blog/${post.slug}`} key={post.id}>
-            {post._embedded?.['wp:featuredmedia']?.[0] && (
-              <div className="aspect-video overflow-hidden group-hover:scale-105 transition-transform duration-300">
-                <Image
-                  src={post._embedded['wp:featuredmedia'][0].source_url}
-                  alt={post._embedded['wp:featuredmedia'][0].alt_text || ''}
-                  width={index === 0 ? 400 : 600}
-                  height={index === 0 ? 225 : 400}
-                  priority={index === 0}
-                  loading={index === 0 ? "eager" : "lazy"}
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover w-full h-full"
+          <Link href={`/blog/${post.slug}`} key={post.id} className="block">
+            <article
+              className="group relative overflow-hidden rounded-lg border bg-background transition-colors hover:bg-accent h-full"
+            >
+              {post._embedded?.['wp:featuredmedia']?.[0] && (
+                <div className="aspect-video overflow-hidden group-hover:scale-105 transition-transform duration-300">
+                  <Image
+                    src={post._embedded['wp:featuredmedia'][0].source_url}
+                    alt={post._embedded['wp:featuredmedia'][0].alt_text || ''}
+                    width={index === 0 ? 400 : 600}
+                    height={index === 0 ? 225 : 400}
+                    priority={index === 0}
+                    loading={index === 0 ? "eager" : "lazy"}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover w-full h-full"
+                  />
+                </div>
+              )}
+              
+              <div className="p-4">
+                <h2
+                  className="line-clamp-2 text-xl font-semibold"
+                  dangerouslySetInnerHTML={{ __html: post.title.rendered }}
                 />
+                <div
+                  className="mt-2 line-clamp-2 text-sm text-muted-foreground"
+                  dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
+                />
+                <div className="mt-4">
+                  <span
+                    className="text-sm font-medium text-primary group-hover:text-primary/80"
+                  >
+                    Read More →
+                  </span>
+                </div>
               </div>
-            )}
-            
-            <div className="p-4">
-              <h2
-                className="line-clamp-2 text-xl font-semibold"
-                dangerouslySetInnerHTML={{ __html: post.title.rendered }}
-              />
-              <div
-                className="mt-2 line-clamp-2 text-sm text-muted-foreground"
-                dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
-              />
-              <div className="mt-4">
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="text-sm font-medium text-primary hover:text-primary/80"
-                >
-                  Read More →
-                </Link>
-              </div>
-            </div>
-            </Link>
-          </article>
-
+            </article>
+          </Link>
         ))
       ) : (
         <EmptyState type={type} />

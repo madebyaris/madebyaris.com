@@ -1,8 +1,12 @@
 import { getPosts, getProjects } from '@/lib/wordpress'
 import type { MetadataRoute } from 'next'
 
+export const revalidate = 10
+
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+
 
   const routes = [
     {
