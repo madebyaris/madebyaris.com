@@ -14,6 +14,9 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
   theme: {
   	extend: {
   		fontFamily: {
@@ -74,7 +77,8 @@ const config: Config = {
   		},
   		animation: {
   			'aurora': 'aurora 60s linear infinite',
-  			'aurora-optimized': 'aurora 120s cubic-bezier(0.4, 0, 0.2, 1) infinite'
+  			'aurora-optimized': 'aurora 120s cubic-bezier(0.4, 0, 0.2, 1) infinite',
+        'fade-in': 'fade-in 0.5s ease-in-out forwards',
   		},
   		keyframes: {
   			aurora: {
@@ -84,7 +88,11 @@ const config: Config = {
   				'50%': {
   					backgroundPosition: '350% 50%, 350% 50%'
   				}
-  			}
+  			},
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        }
   		}
   	}
   },
@@ -99,6 +107,12 @@ const config: Config = {
         ":root": newVars,
       });
     },
+  ],
+  // Optimize for production
+  safelist: [
+    // Add any classes that might be dynamically generated and need to be included
+    'bg-primary',
+    'text-primary-foreground',
   ],
 } satisfies Config;
 

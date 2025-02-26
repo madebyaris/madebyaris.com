@@ -1,13 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { Metadata } from 'next'
-import { getPosts } from '@/lib/wordpress'
-import type { Post } from '@/lib/types'
+import { getPosts, getAllTags } from '@/lib/wordpress'
+import type { Post, Tag } from '@/lib/types'
 import { ImageResponse } from 'next/og'
-import { HomeContent } from '@/components/home-content'
 import { Suspense } from 'react'
+import { BlogContent } from '@/components/blog-content'
 
 export const revalidate = 3600
-
 
 // Structured Data
 const structuredData = {
@@ -162,11 +161,21 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function BlogPage() {
   let posts: Post[] = []
+  let popularTags: Tag[] = []
   
   try {
-    posts = await getPosts({ per_page: 12 })
+    // Fetch posts and popular tags in parallel
+    const [postsData, tagsData] = await Promise.all([
+      getPosts({ per_page: 12 }),
+      getAllTags(6) // Get top 6 most popular tags
+    ]);
+    
+    posts = postsData;
+    popularTags = tagsData;
+    
+    console.log('Popular tags:', popularTags);
   } catch (error) {
-    console.error('Failed to fetch posts:', error)
+    console.error('Failed to fetch data:', error)
   }
 
   // Function to generate structured data
@@ -206,8 +215,8 @@ export default async function BlogPage() {
                 "@type": "WebPage",
                 "@id": `https://madebyaris.com/blog/${post.slug}`
               },
-              "keywords": post.tags?.map((tag) => tag.name).join(", ") || "",
-              "articleSection": post.categories?.map((cat) => cat.name).join(", ") || "Web Development"
+              "keywords": post.tags?.map((tag) => typeof tag === 'object' ? tag.name : '').filter(Boolean).join(", ") || "",
+              "articleSection": post.categories?.map((cat) => typeof cat === 'object' ? cat.name : '').filter(Boolean).join(", ") || "Web Development"
             }
           })),
           "numberOfItems": posts.length
@@ -226,29 +235,45 @@ export default async function BlogPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={generateStructuredData()}
       />
-      <main className="container mx-auto max-w-[980px] px-4 sm:px-6 lg:px-8 py-8 md:py-12 lg:py-24">
-        <div className="flex flex-col gap-8">
-          {/* Hero Section */}
+      
+      {/* Hero Section with simplified background for better LCP */}
+      <section className="relative py-16 overflow-hidden bg-gradient-to-b from-background to-background/50">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(120,119,198,0.05),transparent_60%)]"></div>
+        
+        <div className="container mx-auto max-w-[980px] px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center">
-            <h1 className="text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/50 mb-4">
+            <div className="inline-block px-4 py-1 bg-primary/10 dark:bg-primary/20 text-primary rounded-full text-sm font-medium mb-4">
+              Web Development Blog
+            </div>
+            
+            {/* Critical LCP element - simplified heading */}
+            <h1 className="text-4xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/50">
               Web Development Insights
             </h1>
-            <p className="text-xl text-muted-foreground max-w-[700px] mx-auto">
-              Expert tutorials and insights on Next.js, React, WordPress, and modern web development practices.
-            </p>
+            
+            <div className="max-w-[700px] mx-auto">
+              <p className="text-xl text-muted-foreground">
+                Expert tutorials and insights on Next.js, React, WordPress, and modern web development practices.
+              </p>
+            </div>
           </div>
+        </div>
+      </section>
 
-          {/* Blog Posts Grid */}
-          <Suspense fallback={
+      <main className="container mx-auto max-w-[980px] px-4 sm:px-6 lg:px-8 py-8">
+        <Suspense fallback={
+          <div className="space-y-8">
+            <div className="h-12 animate-pulse bg-muted rounded-lg" />
+            <div className="h-[400px] animate-pulse bg-muted rounded-lg" />
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {[...Array(6)].map((_, i) => (
-                <div key={i} className="h-[300px] animate-pulse rounded-lg bg-muted" />
+                <div key={i} className="h-[350px] animate-pulse rounded-lg bg-muted" />
               ))}
             </div>
-          }>
-            <HomeContent type="posts" initialData={posts} />
-          </Suspense>
-        </div>
+          </div>
+        }>
+          <BlogContent initialPosts={posts} popularTags={popularTags} />
+        </Suspense>
       </main>
     </>
   )

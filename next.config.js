@@ -18,28 +18,38 @@ const nextConfig = {
         pathname: '/**',
       }
     ],
-    // Add image optimization settings
+    // Enhanced image optimization settings
     formats: ['image/avif', 'image/webp'],
-    minimumCacheTTL: 60,
+    minimumCacheTTL: 86400, // Increase cache TTL to 24 hours
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
   // Add experimental optimizations
   experimental: {
     optimizeCss: true,
-    optimizePackageImports: ['lucide-react', 'framer-motion'],
+    optimizePackageImports: ['lucide-react', 'framer-motion', '@radix-ui/react-icons'],
     // Configure Turbopack
     turbo: {
       // Turbopack-specific options
       resolveAlias: {
         // Add any module aliases if needed
       },
-      // You can add rules for specific modules if needed
-      rules: {
-        // Example: { test: /\.svg$/, use: ['@svgr/webpack'] }
-      }
     }
   },
+  // Add performance optimizations
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production' ? {
+      exclude: ['error', 'warn'],
+    } : false,
+  },
+  // Optimize build output
+  output: 'standalone',
+  // Improve performance with compression
+  compress: true,
+  // Add HTTP/2 server push
+  poweredByHeader: false,
+  // Optimize React in production
+  reactStrictMode: true,
 }
 
 export default withBundleAnalyzer({
