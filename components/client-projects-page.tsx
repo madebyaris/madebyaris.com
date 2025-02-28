@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { ArrowRight, Filter, Search, Briefcase, ShoppingCart, Film, Home, Globe } from 'lucide-react'
 import { Sparkles } from '@/components/ui/sparkles'
 import dynamic from 'next/dynamic'
-import { projects } from '@/app/projects/page'
+import { projects } from '@/app/projects/server-page'
 
 // Import ProjectCard as a client component
 const ProjectCard = dynamic(() => import('@/components/project-card'), { ssr: true })

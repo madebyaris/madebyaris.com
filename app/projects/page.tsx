@@ -1,2 +1,2 @@
-// Re-export everything from server-page.tsx
-export { default, metadata, projects, structuredData } from './server-page' 
+// Re-export allowed page exports from server-page.tsx
+export { default, metadata } from './server-page' 
