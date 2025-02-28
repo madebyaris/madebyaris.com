@@ -59,6 +59,19 @@ const benefits = [
   },
 ]
 
+const testimonials = [
+  {
+    quote: "The WordPress theme developed for our business perfectly captures our brand identity. The attention to detail and performance optimization exceeded our expectations.",
+    author: "Marketing Director",
+    company: "Retail Brand"
+  },
+  {
+    quote: "The custom plugin developed for our membership site has streamlined our operations and improved user experience significantly.",
+    author: "CEO",
+    company: "Educational Platform"
+  }
+]
+
 // Structured Data
 const structuredData = {
   "@context": "https://schema.org",
@@ -68,10 +81,49 @@ const structuredData = {
   "provider": {
     "@type": "Person",
     "name": "Aris Setiawan",
+    "jobTitle": "Senior WordPress Developer",
     "url": "https://madebyaris.com"
   },
   "serviceType": "Web Development",
-  "areaServed": "Worldwide"
+  "areaServed": "Worldwide",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "WordPress Development Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "WordPress Theme Development",
+          "description": "Custom WordPress themes that perfectly align with your brand identity."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "WordPress Plugin Development",
+          "description": "Custom WordPress plugins that extend functionality and deliver exactly what your business needs."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Headless WordPress Development",
+          "description": "Modern headless WordPress implementations with Next.js frontend for superior performance."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "WordPress Performance Optimization",
+          "description": "Comprehensive WordPress optimization services for speed and security."
+        }
+      }
+    ]
+  }
 }
 
 // Generate Metadata and Structured Data
@@ -157,13 +209,15 @@ export async function generateMetadata(): Promise<Metadata> {
       description: 'Expert WordPress development services for modern websites.',
       type: 'website',
       locale: 'en_US',
-      images: [ogImage]
+      images: [ogImage],
+      siteName: 'Made by Aris'
     },
     twitter: {
       card: 'summary_large_image',
       title: 'WordPress Development Services | Custom Solutions',
       description: 'Expert WordPress development services for modern websites.',
-      images: [ogImage]
+      images: [ogImage],
+      creator: '@madebyaris'
     },
     alternates: {
       canonical: 'https://madebyaris.com/services/wordpress'
@@ -183,55 +237,74 @@ export default function WordPressServicesPage() {
         <div className="absolute inset-0 bg-gradient-to-br from-zinc-100 via-transparent to-zinc-100/50 dark:from-zinc-900 dark:via-transparent dark:to-zinc-900/50" />
       </div>
 
-      <div className="container relative mx-auto max-w-[980px] px-4 sm:px-6 lg:px-8">
-        <div className="py-12 md:py-16 lg:py-24">
-          {/* Hero Section - Critical Path */}
-          <div className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-50 mb-4">
-              <Globe className="w-4 h-4" />
+      <div className="container relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="py-10 md:py-16">
+          {/* Hero Section - Enhanced with semantic HTML */}
+          <header className="text-center max-w-3xl mx-auto">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-300 mb-4">
+              <Layout className="w-4 h-4" />
               <span className="text-sm font-medium">WordPress Expert</span>
             </div>
-            <h1 className="text-4xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-700 dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-300 mb-6">
-              WordPress Development
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-600 dark:from-emerald-400 dark:via-emerald-300 dark:to-teal-400 mb-6">
+              WordPress Development Services
             </h1>
             <div className="max-w-[700px] mx-auto">
-              <p className="text-xl text-zinc-600 dark:text-zinc-400">
+              <p className="text-base md:text-lg text-zinc-600 dark:text-zinc-400">
                 From custom themes to headless implementations, 
                 <noscript>I provide comprehensive WordPress development services to help you get the most out of your website.</noscript>
                 <span className="inline-block">I provide comprehensive WordPress development services to help you get the most out of your website.</span>
               </p>
             </div>
-          </div>
+          </header>
 
-          {/* Non-critical content */}
-          <div className="flex flex-col gap-12 mt-12">
-            {/* Services Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+          {/* Introduction - Enhanced with article tag */}
+          <article className="mt-8 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-zinc-200 dark:border-zinc-800 shadow-lg">
+            <p className="text-base md:text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
+              With over 12 years of WordPress experience, I deliver custom solutions that combine beautiful design with powerful functionality. 
+              Whether you need a custom theme, specialized plugin, or a complete WordPress solution, I focus on creating secure, 
+              high-performance websites that drive results for your business.
+            </p>
+          </article>
+
+          {/* Services Section - Enhanced with section tag */}
+          <section className="mt-12 md:mt-16" aria-labelledby="services-heading">
+            <div className="text-center mb-8">
+              <span className="inline-block px-4 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-300 rounded-full text-sm font-medium mb-4">
+                Services Offered
+              </span>
+              <h2 id="services-heading" className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
+                WordPress Development Solutions
+              </h2>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
               {services.map((service, index) => (
                 <Link 
                   key={service.title} 
                   href={service.href}
                   className="group animate-in fade-in slide-in-from-bottom duration-1000"
-                  style={{ animationDelay: `${(index + 1) * 200}ms` }}
+                  style={{ animationDelay: `${(index + 1) * 150}ms` }}
                 >
-                  <Card className="h-full transition-all duration-300 hover:shadow-xl hover:scale-[1.02] hover:border-zinc-300 dark:hover:border-zinc-700 flex flex-col bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm">
+                  <Card className="h-full transition-all duration-300 hover:shadow-xl hover:scale-[1.01] hover:border-emerald-200 dark:hover:border-emerald-800 flex flex-col bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm">
                     <div className="p-6 flex flex-col gap-4 flex-1">
-                      <div className="w-12 h-12 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-900 dark:text-zinc-50 transition-transform group-hover:scale-110 group-hover:bg-zinc-900 dark:group-hover:bg-zinc-50 group-hover:text-zinc-50 dark:group-hover:text-zinc-900">
+                      <div className="w-12 h-12 rounded-lg bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 transition-transform group-hover:scale-110">
                         {service.icon}
                       </div>
-                      <h2 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-50">{service.title}</h2>
+                      <h3 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">{service.title}</h3>
                       <p className="text-zinc-600 dark:text-zinc-400">{service.description}</p>
-                      <div className="grid grid-cols-2 gap-2 mt-4">
+                      <div className="flex flex-wrap gap-2 mt-4">
                         {service.features.map((feature) => (
-                          <div key={feature} className="flex items-center text-sm text-zinc-600 dark:text-zinc-400">
-                            <div className="w-1 h-1 rounded-full bg-zinc-400 dark:bg-zinc-600 mr-2" />
+                          <span 
+                            key={feature} 
+                            className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200"
+                          >
                             {feature}
-                          </div>
+                          </span>
                         ))}
                       </div>
                     </div>
                     <div className="p-6 pt-0 mt-auto">
-                      <Button className="w-full group-hover:bg-zinc-900 dark:group-hover:bg-zinc-50 group-hover:text-zinc-50 dark:group-hover:text-zinc-900 transition-all duration-300">
+                      <Button className="w-full group bg-emerald-600 hover:bg-emerald-700 text-white dark:text-black rounded-full">
                         Learn More
                         <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                       </Button>
@@ -240,43 +313,179 @@ export default function WordPressServicesPage() {
                 </Link>
               ))}
             </div>
+          </section>
 
-            {/* Benefits Section */}
-            <div className="mt-24 animate-in fade-in slide-in-from-bottom duration-1000">
-              <h2 className="text-3xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-700 dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-300">
-                Why Choose My WordPress Services?
+          {/* Benefits Section - Enhanced with section tag */}
+          <section className="mt-12 md:mt-16 animate-in fade-in slide-in-from-bottom duration-1000 delay-300" aria-labelledby="benefits-heading">
+            <div className="text-center mb-8">
+              <span className="inline-block px-4 py-1 bg-teal-100 dark:bg-teal-900/30 text-teal-800 dark:text-teal-300 rounded-full text-sm font-medium mb-4">
+                Advantages
+              </span>
+              <h2 id="benefits-heading" className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
+                Why Choose My WordPress Services
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                {benefits.map((benefit, index) => (
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+              {benefits.map((benefit, index) => (
+                <div 
+                  key={benefit.title}
+                  className="p-6 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl border border-zinc-200 dark:border-zinc-800 transition-all duration-300 hover:shadow-lg hover:border-teal-200 dark:hover:border-teal-800 text-center"
+                  style={{ animationDelay: `${(index + 1) * 150}ms` }}
+                >
+                  <div className="w-12 h-12 rounded-lg bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center text-teal-600 dark:text-teal-400 mx-auto mb-4">
+                    {benefit.icon}
+                  </div>
+                  <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50 mb-2">{benefit.title}</h3>
+                  <p className="text-zinc-600 dark:text-zinc-400">{benefit.description}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Process Section - New */}
+          <section className="mt-12 md:mt-16 animate-in fade-in slide-in-from-bottom duration-1000 delay-400" aria-labelledby="process-heading">
+            <div className="text-center mb-8">
+              <span className="inline-block px-4 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full text-sm font-medium mb-4">
+                Workflow
+              </span>
+              <h2 id="process-heading" className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
+                WordPress Development Process
+              </h2>
+            </div>
+            
+            <div className="relative">
+              {/* Connecting line for desktop */}
+              <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-zinc-200 dark:bg-zinc-800 -translate-y-1/2 z-0"></div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 relative z-10">
+                {[
+                  {
+                    title: 'Discovery',
+                    description: 'Understanding your business goals and requirements for the WordPress project.'
+                  },
+                  {
+                    title: 'Planning',
+                    description: 'Creating a detailed roadmap and technical specifications for development.'
+                  },
+                  {
+                    title: 'Development',
+                    description: 'Building your WordPress solution with clean, efficient, and secure code.'
+                  },
+                  {
+                    title: 'Launch & Support',
+                    description: 'Deploying your WordPress site and providing ongoing maintenance.'
+                  }
+                ].map((step, index) => (
                   <div 
-                    key={benefit.title}
-                    className="text-center"
-                    style={{ animationDelay: `${(index + 1) * 200}ms` }}
+                    key={step.title}
+                    className="p-6 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl border border-zinc-200 dark:border-zinc-800 transition-all duration-300 hover:shadow-lg hover:border-blue-200 dark:hover:border-blue-800"
+                    style={{ animationDelay: `${(index + 1) * 150}ms` }}
                   >
-                    <div className="w-12 h-12 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-900 dark:text-zinc-50 mx-auto mb-4">
-                      {benefit.icon}
+                    <div className="flex flex-col items-center text-center mb-4">
+                      <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 font-semibold mb-3">
+                        {index + 1}
+                      </div>
+                      <h3 className="font-semibold text-zinc-900 dark:text-zinc-50 text-lg">{step.title}</h3>
                     </div>
-                    <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50 mb-2">{benefit.title}</h3>
-                    <p className="text-zinc-600 dark:text-zinc-400">{benefit.description}</p>
+                    <p className="text-zinc-600 dark:text-zinc-400 text-center">{step.description}</p>
                   </div>
                 ))}
               </div>
             </div>
+          </section>
 
-            {/* CTA Section */}
-            <div className="mt-24 text-center bg-gradient-to-r from-zinc-100 via-zinc-50 to-zinc-100 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900 rounded-2xl p-12 animate-in fade-in slide-in-from-bottom duration-1000">
-              <h2 className="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-700 dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-300">
-                Ready to Build Something Amazing?
+          {/* Testimonials Section - New */}
+          <section className="mt-12 md:mt-16 animate-in fade-in slide-in-from-bottom duration-1000 delay-500" aria-labelledby="testimonials-heading">
+            <div className="text-center mb-8">
+              <span className="inline-block px-4 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 rounded-full text-sm font-medium mb-4">
+                Client Feedback
+              </span>
+              <h2 id="testimonials-heading" className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
+                What Clients Say
               </h2>
-              <p className="text-xl text-zinc-600 dark:text-zinc-400 max-w-[600px] mx-auto mb-8">
-                Let&apos;s discuss your WordPress project and create a solution that perfectly matches your needs.
-              </p>
-              <Button size="lg" className="min-w-[200px] group bg-zinc-900 dark:bg-zinc-50 text-zinc-50 dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200 hover:scale-105 transition-all duration-300">
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+              {testimonials.map((testimonial, index) => (
+                <div 
+                  key={index}
+                  className="p-6 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl border border-zinc-200 dark:border-zinc-800 shadow-lg"
+                >
+                  <div className="mb-4 text-purple-500 dark:text-purple-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path>
+                      <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"></path>
+                    </svg>
+                  </div>
+                  <p className="text-zinc-600 dark:text-zinc-400 mb-4 italic">&quot;{testimonial.quote}&quot;</p>
+                  <div className="flex items-center">
+                    <div className="ml-0">
+                      <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-50">{testimonial.author}</p>
+                      <p className="text-xs text-zinc-500 dark:text-zinc-500">{testimonial.company}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* FAQ Section - New for SEO */}
+          <section className="mt-12 md:mt-16 animate-in fade-in slide-in-from-bottom duration-1000 delay-600" aria-labelledby="faq-heading">
+            <div className="text-center mb-8">
+              <span className="inline-block px-4 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-300 rounded-full text-sm font-medium mb-4">
+                Questions
+              </span>
+              <h2 id="faq-heading" className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
+                Frequently Asked Questions
+              </h2>
+            </div>
+            
+            <div className="space-y-4 md:space-y-6">
+              {[
+                {
+                  question: "What types of WordPress projects do you work on?",
+                  answer: "I work on a wide range of WordPress projects including business websites, e-commerce stores, membership sites, blogs, and custom web applications built on WordPress. I specialize in custom theme development, plugin development, headless WordPress, and performance optimization."
+                },
+                {
+                  question: "How long does it take to develop a WordPress website?",
+                  answer: "The timeline varies depending on the complexity of the project. A basic custom WordPress site might take 2-4 weeks, while more complex projects with custom functionality can take 6-12 weeks. I'll provide a detailed timeline during our initial consultation."
+                },
+                {
+                  question: "Do you provide WordPress maintenance services?",
+                  answer: "Yes, I offer ongoing WordPress maintenance services including security updates, performance monitoring, content updates, and technical support. This ensures your WordPress site remains secure, fast, and up-to-date."
+                },
+                {
+                  question: "What makes your WordPress development services different?",
+                  answer: "My approach combines technical expertise with a focus on business outcomes. I build WordPress solutions that are not only visually appealing but also secure, scalable, and optimized for performance. I follow WordPress best practices and coding standards to ensure high-quality, maintainable code."
+                }
+              ].map((faq, index) => (
+                <div 
+                  key={index}
+                  className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl p-6 border border-zinc-200 dark:border-zinc-800 shadow-md"
+                >
+                  <h3 className="text-lg md:text-xl font-semibold text-zinc-900 dark:text-zinc-50 mb-3">{faq.question}</h3>
+                  <p className="text-zinc-600 dark:text-zinc-400">{faq.answer}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* CTA Section - Enhanced with semantic HTML */}
+          <aside className="mt-12 md:mt-16 text-center bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/50 dark:to-teal-950/50 rounded-2xl p-8 md:p-12 animate-in fade-in slide-in-from-bottom duration-1000 shadow-lg border border-emerald-100 dark:border-emerald-900/30">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-600 dark:from-emerald-400 dark:to-teal-400">
+              Ready to Build Your WordPress Project?
+            </h2>
+            <p className="text-base md:text-lg text-zinc-600 dark:text-zinc-400 max-w-[600px] mx-auto mb-6 md:mb-8">
+              Let&apos;s discuss your WordPress project and create a solution that perfectly matches your needs and exceeds your expectations.
+            </p>
+            <Link href="/contact">
+              <Button size="lg" className="min-w-[200px] group bg-emerald-600 hover:bg-emerald-700 text-white hover:scale-105 transition-all duration-300 rounded-full">
                 Start Your Project
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
-            </div>
-          </div>
+            </Link>
+          </aside>
         </div>
       </div>
     </div>

@@ -8,7 +8,7 @@ import { AnalyticsWrapper } from "@/components/providers/analytics-wrapper";
 import { cn } from "@/lib/utils";
 import "./globals.css";
 
-// Optimize font loading
+// Optimize font loading with display swap and adjusting preload strategy
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -23,7 +23,7 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
   display: "swap",
-  preload: true,
+  preload: false, // Only preload primary font
   fallback: ['SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace']
 });
 
@@ -31,7 +31,8 @@ const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-jakarta",
   display: "swap",
-  preload: true,
+  preload: false, // Only preload primary font
+  weight: ["400", "600", "700"], // Only load needed weights
 });
 
 export const metadata: Metadata = {
@@ -117,24 +118,25 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Preconnect */}
+        {/* Preconnect to critical domains */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
-        {/* DNS Prefetch */}
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        
-        {/* Other preconnects */}
         <link rel="preconnect" href="https://cdn.vercel-insights.com" />
-        <link rel="preconnect" href="https://va.vercel-scripts.com" />
         
-        {/* Preload critical assets */}
-        <link rel="preload" href="/aris.png" as="image" />
+        {/* DNS Prefetch for performance */}
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="https://va.vercel-scripts.com" />
+        
+        {/* Preload critical assets with priority hints */}
+        <link rel="preload" href="/astro.png" as="image" fetchPriority="high" />
         
         {/* Meta tags for performance */}
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
         <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+        
+        {/* Core Web Vitals optimization hint */}
+        <meta name="renderMode" content="simultaneously" />
       </head>
       <body 
         className={cn(
@@ -150,31 +152,31 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {/* Gradients - Moved to after main content */}
+          {/* Main content - prioritize this */}
           <div className="relative flex min-h-screen flex-col">
             <Header />
             <div className="flex-1">{children}</div>
             <Footer />
           </div>
 
-          {/* Light mode gradient - Deferred loading */}
+          {/* Light mode gradient - Optimized with will-change and contain */}
           <div 
             className="fixed inset-0 -z-10 h-full w-full opacity-0 animate-fade-in dark:hidden"
             style={{
               background: "radial-gradient(100% 50% at 50% 0%, rgba(0,163,255,0.13) 0, rgba(0,163,255,0) 50%, rgba(0,163,255,0) 100%)",
-              willChange: "transform",
-              transform: "translateZ(0)"
+              willChange: "opacity",
+              contain: "paint",
             }}
             aria-hidden="true"
           />
           
-          {/* Dark mode gradient - Deferred loading */}
+          {/* Dark mode gradient - Optimized with will-change and contain */}
           <div 
             className="fixed inset-0 -z-10 hidden h-full w-full bg-neutral-950 opacity-0 animate-fade-in dark:block"
             style={{
               background: "radial-gradient(ellipse 80% 80% at 50% -20%, rgba(120,119,198,0.3), rgba(255,255,255,0))",
-              willChange: "transform",
-              transform: "translateZ(0)"
+              willChange: "opacity",
+              contain: "paint",
             }}
             aria-hidden="true"
           />

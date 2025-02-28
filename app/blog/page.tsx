@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { Metadata } from 'next'
-import { getPosts } from '@/lib/wordpress'
-import type { Post } from '@/lib/types'
+import { getPosts, getAllTags } from '@/lib/wordpress'
+import type { Post, Tag } from '@/lib/types'
 import { ImageResponse } from 'next/og'
-import { HomeContent } from '@/components/home-content'
 import { Suspense } from 'react'
+import { BlogContent } from '@/components/blog-content'
+import { Button } from '@/components/ui/button'
 
 export const revalidate = 3600
-
 
 // Structured Data
 const structuredData = {
@@ -162,11 +162,20 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function BlogPage() {
   let posts: Post[] = []
+  let popularTags: Tag[] = []
   
   try {
-    posts = await getPosts({ per_page: 12 })
+    // Fetch posts and popular tags in parallel
+    const [postsData, tagsData] = await Promise.all([
+      getPosts({ per_page: 12 }),
+      getAllTags(6) // Get top 6 most popular tags
+    ]);
+    
+    posts = postsData;
+    popularTags = tagsData;
+    
   } catch (error) {
-    console.error('Failed to fetch posts:', error)
+    console.error('Failed to fetch data:', error)
   }
 
   // Function to generate structured data
@@ -206,8 +215,8 @@ export default async function BlogPage() {
                 "@type": "WebPage",
                 "@id": `https://madebyaris.com/blog/${post.slug}`
               },
-              "keywords": post.tags?.map((tag) => tag.name).join(", ") || "",
-              "articleSection": post.categories?.map((cat) => cat.name).join(", ") || "Web Development"
+              "keywords": post.tags?.map((tag) => typeof tag === 'object' ? tag.name : '').filter(Boolean).join(", ") || "",
+              "articleSection": post.categories?.map((cat) => typeof cat === 'object' ? cat.name : '').filter(Boolean).join(", ") || "Web Development"
             }
           })),
           "numberOfItems": posts.length
@@ -226,30 +235,56 @@ export default async function BlogPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={generateStructuredData()}
       />
-      <main className="container mx-auto max-w-[980px] px-4 sm:px-6 lg:px-8 py-8 md:py-12 lg:py-24">
-        <div className="flex flex-col gap-8">
-          {/* Hero Section */}
-          <div className="text-center">
-            <h1 className="text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/50 mb-4">
+      
+      {/* Hero Section with improved design and animated gradient */}
+      <section className="relative py-8 md:py-10 overflow-hidden animated-gradient">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(120,119,198,0.15),transparent_70%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(120,119,198,0.1),transparent_70%)]"></div>
+        
+        <div className="container max-w-6xl mx-auto px-4 sm:px-6 relative">
+          <div className="text-center max-w-3xl mx-auto">
+            <div className="inline-block px-4 py-1 bg-primary/10 dark:bg-primary/20 text-primary rounded-full text-sm font-medium mb-3 backdrop-blur-sm">
+              Web Development Insights
+            </div>
+            
+            {/* Critical LCP element - enhanced heading */}
+            <h1 className="text-2xl md:text-3xl font-bold leading-tight tracking-tighter lg:text-4xl mb-3 bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary/90 to-primary/70">
               Web Development Insights
             </h1>
-            <p className="text-xl text-muted-foreground max-w-[700px] mx-auto">
+            
+            <p className="text-sm md:text-base text-muted-foreground mb-4 max-w-2xl mx-auto">
               Expert tutorials and insights on Next.js, React, WordPress, and modern web development practices.
             </p>
+            
+            <div className="flex flex-wrap justify-center gap-2 mb-4">
+              <div className="px-3 py-1 text-xs rounded-full bg-[#007acc] text-white">
+                Next.js
+              </div>
+              <div className="px-3 py-1 text-xs rounded-full bg-[#61dafb] text-black">
+                React
+              </div>
+              <div className="px-3 py-1 text-xs rounded-full bg-[#21759b] text-white">
+                WordPress
+              </div>
+            </div>
           </div>
-
-          {/* Blog Posts Grid */}
+        </div>
+      </section>
+      
+      {/* Main Content Section with improved layout */}
+      <section className="py-4 md:py-6">
+        <div className="container max-w-6xl mx-auto px-4 sm:px-6">
           <Suspense fallback={
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-4 md:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
               {[...Array(6)].map((_, i) => (
-                <div key={i} className="h-[300px] animate-pulse rounded-lg bg-muted" />
+                <div key={i} className="h-[300px] animate-pulse rounded-xl bg-muted" />
               ))}
             </div>
           }>
-            <HomeContent type="posts" initialData={posts} />
+            <BlogContent initialPosts={posts} />
           </Suspense>
         </div>
-      </main>
+      </section>
     </>
   )
 }

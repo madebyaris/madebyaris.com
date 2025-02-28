@@ -21,6 +21,20 @@ export interface RankMathSEO {
   }
 }
 
+export interface Category {
+  id: number
+  name: string
+  slug: string
+  count?: number
+}
+
+export interface Tag {
+  id: number
+  name: string
+  slug: string
+  count: number
+}
+
 export interface Post {
   id: number
   slug: string
@@ -45,16 +59,8 @@ export interface Post {
   rank_math_title?: string
   rank_math_description?: string
   rank_math_seo?: RankMathSEO
-  tags?: Array<{
-    id: number
-    name: string
-    slug: string
-  }>
-  categories?: Array<{
-    id: number
-    name: string
-    slug: string
-  }>
+  tags?: Tag[] | number[]
+  categories?: Category[] | number[]
 }
 
 export interface Project {

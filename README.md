@@ -69,6 +69,7 @@ RESEND_API_KEY="your-resend-api-key"
 | `pnpm dev`    | Start development server             |
 | `pnpm build`  | Create production build              |
 | `pnpm start`  | Start production server              |
+| `pnpm start:standalone` | Start standalone server (for production with `output: standalone`) |
 | `pnpm lint`   | Run ESLint                           |
 | `pnpm format` | Format code with Prettier            |
 
@@ -91,6 +92,33 @@ madebyaris.com/
 - 🚀 [Vercel](https://vercel.com)
 - 🕸️ [Netlify](https://netlify.com)
 - ☁️ [Cloudflare Pages](https://pages.cloudflare.com)
+
+### Standalone Deployment
+This project uses Next.js's `output: standalone` configuration for optimized production deployments:
+
+1. Build the application:
+   ```bash
+   pnpm build
+   ```
+
+2. Run the standalone server:
+   ```bash
+   pnpm start:standalone
+   ```
+
+3. For Docker deployments, copy the standalone output:
+   ```bash
+   # Example Dockerfile
+   FROM node:20-alpine
+   WORKDIR /app
+   COPY .next/standalone ./
+   COPY .next/static ./.next/static
+   COPY public ./public
+   EXPOSE 3000
+   CMD ["node", "server.js"]
+   ```
+
+> **Note:** When using `output: standalone`, do not use `next start`. Instead, use `node .next/standalone/server.js` or the provided `pnpm start:standalone` script.
 
 ## 🤝 Contributing
 We welcome contributions! Please follow these steps:
