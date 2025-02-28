@@ -273,105 +273,174 @@ export default function ServicesPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <div className="relative min-h-screen">
-        {/* Background Pattern */}
-        <div className="fixed inset-0 -z-10">
-          <div className="absolute inset-0 bg-zinc-50 dark:bg-zinc-950 [background:radial-gradient(#e5e7eb_1px,transparent_1px)] dark:[background:radial-gradient(#1f2937_1px,transparent_1px)] [background-size:32px_32px] opacity-40" />
-          <div className="absolute inset-0 bg-gradient-to-br from-zinc-100 via-transparent to-zinc-100/50 dark:from-zinc-900 dark:via-transparent dark:to-zinc-900/50" />
-        </div>
-
-        <div className="container relative mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8">
-          <div className="py-12 md:py-16 lg:py-24">
-            <div className="flex flex-col gap-12">
-              {/* Hero Section */}
-              <div className="text-center max-w-3xl mx-auto">
-                <h1 className="text-4xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-700 dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-300 mb-6 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-                  Professional Web Development Services
-                </h1>
-                <p className="text-xl text-zinc-600 dark:text-zinc-400 max-w-[700px] mx-auto mb-8 animate-in fade-in slide-in-from-bottom-5 duration-1000 delay-200">
+      <div className="relative">
+        {/* Hero Section with improved visual design */}
+        <section className="relative py-10 md:py-12 overflow-hidden">
+          <div className="container max-w-6xl mx-auto px-4 sm:px-6 relative">
+            <div className="text-center">
+              <div className="inline-block px-4 py-1 bg-primary/10 dark:bg-primary/20 text-primary rounded-full text-sm font-medium mb-4">
+                Expert Services
+              </div>
+              
+              <h1 className="text-3xl md:text-4xl font-bold leading-tight tracking-tighter lg:text-5xl mb-4 md:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-emerald-500">
+                Professional Web Development Services
+              </h1>
+              
+              <div className="max-w-[700px] mx-auto bg-white/50 dark:bg-zinc-800/50 backdrop-blur-sm rounded-xl p-4 md:p-6 shadow-xl border border-zinc-200/50 dark:border-zinc-700/50">
+                <p className="text-base md:text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">
                   Expert development services focused on modern technologies and best practices. From blazing-fast Next.js applications to powerful WordPress solutions.
                 </p>
               </div>
-
-              {/* Main Services Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-                {services.map((service, index) => (
-                  <div 
-                    key={service.title}
-                    className="animate-in fade-in slide-in-from-bottom duration-1000"
-                    style={{ animationDelay: `${(index + 1) * 200}ms` }}
-                  >
-                    <div className="h-full p-6 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm rounded-lg border border-zinc-200 dark:border-zinc-800 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] hover:border-zinc-300 dark:hover:border-zinc-700">
-                      <div className="flex flex-col gap-4">
-                        <div className="w-12 h-12 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-900 dark:text-zinc-50 transition-transform hover:scale-110">
-                          {service.icon}
-                        </div>
-                        <h2 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-50">{service.title}</h2>
-                        <p className="text-zinc-600 dark:text-zinc-400">{service.description}</p>
-                        <div className="mt-4 flex flex-wrap gap-2">
-                          {service.features.map((feature) => (
-                            <span key={feature} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200">
-                              {feature}
-                            </span>
-                          ))}
-                        </div>
-                        <div className="mt-6">
-                          <Link href={service.href}>
-                            <Button className="w-full group bg-zinc-900 dark:bg-zinc-50 text-zinc-50 dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200">
-                              Learn More
-                              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                            </Button>
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* WordPress Services Section */}
-              <div className="mt-24">
-                <h2 className="text-3xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-700 dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-300">
-                  WordPress Development Services
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {wordPressServices.map((service, index) => (
-                    <div 
-                      key={service.title}
-                      className="animate-in fade-in slide-in-from-bottom duration-1000"
-                      style={{ animationDelay: `${(index + 1) * 200}ms` }}
-                    >
-                      <div className="h-full p-6 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm rounded-lg border border-zinc-200 dark:border-zinc-800 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] hover:border-zinc-300 dark:hover:border-zinc-700">
-                        <div className="flex flex-col gap-4">
-                          <div className="w-12 h-12 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-900 dark:text-zinc-50 transition-transform hover:scale-110">
-                            {service.icon}
-                          </div>
-                          <h2 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-50">{service.title}</h2>
-                          <p className="text-zinc-600 dark:text-zinc-400">{service.description}</p>
-                          <div className="mt-4 flex flex-wrap gap-2">
-                            {service.benefits.map((benefit) => (
-                              <span key={benefit} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200">
-                                {benefit}
-                              </span>
-                            ))}
-                          </div>
-                          <div className="mt-6">
-                            <Link href={service.href}>
-                              <Button className="w-full group bg-zinc-900 dark:bg-zinc-50 text-zinc-50 dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200">
-                                Learn More
-                                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                              </Button>
-                            </Link>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
             </div>
           </div>
-        </div>
+        </section>
+
+        {/* Main Services Section */}
+        <section className="py-10 md:py-12">
+          <div className="container max-w-6xl mx-auto px-4 sm:px-6">
+            {/* Section heading with decorative elements */}
+            <div className="relative mb-8 md:mb-10 text-center">
+              <span className="inline-block px-4 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full text-sm font-medium mb-4">
+                Core Offerings
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
+                Main Services
+              </h2>
+              <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-blue-500/50 rounded-full"></div>
+            </div>
+            
+            {/* Services grid with enhanced cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+              {services.map((service) => (
+                <div 
+                  key={service.title}
+                  className="group"
+                >
+                  <div className="relative h-full p-6 md:p-8 bg-white dark:bg-zinc-800/60 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-zinc-200/50 dark:border-zinc-700/50 overflow-hidden flex flex-col">
+                    {/* Icon */}
+                    <div className="relative mb-6 p-4 bg-blue-100 dark:bg-blue-900/30 rounded-xl w-fit">
+                      <div className="w-8 h-8 text-blue-600 dark:text-blue-400">
+                        {service.icon}
+                      </div>
+                    </div>
+                    
+                    {/* Content */}
+                    <h3 className="text-xl md:text-2xl font-bold mb-4 text-zinc-900 dark:text-white relative">
+                      {service.title}
+                    </h3>
+                    <p className="text-zinc-600 dark:text-zinc-300 mb-6 relative">
+                      {service.description}
+                    </p>
+                    
+                    {/* Features list */}
+                    <div className="mb-6 relative flex flex-wrap gap-2">
+                      {service.features.map((feature) => (
+                        <span 
+                          key={feature} 
+                          className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200"
+                        >
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                    
+                    <div className="mt-auto">
+                      <Link href={service.href}>
+                        <Button className="w-full group bg-primary hover:bg-primary/90 text-white dark:text-black rounded-full">
+                          Learn More
+                          <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* WordPress Services Section */}
+        <section className="py-10 md:py-12 bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-900 dark:to-zinc-950">
+          <div className="container max-w-6xl mx-auto px-4 sm:px-6">
+            {/* Section heading with decorative elements */}
+            <div className="relative mb-8 md:mb-10 text-center">
+              <span className="inline-block px-4 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-300 rounded-full text-sm font-medium mb-4">
+                WordPress Expertise
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
+                WordPress Development Services
+              </h2>
+              <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-emerald-500/50 rounded-full"></div>
+            </div>
+            
+            {/* WordPress services grid */}
+            <div className="relative grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+              {wordPressServices.map((service) => (
+                <div 
+                  key={service.title}
+                  className="group"
+                >
+                  <div className="relative h-full p-6 md:p-8 bg-white dark:bg-zinc-800/60 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-zinc-200/50 dark:border-zinc-700/50 overflow-hidden flex flex-col">
+                    {/* Icon */}
+                    <div className="relative mb-6 p-4 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl w-fit">
+                      <div className="w-8 h-8 text-emerald-600 dark:text-emerald-400">
+                        {service.icon}
+                      </div>
+                    </div>
+                    
+                    {/* Content */}
+                    <h3 className="text-xl md:text-2xl font-bold mb-4 text-zinc-900 dark:text-white relative">
+                      {service.title}
+                    </h3>
+                    <p className="text-zinc-600 dark:text-zinc-300 mb-6 relative">
+                      {service.description}
+                    </p>
+                    
+                    {/* Benefits list */}
+                    <div className="mb-6 relative flex flex-wrap gap-2">
+                      {service.benefits.map((benefit) => (
+                        <span 
+                          key={benefit} 
+                          className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100/50 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-300"
+                        >
+                          {benefit}
+                        </span>
+                      ))}
+                    </div>
+                    
+                    <div className="mt-auto">
+                      <Link href={service.href}>
+                        <Button className="w-full group bg-emerald-600 hover:bg-emerald-700 text-white rounded-full">
+                          Learn More
+                          <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-10 md:py-12">
+          <div className="container max-w-6xl mx-auto px-4 sm:px-6 relative">
+            <div className="bg-white/70 dark:bg-zinc-800/70 backdrop-blur-md rounded-2xl p-6 md:p-8 shadow-xl border border-zinc-200/50 dark:border-zinc-700/50 text-center">
+              <h2 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
+                Ready to Start Your Project?
+              </h2>
+              <p className="text-base md:text-lg text-zinc-700 dark:text-zinc-300 mb-6 md:mb-8 max-w-2xl mx-auto">
+                Let&apos;s collaborate to create a high-performance, visually stunning solution that meets your business needs and exceeds your expectations.
+              </p>
+              <Link href="/contact">
+                <Button className="bg-primary hover:bg-primary/90 dark:bg-primary dark:text-black dark:hover:bg-primary/90 px-6 py-2 md:px-8 md:py-4 text-base md:text-lg rounded-full shadow-lg hover:shadow-xl transition-all hover:translate-y-[-2px]">
+                  Get in Touch <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
       </div>
     </>
   )

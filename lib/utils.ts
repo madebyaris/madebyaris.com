@@ -11,8 +11,8 @@ export function transformWordPressContent(content: string, baseUrl: string = 'ht
 
     // Transform headings
     transformedContent = transformedContent.replace(
-      /<h([1-6])[^>]*>(.*?)<\/h\1>/g,
-      (_, level: string, text) => {
+      /<h([1-6])([^>]*)>(.*?)<\/h\1>/g,
+      (_, level: string, attrs, text) => {
         const sizes: Record<string, string> = {
           '1': 'text-4xl mb-6 mt-10 font-extrabold',
           '2': 'text-3xl mb-5 mt-10 font-bold',
@@ -21,7 +21,15 @@ export function transformWordPressContent(content: string, baseUrl: string = 'ht
           '5': 'text-lg mb-3 mt-4 font-semibold',
           '6': 'text-base mb-3 mt-4 font-medium'
         }
-        return `<h${level} class="font-bold tracking-tight ${sizes[level]}">${text}</h${level}>`
+        
+        // Preserve any existing ID attribute
+        const idMatch = attrs.match(/id=["']([^"']*)["']/);
+        const idAttr = idMatch ? ` id="${idMatch[1]}"` : '';
+        
+        // Remove any existing id attribute from attrs to avoid duplicates
+        const cleanAttrs = attrs.replace(/id=["'][^"']*["']/g, '');
+        
+        return `<h${level}${idAttr}${cleanAttrs} class="font-bold tracking-tight ${sizes[level]} scroll-mt-20">${text}</h${level}>`
       }
     )
 

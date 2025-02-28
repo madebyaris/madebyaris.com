@@ -78,11 +78,13 @@ async function getCategoriesByIds(categoryIds: number[]): Promise<Category[]> {
     );
     
     const categories = await Promise.all(categoryPromises);
-    return categories.filter(Boolean).map(cat => ({
-      id: cat.id,
-      name: cat.name,
-      slug: cat.slug
-    }));
+    return categories
+      .filter(cat => cat !== null) // Ensure we only process non-null categories
+      .map(cat => ({
+        id: cat.id,
+        name: cat.name,
+        slug: cat.slug
+      }));
   } catch (error) {
     console.error('Failed to fetch categories:', error);
     return [];
@@ -198,9 +200,9 @@ export async function getPosts(params: PaginationParams = {}): Promise<Post[]> {
     
     // Debug: Log the first post to check if categories are included
     if (processedPosts.length > 0) {
-      console.log('First processed post:', processedPosts[0]);
-      console.log('Categories after processing:', processedPosts[0].categories);
-      console.log('Tags after processing:', processedPosts[0].tags);
+     // console.log('First processed post:', processedPosts[0]);
+      //console.log('Categories after processing:', processedPosts[0].categories);
+      //console.log('Tags after processing:', processedPosts[0].tags);
     }
     
     return processedPosts;

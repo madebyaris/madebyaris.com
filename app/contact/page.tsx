@@ -182,12 +182,6 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-// Separate the Sparkles component to be loaded dynamically
-import dynamic from 'next/dynamic'
-const SparklesHeading = dynamic(() => import('@/components/ui/sparkles').then(mod => ({ 
-  default: (props: any) => <mod.Sparkles {...props} /> 
-})), { ssr: true })
-
 export default function ContactPage() {
   // Function to generate structured data
   function generateStructuredData() {
@@ -204,55 +198,49 @@ export default function ContactPage() {
       />
       
       {/* Hero Section - Simplified for better LCP */}
-      <section className="relative py-16 overflow-hidden">
+      <section className="relative py-12 md:py-16 overflow-hidden">
         {/* Static background with reduced complexity */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(120,119,198,0.05),transparent_60%)]"></div>
         
-        <div className="container mx-auto max-w-[1100px] px-4 sm:px-6 lg:px-8 relative">
+        <div className="container max-w-6xl mx-auto px-4 sm:px-6 relative">
           <div className="text-center">
             <div className="inline-block px-4 py-1 bg-primary/10 dark:bg-primary/20 text-primary rounded-full text-sm font-medium mb-4">
               Get in Touch
             </div>
             
             {/* Critical LCP element - simplified and without Sparkles initially */}
-            <h1 className="text-4xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-emerald-500">
+            <h1 className="text-3xl md:text-4xl font-bold leading-tight tracking-tighter lg:text-5xl mb-4 md:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-emerald-500">
               Let&apos;s Build Something Amazing
             </h1>
             
-            <div className="max-w-[700px] mx-auto bg-white/50 dark:bg-zinc-800/50 backdrop-blur-sm rounded-xl p-6 shadow-xl border border-zinc-200/50 dark:border-zinc-700/50">
-              <p className="text-xl leading-relaxed text-zinc-700 dark:text-zinc-300">
+            <div className="max-w-[700px] mx-auto bg-white/50 dark:bg-zinc-800/50 backdrop-blur-sm rounded-xl p-4 md:p-6 shadow-xl border border-zinc-200/50 dark:border-zinc-700/50">
+              <p className="text-base md:text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">
                 Enterprise-level solutions & technical consultation 
                 to help turn your vision into reality.
               </p>
             </div>
           </div>
-        </div>
-        
-        {/* Load decorative elements after main content */}
-        <Suspense fallback={null}>
-          <div className="absolute w-[800px] h-[800px] -right-40 -top-40 bg-blue-200/10 dark:bg-blue-500/5 rounded-full blur-3xl"></div>
-          <div className="absolute w-[600px] h-[600px] -left-20 -bottom-20 bg-emerald-200/10 dark:bg-emerald-500/5 rounded-full blur-3xl"></div>
-        </Suspense>
+        </div>  
       </section>
 
-      <main className="container mx-auto max-w-[1100px] px-4 sm:px-6 lg:px-8 py-12">
+      <main className="container max-w-6xl mx-auto px-4 sm:px-6 py-8 md:py-12">
         {/* Two-column layout for form and contact info */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 md:gap-8 mb-12 md:mb-16">
           {/* Contact Form - Left Column (3/5) */}
           <div className="lg:col-span-3">
             <Card className="overflow-hidden border border-zinc-200/80 dark:border-zinc-700/80 shadow-xl">
-              <div className="bg-gradient-to-r from-primary/10 to-emerald-500/10 p-6 border-b border-zinc-200/80 dark:border-zinc-700/80">
+              <div className="bg-gradient-to-r from-primary/10 to-emerald-500/10 p-4 md:p-6 border-b border-zinc-200/80 dark:border-zinc-700/80">
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-primary/20 rounded-full">
                     <MessageSquare className="h-5 w-5 text-primary" />
                   </div>
-                  <h2 className="text-xl font-semibold">Send Me a Message</h2>
+                  <h2 className="text-lg md:text-xl font-semibold">Send Me a Message</h2>
                 </div>
                 <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
                   Fill out the form below and I&apos;ll get back to you within 24 hours.
                 </p>
               </div>
-              <div className="p-6 bg-white dark:bg-zinc-900">
+              <div className="p-4 md:p-6 bg-white dark:bg-zinc-900">
                 <ContactForm />
               </div>
             </Card>
@@ -300,7 +288,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-medium text-sm text-zinc-500 dark:text-zinc-400">Availability</h3>
-                    <p className="text-zinc-900 dark:text-zinc-100">Mon - Fri, 9:00 - 17:00 WIB</p>
+                    <p className="text-zinc-900 dark:text-zinc-100">Mon - Sat, 9:00 - 17:00 WIB</p>
                   </div>
                 </div>
               </div>
@@ -321,7 +309,7 @@ export default function ContactPage() {
                     LinkedIn
                   </Button>
                 </Link>
-                <Link href="https://github.com/arissetyawan" target="_blank" rel="noopener noreferrer">
+                <Link href="https://github.com/madebyaris" target="_blank" rel="noopener noreferrer">
                   <Button size="sm" variant="outline" className="border-zinc-300 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800">
                     <Github className="mr-2 h-4 w-4" />
                     GitHub
@@ -432,7 +420,7 @@ export default function ContactPage() {
             
             <Card className="p-8 bg-white/70 dark:bg-zinc-900/70 backdrop-blur-md border border-zinc-200/80 dark:border-zinc-700/80 shadow-lg relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-zinc-100/80 to-transparent dark:via-zinc-900/10 backdrop-blur-xl" />
-              <div className="absolute w-[500px] h-[500px] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-zinc-200/50 dark:bg-zinc-800/50 rounded-full blur-3xl" />
+             
               <div className="relative">
                 <LogoCarousel 
                   columnCount={3}
@@ -447,8 +435,6 @@ export default function ContactPage() {
         <Suspense fallback={<div className="h-[200px] animate-pulse bg-zinc-100/20 dark:bg-zinc-800/20 rounded-xl"></div>}>
           <section>
             <Card className="p-8 bg-gradient-to-br from-primary/5 via-primary/10 to-emerald-500/5 border border-zinc-200/80 dark:border-zinc-700/80 shadow-xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full -mr-32 -mt-32 blur-3xl" />
-              <div className="absolute bottom-0 left-0 w-64 h-64 bg-emerald-500/10 rounded-full -ml-32 -mb-32 blur-3xl" />
               
               <div className="relative text-center max-w-2xl mx-auto">
                 <h2 className="text-2xl md:text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">

@@ -5,6 +5,7 @@ import type { Post, Tag } from '@/lib/types'
 import { ImageResponse } from 'next/og'
 import { Suspense } from 'react'
 import { BlogContent } from '@/components/blog-content'
+import { Button } from '@/components/ui/button'
 
 export const revalidate = 3600
 
@@ -173,7 +174,6 @@ export default async function BlogPage() {
     posts = postsData;
     popularTags = tagsData;
     
-    console.log('Popular tags:', popularTags);
   } catch (error) {
     console.error('Failed to fetch data:', error)
   }
@@ -236,45 +236,55 @@ export default async function BlogPage() {
         dangerouslySetInnerHTML={generateStructuredData()}
       />
       
-      {/* Hero Section with simplified background for better LCP */}
-      <section className="relative py-16 overflow-hidden bg-gradient-to-b from-background to-background/50">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(120,119,198,0.05),transparent_60%)]"></div>
+      {/* Hero Section with improved design and animated gradient */}
+      <section className="relative py-8 md:py-10 overflow-hidden animated-gradient">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(120,119,198,0.15),transparent_70%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(120,119,198,0.1),transparent_70%)]"></div>
         
-        <div className="container mx-auto max-w-[980px] px-4 sm:px-6 lg:px-8 relative">
-          <div className="text-center">
-            <div className="inline-block px-4 py-1 bg-primary/10 dark:bg-primary/20 text-primary rounded-full text-sm font-medium mb-4">
-              Web Development Blog
+        <div className="container max-w-6xl mx-auto px-4 sm:px-6 relative">
+          <div className="text-center max-w-3xl mx-auto">
+            <div className="inline-block px-4 py-1 bg-primary/10 dark:bg-primary/20 text-primary rounded-full text-sm font-medium mb-3 backdrop-blur-sm">
+              Web Development Insights
             </div>
             
-            {/* Critical LCP element - simplified heading */}
-            <h1 className="text-4xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/50">
+            {/* Critical LCP element - enhanced heading */}
+            <h1 className="text-2xl md:text-3xl font-bold leading-tight tracking-tighter lg:text-4xl mb-3 bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary/90 to-primary/70">
               Web Development Insights
             </h1>
             
-            <div className="max-w-[700px] mx-auto">
-              <p className="text-xl text-muted-foreground">
-                Expert tutorials and insights on Next.js, React, WordPress, and modern web development practices.
-              </p>
+            <p className="text-sm md:text-base text-muted-foreground mb-4 max-w-2xl mx-auto">
+              Expert tutorials and insights on Next.js, React, WordPress, and modern web development practices.
+            </p>
+            
+            <div className="flex flex-wrap justify-center gap-2 mb-4">
+              <div className="px-3 py-1 text-xs rounded-full bg-[#007acc] text-white">
+                Next.js
+              </div>
+              <div className="px-3 py-1 text-xs rounded-full bg-[#61dafb] text-black">
+                React
+              </div>
+              <div className="px-3 py-1 text-xs rounded-full bg-[#21759b] text-white">
+                WordPress
+              </div>
             </div>
           </div>
         </div>
       </section>
-
-      <main className="container mx-auto max-w-[980px] px-4 sm:px-6 lg:px-8 py-8">
-        <Suspense fallback={
-          <div className="space-y-8">
-            <div className="h-12 animate-pulse bg-muted rounded-lg" />
-            <div className="h-[400px] animate-pulse bg-muted rounded-lg" />
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      
+      {/* Main Content Section with improved layout */}
+      <section className="py-4 md:py-6">
+        <div className="container max-w-6xl mx-auto px-4 sm:px-6">
+          <Suspense fallback={
+            <div className="grid gap-4 md:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
               {[...Array(6)].map((_, i) => (
-                <div key={i} className="h-[350px] animate-pulse rounded-lg bg-muted" />
+                <div key={i} className="h-[300px] animate-pulse rounded-xl bg-muted" />
               ))}
             </div>
-          </div>
-        }>
-          <BlogContent initialPosts={posts} popularTags={popularTags} />
-        </Suspense>
-      </main>
+          }>
+            <BlogContent initialPosts={posts} />
+          </Suspense>
+        </div>
+      </section>
     </>
   )
 }

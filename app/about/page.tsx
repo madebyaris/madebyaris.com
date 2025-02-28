@@ -333,25 +333,22 @@ export default function AboutPage() {
       />
       
       {/* Hero Section with improved visual design */}
-      <section className="relative py-20 overflow-hidden">
+      <section className="relative py-12 md:py-16 overflow-hidden">
         {/* Background decorative elements */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(120,119,198,0.1),transparent_60%)]"></div>
-        <div className="absolute w-[800px] h-[800px] -right-40 -top-40 bg-blue-200/10 dark:bg-blue-500/5 rounded-full blur-3xl"></div>
-        <div className="absolute w-[600px] h-[600px] -left-20 -bottom-20 bg-emerald-200/10 dark:bg-emerald-500/5 rounded-full blur-3xl"></div>
         
-        <div className="container mx-auto max-w-[1100px] px-4 sm:px-6 lg:px-8 relative">
-          <div className="flex flex-col md:flex-row gap-12 items-center">
+        <div className="container max-w-6xl mx-auto px-4 sm:px-6 relative">
+          <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center">
             {/* Profile Image with enhanced styling */}
-            <div className="md:order-2 mb-8 md:mb-0 flex-shrink-0">
+            <div className="md:order-2 mb-6 md:mb-0 flex-shrink-0">
               <div className="relative">
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-emerald-500 rounded-full blur opacity-70 animate-pulse"></div>
                 <Sparkles>
-                  <div className="relative w-56 h-56 rounded-full overflow-hidden border-4 border-white dark:border-zinc-800 shadow-2xl">
+                  <div className="relative w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-white dark:border-zinc-800 shadow-2xl">
                     <Image
                       src="/astro.png"
                       alt="Aris Setiawan"
                       fill
-                      sizes="224px"
+                      sizes="(max-width: 768px) 192px, 224px"
                       className="object-cover"
                       priority
                       loading="eager"
@@ -366,17 +363,17 @@ export default function AboutPage() {
               <div className="inline-block px-4 py-1 bg-primary/10 dark:bg-primary/20 text-primary rounded-full text-sm font-medium mb-4">
                 12+ Years of Experience
               </div>
-              <h1 className="text-4xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl mb-6">
+              <h1 className="text-3xl md:text-4xl font-bold leading-tight tracking-tighter lg:text-5xl mb-4 md:mb-6">
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-emerald-500">
                   Full Stack Developer
                 </span>
               </h1>
-              <div className="bg-white/50 dark:bg-zinc-800/50 backdrop-blur-sm rounded-xl p-8 shadow-xl border border-zinc-200/50 dark:border-zinc-700/50">
-                <p className="text-xl leading-relaxed mb-4 text-zinc-700 dark:text-zinc-300">
+              <div className="bg-white/50 dark:bg-zinc-800/50 backdrop-blur-sm rounded-xl p-4 md:p-6 shadow-xl border border-zinc-200/50 dark:border-zinc-700/50">
+                <p className="text-base md:text-lg leading-relaxed mb-3 md:mb-4 text-zinc-700 dark:text-zinc-300">
                   Hi! I&apos;m <span className="font-bold text-black dark:text-white">Aris Setiawan</span>, a Full Stack Web Developer with over <span className="font-bold text-primary">12 years</span> of experience in building scalable web applications. 
                   Currently, I&apos;m focused on creating high-performance applications using Next.js while maintaining robust backend architectures.
                 </p>
-                <p className="text-xl leading-relaxed mb-0 text-zinc-700 dark:text-zinc-300">
+                <p className="text-base md:text-lg leading-relaxed mb-0 text-zinc-700 dark:text-zinc-300">
                   I&apos;m <span className="font-bold text-emerald-600 dark:text-emerald-400">open to new opportunities</span>
                 </p>
               </div>
@@ -386,15 +383,15 @@ export default function AboutPage() {
       </section>
       
       {/* Connect Section with improved styling */}
-      <section className="py-12 bg-gradient-to-b from-white to-zinc-50/50 dark:from-zinc-950 dark:to-zinc-900/50">
-        <div className="container mx-auto max-w-[1100px] px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap justify-center gap-4">
+      <section className="py-8 md:py-12 ">
+        <div className="container max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="flex flex-wrap justify-center gap-3 md:gap-4">
             <Link 
               href="https://www.linkedin.com/in/arissetia/"
               target="_blank"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#0077B5] text-white hover:bg-[#0077B5]/90 transition-all shadow-lg hover:shadow-xl hover:translate-y-[-2px]"
+              className="inline-flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 rounded-full bg-[#0077B5] text-white hover:bg-[#0077B5]/90 transition-all shadow-lg hover:shadow-xl hover:translate-y-[-2px] text-sm md:text-base"
             >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <svg className="w-4 h-4 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
               </svg>
               LinkedIn
@@ -402,17 +399,17 @@ export default function AboutPage() {
             <Link
               href="https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe"
               target="_blank"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#14a800] hover:bg-[#14a800]/90 text-white transition-all shadow-lg hover:shadow-xl hover:translate-y-[-2px]"
+              className="inline-flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 rounded-full bg-[#14a800] hover:bg-[#14a800]/90 text-white transition-all shadow-lg hover:shadow-xl hover:translate-y-[-2px] text-sm md:text-base"
             >
               <span>UPWORK</span>
-              <UpworkIcon className="w-5 h-5" />
+              <UpworkIcon className="w-4 h-4 md:w-5 md:h-5" />
             </Link>
             <Link 
               href="/contact"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-black dark:bg-white text-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all shadow-lg hover:shadow-xl hover:translate-y-[-2px]"
+              className="inline-flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 rounded-full bg-black dark:bg-white text-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all shadow-lg hover:shadow-xl hover:translate-y-[-2px] text-sm md:text-base"
             >
               Get in Touch
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-3 h-3 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
             </Link>
@@ -421,22 +418,22 @@ export default function AboutPage() {
       </section>
       
       {/* Expertise Section with improved layout */}
-      <section className="py-20">
-        <div className="container mx-auto max-w-[1100px] px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+      <section className="py-12 md:py-16">
+        <div className="container max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-10 md:mb-12">
             <span className="inline-block px-4 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full text-sm font-medium mb-4">
               My Skills
             </span>
-            <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
+            <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
               Technical Expertise
             </h2>
             <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-blue-500/50 rounded-full"></div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             {/* Frontend Card */}
             <div className="group">
-              <div className="relative h-full p-8 bg-white dark:bg-zinc-800/60 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-zinc-200/50 dark:border-zinc-700/50 overflow-hidden">
+              <div className="relative h-full p-6 md:p-8 bg-white dark:bg-zinc-800/60 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-zinc-200/50 dark:border-zinc-700/50 overflow-hidden">
                 {/* Card decoration */}
                 <div className="absolute top-0 right-0 w-32 h-32 bg-blue-100/50 dark:bg-blue-900/20 rounded-bl-full -mr-10 -mt-10 transition-transform group-hover:scale-110"></div>
                 
@@ -446,7 +443,7 @@ export default function AboutPage() {
                 </div>
                 
                 {/* Content */}
-                <h3 className="text-2xl font-bold mb-6 text-zinc-900 dark:text-white relative">
+                <h3 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-zinc-900 dark:text-white relative">
                   Frontend Development
                 </h3>
                 
@@ -562,8 +559,6 @@ export default function AboutPage() {
           
           <div className="relative">
             {/* Decorative elements */}
-            <div className="absolute -top-10 -left-10 w-40 h-40 bg-purple-200/30 dark:bg-purple-900/10 rounded-full blur-3xl"></div>
-            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-blue-200/30 dark:bg-blue-900/10 rounded-full blur-3xl"></div>
             
             {/* Journey container with glass effect */}
             <div className="relative bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-zinc-200/50 dark:border-zinc-700/50 mb-16">

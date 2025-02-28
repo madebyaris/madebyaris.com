@@ -108,8 +108,8 @@ export default function HomePage() {
         </Suspense>
         
         {/* Case studies section with enhanced design and performance optimization */}
-        <section className="w-full py-24 bg-gradient-to-b from-white to-zinc-50/50 dark:from-zinc-950 dark:to-zinc-900/50 cv-auto">
-          <div className="w-full max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="w-full py-16 md:py-20 bg-gradient-to-b from-white to-zinc-50/50 dark:from-zinc-950 dark:to-zinc-900/50 cv-auto">
+          <div className="container max-w-6xl mx-auto px-4 sm:px-6">
             <Suspense fallback={<CaseStudiesFallback />}>
               <CaseStudiesWrapperLazy />
             </Suspense>
@@ -117,24 +117,21 @@ export default function HomePage() {
         </section>
         
         {/* Trusted By Section with optimized rendering */}
-        <section className="w-full py-24 relative overflow-hidden cv-auto">
+        <section className="w-full py-16 md:py-20 relative overflow-hidden cv-auto">
           {/* Enhanced background with subtle patterns */}
-          <div className="absolute inset-0 bg-zinc-50/50 dark:bg-zinc-900/50 backdrop-blur-sm"></div>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(120,119,198,0.1),transparent_60%)]"></div>
-          <div className="absolute w-[800px] h-[800px] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-blue-200/10 dark:bg-blue-500/5 rounded-full blur-3xl"></div>
           
-          <div className="w-full max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="container max-w-6xl mx-auto px-4 sm:px-6 relative">
             <div className="flex flex-col items-center">
               {/* Section heading with decorative elements */}
-              <div className="relative mb-16">
-                <h2 className="text-4xl md:text-5xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-700 dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-300">
+              <div className="relative mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-700 dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-300">
                   Our Trusted Clients
                 </h2>
                 <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-blue-500/50 rounded-full"></div>
               </div>
               
               {/* Logo carousel with enhanced styling */}
-              <div className="w-full max-w-4xl mx-auto p-8 bg-white/30 dark:bg-zinc-800/30 backdrop-blur-md rounded-2xl shadow-xl border border-zinc-200/50 dark:border-zinc-700/50">
+              <div className="w-full max-w-4xl mx-auto p-6 md:p-8 bg-white/30 dark:bg-zinc-800/30 backdrop-blur-md rounded-2xl shadow-xl border border-zinc-200/50 dark:border-zinc-700/50">
                 <LogoCarousel 
                   columnCount={3}
                   logos={techLogos}
@@ -142,13 +139,13 @@ export default function HomePage() {
               </div>
               
               {/* Testimonial or call to action */}
-              <div className="mt-16 text-center max-w-2xl mx-auto">
-                <p className="text-xl text-zinc-700 dark:text-zinc-300 mb-8">
+              <div className="mt-12 text-center max-w-2xl mx-auto">
+                <p className="text-lg md:text-xl text-zinc-700 dark:text-zinc-300 mb-6">
                   Let&apos;s work together to build your next project with modern technologies and best practices.
                 </p>
                 <Link 
                   href="/contact" 
-                  className="bg-black dark:bg-white rounded-full text-white dark:text-black px-8 py-4 text-lg font-medium inline-flex items-center gap-2 transition-transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl"
+                  className="bg-black dark:bg-white rounded-full text-white dark:text-black px-6 py-3 text-base md:text-lg font-medium inline-flex items-center gap-2 transition-transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl"
                 >
                   Contact Me
                   <ArrowRight className="w-4 h-4" />
@@ -159,24 +156,24 @@ export default function HomePage() {
         </section>
 
         {/* Services section with optimized rendering */}
-        <section className="w-full py-24 cv-auto">
-          <div className="w-full max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="w-full py-16 md:py-20 cv-auto">
+          <div className="container max-w-6xl mx-auto px-4 sm:px-6">
             {/* Section heading with decorative elements */}
-            <div className="relative mb-16 text-center">
+            <div className="relative mb-12 text-center">
               <span className="inline-block px-4 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full text-sm font-medium mb-4">
                 Expert Services
               </span>
-              <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
+              <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
                 My Services
               </h2>
               <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-blue-500/50 rounded-full"></div>
             </div>
             
             {/* Services grid with enhanced cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {/* Web Development Card */}
               <div className="group">
-                <div className="relative h-full p-8 bg-white dark:bg-zinc-800/60 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-zinc-200/50 dark:border-zinc-700/50 overflow-hidden">
+                <div className="relative h-full p-6 md:p-8 bg-white dark:bg-zinc-800/60 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-zinc-200/50 dark:border-zinc-700/50 overflow-hidden">
                   {/* Card decoration */}
                   <div className="absolute top-0 right-0 w-32 h-32 bg-blue-100/50 dark:bg-blue-900/20 rounded-bl-full -mr-10 -mt-10 transition-transform group-hover:scale-110"></div>
                   
@@ -186,7 +183,7 @@ export default function HomePage() {
                   </div>
                   
                   {/* Content */}
-                  <h3 className="text-2xl font-bold mb-4 text-zinc-900 dark:text-white relative">
+                  <h3 className="text-xl md:text-2xl font-bold mb-4 text-zinc-900 dark:text-white relative">
                     Web Development
                   </h3>
                   <p className="text-zinc-600 dark:text-zinc-300 mb-6 relative">
@@ -213,7 +210,7 @@ export default function HomePage() {
               
               {/* Headless CMS Card */}
               <div className="group">
-                <div className="relative h-full p-8 bg-white dark:bg-zinc-800/60 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-zinc-200/50 dark:border-zinc-700/50 overflow-hidden">
+                <div className="relative h-full p-6 md:p-8 bg-white dark:bg-zinc-800/60 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-zinc-200/50 dark:border-zinc-700/50 overflow-hidden">
                   {/* Card decoration */}
                   <div className="absolute top-0 right-0 w-32 h-32 bg-purple-100/50 dark:bg-purple-900/20 rounded-bl-full -mr-10 -mt-10 transition-transform group-hover:scale-110"></div>
                   
@@ -223,7 +220,7 @@ export default function HomePage() {
                   </div>
                   
                   {/* Content */}
-                  <h3 className="text-2xl font-bold mb-4 text-zinc-900 dark:text-white relative">
+                  <h3 className="text-xl md:text-2xl font-bold mb-4 text-zinc-900 dark:text-white relative">
                     Headless CMS
                   </h3>
                   <p className="text-zinc-600 dark:text-zinc-300 mb-6 relative">
@@ -250,7 +247,7 @@ export default function HomePage() {
               
               {/* API Development Card */}
               <div className="group">
-                <div className="relative h-full p-8 bg-white dark:bg-zinc-800/60 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-zinc-200/50 dark:border-zinc-700/50 overflow-hidden">
+                <div className="relative h-full p-6 md:p-8 bg-white dark:bg-zinc-800/60 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-zinc-200/50 dark:border-zinc-700/50 overflow-hidden">
                   {/* Card decoration */}
                   <div className="absolute top-0 right-0 w-32 h-32 bg-green-100/50 dark:bg-green-900/20 rounded-bl-full -mr-10 -mt-10 transition-transform group-hover:scale-110"></div>
                   
@@ -260,7 +257,7 @@ export default function HomePage() {
                   </div>
                   
                   {/* Content */}
-                  <h3 className="text-2xl font-bold mb-4 text-zinc-900 dark:text-white relative">
+                  <h3 className="text-xl md:text-2xl font-bold mb-4 text-zinc-900 dark:text-white relative">
                     API Development
                   </h3>
                   <p className="text-zinc-600 dark:text-zinc-300 mb-6 relative">
@@ -287,7 +284,7 @@ export default function HomePage() {
             </div>
             
             {/* View all services button */}
-            <div className="mt-16 text-center">
+            <div className="mt-12 text-center">
               <Link 
                 href="/services" 
                 className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 font-medium hover:underline"
@@ -300,14 +297,14 @@ export default function HomePage() {
         </section>
 
         {/* Blog section with optimized loading */}
-        <section className="w-full py-24 bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-900 dark:to-zinc-950 cv-auto">
-          <div className="w-full max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="w-full py-16 md:py-20 bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-900 dark:to-zinc-950 cv-auto">
+          <div className="container max-w-6xl mx-auto px-4 sm:px-6">
             {/* Section heading with decorative elements */}
-            <div className="relative mb-16 text-center">
+            <div className="relative mb-12 text-center">
               <span className="inline-block px-4 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 rounded-full text-sm font-medium mb-4">
                 From My Blog
               </span>
-              <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
+              <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
                 Latest Articles
               </h2>
               <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-purple-500/50 rounded-full"></div>
@@ -316,11 +313,9 @@ export default function HomePage() {
             {/* Blog posts with enhanced styling */}
             <div className="relative">
               {/* Decorative elements */}
-              <div className="absolute -top-10 -left-10 w-40 h-40 bg-purple-200/30 dark:bg-purple-900/10 rounded-full blur-3xl"></div>
-              <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-blue-200/30 dark:bg-blue-900/10 rounded-full blur-3xl"></div>
               
               {/* Posts container with glass effect */}
-              <div className="relative bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-zinc-200/50 dark:border-zinc-700/50">
+              <div className="relative bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-xl border border-zinc-200/50 dark:border-zinc-700/50">
                 <Suspense fallback={<PostsFallback />}>
                   <Posts />
                 </Suspense>
@@ -328,10 +323,10 @@ export default function HomePage() {
             </div>
             
             {/* View all articles button */}
-            <div className="mt-16 text-center">
+            <div className="mt-12 text-center">
               <Link 
                 href="/blog" 
-                className="inline-flex items-center gap-2 px-8 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-full font-medium transition-all hover:shadow-lg"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-full font-medium transition-all hover:shadow-lg"
               >
                 View All Articles
                 <ArrowRight className="w-4 h-4" />
