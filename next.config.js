@@ -34,7 +34,8 @@ const nextConfig = {
       resolveAlias: {
         // Add any module aliases if needed
       },
-    }
+    },
+    useCache: true,
   },
   // Add performance optimizations
   compiler: {

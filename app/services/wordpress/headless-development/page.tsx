@@ -4,6 +4,8 @@ import { Button } from '../../../../components/ui/button'
 import { Card } from '../../../../components/ui/card'
 import { ImageResponse } from 'next/og'
 
+export const revalidate = 86400 // Revalidate daily
+
 const features = [
   {
     title: 'Next.js Integration',

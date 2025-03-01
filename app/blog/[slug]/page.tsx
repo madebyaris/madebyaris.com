@@ -14,6 +14,8 @@ import type { Category } from '@/lib/types'
 import { TableOfContents } from '@/components/table-of-contents'
 import { SmoothScroll } from '@/components/smooth-scroll'
 
+export const revalidate = 3600 // Revalidate every hour
+
 interface BlogPostPageProps {
   params: Promise<{
     slug: string
