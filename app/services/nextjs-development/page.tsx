@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Code2, ArrowRight, Rocket, Globe, Zap } from 'lucide-react'
+import { Code2, ArrowRight, Rocket, Globe, Zap, Search, Building } from 'lucide-react'
 import { Button } from '../../../components/ui/button'
 import { Card } from '../../../components/ui/card'
 import { ImageResponse } from 'next/og'
@@ -27,7 +27,12 @@ const structuredData = {
     "App Router",
     "Server Components",
     "Edge Runtime",
-    "Vercel Deployment"
+    "Vercel Deployment",
+    "Next.js SEO Services",
+    "Next.js Indonesia",
+    "Jasa Next.js",
+    "Next.js Agency Indonesia",
+    "Jasa SEO Next.js"
   ],
   "mainEntity": {
     "@type": "Service",
@@ -87,6 +92,38 @@ const structuredData = {
             "@type": "Service",
             "name": "Next.js Migration & Upgrades",
             "description": "Migrating existing applications to Next.js or upgrading to the latest version."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Vercel Deployment Services",
+            "description": "Expert Vercel deployment services for Next.js applications with optimized configuration."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Next.js SEO Services",
+            "description": "Comprehensive SEO optimization for Next.js applications to improve search rankings."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Next.js Indonesia Services",
+            "description": "Specialized Next.js development services for the Indonesian market and businesses."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Next.js Agency Services Indonesia",
+            "description": "Full-service Next.js agency for Indonesian enterprises and organizations."
           }
         }
       ]
@@ -198,7 +235,12 @@ export async function generateMetadata(): Promise<Metadata> {
       'App Router',
       'Server Components',
       'Edge Runtime',
-      'Vercel Deployment'
+      'Vercel Deployment',
+      'Next.js SEO Services',
+      'Next.js Indonesia',
+      'Jasa Next.js',
+      'Next.js Agency Indonesia',
+      'Jasa SEO Next.js'
     ],
     openGraph: {
       title: 'Next.js Development Services | Modern Web Applications',
@@ -427,6 +469,84 @@ export default function NextjsDevelopmentPage() {
                   </div>
                 ))}
               </div>
+            </div>
+          </section>
+
+          {/* Specialized Services Section */}
+          <section className="mt-12 md:mt-16 animate-in fade-in slide-in-from-bottom duration-1000 delay-550" aria-labelledby="specialized-services-heading">
+            <div className="text-center mb-8">
+              <span className="inline-block px-4 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-300 rounded-full text-sm font-medium mb-4">
+                Specialized Services
+              </span>
+              <h2 id="specialized-services-heading" className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
+                Next.js Specialized Solutions
+              </h2>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Link href="/services/nextjs-development/vercel" className="group">
+                <div className="h-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-zinc-200 dark:border-zinc-800 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                  <div className="flex items-center mb-4">
+                    <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 mr-4">
+                      <Rocket className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-xl font-semibold">Vercel Deployment</h3>
+                  </div>
+                  <p className="text-muted-foreground mb-4">Expert Vercel deployment services for Next.js applications. Optimize your deployment pipeline with edge functions, analytics, and enterprise-grade infrastructure.</p>
+                  <div className="flex items-center text-blue-600 dark:text-blue-400 font-medium group-hover:underline">
+                    Learn more
+                    <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </div>
+                </div>
+              </Link>
+              
+              <Link href="/services/nextjs-development/nextjs-indonesia" className="group">
+                <div className="h-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-zinc-200 dark:border-zinc-800 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                  <div className="flex items-center mb-4">
+                    <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 mr-4">
+                      <Globe className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-xl font-semibold">Next.js Indonesia</h3>
+                  </div>
+                  <p className="text-muted-foreground mb-4">Specialized Next.js development services for the Indonesian market. Tailored solutions for local businesses with support in Bahasa Indonesia.</p>
+                  <div className="flex items-center text-blue-600 dark:text-blue-400 font-medium group-hover:underline">
+                    Learn more
+                    <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </div>
+                </div>
+              </Link>
+              
+              <Link href="/services/nextjs-development/nextjs-seo" className="group">
+                <div className="h-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-zinc-200 dark:border-zinc-800 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                  <div className="flex items-center mb-4">
+                    <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 mr-4">
+                      <Search className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-xl font-semibold">Next.js SEO Services</h3>
+                  </div>
+                  <p className="text-muted-foreground mb-4">Comprehensive SEO optimization for Next.js applications. Improve your search rankings with server-side rendering, metadata optimization, and structured data.</p>
+                  <div className="flex items-center text-blue-600 dark:text-blue-400 font-medium group-hover:underline">
+                    Learn more
+                    <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </div>
+                </div>
+              </Link>
+              
+              <Link href="/services/nextjs-development/agency-indonesia" className="group">
+                <div className="h-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-zinc-200 dark:border-zinc-800 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                  <div className="flex items-center mb-4">
+                    <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 mr-4">
+                      <Building className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-xl font-semibold">Agency Services Indonesia</h3>
+                  </div>
+                  <p className="text-muted-foreground mb-4">Full-service Next.js agency for Indonesian enterprises. End-to-end web development from planning and design to development and maintenance.</p>
+                  <div className="flex items-center text-blue-600 dark:text-blue-400 font-medium group-hover:underline">
+                    Learn more
+                    <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </div>
+                </div>
+              </Link>
             </div>
           </section>
 

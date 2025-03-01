@@ -4,7 +4,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, ChevronDown, ChevronUp } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { motion } from 'framer-motion'
 
@@ -35,6 +35,15 @@ const navigationItems: NavigationItem[] = [
 export function Navigation() {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = React.useState(false)
+  const [expandedItems, setExpandedItems] = React.useState<Record<string, boolean>>({})
+
+  // Toggle submenu expansion
+  const toggleSubmenu = (href: string) => {
+    setExpandedItems(prev => ({
+      ...prev,
+      [href]: !prev[href]
+    }))
+  }
 
   // Prevent scrolling when menu is open
   React.useEffect(() => {
@@ -158,36 +167,49 @@ export function Navigation() {
                 <nav className="flex flex-col items-center justify-center space-y-8">
                   {navigationItems.map((item) => (
                     <div key={item.href} className="w-full text-center">
-                      <Link
-                        href={item.href}
-                        onClick={() => !item.children && setIsOpen(false)}
-                        className={cn(
-                          'text-3xl font-medium transition-colors hover:text-foreground/80 inline-flex items-center',
-                          pathname === item.href
-                            ? 'text-foreground'
-                            : 'text-foreground/60'
-                        )}
-                      >
-                        {item.label}
-                        {item.children && (
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="w-6 h-6 ml-2"
-                          >
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                          </svg>
-                        )}
-                      </Link>
-                      {item.children && (
-                        <div className="mt-4 space-y-4">
+                      {item.children ? (
+                        // For items with children, make the parent a button that toggles the submenu
+                        <button
+                          onClick={() => toggleSubmenu(item.href)}
+                          className={cn(
+                            'text-3xl font-medium transition-colors hover:text-foreground/80 inline-flex items-center',
+                            pathname && (pathname === item.href || pathname.startsWith(item.href + '/'))
+                              ? 'text-foreground'
+                              : 'text-foreground/60'
+                          )}
+                        >
+                          {item.label}
+                          {expandedItems[item.href] ? (
+                            <ChevronUp className="w-6 h-6 ml-2" />
+                          ) : (
+                            <ChevronDown className="w-6 h-6 ml-2" />
+                          )}
+                        </button>
+                      ) : (
+                        // For items without children, keep as a link
+                        <Link
+                          href={item.href}
+                          onClick={() => setIsOpen(false)}
+                          className={cn(
+                            'text-3xl font-medium transition-colors hover:text-foreground/80 inline-flex items-center',
+                            pathname === item.href
+                              ? 'text-foreground'
+                              : 'text-foreground/60'
+                          )}
+                        >
+                          {item.label}
+                        </Link>
+                      )}
+                      
+                      {/* Submenu items - only show if expanded */}
+                      {item.children && expandedItems[item.href] && (
+                        <motion.div 
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="mt-4 space-y-4"
+                        >
                           {item.children.map((child) => (
                             <Link
                               key={child.href}
@@ -203,7 +225,7 @@ export function Navigation() {
                               {child.label}
                             </Link>
                           ))}
-                        </div>
+                        </motion.div>
                       )}
                     </div>
                   ))}

@@ -5,6 +5,8 @@ import { Card } from '../../../components/ui/card'
 import Link from 'next/link'
 import { ImageResponse } from 'next/og'
 
+export const revalidate = 86400 // Revalidate daily
+
 const services = [
   {
     title: 'Theme Development',

@@ -1,13 +1,13 @@
 import Link from 'next/link'
 import { Suspense } from 'react'
 import { getPosts } from '@/lib/wordpress'
-import dynamic from 'next/dynamic'
+import { default as dynamicImport } from 'next/dynamic'
 import { Code2, Layout, Server, ArrowRight } from 'lucide-react'
 import { LogoCarousel } from '@/components/ui/logo-carousel'
 import { techLogos } from '@/components/ui/tech-logos'
 import { structuredData } from '@/lib/structured-data'
 
-// Increase revalidation time for better performance
+// Segment Configuration
 export const revalidate = 86400 // 24 hours
 
 // Loading fallbacks
@@ -40,35 +40,37 @@ const CaseStudiesFallback = () => (
 const PostsFallback = () => <div className="h-[400px] w-full bg-zinc-100/20 dark:bg-zinc-900/20 rounded-lg animate-pulse" />
 
 // Dynamically import heavy components with optimized loading
-const ClientHeroLazy = dynamic(
+const ClientHeroLazy = dynamicImport(
   () => import('@/components/client-hero').then(mod => ({ default: mod.ClientHero })),
   { ssr: true, loading: () => <HeroFallback /> }
 )
 
-const CaseStudiesWrapperLazy = dynamic(
+const CaseStudiesWrapperLazy = dynamicImport(
   () => import('@/components/case-studies-wrapper').then(mod => ({ default: mod.CaseStudiesWrapper })),
   { ssr: true, loading: () => <CaseStudiesFallback /> }
 )
 
 // Dynamically import HomeContent for Posts
-const HomeContentLazy = dynamic(
+const HomeContentLazy = dynamicImport(
   () => import('@/components/home-content').then(mod => ({ default: mod.HomeContent })),
   { ssr: true, loading: () => <PostsFallback /> }
 )
 
-export const metadata = {
-  title: 'Senior Full-Stack Developer | Next.js, React & WordPress Architect | Aris Setiawan',
-  description: 'Senior Full-Stack Developer with 12+ years of experience in Next.js, React, WordPress, and PHP. Specializing in enterprise-scale web applications and headless CMS architecture.',
-  keywords: [
-    'Senior Next.js Developer',
-    'Headless WordPress Expert',
-    'Enterprise React Architect',
-    'Full-Stack PHP Developer',
-    'Web Architecture Specialist',
-    'Senior Software Engineer',
-  ],
-  other: {
-    'structured-data': JSON.stringify(structuredData)
+export async function generateMetadata() {
+  return {
+    title: 'Senior Full-Stack Developer | Next.js, React & WordPress Architect | Aris Setiawan',
+    description: 'Senior Full-Stack Developer with 12+ years of experience in Next.js, React, WordPress, and PHP. Specializing in enterprise-scale web applications and headless CMS architecture.',
+    keywords: [
+      'Senior Next.js Developer',
+      'Headless WordPress Expert',
+      'Enterprise React Architect',
+      'Full-Stack PHP Developer',
+      'Web Architecture Specialist',
+      'Senior Software Engineer',
+    ],
+    other: {
+      'structured-data': JSON.stringify(structuredData)
+    }
   }
 }
 

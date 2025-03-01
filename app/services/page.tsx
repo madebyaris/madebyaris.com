@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { Button } from '../../components/ui/button'
 import { ImageResponse } from 'next/og'
 
+export const revalidate = 86400 // Revalidate daily
+
 const services = [
   {
     title: 'Next.js Development',
