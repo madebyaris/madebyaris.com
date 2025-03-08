@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { ArrowRight, Briefcase, ShoppingCart, Film, Home, Globe } from 'lucide-react'
+import { ArrowRight, Briefcase, ShoppingCart, Film, Home, Globe, Music, Factory, Wrench, Utensils, Car, Zap } from 'lucide-react'
 import { Sparkles } from '@/components/ui/sparkles'
 import dynamic from 'next/dynamic'
 import { projects } from './server-page'
@@ -47,6 +47,48 @@ const categoryColors: Record<string, { bg: string, text: string, icon: React.Rea
     text: "text-indigo-800 dark:text-indigo-300",
     icon: <Home className="w-4 h-4" />,
     hoverBg: "hover:bg-indigo-200 dark:hover:bg-indigo-800/50"
+  },
+  "Industrial Supply": { 
+    bg: "bg-orange-100 dark:bg-orange-900/30", 
+    text: "text-orange-800 dark:text-orange-300",
+    icon: <Wrench className="w-4 h-4" />,
+    hoverBg: "hover:bg-orange-200 dark:hover:bg-orange-800/50"
+  },
+  "Industrial": { 
+    bg: "bg-gray-100 dark:bg-gray-900/30", 
+    text: "text-gray-800 dark:text-gray-300",
+    icon: <Factory className="w-4 h-4" />,
+    hoverBg: "hover:bg-gray-200 dark:hover:bg-gray-800/50"
+  },
+  "Music Publishing": { 
+    bg: "bg-red-100 dark:bg-red-900/30", 
+    text: "text-red-800 dark:text-red-300",
+    icon: <Music className="w-4 h-4" />,
+    hoverBg: "hover:bg-red-200 dark:hover:bg-red-800/50"
+  },
+  "Music Industry": { 
+    bg: "bg-violet-100 dark:bg-violet-900/30", 
+    text: "text-violet-800 dark:text-violet-300",
+    icon: <Music className="w-4 h-4" />,
+    hoverBg: "hover:bg-violet-200 dark:hover:bg-violet-800/50"
+  },
+  "Food & Beverage": { 
+    bg: "bg-rose-100 dark:bg-rose-900/30", 
+    text: "text-rose-800 dark:text-rose-300",
+    icon: <Utensils className="w-4 h-4" />,
+    hoverBg: "hover:bg-rose-200 dark:hover:bg-rose-800/50"
+  },
+  "Rental Services": { 
+    bg: "bg-fuchsia-100 dark:bg-fuchsia-900/30", 
+    text: "text-fuchsia-800 dark:text-fuchsia-300",
+    icon: <Car className="w-4 h-4" />,
+    hoverBg: "hover:bg-fuchsia-200 dark:hover:bg-fuchsia-800/50"
+  },
+  "Energy": { 
+    bg: "bg-yellow-100 dark:bg-yellow-900/30", 
+    text: "text-yellow-800 dark:text-yellow-300",
+    icon: <Zap className="w-4 h-4" />,
+    hoverBg: "hover:bg-yellow-200 dark:hover:bg-yellow-800/50"
   }
 }
 

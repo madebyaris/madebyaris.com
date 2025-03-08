@@ -81,6 +81,78 @@ export const projects = [
     tags: ["React", "Node.js", "MongoDB"],
     link: "https://learnislam.sg",
     category: "Education"
+  },
+  {
+    id: 9,
+    title: "Aalii",
+    description: "Industrial supply company website specializing in pumps, air compressors, and related equipment with product catalog and service offerings.",
+    logo: "/images/clients/aalii-compressor.png",
+    tags: ["Next.js", "WordPress", "TailwindCSS"],
+    link: "https://aaliisupply.com/",
+    category: "Industrial Supply"
+  },
+  {
+    id: 10,
+    title: "WRS Dosing",
+    description: "Industrial dosing systems provider with technical product catalog and service management platform.",
+    logo: "/images/clients/wrsdosing.png",
+    tags: ["React", "Node.js", "PostgreSQL"],
+    link: "https://wrsdosing.com",
+    category: "Industrial"
+  },
+  {
+    id: 11,
+    title: "Mahar Pustaka Nusantara",
+    description: "Music publishing platform managing copyright and royalty distribution for over 400 songwriters and 7000+ songs in Indonesia.",
+    logo: "/images/clients/mahar-pustaka.png",
+    tags: ["Next.js", "Node.js", "MySQL"],
+    link: "https://maharpustaka.id/",
+    category: "Music Publishing"
+  },
+  {
+    id: 12,
+    title: "Creates",
+    description: "Digital music distribution platform with cover-to-master licensing services for artists to distribute music to Spotify, Apple Music, and other global platforms.",
+    logo: "/images/clients/creates.png",
+    tags: ["React", "Express.js", "MongoDB"],
+    link: "https://creates.co.id/",
+    category: "Music Industry"
+  },
+  {
+    id: 13,
+    title: "Ichiban Sushi",
+    description: "Restaurant chain website with online ordering system, menu management, and location finder.",
+    logo: "/images/clients/ichiban-shushi.png",
+    tags: ["Next.js", "Node.js", "PostgreSQL"],
+    link: "https://ichibansushi.co.id/",
+    category: "Food & Beverage"
+  },
+  {
+    id: 14,
+    title: "Mama Sewa",
+    description: "Baby equipment rental platform with inventory management and booking system.",
+    logo: "/images/clients/mama-sewa.png",
+    tags: ["React", "Firebase", "TailwindCSS"],
+    link: "https://mamasewa.com/",
+    category: "Rental Services"
+  },
+  {
+    id: 15,
+    title: "PGN Gagas",
+    description: "Energy company website with service information, client portal, and news management system.",
+    logo: "/images/clients/pgn-gagas.png",
+    tags: ["WordPress", "PHP", "MySQL"],
+    link: "https://gagas.co.id/",
+    category: "Energy"
+  },
+  {
+    id: 16,
+    title: "Ta Wan",
+    description: "Chinese restaurant chain website with menu showcase, location finder, and reservation system.",
+    logo: "/images/clients/ta-wan.png",
+    tags: ["React", "Express.js", "MongoDB"],
+    link: "https://www.tawanrestaurant.com/",
+    category: "Food & Beverage"
   }
 ]
 

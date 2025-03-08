@@ -1,99 +1,174 @@
-# 🚀 Madebyaris.com - Open Source Portfolio
+# 🚀 Made by Aris - Professional Portfolio & Services
 
-✨ A modern, high-performance personal portfolio built with cutting-edge web technologies. Showcasing professional skills, projects, and technical expertise.
+A modern, high-performance portfolio and services website built with Next.js 15 and the App Router. This website showcases professional skills, services, and projects with a focus on web development expertise in Next.js, PHP, and WordPress.
 
-## 🌟 Features
+![Made by Aris](https://madebyaris.com/og-image.png)
 
-### 🎨 Stunning Visuals
-- 🌓 Dark/Light mode with system preference
-- ✨ Aurora background animations
-- 🎆 Sparkles effects
-- 🖼️ Responsive image optimization
+## ✨ Key Features
 
-### ⚡ Performance
-- 🚀 Next.js 15 with Turbopack
-- 📦 Optimized bundle size
-- ⏱️ Instant page transitions
-- 📊 Vercel Speed Insights
+### 🎨 Modern Design & User Experience
+- Responsive design optimized for all devices
+- Dark/Light mode with system preference detection
+- Smooth page transitions and animations
+- Accessible UI components with keyboard navigation
 
-### 🛠️ Tech Stack
-- **Framework**: Next.js 15 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS + Tailwind Animate
-- **UI Components**: Radix UI + Shadcn UI
-- **Animations**: Framer Motion
-- **CMS**: WordPress REST API
-- **Fonts**: Geist + Plus Jakarta Sans
+### 🌐 Service Pages
+- **Next.js Development Services**
+  - Next.js SEO Optimization
+  - Vercel Deployment
+  - Agency Services (Indonesia)
+  - Next.js Indonesia Localization
+- **PHP Development Services**
+  - Custom Applications
+  - API Development
+  - Database Solutions
+  - Modernization
+- **WordPress Services**
+  - Theme Development
+  - Plugin Development
+  - Headless Development
+  - Optimization
 
-### 📚 Content Management
-- 🖋️ Blog posts integration
-- 🏗️ Projects showcase
-- 🔗 Custom post types
-- 🔄 Automatic content revalidation
+### ⚡ Performance Optimizations
+- Next.js 15 with App Router and Turbopack
+- Static Site Generation with revalidation
+- Image optimization with next/image
+- Bundle size optimization
+- CSS optimization with Tailwind
 
-## 🛠️ Development Setup
+### 🔍 SEO Features
+- Structured data for rich search results
+- Optimized metadata for each page
+- OpenGraph images for social sharing
+- Sitemap generation
+- Robots.txt configuration
 
-### 📋 Prerequisites
-- Node.js v20+
-- pnpm v9.15.3+
+### 🌍 Internationalization
+- Multi-language support (English and Indonesian)
+- Localized content for Indonesian market
+- SEO optimization for local search
 
-### 🚀 Quick Start
-```bash
-# Clone repository
-git clone https://github.com/madebyaris/madebyaris.com.git
-cd madebyaris.com
+## 🛠️ Tech Stack
 
-# Install dependencies
-pnpm install
+- **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) + [Tailwind Animate](https://github.com/jamiebuilds/tailwindcss-animate)
+- **UI Components**: [Radix UI](https://www.radix-ui.com/) + [Shadcn UI](https://ui.shadcn.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Form Handling**: [React Hook Form](https://react-hook-form.com/) + [Zod](https://zod.dev/)
+- **Email**: [Resend](https://resend.com/)
+- **Analytics**: [Vercel Analytics](https://vercel.com/analytics) + [Speed Insights](https://vercel.com/docs/speed-insights)
+- **Deployment**: [Vercel](https://vercel.com/)
 
-# Start development server
-pnpm dev
-```
+## 📋 Getting Started
 
-### 🔧 Environment Variables
-Create `.env.local` with:
-```bash
-NEXT_PUBLIC_WP_API_URL="your-wordpress-api-url"
-RESEND_API_KEY="your-resend-api-key"
-```
+### Prerequisites
+- [Node.js](https://nodejs.org/) v20+
+- [pnpm](https://pnpm.io/) v9.15.3+
 
-### 📧 Contact Form
-- 📨 Secure email submission via Resend
-- 🔒 Rate limiting protection
-- ✅ Input validation
-- 🚦 Real-time form status
+### Installation
 
-## 📦 Scripts
-| Command       | Description                          |
-|---------------|--------------------------------------|
-| `pnpm dev`    | Start development server             |
-| `pnpm build`  | Create production build              |
-| `pnpm start`  | Start production server              |
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/madebyaris/madebyaris.com.git
+   cd madebyaris.com
+   ```
+
+2. Install dependencies:
+   ```bash
+   pnpm install
+   ```
+
+3. Set up environment variables:
+   Create a `.env.local` file based on `.env.example`:
+   ```
+   # WordPress API
+   NEXT_PUBLIC_WP_API_URL="your-wordpress-api-url"
+   
+   # Email (Resend)
+   RESEND_API_KEY="your-resend-api-key"
+   
+   # Revalidation
+   REVALIDATION_SECRET="your-secret-token"
+   ```
+
+4. Start the development server:
+   ```bash
+   pnpm dev
+   ```
+
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## 📦 Available Scripts
+
+| Command | Description |
+|---------|-------------|
+| `pnpm dev` | Start development server with Turbopack |
+| `pnpm build` | Create production build |
+| `pnpm start` | Start production server |
 | `pnpm start:standalone` | Start standalone server (for production with `output: standalone`) |
-| `pnpm lint`   | Run ESLint                           |
-| `pnpm format` | Format code with Prettier            |
+| `pnpm lint` | Run ESLint |
+| `pnpm analyze` | Analyze bundle size |
 
 ## 🏗️ Project Structure
+
 ```
 madebyaris.com/
-├── app/                # App router pages
-│   ├── about/          # About page
-│   ├── blog/           # Blog section
-│   ├── projects/       # Projects showcase
-│   └── contact/        # Contact page
-├── components/         # Reusable components
-├── lib/                # Utilities and API clients
-├── public/             # Static assets
-└── styles/             # Global styles
+├── app/                  # App Router pages and layouts
+│   ├── about/            # About page
+│   ├── api/              # API routes
+│   ├── blog/             # Blog section
+│   ├── contact/          # Contact page
+│   ├── privacy-policy/   # Privacy policy page
+│   ├── projects/         # Projects showcase
+│   ├── services/         # Service pages
+│   │   ├── nextjs-development/  # Next.js services
+│   │   ├── php-development/     # PHP services
+│   │   └── wordpress/           # WordPress services
+│   ├── terms-of-service/ # Terms of service page
+│   ├── globals.css       # Global styles
+│   ├── layout.tsx        # Root layout
+│   └── page.tsx          # Home page
+├── components/           # Reusable components
+├── lib/                  # Utilities and API clients
+├── public/               # Static assets
+└── types/                # TypeScript type definitions
 ```
 
-## 🌐 Deployment
-### Recommended Platforms:
-- 🚀 [Vercel](https://vercel.com)
-- 🕸️ [Netlify](https://netlify.com)
-- ☁️ [Cloudflare Pages](https://pages.cloudflare.com)
+## 🔄 Content Revalidation
+
+This project uses Next.js 15's revalidation features to keep content fresh while maintaining high performance:
+
+### Static Generation with Revalidation
+
+Pages are statically generated at build time and automatically revalidated after a specified time period. This approach provides:
+
+- Fast initial page loads
+- SEO benefits of static content
+- Automatic content updates without full rebuilds
+
+### On-Demand Revalidation
+
+The `/api/revalidate` endpoint allows for on-demand revalidation of specific content when triggered by webhooks or other events.
+
+Example usage:
+```bash
+curl -X POST "https://madebyaris.com/api/revalidate?secret=your-secret-token&tag=blog-posts"
+```
+
+## 🚀 Deployment
+
+### Vercel Deployment (Recommended)
+
+The easiest way to deploy this website is using [Vercel](https://vercel.com):
+
+1. Push your code to a GitHub repository
+2. Import the project in Vercel
+3. Set the required environment variables
+4. Deploy
 
 ### Standalone Deployment
+
 This project uses Next.js's `output: standalone` configuration for optimized production deployments:
 
 1. Build the application:
@@ -106,89 +181,43 @@ This project uses Next.js's `output: standalone` configuration for optimized pro
    pnpm start:standalone
    ```
 
-3. For Docker deployments, copy the standalone output:
-   ```bash
-   # Example Dockerfile
-   FROM node:20-alpine
-   WORKDIR /app
-   COPY .next/standalone ./
-   COPY .next/static ./.next/static
-   COPY public ./public
-   EXPOSE 3000
-   CMD ["node", "server.js"]
-   ```
+### Docker Deployment
 
-> **Note:** When using `output: standalone`, do not use `next start`. Instead, use `node .next/standalone/server.js` or the provided `pnpm start:standalone` script.
+```dockerfile
+FROM node:20-alpine AS builder
+WORKDIR /app
+COPY . .
+RUN npm install -g pnpm && pnpm install && pnpm build
+
+FROM node:20-alpine
+WORKDIR /app
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/public ./public
+EXPOSE 3000
+CMD ["node", "server.js"]
+```
 
 ## 🤝 Contributing
-We welcome contributions! Please follow these steps:
-1. 🍴 Fork the repository
-2. 🌿 Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. 💾 Commit changes (`git commit -m 'Add some AmazingFeature'`)
-4. 📤 Push to branch (`git push origin feature/AmazingFeature`)
-5. 🔀 Open a Pull Request
 
-## 📜 License
-MIT License - See [LICENSE](LICENSE) for more information.
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 📬 Contact
-Aris - [arissetia.m@gmail.com](mailto:arissetia.m@gmail.com)
 
-**Project Link**: [https://github.com/madebyaris/madebyaris.com](https://github.com/madebyaris/madebyaris.com)
+Aris Setiawan - [arissetia.m@gmail.com](mailto:arissetia.m@gmail.com)
 
-## 🙏 Acknowledgments
-- [Next.js](https://nextjs.org/) - The React Framework
-- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
-- [Radix UI](https://www.radix-ui.com/) - Primitives for building UIs
-- [Shadcn UI](https://ui.shadcn.com/) - Beautifully designed components
-- [Framer Motion](https://www.framer.com/motion/) - Animation library
+Project Link: [https://github.com/madebyaris/madebyaris.com](https://github.com/madebyaris/madebyaris.com)
 
-## Incremental Static Regeneration (ISR)
+---
 
-This project uses Next.js 15's Incremental Static Regeneration (ISR) to optimize performance while keeping content fresh.
-
-### How ISR Works in This Project
-
-1. **Static Generation with Revalidation**:
-   - Pages are statically generated at build time
-   - Content is automatically revalidated after a specified time period (60 seconds by default)
-   - Stale content is served while revalidation happens in the background
-
-2. **Cache Tags**:
-   - We use cache tags (`wp-posts`, `wp-projects`, etc.) to target specific content for revalidation
-   - This allows for more granular control over what gets revalidated
-
-3. **On-Demand Revalidation**:
-   - The `/api/revalidate` endpoint allows for on-demand revalidation of specific content
-   - This is useful for webhooks from WordPress when content changes
-
-### Using the Revalidation API
-
-To revalidate content on-demand, make a POST request to the revalidation API:
-
-```bash
-curl -X POST "https://yourdomain.com/api/revalidate?secret=your-secret-token&tag=wp-posts"
-```
-
-Parameters:
-- `secret`: Your revalidation secret token (set in environment variables)
-- `tag`: The cache tag to revalidate (e.g., `wp-posts`, `wp-projects`)
-
-### WordPress Webhook Setup
-
-To automatically revalidate content when it changes in WordPress, set up a webhook:
-
-1. Install a webhook plugin in WordPress
-2. Configure it to send a POST request to your revalidation endpoint when content is published or updated
-3. Include your secret token and the appropriate tag
-
-Example webhook URL:
-```
-https://yourdomain.com/api/revalidate?secret=your-secret-token&tag=wp-posts
-```
-
-### Environment Variables
-
-Make sure to set these environment variables:
-- `NEXT_PUBLIC_WP_API_URL`: Your WordPress API URL
-- `REVALIDATION_SECRET`: A secret token for the revalidation API
+Built with ❤️ by [Aris Setiawan](https://madebyaris.com)

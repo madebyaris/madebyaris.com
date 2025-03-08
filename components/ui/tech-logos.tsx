@@ -158,5 +158,57 @@ export const techLogos = [
         className="object-contain"
       />
     )
+  },
+  { 
+    name: "Aalii", 
+    id: 13, 
+    img: () => (
+      <Image
+        src="/images/clients/aalii-compressor.png"
+        alt="Aalii"
+        width={180}
+        height={60}
+        className="object-contain"
+      />
+    )
+  },
+  { 
+    name: "WRS Dosing", 
+    id: 14, 
+    img: () => (
+      <Image
+        src="/images/clients/wrsdosing.png"
+        alt="WRS Dosing"
+        width={180}
+        height={60}
+        className="object-contain"
+      />
+    )
+  },
+  { 
+    name: "Mahar Pustaka Nusantara", 
+    id: 15, 
+    img: () => (
+      <Image
+        src="/images/clients/mahar-pustaka.png"
+        alt="Mahar Pustaka Nusantara"
+        width={180}
+        height={60}
+        className="object-contain"
+      />
+    )
+  },
+  { 
+    name: "Creates", 
+    id: 16, 
+    img: () => (
+      <Image
+        src="/images/clients/creates.png"
+        alt="Creates"
+        width={180}
+        height={60}
+        className="object-contain"
+      />
+    )
   }
 ]; 
