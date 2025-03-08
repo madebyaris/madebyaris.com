@@ -52,7 +52,7 @@ const structuredData = {
       "price": "Contact for pricing",
       "priceCurrency": "USD"
     },
-    "itemOffered": [
+    "serviceOutput": [
       {
         "@type": "Service",
         "name": "Modern Next.js Development",
@@ -135,7 +135,7 @@ const structuredData = {
     "description": "Professional Next.js development services focusing on building modern web applications with optimal performance, SEO, and user experience. Specializing in server-side rendering, static generation, and enterprise-grade solutions."
   },
   "potentialAction": {
-    "@type": "ContactAction",
+    "@type": "CommunicateAction",
     "name": "Contact for Next.js Development",
     "target": "https://madebyaris.com/contact"
   },
@@ -321,293 +321,299 @@ const processSteps = [
 
 export default function NextjsDevelopmentPage() {
   return (
-    <div className="relative min-h-screen">
-      {/* Background Pattern */}
-      <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-zinc-50 dark:bg-zinc-950 [background:radial-gradient(#e5e7eb_1px,transparent_1px)] dark:[background:radial-gradient(#1f2937_1px,transparent_1px)] [background-size:32px_32px] opacity-40" />
-        <div className="absolute inset-0 bg-gradient-to-br from-zinc-100 via-transparent to-zinc-100/50 dark:from-zinc-900 dark:via-transparent dark:to-zinc-900/50" />
-      </div>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <div className="relative min-h-screen">
+        {/* Background Pattern */}
+        <div className="fixed inset-0 -z-10">
+          <div className="absolute inset-0 bg-zinc-50 dark:bg-zinc-950 [background:radial-gradient(#e5e7eb_1px,transparent_1px)] dark:[background:radial-gradient(#1f2937_1px,transparent_1px)] [background-size:32px_32px] opacity-40" />
+          <div className="absolute inset-0 bg-gradient-to-br from-zinc-100 via-transparent to-zinc-100/50 dark:from-zinc-900 dark:via-transparent dark:to-zinc-900/50" />
+        </div>
 
-      <div className="container relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="py-10 md:py-16">
-          {/* Hero Section - Enhanced with semantic HTML */}
-          <header className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 mb-4">
-              <Code2 className="w-4 h-4" />
-              <span className="text-sm font-medium">Next.js Expert</span>
-            </div>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 dark:from-blue-400 dark:via-blue-300 dark:to-indigo-400 mb-6">
-              Next.js Development Services
-            </h1>
-            <div className="max-w-[700px] mx-auto">
-              <p className="text-base md:text-lg text-zinc-600 dark:text-zinc-400">
-                Modern web applications built with Next.js. 
-                <noscript>Optimized for performance, SEO, and exceptional user experience.</noscript>
-                <span className="inline-block">Optimized for performance, SEO, and exceptional user experience.</span>
+        <div className="container relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="py-10 md:py-16">
+            {/* Hero Section - Enhanced with semantic HTML */}
+            <header className="text-center max-w-3xl mx-auto">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 mb-4">
+                <Code2 className="w-4 h-4" />
+                <span className="text-sm font-medium">Next.js Expert</span>
+              </div>
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 dark:from-blue-400 dark:via-blue-300 dark:to-indigo-400 mb-6">
+                Next.js Development Services
+              </h1>
+              <div className="max-w-[700px] mx-auto">
+                <p className="text-base md:text-lg text-zinc-600 dark:text-zinc-400">
+                  Modern web applications built with Next.js. 
+                  <noscript>Optimized for performance, SEO, and exceptional user experience.</noscript>
+                  <span className="inline-block">Optimized for performance, SEO, and exceptional user experience.</span>
+                </p>
+              </div>
+            </header>
+
+            {/* Introduction - Enhanced with article tag */}
+            <article className="mt-8 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-zinc-200 dark:border-zinc-800 shadow-lg">
+              <p className="text-base md:text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
+                My Next.js development service focuses on creating modern, high-performance web 
+                applications. Using the latest features and best practices, I build solutions that 
+                are not only fast and reliable but also maintainable and scalable for future growth.
               </p>
-            </div>
-          </header>
+            </article>
 
-          {/* Introduction - Enhanced with article tag */}
-          <article className="mt-8 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-zinc-200 dark:border-zinc-800 shadow-lg">
-            <p className="text-base md:text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
-              My Next.js development service focuses on creating modern, high-performance web 
-              applications. Using the latest features and best practices, I build solutions that 
-              are not only fast and reliable but also maintainable and scalable for future growth.
-            </p>
-          </article>
-
-          {/* Key Features Section - Enhanced with section tag */}
-          <section className="mt-12 md:mt-16" aria-labelledby="features-heading">
-            <div className="text-center mb-8">
-              <span className="inline-block px-4 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full text-sm font-medium mb-4">
-                Key Features
-              </span>
-              <h2 id="features-heading" className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
-                What Makes Next.js Special
-              </h2>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-              {features.map((feature, index) => (
-                <Card 
-                  key={feature.title}
-                  className="p-6 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border-zinc-200 dark:border-zinc-800 transition-all duration-300 hover:shadow-xl hover:scale-[1.01] animate-in fade-in slide-in-from-bottom duration-1000"
-                  style={{ animationDelay: `${(index + 1) * 150}ms` }}
-                >
-                  <div className="flex flex-col gap-4">
-                    <div className="w-12 h-12 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 transition-transform hover:scale-110">
-                      {feature.icon}
-                    </div>
-                    <h3 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">{feature.title}</h3>
-                    <p className="text-zinc-600 dark:text-zinc-400">{feature.description}</p>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </section>
-
-          {/* Benefits Section - Enhanced with section tag */}
-          <section className="mt-12 md:mt-16 animate-in fade-in slide-in-from-bottom duration-1000 delay-300" aria-labelledby="benefits-heading">
-            <div className="text-center mb-8">
-              <span className="inline-block px-4 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-300 rounded-full text-sm font-medium mb-4">
-                Advantages
-              </span>
-              <h2 id="benefits-heading" className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
-                Benefits of Next.js Development
-              </h2>
-            </div>
-            
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-              {benefits.map((benefit, index) => (
-                <div 
-                  key={benefit}
-                  className="p-4 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-lg border border-zinc-200 dark:border-zinc-800 text-center text-zinc-600 dark:text-zinc-400 transition-all duration-300 hover:scale-105 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-700 dark:hover:text-blue-300 hover:border-blue-200 dark:hover:border-blue-800"
-                  style={{ animationDelay: `${(index + 1) * 75}ms` }}
-                >
-                  {benefit}
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Development Process - Enhanced with section tag */}
-          <section className="mt-12 md:mt-16 animate-in fade-in slide-in-from-bottom duration-1000 delay-400" aria-labelledby="process-heading">
-            <div className="text-center mb-8">
-              <span className="inline-block px-4 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-300 rounded-full text-sm font-medium mb-4">
-                Workflow
-              </span>
-              <h2 id="process-heading" className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
-                Development Process
-              </h2>
-            </div>
-            
-            <div className="relative">
-              {/* Connecting line for desktop */}
-              <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-zinc-200 dark:bg-zinc-800 -translate-y-1/2 z-0"></div>
+            {/* Key Features Section - Enhanced with section tag */}
+            <section className="mt-12 md:mt-16" aria-labelledby="features-heading">
+              <div className="text-center mb-8">
+                <span className="inline-block px-4 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full text-sm font-medium mb-4">
+                  Key Features
+                </span>
+                <h2 id="features-heading" className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
+                  What Makes Next.js Special
+                </h2>
+              </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 relative z-10">
-                {processSteps.map((step, index) => (
-                  <div 
-                    key={step.title}
-                    className="p-6 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl border border-zinc-200 dark:border-zinc-800 transition-all duration-300 hover:shadow-lg hover:border-emerald-200 dark:hover:border-emerald-800"
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                {features.map((feature, index) => (
+                  <Card 
+                    key={feature.title}
+                    className="p-6 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border-zinc-200 dark:border-zinc-800 transition-all duration-300 hover:shadow-xl hover:scale-[1.01] animate-in fade-in slide-in-from-bottom duration-1000"
                     style={{ animationDelay: `${(index + 1) * 150}ms` }}
                   >
-                    <div className="flex flex-col items-center text-center mb-4">
-                      <div className="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 font-semibold mb-3">
-                        {index + 1}
+                    <div className="flex flex-col gap-4">
+                      <div className="w-12 h-12 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 transition-transform hover:scale-110">
+                        {feature.icon}
                       </div>
-                      <h3 className="font-semibold text-zinc-900 dark:text-zinc-50 text-lg">{step.title}</h3>
+                      <h3 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">{feature.title}</h3>
+                      <p className="text-zinc-600 dark:text-zinc-400">{feature.description}</p>
                     </div>
-                    <p className="text-zinc-600 dark:text-zinc-400 text-center">{step.description}</p>
-                  </div>
+                  </Card>
                 ))}
               </div>
-            </div>
-          </section>
+            </section>
 
-          {/* Technologies Section - Enhanced with section tag */}
-          <section className="mt-12 md:mt-16 animate-in fade-in slide-in-from-bottom duration-1000 delay-500" aria-labelledby="tech-heading">
-            <div className="text-center mb-8">
-              <span className="inline-block px-4 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 rounded-full text-sm font-medium mb-4">
-                Tech Stack
-              </span>
-              <h2 id="tech-heading" className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
-                Technologies I Work With
-              </h2>
-            </div>
-            
-            <div className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-zinc-200 dark:border-zinc-800 shadow-lg">
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 md:gap-6">
-                {['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Node.js', 'Prisma', 'tRPC', 'GraphQL', 'REST API', 'MongoDB', 'PostgreSQL', 'Vercel'].map((tech, index) => (
+            {/* Benefits Section - Enhanced with section tag */}
+            <section className="mt-12 md:mt-16 animate-in fade-in slide-in-from-bottom duration-1000 delay-300" aria-labelledby="benefits-heading">
+              <div className="text-center mb-8">
+                <span className="inline-block px-4 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-300 rounded-full text-sm font-medium mb-4">
+                  Advantages
+                </span>
+                <h2 id="benefits-heading" className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
+                  Benefits of Next.js Development
+                </h2>
+              </div>
+              
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+                {benefits.map((benefit, index) => (
                   <div 
-                    key={tech}
-                    className="p-3 bg-zinc-50 dark:bg-zinc-800/50 rounded-lg text-center text-sm font-medium text-zinc-700 dark:text-zinc-300 transition-all duration-300 hover:scale-105 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-700 dark:hover:text-blue-300"
-                    style={{ animationDelay: `${(index + 1) * 50}ms` }}
+                    key={benefit}
+                    className="p-4 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-lg border border-zinc-200 dark:border-zinc-800 text-center text-zinc-600 dark:text-zinc-400 transition-all duration-300 hover:scale-105 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-700 dark:hover:text-blue-300 hover:border-blue-200 dark:hover:border-blue-800"
+                    style={{ animationDelay: `${(index + 1) * 75}ms` }}
                   >
-                    {tech}
+                    {benefit}
                   </div>
                 ))}
               </div>
-            </div>
-          </section>
+            </section>
 
-          {/* Specialized Services Section */}
-          <section className="mt-12 md:mt-16 animate-in fade-in slide-in-from-bottom duration-1000 delay-550" aria-labelledby="specialized-services-heading">
-            <div className="text-center mb-8">
-              <span className="inline-block px-4 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-300 rounded-full text-sm font-medium mb-4">
-                Specialized Services
-              </span>
-              <h2 id="specialized-services-heading" className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
-                Next.js Specialized Solutions
+            {/* Development Process - Enhanced with section tag */}
+            <section className="mt-12 md:mt-16 animate-in fade-in slide-in-from-bottom duration-1000 delay-400" aria-labelledby="process-heading">
+              <div className="text-center mb-8">
+                <span className="inline-block px-4 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-300 rounded-full text-sm font-medium mb-4">
+                  Workflow
+                </span>
+                <h2 id="process-heading" className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
+                  Development Process
+                </h2>
+              </div>
+              
+              <div className="relative">
+                {/* Connecting line for desktop */}
+                <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-zinc-200 dark:bg-zinc-800 -translate-y-1/2 z-0"></div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 relative z-10">
+                  {processSteps.map((step, index) => (
+                    <div 
+                      key={step.title}
+                      className="p-6 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl border border-zinc-200 dark:border-zinc-800 transition-all duration-300 hover:shadow-lg hover:border-emerald-200 dark:hover:border-emerald-800"
+                      style={{ animationDelay: `${(index + 1) * 150}ms` }}
+                    >
+                      <div className="flex flex-col items-center text-center mb-4">
+                        <div className="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 font-semibold mb-3">
+                          {index + 1}
+                        </div>
+                        <h3 className="font-semibold text-zinc-900 dark:text-zinc-50 text-lg">{step.title}</h3>
+                      </div>
+                      <p className="text-zinc-600 dark:text-zinc-400 text-center">{step.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* Technologies Section - Enhanced with section tag */}
+            <section className="mt-12 md:mt-16 animate-in fade-in slide-in-from-bottom duration-1000 delay-500" aria-labelledby="tech-heading">
+              <div className="text-center mb-8">
+                <span className="inline-block px-4 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 rounded-full text-sm font-medium mb-4">
+                  Tech Stack
+                </span>
+                <h2 id="tech-heading" className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
+                  Technologies I Work With
+                </h2>
+              </div>
+              
+              <div className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-zinc-200 dark:border-zinc-800 shadow-lg">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 md:gap-6">
+                  {['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Node.js', 'Prisma', 'tRPC', 'GraphQL', 'REST API', 'MongoDB', 'PostgreSQL', 'Vercel'].map((tech, index) => (
+                    <div 
+                      key={tech}
+                      className="p-3 bg-zinc-50 dark:bg-zinc-800/50 rounded-lg text-center text-sm font-medium text-zinc-700 dark:text-zinc-300 transition-all duration-300 hover:scale-105 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-700 dark:hover:text-blue-300"
+                      style={{ animationDelay: `${(index + 1) * 50}ms` }}
+                    >
+                      {tech}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* Specialized Services Section */}
+            <section className="mt-12 md:mt-16 animate-in fade-in slide-in-from-bottom duration-1000 delay-550" aria-labelledby="specialized-services-heading">
+              <div className="text-center mb-8">
+                <span className="inline-block px-4 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-300 rounded-full text-sm font-medium mb-4">
+                  Specialized Services
+                </span>
+                <h2 id="specialized-services-heading" className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
+                  Next.js Specialized Solutions
+                </h2>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Link href="/services/nextjs-development/vercel" className="group">
+                  <div className="h-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-zinc-200 dark:border-zinc-800 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    <div className="flex items-center mb-4">
+                      <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 mr-4">
+                        <Rocket className="w-6 h-6" />
+                      </div>
+                      <h3 className="text-xl font-semibold">Vercel Deployment</h3>
+                    </div>
+                    <p className="text-muted-foreground mb-4">Expert Vercel deployment services for Next.js applications. Optimize your deployment pipeline with edge functions, analytics, and enterprise-grade infrastructure.</p>
+                    <div className="flex items-center text-blue-600 dark:text-blue-400 font-medium group-hover:underline">
+                      Learn more
+                      <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    </div>
+                  </div>
+                </Link>
+                
+                <Link href="/services/nextjs-development/nextjs-indonesia" className="group">
+                  <div className="h-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-zinc-200 dark:border-zinc-800 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    <div className="flex items-center mb-4">
+                      <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 mr-4">
+                        <Globe className="w-6 h-6" />
+                      </div>
+                      <h3 className="text-xl font-semibold">Next.js Indonesia</h3>
+                    </div>
+                    <p className="text-muted-foreground mb-4">Specialized Next.js development services for the Indonesian market. Tailored solutions for local businesses with support in Bahasa Indonesia.</p>
+                    <div className="flex items-center text-blue-600 dark:text-blue-400 font-medium group-hover:underline">
+                      Learn more
+                      <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    </div>
+                  </div>
+                </Link>
+                
+                <Link href="/services/nextjs-development/nextjs-seo" className="group">
+                  <div className="h-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-zinc-200 dark:border-zinc-800 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    <div className="flex items-center mb-4">
+                      <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 mr-4">
+                        <Search className="w-6 h-6" />
+                      </div>
+                      <h3 className="text-xl font-semibold">Next.js SEO Services</h3>
+                    </div>
+                    <p className="text-muted-foreground mb-4">Comprehensive SEO optimization for Next.js applications. Improve your search rankings with server-side rendering, metadata optimization, and structured data.</p>
+                    <div className="flex items-center text-blue-600 dark:text-blue-400 font-medium group-hover:underline">
+                      Learn more
+                      <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    </div>
+                  </div>
+                </Link>
+                
+                <Link href="/services/nextjs-development/agency-indonesia" className="group">
+                  <div className="h-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-zinc-200 dark:border-zinc-800 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    <div className="flex items-center mb-4">
+                      <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 mr-4">
+                        <Building className="w-6 h-6" />
+                      </div>
+                      <h3 className="text-xl font-semibold">Agency Services Indonesia</h3>
+                    </div>
+                    <p className="text-muted-foreground mb-4">Full-service Next.js agency for Indonesian enterprises. End-to-end web development from planning and design to development and maintenance.</p>
+                    <div className="flex items-center text-blue-600 dark:text-blue-400 font-medium group-hover:underline">
+                      Learn more
+                      <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            </section>
+
+            {/* FAQ Section - New for SEO */}
+            <section className="mt-12 md:mt-16 animate-in fade-in slide-in-from-bottom duration-1000 delay-600" aria-labelledby="faq-heading">
+              <div className="text-center mb-8">
+                <span className="inline-block px-4 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-300 rounded-full text-sm font-medium mb-4">
+                  Questions
+                </span>
+                <h2 id="faq-heading" className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
+                  Frequently Asked Questions
+                </h2>
+              </div>
+              
+              <div className="space-y-4 md:space-y-6">
+                {[
+                  {
+                    question: "What is Next.js and why should I use it for my project?",
+                    answer: "Next.js is a React framework that enables server-side rendering, static site generation, and other performance optimizations. It's ideal for projects that need SEO optimization, fast loading times, and a modern development experience."
+                  },
+                  {
+                    question: "How long does it typically take to develop a Next.js application?",
+                    answer: "Development timelines vary based on project complexity, but most small to medium-sized applications can be completed in 4-12 weeks. Enterprise applications may take longer depending on requirements and integrations."
+                  },
+                  {
+                    question: "Do you work with existing codebases or only new projects?",
+                    answer: "I work with both new projects and existing codebases. Whether you need to migrate from another framework to Next.js, upgrade an existing Next.js application, or start from scratch, I can help."
+                  },
+                  {
+                    question: "What makes your Next.js development services different?",
+                    answer: "My services combine technical expertise with a focus on business outcomes. I prioritize performance, maintainability, and user experience while ensuring your application meets your specific business goals."
+                  }
+                ].map((faq, index) => (
+                  <div 
+                    key={index}
+                    className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl p-6 border border-zinc-200 dark:border-zinc-800 shadow-md"
+                  >
+                    <h3 className="text-lg md:text-xl font-semibold text-zinc-900 dark:text-zinc-50 mb-3">{faq.question}</h3>
+                    <p className="text-zinc-600 dark:text-zinc-400">{faq.answer}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* CTA Section - Enhanced with semantic HTML */}
+            <aside className="mt-12 md:mt-16 text-center bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/50 dark:to-indigo-950/50 rounded-2xl p-8 md:p-12 animate-in fade-in slide-in-from-bottom duration-1000 shadow-lg border border-blue-100 dark:border-blue-900/30">
+              <h2 className="text-2xl md:text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">
+                Ready to Build Your Next.js Project?
               </h2>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Link href="/services/nextjs-development/vercel" className="group">
-                <div className="h-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-zinc-200 dark:border-zinc-800 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-                  <div className="flex items-center mb-4">
-                    <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 mr-4">
-                      <Rocket className="w-6 h-6" />
-                    </div>
-                    <h3 className="text-xl font-semibold">Vercel Deployment</h3>
-                  </div>
-                  <p className="text-muted-foreground mb-4">Expert Vercel deployment services for Next.js applications. Optimize your deployment pipeline with edge functions, analytics, and enterprise-grade infrastructure.</p>
-                  <div className="flex items-center text-blue-600 dark:text-blue-400 font-medium group-hover:underline">
-                    Learn more
-                    <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </div>
-                </div>
+              <p className="text-base md:text-lg text-zinc-600 dark:text-zinc-400 max-w-[600px] mx-auto mb-6 md:mb-8">
+                Let&apos;s discuss how Next.js can help you build a faster, more efficient web application that delivers exceptional user experiences.
+              </p>
+              <Link href="/contact">
+                <Button size="lg" className="min-w-[200px] group bg-blue-600 hover:bg-blue-700 text-white hover:scale-105 transition-all duration-300 rounded-full">
+                  Start Your Project
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Button>
               </Link>
-              
-              <Link href="/services/nextjs-development/nextjs-indonesia" className="group">
-                <div className="h-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-zinc-200 dark:border-zinc-800 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-                  <div className="flex items-center mb-4">
-                    <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 mr-4">
-                      <Globe className="w-6 h-6" />
-                    </div>
-                    <h3 className="text-xl font-semibold">Next.js Indonesia</h3>
-                  </div>
-                  <p className="text-muted-foreground mb-4">Specialized Next.js development services for the Indonesian market. Tailored solutions for local businesses with support in Bahasa Indonesia.</p>
-                  <div className="flex items-center text-blue-600 dark:text-blue-400 font-medium group-hover:underline">
-                    Learn more
-                    <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </div>
-                </div>
-              </Link>
-              
-              <Link href="/services/nextjs-development/nextjs-seo" className="group">
-                <div className="h-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-zinc-200 dark:border-zinc-800 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-                  <div className="flex items-center mb-4">
-                    <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 mr-4">
-                      <Search className="w-6 h-6" />
-                    </div>
-                    <h3 className="text-xl font-semibold">Next.js SEO Services</h3>
-                  </div>
-                  <p className="text-muted-foreground mb-4">Comprehensive SEO optimization for Next.js applications. Improve your search rankings with server-side rendering, metadata optimization, and structured data.</p>
-                  <div className="flex items-center text-blue-600 dark:text-blue-400 font-medium group-hover:underline">
-                    Learn more
-                    <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </div>
-                </div>
-              </Link>
-              
-              <Link href="/services/nextjs-development/agency-indonesia" className="group">
-                <div className="h-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-zinc-200 dark:border-zinc-800 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-                  <div className="flex items-center mb-4">
-                    <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 mr-4">
-                      <Building className="w-6 h-6" />
-                    </div>
-                    <h3 className="text-xl font-semibold">Agency Services Indonesia</h3>
-                  </div>
-                  <p className="text-muted-foreground mb-4">Full-service Next.js agency for Indonesian enterprises. End-to-end web development from planning and design to development and maintenance.</p>
-                  <div className="flex items-center text-blue-600 dark:text-blue-400 font-medium group-hover:underline">
-                    Learn more
-                    <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </div>
-                </div>
-              </Link>
-            </div>
-          </section>
-
-          {/* FAQ Section - New for SEO */}
-          <section className="mt-12 md:mt-16 animate-in fade-in slide-in-from-bottom duration-1000 delay-600" aria-labelledby="faq-heading">
-            <div className="text-center mb-8">
-              <span className="inline-block px-4 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-300 rounded-full text-sm font-medium mb-4">
-                Questions
-              </span>
-              <h2 id="faq-heading" className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
-                Frequently Asked Questions
-              </h2>
-            </div>
-            
-            <div className="space-y-4 md:space-y-6">
-              {[
-                {
-                  question: "What is Next.js and why should I use it for my project?",
-                  answer: "Next.js is a React framework that enables server-side rendering, static site generation, and other performance optimizations. It's ideal for projects that need SEO optimization, fast loading times, and a modern development experience."
-                },
-                {
-                  question: "How long does it typically take to develop a Next.js application?",
-                  answer: "Development timelines vary based on project complexity, but most small to medium-sized applications can be completed in 4-12 weeks. Enterprise applications may take longer depending on requirements and integrations."
-                },
-                {
-                  question: "Do you work with existing codebases or only new projects?",
-                  answer: "I work with both new projects and existing codebases. Whether you need to migrate from another framework to Next.js, upgrade an existing Next.js application, or start from scratch, I can help."
-                },
-                {
-                  question: "What makes your Next.js development services different?",
-                  answer: "My services combine technical expertise with a focus on business outcomes. I prioritize performance, maintainability, and user experience while ensuring your application meets your specific business goals."
-                }
-              ].map((faq, index) => (
-                <div 
-                  key={index}
-                  className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl p-6 border border-zinc-200 dark:border-zinc-800 shadow-md"
-                >
-                  <h3 className="text-lg md:text-xl font-semibold text-zinc-900 dark:text-zinc-50 mb-3">{faq.question}</h3>
-                  <p className="text-zinc-600 dark:text-zinc-400">{faq.answer}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* CTA Section - Enhanced with semantic HTML */}
-          <aside className="mt-12 md:mt-16 text-center bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/50 dark:to-indigo-950/50 rounded-2xl p-8 md:p-12 animate-in fade-in slide-in-from-bottom duration-1000 shadow-lg border border-blue-100 dark:border-blue-900/30">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">
-              Ready to Build Your Next.js Project?
-            </h2>
-            <p className="text-base md:text-lg text-zinc-600 dark:text-zinc-400 max-w-[600px] mx-auto mb-6 md:mb-8">
-              Let&apos;s discuss how Next.js can help you build a faster, more efficient web application that delivers exceptional user experiences.
-            </p>
-            <Link href="/contact">
-              <Button size="lg" className="min-w-[200px] group bg-blue-600 hover:bg-blue-700 text-white hover:scale-105 transition-all duration-300 rounded-full">
-                Start Your Project
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </Link>
-          </aside>
+            </aside>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }

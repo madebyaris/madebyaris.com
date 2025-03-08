@@ -143,19 +143,9 @@ const structuredData = {
   ],
   "url": "https://madebyaris.com/services/wordpress/plugin-development",
   "potentialAction": {
-    "@type": "LearnAction",
-    "target": {
-      "@type": "EntryPoint",
-      "urlTemplate": "https://madebyaris.com/contact",
-      "actionPlatform": [
-        "http://schema.org/DesktopWebPlatform",
-        "http://schema.org/MobileWebPlatform"
-      ]
-    },
-    "result": {
-      "@type": "ContactPage",
-      "name": "Contact for WordPress Plugin Development"
-    }
+    "@type": "CommunicateAction",
+    "target": "https://madebyaris.com/contact",
+    "name": "Contact for WordPress Plugin Development"
   }
 }
 
