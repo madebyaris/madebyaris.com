@@ -53,7 +53,7 @@ export default function ProjectCard({ project, index, categoryColors }: ProjectC
         <div className="relative">
           {/* Category badge */}
           <div className={`absolute top-4 left-4 z-10 ${categoryColors[project.category]?.bg || "bg-zinc-100 dark:bg-zinc-800"} ${categoryColors[project.category]?.text || "text-zinc-800 dark:text-zinc-200"} px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1.5`}>
-            {categoryColors[project.category]?.icon}
+            {categoryColors[project.category]?.icon || <span className="w-4 h-4"/>}
             {project.category}
           </div>
           
