@@ -175,13 +175,6 @@ export const structuredData = {
       },
       "areaServed": "Worldwide",
       "description": "Comprehensive web development services specializing in Next.js, React, WordPress, and modern web architecture. Delivering high-performance, scalable solutions for businesses worldwide.",
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "25",
-        "bestRating": "5",
-        "worstRating": "1"
-      },
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "Expert Web Development Services",
@@ -223,6 +216,31 @@ export const structuredData = {
             }
           }
         ]
+      }
+    },
+    {
+      "@type": "Product",
+      "@id": "https://madebyaris.com/#product",
+      "name": "Web Development Services",
+      "description": "Professional web development services including Next.js, WordPress, and PHP solutions for businesses worldwide.",
+      "brand": {
+        "@type": "Brand",
+        "name": "Made by Aris"
+      },
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "USD",
+        "highPrice": 50000,
+        "lowPrice": 5000,
+        "offerCount": 6,
+        "availability": "https://schema.org/InStock"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "25",
+        "bestRating": "5",
+        "worstRating": "1"
       },
       "review": [
         {
