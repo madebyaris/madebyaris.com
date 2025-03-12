@@ -191,7 +191,7 @@ const structuredData = {
     "image": "https://madebyaris.com/astro.png",
     "sameAs": [
       "https://www.linkedin.com/in/arissetia/",
-      "https://github.com/arissetyawan",
+      "https://github.com/madebyaris",
       "https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe"
     ],
     "worksFor": [
