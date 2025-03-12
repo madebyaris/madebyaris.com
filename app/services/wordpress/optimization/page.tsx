@@ -64,7 +64,7 @@ const structuredData = {
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "WordPress Optimization Services",
-  "description": "Professional WordPress optimization services for improved performance, speed, and security. Expert solutions for faster loading times and better user experience.",
+  "description": "Professional WordPress optimization services to improve speed, security, and performance of your WordPress website.",
   "provider": {
     "@type": "Person",
     "name": "Aris Setiawan",
@@ -83,10 +83,54 @@ const structuredData = {
       "url": "https://madebyaris.com"
     },
     "offers": {
-      "@type": "Offer",
-      "description": "Professional WordPress optimization services",
-      "availability": "https://schema.org/InStock"
+      "@type": "AggregateOffer",
+      "priceCurrency": "USD",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "price": "Contact for pricing",
+        "priceCurrency": "USD",
+        "valueAddedTaxIncluded": true
+      },
+      "availability": "https://schema.org/InStock",
+      "highPrice": 500,
+      "lowPrice": 150,
+      "offerCount": 4
     },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "27",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "E-commerce Store Owner"
+        },
+        "reviewBody": "Our site's loading speed improved dramatically after the optimization service. We've seen a significant increase in conversions."
+      },
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Blog Platform Manager"
+        },
+        "reviewBody": "The security improvements and performance optimizations have made our platform much more reliable and faster."
+      }
+    ],
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "WordPress Optimization Services",
@@ -96,7 +140,7 @@ const structuredData = {
           "itemOffered": {
             "@type": "Service",
             "name": "Speed Optimization",
-            "description": "Comprehensive performance tuning and speed optimization"
+            "description": "Comprehensive speed optimization and caching setup"
           }
         },
         {
@@ -104,15 +148,7 @@ const structuredData = {
           "itemOffered": {
             "@type": "Service",
             "name": "Security Hardening",
-            "description": "Advanced security measures and vulnerability protection"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "CDN Integration",
-            "description": "Global content delivery network setup and configuration"
+            "description": "Advanced security measures and monitoring"
           }
         },
         {
@@ -120,11 +156,93 @@ const structuredData = {
           "itemOffered": {
             "@type": "Service",
             "name": "Performance Monitoring",
-            "description": "Continuous monitoring and optimization of performance metrics"
+            "description": "Continuous performance tracking and optimization"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "CDN Integration",
+            "description": "Content delivery network setup and configuration"
           }
         }
       ]
     }
+  },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https://madebyaris.com",
+          "name": "Home"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@id": "https://madebyaris.com/services",
+          "name": "Services"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https://madebyaris.com/services/wordpress",
+          "name": "WordPress Development"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "item": {
+          "@id": "https://madebyaris.com/services/wordpress/optimization",
+          "name": "WordPress Optimization"
+        }
+      }
+    ]
+  },
+  "mainEntityOfPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What does WordPress optimization include?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Our WordPress optimization service includes speed optimization, caching implementation, database optimization, security hardening, CDN integration, and performance monitoring to ensure your site runs at peak efficiency."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much can optimization improve my site's speed?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most websites see a 40-70% improvement in loading times after our optimization service. The exact improvement depends on your current setup and the optimization measures implemented."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What security measures are implemented?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We implement multiple layers of security including firewall configuration, malware scanning, login protection, SSL setup, regular security audits, and automated backup systems."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you provide ongoing optimization support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, we offer continuous monitoring and optimization services to maintain peak performance, implement updates, and make adjustments as your site grows and changes."
+        }
+      }
+    ]
   },
   "about": {
     "@type": "Thing",

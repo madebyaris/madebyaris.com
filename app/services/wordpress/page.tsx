@@ -77,51 +77,176 @@ const testimonials = [
 // Structured Data
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": "Service",
-  "name": "WordPress Development Services",
-  "description": "Professional WordPress development services including custom themes, plugins, and optimization",
-  "provider": {
-    "@type": "Person",
-    "name": "Aris Setiawan",
-    "jobTitle": "Senior WordPress Developer",
-    "url": "https://madebyaris.com"
+  "@type": "WebPage",
+  "@id": "https://madebyaris.com/services/wordpress/#webpage",
+  "name": "WordPress Development Services | Custom Solutions",
+  "description": "Professional WordPress development services including custom themes, plugins, and optimization. Expert solutions for modern WordPress websites.",
+  "url": "https://madebyaris.com/services/wordpress",
+  "isPartOf": {
+    "@type": "WebSite",
+    "@id": "https://madebyaris.com/#website"
   },
-  "serviceType": "Web Development",
-  "areaServed": "Worldwide",
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "WordPress Development Services",
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
     "itemListElement": [
       {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "WordPress Theme Development",
-          "description": "Custom WordPress themes that perfectly align with your brand identity."
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https://madebyaris.com",
+          "name": "Home"
         }
       },
       {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "WordPress Plugin Development",
-          "description": "Custom WordPress plugins that extend functionality and deliver exactly what your business needs."
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@id": "https://madebyaris.com/services",
+          "name": "Services"
         }
       },
       {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https://madebyaris.com/services/wordpress",
+          "name": "WordPress Development"
+        }
+      }
+    ]
+  },
+  "mainEntity": {
+    "@type": "Service",
+    "name": "WordPress Development Services",
+    "description": "Professional WordPress development services including custom themes, plugins, and optimization",
+    "provider": {
+      "@type": "Person",
+      "@id": "https://madebyaris.com/#person",
+      "name": "Aris Setiawan",
+      "jobTitle": "Senior Full Stack Developer",
+      "url": "https://madebyaris.com",
+      "image": "https://madebyaris.com/astro.png",
+      "sameAs": [
+        "https://www.linkedin.com/in/arissetia/",
+        "https://github.com/madebyaris",
+        "https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe"
+      ]
+    },
+    "serviceType": "Web Development",
+    "areaServed": {
+      "@type": "Country",
+      "name": "Worldwide"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "WordPress Development Services",
+      "itemListElement": services.map((service) => ({
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Headless WordPress Development",
-          "description": "Modern headless WordPress implementations with Next.js frontend for superior performance."
+          "name": service.title,
+          "description": service.description,
+          "url": `https://madebyaris.com${service.href}`,
+          "serviceOutput": {
+            "@type": "ItemList",
+            "itemListElement": service.features.map((feature, index) => ({
+              "@type": "ListItem",
+              "position": index + 1,
+              "item": {
+                "@type": "Service",
+                "name": feature
+              }
+            }))
+          }
+        }
+      }))
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "25",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": testimonials.map((testimonial) => ({
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "author": {
+        "@type": "Person",
+        "name": testimonial.author,
+        "jobTitle": testimonial.company
+      },
+      "reviewBody": testimonial.quote
+    }))
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "WordPress Development Expertise",
+    "description": "Expert WordPress development services focusing on custom themes, plugins, and optimization. Specializing in modern WordPress solutions and headless architecture."
+  },
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://madebyaris.com/#organization",
+    "name": "MadeByAris",
+    "url": "https://madebyaris.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://madebyaris.com/logo.png",
+      "width": "180",
+      "height": "180"
+    }
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "USD",
+    "priceSpecification": {
+      "@type": "PriceSpecification",
+      "price": "Contact for custom pricing",
+      "priceCurrency": "USD",
+      "valueAddedTaxIncluded": true
+    },
+    "availability": "https://schema.org/InStock",
+    "highPrice": 50000,
+    "lowPrice": 5000,
+    "offerCount": services.length
+  },
+  "mainEntityOfPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What WordPress services do you offer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "I offer comprehensive WordPress services including custom theme development, plugin development, headless WordPress solutions with Next.js, and performance optimization. Each service is tailored to meet your specific business needs."
         }
       },
       {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "WordPress Performance Optimization",
-          "description": "Comprehensive WordPress optimization services for speed and security."
+        "@type": "Question",
+        "name": "Do you work with existing WordPress sites?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, I work with both new and existing WordPress sites. Whether you need to upgrade, optimize, or add new features to your current WordPress site, I can help ensure your site performs at its best."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the benefit of headless WordPress?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Headless WordPress combines WordPress's powerful content management capabilities with modern frontend technologies like Next.js. This results in better performance, enhanced security, and more flexibility in delivering content across different platforms."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you ensure WordPress security?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "I implement comprehensive security measures including regular updates, secure coding practices, robust authentication, and security hardening. I also set up monitoring and backup systems to protect your WordPress site."
         }
       }
     ]

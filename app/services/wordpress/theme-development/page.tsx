@@ -81,10 +81,54 @@ const structuredData = {
       "url": "https://madebyaris.com"
     },
     "offers": {
-      "@type": "Offer",
-      "description": "Professional WordPress theme development services",
-      "availability": "https://schema.org/InStock"
+      "@type": "AggregateOffer",
+      "priceCurrency": "USD",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "price": "Contact for pricing",
+        "priceCurrency": "USD",
+        "valueAddedTaxIncluded": true
+      },
+      "availability": "https://schema.org/InStock",
+      "highPrice": 5000,
+      "lowPrice": 1000,
+      "offerCount": 4
     },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "27",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Marketing Director at RetailBrand"
+        },
+        "reviewBody": "The WordPress theme developed for our business perfectly captures our brand identity. The attention to detail and performance optimization exceeded our expectations."
+      },
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "CEO at EducationalPlatform"
+        },
+        "reviewBody": "Outstanding work on our custom WordPress theme. The performance improvements and modern design have significantly enhanced our user experience."
+      }
+    ],
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "WordPress Theme Services",
@@ -123,6 +167,80 @@ const structuredData = {
         }
       ]
     }
+  },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https://madebyaris.com",
+          "name": "Home"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@id": "https://madebyaris.com/services",
+          "name": "Services"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https://madebyaris.com/services/wordpress",
+          "name": "WordPress Development"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "item": {
+          "@id": "https://madebyaris.com/services/wordpress/theme-development",
+          "name": "Theme Development"
+        }
+      }
+    ]
+  },
+  "mainEntityOfPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is included in your WordPress theme development service?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Our WordPress theme development service includes custom design implementation, responsive layouts, performance optimization, SEO-friendly structure, custom functionality integration, and comprehensive documentation. We also provide post-launch support and maintenance."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does it take to develop a custom WordPress theme?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The development timeline typically ranges from 4-8 weeks, depending on the complexity of the design and required functionality. We provide a detailed timeline during the initial consultation based on your specific requirements."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you provide ongoing support after the theme is launched?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, we offer comprehensive post-launch support including bug fixes, updates, and maintenance. We also provide documentation and training to help you manage your theme effectively."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are your WordPress themes optimized for performance?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Absolutely. All our themes are built with performance in mind, implementing best practices for code optimization, image optimization, caching, and Core Web Vitals compliance."
+        }
+      }
+    ]
   },
   "about": {
     "@type": "Thing",

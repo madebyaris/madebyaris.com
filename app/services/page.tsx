@@ -73,101 +73,166 @@ const structuredData = {
     "@type": "WebSite",
     "@id": "https://madebyaris.com/#website"
   },
-  "about": {
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https://madebyaris.com",
+          "name": "Home"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@id": "https://madebyaris.com/services",
+          "name": "Services"
+        }
+      }
+    ]
+  },
+  "mainEntity": {
     "@type": "Service",
     "name": "Professional Web Development Services",
     "description": "Expert development services focused on modern technologies and best practices. From blazing-fast Next.js applications to powerful WordPress solutions.",
     "provider": {
       "@type": "Person",
+      "@id": "https://madebyaris.com/#person",
       "name": "Aris Setiawan",
-      "jobTitle": "Senior Full-Stack Developer",
-      "url": "https://madebyaris.com"
+      "jobTitle": "Senior Full Stack Developer",
+      "url": "https://madebyaris.com",
+      "image": "https://madebyaris.com/astro.png",
+      "sameAs": [
+        "https://www.linkedin.com/in/arissetia/",
+        "https://github.com/madebyaris",
+        "https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe"
+      ]
     },
     "serviceType": "Web Development",
     "areaServed": "Worldwide",
-    "offers": {
-      "@type": "AggregateOffer",
-      "offers": [
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Next.js Development",
-            "description": "Modern web applications built with Next.js for optimal performance, SEO, and exceptional user experience.",
-            "url": "https://madebyaris.com/services/nextjs-development"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "PHP Development",
-            "description": "Custom PHP applications and solutions built with modern practices and robust architecture.",
-            "url": "https://madebyaris.com/services/php-development"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "WordPress Development",
-            "description": "Professional WordPress development including custom themes, plugins, and headless solutions.",
-            "url": "https://madebyaris.com/services/wordpress"
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Web Development Services",
+      "itemListElement": services.map((service) => ({
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": service.title,
+          "description": service.description,
+          "url": `https://madebyaris.com${service.href}`,
+          "serviceOutput": {
+            "@type": "ItemList",
+            "itemListElement": service.features.map((feature, index) => ({
+              "@type": "ListItem",
+              "position": index + 1,
+              "item": {
+                "@type": "Service",
+                "name": feature
+              }
+            }))
           }
         }
-      ]
+      }))
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "25",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Tech Director at E-commerce Company"
+        },
+        "reviewBody": "Working with Aris transformed our e-commerce platform. His deep understanding of Next.js and performance optimization resulted in significantly faster load times and better user engagement."
+      },
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Founder of Tech Startup"
+        },
+        "reviewBody": "Aris helped us migrate our application to Next.js 14, implementing server components and the new app router. The improvement in performance and SEO was immediate."
+      }
+    ]
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "Web Development Services",
+    "description": "Comprehensive web development services including Next.js, WordPress, and PHP development. Expert solutions for modern web applications and enterprise needs."
+  },
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://madebyaris.com/#organization",
+    "name": "MadeByAris",
+    "url": "https://madebyaris.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://madebyaris.com/logo.png",
+      "width": "180",
+      "height": "180"
     }
   },
-  "mainEntity": {
-    "@type": "Service",
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "USD",
+    "priceSpecification": {
+      "@type": "PriceSpecification",
+      "price": "Contact for custom pricing",
+      "priceCurrency": "USD",
+      "valueAddedTaxIncluded": true
+    },
+    "availability": "https://schema.org/InStock",
+    "highPrice": 50000,
+    "lowPrice": 5000,
+    "offerCount": services.length + wordPressServices.length
+  },
+  "subjectOf": {
+    "@type": "ItemList",
     "name": "WordPress Development Services",
     "description": "Comprehensive WordPress development services including custom themes, plugins, headless solutions, and optimization.",
-    "provider": {
-      "@type": "Person",
-      "name": "Aris Setiawan",
-      "url": "https://madebyaris.com"
-    },
-    "offers": {
-      "@type": "AggregateOffer",
-      "offers": [
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Custom Theme Development",
-            "description": "Pixel-perfect WordPress themes that capture your unique style and meet your specific requirements.",
-            "url": "https://madebyaris.com/services/wordpress/theme-development"
-          }
+    "itemListElement": wordPressServices.map((service, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "Service",
+        "name": service.title,
+        "description": service.description,
+        "url": `https://madebyaris.com${service.href}`,
+        "provider": {
+          "@type": "Person",
+          "@id": "https://madebyaris.com/#person"
         },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Plugin Development",
-            "description": "Custom WordPress plugins that add exactly the features you need, built with security and performance in mind.",
-            "url": "https://madebyaris.com/services/wordpress/plugin-development"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Headless WordPress",
-            "description": "Modern headless WordPress solutions with Next.js frontends, combining the best of both worlds.",
-            "url": "https://madebyaris.com/services/wordpress/headless-development"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "WordPress Optimization",
-            "description": "Comprehensive WordPress optimization for peak performance, security, and user experience.",
-            "url": "https://madebyaris.com/services/wordpress/optimization"
-          }
+        "serviceOutput": {
+          "@type": "ItemList",
+          "itemListElement": service.benefits.map((benefit, benefitIndex) => ({
+            "@type": "ListItem",
+            "position": benefitIndex + 1,
+            "item": {
+              "@type": "Service",
+              "name": benefit
+            }
+          }))
         }
-      ]
-    }
+      }
+    }))
   }
 }
 

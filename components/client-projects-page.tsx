@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button'
 import { ArrowRight, Filter, Search, Briefcase, ShoppingCart, Film, Home, Globe } from 'lucide-react'
 import { Sparkles } from '@/components/ui/sparkles'
 import dynamic from 'next/dynamic'
-import { projects } from '@/app/projects/server-page'
 
 // Import ProjectCard as a client component
 const ProjectCard = dynamic(() => import('@/components/project-card'), { ssr: true })
@@ -51,7 +50,22 @@ const categoryColors: Record<string, { bg: string, text: string, icon: React.Rea
   }
 }
 
-export default function ClientProjectsPage() {
+// Define the project type
+interface Project {
+  id: number;
+  title: string;
+  description: string;
+  logo: string;
+  tags: string[];
+  link: string;
+  category: string;
+}
+
+interface ClientProjectsPageProps {
+  projects: Project[];
+}
+
+export default function ClientProjectsPage({ projects }: ClientProjectsPageProps) {
   // State for filtered projects and active category
   const [filteredProjects, setFilteredProjects] = useState(projects);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
@@ -81,7 +95,7 @@ export default function ClientProjectsPage() {
     }
     
     setFilteredProjects(result);
-  }, [activeCategory, searchQuery]);
+  }, [activeCategory, searchQuery, projects]);
 
   // Handle category click
   const handleCategoryClick = (category: string) => {

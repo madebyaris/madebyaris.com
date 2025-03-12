@@ -151,71 +151,150 @@ const timelineData = [
 // Structured Data
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Aris Setiawan",
-  "jobTitle": "Senior Full Stack Developer",
-  "description": "Senior Full Stack Developer with 12+ years of experience in Next.js, React, WordPress, and enterprise web architecture.",
-  "url": "https://madebyaris.com",
-  "image": "https://madebyaris.com/astro.png",
-  "sameAs": [
-    "https://www.linkedin.com/in/arissetia/",
-    "https://github.com/arissetyawan",
-    "https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe"
-  ],
-  "worksFor": {
-    "@type": "Organization",
-    "name": "SAB Digital Marketing Agency",
-    "url": "https://madebyaris.com"
+  "@type": "AboutPage",
+  "@id": "https://madebyaris.com/about/#webpage",
+  "url": "https://madebyaris.com/about",
+  "name": "About Aris Setiawan | Senior Full-Stack Developer & Web Architect",
+  "description": "Learn about Aris Setiawan's 12+ years of experience in enterprise web development, specializing in Next.js, React, WordPress, and modern web architecture.",
+  "isPartOf": {
+    "@type": "WebSite",
+    "@id": "https://madebyaris.com/#website"
   },
-  "knowsAbout": [
-    "Next.js Development",
-    "React Development",
-    "WordPress Development",
-    "Full Stack Development",
-    "Web Architecture",
-    "Enterprise Solutions",
-    "Performance Optimization",
-    "Technical Leadership"
-  ],
-  "hasOccupation": {
-    "@type": "Occupation",
-    "name": "Full Stack Developer",
-    "occupationLocation": {
-      "@type": "City",
-      "name": "Sidoarjo",
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "Indonesia"
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https://madebyaris.com",
+          "name": "Home"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@id": "https://madebyaris.com/about",
+          "name": "About"
+        }
       }
-    },
-    "skills": [
-      "Next.js",
-      "React",
-      "TypeScript",
-      "WordPress",
-      "PHP",
-      "MySQL",
-      "Node.js",
-      "GraphQL"
     ]
   },
-  "alumniOf": [
-    {
-      "@type": "Organization",
-      "name": "SAB Digital Marketing Agency",
-      "url": "https://madebyaris.com"
+  "mainEntity": {
+    "@type": "Person",
+    "@id": "https://madebyaris.com/#person",
+    "name": "Aris Setiawan",
+    "jobTitle": "Senior Full Stack Developer",
+    "description": "Senior Full Stack Developer with 12+ years of experience in Next.js, React, WordPress, and enterprise web architecture.",
+    "url": "https://madebyaris.com",
+    "image": "https://madebyaris.com/astro.png",
+    "sameAs": [
+      "https://www.linkedin.com/in/arissetia/",
+      "https://github.com/madebyaris",
+      "https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe"
+    ],
+    "worksFor": [
+      {
+        "@type": "Organization",
+        "name": "SAB Digital Marketing Agency",
+        "url": "https://madebyaris.com",
+        "startDate": "2022"
+      },
+      {
+        "@type": "Organization",
+        "name": "Made by Aris",
+        "url": "https://madebyaris.com",
+        "startDate": "2015"
+      }
+    ],
+    "knowsAbout": [
+      "Next.js Development",
+      "React Development",
+      "WordPress Development",
+      "Full Stack Development",
+      "Web Architecture",
+      "Enterprise Solutions",
+      "Performance Optimization",
+      "Technical Leadership"
+    ],
+    "hasOccupation": {
+      "@type": "Occupation",
+      "name": "Full Stack Developer",
+      "occupationLocation": {
+        "@type": "City",
+        "name": "Sidoarjo",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "Indonesia"
+        }
+      },
+      "skills": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "WordPress",
+        "PHP",
+        "MySQL",
+        "Node.js",
+        "GraphQL",
+        "System Architecture",
+        "Performance Optimization"
+      ]
     },
-    {
-      "@type": "Organization",
-      "name": "Raja Kreatif Asia",
-      "url": "https://rajakreatif.com"
-    },
-    {
-      "@type": "Organization",
-      "name": "Hongkiat.com",
-      "url": "https://www.hongkiat.com"
-    }
-  ]
+    "alumniOf": [
+      {
+        "@type": "Organization",
+        "name": "SAB Digital Marketing Agency",
+        "url": "https://madebyaris.com"
+      },
+      {
+        "@type": "Organization",
+        "name": "Raja Kreatif Asia",
+        "url": "https://rajakreatif.com"
+      },
+      {
+        "@type": "Organization",
+        "name": "Hongkiat.com",
+        "url": "https://www.hongkiat.com"
+      }
+    ],
+    "workExperience": [
+      {
+        "@type": "WorkExperience",
+        "jobTitle": "Senior Full Stack Developer",
+        "startDate": "2022",
+        "endDate": "Present",
+        "employer": {
+          "@type": "Organization",
+          "name": "SAB Digital Marketing Agency"
+        },
+        "description": "Leading web development projects, optimizing performance, and implementing modern development practices."
+      },
+      {
+        "@type": "WorkExperience",
+        "jobTitle": "Founder",
+        "startDate": "2015",
+        "endDate": "Present",
+        "employer": {
+          "@type": "Organization",
+          "name": "MadeByAris"
+        },
+        "description": "Running a successful freelance business offering full-stack web development services."
+      },
+      {
+        "@type": "WorkExperience",
+        "jobTitle": "CEO",
+        "startDate": "2022",
+        "endDate": "2022",
+        "employer": {
+          "@type": "Organization",
+          "name": "Raja Kreatif Asia"
+        },
+        "description": "Led company growth and innovation initiatives."
+      }
+    ]
+  }
 }
 
 // Generate Metadata and Structured Data

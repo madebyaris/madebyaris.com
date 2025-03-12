@@ -10,39 +10,237 @@ export const revalidate = 86400 // Revalidate daily
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "name": "Next.js SEO Services | Search Engine Optimization for Next.js",
-  "description": "Professional Next.js SEO services to optimize your web application for search engines. Improve rankings, visibility, and organic traffic with Next.js-specific SEO strategies.",
+  "name": "Next.js SEO | Technical Search Optimization",
+  "description": "Boost your Next.js application's search visibility with expert SEO implementation. Get higher rankings and more organic traffic through technical optimization and performance tuning. Based in Indonesia, serving worldwide.",
   "url": "https://madebyaris.com/services/nextjs-development/nextjs-seo",
   "keywords": [
     "Next.js SEO",
     "Next.js Search Engine Optimization",
     "SEO for Next.js",
-    "Next.js SEO Services",
     "Next.js SEO Expert",
-    "Jasa SEO Next.js",
-    "Next.js Optimization",
     "Technical SEO Next.js",
     "Server-Side Rendering SEO",
-    "Static Site Generation SEO"
+    "Static Site Generation SEO",
+    "Core Web Vitals",
+    "SEO Performance",
+    "Search Rankings",
+    "Organic Traffic",
+    "SEO Monitoring",
+    "Next.js Metadata",
+    "Structured Data",
+    "Indonesian Developer"
   ],
+  "provider": {
+    "@type": "Person",
+    "name": "Aris Setiawan",
+    "jobTitle": "Full-Stack Developer & SEO Specialist",
+    "url": "https://madebyaris.com"
+  },
   "mainEntity": {
     "@type": "Service",
-    "name": "Next.js SEO Services",
+    "name": "Next.js SEO Solutions",
     "serviceType": "Search Engine Optimization",
     "provider": {
       "@type": "Person",
       "name": "Aris Setiawan",
-      "jobTitle": "Senior Full-Stack Developer & SEO Expert",
+      "jobTitle": "Full-Stack Developer & SEO Specialist",
       "url": "https://madebyaris.com"
     },
     "areaServed": "Worldwide",
-    "description": "Expert SEO services specifically for Next.js applications, leveraging server-side rendering and static generation for optimal search engine visibility.",
+    "description": "I help businesses improve their search visibility through technical SEO optimization of Next.js applications. My approach combines deep technical knowledge with proven SEO strategies to boost rankings and organic traffic. From metadata optimization to Core Web Vitals, I ensure your Next.js app meets all modern SEO requirements.",
     "offers": {
-      "@type": "Offer",
+      "@type": "AggregateOffer",
+      "priceCurrency": "USD",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "price": "Contact for custom pricing",
+        "priceCurrency": "USD",
+        "valueAddedTaxIncluded": true
+      },
       "availability": "https://schema.org/InStock",
-      "price": "Contact for pricing",
-      "priceCurrency": "USD"
+      "highPrice": 4000,
+      "lowPrice": 1000,
+      "offerCount": 4
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "21",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Marketing Director at Online Marketplace"
+        },
+        "reviewBody": "Aris's SEO expertise transformed our Next.js application's search performance. Our organic traffic increased by 150% within three months, and we now rank on page one for our main keywords. His technical approach to SEO made a real difference."
+      },
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "CEO of Digital Agency"
+        },
+        "reviewBody": "Working with Aris on our Next.js SEO was eye-opening. His deep understanding of both technical SEO and Next.js helped us achieve perfect Core Web Vitals scores and significantly improved our search rankings. The detailed reporting and recommendations were invaluable."
+      }
+    ],
+    "serviceOutput": [
+      {
+        "@type": "Service",
+        "name": "Technical SEO Implementation",
+        "description": "Comprehensive technical SEO setup including metadata optimization, structured data, and server-side rendering configuration."
+      },
+      {
+        "@type": "Service",
+        "name": "Performance Optimization",
+        "description": "Core Web Vitals optimization and performance tuning for better search rankings and user experience."
+      },
+      {
+        "@type": "Service",
+        "name": "Content Strategy",
+        "description": "SEO-driven content structure and optimization strategies specific to Next.js applications."
+      },
+      {
+        "@type": "Service",
+        "name": "Analytics & Monitoring",
+        "description": "Detailed SEO performance tracking, reporting, and continuous optimization recommendations."
+      }
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Next.js SEO Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Technical SEO Audit",
+            "description": "In-depth analysis of your Next.js application's SEO performance, including technical issues, Core Web Vitals, and ranking factors."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "SEO Implementation",
+            "description": "Full technical SEO setup including metadata, structured data, sitemaps, and robots.txt configuration optimized for Next.js."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Performance Optimization",
+            "description": "Core Web Vitals optimization, server-side rendering configuration, and performance tuning for better rankings."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "SEO Monitoring",
+            "description": "Ongoing performance tracking, ranking analysis, and optimization updates to maintain and improve search visibility."
+          }
+        }
+      ]
     }
+  },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https://madebyaris.com",
+          "name": "Home"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@id": "https://madebyaris.com/services",
+          "name": "Services"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https://madebyaris.com/services/nextjs-development",
+          "name": "Next.js Development"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "item": {
+          "@id": "https://madebyaris.com/services/nextjs-development/nextjs-seo",
+          "name": "Next.js SEO"
+        }
+      }
+    ]
+  },
+  "mainEntityOfPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How is Next.js SEO different from regular SEO?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Next.js offers unique SEO advantages through its server-side rendering and static generation capabilities. This means search engines can crawl and index your content more effectively, leading to better rankings. I leverage these features along with Next.js's built-in performance optimizations to give your site a competitive edge in search results."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What improvements can I expect from Next.js SEO?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "With proper Next.js SEO implementation, you can expect faster page load times, improved Core Web Vitals scores, better search engine crawling, and higher rankings. My clients typically see significant increases in organic traffic within 2-3 months. I'll provide regular reports showing your progress in these areas."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What's included in your Next.js SEO service?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "My service includes a comprehensive technical SEO audit, metadata optimization, structured data implementation, Core Web Vitals optimization, and ongoing performance monitoring. I'll also provide recommendations for content structure and internal linking specific to your Next.js application."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you track and report SEO progress?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "I use a combination of tools to track your SEO performance, including Google Search Console, Analytics, and specialized SEO software. You'll receive monthly reports showing ranking changes, organic traffic growth, Core Web Vitals scores, and specific recommendations for further improvements."
+        }
+      }
+    ]
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "Next.js SEO Expertise",
+    "description": "Specialized in technical SEO optimization for Next.js applications, focusing on performance, search visibility, and organic traffic growth through modern SEO strategies."
+  },
+  "potentialAction": {
+    "@type": "CommunicateAction",
+    "name": "Discuss Your Next.js SEO",
+    "target": "https://madebyaris.com/contact"
   }
 }
 

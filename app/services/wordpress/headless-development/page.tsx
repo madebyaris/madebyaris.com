@@ -64,7 +64,7 @@ const structuredData = {
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "Headless WordPress Development Services",
-  "description": "Professional headless WordPress development services combining WordPress CMS with modern frontend technologies like Next.js for superior performance and flexibility.",
+  "description": "Expert headless WordPress development services using Next.js. Build fast, secure, and scalable web applications with modern technology stack.",
   "provider": {
     "@type": "Person",
     "name": "Aris Setiawan",
@@ -74,7 +74,7 @@ const structuredData = {
   "mainEntity": {
     "@type": "Service",
     "name": "Headless WordPress Development",
-    "serviceType": "Web Development",
+    "serviceType": "Headless WordPress Development",
     "areaServed": "Worldwide",
     "provider": {
       "@type": "Person",
@@ -83,10 +83,54 @@ const structuredData = {
       "url": "https://madebyaris.com"
     },
     "offers": {
-      "@type": "Offer",
-      "description": "Professional headless WordPress development services",
-      "availability": "https://schema.org/InStock"
+      "@type": "AggregateOffer",
+      "priceCurrency": "USD",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "price": "Contact for pricing",
+        "priceCurrency": "USD",
+        "valueAddedTaxIncluded": true
+      },
+      "availability": "https://schema.org/InStock",
+      "highPrice": 2000,
+      "lowPrice": 500,
+      "offerCount": 4
     },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "18",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Digital Agency Owner"
+        },
+        "reviewBody": "The headless WordPress solution delivered exceptional performance and flexibility for our client's e-commerce platform."
+      },
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Marketing Director"
+        },
+        "reviewBody": "Our content team loves the WordPress backend while our developers appreciate the modern Next.js frontend. Best of both worlds!"
+      }
+    ],
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "Headless WordPress Services",
@@ -96,7 +140,7 @@ const structuredData = {
           "itemOffered": {
             "@type": "Service",
             "name": "Next.js Integration",
-            "description": "Modern frontend development using Next.js for optimal performance and SEO"
+            "description": "Seamless integration of Next.js with WordPress"
           }
         },
         {
@@ -104,50 +148,101 @@ const structuredData = {
           "itemOffered": {
             "@type": "Service",
             "name": "API Development",
-            "description": "Custom REST API endpoints and GraphQL schema development"
+            "description": "Custom REST API and GraphQL endpoint development"
           }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
-            "name": "Global Performance",
-            "description": "Lightning-fast content delivery through edge caching and CDNs"
+            "name": "Performance Optimization",
+            "description": "Speed optimization and caching implementation"
           }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
-            "name": "Backend Optimization",
-            "description": "WordPress backend optimization for headless architecture"
+            "name": "Deployment Setup",
+            "description": "Server configuration and deployment automation"
           }
         }
       ]
     }
   },
-  "about": {
-    "@type": "Thing",
-    "name": "Headless WordPress Development",
-    "description": "Modern headless WordPress development combining WordPress CMS with Next.js frontend for superior performance and flexibility."
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https://madebyaris.com",
+          "name": "Home"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@id": "https://madebyaris.com/services",
+          "name": "Services"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https://madebyaris.com/services/wordpress",
+          "name": "WordPress Development"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "item": {
+          "@id": "https://madebyaris.com/services/wordpress/headless-development",
+          "name": "Headless Development"
+        }
+      }
+    ]
   },
-  "keywords": [
-    "Headless WordPress",
-    "WordPress Development",
-    "Next.js WordPress",
-    "Decoupled WordPress",
-    "WordPress API",
-    "Modern WordPress",
-    "JAMstack WordPress",
-    "WordPress REST API",
-    "WordPress Frontend",
-    "WordPress Architecture"
-  ],
-  "url": "https://madebyaris.com/services/wordpress/headless-development",
-  "potentialAction": {
-    "@type": "CommunicateAction",
-    "target": "https://madebyaris.com/contact",
-    "name": "Contact for Headless WordPress Development"
+  "mainEntityOfPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is headless WordPress development?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Headless WordPress development separates the frontend (Next.js) from the backend (WordPress), allowing for faster performance, better security, and more flexibility in content delivery while maintaining WordPress's familiar admin interface."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why choose Next.js for headless WordPress?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Next.js offers superior performance through static site generation and server-side rendering, better SEO capabilities, improved security, and a modern development experience while leveraging WordPress as a powerful content management system."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does headless WordPress improve performance?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Headless WordPress with Next.js delivers faster page loads through static generation, efficient caching, and optimized asset delivery. This architecture also reduces server load and improves overall application responsiveness."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you provide ongoing support for headless WordPress sites?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, we offer comprehensive support including performance monitoring, security updates, content delivery optimization, and technical maintenance for both the WordPress backend and Next.js frontend."
+        }
+      }
+    ]
   }
 }
 

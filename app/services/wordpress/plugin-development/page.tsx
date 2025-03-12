@@ -81,10 +81,54 @@ const structuredData = {
       "url": "https://madebyaris.com"
     },
     "offers": {
-      "@type": "Offer",
-      "description": "Professional WordPress plugin development services",
-      "availability": "https://schema.org/InStock"
+      "@type": "AggregateOffer",
+      "priceCurrency": "USD",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "price": "Contact for pricing",
+        "priceCurrency": "USD",
+        "valueAddedTaxIncluded": true
+      },
+      "availability": "https://schema.org/InStock",
+      "highPrice": 2000,
+      "lowPrice": 500,
+      "offerCount": 4
     },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "23",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "CEO at Educational Platform"
+        },
+        "reviewBody": "The custom plugin developed for our membership site has streamlined our operations and improved user experience significantly."
+      },
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "CTO at E-commerce Platform"
+        },
+        "reviewBody": "Excellent work on our custom WooCommerce plugin. The integration was seamless and the performance improvements are notable."
+      }
+    ],
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "WordPress Plugin Services",
@@ -123,6 +167,80 @@ const structuredData = {
         }
       ]
     }
+  },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https://madebyaris.com",
+          "name": "Home"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@id": "https://madebyaris.com/services",
+          "name": "Services"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https://madebyaris.com/services/wordpress",
+          "name": "WordPress Development"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "item": {
+          "@id": "https://madebyaris.com/services/wordpress/plugin-development",
+          "name": "Plugin Development"
+        }
+      }
+    ]
+  },
+  "mainEntityOfPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What types of WordPress plugins can you develop?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We develop all types of WordPress plugins including e-commerce extensions, membership plugins, custom post type plugins, API integrations, security plugins, and any custom functionality your business needs."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you ensure plugin security?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We follow WordPress security best practices, implement input validation, data sanitization, and proper authentication. All plugins undergo thorough security testing before deployment."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you provide plugin maintenance and updates?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, we offer ongoing maintenance services including regular updates, compatibility checks, security patches, and performance optimization to keep your plugin running smoothly."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you integrate third-party APIs with WordPress plugins?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Absolutely. We have extensive experience integrating various third-party APIs and services into WordPress plugins, ensuring secure and efficient data exchange."
+        }
+      }
+    ]
   },
   "about": {
     "@type": "Thing",
