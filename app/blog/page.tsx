@@ -5,7 +5,6 @@ import type { Post, Tag } from '@/lib/types'
 import { ImageResponse } from 'next/og'
 import { Suspense } from 'react'
 import { BlogContent } from '@/components/blog-content'
-import { Button } from '@/components/ui/button'
 
 export const revalidate = 3600
 

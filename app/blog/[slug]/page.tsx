@@ -10,7 +10,6 @@ import { ArrowLeft, ArrowRight, BookOpen, Calendar, Clock, Share2, Tag, User } f
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Suspense } from 'react'
-import type { Category } from '@/lib/types'
 import { TableOfContents } from '@/components/table-of-contents'
 import { SmoothScroll } from '@/components/smooth-scroll'
 

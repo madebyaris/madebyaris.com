@@ -76,11 +76,7 @@ Disallow: /api/
 Disallow: /_next/
 Disallow: /static/
 
-# Crawl-delay
-Crawl-delay: 1
-
-# Host
-Host: ${baseUrl}
+# no crawl delay
 
 # Sitemaps
 Sitemap: ${baseUrl}/sitemap.xml`
