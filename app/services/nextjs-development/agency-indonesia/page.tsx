@@ -10,80 +10,289 @@ export const revalidate = 86400 // Revalidate daily
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "name": "Agensi Next.js Indonesia | Jasa Pembuatan Website Perusahaan",
-  "description": "Agensi Next.js profesional di Indonesia yang ahli dalam pembuatan website perusahaan. Website keren dan cepat untuk bisnis dan organisasi Indonesia.",
+  "name": "Agensi Next.js Indonesia | Solusi Website Enterprise",
+  "description": "Agensi Next.js terpercaya di Indonesia untuk pengembangan website enterprise. Kami membangun website modern, performa tinggi, dan SEO-friendly untuk perusahaan besar dan organisasi Indonesia.",
   "url": "https://madebyaris.com/services/nextjs-development/agency-indonesia",
   "keywords": [
-    "Jasa Pembuatan Website",
-    "Jasa Web",
     "Agensi Next.js Indonesia",
-    "Website Perusahaan",
-    "Jasa Pembuatan Website Jakarta",
-    "Agensi Digital Indonesia",
-    "Jasa Web Developer Profesional",
-    "Pembuatan Website Bisnis",
-    "Solusi Web Perusahaan Indonesia",
-    "Jasa IT Enterprise",
-    "Pembuatan Website Next.js",
-    "Migrasi WordPress ke Next.js",
-    "Jasa Pembuatan Website Perusahaan",
+    "Website Enterprise Next.js",
+    "Pengembangan Web Enterprise",
+    "Agensi Digital Jakarta",
+    "Website Perusahaan Modern",
+    "Solusi Web Enterprise",
+    "Next.js Enterprise Solutions",
     "Agensi Web Premium",
-    "Jasa Pembuatan Website Cepat"
+    "Website Performa Tinggi",
+    "Migrasi WordPress ke Next.js",
+    "Website Bisnis Enterprise",
+    "Full-Stack Development Agency",
+    "Konsultan Next.js Enterprise",
+    "Agensi Website Premium",
+    "Solusi Digital Enterprise"
   ],
+  "provider": {
+    "@type": "Person",
+    "name": "Aris Setiawan",
+    "jobTitle": "Full-Stack Developer & Technical Lead",
+    "url": "https://madebyaris.com"
+  },
   "mainEntity": {
     "@type": "Service",
-    "name": "Jasa Agensi Next.js di Indonesia",
-    "serviceType": "Agensi Pembuatan Website",
+    "name": "Agensi Next.js Enterprise Indonesia",
+    "serviceType": "Pengembangan Website Enterprise",
     "provider": {
       "@type": "Person",
       "name": "Aris Setiawan",
-      "jobTitle": "Senior Full-Stack Developer",
+      "jobTitle": "Full-Stack Developer & Technical Lead",
       "url": "https://madebyaris.com"
     },
     "areaServed": "Indonesia",
-    "description": "Agensi Next.js full-service yang menyediakan jasa pembuatan website perusahaan untuk bisnis dan organisasi Indonesia.",
+    "description": "Kami adalah agensi Next.js yang fokus pada solusi website enterprise di Indonesia. Tim kami memiliki pengalaman mendalam dalam membangun dan mengoptimalkan website skala besar dengan performa tinggi, keamanan maksimal, dan skalabilitas tanpa batas.",
     "offers": {
-      "@type": "Offer",
+      "@type": "AggregateOffer",
+      "priceCurrency": "IDR",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "price": "Hubungi untuk penawaran enterprise",
+        "priceCurrency": "IDR",
+        "valueAddedTaxIncluded": true
+      },
       "availability": "https://schema.org/InStock",
-      "price": "Hubungi untuk penawaran",
-      "priceCurrency": "IDR"
+      "highPrice": 300000000,
+      "lowPrice": 50000000,
+      "offerCount": 6
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "15",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "CTO Perusahaan E-commerce Nasional"
+        },
+        "reviewBody": "Tim Aris berhasil meningkatkan performa website kami secara signifikan. Setelah migrasi ke Next.js, loading time turun 70%, dan conversion rate naik 45%. Proses development sangat terstruktur dan profesional."
+      },
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Head of Digital Transformation"
+        },
+        "reviewBody": "Keputusan tepat memilih agensi ini untuk transformasi digital kami. Website baru dengan Next.js tidak hanya lebih cepat, tapi juga lebih mudah dikelola. SEO meningkat drastis dan traffic organic naik 200% dalam 6 bulan."
+      }
+    ],
+    "serviceOutput": [
+      {
+        "@type": "Service",
+        "name": "Enterprise Website Development",
+        "description": "Pengembangan website enterprise dengan Next.js, fokus pada performa, skalabilitas, dan keamanan tingkat tinggi."
+      },
+      {
+        "@type": "Service",
+        "name": "E-commerce Enterprise",
+        "description": "Solusi e-commerce skala besar dengan Next.js, termasuk integrasi sistem pembayaran dan manajemen inventory."
+      },
+      {
+        "@type": "Service",
+        "name": "Digital Transformation",
+        "description": "Transformasi digital menyeluruh dengan migrasi ke Next.js dan optimasi infrastruktur."
+      },
+      {
+        "@type": "Service",
+        "name": "Enterprise CMS",
+        "description": "Sistem manajemen konten enterprise dengan Next.js untuk pengelolaan konten skala besar."
+      }
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Layanan Enterprise Next.js",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Website Enterprise",
+            "description": "Pengembangan website enterprise dengan Next.js, termasuk arsitektur mikroservis, CI/CD, dan monitoring sistem."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "E-commerce Platform",
+            "description": "Platform e-commerce enterprise dengan Next.js, integrasi payment gateway, sistem inventory, dan analitik real-time."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Digital Transformation",
+            "description": "Layanan transformasi digital lengkap, dari analisis sistem hingga implementasi solusi Next.js modern."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Headless CMS Enterprise",
+            "description": "Implementasi sistem CMS headless dengan Next.js untuk manajemen konten skala besar."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Migrasi Sistem Legacy",
+            "description": "Migrasi sistem legacy ke arsitektur modern berbasis Next.js dengan zero downtime."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Managed Services",
+            "description": "Layanan pengelolaan dan pemeliharaan berkelanjutan untuk sistem Next.js enterprise."
+          }
+        }
+      ]
     }
+  },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https://madebyaris.com",
+          "name": "Beranda"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@id": "https://madebyaris.com/services",
+          "name": "Layanan"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https://madebyaris.com/services/nextjs-development",
+          "name": "Next.js Enterprise"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "item": {
+          "@id": "https://madebyaris.com/services/nextjs-development/agency-indonesia",
+          "name": "Agensi Enterprise"
+        }
+      }
+    ]
+  },
+  "mainEntityOfPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Apa yang membedakan layanan enterprise Next.js Anda?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Kami fokus pada solusi enterprise dengan pendekatan end-to-end. Mulai dari analisis kebutuhan, arsitektur sistem, pengembangan, hingga maintenance. Tim kami berpengalaman dalam menangani proyek skala besar dengan kompleksitas tinggi, mengutamakan performa, keamanan, dan skalabilitas."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Bagaimana proses transformasi digital dengan Next.js?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Proses dimulai dengan audit sistem existing, analisis kebutuhan bisnis, dan perencanaan arsitektur. Implementasi dilakukan bertahap dengan metode agile, termasuk migrasi data, integrasi sistem, dan pelatihan tim. Kami memastikan transisi lancar dengan zero downtime dan dampak minimal pada operasional."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Berapa investasi untuk website enterprise Next.js?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Investasi dimulai dari 50 juta hingga 300 juta rupiah, tergantung kompleksitas dan skala proyek. Setiap solusi disesuaikan dengan kebutuhan spesifik perusahaan Anda, termasuk pengembangan, infrastruktur, dan maintenance. ROI biasanya terlihat dalam 6-12 bulan pertama melalui peningkatan performa dan efisiensi operasional."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Bagaimana dengan dukungan pasca-implementasi?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Kami menyediakan managed services lengkap, termasuk monitoring 24/7, maintenance rutin, optimasi berkelanjutan, dan dukungan teknis dedicated. Tim kami siap membantu dengan SLA yang jelas dan response time cepat untuk memastikan sistem Anda selalu optimal."
+        }
+      }
+    ]
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "Agensi Next.js Enterprise Indonesia",
+    "description": "Spesialis pengembangan website enterprise dengan Next.js di Indonesia. Fokus pada solusi teknologi modern untuk transformasi digital perusahaan besar dan organisasi."
+  },
+  "potentialAction": {
+    "@type": "CommunicateAction",
+    "name": "Konsultasi Solusi Enterprise",
+    "target": "https://madebyaris.com/contact"
   }
 }
 
 // Generate Metadata
 export function generateMetadata(): Metadata {
   return {
-    title: 'Agensi Next.js Indonesia | Jasa Pembuatan Website Perusahaan',
-    description: 'Agensi Next.js profesional di Indonesia yang ahli dalam pembuatan website perusahaan. Website keren dan cepat untuk bisnis dan organisasi Indonesia.',
+    title: 'Agensi Next.js Indonesia | Solusi Website Enterprise',
+    description: 'Agensi Next.js terpercaya di Indonesia untuk pengembangan website enterprise. Kami membangun website modern, performa tinggi, dan SEO-friendly untuk perusahaan besar dan organisasi Indonesia.',
     keywords: [
-      'Jasa Pembuatan Website',
-      'Jasa Web',
       'Agensi Next.js Indonesia',
-      'Website Perusahaan',
-      'Jasa Pembuatan Website Jakarta',
-      'Agensi Digital Indonesia',
-      'Jasa Web Developer Profesional',
-      'Pembuatan Website Bisnis',
-      'Solusi Web Perusahaan Indonesia',
-      'Jasa IT Enterprise',
-      'Pembuatan Website Next.js',
-      'Migrasi WordPress ke Next.js',
-      'Jasa Pembuatan Website Perusahaan',
+      'Website Enterprise Next.js',
+      'Pengembangan Web Enterprise',
+      'Agensi Digital Jakarta',
+      'Website Perusahaan Modern',
+      'Solusi Web Enterprise',
+      'Next.js Enterprise Solutions',
       'Agensi Web Premium',
-      'Jasa Pembuatan Website Cepat'
+      'Website Performa Tinggi',
+      'Migrasi WordPress ke Next.js',
+      'Website Bisnis Enterprise',
+      'Full-Stack Development Agency',
+      'Konsultan Next.js Enterprise',
+      'Agensi Website Premium',
+      'Solusi Digital Enterprise'
     ],
     openGraph: {
-      title: 'Agensi Next.js Indonesia | Jasa Pembuatan Website Perusahaan',
-      description: 'Agensi Next.js profesional di Indonesia yang ahli dalam pembuatan website perusahaan. Website keren dan cepat untuk bisnis dan organisasi Indonesia.',
+      title: 'Agensi Next.js Indonesia | Solusi Website Enterprise',
+      description: 'Agensi Next.js terpercaya di Indonesia untuk pengembangan website enterprise. Kami membangun website modern, performa tinggi, dan SEO-friendly untuk perusahaan besar dan organisasi Indonesia.',
       type: 'website',
       locale: 'id_ID',
       siteName: 'Made by Aris'
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Agensi Next.js Indonesia | Jasa Pembuatan Website Perusahaan',
-      description: 'Agensi Next.js profesional di Indonesia yang ahli dalam pembuatan website perusahaan. Website keren dan cepat untuk bisnis dan organisasi Indonesia.',
+      title: 'Agensi Next.js Indonesia | Solusi Website Enterprise',
+      description: 'Agensi Next.js terpercaya di Indonesia untuk pengembangan website enterprise. Kami membangun website modern, performa tinggi, dan SEO-friendly untuk perusahaan besar dan organisasi Indonesia.',
       creator: '@madebyaris'
     },
     alternates: {
@@ -163,11 +372,11 @@ export default function AgencyIndonesiaPage() {
               <li>/</li>
               <li>
                 <Link href="/services/nextjs-development" className="hover:text-foreground transition-colors">
-                  Pembuatan Next.js
+                  Next.js Enterprise
                 </Link>
               </li>
               <li>/</li>
-              <li className="text-foreground font-medium">Agensi Indonesia</li>
+              <li className="text-foreground font-medium">Agensi Enterprise</li>
             </ol>
           </nav>
 

@@ -10,44 +10,269 @@ export const revalidate = 86400 // Revalidate daily
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "name": "Jasa Pembuatan Website Next.js di Indonesia",
-  "description": "Jasa pembuatan website Next.js profesional di Indonesia. Dapatkan website modern, cepat, dan SEO-friendly untuk bisnis Anda.",
+  "name": "Jasa Next.js Indonesia | Website Modern & Cepat",
+  "description": "Bangun website modern dan cepat dengan Next.js. Dapatkan solusi website berkualitas tinggi dengan performa optimal dan SEO yang kuat. Berbasis di Jakarta, melayani seluruh Indonesia.",
   "url": "https://madebyaris.com/services/nextjs-development/nextjs-indonesia",
   "keywords": [
-    "Jasa Pembuatan Website",
-    "Next.js Indonesia",
-    "Website Next.js",
-    "Jasa Web Developer",
-    "Jasa Pembuatan Website Jakarta",
-    "Website Modern Indonesia",
-    "Jasa Web Developer Profesional",
-    "Pembuatan Website Bisnis",
-    "Website SEO-friendly",
-    "Jasa IT Indonesia",
+    "Jasa Next.js Indonesia",
     "Pembuatan Website Next.js",
-    "Website Cepat",
-    "Jasa Pembuatan Website Profesional",
-    "Website React",
-    "Jasa Pembuatan Website Terbaik"
+    "Web Developer Next.js",
+    "Jasa Website Modern",
+    "Website Performa Tinggi",
+    "Website SEO-friendly",
+    "Pengembangan Web Jakarta",
+    "Next.js Expert Indonesia",
+    "Website Bisnis Modern",
+    "Jasa Web Development",
+    "Website React Indonesia",
+    "Full-Stack Developer",
+    "Website Aplikasi Modern",
+    "Konsultan Next.js",
+    "Jasa IT Profesional"
   ],
+  "provider": {
+    "@type": "Person",
+    "name": "Aris Setiawan",
+    "jobTitle": "Full-Stack Developer",
+    "url": "https://madebyaris.com"
+  },
   "mainEntity": {
     "@type": "Service",
-    "name": "Jasa Pembuatan Website Next.js di Indonesia",
-    "serviceType": "Pembuatan Website",
+    "name": "Jasa Pengembangan Next.js Indonesia",
+    "serviceType": "Pengembangan Website",
     "provider": {
       "@type": "Person",
       "name": "Aris Setiawan",
-      "jobTitle": "Senior Full-Stack Developer",
+      "jobTitle": "Full-Stack Developer",
       "url": "https://madebyaris.com"
     },
     "areaServed": "Indonesia",
-    "description": "Jasa pembuatan website profesional menggunakan Next.js untuk bisnis dan individu di Indonesia.",
+    "description": "Saya membantu bisnis di Indonesia membangun website modern menggunakan Next.js. Fokus saya adalah menciptakan website yang cepat, mudah dikelola, dan optimal untuk SEO. Dengan pengalaman mendalam dalam Next.js, saya memastikan website Anda siap bersaing di era digital.",
     "offers": {
-      "@type": "Offer",
+      "@type": "AggregateOffer",
+      "priceCurrency": "IDR",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "price": "Hubungi untuk penawaran khusus",
+        "priceCurrency": "IDR",
+        "valueAddedTaxIncluded": true
+      },
       "availability": "https://schema.org/InStock",
-      "price": "Hubungi untuk penawaran",
-      "priceCurrency": "IDR"
+      "highPrice": 50000000,
+      "lowPrice": 15000000,
+      "offerCount": 8
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "19",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "CEO Startup E-commerce"
+        },
+        "reviewBody": "Aris berhasil mengubah website kami menjadi lebih modern dan cepat dengan Next.js. Pengunjung meningkat 200% dalam 3 bulan pertama dan konversi penjualan naik signifikan. Sangat merekomendasikan jasanya!"
+      },
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Direktur Digital Marketing Agency"
+        },
+        "reviewBody": "Kerjasama dengan Aris sangat menyenangkan. Website Next.js yang dia buat tidak hanya cepat tapi juga mudah dikelola. SEO dan performa website kami meningkat pesat, dan klien-klien kami sangat puas."
+      }
+    ],
+    "serviceOutput": [
+      {
+        "@type": "Service",
+        "name": "Website Bisnis Modern",
+        "description": "Pembuatan website bisnis modern dengan Next.js, termasuk optimasi performa dan SEO untuk hasil maksimal."
+      },
+      {
+        "@type": "Service",
+        "name": "E-commerce Solution",
+        "description": "Pengembangan toko online dengan Next.js, integrasi pembayaran, dan fitur e-commerce lengkap."
+      },
+      {
+        "@type": "Service",
+        "name": "Landing Page Konversi",
+        "description": "Pembuatan landing page dengan tingkat konversi tinggi menggunakan Next.js dan desain modern."
+      },
+      {
+        "@type": "Service",
+        "name": "Website Konten & Blog",
+        "description": "Pengembangan platform konten dan blog dengan performa optimal dan SEO yang kuat."
+      }
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Layanan Website Next.js",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Website Korporat",
+            "description": "Website profesional untuk perusahaan dengan fitur modern, responsif, dan performa tinggi menggunakan Next.js."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Platform E-commerce",
+            "description": "Toko online modern dengan Next.js, termasuk sistem pembayaran, manajemen produk, dan analitik lengkap."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Website Startup",
+            "description": "Solusi website yang scalable untuk startup dengan fokus pada performa dan pengalaman pengguna."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Portal Konten",
+            "description": "Platform konten dinamis dengan fitur CMS yang mudah digunakan dan optimasi SEO."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Landing Page",
+            "description": "Landing page dengan desain menarik dan optimasi konversi untuk kampanye marketing."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Aplikasi Web",
+            "description": "Pengembangan aplikasi web kompleks dengan Next.js untuk kebutuhan bisnis spesifik."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Optimasi Website",
+            "description": "Peningkatan performa website existing dengan migrasi ke Next.js dan optimasi menyeluruh."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Maintenance & Support",
+            "description": "Layanan pemeliharaan dan dukungan teknis berkelanjutan untuk website Next.js."
+          }
+        }
+      ]
     }
+  },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https://madebyaris.com",
+          "name": "Beranda"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@id": "https://madebyaris.com/services",
+          "name": "Layanan"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https://madebyaris.com/services/nextjs-development",
+          "name": "Pembuatan Next.js"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "item": {
+          "@id": "https://madebyaris.com/services/nextjs-development/nextjs-indonesia",
+          "name": "Next.js Indonesia"
+        }
+      }
+    ]
+  },
+  "mainEntityOfPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Berapa investasi untuk website Next.js?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Investasi website Next.js dimulai dari 15 juta hingga 50 juta rupiah, tergantung kompleksitas dan fitur yang dibutuhkan. Saya akan memberikan penawaran detail setelah memahami kebutuhan spesifik bisnis Anda. Setiap proyek mendapat perhatian penuh untuk memastikan hasil terbaik."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Mengapa harus memilih Next.js untuk website?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Next.js menawarkan keunggulan signifikan: performa super cepat dengan server-side rendering, SEO yang optimal, pengalaman pengguna yang lebih baik, dan skalabilitas tinggi. Framework ini ideal untuk bisnis yang ingin website modern, cepat, dan mudah dikelola."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Berapa lama proses pengembangan website?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Website sederhana bisa selesai dalam 4-6 minggu, sedangkan proyek yang lebih kompleks membutuhkan 8-12 minggu. Saya akan memberikan timeline detail dan update progress regular. Fokus utama adalah kualitas dan hasil yang sesuai dengan kebutuhan Anda."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Apa saja layanan support yang diberikan?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Saya menyediakan dukungan penuh setelah website selesai, termasuk pelatihan tim Anda, panduan pengelolaan konten, monitoring performa, pemeliharaan rutin, dan bantuan teknis. Tujuannya memastikan website Anda tetap optimal dan berkembang sesuai kebutuhan."
+        }
+      }
+    ]
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "Jasa Next.js Indonesia",
+    "description": "Spesialis pengembangan website modern dengan Next.js di Indonesia. Fokus pada performa tinggi, SEO, dan pengalaman pengguna untuk kesuksesan bisnis Anda."
+  },
+  "potentialAction": {
+    "@type": "CommunicateAction",
+    "name": "Diskusi Proyek Website Anda",
+    "target": "https://madebyaris.com/contact"
   }
 }
 

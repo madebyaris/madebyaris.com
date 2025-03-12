@@ -5,6 +5,76 @@ import { Button } from '@/components/ui/button'
 
 export const revalidate = 86400 // Revalidate daily
 
+// Structured Data
+export const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://madebyaris.com/terms-of-service/#webpage",
+  "name": "Terms of Service | Made by Aris",
+  "description": "Terms of service for Made by Aris website, outlining the rules, guidelines, and legal terms for using our services.",
+  "url": "https://madebyaris.com/terms-of-service",
+  "isPartOf": {
+    "@type": "WebSite",
+    "@id": "https://madebyaris.com/#website"
+  },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https://madebyaris.com",
+          "name": "Home"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@id": "https://madebyaris.com/terms-of-service",
+          "name": "Terms of Service"
+        }
+      }
+    ]
+  },
+  "mainEntity": {
+    "@type": "TermsOfService",
+    "name": "Made by Aris Terms of Service",
+    "text": "These Terms of Service govern your use of the Made by Aris website and services offered by Aris Setiawan.",
+    "dateModified": new Date().toISOString(),
+    "provider": {
+      "@type": "Organization",
+      "@id": "https://madebyaris.com/#organization",
+      "name": "MadeByAris",
+      "url": "https://madebyaris.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://madebyaris.com/logo.png",
+        "width": "180",
+        "height": "180"
+      }
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Web Development Services Terms",
+      "description": "Legal terms and conditions for web development, design, and related services provided by Aris Setiawan."
+    }
+  },
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://madebyaris.com/#organization",
+    "name": "MadeByAris",
+    "url": "https://madebyaris.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://madebyaris.com/logo.png",
+      "width": "180",
+      "height": "180"
+    }
+  }
+}
+
 export const metadata: Metadata = {
   title: 'Terms of Service | Made by Aris',
   description: 'Terms of service for Made by Aris website, outlining the rules, guidelines, and legal terms for using our services.',

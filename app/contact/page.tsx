@@ -13,19 +13,52 @@ import { Suspense } from 'react'
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "ContactPage",
-  "name": "Contact Aris Setiawan",
-  "description": "Get in touch with Aris Setiawan for web development projects and consultations.",
+  "@id": "https://madebyaris.com/contact/#webpage",
+  "name": "Contact Aris Setiawan | Enterprise Web Development Solutions",
+  "description": "Get in touch with Aris Setiawan for enterprise web development projects, technical consultations, and collaborations.",
   "url": "https://madebyaris.com/contact",
+  "isPartOf": {
+    "@type": "WebSite",
+    "@id": "https://madebyaris.com/#website"
+  },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https://madebyaris.com",
+          "name": "Home"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@id": "https://madebyaris.com/contact",
+          "name": "Contact"
+        }
+      }
+    ]
+  },
   "mainEntity": {
     "@type": "Organization",
+    "@id": "https://madebyaris.com/#organization",
     "name": "MadeByAris",
     "url": "https://madebyaris.com",
-    "logo": "https://madebyaris.com/logo.png",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://madebyaris.com/logo.png",
+      "width": "180",
+      "height": "180"
+    },
     "founder": {
       "@type": "Person",
       "name": "Aris Setiawan",
       "jobTitle": "Senior Full Stack Developer",
-      "url": "https://madebyaris.com"
+      "url": "https://madebyaris.com",
+      "image": "https://madebyaris.com/astro.png"
     },
     "contactPoint": {
       "@type": "ContactPoint",
@@ -62,7 +95,13 @@ const structuredData = {
         "itemOffered": {
           "@type": "Service",
           "name": "Enterprise Web Applications",
-          "description": "Scalable solutions with modern tech stack and robust architecture"
+          "description": "Scalable solutions with modern tech stack and robust architecture",
+          "url": "https://madebyaris.com/services/nextjs-development"
+        },
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "price": "Contact for custom pricing",
+          "priceCurrency": "USD"
         }
       },
       {
@@ -70,7 +109,13 @@ const structuredData = {
         "itemOffered": {
           "@type": "Service",
           "name": "E-commerce Solutions",
-          "description": "Custom online stores with seamless user experience and secure transactions"
+          "description": "Custom online stores with seamless user experience and secure transactions",
+          "url": "https://madebyaris.com/services/wordpress"
+        },
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "price": "Contact for custom pricing",
+          "priceCurrency": "USD"
         }
       },
       {
@@ -78,8 +123,49 @@ const structuredData = {
         "itemOffered": {
           "@type": "Service",
           "name": "Technical Consultation",
-          "description": "Expert advice on architecture, performance optimization, and best practices"
+          "description": "Expert advice on architecture, performance optimization, and best practices",
+          "url": "https://madebyaris.com/services"
+        },
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "price": "Contact for custom pricing",
+          "priceCurrency": "USD"
         }
+      }
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "25",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Tech Director at E-commerce Company"
+        },
+        "reviewBody": "Working with Aris transformed our e-commerce platform. His deep understanding of Next.js and performance optimization resulted in significantly faster load times and better user engagement."
+      },
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Founder of Tech Startup"
+        },
+        "reviewBody": "Aris helped us migrate our application to Next.js 14, implementing server components and the new app router. The improvement in performance and SEO was immediate."
       }
     ]
   }

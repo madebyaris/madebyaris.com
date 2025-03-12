@@ -4,7 +4,7 @@ import Link from 'next/link'
 export function Footer() {
   return (
     <footer className="border-t bg-zinc-50 dark:bg-zinc-950">
-      <div className="container relative mx-auto max-w-[980px] px-4 py-12 sm:px-6 flex flex-col items-center">
+      <div className="container relative mx-auto max-w-6xl px-4 py-12 sm:px-6 flex flex-col items-center">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 w-full">
           {/* Company Info */}
           <div className="space-y-4">
@@ -117,7 +117,7 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-zinc-200 dark:border-zinc-800 w-full max-w-[980px]">
+        <div className="mt-12 pt-8 border-t border-zinc-200 dark:border-zinc-800 w-full max-w-6xl">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             <p className="text-sm text-muted-foreground">
               © {new Date().getFullYear()} MadeByAris. All rights reserved.

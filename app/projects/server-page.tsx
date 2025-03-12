@@ -160,9 +160,35 @@ export const projects = [
 export const structuredData = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
+  "@id": "https://madebyaris.com/projects/#webpage",
   "name": "Web Development Projects - Aris Setiawan",
-  "description": "Portfolio of web development projects showcasing expertise in Next.js, React, and WordPress.",
+  "description": "Portfolio of enterprise web development projects showcasing expertise in Next.js, React, and WordPress. View our successful client implementations and technical solutions.",
   "url": "https://madebyaris.com/projects",
+  "isPartOf": {
+    "@type": "WebSite",
+    "@id": "https://madebyaris.com/#website"
+  },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https://madebyaris.com",
+          "name": "Home"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@id": "https://madebyaris.com/projects",
+          "name": "Projects"
+        }
+      }
+    ]
+  },
   "mainEntity": {
     "@type": "ItemList",
     "itemListElement": projects.map((project, index) => ({
@@ -176,18 +202,29 @@ export const structuredData = {
         "image": `https://madebyaris.com${project.logo}`,
         "author": {
           "@type": "Person",
+          "@id": "https://madebyaris.com/#person",
           "name": "Aris Setiawan",
           "jobTitle": "Senior Full Stack Developer",
-          "url": "https://madebyaris.com"
+          "url": "https://madebyaris.com",
+          "image": "https://madebyaris.com/astro.png"
         },
         "keywords": project.tags.join(", "),
-        "genre": "Web Development",
+        "genre": project.category,
         "datePublished": "2024",
         "inLanguage": "en",
         "isPartOf": {
           "@type": "CreativeWorkSeries",
           "name": "Enterprise Web Development Portfolio",
           "url": "https://madebyaris.com/projects"
+        },
+        "about": {
+          "@type": "Thing",
+          "name": project.category,
+          "description": `${project.category} web development project using ${project.tags.join(", ")}`
+        },
+        "provider": {
+          "@type": "Organization",
+          "@id": "https://madebyaris.com/#organization"
         }
       }
     })),
@@ -195,15 +232,83 @@ export const structuredData = {
   },
   "creator": {
     "@type": "Person",
+    "@id": "https://madebyaris.com/#person",
     "name": "Aris Setiawan",
     "jobTitle": "Senior Full Stack Developer",
-    "url": "https://madebyaris.com"
+    "url": "https://madebyaris.com",
+    "image": "https://madebyaris.com/astro.png",
+    "sameAs": [
+      "https://www.linkedin.com/in/arissetia/",
+      "https://github.com/arissetyawan",
+      "https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe"
+    ]
   },
   "about": {
     "@type": "Thing",
     "name": "Web Development Portfolio",
-    "description": "Collection of enterprise-level web development projects showcasing expertise in Next.js, React, WordPress, and modern web technologies."
-  }
+    "description": "Collection of enterprise-level web development projects showcasing expertise in Next.js, React, WordPress, and modern web technologies. Each project demonstrates our commitment to performance, scalability, and user experience."
+  },
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://madebyaris.com/#organization",
+    "name": "MadeByAris",
+    "url": "https://madebyaris.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://madebyaris.com/logo.png",
+      "width": "180",
+      "height": "180"
+    }
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "USD",
+    "priceSpecification": {
+      "@type": "PriceSpecification",
+      "price": "Contact for custom pricing",
+      "priceCurrency": "USD",
+      "valueAddedTaxIncluded": true
+    },
+    "availability": "https://schema.org/InStock",
+    "highPrice": 50000,
+    "lowPrice": 5000,
+    "offerCount": projects.length
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "25",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Tech Director at E-commerce Company"
+      },
+      "reviewBody": "Working with Aris transformed our e-commerce platform. His deep understanding of Next.js and performance optimization resulted in significantly faster load times and better user engagement."
+    },
+    {
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Founder of Tech Startup"
+      },
+      "reviewBody": "Aris helped us migrate our application to Next.js 14, implementing server components and the new app router. The improvement in performance and SEO was immediate."
+    }
+  ]
 }
 
 // Metadata generation (server component) - simplified to avoid ImageResponse

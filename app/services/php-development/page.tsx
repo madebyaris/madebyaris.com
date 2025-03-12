@@ -75,40 +75,177 @@ const testimonials = [
 // Structured Data
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": "Service",
-  "name": "PHP Development Services",
+  "@type": "WebPage",
+  "@id": "https://madebyaris.com/services/php-development/#webpage",
+  "name": "PHP Development Services | Custom Applications & APIs",
   "description": "Professional PHP development services for custom web applications, APIs, and enterprise solutions. Expert in modern PHP frameworks and best practices.",
-  "provider": {
-    "@type": "Person",
-    "name": "Aris Setiawan",
-    "jobTitle": "Senior PHP Developer",
-    "url": "https://madebyaris.com"
+  "url": "https://madebyaris.com/services/php-development",
+  "isPartOf": {
+    "@type": "WebSite",
+    "@id": "https://madebyaris.com/#website"
   },
-  "serviceType": "PHP Development",
-  "areaServed": "Worldwide",
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "PHP Services",
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
     "itemListElement": [
       {
-        "@type": "Offer",
-        "name": "Custom PHP Applications",
-        "description": "Tailored PHP solutions"
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https://madebyaris.com",
+          "name": "Home"
+        }
       },
       {
-        "@type": "Offer",
-        "name": "API Development",
-        "description": "RESTful and GraphQL APIs"
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@id": "https://madebyaris.com/services",
+          "name": "Services"
+        }
       },
       {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https://madebyaris.com/services/php-development",
+          "name": "PHP Development"
+        }
+      }
+    ]
+  },
+  "mainEntity": {
+    "@type": "Service",
+    "name": "PHP Development Services",
+    "description": "Professional PHP development services for custom web applications, APIs, and enterprise solutions. Expert in modern PHP frameworks and best practices.",
+    "provider": {
+      "@type": "Person",
+      "@id": "https://madebyaris.com/#person",
+      "name": "Aris Setiawan",
+      "jobTitle": "Senior Full Stack Developer",
+      "url": "https://madebyaris.com",
+      "image": "https://madebyaris.com/astro.png",
+      "sameAs": [
+        "https://www.linkedin.com/in/arissetia/",
+        "https://github.com/arissetyawan",
+        "https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe"
+      ]
+    },
+    "serviceType": "PHP Development",
+    "areaServed": {
+      "@type": "Country",
+      "name": "Worldwide"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "PHP Development Services",
+      "itemListElement": services.map((service) => ({
         "@type": "Offer",
-        "name": "Database Solutions",
-        "description": "Optimized database architecture"
+        "itemOffered": {
+          "@type": "Service",
+          "name": service.title,
+          "description": service.description,
+          "url": `https://madebyaris.com${service.href}`,
+          "serviceOutput": {
+            "@type": "ItemList",
+            "itemListElement": service.features.map((feature, index) => ({
+              "@type": "ListItem",
+              "position": index + 1,
+              "item": {
+                "@type": "Service",
+                "name": feature
+              }
+            }))
+          }
+        }
+      }))
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "25",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": testimonials.map((testimonial) => ({
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "author": {
+        "@type": "Person",
+        "name": testimonial.author,
+        "jobTitle": testimonial.company
+      },
+      "reviewBody": testimonial.quote
+    }))
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "PHP Development Expertise",
+    "description": "Expert PHP development services focusing on modern practices, security, and scalability. Specializing in custom applications, APIs, and enterprise solutions."
+  },
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://madebyaris.com/#organization",
+    "name": "MadeByAris",
+    "url": "https://madebyaris.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://madebyaris.com/logo.png",
+      "width": "180",
+      "height": "180"
+    }
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "USD",
+    "priceSpecification": {
+      "@type": "PriceSpecification",
+      "price": "Contact for custom pricing",
+      "priceCurrency": "USD",
+      "valueAddedTaxIncluded": true
+    },
+    "availability": "https://schema.org/InStock",
+    "highPrice": 50000,
+    "lowPrice": 5000,
+    "offerCount": services.length
+  },
+  "mainEntityOfPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What PHP versions do you work with?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "I work with modern PHP versions (7.4+, 8.x) and follow PHP-FIG standards and best practices. I can also help upgrade legacy applications to newer PHP versions."
+        }
       },
       {
-        "@type": "Offer",
-        "name": "Legacy Code Modernization",
-        "description": "PHP codebase upgrades"
+        "@type": "Question",
+        "name": "What PHP frameworks do you use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "I have extensive experience with Laravel, Symfony, CodeIgniter, and other modern PHP frameworks. The choice of framework depends on your project's specific requirements."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you help with legacy PHP applications?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, I specialize in modernizing legacy PHP applications. This includes code refactoring, security updates, performance optimization, and migration to modern PHP versions and frameworks."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you provide ongoing maintenance?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, I offer comprehensive maintenance services including security updates, bug fixes, performance optimization, and feature enhancements for PHP applications."
+        }
       }
     ]
   }

@@ -13,14 +13,44 @@ export const revalidate = 3600
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "Blog",
+  "@id": "https://madebyaris.com/blog/#webpage",
   "name": "Web Development Insights & Tutorials",
   "description": "Expert insights on Next.js, React, WordPress, and modern web development practices. Technical tutorials and industry best practices.",
   "url": "https://madebyaris.com/blog",
+  "isPartOf": {
+    "@type": "WebSite",
+    "@id": "https://madebyaris.com/#website",
+    "name": "MadeByAris",
+    "url": "https://madebyaris.com"
+  },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https://madebyaris.com",
+          "name": "Home"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@id": "https://madebyaris.com/blog",
+          "name": "Blog"
+        }
+      }
+    ]
+  },
   "author": {
     "@type": "Person",
+    "@id": "https://madebyaris.com/#person",
     "name": "Aris Setiawan",
     "jobTitle": "Senior Full Stack Developer",
     "url": "https://madebyaris.com",
+    "image": "https://madebyaris.com/astro.png",
     "sameAs": [
       "https://www.linkedin.com/in/arissetia/",
       "https://github.com/arissetyawan",
@@ -29,11 +59,14 @@ const structuredData = {
   },
   "publisher": {
     "@type": "Organization",
+    "@id": "https://madebyaris.com/#organization",
     "name": "MadeByAris",
     "url": "https://madebyaris.com",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://madebyaris.com/logo.png"
+      "url": "https://madebyaris.com/logo.png",
+      "width": "180",
+      "height": "180"
     }
   },
   "keywords": [
@@ -46,21 +79,42 @@ const structuredData = {
     "Full Stack Development",
     "Frontend Development",
     "Backend Development",
-    "Web Performance"
+    "Web Performance",
+    "Enterprise Solutions",
+    "System Architecture",
+    "Technical Leadership"
   ],
   "about": {
     "@type": "Thing",
     "name": "Web Development Blog",
-    "description": "Technical blog covering modern web development topics, best practices, and industry insights."
-  },
-  "isPartOf": {
-    "@type": "WebSite",
-    "name": "MadeByAris",
-    "url": "https://madebyaris.com"
+    "description": "Technical blog covering modern web development topics, best practices, and industry insights. Focus on enterprise solutions and scalable architectures."
   },
   "inLanguage": "en-US",
   "copyrightYear": new Date().getFullYear(),
-  "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+  "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": 12,
+    "itemListElement": []  // This will be populated dynamically with blog posts
+  },
+  "offers": {
+    "@type": "Offer",
+    "availability": "https://schema.org/InStock",
+    "price": "0",
+    "priceCurrency": "USD",
+    "seller": {
+      "@type": "Organization",
+      "@id": "https://madebyaris.com/#organization"
+    }
+  },
+  "audience": {
+    "@type": "Audience",
+    "audienceType": "Developers",
+    "geographicArea": {
+      "@type": "AdministrativeArea",
+      "name": "Worldwide"
+    }
+  }
 }
 
 // Generate OG Image

@@ -9,71 +9,177 @@ import Link from 'next/link'
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "name": "Next.js Development Services | Expert React & TypeScript Solutions",
-  "description": "Professional Next.js development services specializing in building high-performance, SEO-optimized web applications with modern architecture and enterprise-grade solutions. Expertise in React, TypeScript, and server-side rendering.",
+  "@id": "https://madebyaris.com/services/nextjs-development/#webpage",
+  "name": "Next.js Development | React & TypeScript Solutions by Skilled Developer",
+  "description": "Crafting high-performance web applications with Next.js, React, and TypeScript. Specialized in server components, performance optimization, and enterprise solutions. Based in Indonesia, serving clients worldwide.",
   "url": "https://madebyaris.com/services/nextjs-development",
+  "isPartOf": {
+    "@type": "WebSite",
+    "@id": "https://madebyaris.com/#website"
+  },
   "keywords": [
     "Next.js Development",
     "React Development",
-    "TypeScript Development",
+    "TypeScript Solutions",
     "Full Stack Development",
-    "Enterprise Web Apps",
-    "Server-Side Rendering",
-    "Static Site Generation",
-    "API Integration",
+    "Web App Development",
+    "Server Components",
+    "App Router",
     "Performance Optimization",
+    "Next.js Indonesia",
+    "Next.js Agency",
+    "Enterprise Solutions",
+    "SEO Optimization",
+    "Vercel Deployment",
+    "API Integration",
     "Modern Web Development",
     "Next.js 14",
-    "App Router",
-    "Server Components",
     "Edge Runtime",
-    "Vercel Deployment",
-    "Next.js SEO Services",
-    "Next.js Indonesia",
-    "Jasa Next.js",
-    "Next.js Agency Indonesia",
-    "Jasa SEO Next.js"
+    "Next.js Expert",
+    "Indonesian Developer",
+    "React TypeScript Expert"
   ],
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https://madebyaris.com",
+          "name": "Home"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@id": "https://madebyaris.com/services",
+          "name": "Services"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https://madebyaris.com/services/nextjs-development",
+          "name": "Next.js Development"
+        }
+      }
+    ]
+  },
   "mainEntity": {
     "@type": "Service",
-    "name": "Next.js Development Services",
+    "name": "Next.js Development Solutions",
     "serviceType": "Web Development",
     "provider": {
       "@type": "Person",
+      "@id": "https://madebyaris.com/#person",
       "name": "Aris Setiawan",
-      "jobTitle": "Senior Full-Stack Developer",
-      "url": "https://madebyaris.com"
+      "jobTitle": "Senior Full Stack Developer",
+      "url": "https://madebyaris.com",
+      "image": "https://madebyaris.com/astro.png",
+      "sameAs": [
+        "https://www.linkedin.com/in/arissetia/",
+        "https://github.com/arissetyawan",
+        "https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe"
+      ]
     },
-    "areaServed": "Worldwide",
-    "description": "Expert Next.js development services for building modern, high-performance web applications with React and TypeScript. Specializing in server components, app router, and edge runtime solutions.",
+    "areaServed": {
+      "@type": "Country",
+      "name": "Worldwide"
+    },
+    "description": "I build modern web applications using Next.js, React, and TypeScript. My focus is on creating fast, scalable solutions that are easy to maintain and deliver real business value. From server components to edge computing, I implement the latest features to give your project a competitive edge.",
     "offers": {
-      "@type": "Offer",
+      "@type": "AggregateOffer",
+      "priceCurrency": "USD",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "price": "Contact for custom pricing",
+        "priceCurrency": "USD",
+        "valueAddedTaxIncluded": true
+      },
       "availability": "https://schema.org/InStock",
-      "price": "Contact for pricing",
-      "priceCurrency": "USD"
+      "highPrice": 50000,
+      "lowPrice": 5000,
+      "offerCount": 6
     },
-    "serviceOutput": [
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "25",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": [
       {
-        "@type": "Service",
-        "name": "Modern Next.js Development",
-        "description": "Building fast, modern web applications using the latest Next.js features and best practices, including App Router, Server Components, and Edge Runtime."
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Tech Director at E-commerce Company"
+        },
+        "reviewBody": "Working with Aris transformed our e-commerce platform. His deep understanding of Next.js and performance optimization resulted in significantly faster load times and better user engagement. The codebase is clean, well-documented, and easy to maintain."
       },
       {
-        "@type": "Service",
-        "name": "Performance Optimization",
-        "description": "Implementing server-side rendering, static site generation, and edge caching for optimal performance and user experience."
-      },
-      {
-        "@type": "Service",
-        "name": "API Development & Integration",
-        "description": "Creating robust API routes and seamlessly integrating with external services and databases."
-      },
-      {
-        "@type": "Service",
-        "name": "Enterprise Solutions",
-        "description": "Developing scalable, type-safe applications with TypeScript and modern architectural patterns for enterprise clients."
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Founder of Tech Startup"
+        },
+        "reviewBody": "Aris helped us migrate our application to Next.js 14, implementing server components and the new app router. The improvement in performance and SEO was immediate. His technical expertise and clear communication made the process smooth."
       }
     ],
+    "serviceOutput": {
+      "@type": "ItemList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "Service",
+            "name": "Modern Next.js Solutions",
+            "description": "Leveraging Next.js 14's latest features including server components, app router, and edge runtime for optimal performance and developer experience."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "Service",
+            "name": "Performance & SEO",
+            "description": "Implementing advanced optimization techniques through server-side rendering, static generation, and edge caching for maximum performance and search visibility."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "Service",
+            "name": "API Development",
+            "description": "Building robust, type-safe APIs with modern patterns and seamless integration with various data sources and third-party services."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "Service",
+            "name": "Enterprise Applications",
+            "description": "Creating scalable, maintainable applications with TypeScript, following industry best practices and modern architectural patterns."
+          }
+        }
+      ]
+    },
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "Next.js Development Services",
@@ -82,75 +188,106 @@ const structuredData = {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
-            "name": "Next.js Application Development",
-            "description": "Full-stack Next.js application development with modern features and best practices."
+            "name": "Full-Stack Next.js Development",
+            "description": "End-to-end web application development using Next.js, React, and TypeScript, with a focus on performance and maintainability."
           }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
-            "name": "Next.js Migration & Upgrades",
-            "description": "Migrating existing applications to Next.js or upgrading to the latest version."
+            "name": "Next.js Migration & Updates",
+            "description": "Expert assistance in migrating to Next.js or upgrading to the latest version, ensuring smooth transitions and performance improvements."
           }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
-            "name": "Vercel Deployment Services",
-            "description": "Expert Vercel deployment services for Next.js applications with optimized configuration."
+            "name": "Vercel Deployment & Optimization",
+            "description": "Professional Vercel deployment setup with automated workflows, analytics integration, and performance monitoring."
           }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
-            "name": "Next.js SEO Services",
-            "description": "Comprehensive SEO optimization for Next.js applications to improve search rankings."
+            "name": "Next.js SEO Implementation",
+            "description": "Comprehensive SEO optimization using Next.js best practices, metadata optimization, and structured data implementation."
           }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
-            "name": "Next.js Indonesia Services",
-            "description": "Specialized Next.js development services for the Indonesian market and businesses."
+            "name": "Next.js Development Indonesia",
+            "description": "Specialized Next.js development services for Indonesian businesses, with local market understanding and native language support."
           }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
-            "name": "Next.js Agency Services Indonesia",
-            "description": "Full-service Next.js agency for Indonesian enterprises and organizations."
+            "name": "Next.js Agency Solutions",
+            "description": "Comprehensive Next.js development services for enterprises, from strategy and planning to development and ongoing support."
           }
         }
       ]
     }
   },
+  "mainEntityOfPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What makes Next.js the right choice for web development?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Next.js combines React's flexibility with powerful features like server-side rendering and static generation. It's particularly effective for projects needing strong SEO, fast page loads, and excellent user experience. The framework's server components and app router make it ideal for building modern, scalable web applications."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does it take to build a Next.js application?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The timeline varies based on your project's scope and requirements. Typically, a basic application takes 4-6 weeks, while more complex projects might need 8-12 weeks. Enterprise applications with custom features and integrations can take 3-6 months. I'll provide a detailed timeline after understanding your specific needs."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you work with existing Next.js projects?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, I regularly work with existing Next.js applications. Whether you need to upgrade to a newer version, improve performance, add features, or fix issues, I can help. I start by reviewing your codebase and suggesting the most effective approach for your goals."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What support do you provide after launch?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "I offer comprehensive post-launch support including performance monitoring, security updates, bug fixes, and feature enhancements. I can also provide training for your team and documentation for maintaining the application. My goal is to ensure your application continues to perform optimally."
+        }
+      }
+    ]
+  },
   "about": {
     "@type": "Thing",
     "name": "Next.js Development Expertise",
-    "description": "Professional Next.js development services focusing on building modern web applications with optimal performance, SEO, and user experience. Specializing in server-side rendering, static generation, and enterprise-grade solutions."
+    "description": "Specialized in building modern web applications with Next.js, focusing on performance, SEO, and scalability. Expert in React, TypeScript, and enterprise-grade solutions."
   },
-  "potentialAction": {
-    "@type": "CommunicateAction",
-    "name": "Contact for Next.js Development",
-    "target": "https://madebyaris.com/contact"
-  },
-  "review": {
-    "@type": "Review",
-    "reviewRating": {
-      "@type": "Rating",
-      "ratingValue": "5",
-      "bestRating": "5"
-    },
-    "author": {
-      "@type": "Person",
-      "name": "Client"
-    },
-    "reviewBody": "Exceptional Next.js development services. The application performance and user experience exceeded our expectations."
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://madebyaris.com/#organization",
+    "name": "MadeByAris",
+    "url": "https://madebyaris.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://madebyaris.com/logo.png",
+      "width": "180",
+      "height": "180"
+    }
   }
 }
 

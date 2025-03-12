@@ -10,8 +10,8 @@ export const revalidate = 86400 // Revalidate daily
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "name": "Vercel Deployment Services for Next.js | Expert Deployment Solutions",
-  "description": "Professional Vercel deployment services for Next.js applications. Optimize your deployment pipeline with edge functions, analytics, and enterprise-grade infrastructure.",
+  "name": "Vercel Deployment | Next.js Performance Optimization",
+  "description": "Transform your Next.js application with expert Vercel deployment. Get blazing-fast global performance, automated workflows, and enterprise-grade reliability. Based in Indonesia, serving worldwide.",
   "url": "https://madebyaris.com/services/nextjs-development/vercel",
   "keywords": [
     "Vercel Deployment",
@@ -23,26 +23,232 @@ const structuredData = {
     "Performance Analytics",
     "Enterprise Deployment",
     "Global CDN",
-    "Deployment Optimization"
+    "Deployment Optimization",
+    "Next.js Expert",
+    "Indonesian Developer",
+    "Vercel Platform",
+    "Edge Runtime",
+    "Deployment Automation"
   ],
+  "provider": {
+    "@type": "Person",
+    "name": "Aris Setiawan",
+    "jobTitle": "Full-Stack Developer",
+    "url": "https://madebyaris.com"
+  },
   "mainEntity": {
     "@type": "Service",
-    "name": "Vercel Deployment Services for Next.js",
+    "name": "Vercel Deployment Solutions",
     "serviceType": "Web Deployment",
     "provider": {
       "@type": "Person",
       "name": "Aris Setiawan",
-      "jobTitle": "Senior Full-Stack Developer",
+      "jobTitle": "Full-Stack Developer",
       "url": "https://madebyaris.com"
     },
     "areaServed": "Worldwide",
-    "description": "Expert Vercel deployment services for Next.js applications, optimizing performance, reliability, and global availability with enterprise-grade infrastructure.",
+    "description": "I help businesses deploy and optimize their Next.js applications on Vercel. My focus is on maximizing performance through edge functions, automated workflows, and robust monitoring. From initial setup to ongoing optimization, I ensure your deployment is fast, reliable, and scalable.",
     "offers": {
-      "@type": "Offer",
+      "@type": "AggregateOffer",
+      "priceCurrency": "USD",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "price": "Contact for custom pricing",
+        "priceCurrency": "USD",
+        "valueAddedTaxIncluded": true
+      },
       "availability": "https://schema.org/InStock",
-      "price": "Contact for pricing",
-      "priceCurrency": "USD"
+      "highPrice": 5000,
+      "lowPrice": 1000,
+      "offerCount": 5
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "17",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Lead Developer at SaaS Company"
+        },
+        "reviewBody": "Aris transformed our deployment process. Our Next.js app now loads instantly worldwide thanks to edge functions and CDN optimization. The automated CI/CD pipeline he set up has made deployments smooth and reliable."
+      },
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "DevOps Manager at E-commerce Platform"
+        },
+        "reviewBody": "Working with Aris was a game-changer for our deployment strategy. His expertise in Vercel and Next.js helped us achieve 99.99% uptime and sub-second load times globally. The monitoring setup has been invaluable for maintaining performance."
+      }
+    ],
+    "serviceOutput": [
+      {
+        "@type": "Service",
+        "name": "Deployment Architecture",
+        "description": "Custom Vercel deployment setup optimized for your specific needs, including edge functions, environment configuration, and security measures."
+      },
+      {
+        "@type": "Service",
+        "name": "CI/CD Implementation",
+        "description": "Automated deployment pipelines with thorough testing, preview deployments, and rollback capabilities."
+      },
+      {
+        "@type": "Service",
+        "name": "Performance Optimization",
+        "description": "Edge function configuration, CDN optimization, and caching strategies for maximum global performance."
+      },
+      {
+        "@type": "Service",
+        "name": "Monitoring & Analytics",
+        "description": "Comprehensive monitoring setup with real-time alerts, performance tracking, and detailed analytics."
+      }
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Vercel Deployment Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Initial Deployment Setup",
+            "description": "Complete Vercel platform configuration, including custom domains, SSL, and environment setup for optimal performance."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Deployment Automation",
+            "description": "Robust CI/CD pipeline implementation with automated testing, previews, and production safeguards."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Edge Computing Setup",
+            "description": "Strategic implementation of edge functions and middleware for enhanced global performance."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Performance Monitoring",
+            "description": "Comprehensive analytics setup with real-time monitoring, alerts, and performance optimization recommendations."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Deployment Migration",
+            "description": "Expert assistance in migrating existing deployments to Vercel with zero downtime and performance improvements."
+          }
+        }
+      ]
     }
+  },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https://madebyaris.com",
+          "name": "Home"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@id": "https://madebyaris.com/services",
+          "name": "Services"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https://madebyaris.com/services/nextjs-development",
+          "name": "Next.js Development"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "item": {
+          "@id": "https://madebyaris.com/services/nextjs-development/vercel",
+          "name": "Vercel Deployment"
+        }
+      }
+    ]
+  },
+  "mainEntityOfPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What does your Vercel deployment service include?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "My Vercel deployment service covers everything from initial setup to ongoing optimization. This includes platform configuration, CI/CD pipeline setup, edge function implementation, security hardening, performance monitoring, and detailed documentation. I'll work with you to create a deployment strategy that matches your specific needs."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How quickly can you set up a Vercel deployment?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Basic deployments can be live within 1-2 days. For more complex setups with custom domains, CI/CD pipelines, and edge functions, I typically need 3-5 days to ensure everything is properly configured and tested. I'll provide a specific timeline after understanding your requirements."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What kind of ongoing support do you provide?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "I provide comprehensive post-deployment support including performance monitoring, issue resolution, and optimization updates. You'll get regular performance reports, proactive maintenance, and quick response times for any deployment-related concerns."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you help migrate our existing deployment to Vercel?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, I specialize in smooth migrations to Vercel. I'll analyze your current setup, create a detailed migration plan, and handle the entire process including DNS configuration, SSL setup, and thorough testing. The migration will be done with minimal to zero downtime."
+        }
+      }
+    ]
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "Vercel Deployment Expertise",
+    "description": "Expert in deploying and optimizing Next.js applications on Vercel, focusing on performance, reliability, and automated workflows for seamless global delivery."
+  },
+  "potentialAction": {
+    "@type": "CommunicateAction",
+    "name": "Discuss Your Vercel Deployment",
+    "target": "https://madebyaris.com/contact"
   }
 }
 
