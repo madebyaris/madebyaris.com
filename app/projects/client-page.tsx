@@ -1,77 +1,179 @@
 'use client'
 
-import Image from 'next/image'
-import type { Project } from '@/app/types/wordpress'
+import { useState, useEffect } from 'react'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import { ArrowRight, Briefcase, ShoppingCart, Film, Home, Globe, Music, Factory, Wrench, Utensils, Car, Zap } from 'lucide-react'
+import { Sparkles } from '@/components/ui/sparkles'
+import dynamic from 'next/dynamic'
+import { projects } from './server-page'
 
-interface ProjectsPageProps {
-  projects: Project[]
+// Import ProjectCard as a client component
+const ProjectCard = dynamic(() => import('@/components/project-card'), { 
+  ssr: true,
+  loading: () => <div className="bg-white/50 dark:bg-zinc-800/50 rounded-lg shadow-md h-96 animate-pulse"></div>
+})
+
+// Define category colors with improved icons
+const categoryColors: Record<string, { bg: string, text: string, icon: React.ReactNode, hoverBg: string }> = {
+  "Education": { 
+    bg: "bg-blue-100 dark:bg-blue-900/30", 
+    text: "text-blue-800 dark:text-blue-300",
+    icon: <Globe className="w-4 h-4" />,
+    hoverBg: "hover:bg-blue-200 dark:hover:bg-blue-800/50"
+  },
+  "Agency": { 
+    bg: "bg-purple-100 dark:bg-purple-900/30", 
+    text: "text-purple-800 dark:text-purple-300",
+    icon: <Briefcase className="w-4 h-4" />,
+    hoverBg: "hover:bg-purple-200 dark:hover:bg-purple-800/50"
+  },
+  "Marketplace": { 
+    bg: "bg-emerald-100 dark:bg-emerald-900/30", 
+    text: "text-emerald-800 dark:text-emerald-300",
+    icon: <Globe className="w-4 h-4" />,
+    hoverBg: "hover:bg-emerald-200 dark:hover:bg-emerald-800/50"
+  },
+  "E-commerce": { 
+    bg: "bg-amber-100 dark:bg-amber-900/30", 
+    text: "text-amber-800 dark:text-amber-300",
+    icon: <ShoppingCart className="w-4 h-4" />,
+    hoverBg: "hover:bg-amber-200 dark:hover:bg-amber-800/50"
+  },
+  "Entertainment": { 
+    bg: "bg-pink-100 dark:bg-pink-900/30", 
+    text: "text-pink-800 dark:text-pink-300",
+    icon: <Film className="w-4 h-4" />,
+    hoverBg: "hover:bg-pink-200 dark:hover:bg-pink-800/50"
+  },
+  "Real Estate": { 
+    bg: "bg-indigo-100 dark:bg-indigo-900/30", 
+    text: "text-indigo-800 dark:text-indigo-300",
+    icon: <Home className="w-4 h-4" />,
+    hoverBg: "hover:bg-indigo-200 dark:hover:bg-indigo-800/50"
+  },
+  "Industrial Supply": { 
+    bg: "bg-orange-100 dark:bg-orange-900/30", 
+    text: "text-orange-800 dark:text-orange-300",
+    icon: <Wrench className="w-4 h-4" />,
+    hoverBg: "hover:bg-orange-200 dark:hover:bg-orange-800/50"
+  },
+  "Industrial": { 
+    bg: "bg-gray-100 dark:bg-gray-900/30", 
+    text: "text-gray-800 dark:text-gray-300",
+    icon: <Factory className="w-4 h-4" />,
+    hoverBg: "hover:bg-gray-200 dark:hover:bg-gray-800/50"
+  },
+  "Music Publishing": { 
+    bg: "bg-red-100 dark:bg-red-900/30", 
+    text: "text-red-800 dark:text-red-300",
+    icon: <Music className="w-4 h-4" />,
+    hoverBg: "hover:bg-red-200 dark:hover:bg-red-800/50"
+  },
+  "Music Industry": { 
+    bg: "bg-violet-100 dark:bg-violet-900/30", 
+    text: "text-violet-800 dark:text-violet-300",
+    icon: <Music className="w-4 h-4" />,
+    hoverBg: "hover:bg-violet-200 dark:hover:bg-violet-800/50"
+  },
+  "Food & Beverage": { 
+    bg: "bg-rose-100 dark:bg-rose-900/30", 
+    text: "text-rose-800 dark:text-rose-300",
+    icon: <Utensils className="w-4 h-4" />,
+    hoverBg: "hover:bg-rose-200 dark:hover:bg-rose-800/50"
+  },
+  "Rental Services": { 
+    bg: "bg-fuchsia-100 dark:bg-fuchsia-900/30", 
+    text: "text-fuchsia-800 dark:text-fuchsia-300",
+    icon: <Car className="w-4 h-4" />,
+    hoverBg: "hover:bg-fuchsia-200 dark:hover:bg-fuchsia-800/50"
+  },
+  "Energy": { 
+    bg: "bg-yellow-100 dark:bg-yellow-900/30", 
+    text: "text-yellow-800 dark:text-yellow-300",
+    icon: <Zap className="w-4 h-4" />,
+    hoverBg: "hover:bg-yellow-200 dark:hover:bg-yellow-800/50"
+  }
 }
 
-export default function ProjectsPage({ projects }: ProjectsPageProps) {
+export default function ClientProjectsPage() {
+  // Use state to control client-side rendering
+  const [isClient, setIsClient] = useState(false)
+
+  // Set isClient to true after component mounts
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold mb-8">Projects</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {projects.map((project) => (
-          <div key={project.id} className="bg-white rounded-lg shadow-md overflow-hidden">
-            {project.acf.logo && (
-              <div className="relative aspect-w-16 aspect-h-9 h-48">
-                <Image
-                  src={project.acf.logo}
-                  alt={project.title.rendered}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
-              </div>
-            )}
-            <div className="p-6">
-              <h2 className="text-xl font-semibold mb-2">{project.title.rendered}</h2>
-              {project.acf.description ? (
-                <p className="text-gray-600 mb-4">{project.acf.description}</p>
-              ) : project.excerpt?.rendered ? (
-                <div 
-                  className="text-gray-600 mb-4"
-                  dangerouslySetInnerHTML={{ __html: project.excerpt.rendered }}
-                />
-              ) : (
-                <p className="text-gray-600 mb-4">Project by Aris Setiawan</p>
-              )}
-              {project.acf.technologies && (
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.acf.technologies.map((tech) => (
-                    <span key={tech} className="px-2 py-1 bg-gray-100 text-sm rounded">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              )}
-              <div className="flex gap-4">
-                {project.acf.project_url && (
-                  <a
-                    href={project.acf.project_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-600 hover:text-blue-800"
-                  >
-                    View Project →
-                  </a>
-                )}
-                {project.acf.github_url && (
-                  <a
-                    href={project.acf.github_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-600 hover:text-gray-800"
-                  >
-                    View Code →
-                  </a>
-                )}
-              </div>
+    <div suppressHydrationWarning>
+      {/* Hero Section with enhanced design */}
+      <section className="relative py-12 md:py-16 overflow-hidden">
+        {/* Background decorative elements */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(120,119,198,0.1),transparent_60%)]"></div>
+        
+        <div className="container max-w-6xl mx-auto px-4 sm:px-6 relative">
+          <div className="text-center">
+            <div className="inline-block px-4 py-1 bg-primary/10 dark:bg-primary/20 text-primary rounded-full text-sm font-medium mb-4">
+              Enterprise Solutions
+            </div>
+            <Sparkles>
+              <h1 className="text-3xl md:text-4xl font-bold leading-tight tracking-tighter lg:text-5xl mb-4 md:mb-6">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-emerald-500">
+                  Client Projects Portfolio
+                </span>
+              </h1>
+            </Sparkles>
+            <div className="max-w-[700px] mx-auto bg-white/50 dark:bg-zinc-800/50 backdrop-blur-sm rounded-xl p-4 md:p-6 shadow-xl border border-zinc-200/50 dark:border-zinc-700/50">
+              <p className="text-base md:text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">
+                Explore our showcase of enterprise-level web development solutions, 
+                delivering exceptional results for clients worldwide.
+              </p>
             </div>
           </div>
-        ))}
-      </div>
+        </div>
+      </section>
+
+      {/* Projects Grid with enhanced cards */}
+      <section className="py-8 md:py-12">
+        <div className="container max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+            {isClient ? projects.map((project, index) => (
+              <ProjectCard 
+                key={project.id}
+                project={project}
+                index={index}
+                categoryColors={categoryColors}
+              />
+            )) : (
+              // Skeleton loading placeholders for server-side rendering
+              Array.from({ length: 6 }).map((_, index) => (
+                <div key={index} className="bg-white/50 dark:bg-zinc-800/50 rounded-lg shadow-md h-96 animate-pulse"></div>
+              ))
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* Enhanced CTA Section with fixed button contrast */}
+      <section className="py-12 md:py-16 relative overflow-hidden">
+        
+        <div className="container max-w-6xl mx-auto px-4 sm:px-6 relative">
+          <div className="bg-white/70 dark:bg-zinc-800/70 backdrop-blur-md rounded-2xl p-6 md:p-10 shadow-xl border border-zinc-200/50 dark:border-zinc-700/50 text-center">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
+              Ready to Build Your Next Project?
+            </h2>
+            <p className="text-base md:text-lg text-zinc-700 dark:text-zinc-300 mb-6 md:mb-8 max-w-2xl mx-auto">
+              Let&apos;s collaborate to create a high-performance, visually stunning solution that meets your business needs and exceeds your expectations.
+            </p>
+            <Link href="/contact">
+              <Button className="bg-primary hover:bg-primary/90 dark:bg-primary dark:text-black dark:hover:bg-primary/90 px-6 py-2 md:px-8 md:py-6 text-base md:text-lg rounded-full shadow-lg hover:shadow-xl transition-all hover:translate-y-[-2px]">
+                Start a Project <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   )
 } 
