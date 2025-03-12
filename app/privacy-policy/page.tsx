@@ -80,12 +80,16 @@ export function generateMetadata(): Metadata {
     title: 'Privacy Policy | Made by Aris',
     description: 'Privacy policy for Made by Aris website, detailing how we collect, use, and protect your personal information.',
     keywords: [
-      'privacy policy',
-      'data protection',
-      'personal information',
-      'cookies policy',
-      'GDPR compliance',
-      'web development privacy',
+      'Privacy Policy',
+      'Data Protection',
+      'Personal Information',
+      'Cookie Policy',
+      'Website Terms',
+      'User Privacy',
+      'Information Collection',
+      'Data Security',
+      'GDPR Compliance',
+      'Privacy Rights'
     ],
     alternates: {
       canonical: 'https://madebyaris.com/privacy-policy'
@@ -99,7 +103,7 @@ export function generateMetadata(): Metadata {
       type: 'website',
     },
     other: {
-      structuredData: JSON.stringify(structuredData),
+      'structured-data': JSON.stringify(structuredData),
     },
     verification: {
       google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || '',

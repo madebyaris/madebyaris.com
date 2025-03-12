@@ -113,74 +113,94 @@ const structuredData = {
       }
     ]
   },
-  "mainEntity": {
-    "@type": "Service",
-    "name": "PHP Development Services",
-    "description": "Professional PHP development services for custom web applications, APIs, and enterprise solutions. Expert in modern PHP frameworks and best practices.",
-    "provider": {
-      "@type": "Person",
-      "@id": "https://madebyaris.com/#person",
-      "name": "Aris Setiawan",
-      "jobTitle": "Senior Full Stack Developer",
-      "url": "https://madebyaris.com",
-      "image": "https://madebyaris.com/astro.png",
-      "sameAs": [
-        "https://www.linkedin.com/in/arissetia/",
-        "https://github.com/madebyaris",
-        "https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe"
-      ]
-    },
-    "serviceType": "PHP Development",
-    "areaServed": {
-      "@type": "Country",
-      "name": "Worldwide"
-    },
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
+  "mainEntity": [
+    {
+      "@type": "Service",
       "name": "PHP Development Services",
-      "itemListElement": services.map((service) => ({
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": service.title,
-          "description": service.description,
-          "url": `https://madebyaris.com${service.href}`,
-          "serviceOutput": {
-            "@type": "ItemList",
-            "itemListElement": service.features.map((feature, index) => ({
-              "@type": "ListItem",
-              "position": index + 1,
-              "item": {
-                "@type": "Service",
-                "name": feature
-              }
-            }))
-          }
-        }
-      }))
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "reviewCount": "25",
-      "bestRating": "5",
-      "worstRating": "1"
-    },
-    "review": testimonials.map((testimonial) => ({
-      "@type": "Review",
-      "reviewRating": {
-        "@type": "Rating",
-        "ratingValue": "5",
-        "bestRating": "5"
-      },
-      "author": {
+      "description": "Professional PHP development services for custom web applications, APIs, and enterprise solutions. Expert in modern PHP frameworks and best practices.",
+      "provider": {
         "@type": "Person",
-        "name": testimonial.author,
-        "jobTitle": testimonial.company
+        "@id": "https://madebyaris.com/#person",
+        "name": "Aris Setiawan",
+        "jobTitle": "Senior Full Stack Developer",
+        "url": "https://madebyaris.com",
+        "image": "https://madebyaris.com/astro.png",
+        "sameAs": [
+          "https://www.linkedin.com/in/arissetia/",
+          "https://github.com/madebyaris",
+          "https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe"
+        ]
       },
-      "reviewBody": testimonial.quote
-    }))
-  },
+      "serviceType": "PHP Development",
+      "areaServed": {
+        "@type": "Country",
+        "name": "Worldwide"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "PHP Development Services",
+        "itemListElement": services.map((service) => ({
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": service.title,
+            "description": service.description,
+            "url": `https://madebyaris.com${service.href}`,
+            "serviceOutput": {
+              "@type": "ItemList",
+              "itemListElement": service.features.map((feature, index) => ({
+                "@type": "ListItem",
+                "position": index + 1,
+                "item": {
+                  "@type": "Service",
+                  "name": feature
+                }
+              }))
+            }
+          }
+        }))
+      }
+    },
+    {
+      "@type": "Product",
+      "@id": "https://madebyaris.com/services/php-development/#product",
+      "name": "PHP Development Services",
+      "description": "Professional PHP development services for custom web applications, APIs, and enterprise solutions.",
+      "brand": {
+        "@type": "Brand",
+        "name": "Made by Aris"
+      },
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "USD",
+        "highPrice": 50000,
+        "lowPrice": 5000,
+        "offerCount": 6,
+        "availability": "https://schema.org/InStock"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "25",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "review": testimonials.map((testimonial) => ({
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": testimonial.author,
+          "jobTitle": testimonial.company
+        },
+        "reviewBody": testimonial.quote
+      }))
+    }
+  ],
   "about": {
     "@type": "Thing",
     "name": "PHP Development Expertise",

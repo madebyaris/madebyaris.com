@@ -94,85 +94,105 @@ const structuredData = {
       }
     ]
   },
-  "mainEntity": {
-    "@type": "Service",
-    "name": "Professional Web Development Services",
-    "description": "Expert development services focused on modern technologies and best practices. From blazing-fast Next.js applications to powerful WordPress solutions.",
-    "provider": {
-      "@type": "Person",
-      "@id": "https://madebyaris.com/#person",
-      "name": "Aris Setiawan",
-      "jobTitle": "Senior Full Stack Developer",
-      "url": "https://madebyaris.com",
-      "image": "https://madebyaris.com/astro.png",
-      "sameAs": [
-        "https://www.linkedin.com/in/arissetia/",
-        "https://github.com/madebyaris",
-        "https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe"
-      ]
-    },
-    "serviceType": "Web Development",
-    "areaServed": "Worldwide",
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Web Development Services",
-      "itemListElement": services.map((service) => ({
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": service.title,
-          "description": service.description,
-          "url": `https://madebyaris.com${service.href}`,
-          "serviceOutput": {
-            "@type": "ItemList",
-            "itemListElement": service.features.map((feature, index) => ({
-              "@type": "ListItem",
-              "position": index + 1,
-              "item": {
-                "@type": "Service",
-                "name": feature
-              }
-            }))
-          }
-        }
-      }))
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "reviewCount": "25",
-      "bestRating": "5",
-      "worstRating": "1"
-    },
-    "review": [
-      {
-        "@type": "Review",
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": "5",
-          "bestRating": "5"
-        },
-        "author": {
-          "@type": "Person",
-          "name": "Tech Director at E-commerce Company"
-        },
-        "reviewBody": "Working with Aris transformed our e-commerce platform. His deep understanding of Next.js and performance optimization resulted in significantly faster load times and better user engagement."
+  "mainEntity": [
+    {
+      "@type": "Service",
+      "name": "Professional Web Development Services",
+      "description": "Expert development services focused on modern technologies and best practices. From blazing-fast Next.js applications to powerful WordPress solutions.",
+      "provider": {
+        "@type": "Person",
+        "@id": "https://madebyaris.com/#person",
+        "name": "Aris Setiawan",
+        "jobTitle": "Senior Full Stack Developer",
+        "url": "https://madebyaris.com",
+        "image": "https://madebyaris.com/astro.png",
+        "sameAs": [
+          "https://www.linkedin.com/in/arissetia/",
+          "https://github.com/madebyaris",
+          "https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe"
+        ]
       },
-      {
-        "@type": "Review",
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": "5",
-          "bestRating": "5"
-        },
-        "author": {
-          "@type": "Person",
-          "name": "Founder of Tech Startup"
-        },
-        "reviewBody": "Aris helped us migrate our application to Next.js 14, implementing server components and the new app router. The improvement in performance and SEO was immediate."
+      "serviceType": "Web Development",
+      "areaServed": "Worldwide",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Web Development Services",
+        "itemListElement": services.map((service) => ({
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": service.title,
+            "description": service.description,
+            "url": `https://madebyaris.com${service.href}`,
+            "serviceOutput": {
+              "@type": "ItemList",
+              "itemListElement": service.features.map((feature, index) => ({
+                "@type": "ListItem",
+                "position": index + 1,
+                "item": {
+                  "@type": "Service",
+                  "name": feature
+                }
+              }))
+            }
+          }
+        }))
       }
-    ]
-  },
+    },
+    {
+      "@type": "Product",
+      "@id": "https://madebyaris.com/services/#product",
+      "name": "Web Development Services",
+      "description": "Professional web development services including Next.js, WordPress, and PHP solutions for businesses worldwide.",
+      "brand": {
+        "@type": "Brand",
+        "name": "Made by Aris"
+      },
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "USD",
+        "highPrice": 50000,
+        "lowPrice": 5000,
+        "offerCount": 6,
+        "availability": "https://schema.org/InStock"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "25",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "review": [
+        {
+          "@type": "Review",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "author": {
+            "@type": "Person",
+            "name": "Tech Director at E-commerce Company"
+          },
+          "reviewBody": "Working with Aris transformed our e-commerce platform. His deep understanding of Next.js and performance optimization resulted in significantly faster load times and better user engagement."
+        },
+        {
+          "@type": "Review",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "author": {
+            "@type": "Person",
+            "name": "Founder of Tech Startup"
+          },
+          "reviewBody": "Aris helped us migrate our application to Next.js 14, implementing server components and the new app router. The improvement in performance and SEO was immediate."
+        }
+      ]
+    }
+  ],
   "about": {
     "@type": "Thing",
     "name": "Web Development Services",

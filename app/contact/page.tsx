@@ -264,25 +264,16 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     alternates: {
       canonical: 'https://madebyaris.com/contact'
+    },
+    other: {
+      'structured-data': JSON.stringify(structuredData)
     }
   }
 }
 
 export default function ContactPage() {
-  // Function to generate structured data
-  function generateStructuredData() {
-    return {
-      __html: JSON.stringify(structuredData)
-    }
-  }
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={generateStructuredData()}
-      />
-      
       {/* Hero Section - Simplified for better LCP */}
       <section className="relative py-12 md:py-16 overflow-hidden">
         {/* Static background with reduced complexity */}

@@ -106,7 +106,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: process.env.GOOGLE_VERIFICATION_CODE,
+    google: process.env.GOOGLE_VERIFICATION_CODE || '',
   },
 };
 
