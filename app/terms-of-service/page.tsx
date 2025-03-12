@@ -5,45 +5,64 @@ import { Button } from '@/components/ui/button'
 
 export const revalidate = 86400 // Revalidate daily
 
-// Structured Data
-export const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "@id": "https://madebyaris.com/terms-of-service/#webpage",
-  "name": "Terms of Service | Made by Aris",
-  "description": "Terms of service for Made by Aris website, outlining the rules, guidelines, and legal terms for using our services.",
-  "url": "https://madebyaris.com/terms-of-service",
-  "isPartOf": {
-    "@type": "WebSite",
-    "@id": "https://madebyaris.com/#website"
-  },
-  "breadcrumb": {
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "item": {
-          "@id": "https://madebyaris.com",
-          "name": "Home"
+// Generate Metadata and Structured Data
+export function generateMetadata(): Metadata {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://madebyaris.com/terms-of-service/#webpage",
+    "name": "Terms of Service | Made by Aris",
+    "description": "Terms of service and conditions for Made by Aris website and services.",
+    "url": "https://madebyaris.com/terms-of-service",
+    "isPartOf": {
+      "@type": "WebSite",
+      "@id": "https://madebyaris.com/#website"
+    },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@id": "https://madebyaris.com",
+            "name": "Home"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@id": "https://madebyaris.com/terms-of-service",
+            "name": "Terms of Service"
+          }
+        }
+      ]
+    },
+    "mainEntity": {
+      "@type": "DigitalDocument",
+      "name": "Made by Aris Terms of Service",
+      "text": "These terms and conditions outline the rules and regulations for the use of Made by Aris's services.",
+      "dateModified": new Date().toISOString(),
+      "provider": {
+        "@type": "Organization",
+        "@id": "https://madebyaris.com/#organization",
+        "name": "MadeByAris",
+        "url": "https://madebyaris.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://madebyaris.com/logo.png",
+          "width": "180",
+          "height": "180"
         }
       },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "item": {
-          "@id": "https://madebyaris.com/terms-of-service",
-          "name": "Terms of Service"
-        }
+      "about": {
+        "@type": "Thing",
+        "name": "Service Terms and Conditions",
+        "description": "Terms and conditions governing the use of Made by Aris's web development and consulting services."
       }
-    ]
-  },
-  "mainEntity": {
-    "@type": "TermsOfService",
-    "name": "Made by Aris Terms of Service",
-    "text": "These Terms of Service govern your use of the Made by Aris website and services offered by Aris Setiawan.",
-    "dateModified": new Date().toISOString(),
-    "provider": {
+    },
+    "publisher": {
       "@type": "Organization",
       "@id": "https://madebyaris.com/#organization",
       "name": "MadeByAris",
@@ -54,40 +73,37 @@ export const structuredData = {
         "width": "180",
         "height": "180"
       }
-    },
-    "about": {
-      "@type": "Thing",
-      "name": "Web Development Services Terms",
-      "description": "Legal terms and conditions for web development, design, and related services provided by Aris Setiawan."
-    }
-  },
-  "publisher": {
-    "@type": "Organization",
-    "@id": "https://madebyaris.com/#organization",
-    "name": "MadeByAris",
-    "url": "https://madebyaris.com",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://madebyaris.com/logo.png",
-      "width": "180",
-      "height": "180"
     }
   }
-}
 
-export const metadata: Metadata = {
-  title: 'Terms of Service | Made by Aris',
-  description: 'Terms of service for Made by Aris website, outlining the rules, guidelines, and legal terms for using our services.',
-  keywords: [
-    'terms of service',
-    'terms and conditions',
-    'legal agreement',
-    'service terms',
-    'website terms',
-    'user agreement',
-  ],
-  alternates: {
-    canonical: 'https://madebyaris.com/terms-of-service'
+  return {
+    title: 'Terms of Service | Made by Aris',
+    description: 'Terms of service and conditions for Made by Aris website and services.',
+    keywords: [
+      'terms of service',
+      'terms and conditions',
+      'service agreement',
+      'usage terms',
+      'web development terms',
+      'consulting terms',
+    ],
+    alternates: {
+      canonical: 'https://madebyaris.com/terms-of-service'
+    },
+    openGraph: {
+      title: 'Terms of Service | Made by Aris',
+      description: 'Terms of service and conditions for Made by Aris website and services.',
+      url: 'https://madebyaris.com/terms-of-service',
+      siteName: 'Made by Aris',
+      locale: 'en_US',
+      type: 'website',
+    },
+    other: {
+      structuredData: JSON.stringify(structuredData),
+    },
+    verification: {
+      google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || '',
+    },
   }
 }
 

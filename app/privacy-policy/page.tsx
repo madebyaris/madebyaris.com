@@ -5,45 +5,64 @@ import { Button } from '@/components/ui/button'
 
 export const revalidate = 86400 // Revalidate daily
 
-// Structured Data
-export const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "@id": "https://madebyaris.com/privacy-policy/#webpage",
-  "name": "Privacy Policy | Made by Aris",
-  "description": "Privacy policy for Made by Aris website, detailing how we collect, use, and protect your personal information.",
-  "url": "https://madebyaris.com/privacy-policy",
-  "isPartOf": {
-    "@type": "WebSite",
-    "@id": "https://madebyaris.com/#website"
-  },
-  "breadcrumb": {
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "item": {
-          "@id": "https://madebyaris.com",
-          "name": "Home"
+// Generate Metadata and Structured Data
+export function generateMetadata(): Metadata {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://madebyaris.com/privacy-policy/#webpage",
+    "name": "Privacy Policy | Made by Aris",
+    "description": "Privacy policy for Made by Aris website, detailing how we collect, use, and protect your personal information.",
+    "url": "https://madebyaris.com/privacy-policy",
+    "isPartOf": {
+      "@type": "WebSite",
+      "@id": "https://madebyaris.com/#website"
+    },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@id": "https://madebyaris.com",
+            "name": "Home"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@id": "https://madebyaris.com/privacy-policy",
+            "name": "Privacy Policy"
+          }
+        }
+      ]
+    },
+    "mainEntity": {
+      "@type": "PrivacyPolicy",
+      "name": "Made by Aris Privacy Policy",
+      "text": "At Made by Aris, I am committed to protecting your privacy and ensuring the security of your personal information.",
+      "dateModified": new Date().toISOString(),
+      "provider": {
+        "@type": "Organization",
+        "@id": "https://madebyaris.com/#organization",
+        "name": "MadeByAris",
+        "url": "https://madebyaris.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://madebyaris.com/logo.png",
+          "width": "180",
+          "height": "180"
         }
       },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "item": {
-          "@id": "https://madebyaris.com/privacy-policy",
-          "name": "Privacy Policy"
-        }
+      "about": {
+        "@type": "Thing",
+        "name": "Data Protection and Privacy",
+        "description": "Information about how Made by Aris collects, uses, and protects personal data, including cookies policy and GDPR compliance."
       }
-    ]
-  },
-  "mainEntity": {
-    "@type": "PrivacyPolicy",
-    "name": "Made by Aris Privacy Policy",
-    "text": "At Made by Aris, I am committed to protecting your privacy and ensuring the security of your personal information.",
-    "dateModified": new Date().toISOString(),
-    "provider": {
+    },
+    "publisher": {
       "@type": "Organization",
       "@id": "https://madebyaris.com/#organization",
       "name": "MadeByAris",
@@ -54,40 +73,37 @@ export const structuredData = {
         "width": "180",
         "height": "180"
       }
-    },
-    "about": {
-      "@type": "Thing",
-      "name": "Data Protection and Privacy",
-      "description": "Information about how Made by Aris collects, uses, and protects personal data, including cookies policy and GDPR compliance."
-    }
-  },
-  "publisher": {
-    "@type": "Organization",
-    "@id": "https://madebyaris.com/#organization",
-    "name": "MadeByAris",
-    "url": "https://madebyaris.com",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://madebyaris.com/logo.png",
-      "width": "180",
-      "height": "180"
     }
   }
-}
 
-export const metadata: Metadata = {
-  title: 'Privacy Policy | Made by Aris',
-  description: 'Privacy policy for Made by Aris website, detailing how we collect, use, and protect your personal information.',
-  keywords: [
-    'privacy policy',
-    'data protection',
-    'personal information',
-    'cookies policy',
-    'GDPR compliance',
-    'web development privacy',
-  ],
-  alternates: {
-    canonical: 'https://madebyaris.com/privacy-policy'
+  return {
+    title: 'Privacy Policy | Made by Aris',
+    description: 'Privacy policy for Made by Aris website, detailing how we collect, use, and protect your personal information.',
+    keywords: [
+      'privacy policy',
+      'data protection',
+      'personal information',
+      'cookies policy',
+      'GDPR compliance',
+      'web development privacy',
+    ],
+    alternates: {
+      canonical: 'https://madebyaris.com/privacy-policy'
+    },
+    openGraph: {
+      title: 'Privacy Policy | Made by Aris',
+      description: 'Privacy policy for Made by Aris website, detailing how we collect, use, and protect your personal information.',
+      url: 'https://madebyaris.com/privacy-policy',
+      siteName: 'Made by Aris',
+      locale: 'en_US',
+      type: 'website',
+    },
+    other: {
+      structuredData: JSON.stringify(structuredData),
+    },
+    verification: {
+      google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || '',
+    },
   }
 }
 
