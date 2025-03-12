@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { ArrowRight, Briefcase, ShoppingCart, Film, Home, Globe, Music, Factory, Wrench, Utensils, Car, Zap } from 'lucide-react'
@@ -8,7 +9,10 @@ import dynamic from 'next/dynamic'
 import { projects } from './server-page'
 
 // Import ProjectCard as a client component
-const ProjectCard = dynamic(() => import('@/components/project-card'), { ssr: true })
+const ProjectCard = dynamic(() => import('@/components/project-card'), { 
+  ssr: true,
+  loading: () => <div className="bg-white/50 dark:bg-zinc-800/50 rounded-lg shadow-md h-96 animate-pulse"></div>
+})
 
 // Define category colors with improved icons
 const categoryColors: Record<string, { bg: string, text: string, icon: React.ReactNode, hoverBg: string }> = {
@@ -93,8 +97,16 @@ const categoryColors: Record<string, { bg: string, text: string, icon: React.Rea
 }
 
 export default function ClientProjectsPage() {
+  // Use state to control client-side rendering
+  const [isClient, setIsClient] = useState(false)
+
+  // Set isClient to true after component mounts
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
   return (
-    <>
+    <div suppressHydrationWarning>
       {/* Hero Section with enhanced design */}
       <section className="relative py-12 md:py-16 overflow-hidden">
         {/* Background decorative elements */}
@@ -126,14 +138,19 @@ export default function ClientProjectsPage() {
       <section className="py-8 md:py-12">
         <div className="container max-w-6xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-            {projects.map((project, index) => (
+            {isClient ? projects.map((project, index) => (
               <ProjectCard 
                 key={project.id}
                 project={project}
                 index={index}
                 categoryColors={categoryColors}
               />
-            ))}
+            )) : (
+              // Skeleton loading placeholders for server-side rendering
+              Array.from({ length: 6 }).map((_, index) => (
+                <div key={index} className="bg-white/50 dark:bg-zinc-800/50 rounded-lg shadow-md h-96 animate-pulse"></div>
+              ))
+            )}
           </div>
         </div>
       </section>
@@ -157,6 +174,6 @@ export default function ClientProjectsPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 } 

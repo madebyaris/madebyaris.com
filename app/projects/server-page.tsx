@@ -174,28 +174,28 @@ export const metadata: Metadata = {
     locale: 'en_US',
     type: 'website',
   },
-}
-
-// Structured data for SEO
-export const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  "name": "Projects | Made by Aris",
-  "description": "Explore my portfolio of web development projects, featuring Next.js, WordPress, and full-stack solutions. See real examples of my work and expertise.",
-  "url": "https://madebyaris.com/projects",
-  "mainEntity": {
-    "@type": "ItemList",
-    "itemListElement": projects.map((project, index) => ({
-      "@type": "ListItem",
-      "position": index + 1,
-      "item": {
-        "@type": "WebSite",
-        "name": project.title,
-        "description": project.description,
-        "url": project.link
+  other: {
+    structuredData: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Projects | Made by Aris",
+      "description": "Explore my portfolio of web development projects, featuring Next.js, WordPress, and full-stack solutions. See real examples of my work and expertise.",
+      "url": "https://madebyaris.com/projects",
+      "mainEntity": {
+        "@type": "ItemList",
+        "itemListElement": projects.map((project, index) => ({
+          "@type": "ListItem",
+          "position": index + 1,
+          "item": {
+            "@type": "WebSite",
+            "name": project.title,
+            "description": project.description,
+            "url": project.link
+          }
+        }))
       }
-    }))
-  }
+    }),
+  },
 }
 
 // Import the client component from the same directory
@@ -208,10 +208,6 @@ const ClientProjectsPage = dynamic(() => import('./client-page'), {
 export default function ProjectsPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
       <ClientProjectsPage />
     </>
   )
