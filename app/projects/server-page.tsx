@@ -175,7 +175,7 @@ export const metadata: Metadata = {
     type: 'website',
   },
   other: {
-    structuredData: JSON.stringify({
+    'structured-data': JSON.stringify({
       "@context": "https://schema.org",
       "@type": "CollectionPage",
       "name": "Projects | Made by Aris",

@@ -80,12 +80,16 @@ export function generateMetadata(): Metadata {
     title: 'Terms of Service | Made by Aris',
     description: 'Terms of service and conditions for Made by Aris website and services.',
     keywords: [
-      'terms of service',
-      'terms and conditions',
-      'service agreement',
-      'usage terms',
-      'web development terms',
-      'consulting terms',
+      'Terms of Service',
+      'Terms and Conditions',
+      'Legal Agreement',
+      'Service Terms',
+      'Website Terms',
+      'User Agreement',
+      'Legal Terms',
+      'Service Conditions',
+      'Usage Policy',
+      'Legal Information'
     ],
     alternates: {
       canonical: 'https://madebyaris.com/terms-of-service'
@@ -99,7 +103,7 @@ export function generateMetadata(): Metadata {
       type: 'website',
     },
     other: {
-      structuredData: JSON.stringify(structuredData),
+      'structured-data': JSON.stringify(structuredData),
     },
     verification: {
       google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || '',

@@ -180,6 +180,50 @@ export async function generateMetadata(): Promise<Metadata> {
     }
   )
 
+  // Generate combined schema for structured data
+  const combinedSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      structuredData,
+      {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "itemListElement": (await getPosts()).map((post, index) => ({
+          "@type": "ListItem",
+          "position": index + 1,
+          "item": {
+            "@type": "BlogPosting",
+            "headline": post.title.rendered,
+            "description": post.excerpt.rendered.replace(/<[^>]*>/g, ''),
+            "url": `https://madebyaris.com/blog/${post.slug}`,
+            "author": {
+              "@type": "Person",
+              "name": "Aris Setiawan",
+              "url": "https://madebyaris.com"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "MadeByAris",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://madebyaris.com/logo.png"
+              }
+            },
+            "datePublished": post.date,
+            "dateModified": post.modified,
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": `https://madebyaris.com/blog/${post.slug}`
+            },
+            "keywords": post.tags?.map((tag) => typeof tag === 'object' ? tag.name : '').filter(Boolean).join(", ") || "",
+            "articleSection": post.categories?.map((cat) => typeof cat === 'object' ? cat.name : '').filter(Boolean).join(", ") || "Web Development"
+          }
+        })),
+        "numberOfItems": (await getPosts()).length
+      }
+    ]
+  };
+
   return {
     title: 'Web Development Blog | Next.js, React & WordPress Insights',
     description: 'Expert tutorials and insights on Next.js, React, WordPress, and modern web development practices. Learn from real-world enterprise development experience.',
@@ -210,6 +254,9 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     alternates: {
       canonical: 'https://madebyaris.com/blog'
+    },
+    other: {
+      'structured-data': JSON.stringify(combinedSchema)
     }
   }
 }
@@ -232,64 +279,8 @@ export default async function BlogPage() {
     console.error('Failed to fetch data:', error)
   }
 
-  // Function to generate structured data
-  function generateStructuredData() {
-    // Combine both schemas into a single object with @graph
-    const combinedSchema = {
-      "@context": "https://schema.org",
-      "@graph": [
-        structuredData,
-        {
-          "@context": "https://schema.org",
-          "@type": "ItemList",
-          "itemListElement": posts.map((post, index) => ({
-            "@type": "ListItem",
-            "position": index + 1,
-            "item": {
-              "@type": "BlogPosting",
-              "headline": post.title.rendered,
-              "description": post.excerpt.rendered.replace(/<[^>]*>/g, ''),
-              "url": `https://madebyaris.com/blog/${post.slug}`,
-              "author": {
-                "@type": "Person",
-                "name": "Aris Setiawan",
-                "url": "https://madebyaris.com"
-              },
-              "publisher": {
-                "@type": "Organization",
-                "name": "MadeByAris",
-                "logo": {
-                  "@type": "ImageObject",
-                  "url": "https://madebyaris.com/logo.png"
-                }
-              },
-              "datePublished": post.date,
-              "dateModified": post.modified,
-              "mainEntityOfPage": {
-                "@type": "WebPage",
-                "@id": `https://madebyaris.com/blog/${post.slug}`
-              },
-              "keywords": post.tags?.map((tag) => typeof tag === 'object' ? tag.name : '').filter(Boolean).join(", ") || "",
-              "articleSection": post.categories?.map((cat) => typeof cat === 'object' ? cat.name : '').filter(Boolean).join(", ") || "Web Development"
-            }
-          })),
-          "numberOfItems": posts.length
-        }
-      ]
-    }
-
-    return {
-      __html: JSON.stringify(combinedSchema)
-    }
-  }
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={generateStructuredData()}
-      />
-      
       {/* Hero Section with improved design and animated gradient */}
       <section className="relative py-8 md:py-10 overflow-hidden animated-gradient">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(120,119,198,0.15),transparent_70%)]"></div>
