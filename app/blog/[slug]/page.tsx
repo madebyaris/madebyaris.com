@@ -14,7 +14,6 @@ import { TableOfContents } from '@/components/table-of-contents'
 import { SmoothScroll } from '@/components/smooth-scroll'
 
 export const revalidate = 3600 // Revalidate every hour
-export const dynamicParams = true
 
 interface BlogPostPageProps {
   params: Promise<{
@@ -488,16 +487,6 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
     )
   } catch (error) {
     console.error('Error rendering blog post:', error);
-    return (
-      <div className="container mx-auto max-w-[1080px] px-5 py-16 text-center">
-        <h1 className="text-2xl font-bold mb-4">Error Loading Article</h1>
-        <p className="text-muted-foreground mb-6">
-          There was an error loading this article. Please try again later.
-        </p>
-        <Link href="/blog">
-          <Button>Return to Blog</Button>
-        </Link>
-      </div>
-    );
+    notFound()
   }
 }
