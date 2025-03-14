@@ -14,7 +14,6 @@ import { TableOfContents } from '@/components/table-of-contents'
 import { SmoothScroll } from '@/components/smooth-scroll'
 
 export const revalidate = 3600 // Revalidate every hour
-export const dynamicParams = true
 
 interface BlogPostPageProps {
   params: Promise<{
