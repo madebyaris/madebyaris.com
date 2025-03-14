@@ -1,13 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { Metadata } from 'next'
-import { getPosts, getAllTags } from '@/lib/wordpress'
 import type { Post, Tag } from '@/lib/types'
 import { ImageResponse } from 'next/og'
 import { Suspense } from 'react'
 import { BlogContent } from '@/components/blog-content'
-import { Button } from '@/components/ui/button'
-
-export const revalidate = 3600
 
 // Structured Data
 const structuredData = {
@@ -180,6 +176,18 @@ export async function generateMetadata(): Promise<Metadata> {
     }
   )
 
+  // Fetch posts for structured data
+  const postsResponse = await fetch(
+    `${process.env.NEXT_PUBLIC_WP_API_URL}/wp/v2/posts?per_page=12&_embed=wp:featuredmedia`,
+    { next: { revalidate: 3600 } }
+  );
+
+  if (!postsResponse.ok) {
+    throw new Error('Failed to fetch posts for metadata');
+  }
+
+  const posts = await postsResponse.json() as Post[];
+
   // Generate combined schema for structured data
   const combinedSchema = {
     "@context": "https://schema.org",
@@ -188,7 +196,7 @@ export async function generateMetadata(): Promise<Metadata> {
       {
         "@context": "https://schema.org",
         "@type": "ItemList",
-        "itemListElement": (await getPosts()).map((post, index) => ({
+        "itemListElement": posts.map((post: Post, index: number) => ({
           "@type": "ListItem",
           "position": index + 1,
           "item": {
@@ -215,11 +223,15 @@ export async function generateMetadata(): Promise<Metadata> {
               "@type": "WebPage",
               "@id": `https://madebyaris.com/blog/${post.slug}`
             },
-            "keywords": post.tags?.map((tag) => typeof tag === 'object' ? tag.name : '').filter(Boolean).join(", ") || "",
-            "articleSection": post.categories?.map((cat) => typeof cat === 'object' ? cat.name : '').filter(Boolean).join(", ") || "Web Development"
+            "keywords": post.tags?.map((tag: { name?: string }) => 
+              typeof tag === 'object' ? tag.name : ''
+            ).filter(Boolean).join(", ") || "",
+            "articleSection": post.categories?.map((cat: { name?: string }) => 
+              typeof cat === 'object' ? cat.name : ''
+            ).filter(Boolean).join(", ") || "Web Development"
           }
         })),
-        "numberOfItems": (await getPosts()).length
+        "numberOfItems": posts.length
       }
     ]
   };
@@ -267,12 +279,62 @@ export default async function BlogPage() {
   
   try {
     // Fetch posts and popular tags in parallel
-    const [postsData, tagsData] = await Promise.all([
-      getPosts({ per_page: 12 }),
-      getAllTags(6) // Get top 6 most popular tags
+    const [postsResponse, tagsResponse] = await Promise.all([
+      fetch(`${process.env.NEXT_PUBLIC_WP_API_URL}/wp/v2/posts?per_page=12&_embed=wp:featuredmedia`, {
+        next: {
+          revalidate: 3600
+        }
+      }),
+      fetch(`${process.env.NEXT_PUBLIC_WP_API_URL}/wp/v2/tags?orderby=count&order=desc&per_page=6`, {
+        next: {
+          revalidate: 3600
+        }
+      })
     ]);
+
+    if (!postsResponse.ok || !tagsResponse.ok) {
+      throw new Error('Failed to fetch data');
+    }
+
+    const [postsData, tagsData] = await Promise.all([
+      postsResponse.json(),
+      tagsResponse.json()
+    ]);
+
+    // Process posts to include full category and tag objects
+    const processedPosts = await Promise.all(postsData.map(async (post: Post) => {
+      // Fetch categories if they exist
+      if (post.categories && Array.isArray(post.categories) && post.categories.length > 0) {
+        const categoriesResponse = await fetch(
+          `${process.env.NEXT_PUBLIC_WP_API_URL}/wp/v2/categories?include=${post.categories.join(',')}`,
+          { next: { revalidate: 3600 } }
+        );
+        if (categoriesResponse.ok) {
+          const categories = await categoriesResponse.json();
+          post.categories = categories;
+        }
+      } else {
+        post.categories = [];
+      }
+      
+      // Fetch tags if they exist
+      if (post.tags && Array.isArray(post.tags) && post.tags.length > 0) {
+        const tagsResponse = await fetch(
+          `${process.env.NEXT_PUBLIC_WP_API_URL}/wp/v2/tags?include=${post.tags.join(',')}`,
+          { next: { revalidate: 3600 } }
+        );
+        if (tagsResponse.ok) {
+          const tags = await tagsResponse.json();
+          post.tags = tags;
+        }
+      } else {
+        post.tags = [];
+      }
+      
+      return post;
+    }));
     
-    posts = postsData;
+    posts = processedPosts;
     popularTags = tagsData;
     
   } catch (error) {
