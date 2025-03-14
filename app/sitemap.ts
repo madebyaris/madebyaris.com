@@ -1,7 +1,21 @@
-import { getPosts, getProjects } from '@/lib/wordpress'
 import type { MetadataRoute } from 'next'
 
-export const revalidate = 86400 // Revalidate daily
+
+export const dynamic = 'force-dynamic'
+
+// Define types directly instead of importing
+interface Post {
+  slug: string;
+  date: string;
+  modified: string;
+  title: { rendered: string };
+  content: { rendered: string };
+  excerpt: { rendered: string };
+  categories?: Array<{ id: number; name: string; slug: string }>;
+  tags?: Array<{ id: number; name: string; slug: string; count?: number }>;
+}
+
+export const revalidate = 3600 // Revalidate hourly instead of daily
 
 // Define route groups for better organization
 const mainRoutes = [
@@ -62,35 +76,39 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ].map(route => createSitemapEntry(baseUrl, route))
 
   try {
-    // Fetch dynamic content with error handling and timeouts
-    const [posts, projects] = await Promise.all([
-      getPosts({ per_page: 100 }).catch(error => {
+    // Fetch dynamic content with direct fetch calls and proper revalidation
+    const [postsResponse, projectsResponse] = await Promise.all([
+      fetch(`${process.env.NEXT_PUBLIC_WP_API_URL}/wp/v2/posts?per_page=100`, {
+        next: { revalidate: 3600 }
+      }).catch(error => {
         console.error('Failed to fetch posts:', error)
-        return []
+        return new Response(JSON.stringify([]), { status: 200 })
       }),
-      getProjects({ per_page: 100 }).catch(error => {
+      fetch(`${process.env.NEXT_PUBLIC_WP_API_URL}/wp/v2/project?per_page=100`, {
+        next: { revalidate: 3600 }
+      }).catch(error => {
         console.error('Failed to fetch projects:', error)
-        return []
+        return new Response(JSON.stringify([]), { status: 200 })
       }),
     ])
 
+    if (!postsResponse.ok || !projectsResponse.ok) {
+      throw new Error('Failed to fetch data for sitemap')
+    }
+
+    // Parse responses
+    const posts = await postsResponse.json() as Post[]
+
     // Create dynamic route entries with proper date handling
-    const postRoutes = posts.map(post => ({
+    const postRoutes = posts.map((post: Post) => ({
       url: `${baseUrl}/blog/${post.slug}`,
       lastModified: new Date(post.modified || post.date),
-      changeFrequency: 'monthly' as const,
-      priority: 0.6,
-    }))
-
-    const projectRoutes = projects.map(project => ({
-      url: `${baseUrl}/projects/${project.slug}`,
-      lastModified: new Date(project.modified || new Date()),
-      changeFrequency: 'monthly' as const,
+      changeFrequency: 'weekly' as const,
       priority: 0.6,
     }))
 
     // Combine all routes and sort by priority
-    const allRoutes = [...staticRoutes, ...postRoutes, ...projectRoutes]
+    const allRoutes = [...staticRoutes, ...postRoutes]
     return allRoutes.sort((a, b) => (b.priority || 0) - (a.priority || 0))
 
   } catch (error) {
