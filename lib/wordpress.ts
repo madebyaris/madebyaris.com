@@ -6,6 +6,12 @@ if (!WP_API_URL) {
   throw new Error('NEXT_PUBLIC_WP_API_URL is not defined')
 }
 
+// Interface for posts with processed categories and tags
+interface ProcessedPost extends Omit<Post, 'categories' | 'tags'> {
+  categories: Category[];
+  tags: Tag[];
+}
+
 export interface PaginationParams {
   page?: number
   per_page?: number
@@ -148,7 +154,7 @@ export async function getAllTags(limit: number = 10): Promise<Tag[]> {
   }
 }
 
-export async function getPosts(params: PaginationParams = {}): Promise<Post[]> {
+export async function getPosts(params: PaginationParams = {}): Promise<ProcessedPost[]> {
   try {
     const searchParams = new URLSearchParams()
     
@@ -176,33 +182,29 @@ export async function getPosts(params: PaginationParams = {}): Promise<Post[]> {
       throw new Error('Failed to fetch posts')
     }
 
-    const posts = await response.json();
+    const posts = await response.json() as Post[];
     
     // Process posts to fetch and add full category and tag objects
-    const processedPosts = await Promise.all(posts.map(async (post: Post) => {
+    const processedPosts = await Promise.all(posts.map(async (post) => {
+      // Create a new object with the processed data
+      const processedPost: ProcessedPost = {
+        ...post,
+        categories: [],
+        tags: []
+      };
+
       // Fetch full category objects if we have category IDs
       if (post.categories && Array.isArray(post.categories) && post.categories.length > 0) {
-        post.categories = await getCategoriesByIds(post.categories as unknown as number[]);
-      } else {
-        post.categories = [];
+        processedPost.categories = await getCategoriesByIds(post.categories);
       }
       
       // Fetch full tag objects if we have tag IDs
       if (post.tags && Array.isArray(post.tags) && post.tags.length > 0) {
-        post.tags = await getTagsByIds(post.tags as unknown as number[]);
-      } else {
-        post.tags = [];
+        processedPost.tags = await getTagsByIds(post.tags as unknown as number[]);
       }
       
-      return post;
+      return processedPost;
     }));
-    
-    // Debug: Log the first post to check if categories are included
-    if (processedPosts.length > 0) {
-     // console.log('First processed post:', processedPosts[0]);
-      //console.log('Categories after processing:', processedPosts[0].categories);
-      //console.log('Tags after processing:', processedPosts[0].tags);
-    }
     
     return processedPosts;
   } catch (error) {
