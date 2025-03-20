@@ -4,14 +4,14 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getPost, getPosts } from '@/lib/wordpress'
-import { transformWordPressContent } from '@/lib/utils'
 import { ArrowLeft, ArrowRight, BookOpen, Calendar, Clock, Share2, Tag, User } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Suspense } from 'react'
 import { TableOfContents } from '@/components/table-of-contents'
 import { SmoothScroll } from '@/components/smooth-scroll'
+import { Post, Tag as TagType } from '@/lib/types'
+import { convertBlocks } from 'wp-block-to-html/core'
 
 export const revalidate = 3600 // Revalidate every hour
 
@@ -24,7 +24,20 @@ interface BlogPostPageProps {
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params
   try {
-    const post = await getPost(slug)
+    const postResponse = await fetch(
+      `${process.env.NEXT_PUBLIC_WP_API_URL}/wp/v2/posts?slug=${slug}&_embed=wp:featuredmedia`,
+      { next: { revalidate: 3600 } }
+    );
+
+    if (!postResponse.ok) {
+      return {
+        title: 'Post Not Found',
+        description: 'The requested blog post could not be found.'
+      }
+    }
+
+    const posts = await postResponse.json();
+    const post = posts[0];
     
     if (!post) {
       return {
@@ -65,8 +78,18 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 
 export async function generateStaticParams() {
   try {
-    const posts = await getPosts({ per_page: 20 });
-    return posts.map((post) => ({
+    const postsResponse = await fetch(
+      `${process.env.NEXT_PUBLIC_WP_API_URL}/wp/v2/posts?per_page=100`,
+      { next: { revalidate: 3600 } }
+    );
+
+    if (!postsResponse.ok) {
+      console.error('Error fetching posts:', postsResponse.statusText);
+      return [];
+    }
+
+    const posts = await postsResponse.json();
+    return posts.map((post: Post) => ({
       slug: post.slug,
     }));
   } catch (error) {
@@ -153,16 +176,50 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
   const { slug } = await params
   
   try {
-    const post = await getPost(slug)
-    
+    // Fetch post data directly from WordPress API
+    const postResponse = await fetch(
+      `${process.env.NEXT_PUBLIC_WP_API_URL}/wp/v2/posts?slug=${slug}&_embed=wp:featuredmedia&_fields=id,date,modified,slug,status,type,link,title,content,excerpt,author,featured_media,categories,tags,blocks`,
+      { next: { revalidate: 3600 } }
+    );
+
+    if (!postResponse.ok) {
+      notFound();
+    }
+
+    const posts = await postResponse.json();
+    const post = posts[0];
+
     if (!post) {
-      notFound()
+      notFound();
+    }
+
+    // Fetch featured media data if available
+    let featuredImageUrl = '';
+    if (post.featured_media) {
+      const mediaResponse = await fetch(
+        `${process.env.NEXT_PUBLIC_WP_API_URL}/wp/v2/media/${post.featured_media}`,
+        { next: { revalidate: 3600 } }
+      );
+      
+      if (mediaResponse.ok) {
+        const mediaData = await mediaResponse.json();
+        featuredImageUrl = mediaData.source_url;
+      }
     }
 
     // Get related posts (for now, just get recent posts)
-    const allPosts = await getPosts({ per_page: 6 });
+    const relatedPostsResponse = await fetch(
+      `${process.env.NEXT_PUBLIC_WP_API_URL}/wp/v2/posts?per_page=6&_embed=wp:featuredmedia`,
+      { next: { revalidate: 3600 } }
+    );
+
+    if (!relatedPostsResponse.ok) {
+      throw new Error('Failed to fetch related posts');
+    }
+
+    const allPosts = await relatedPostsResponse.json();
     const relatedPosts = allPosts
-      .filter(p => p.id !== post.id)
+      .filter((p: Post) => p.id !== post.id)
       .slice(0, 3);
 
     // Extract headings for table of contents
@@ -170,20 +227,30 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
     let transformedContent = '';
     
     try {
-      // Extract headings for table of contents
-      headings = extractHeadings(post.content.rendered);
-      
-      // Add IDs to headings in content
+      // First, add IDs to the rendered content
       const contentWithIds = addIdsToHeadings(post.content.rendered);
       
-      // Transform content with styles
-      transformedContent = transformWordPressContent(contentWithIds);
+      // Extract headings from the content with IDs
+      headings = extractHeadings(contentWithIds);
       
+      // Transform content using wp-block-to-html if blocks are available
+      if (post.content) {
+        transformedContent = convertBlocks(post.content, {
+          cssFramework: 'tailwind',
+          contentHandling: 'hybrid'
+        }) as string;
+        
+        // Add IDs to the transformed content as well
+        transformedContent = addIdsToHeadings(transformedContent);
+      } else {
+        // If no blocks available, use the rendered content with IDs
+        transformedContent = contentWithIds;
+      }
     } catch (error) {
-      console.error('Error processing content:', error);
-      transformedContent = transformWordPressContent(post.content.rendered);
+      console.error('Error transforming content:', error);
+      // Fallback to rendered content with IDs if transformation fails
+      transformedContent = addIdsToHeadings(post.content.rendered);
     }
-    
     // Calculate reading time
     const readingTime = getReadingTime(post.content.rendered);
 
@@ -307,11 +374,11 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
                 </header>
                 
                 {/* Featured Image */}
-                {post._embedded?.['wp:featuredmedia']?.[0] && (
+                {featuredImageUrl && (
                   <div className="relative mb-12 overflow-hidden rounded-xl aspect-[16/9] w-full shadow-md">
                     <Image
-                      src={post._embedded?.['wp:featuredmedia']?.[0].source_url}
-                      alt={post._embedded?.['wp:featuredmedia']?.[0].alt_text || post.title.rendered.replace(/<[^>]*>/g, '')}
+                      src={featuredImageUrl}
+                      alt={post.title.rendered.replace(/<[^>]*>/g, '')}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 800px, 800px"
                       className="object-cover"
@@ -347,8 +414,8 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
                         </h3>
                         <div className="flex flex-wrap gap-2">
                           {post.tags
-                            .filter(tag => typeof tag === 'object' && tag.name)
-                            .map(tag => {
+                            .filter((tag: TagType) => typeof tag === 'object' && tag.name)
+                            .map((tag: TagType) => {
                               if (typeof tag !== 'object') return null;
                               return (
                                 <Link 
@@ -443,7 +510,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
                     </div>
                   }>
                     <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3">
-                      {relatedPosts.map((relatedPost) => (
+                      {relatedPosts.map((relatedPost: Post) => (
                         <Link href={`/blog/${relatedPost.slug}`} key={relatedPost.id} className="group">
                           <Card className="h-full flex flex-col overflow-hidden hover:border-primary/50 transition-colors duration-300 shadow-sm">
                             {relatedPost._embedded?.['wp:featuredmedia']?.[0] && (

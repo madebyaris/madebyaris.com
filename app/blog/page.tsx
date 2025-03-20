@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { Metadata } from 'next'
-import type { Post, Tag } from '@/lib/types'
+import type { Post, Tag, Category } from '@/lib/types'
 import { ImageResponse } from 'next/og'
 import { Suspense } from 'react'
 import { BlogContent } from '@/components/blog-content'
@@ -178,17 +178,12 @@ export async function generateMetadata(): Promise<Metadata> {
     }
   )
 
-  // Fetch posts for structured data
-  const postsResponse = await fetch(
-    `${process.env.NEXT_PUBLIC_WP_API_URL}/wp/v2/posts?per_page=12&_embed=wp:featuredmedia`,
-    { next: {  } }
-  );
-
-  if (!postsResponse.ok) {
-    throw new Error('Failed to fetch posts for metadata');
-  }
-
+  const postsResponse = await fetch(`${process.env.NEXT_PUBLIC_WP_API_URL}/wp/v2/posts?per_page=12&_embed=wp:featuredmedia`, { next: { revalidate: 3600 } });
   const posts = await postsResponse.json() as Post[];
+
+  // Fetch categories for processing
+  const categoriesResponse = await fetch(`${process.env.NEXT_PUBLIC_WP_API_URL}/wp/v2/categories`, { next: { revalidate: 3600 } });
+  const categories: Category[] = await categoriesResponse.json();
 
   // Generate combined schema for structured data
   const combinedSchema = {
@@ -198,41 +193,62 @@ export async function generateMetadata(): Promise<Metadata> {
       {
         "@context": "https://schema.org",
         "@type": "ItemList",
-        "itemListElement": posts.map((post: Post, index: number) => ({
-          "@type": "ListItem",
-          "position": index + 1,
-          "item": {
-            "@type": "BlogPosting",
-            "headline": post.title.rendered,
-            "description": post.excerpt.rendered.replace(/<[^>]*>/g, ''),
-            "url": `https://madebyaris.com/blog/${post.slug}`,
-            "author": {
-              "@type": "Person",
-              "name": "Aris Setiawan",
-              "url": "https://madebyaris.com"
-            },
-            "publisher": {
-              "@type": "Organization",
-              "name": "MadeByAris",
-              "logo": {
-                "@type": "ImageObject",
-                "url": "https://madebyaris.com/logo.png"
-              }
-            },
-            "datePublished": post.date,
-            "dateModified": post.modified,
-            "mainEntityOfPage": {
-              "@type": "WebPage",
-              "@id": `https://madebyaris.com/blog/${post.slug}`
-            },
-            "keywords": post.tags?.map((tag: { name?: string }) => 
-              typeof tag === 'object' ? tag.name : ''
-            ).filter(Boolean).join(", ") || "",
-            "articleSection": post.categories?.map((cat: { name?: string }) => 
-              typeof cat === 'object' ? cat.name : ''
-            ).filter(Boolean).join(", ") || "Web Development"
-          }
-        })),
+        "itemListElement": posts.map((post, index) => {
+          // Process categories and tags
+          const categoryNames = Array.isArray(post.categories) 
+            ? post.categories
+                .map(catId => {
+                  const category = categories.find(c => c.id === catId);
+                  return category?.name || '';
+                })
+                .filter(Boolean)
+                .join(", ")
+            : "Web Development";
+
+          const tagNames = Array.isArray(post.tags)
+            ? post.tags
+                .map(tag => {
+                  if (typeof tag === 'number') {
+                    return ''; // Skip numeric tag IDs
+                  }
+                  return tag.name;
+                })
+                .filter(Boolean)
+                .join(", ")
+            : "";
+
+          return {
+            "@type": "ListItem",
+            "position": index + 1,
+            "item": {
+              "@type": "BlogPosting",
+              "headline": post.title.rendered,
+              "description": post.excerpt.rendered.replace(/<[^>]*>/g, ''),
+              "url": `https://madebyaris.com/blog/${post.slug}`,
+              "author": {
+                "@type": "Person",
+                "name": "Aris Setiawan",
+                "url": "https://madebyaris.com"
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "MadeByAris",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://madebyaris.com/logo.png"
+                }
+              },
+              "datePublished": post.date,
+              "dateModified": post.modified,
+              "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": `https://madebyaris.com/blog/${post.slug}`
+              },
+              "keywords": tagNames,
+              "articleSection": categoryNames
+            }
+          };
+        }),
         "numberOfItems": posts.length
       }
     ]

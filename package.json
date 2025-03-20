@@ -37,6 +37,7 @@
     "resend": "^4.1.1",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
+    "wp-block-to-html": "^0.3.0",
     "zod": "link:@hookform/resolvers/zod"
   },
   "devDependencies": {

@@ -5,11 +5,17 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import type { Post, Project } from '@/lib/types'
+import type { Post, Project, Category, Tag } from '@/lib/types'
+
+// Interface for posts with processed categories and tags
+interface ProcessedPost extends Omit<Post, 'categories' | 'tags'> {
+  categories: Category[];
+  tags: Tag[];
+}
 
 interface HomeContentProps {
   type: 'projects' | 'posts'
-  initialData: Project[] | Post[]
+  initialData: Project[] | ProcessedPost[]
 }
 
 function EmptyState({ type }: { type: 'projects' | 'posts' }) {
@@ -98,7 +104,7 @@ export function HomeContent({ type, initialData }: HomeContentProps) {
     )
   }
 
-  const posts = initialData as Post[]
+  const posts = initialData as ProcessedPost[]
   return (
     <div className="grid gap-4 md:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
       {posts.length > 0 ? (
@@ -131,6 +137,18 @@ export function HomeContent({ type, initialData }: HomeContentProps) {
                   className="mt-2 line-clamp-2 text-xs md:text-sm text-muted-foreground"
                   dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
                 />
+                {post.categories.length > 0 && (
+                  <div className="mt-3 md:mt-4 flex flex-wrap gap-1.5 md:gap-2">
+                    {post.categories.map((category) => (
+                      <span
+                        key={category.id}
+                        className="inline-flex items-center rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary"
+                      >
+                        {category.name}
+                      </span>
+                    ))}
+                  </div>
+                )}
                 <div className="mt-3 md:mt-4">
                   <span
                     className="text-xs md:text-sm font-medium text-primary group-hover:text-primary/80"

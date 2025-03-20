@@ -37,30 +37,81 @@ export interface Tag {
 
 export interface Post {
   id: number
+  date: string
+  modified: string
   slug: string
+  status: string
+  type: string
+  link: string
   title: {
-    rendered: string
-  }
-  excerpt: {
     rendered: string
   }
   content: {
     rendered: string
+    protected: boolean
   }
-  date: string
-  modified: string
+  excerpt: {
+    rendered: string
+    protected: boolean
+  }
+  author: number
   featured_media: number
+  categories: number[]
+  tags: Tag[] | number[]
   _embedded?: {
+    author?: Array<{
+      id: number
+      name: string
+      url: string
+      description: string
+      link: string
+      slug: string
+      avatar_urls: {
+        [key: string]: string
+      }
+    }>
     'wp:featuredmedia'?: Array<{
+      id: number
+      date: string
+      slug: string
+      type: string
+      link: string
+      title: {
+        rendered: string
+      }
       source_url: string
       alt_text: string
     }>
   }
-  rank_math_title?: string
-  rank_math_description?: string
-  rank_math_seo?: RankMathSEO
-  tags?: Tag[] | number[]
-  categories?: Category[] | number[]
+  rank_math_seo?: {
+    title: string
+    description: string
+    robots: {
+      index: string
+      follow: string
+      'max-video-preview': string
+      'max-image-preview': string
+      'max-snippet': string
+    }
+  }
+  blocks?: Array<{
+    blockName: string
+    attrs: Record<string, unknown>
+    innerBlocks: Array<{
+      blockName: string
+      attrs: Record<string, unknown>
+      innerBlocks: Array<{
+        blockName: string
+        attrs: Record<string, unknown>
+        innerHTML: string
+        innerContent: string[]
+      }>
+      innerHTML: string
+      innerContent: string[]
+    }>
+    innerHTML: string
+    innerContent: string[]
+  }>
 }
 
 export interface Project {
