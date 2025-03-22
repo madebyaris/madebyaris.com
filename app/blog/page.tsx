@@ -300,10 +300,12 @@ export default async function BlogPage() {
     const [postsResponse, tagsResponse] = await Promise.all([
       fetch(`${process.env.NEXT_PUBLIC_WP_API_URL}/wp/v2/posts?per_page=12&_embed=wp:featuredmedia`, {
         next: {
+          revalidate: 3600
         }
       }),
       fetch(`${process.env.NEXT_PUBLIC_WP_API_URL}/wp/v2/tags?orderby=count&order=desc&per_page=6`, {
         next: {
+          revalidate: 3600
         }
       })
     ]);
@@ -323,7 +325,7 @@ export default async function BlogPage() {
       if (post.categories && Array.isArray(post.categories) && post.categories.length > 0) {
         const categoriesResponse = await fetch(
           `${process.env.NEXT_PUBLIC_WP_API_URL}/wp/v2/categories?include=${post.categories.join(',')}`,
-          { next: {  } }
+          { next: { revalidate: 3600 } }
         );
         if (categoriesResponse.ok) {
           const categories = await categoriesResponse.json();
@@ -337,7 +339,7 @@ export default async function BlogPage() {
       if (post.tags && Array.isArray(post.tags) && post.tags.length > 0) {
         const tagsResponse = await fetch(
           `${process.env.NEXT_PUBLIC_WP_API_URL}/wp/v2/tags?include=${post.tags.join(',')}`,
-          { next: {  } }
+          { next: { revalidate: 3600 } }
         );
         if (tagsResponse.ok) {
           const tags = await tagsResponse.json();
