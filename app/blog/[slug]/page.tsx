@@ -11,6 +11,7 @@ import { Suspense } from 'react'
 import { TableOfContents } from '@/components/table-of-contents'
 import { SmoothScroll } from '@/components/smooth-scroll'
 import { Post, Tag as TagType } from '@/lib/types'
+import { WordPressContent } from '@/components/wordpress-content'
 import { convertBlocks } from 'wp-block-to-html/core'
 
 export const revalidate = 3600 // Revalidate every hour
@@ -222,37 +223,47 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
       .filter((p: Post) => p.id !== post.id)
       .slice(0, 3);
 
-    // Extract headings for table of contents
+    // Extract headings for table of contents and transform content on the server
     let headings: Heading[] = [];
     let transformedContent = '';
     
     try {
-      // First, add IDs to the rendered content
-      const contentWithIds = addIdsToHeadings(post.content.rendered);
-      
-      // Extract headings from the content with IDs
-      headings = extractHeadings(contentWithIds);
-      
-      // Transform content using wp-block-to-html if blocks are available
+      // First, process content with wp-block-to-html if available
       if (post.content) {
+        // Process blocks with wp-block-to-html
         transformedContent = convertBlocks(post.content, {
           cssFramework: 'tailwind',
-          contentHandling: 'hybrid'
+          contentHandling: 'hybrid',
+          ssrOptions: {
+            enabled: true,
+            lazyLoadMedia: true,
+            preconnect: true,
+            criticalPathOnly: true,
+            removeDuplicateStyles: true
+          }
         }) as string;
-        
-        // Add IDs to the transformed content as well
-        transformedContent = addIdsToHeadings(transformedContent);
       } else {
-        // If no blocks available, use the rendered content with IDs
-        transformedContent = contentWithIds;
+        // Use rendered content if blocks not available
+        transformedContent = post.content.rendered;
       }
+      
+      // Add IDs to the transformed content
+      const contentWithIds = addIdsToHeadings(transformedContent);
+      
+      // Extract headings for table of contents
+      headings = extractHeadings(contentWithIds);
+      
+      // Save the processed content with IDs
+      transformedContent = contentWithIds;
     } catch (error) {
-      console.error('Error transforming content:', error);
-      // Fallback to rendered content with IDs if transformation fails
+      console.error('Error processing content:', error);
+      // Fallback to rendered content with IDs
       transformedContent = addIdsToHeadings(post.content.rendered);
+      headings = extractHeadings(transformedContent);
     }
+
     // Calculate reading time
-    const readingTime = getReadingTime(post.content.rendered);
+    const readingTime = getReadingTime(transformedContent);
 
     // Structured data for the article
     const articleStructuredData = {
@@ -373,21 +384,27 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
                   </div>
                 </header>
                 
-                {/* Featured Image */}
-                {featuredImageUrl && (
-                  <div className="relative mb-12 overflow-hidden rounded-xl aspect-[16/9] w-full shadow-md">
-                    <Image
-                      src={featuredImageUrl}
-                      alt={post.title.rendered.replace(/<[^>]*>/g, '')}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 800px, 800px"
-                      className="object-cover"
-                      priority
-                      loading="eager"
-                      quality={90}
-                    />
+                {/* Featured Image with aspect ratio container to prevent layout shift */}
+                <div className="relative mb-12 overflow-hidden rounded-xl w-full">
+                  <div className="aspect-[16/9] bg-muted/20">
+                    {featuredImageUrl ? (
+                      <Image
+                        src={featuredImageUrl}
+                        alt={post.title.rendered.replace(/<[^>]*>/g, '')}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 800px, 800px"
+                        className="object-cover"
+                        priority
+                        fetchPriority="high"
+                        quality={90}
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <span className="text-muted-foreground text-sm">No featured image</span>
+                      </div>
+                    )}
                   </div>
-                )}
+                </div>
                 
                 {/* Table of Contents (Mobile) */}
                 {headings.length > 0 && <TableOfContents headings={headings} isMobile={true} />}
@@ -399,10 +416,10 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
                   
                   {/* Main Content */}
                   <div className={`${headings.length > 0 ? 'lg:col-span-9' : 'lg:col-span-12'}`}>
-                    {/* Article Content */}
-                    <div
-                      className="prose prose-zinc dark:prose-invert max-w-none overflow-hidden prose-img:rounded-lg prose-img:w-full prose-pre:overflow-x-auto prose-pre:max-w-full prose-headings:scroll-mt-20"
-                      dangerouslySetInnerHTML={{ __html: transformedContent }}
+                    {/* Article Content - Server-rendered with client hydration */}
+                    <WordPressContent 
+                      content={transformedContent} 
+                      estimatedReadTime={readingTime}
                     />
                     
                     {/* Tags */}
