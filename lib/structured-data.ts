@@ -31,7 +31,39 @@ export const structuredData = {
       ],
       "worksFor": {
         "@type": "Organization",
-        "@id": "https://madebyaris.com/about"
+        "@id": "https://madebyaris.com/about",
+        "name": "MadeByAris",
+        "description": "Professional web development services specializing in Next.js, React, and WordPress solutions",
+        "url": "https://madebyaris.com",
+        "logo": "https://madebyaris.com/astro.png",
+        "sameAs": [
+          "https://github.com/madebyaris",
+          "https://www.linkedin.com/in/arissetia",
+          "https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe"
+        ],
+        "offers": {
+          "@type": "Offer",
+          "itemOffered": [
+            {
+              "@type": "Service",
+              "name": "Next.js Development",
+              "description": "Enterprise-grade Next.js applications with optimal performance and SEO",
+              "url": "https://madebyaris.com/services/nextjs-development"
+            },
+            {
+              "@type": "Service",
+              "name": "WordPress Development",
+              "description": "Custom WordPress solutions including theme and plugin development",
+              "url": "https://madebyaris.com/services/wordpress"
+            },
+            {
+              "@type": "Service",
+              "name": "React Architecture",
+              "description": "Scalable React applications with modern architecture patterns",
+              "url": "https://madebyaris.com/services/react-development"
+            }
+          ]
+        }
       },
       "award": "12+ Years of Enterprise Experience",
       "hasOccupation": {

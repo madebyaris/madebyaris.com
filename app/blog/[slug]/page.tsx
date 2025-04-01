@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowLeft, ArrowRight, BookOpen, Calendar, Clock, Share2, Tag, User } from 'lucide-react'
@@ -12,6 +11,7 @@ import { TableOfContents } from '@/components/table-of-contents'
 import { SmoothScroll } from '@/components/smooth-scroll'
 import { Post, Tag as TagType } from '@/lib/types'
 import { WordPressContent } from '@/components/wordpress-content'
+import { NextImage } from '@/components/ui/next-image'
 import { convertBlocks } from 'wp-block-to-html/core'
 
 export const revalidate = 3600 // Revalidate every hour
@@ -80,7 +80,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 export async function generateStaticParams() {
   try {
     const postsResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_WP_API_URL}/wp/v2/posts?per_page=100`,
+      `${process.env.NEXT_PUBLIC_WP_API_URL}/wp/v2/posts?per_page=1`,
       { next: { revalidate: 3600 } }
     );
 
@@ -173,6 +173,40 @@ function addIdsToHeadings(content: string) {
   }
 }
 
+// Function to transform WordPress images to use NextImage
+function transformTheImage(content: string): string {
+  // Replace WordPress image markup with Next.js Image component
+  return content.replace(
+    /<img([^>]*?)src="([^"]*?)"([^>]*?)>/g,
+    (match, before, src, after) => {
+      // Extract attributes
+      const width = before.match(/width="(\d+)"/)?.[1] || '800';
+      const height = before.match(/height="(\d+)"/)?.[1] || '600';
+      const alt = before.match(/alt="([^"]*)"/)?.[1] || '';
+      const classMatch = before.match(/class="([^"]*)"/)?.[1] || '';
+      
+      // Calculate aspect ratio
+      const aspectRatio = (parseInt(height) / parseInt(width)) * 100;
+      
+      return `
+        <div class="img-container relative my-8" style="padding-bottom: ${aspectRatio}%; position: relative; overflow: hidden;">
+          <NextImage
+            src="${src}"
+            alt="${alt}"
+            width="${width}"
+            height="${height}"
+            className="absolute inset-0 w-full h-full object-cover rounded-lg ${classMatch}"
+            loading="lazy"
+            decoding="async"
+            quality={90}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
+          />
+        </div>
+      `.trim();
+    }
+  );
+}
+
 export default async function BlogPost({ params }: BlogPostPageProps) {
   const { slug } = await params
   
@@ -242,6 +276,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
             removeDuplicateStyles: true
           }
         }) as string;
+        // transform the content to use the NextImage component
       } else {
         // Use rendered content if blocks not available
         transformedContent = post.content.rendered;
@@ -388,11 +423,11 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
                 <div className="relative mb-12 overflow-hidden rounded-xl w-full">
                   <div className="aspect-[16/9] bg-muted/20">
                     {featuredImageUrl ? (
-                      <Image
+                      <NextImage
                         src={featuredImageUrl}
                         alt={post.title.rendered.replace(/<[^>]*>/g, '')}
-                        fill
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 800px, 800px"
+                        width={800}
+                        height={450}
                         className="object-cover"
                         priority
                         fetchPriority="high"
@@ -453,10 +488,11 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
                     <div className="mt-12 pt-8 border-t">
                       <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 p-8 bg-muted/30 rounded-xl">
                         <div className="relative h-20 w-20 rounded-full overflow-hidden shadow-md border-2 border-primary/20 bg-muted flex-shrink-0">
-                          <Image 
+                          <NextImage 
                             src="/aris.png" 
                             alt="Aris Setiawan" 
-                            fill
+                            width={80}
+                            height={80}
                             className="object-cover"
                             priority
                           />
@@ -532,11 +568,11 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
                           <Card className="h-full flex flex-col overflow-hidden hover:border-primary/50 transition-colors duration-300 shadow-sm">
                             {relatedPost._embedded?.['wp:featuredmedia']?.[0] && (
                               <div className="relative aspect-video overflow-hidden">
-                                <Image
+                                <NextImage
                                   src={relatedPost._embedded['wp:featuredmedia'][0].source_url}
                                   alt={relatedPost._embedded['wp:featuredmedia'][0].alt_text || ''}
-                                  fill
-                                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                  width={800}
+                                  height={450}
                                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                                   loading="lazy"
                                 />

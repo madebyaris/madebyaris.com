@@ -93,7 +93,10 @@ export const metadata: Metadata = {
     creator: "@madebyaris",
     images: ['/favicon.ico'],
   },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_URL || 'https://madebyaris.com'),
+  metadataBase: new URL('https://madebyaris.com'),
+  alternates: {
+    canonical: '/',
+  },
   robots: {
     index: true,
     follow: true,
