@@ -8,49 +8,112 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'wp.madebyaris.com',
         port: '',
-        pathname: '/**',
+        pathname: '/wp-content/uploads/**',
       },
-      // Add any other domains you need to support
       {
         protocol: 'https',
-        hostname: 'secure.gravatar.com',
+        hostname: 'madebyaris.com',
         port: '',
         pathname: '/**',
-      }
+      },
     ],
-    // Enhanced image optimization settings
     formats: ['image/avif', 'image/webp'],
-    minimumCacheTTL: 86400, // Increase cache TTL to 24 hours
+    minimumCacheTTL: 60,
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
-  // Add experimental optimizations
   experimental: {
     optimizeCss: true,
-    optimizePackageImports: ['lucide-react', 'framer-motion', '@radix-ui/react-icons'],
-    // Configure Turbopack
+    optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
+    serverActions: {
+      allowedOrigins: ['localhost:3000', 'madebyaris.com'],
+    },
     turbo: {
-      // Turbopack-specific options
-      resolveAlias: {
-        // Add any module aliases if needed
+      rules: {
+        '*.svg': ['@svgr/webpack'],
       },
     },
-    useCache: true,
+    memoryBasedWorkersCount: true,
   },
-  // Add performance optimizations
-  compiler: {
-    removeConsole: process.env.NODE_ENV === 'production' ? {
-      exclude: ['error', 'warn'],
-    } : false,
-  },
-  // Optimize build output
-  output: 'standalone',
-  // Improve performance with compression
-  compress: true,
-  // Add HTTP/2 server push
+  serverExternalPackages: ['sharp'],
   poweredByHeader: false,
-  // Optimize React in production
   reactStrictMode: true,
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
+  output: 'standalone',
+  compress: true,
+  generateEtags: true,
+  headers: async () => [
+    {
+      source: '/:path*',
+      headers: [
+        {
+          key: 'X-DNS-Prefetch-Control',
+          value: 'on'
+        },
+        {
+          key: 'Strict-Transport-Security',
+          value: 'max-age=31536000; includeSubDomains'
+        },
+        {
+          key: 'X-Frame-Options',
+          value: 'SAMEORIGIN'
+        },
+        {
+          key: 'X-Content-Type-Options',
+          value: 'nosniff'
+        },
+        {
+          key: 'Referrer-Policy',
+          value: 'strict-origin-when-cross-origin'
+        },
+        {
+          key: 'Permissions-Policy',
+          value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()'
+        },
+        {
+          key: 'Cache-Control',
+          value: 'public, max-age=31536000, immutable'
+        },
+        {
+          key: 'Vercel-CDN-Cache-Control',
+          value: 'public, max-age=31536000, immutable'
+        }
+      ]
+    }
+  ],
+  webpack: (config, { dev, isServer }) => {
+    if (!dev && !isServer) {
+      config.optimization = {
+        ...config.optimization,
+        splitChunks: {
+          chunks: 'all',
+          minSize: 20000,
+          maxSize: 244000,
+          minChunks: 1,
+          maxAsyncRequests: 30,
+          maxInitialRequests: 30,
+          cacheGroups: {
+            defaultVendors: {
+              test: /[\\/]node_modules[\\/]/,
+              priority: -10,
+              reuseExistingChunk: true,
+            },
+            default: {
+              minChunks: 2,
+              priority: -20,
+              reuseExistingChunk: true,
+            },
+          },
+        },
+      }
+    }
+    return config
+  },
 }
 
 export default withBundleAnalyzer({
