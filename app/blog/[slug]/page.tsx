@@ -13,6 +13,9 @@ import { Post, Tag as TagType } from '@/lib/types'
 import { WordPressContent } from '@/components/wordpress-content'
 import { NextImage } from '@/components/ui/next-image'
 import { convertBlocks } from 'wp-block-to-html/core'
+import { FeaturedImage } from '@/components/featured-image'
+import { AuthorImage } from '@/components/author-image'
+import { RelatedPostCard } from '@/components/related-post-card'
 
 export const revalidate = 3600 // Revalidate every hour
 
@@ -419,27 +422,21 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
                   </div>
                 </header>
                 
-                {/* Featured Image with aspect ratio container to prevent layout shift */}
-                <div className="relative mb-12 overflow-hidden rounded-xl w-full">
-                  <div className="aspect-[16/9] bg-muted/20">
-                    {featuredImageUrl ? (
-                      <NextImage
-                        src={featuredImageUrl}
-                        alt={post.title.rendered.replace(/<[^>]*>/g, '')}
-                        width={800}
-                        height={450}
-                        className="object-cover"
-                        priority
-                        fetchPriority="high"
-                        quality={90}
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center">
-                        <span className="text-muted-foreground text-sm">No featured image</span>
-                      </div>
-                    )}
+                {/* Featured Image */}
+                {featuredImageUrl ? (
+                  <FeaturedImage
+                    src={featuredImageUrl}
+                    alt={post.title.rendered.replace(/<[^>]*>/g, '')}
+                    width={800}
+                    height={450}
+                  />
+                ) : (
+                  <div className="relative mb-12 overflow-hidden rounded-xl w-full">
+                    <div className="aspect-[16/9] bg-muted/20 flex items-center justify-center">
+                      <span className="text-muted-foreground text-sm">No featured image</span>
+                    </div>
                   </div>
-                </div>
+                )}
                 
                 {/* Table of Contents (Mobile) */}
                 {headings.length > 0 && <TableOfContents headings={headings} isMobile={true} />}
@@ -487,16 +484,12 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
                     {/* Author Bio */}
                     <div className="mt-12 pt-8 border-t">
                       <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 p-8 bg-muted/30 rounded-xl">
-                        <div className="relative h-20 w-20 rounded-full overflow-hidden shadow-md border-2 border-primary/20 bg-muted flex-shrink-0">
-                          <NextImage 
-                            src="/aris.png" 
-                            alt="Aris Setiawan" 
-                            width={80}
-                            height={80}
-                            className="object-cover"
-                            priority
-                          />
-                        </div>
+                        <AuthorImage 
+                          src="/aris.png" 
+                          alt="Aris Setiawan" 
+                          width={80}
+                          height={80}
+                        />
                         <div className="flex-1 text-center sm:text-left">
                           <h3 className="font-semibold text-xl mb-2">Aris Setiawan</h3>
                           <p className="text-muted-foreground mb-3">
@@ -564,37 +557,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
                   }>
                     <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3">
                       {relatedPosts.map((relatedPost: Post) => (
-                        <Link href={`/blog/${relatedPost.slug}`} key={relatedPost.id} className="group">
-                          <Card className="h-full flex flex-col overflow-hidden hover:border-primary/50 transition-colors duration-300 shadow-sm">
-                            {relatedPost._embedded?.['wp:featuredmedia']?.[0] && (
-                              <div className="relative aspect-video overflow-hidden">
-                                <NextImage
-                                  src={relatedPost._embedded['wp:featuredmedia'][0].source_url}
-                                  alt={relatedPost._embedded['wp:featuredmedia'][0].alt_text || ''}
-                                  width={800}
-                                  height={450}
-                                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                                  loading="lazy"
-                                />
-                              </div>
-                            )}
-                            
-                            <div className="p-5 flex flex-col flex-grow">
-                              <div className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
-                                <time dateTime={relatedPost.date}>{formatDate(relatedPost.date)}</time>
-                              </div>
-                              
-                              <h3 
-                                className="text-base font-semibold mb-3 line-clamp-2 group-hover:text-primary transition-colors"
-                                dangerouslySetInnerHTML={{ __html: relatedPost.title.rendered }}
-                              />
-                              
-                              <div className="mt-auto pt-2 text-sm font-medium text-primary flex items-center">
-                                Read Article <ArrowRight className="ml-1 h-3 w-3 group-hover:translate-x-1 transition-transform" />
-                              </div>
-                            </div>
-                          </Card>
-                        </Link>
+                        <RelatedPostCard key={relatedPost.id} post={relatedPost} />
                       ))}
                     </div>
                   </Suspense>
