@@ -1,8 +1,8 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { UpworkIcon } from "@/components/icons/upwork"
-import { NextImage } from "@/components/ui/next-image"
 import { ReactNode } from 'react'
 
 interface ClientHeroProps {
@@ -84,17 +84,15 @@ export function ClientHero({
               {/* Image - Takes 2 columns on desktop */}
               <div className="md:col-span-2 flex justify-center md:justify-end">
                 <div className="relative w-56 h-56 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-2xl overflow-hidden border-4 border-black/80 dark:border-white/80 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
-                  <NextImage
+                  <Image
                     src="/astro.png"
                     alt="Aris Setiawan - Senior Full-Stack Developer"
                     width={320}
                     height={320}
-                    className="object-cover"
+                    className="w-full h-full object-cover"
                     priority
-                    fetchPriority="high"
-                    loading="eager"
-                    placeholder="blur"
-                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFdwI2QOQvhAAAAABJRU5ErkJggg=="
+                    quality={90}
+                    sizes="(max-width: 768px) 224px, (max-width: 1200px) 288px, 320px"
                   />
                   
                   {/* Decorative elements */}
