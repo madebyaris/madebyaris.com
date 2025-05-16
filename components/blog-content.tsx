@@ -48,25 +48,25 @@ export function BlogContent({ initialPosts }: BlogContentProps) {
     
     setFilteredPosts(filtered);
   }, [searchQuery, initialPosts]);
-
+  
   // Highlight search matches in text
   const highlightSearchMatch = (text: string) => {
     if (!searchQuery) return text;
     const regex = new RegExp(`(${searchQuery})`, 'gi');
     return text.replace(regex, '<mark>$1</mark>');
   };
-
+  
   return (
     <div className="w-full">
       {/* Search and filter section */}
       <div className="mb-8">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-zinc-500" size={20} />
-          <input
+            <input 
             type="text"
             placeholder="Search posts..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full pl-10 pr-4 py-2 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
@@ -84,8 +84,8 @@ export function BlogContent({ initialPosts }: BlogContentProps) {
                   width={800}
                   height={450}
                   className="object-cover"
-                />
-              </div>
+                    />
+                  </div>
               <div className="p-4">
                 <h2 className="text-xl font-semibold mb-2 line-clamp-2">
                   {highlightSearchMatch(post.title.rendered)}
@@ -101,10 +101,10 @@ export function BlogContent({ initialPosts }: BlogContentProps) {
                   </div>
                 </div>
               </div>
-            </Link>
-          </Card>
-        ))}
-      </div>
-    </div>
+          </Link>
+                </Card>
+            ))}
+          </div>
+          </div>
   );
 } 
