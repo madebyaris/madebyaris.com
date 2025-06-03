@@ -62,25 +62,60 @@ const structuredData = {
     {
       "@type": "Service",
       "name": "Vibe Code Friend",
-      "serviceType": "AI Coding Assistance",
+      "description": "AI-powered coding assistance and mentorship to help developers master coding tools, fix issues, and build better applications.",
       "provider": {
         "@type": "Person",
-        "@id": "https://madebyaris.com/#person",
-        "name": "Aris Setiawan",
-        "jobTitle": "Senior Full Stack Developer",
-        "url": "https://madebyaris.com",
-        "image": "https://madebyaris.com/aris.png",
-        "sameAs": [
-          "https://www.linkedin.com/in/arissetia/",
-          "https://github.com/madebyaris",
-          "https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe"
+        "name": "Aris Setiawan"
+      },
+      "serviceType": "Development Assistance",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Vibe Code Friend Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "AI IDE Tutoring",
+              "description": "Get real-time guidance and explanations as you code, with personalized assistance directly in your IDE.",
+              "url": "https://madebyaris.com/services/vibe-code-friend/ai-ide-tutoring"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Code Fixing",
+              "description": "Quick and efficient debugging and error resolution for your code, with clear explanations of the solutions.",
+              "url": "https://madebyaris.com/services/vibe-code-friend/code-fixing"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Server Setup",
+              "description": "Expert configuration and deployment of servers, ensuring optimal performance and security for your applications."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Project Restructuring",
+              "description": "Comprehensive reorganization of your codebase for improved maintainability, scalability, and developer experience."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Infrastructure Architecture",
+              "description": "Strategic design and implementation of robust, scalable infrastructure tailored to your project requirements."
+            }
+          }
         ]
       },
-      "areaServed": {
-        "@type": "Country",
-        "name": "Worldwide"
-      },
-      "description": "I help developers master AI tools like Cursor, fix stubborn bugs, set up servers, restructure projects, and architect scalable infrastructure. My focus is on empowering you to code with confidence and joy.",
       "offers": {
         "@type": "AggregateOffer",
         "priceCurrency": "USD",
@@ -167,14 +202,14 @@ export async function generateMetadata(): Promise<Metadata> {
       images: ["https://madebyaris.com/og-vibe-code-friend.png"],
     },
     verification: {
-      google: "your-google-verification-code", // Replace with your verification code
+      google: process.env.GOOGLE_VERIFICATION_CODE || '',
     },
   };
 }
 
 export default function VibeCodeFriendPage() {
   return (
-    <div>
+    <div className="bg-background min-h-screen">
       {/* Add structured data */}
       <script
         type="application/ld+json"
@@ -197,6 +232,16 @@ export default function VibeCodeFriendPage() {
       <VibeCodeCta
         heading="Ready to Level Up Your Coding Experience?"
         description="Whether you're looking to master AI tools, fix stubborn bugs, or architect your next big project, I'm here to help. Let's build something amazing together!"
+        buttons={{
+          primary: {
+            text: "Schedule Free Consultation",
+            url: "/contact",
+          },
+          secondary: {
+            text: "Explore Services",
+            url: "/services",
+          }
+        }}
       />
     </div>
   );

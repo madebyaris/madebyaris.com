@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { Suspense } from 'react'
 import { getPosts } from '@/lib/wordpress'
-import { default as dynamicImport } from 'next/dynamic'
+import dynamic from 'next/dynamic'
 import { Code2, Layout, Server, ArrowRight } from 'lucide-react'
 import { LogoCarousel } from '@/components/ui/logo-carousel'
 import { techLogos } from '@/components/ui/tech-logos'
@@ -40,21 +40,18 @@ const CaseStudiesFallback = () => (
 const PostsFallback = () => <div className="h-[400px] w-full bg-zinc-100/20 dark:bg-zinc-900/20 rounded-lg animate-pulse" />
 
 // Dynamically import heavy components with optimized loading
-const ClientHeroLazy = dynamicImport(
-  () => import('@/components/client-hero').then(mod => ({ default: mod.ClientHero })),
-  { ssr: true, loading: () => <HeroFallback /> }
-)
+const ClientHeroLazy = dynamic(() => import('@/components/client-hero'), {
+  loading: () => <HeroFallback />
+})
 
-const CaseStudiesWrapperLazy = dynamicImport(
-  () => import('@/components/case-studies-wrapper').then(mod => ({ default: mod.CaseStudiesWrapper })),
-  { ssr: true, loading: () => <CaseStudiesFallback /> }
-)
+const CaseStudiesWrapperLazy = dynamic(() => import('@/components/case-studies-wrapper'), {
+  loading: () => <CaseStudiesFallback />
+})
 
 // Dynamically import HomeContent for Posts
-const HomeContentLazy = dynamicImport(
-  () => import('@/components/home-content').then(mod => ({ default: mod.HomeContent })),
-  { ssr: true, loading: () => <PostsFallback /> }
-)
+const HomeContentLazy = dynamic(() => import('@/components/home-content'), {
+  loading: () => <PostsFallback />
+})
 
 export async function generateMetadata() {
   return {

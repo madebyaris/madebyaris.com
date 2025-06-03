@@ -25,6 +25,7 @@ const navigationItems: NavigationItem[] = [
       { href: '/services/nextjs-development', label: 'Next.js Development' },
       { href: '/services/wordpress', label: 'WordPress Development' },
       { href: '/services/php-development', label: 'PHP Development' },
+      { href: '/services/vibe-code-friend', label: 'Vibe Code Friend' },
     ]
   },
   { href: '/blog', label: 'Blog' },

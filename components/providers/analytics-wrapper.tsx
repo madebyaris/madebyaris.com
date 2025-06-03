@@ -9,4 +9,7 @@ const AnalyticsProvider = dynamic(
 
 export function AnalyticsWrapper() {
   return <AnalyticsProvider />;
-} 
+}
+
+// Add default export for better HMR support
+export default AnalyticsWrapper; 

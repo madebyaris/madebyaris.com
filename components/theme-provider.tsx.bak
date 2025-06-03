@@ -1,0 +1,18 @@
+"use client"
+
+import * as React from "react"
+import { ThemeProvider as NextThemesProvider } from "next-themes"
+import type { ThemeProviderProps } from "next-themes"
+
+// Renamed to a more generic export name to avoid HMR issues
+const Provider = ({ children, ...props }: ThemeProviderProps) => {
+  return (
+    <NextThemesProvider {...props}>
+      {children}
+    </NextThemesProvider>
+  )
+}
+
+// Export as default to help with HMR
+export default Provider
+export { Provider as ThemeProvider }

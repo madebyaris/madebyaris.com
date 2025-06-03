@@ -31,12 +31,12 @@ const nextConfig = {
     serverActions: {
       allowedOrigins: ['localhost:3000', 'madebyaris.com'],
     },
-    turbo: {
-      rules: {
-        '*.svg': ['@svgr/webpack'],
-      },
-    },
     memoryBasedWorkersCount: true,
+  },
+  turbopack: {
+    rules: {
+      '*.svg': ['@svgr/webpack'],
+    },
   },
   serverExternalPackages: ['sharp'],
   poweredByHeader: false,

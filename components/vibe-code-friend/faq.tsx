@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from "react";
-import { Code, Laptop, MessageCircle, DollarSign, Clock } from "lucide-react";
+import { Code, Laptop, MessageCircle, DollarSign, Timer } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -45,7 +45,7 @@ export const faqData: FAQItem[] = [
     id: 4,
     question: "Is Vibe Code Friend available 24/7?",
     answer: "Yes! Our service is available around the clock, so you can get coding help whenever inspiration strikes. Whether you're coding late at night or early in the morning, Vibe Code Friend is ready to assist you with your programming challenges.",
-    icon: <Clock className="h-5 w-5 text-primary" />,
+    icon: <Timer className="h-5 w-5 text-primary" />,
   },
   {
     id: 5,
@@ -57,31 +57,32 @@ export const faqData: FAQItem[] = [
 
 export function VibeCodeFAQ({
   className,
-  timestamp = "Last updated: June 2023",
+  timestamp = "Last updated: June 2024",
 }: VibeCodeFAQProps) {
   const [openItem, setOpenItem] = React.useState<string | null>(null);
 
   return (
-    <section className="w-full py-20">
-      <div className="container mx-auto">
-        <div className="grid lg:grid-cols-2 gap-10">
-          <div className="flex gap-10 flex-col">
-            <div className="flex gap-4 flex-col">
-              <div>
-                <Badge variant="outline">FAQ</Badge>
-              </div>
-              <div className="flex gap-2 flex-col">
-                <h2 className="text-3xl md:text-5xl tracking-tighter max-w-xl text-left font-bold">
-                  Frequently Asked Questions
-                </h2>
-                <p className="text-lg max-w-xl lg:max-w-lg leading-relaxed tracking-tight text-muted-foreground text-left">
-                  Everything you need to know about Vibe Code Friend. Can&apos;t find the answer you&apos;re looking for? Feel free to contact our support team.
-                </p>
-              </div>
-              {timestamp && (
-                <div className="text-sm text-muted-foreground">{timestamp}</div>
-              )}
+    <section id="faq" className="w-full py-16 md:py-24 bg-gradient-to-b from-muted/30 to-background">
+      <div className="container mx-auto max-w-6xl px-4 sm:px-6 relative">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+          <div className="flex gap-8 flex-col">
+            <div>
+              <Badge variant="outline" className="px-4 py-1.5">FAQ</Badge>
             </div>
+            <div className="flex gap-4 flex-col">
+              <h2 className="text-3xl md:text-4xl tracking-tight max-w-xl font-semibold">
+                Frequently Asked Questions
+              </h2>
+              <p className="text-lg leading-relaxed text-muted-foreground max-w-xl">
+                Everything you need to know about Vibe Code Friend. Can&apos;t find the answer you&apos;re looking for? Feel free to <a href="/contact" className="text-primary hover:underline">contact our support team</a>.
+              </p>
+            </div>
+            {timestamp && (
+              <div className="text-sm text-muted-foreground/70 flex items-center gap-1.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-calendar"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+                {timestamp}
+              </div>
+            )}
           </div>
           
           <Accordion
@@ -89,20 +90,20 @@ export function VibeCodeFAQ({
             collapsible
             value={openItem || ""}
             onValueChange={(value) => setOpenItem(value)}
-            className={className}
+            className={`bg-background/50 backdrop-blur-sm p-6 rounded-xl border border-border/50 shadow-sm ${className}`}
           >
             {faqData.map((item) => (
               <AccordionItem 
                 key={item.id} 
                 value={item.id.toString()}
-                className="border-b border-border"
+                className="border-b border-border/50 last:border-0"
               >
-                <AccordionTrigger className="py-6 flex items-center gap-3">
-                  {item.icon && <span className="flex-shrink-0">{item.icon}</span>}
+                <AccordionTrigger className="py-5 flex items-center gap-3 hover:no-underline">
+                  {item.icon && <span className="flex-shrink-0 bg-primary/10 p-2 rounded-full">{item.icon}</span>}
                   <span className="font-medium text-left">{item.question}</span>
                 </AccordionTrigger>
                 <AccordionContent>
-                  <div className="pb-4 pt-2 text-muted-foreground">
+                  <div className="pb-4 pt-1 text-muted-foreground pl-11">
                     {item.answer}
                   </div>
                 </AccordionContent>
