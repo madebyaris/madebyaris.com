@@ -3,8 +3,8 @@ import localFont from "next/font/local";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { ThemeProvider } from "@/components/theme-provider";
-import { AnalyticsWrapper } from "@/components/providers/analytics-wrapper";
+import ThemeProvider from "@/components/providers/theme-provider";
+import AnalyticsWrapper from "@/components/providers/analytics-wrapper";
 import { cn } from "@/lib/utils";
 import "./globals.css";
 
@@ -142,6 +142,7 @@ export default function RootLayout({
         <meta name="renderMode" content="simultaneously" />
       </head>
       <body 
+        suppressHydrationWarning
         className={cn(
           "min-h-screen font-sans antialiased",
           geistSans.variable,

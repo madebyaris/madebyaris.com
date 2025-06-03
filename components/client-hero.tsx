@@ -114,4 +114,7 @@ export function ClientHero({
       </section>
     </>
   )
-} 
+}
+
+// Add default export for better HMR support
+export default ClientHero; 

@@ -76,9 +76,11 @@ const config: Config = {
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		animation: {
-  			'aurora': 'aurora 60s linear infinite',
+  			aurora: 'aurora 60s linear infinite',
   			'aurora-optimized': 'aurora 120s cubic-bezier(0.4, 0, 0.2, 1) infinite',
-        'fade-in': 'fade-in 0.5s ease-in-out forwards',
+  			'fade-in': 'fade-in 0.5s ease-in-out forwards',
+  			'accordion-down': 'accordion-down 0.2s ease-out',
+  			'accordion-up': 'accordion-up 0.2s ease-out'
   		},
   		keyframes: {
   			aurora: {
@@ -89,10 +91,30 @@ const config: Config = {
   					backgroundPosition: '350% 50%, 350% 50%'
   				}
   			},
-        'fade-in': {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        }
+  			'fade-in': {
+  				'0%': {
+  					opacity: '0'
+  				},
+  				'100%': {
+  					opacity: '1'
+  				}
+  			},
+  			'accordion-down': {
+  				from: {
+  					height: '0'
+  				},
+  				to: {
+  					height: 'var(--radix-accordion-content-height)'
+  				}
+  			},
+  			'accordion-up': {
+  				from: {
+  					height: 'var(--radix-accordion-content-height)'
+  				},
+  				to: {
+  					height: '0'
+  				}
+  			}
   		}
   	}
   },

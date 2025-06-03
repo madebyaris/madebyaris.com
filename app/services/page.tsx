@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Code2, Layout, Server, Rocket, Zap, FileCode, ArrowRight } from 'lucide-react'
+import { Code2, Layout, Server, Rocket, Zap, FileCode, ArrowRight, MessageSquareHeart } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '../../components/ui/button'
 import { ImageResponse } from 'next/og'
@@ -27,6 +27,13 @@ const services = [
     icon: <Layout className="w-6 h-6" />,
     href: '/services/wordpress',
     features: ['Custom Themes', 'Plugin Development', 'Headless WordPress', 'Performance'],
+  },
+  {
+    title: 'Vibe Code Friend',
+    description: 'Your AI-powered coding companion. Get help with AI tools like Cursor, code fixes, server setup, and infrastructure architecture.',
+    icon: <MessageSquareHeart className="w-6 h-6" />,
+    href: '/services/vibe-code-friend',
+    features: ['AI IDE Tutoring', 'Code Fixing', 'Server Setup', 'Project Restructuring'],
   },
 ]
 

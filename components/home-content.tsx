@@ -166,3 +166,6 @@ export function HomeContent({ type, initialData }: HomeContentProps) {
     </div>
   )
 }
+
+// Add default export for better HMR support
+export default HomeContent;

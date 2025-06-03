@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import Image from 'next/image'
 
 const CaseStudiesCarousel = dynamic(
-  () => import('@/components/case-studies-carousel').then(mod => mod.default),
+  () => import('@/components/case-studies-carousel'),
   { loading: () => <div className="h-[400px] bg-zinc-100/20 dark:bg-zinc-900/20 rounded-lg animate-pulse" /> }
 )
 
@@ -61,4 +61,7 @@ export function CaseStudiesWrapper() {
       </div>
     </div>
   )
-} 
+}
+
+// Add default export for better HMR support
+export default CaseStudiesWrapper; 

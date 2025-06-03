@@ -423,18 +423,18 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
                 </header>
                 
                 {/* Featured Image */}
-                {featuredImageUrl ? (
+                    {featuredImageUrl ? (
                   <FeaturedImage
-                    src={featuredImageUrl}
-                    alt={post.title.rendered.replace(/<[^>]*>/g, '')}
+                        src={featuredImageUrl}
+                        alt={post.title.rendered.replace(/<[^>]*>/g, '')}
                     width={800}
                     height={450}
-                  />
-                ) : (
+                      />
+                    ) : (
                   <div className="relative mb-12 overflow-hidden rounded-xl w-full">
                     <div className="aspect-[16/9] bg-muted/20 flex items-center justify-center">
-                      <span className="text-muted-foreground text-sm">No featured image</span>
-                    </div>
+                        <span className="text-muted-foreground text-sm">No featured image</span>
+                      </div>
                   </div>
                 )}
                 
@@ -485,11 +485,11 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
                     <div className="mt-12 pt-8 border-t">
                       <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 p-8 bg-muted/30 rounded-xl">
                         <AuthorImage 
-                          src="/aris.png" 
-                          alt="Aris Setiawan" 
+                            src="/aris.png" 
+                            alt="Aris Setiawan" 
                           width={80}
                           height={80}
-                        />
+                          />
                         <div className="flex-1 text-center sm:text-left">
                           <h3 className="font-semibold text-xl mb-2">Aris Setiawan</h3>
                           <p className="text-muted-foreground mb-3">
