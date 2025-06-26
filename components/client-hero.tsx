@@ -17,8 +17,8 @@ export function ClientHero({
   title = "Senior Full-Stack Developer & Web Architecture Specialist",
   description = (
     <>
-      Hi! I&apos;m <span className="font-bold dark:text-white text-black">Aris</span>, architecting{" "}
-      <span className="bg-neutral-800 text-white dark:bg-white dark:text-black px-2 py-1 rounded-md inline-flex items-center">
+      Hi! I&apos;m <span className="font-bold text-wp-navy dark:text-wp-gold">Aris</span>, architecting{" "}
+      <span className="bg-wp-gold text-wp-gold-foreground dark:bg-wp-blue dark:text-wp-blue-foreground px-3 py-1.5 rounded-lg inline-flex items-center font-medium">
         scalable solutions
       </span>{" "}
       with Next.js, React, and WordPress for enterprise clients.
@@ -27,90 +27,128 @@ export function ClientHero({
 }: ClientHeroProps) {
   return (
     <>
-      {/* Modern hero section with improved visual design */}
-      <section className="w-full min-h-[calc(100vh-5rem)] relative overflow-hidden">
-        {/* Background gradient with subtle animation */}
+      {/* WordPress VIP inspired hero section */}
+      <section className="w-full min-h-[calc(100vh-5rem)] relative overflow-hidden bg-gradient-wp-hero-light dark:bg-gradient-wp-hero">
+        {/* Enhanced background with WordPress VIP styling */}
         <div className="absolute inset-0 -z-10">
+          {/* Light mode background */}
           <div 
-            className="absolute inset-0 bg-gradient-to-br from-zinc-100/50 via-blue-50/30 to-zinc-100/50 dark:from-zinc-900/50 dark:via-blue-900/10 dark:to-zinc-900/50 will-change-opacity"
+            className="absolute inset-0 bg-gradient-to-br from-wp-sage/20 via-transparent to-wp-blue/10 dark:hidden"
             style={{
               contain: "paint",
             }}
           />
-          <div className="absolute top-[10%] right-[10%] w-full max-w-[300px] aspect-square rounded-full bg-blue-200/20 dark:bg-blue-500/10 blur-3xl" />
-          <div className="absolute bottom-[10%] left-[10%] w-full max-w-[200px] aspect-square rounded-full bg-purple-200/20 dark:bg-purple-500/10 blur-3xl" />
+          {/* Dark mode background */}
+          <div 
+            className="absolute inset-0 bg-gradient-to-br from-wp-blue/20 via-transparent to-wp-gold/10 hidden dark:block"
+            style={{
+              contain: "paint",
+            }}
+          />
+          
+          {/* Decorative elements with WordPress VIP colors */}
+          <div className="absolute top-[15%] right-[15%] w-72 h-72 rounded-full bg-wp-blue/10 dark:bg-wp-gold/20 blur-3xl animate-pulse" />
+          <div className="absolute bottom-[20%] left-[10%] w-56 h-56 rounded-full bg-wp-gold/15 dark:bg-wp-blue/15 blur-3xl animate-pulse delay-1000" />
+          <div className="absolute top-[60%] right-[5%] w-40 h-40 rounded-full bg-wp-sage/20 dark:bg-wp-navy/30 blur-2xl animate-pulse delay-2000" />
         </div>
 
         <div className="relative z-10 flex items-center justify-center min-h-[calc(100vh-5rem)]">
           <div className="container max-w-6xl mx-auto px-4 sm:px-6 py-8 md:py-12">
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-8 items-center">
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-12 items-center">
               {/* Content - Takes 3 columns on desktop */}
-              <div className="md:col-span-3 flex flex-col gap-4 md:gap-6">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/80 text-white dark:bg-white/90 dark:text-black mb-2 md:mb-4 w-fit backdrop-blur-sm">
-                  <span className="text-sm font-medium">{badge}</span>
+              <div className="md:col-span-3 flex flex-col gap-6 md:gap-8">
+                {/* Professional badge with WordPress VIP styling */}
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-wp-navy/90 text-wp-navy-foreground dark:bg-wp-gold/90 dark:text-wp-gold-foreground mb-2 md:mb-4 w-fit backdrop-blur-sm shadow-wp-elevated animate-slide-down">
+                  <div className="w-2 h-2 rounded-full bg-wp-gold dark:bg-wp-navy animate-pulse" />
+                  <span className="text-sm font-semibold tracking-wide">{badge}</span>
                 </div>
                 
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-zinc-900 dark:text-white [text-wrap:balance]">
-                  {title}
+                {/* Main title with gradient text */}
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-wp-navy dark:text-foreground [text-wrap:balance] animate-slide-up">
+                  <span className="block">Senior Full-Stack</span>
+                  <span className="block bg-gradient-to-r from-wp-gold to-wp-blue bg-clip-text text-transparent">
+                    Developer & Web
+                  </span>
+                  <span className="block">Architecture Specialist</span>
                 </h1>
                 
-                <p className="text-lg md:text-xl text-zinc-700 dark:text-zinc-300 font-light [text-wrap:balance] leading-relaxed">
+                {/* Description with enhanced styling */}
+                <p className="text-lg md:text-xl text-wp-navy/80 dark:text-muted-foreground font-light [text-wrap:balance] leading-relaxed max-w-2xl animate-slide-up animation-delay-200">
                   {description}
                 </p>
                 
-                <div className="flex flex-wrap gap-3 md:gap-4 pt-4 md:pt-6">
+                {/* WordPress VIP inspired CTA buttons */}
+                <div className="flex flex-wrap gap-4 md:gap-6 pt-4 md:pt-6 animate-slide-up animation-delay-400">
                   <Link 
                     href="/contact" 
-                    className="bg-black dark:bg-white rounded-full text-white dark:text-black px-6 py-3 md:px-8 md:py-4 text-base md:text-lg font-medium transition-transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl"
+                    className="btn-wp-primary px-8 py-4 md:px-10 md:py-5 text-lg md:text-xl font-semibold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-wp-glow active:scale-95 inline-flex items-center gap-2"
                   >
-                    Contact Me 👋
+                    Contact Me
+                    <span className="text-2xl">👋</span>
                   </Link>
                   <Link 
                     href="https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe" 
                     target="_blank"
                     rel="noopener"
-                    className="bg-[#14a800] hover:bg-[#14a800]/90 rounded-full text-white px-6 py-3 md:px-8 md:py-4 text-base md:text-lg font-medium flex items-center gap-2 transition-transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl"
+                    className="btn-wp-secondary px-8 py-4 md:px-10 md:py-5 text-lg md:text-xl font-semibold rounded-xl inline-flex items-center gap-3 transition-all duration-300 hover:scale-105 hover:shadow-wp-glow-blue active:scale-95"
                   >
                     <span>UPWORK</span>
-                    <UpworkIcon className="w-4 h-4 md:w-5 md:h-5" />
+                    <UpworkIcon className="w-5 h-5 md:w-6 md:h-6" />
                   </Link>
                 </div>
                 
-                {/* Subtle tag line */}
-                <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-2 md:mt-4">
-                  Nextjs Agency Indonesia
-                </p>
+                {/* Professional tagline with elegant styling */}
+                <div className="flex items-center gap-3 mt-6 md:mt-8 animate-slide-up animation-delay-600">
+                  <div className="flex items-center gap-2">
+                    <div className="w-12 h-px bg-wp-gold"></div>
+                    <span className="text-sm font-medium text-wp-blue dark:text-wp-gold tracking-wider uppercase">
+                      Next.js Agency Indonesia
+                    </span>
+                    <div className="w-12 h-px bg-wp-gold"></div>
+                  </div>
+                </div>
               </div>
               
-              {/* Image - Takes 2 columns on desktop */}
-              <div className="md:col-span-2 flex justify-center md:justify-end">
-                <div className="relative w-56 h-56 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-2xl overflow-hidden border-4 border-black/80 dark:border-white/80 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
-                  <Image
-                    src="/astro.png"
-                    alt="Aris Setiawan - Senior Full-Stack Developer"
-                    width={320}
-                    height={320}
-                    className="w-full h-full object-cover"
-                    priority
-                    quality={90}
-                    sizes="(max-width: 768px) 224px, (max-width: 1200px) 288px, 320px"
-                    placeholder="blur"
-                    blurDataURL={blurDataURLs.avatar}
-                  />
+              {/* Enhanced image section with WordPress VIP styling */}
+              <div className="md:col-span-2 flex justify-center md:justify-end animate-scale-in animation-delay-800">
+                <div className="relative group">
+                  {/* Main image container */}
+                  <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-3xl overflow-hidden border-4 border-wp-gold/80 dark:border-wp-blue/80 shadow-wp-elevated hover:shadow-wp-glow transition-all duration-500 group-hover:scale-105 group-hover:rotate-1">
+                    <Image
+                      src="/astro.png"
+                      alt="Aris Setiawan - Senior Full-Stack Developer"
+                      width={384}
+                      height={384}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      priority
+                      quality={95}
+                      sizes="(max-width: 768px) 256px, (max-width: 1200px) 320px, 384px"
+                      placeholder="blur"
+                      blurDataURL={blurDataURLs.avatar}
+                    />
+                    
+                    {/* Professional overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-wp-navy/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
                   
-                  {/* Decorative elements */}
-                  <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-blue-500/20 dark:bg-blue-500/30 rounded-full blur-xl"></div>
-                  <div className="absolute -top-6 -left-6 w-24 h-24 bg-purple-500/20 dark:bg-purple-500/30 rounded-full blur-xl"></div>
+                  {/* Floating elements with WordPress VIP colors */}
+                  <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-wp-gold/20 dark:bg-wp-blue/30 rounded-full blur-2xl animate-pulse"></div>
+                  <div className="absolute -top-8 -left-8 w-24 h-24 bg-wp-blue/20 dark:bg-wp-gold/30 rounded-full blur-xl animate-pulse delay-1000"></div>
+                  
+                  {/* Professional badge floating element */}
+                  <div className="absolute -bottom-4 -left-4 px-4 py-2 bg-wp-sage/95 dark:bg-wp-navy/95 backdrop-blur-sm rounded-xl border border-wp-sage-foreground/20 dark:border-wp-navy-foreground/20 shadow-wp-elevated">
+                    <span className="text-sm font-semibold text-wp-sage-foreground dark:text-wp-navy-foreground">12+ Years</span>
+                  </div>
                 </div>
               </div>
             </div>
             
-            {/* Scroll indicator */}
+            {/* Enhanced scroll indicator with WordPress VIP styling */}
             <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
-              <span className="text-sm text-zinc-500 dark:text-zinc-400 mb-2">Scroll</span>
-              <svg className="w-5 h-5 md:w-6 md:h-6 text-zinc-500 dark:text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-              </svg>
+              <span className="text-sm font-medium text-wp-blue dark:text-wp-gold mb-2 tracking-wide">Scroll</span>
+              <div className="w-6 h-10 border-2 border-wp-blue dark:border-wp-gold rounded-full flex justify-center">
+                <div className="w-1 h-3 bg-wp-blue dark:bg-wp-gold rounded-full mt-2 animate-pulse"></div>
+              </div>
             </div>
           </div>
         </div>

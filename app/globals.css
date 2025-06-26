@@ -20,6 +20,16 @@
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
+  
+  /* WordPress VIP Inspired Color Palette */
+  --color-wp-navy: hsl(var(--wp-navy));
+  --color-wp-navy-foreground: hsl(var(--wp-navy-foreground));
+  --color-wp-gold: hsl(var(--wp-gold));
+  --color-wp-gold-foreground: hsl(var(--wp-gold-foreground));
+  --color-wp-blue: hsl(var(--wp-blue));
+  --color-wp-blue-foreground: hsl(var(--wp-blue-foreground));
+  --color-wp-sage: hsl(var(--wp-sage));
+  --color-wp-sage-foreground: hsl(var(--wp-sage-foreground));
 }
 
 /* Optimize rendering performance */
@@ -378,55 +388,85 @@ body {
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
+    /* Light Mode - WordPress VIP Inspired */
+    --background: 0 0% 100%;                    /* Pure white */
+    --foreground: 215 25% 15%;                  /* Deep navy text - professional */
+    --card: 0 0% 100%;                          /* White cards */
+    --card-foreground: 215 25% 15%;             /* Navy text on cards */
+    --popover: 0 0% 100%;                       /* White popovers */
+    --popover-foreground: 215 25% 15%;          /* Navy text in popovers */
+    
+    /* WordPress VIP Primary Colors */
+    --primary: 35 45% 55%;                      /* WP VIP Gold - warm, professional, cheerful */
+    --primary-foreground: 0 0% 98%;             /* Light text on gold */
+    --secondary: 210 40% 96%;                   /* Light blue-gray - elegant */
+    --secondary-foreground: 215 25% 15%;        /* Navy text on light secondary */
+    --muted: 210 40% 96%;                       /* Subtle background */
+    --muted-foreground: 215 15% 45%;            /* Muted navy text */
+    --accent: 210 100% 55%;                     /* Professional blue - cheerful accent */
+    --accent-foreground: 0 0% 98%;              /* Light text on blue */
+    
+    /* WordPress VIP Extended Palette */
+    --wp-navy: 215 30% 15%;                     /* Deep navy - professional authority */
+    --wp-navy-foreground: 0 0% 98%;             /* Light text on navy */
+    --wp-gold: 35 45% 55%;                      /* Warm gold - success, premium */
+    --wp-gold-foreground: 0 0% 98%;             /* Light text on gold */
+    --wp-blue: 210 100% 55%;                    /* Trust blue - professional, cheerful */
+    --wp-blue-foreground: 0 0% 98%;             /* Light text on blue */
+    --wp-sage: 160 25% 85%;                     /* Soft sage - elegant, calming */
+    --wp-sage-foreground: 215 25% 15%;          /* Navy text on sage */
+    
+    /* Semantic colors */
+    --destructive: 0 65% 52%;                   /* Professional red */
+    --destructive-foreground: 0 0% 98%;         /* Light text on destructive */
+    --border: 220 15% 90%;                      /* Subtle borders */
+    --input: 220 15% 90%;                       /* Input borders */
+    --ring: 210 100% 55%;                       /* Blue focus rings */
+    --radius: 0.75rem;                          /* Slightly more rounded - modern */
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
     --white: white;
     --black: black;
     --transparent: transparent;
   }
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
+    /* Dark Mode - WordPress VIP Night Theme */
+    --background: 220 25% 8%;                   /* Deep navy background */
+    --foreground: 210 40% 95%;                  /* Light text */
+    --card: 220 25% 10%;                        /* Slightly lighter navy cards */
+    --card-foreground: 210 40% 95%;             /* Light text on cards */
+    --popover: 220 25% 10%;                     /* Navy popovers */
+    --popover-foreground: 210 40% 95%;          /* Light text in popovers */
+    
+    /* Dark Mode Primary Colors */
+    --primary: 35 55% 65%;                      /* Brighter gold for dark mode */
+    --primary-foreground: 220 25% 8%;           /* Dark text on gold */
+    --secondary: 220 20% 15%;                   /* Dark secondary */
+    --secondary-foreground: 210 40% 95%;        /* Light text on secondary */
+    --muted: 220 20% 15%;                       /* Dark muted */
+    --muted-foreground: 210 25% 65%;            /* Muted light text */
+    --accent: 210 100% 65%;                     /* Brighter blue for dark mode */
+    --accent-foreground: 220 25% 8%;            /* Dark text on bright blue */
+    
+    /* WordPress VIP Extended Palette - Dark Mode */
+    --wp-navy: 220 25% 8%;                      /* Very deep navy */
+    --wp-navy-foreground: 210 40% 95%;          /* Light text on navy */
+    --wp-gold: 35 55% 65%;                      /* Bright gold for dark mode */
+    --wp-gold-foreground: 220 25% 8%;           /* Dark text on bright gold */
+    --wp-blue: 210 100% 65%;                    /* Bright blue for dark mode */
+    --wp-blue-foreground: 220 25% 8%;           /* Dark text on bright blue */
+    --wp-sage: 160 20% 25%;                     /* Dark sage - elegant contrast */
+    --wp-sage-foreground: 210 40% 95%;          /* Light text on dark sage */
+    
+    /* Dark mode semantic colors */
+    --destructive: 0 65% 58%;                   /* Brighter red for dark mode */
+    --destructive-foreground: 0 0% 98%;         /* Light text on destructive */
+    --border: 220 20% 18%;                      /* Dark borders */
+    --input: 220 20% 18%;                       /* Dark input borders */
+    --ring: 210 100% 65%;                       /* Bright blue focus rings */
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
@@ -697,4 +737,130 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
   .gap-4 {
     gap: 0.75rem;
   }
+}
+
+/* Enhanced Background Gradients - WordPress VIP Style */
+.gradient-wp-hero {
+  background: linear-gradient(135deg, 
+    hsl(var(--wp-navy)) 0%, 
+    hsl(220 30% 20%) 50%, 
+    hsl(215 25% 25%) 100%
+  );
+}
+
+.gradient-wp-hero-light {
+  background: linear-gradient(135deg, 
+    hsl(210 40% 98%) 0%, 
+    hsl(210 40% 96%) 50%, 
+    hsl(220 15% 95%) 100%
+  );
+}
+
+.gradient-wp-accent {
+  background: linear-gradient(135deg, 
+    hsl(var(--wp-gold)) 0%, 
+    hsl(35 55% 60%) 100%
+  );
+}
+
+.gradient-wp-blue {
+  background: linear-gradient(135deg, 
+    hsl(var(--wp-blue)) 0%, 
+    hsl(210 100% 60%) 100%
+  );
+}
+
+.gradient-wp-text {
+  background: linear-gradient(135deg, 
+    hsl(var(--wp-navy)) 0%, 
+    hsl(var(--wp-blue)) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-wp-text-light {
+  background: linear-gradient(135deg, 
+    hsl(var(--wp-gold)) 0%, 
+    hsl(var(--wp-blue)) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* WordPress VIP Inspired Card Patterns */
+.card-wp-elevated {
+  background: hsl(var(--card) / 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid hsl(var(--wp-sage) / 0.3);
+  box-shadow: 
+    0 2px 8px -2px hsl(var(--wp-navy) / 0.1),
+    0 4px 16px -4px hsl(var(--wp-navy) / 0.08);
+}
+
+.dark .card-wp-elevated {
+  background: hsl(var(--card) / 0.9);
+  border: 1px solid hsl(var(--wp-blue) / 0.2);
+  box-shadow: 
+    0 2px 8px -2px hsl(0 0% 0% / 0.3),
+    0 4px 16px -4px hsl(0 0% 0% / 0.2);
+}
+
+/* WordPress VIP Button Patterns */
+.btn-wp-primary {
+  background: hsl(var(--wp-gold));
+  color: hsl(var(--wp-gold-foreground));
+  border: 1px solid hsl(var(--wp-gold));
+  box-shadow: 0 2px 4px -1px hsl(var(--wp-gold) / 0.3);
+  transition: all 0.2s ease;
+}
+
+.btn-wp-primary:hover {
+  background: hsl(35 55% 50%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px -2px hsl(var(--wp-gold) / 0.4);
+}
+
+.btn-wp-secondary {
+  background: transparent;
+  color: hsl(var(--wp-blue));
+  border: 1.5px solid hsl(var(--wp-blue));
+  transition: all 0.2s ease;
+}
+
+.btn-wp-secondary:hover {
+  background: hsl(var(--wp-blue));
+  color: hsl(var(--wp-blue-foreground));
+  transform: translateY(-1px);
+}
+
+/* Professional Tag Styles */
+.tag-wp-professional {
+  background: hsl(var(--wp-sage));
+  color: hsl(var(--wp-sage-foreground));
+  border: 1px solid hsl(var(--wp-sage));
+  font-weight: 500;
+}
+
+.tag-wp-accent {
+  background: hsl(var(--wp-blue) / 0.1);
+  color: hsl(var(--wp-blue));
+  border: 1px solid hsl(var(--wp-blue) / 0.3);
+  font-weight: 500;
+}
+
+/* Enhanced Link Styles */
+.link-wp-professional {
+  color: hsl(var(--wp-blue));
+  text-decoration: underline;
+  text-decoration-color: hsl(var(--wp-blue) / 0.3);
+  text-underline-offset: 3px;
+  transition: all 0.2s ease;
+}
+
+.link-wp-professional:hover {
+  color: hsl(var(--wp-gold));
+  text-decoration-color: hsl(var(--wp-gold) / 0.6);
 }
