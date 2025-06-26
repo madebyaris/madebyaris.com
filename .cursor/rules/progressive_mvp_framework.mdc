@@ -1,0 +1,268 @@
+---
+description: Progressive MVP Development Framework - From Design to Database
+globs: ["**/*"]
+alwaysApply: false
+---
+
+# Progressive MVP Development Framework
+
+## Command Activation
+- **MVP MODE**: Activates complete progressive MVP development assistance
+- **LEVEL 1**: Design-only MVP with mockup data
+- **LEVEL 2**: Interactive MVP with actionable features
+- **LEVEL 3**: Full MVP with real database integration
+- **LEVEL 4**: Production-ready MVP with optimization
+- **LEVEL 5**: Scalable MVP ready for market
+
+## Core MVP Philosophy
+- Client perception = visual experience first, functionality second
+- Progressive enhancement from UI to backend integration
+- Speed-to-feedback loop optimization
+- Design validates concept before backend investment
+- Each level builds upon previous foundation
+
+## Level 1: Design-Only MVP (Visual Validation)
+**Goal**: Validate user interface and user experience concepts
+**Timeline**: 1-3 days
+**Output**: Interactive prototypes with mockup data
+
+### Implementation:
+- Create high-fidelity UI mockups using design system
+- Implement responsive layouts (mobile-first approach)
+- Use static/mockup data for all dynamic content
+- Focus on visual hierarchy and user flow validation
+- Include loading states, empty states, error states
+- Ensure WCAG 2.1 AA accessibility compliance
+
+### Technical Stack:
+- Frontend: HTML/CSS/JS or React/Vue/Angular
+- Mock Data: JSON files, localStorage, or hardcoded arrays
+- Styling: Tailwind CSS, Bootstrap, or custom CSS
+- Prototyping: Figma components translated to code
+
+### Validation Criteria:
+- Visual appeal meets client expectations
+- User flows are intuitive and complete
+- Responsive behavior across devices
+- Loading and error states properly designed
+- Stakeholder approval on overall direction
+
+### Code Patterns:
+```javascript
+// Example: Mock data structure
+const mockUsers = [
+  { id: 1, name: "John Doe", email: "john@example.com" },
+  { id: 2, name: "Jane Smith", email: "jane@example.com" }
+];
+
+// Example: Loading state component
+const UserList = () => {
+  const [loading, setLoading] = useState(true);
+  return loading ? <LoadingSkeleton /> : <UserGrid users={mockUsers} />;
+};
+```
+
+## Level 2: Interactive MVP (Behavioral Validation)
+**Goal**: Validate user interactions and feature usability
+**Timeline**: 3-7 days
+**Output**: Functional prototype with client-side logic
+
+### Implementation:
+- Add interactive functionality to Level 1 design
+- Implement form validation and user feedback
+- Create navigation and state management
+- Add basic authentication flows (frontend only)
+- Include progressive enhancement patterns
+- Test user interactions and edge cases
+
+### Technical Stack:
+- State Management: React Context, Vuex, or vanilla JS state
+- Routing: React Router, Vue Router, or vanilla routing
+- Form Handling: Controlled components with validation
+- Storage: localStorage, sessionStorage for persistence
+- API Simulation: Mock API responses using interceptors
+
+### Validation Criteria:
+- All interactive elements function correctly
+- Form submissions work with proper validation
+- Navigation flows are smooth and logical
+- Error handling provides meaningful feedback
+- User authentication flows complete successfully
+
+### Code Patterns:
+```javascript
+// Example: Form validation
+const validateForm = (data) => {
+  const errors = {};
+  if (!data.email) errors.email = "Email is required";
+  if (!data.password?.length >= 8) errors.password = "Password must be 8+ characters";
+  return { isValid: Object.keys(errors).length === 0, errors };
+};
+
+// Example: Mock API integration
+const api = {
+  users: {
+    create: (userData) => Promise.resolve({ id: Date.now(), ...userData }),
+    list: () => Promise.resolve(mockUsers)
+  }
+};
+```
+
+## Level 3: Database-Integrated MVP (Data Validation)
+**Goal**: Validate data architecture and business logic
+**Timeline**: 5-14 days  
+**Output**: Full-stack application with real data persistence
+
+### Implementation:
+- Set up database schema and migrations
+- Create REST API or GraphQL endpoints
+- Implement real authentication and authorization
+- Add data validation and business logic
+- Connect frontend to real backend services
+- Include basic security measures
+
+### Technical Stack:
+- Backend: Node.js/Express, Python/Django, PHP/Laravel, or similar
+- Database: PostgreSQL, MySQL, MongoDB, or SQLite
+- Authentication: JWT, sessions, or OAuth integration
+- API: RESTful endpoints or GraphQL
+- ORM: Prisma, Sequelize, Eloquent, or similar
+
+### Validation Criteria:
+- Data persists correctly across sessions
+- API endpoints handle CRUD operations
+- Authentication and authorization work properly
+- Database performance is acceptable
+- Security measures prevent common vulnerabilities
+
+### Code Patterns:
+```javascript
+// Example: Database model
+const User = {
+  async create(userData) {
+    return await db.users.create({
+      data: { ...userData, createdAt: new Date() }
+    });
+  },
+  async findById(id) {
+    return await db.users.findUnique({ where: { id } });
+  }
+};
+
+// Example: API endpoint
+app.post('/api/users', async (req, res) => {
+  try {
+    const user = await User.create(req.body);
+    res.status(201).json(user);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+```
+
+## Level 4: Production-Ready MVP (Performance Validation)
+**Goal**: Validate performance and reliability
+**Timeline**: 7-21 days
+**Output**: Optimized application ready for user testing
+
+### Implementation:
+- Add comprehensive error handling and logging
+- Implement caching strategies (Redis, CDN)
+- Optimize database queries and indexing
+- Add monitoring and analytics
+- Include CI/CD pipeline setup
+- Implement backup and recovery procedures
+
+### Technical Stack:
+- Monitoring: Sentry, LogRocket, or similar
+- Caching: Redis, Memcached, or browser caching
+- CDN: Cloudflare, AWS CloudFront, or similar
+- Analytics: Google Analytics, Mixpanel, or custom
+- Deployment: Docker, Vercel, Heroku, or cloud platforms
+
+### Validation Criteria:
+- Page load times under 3 seconds
+- Error rates below 1%
+- Uptime above 99%
+- Proper logging and monitoring in place
+- Automated deployment pipeline working
+
+## Level 5: Scalable MVP (Market Validation)
+**Goal**: Validate market readiness and growth potential
+**Timeline**: 14-30 days
+**Output**: Market-ready application with growth infrastructure
+
+### Implementation:
+- Horizontal scaling capabilities
+- Advanced security hardening
+- A/B testing framework integration
+- Advanced analytics and user tracking
+- SEO optimization and performance monitoring
+- Legal compliance (GDPR, accessibility, etc.)
+
+### Technical Stack:
+- Scaling: Load balancers, microservices, or serverless
+- Security: SSL/TLS, security headers, penetration testing
+- A/B Testing: LaunchDarkly, Optimizely, or custom
+- SEO: Structured data, meta tags, sitemap generation
+- Compliance: GDPR toolkit, accessibility auditing
+
+### Validation Criteria:
+- Application handles expected user load
+- Security audit passes successfully
+- SEO score above 90
+- A/B testing framework operational
+- Legal compliance requirements met
+
+## Development Best Practices
+
+### Client Communication:
+- Show visual progress first (Level 1) before discussing backend
+- Use interactive prototypes for stakeholder feedback
+- Validate each level before proceeding to next
+- Document decisions and rationale at each stage
+- Regular check-ins with working demonstrations
+
+### Code Quality:
+- Write clean, self-documenting code
+- Include comprehensive error handling
+- Follow security best practices from Level 3 onward
+- Implement proper logging and monitoring
+- Use version control with meaningful commit messages
+
+### Performance Optimization:
+- Implement lazy loading for non-critical resources
+- Optimize images and assets for web delivery
+- Use efficient algorithms and data structures
+- Implement proper caching strategies
+- Monitor and optimize database queries
+
+### Testing Strategy:
+- Unit tests for business logic (Level 3+)
+- Integration tests for API endpoints (Level 3+)
+- End-to-end tests for critical user flows (Level 4+)
+- Performance testing under load (Level 5)
+- Security testing and penetration testing (Level 5)
+
+## Mode-Specific Guidance
+
+### When using MVP MODE:
+- Ask which level to implement
+- Provide complete implementation for that level
+- Include migration path to next level
+- Focus on client-visible value delivery
+
+### When using LEVEL commands:
+- Implement exactly that level's requirements
+- Don't over-engineer beyond current level needs
+- Provide clear upgrade path to next level
+- Validate current level thoroughly before advancing
+
+## Progressive Enhancement Philosophy
+- Start with working HTML/CSS (accessibility baseline)
+- Enhance with JavaScript interactivity
+- Add backend integration when data validation needed
+- Optimize for performance when user load justifies it
+- Scale when market demand requires it
+
+Remember: Clients judge MVPs by what they see and interact with first. Technical excellence matters, but user experience validation drives early success.

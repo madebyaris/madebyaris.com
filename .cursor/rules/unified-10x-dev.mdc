@@ -1,0 +1,705 @@
+---
+alwaysApply: true
+---
+# UNIFIED 10X DEVELOPER FRAMEWORK - ENTERPRISE EDITION
+
+Advanced development framework optimized for enterprise-scale applications, incorporating learnings from high-performance portfolio and content management systems.
+
+## 🎯 PROJECT CONTEXT & ARCHITECTURE
+
+### Modern Tech Stack Focus
+**Primary Stack**: Next.js 15 + React 19 + TypeScript + Tailwind CSS + Shadcn/UI
+**Backend Integration**: Headless CMS, GraphQL/REST APIs, Server Components
+**Performance Tools**: Vercel Analytics, Speed Insights, Bundle Analyzer
+**State Management**: Server State + Client State separation, React 19 concurrent features
+**Styling Architecture**: Design tokens + Component variants + Responsive patterns
+
+### Architecture Patterns
+- **App Router First**: Leverage Next.js App Router for optimal performance
+- **Server Components Default**: Use RSC for data fetching, minimize client components
+- **Performance-Driven**: Core Web Vitals optimization, content-visibility, lazy loading
+- **Accessibility-First**: WCAG 2.1 AA minimum, keyboard navigation, screen readers
+- **Mobile-First**: Progressive enhancement, touch-friendly, responsive design
+
+## 🚀 DEVELOPMENT STANDARDS
+
+### Code Quality & Architecture
+```typescript
+// Component Structure Template
+interface ComponentProps {
+  variant?: 'default' | 'primary' | 'secondary';
+  size?: 'sm' | 'md' | 'lg';
+  children: React.ReactNode;
+  className?: string;
+}
+
+export function Component({ 
+  variant = 'default', 
+  size = 'md', 
+  children, 
+  className,
+  ...props 
+}: ComponentProps) {
+  return (
+    <div 
+      className={cn(
+        // Base styles
+        "inline-flex items-center justify-center",
+        // Variants
+        variant === 'primary' && "bg-primary text-primary-foreground",
+        variant === 'secondary' && "bg-secondary text-secondary-foreground",
+        // Sizes
+        size === 'sm' && "h-8 px-3 text-xs",
+        size === 'md' && "h-9 px-4 text-sm",
+        size === 'lg' && "h-10 px-8 text-base",
+        // Custom styles
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+}
+
+Component.displayName = "Component";
+```
+
+### TypeScript Best Practices
+- **Strict Mode**: Always use strict TypeScript configuration
+- **Interface over Type**: Prefer interfaces for object shapes
+- **Generic Constraints**: Use proper generic constraints for reusability
+- **Discriminated Unions**: For component variants and state management
+- **Utility Types**: Leverage Pick, Omit, Partial for type composition
+
+### Naming Conventions & File Structure
+```
+src/
+├── app/                    # Next.js App Router
+│   ├── (dashboard)/       # Route groups
+│   ├── globals.css        # Global styles
+│   ├── layout.tsx         # Root layout
+│   └── page.tsx           # Page components
+├── components/
+│   ├── ui/                # Base components (Shadcn/UI)
+│   ├── layout/           # Layout components
+│   ├── feature/          # Feature-specific components
+│   └── providers/        # Context providers
+├── lib/
+│   ├── utils.ts          # Utility functions
+│   ├── types.ts          # Global types
+│   ├── constants.ts      # Application constants
+│   └── validations.ts    # Zod schemas
+└── hooks/                # Custom React hooks
+```
+
+## 🎨 UI/UX EXCELLENCE
+
+### Design System Integration
+```css
+/* Design Tokens */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 3.9%;
+  --primary: 0 0% 9%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 0 0% 96.1%;
+  --secondary-foreground: 0 0% 9%;
+  --muted: 0 0% 96.1%;
+  --muted-foreground: 0 0% 45.1%;
+  --border: 0 0% 89.8%;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: 0 0% 3.9%;
+  --foreground: 0 0% 98%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 0 0% 9%;
+  /* ... */
+}
+```
+
+### Component Patterns
+```tsx
+// Hero Section Pattern
+<section className="w-full min-h-[calc(100vh-5rem)] relative overflow-hidden">
+  <div className="absolute inset-0 -z-10">
+    <div className="absolute inset-0 bg-gradient-to-br from-zinc-100/50 via-blue-50/30 to-zinc-100/50 dark:from-zinc-900/50 dark:via-blue-900/10 dark:to-zinc-900/50" />
+  </div>
+  
+  <div className="relative z-10 flex items-center justify-center min-h-[calc(100vh-5rem)]">
+    <div className="container max-w-6xl mx-auto px-4 sm:px-6 py-8 md:py-12">
+      {/* Content */}
+    </div>
+  </div>
+</section>
+
+// Card Pattern with Glassmorphism
+<Card className="bg-white/30 dark:bg-zinc-800/30 backdrop-blur-md border border-zinc-200/50 dark:border-zinc-700/50 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all">
+  <CardHeader>
+    <CardTitle>Title</CardTitle>
+    <CardDescription>Description</CardDescription>
+  </CardHeader>
+  <CardContent>
+    {/* Content */}
+  </CardContent>
+</Card>
+```
+
+### Responsive Design Patterns
+```tsx
+// Mobile-First Grid
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+
+// Responsive Typography
+<h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
+
+// Responsive Spacing
+<section className="py-12 md:py-16 lg:py-20">
+
+// Container Patterns
+<div className="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+```
+
+## ⚡ PERFORMANCE OPTIMIZATION
+
+### Core Web Vitals Focus
+```tsx
+// Image Optimization
+import Image from 'next/image';
+
+<Image
+  src="/hero-image.jpg"
+  alt="Description"
+  width={1200}
+  height={600}
+  priority // Above-fold images
+  placeholder="blur"
+  className="rounded-lg object-cover"
+  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+/>
+
+// Dynamic Imports
+const LazyComponent = dynamic(() => import('./HeavyComponent'), {
+  loading: () => <div className="animate-pulse bg-muted h-40 rounded-lg" />
+});
+
+// Suspense Boundaries
+<Suspense fallback={<SkeletonLoader />}>
+  <DataComponent />
+</Suspense>
+```
+
+### Loading Strategies
+```css
+/* Content Visibility for Performance */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
+}
+
+/* Optimized Animations */
+.smooth-transition {
+  will-change: transform, opacity;
+  transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+## 🔒 SECURITY & AUTHENTICATION
+
+### Modern Auth Patterns
+```typescript
+// Server Actions for Secure Operations
+'use server';
+
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
+
+export async function createPost(formData: FormData) {
+  // Validation
+  const title = formData.get('title') as string;
+  if (!title || title.length < 3) {
+    throw new Error('Title must be at least 3 characters');
+  }
+
+  // Database operation
+  await db.post.create({ data: { title } });
+  
+  // Revalidate and redirect
+  revalidatePath('/posts');
+  redirect('/posts');
+}
+
+// Client-side validation with Zod
+import { z } from 'zod';
+
+const postSchema = z.object({
+  title: z.string().min(3).max(100),
+  content: z.string().min(10),
+  published: z.boolean().default(false),
+});
+
+type PostData = z.infer<typeof postSchema>;
+```
+
+### Input Validation & Sanitization
+- **Server Actions**: Use for all mutations, automatic CSRF protection
+- **Zod Schemas**: Type-safe validation for all inputs
+- **Rate Limiting**: Implement for API routes and forms
+- **Sanitization**: HTML content from CMS, user inputs
+
+## 🎯 AI-ENHANCED DEVELOPMENT
+
+### AI Integration Patterns
+```tsx
+// AI Loading States
+const AIThinkingIndicator = () => (
+  <div className="flex items-center gap-2 text-muted-foreground">
+    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary"></div>
+    <span className="text-sm">AI is thinking...</span>
+  </div>
+);
+
+// AI Content Labeling
+const AIGeneratedBadge = () => (
+  <span className="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full text-xs font-medium">
+    🤖 AI Generated
+  </span>
+);
+
+// Confidence Indicators
+const ConfidenceLevel = ({ confidence }: { confidence: number }) => (
+  <div className="flex items-center gap-2">
+    <div className="flex gap-1">
+      {[1, 2, 3, 4, 5].map((level) => (
+        <div
+          key={level}
+          className={cn(
+            "w-2 h-2 rounded-full",
+            level <= confidence ? "bg-green-500" : "bg-gray-300"
+          )}
+        />
+      ))}
+    </div>
+    <span className="text-xs text-muted-foreground">
+      {confidence}/5 confidence
+    </span>
+  </div>
+);
+```
+
+### AI Workflow Integration
+- **Code Generation**: Use AI for boilerplate, component variants
+- **Content Enhancement**: AI-assisted content optimization
+- **Performance Analysis**: AI-driven performance suggestions
+- **Accessibility Audit**: AI-powered a11y recommendations
+
+## 🧪 TESTING & QUALITY ASSURANCE
+
+### Testing Strategy
+```typescript
+// Component Testing with Testing Library
+import { render, screen } from '@testing-library/react';
+import { Button } from './button';
+
+describe('Button Component', () => {
+  it('renders with correct variant styles', () => {
+    render(<Button variant="primary">Click me</Button>);
+    const button = screen.getByRole('button');
+    expect(button).toHaveClass('bg-primary', 'text-primary-foreground');
+  });
+
+  it('handles click events', async () => {
+    const handleClick = jest.fn();
+    render(<Button onClick={handleClick}>Click me</Button>);
+    
+    await user.click(screen.getByRole('button'));
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
+});
+
+// E2E Testing with Playwright
+import { test, expect } from '@playwright/test';
+
+test('homepage loads correctly', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+  await expect(page.getByText('Welcome')).toBeVisible();
+});
+```
+
+### Code Quality Tools
+- **ESLint**: Strict configuration with custom rules
+- **Prettier**: Consistent code formatting
+- **TypeScript**: Strict mode with no implicit any
+- **Husky**: Pre-commit hooks for quality gates
+
+## 📱 RESPONSIVE & ACCESSIBILITY
+
+### Mobile-First Approach
+```css
+/* Breakpoint Strategy */
+/* Default: 320px+ (mobile) */
+@media (min-width: 640px) { /* sm */ }
+@media (min-width: 768px) { /* md */ }
+@media (min-width: 1024px) { /* lg */ }
+@media (min-width: 1280px) { /* xl */ }
+
+/* Touch Targets */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Safe Areas */
+.safe-area {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+```
+
+### Accessibility Standards
+```tsx
+// Proper ARIA Labels
+<button 
+  aria-label="Close dialog"
+  aria-expanded={isOpen}
+  aria-controls="dialog-content"
+>
+  <X className="h-4 w-4" />
+</button>
+
+// Skip Links
+<a 
+  href="#main-content" 
+  className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded"
+>
+  Skip to main content
+</a>
+
+// Focus Management
+const FocusTrap = ({ children }: { children: React.ReactNode }) => {
+  const trapRef = useRef<HTMLDivElement>(null);
+  
+  useEffect(() => {
+    const trap = trapRef.current;
+    if (!trap) return;
+    
+    // Focus management logic
+  }, []);
+  
+  return <div ref={trapRef}>{children}</div>;
+};
+```
+
+## 🔄 STATE MANAGEMENT & DATA FETCHING
+
+### Server State Pattern
+```typescript
+// Server Components for Data Fetching
+async function PostList() {
+  const posts = await getPosts();
+  
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {posts.map((post) => (
+        <PostCard key={post.id} post={post} />
+      ))}
+    </div>
+  );
+}
+
+// Client State with useOptimistic
+'use client';
+
+import { useOptimistic, useTransition } from 'react';
+
+function LikeButton({ post }: { post: Post }) {
+  const [isPending, startTransition] = useTransition();
+  const [optimisticLikes, addOptimisticLike] = useOptimistic(
+    post.likes,
+    (state, amount) => state + amount
+  );
+
+  const handleLike = () => {
+    startTransition(() => {
+      addOptimisticLike(1);
+      likePost(post.id);
+    });
+  };
+
+  return (
+    <button 
+      onClick={handleLike}
+      disabled={isPending}
+      className="flex items-center gap-2"
+    >
+      <Heart className="h-4 w-4" />
+      {optimisticLikes}
+    </button>
+  );
+}
+```
+
+## 🚀 DEPLOYMENT & MONITORING
+
+### Production-Ready Configuration
+```typescript
+// Next.js Configuration
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  experimental: {
+    ppr: true, // Partial Pre-rendering
+    reactCompiler: true, // React Compiler
+  },
+  images: {
+    formats: ['image/webp', 'image/avif'],
+    deviceSizes: [640, 768, 1024, 1280, 1600],
+  },
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY'
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff'
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'origin-when-cross-origin'
+          }
+        ]
+      }
+    ];
+  },
+};
+
+export default nextConfig;
+```
+
+### Performance Monitoring
+```typescript
+// Analytics Integration
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        {children}
+        <Analytics />
+        <SpeedInsights />
+      </body>
+    </html>
+  );
+}
+
+// Error Boundaries
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error('Error caught by boundary:', error, errorInfo);
+    // Log to error tracking service
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="flex flex-col items-center justify-center min-h-[400px] p-8">
+          <h2 className="text-2xl font-bold mb-4">Something went wrong</h2>
+          <button 
+            onClick={() => this.setState({ hasError: false })}
+            className="px-4 py-2 bg-primary text-primary-foreground rounded-md"
+          >
+            Try again
+          </button>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+```
+
+## 🎯 RAPID DEVELOPMENT COMMANDS
+
+### Enhanced Development Modes
+- **"DESIGN MODE"** - Activate design system patterns, component variants
+- **"PERFORMANCE MODE"** - Focus on Core Web Vitals, optimization
+- **"ACCESSIBILITY MODE"** - WCAG compliance, keyboard navigation
+- **"MOBILE MODE"** - Mobile-first responsive development
+- **"AI MODE"** - AI-enhanced development workflow
+- **"TESTING MODE"** - Comprehensive testing strategy
+
+### Quality Gates Checklist
+```typescript
+// Pre-deployment Checklist
+const qualityGates = {
+  performance: [
+    'Core Web Vitals optimized',
+    'Images properly sized and optimized',
+    'Bundle size analyzed and optimized',
+    'Loading states implemented',
+  ],
+  accessibility: [
+    'WCAG 2.1 AA compliance verified',
+    'Keyboard navigation tested',
+    'Screen reader compatibility checked',
+    'Focus management implemented',
+  ],
+  seo: [
+    'Meta tags properly configured',
+    'Structured data implemented',
+    'Sitemap generated',
+    'Robot.txt configured',
+  ],
+  security: [
+    'Input validation implemented',
+    'CSRF protection enabled',
+    'Security headers configured',
+    'Environment variables secured',
+  ],
+};
+```
+
+## 🤝 TEAM COLLABORATION
+
+### Code Review Standards
+```typescript
+// PR Template Guidelines
+/*
+## Description
+Brief description of changes
+
+## Type of Change
+- [ ] Bug fix
+- [ ] New feature
+- [ ] Breaking change
+- [ ] Documentation update
+
+## Testing
+- [ ] Unit tests added/updated
+- [ ] Integration tests added/updated
+- [ ] Manual testing completed
+
+## Accessibility
+- [ ] Keyboard navigation tested
+- [ ] Screen reader tested
+- [ ] Color contrast verified
+
+## Performance
+- [ ] Core Web Vitals impact assessed
+- [ ] Bundle size impact checked
+- [ ] Loading performance tested
+*/
+```
+
+### Documentation Standards
+- **Component Documentation**: Props, examples, accessibility notes
+- **API Documentation**: OpenAPI/Swagger specs for all endpoints
+- **Deployment Guide**: Step-by-step deployment procedures
+- **Troubleshooting**: Common issues and solutions
+
+---
+
+## 🎯 ENTERPRISE PATTERNS
+
+### Content Management
+```typescript
+// WordPress/Headless CMS Integration
+export async function getPost(slug: string) {
+  const response = await fetch(
+    `${process.env.WORDPRESS_API_URL}/posts?slug=${slug}`,
+    {
+      next: { revalidate: 3600 }, // 1 hour cache
+    }
+  );
+  
+  if (!response.ok) {
+    throw new Error('Failed to fetch post');
+  }
+  
+  const posts = await response.json();
+  return transformWordPressContent(posts[0]);
+}
+
+// Content Transformation
+function transformWordPressContent(content: string): string {
+  return content
+    .replace(/<h([1-6])([^>]*)>(.*?)<\/h\1>/g, (_, level, attrs, text) => {
+      const sizes = {
+        '1': 'text-4xl font-bold mb-6',
+        '2': 'text-3xl font-bold mb-5',
+        '3': 'text-2xl font-bold mb-4',
+      };
+      return `<h${level} class="${sizes[level]}">${text}</h${level}>`;
+    })
+    .replace(/<p[^>]*>(.*?)<\/p>/g, '<p class="mb-4 leading-relaxed">$1</p>');
+}
+```
+
+### Error Handling Strategy
+```typescript
+// Global Error Handler
+export default function GlobalError({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string };
+  reset: () => void;
+}) {
+  useEffect(() => {
+    // Log error to monitoring service
+    console.error('Global error:', error);
+  }, [error]);
+
+  return (
+    <html>
+      <body>
+        <div className="flex flex-col items-center justify-center min-h-screen p-8">
+          <h2 className="text-2xl font-bold mb-4">Something went wrong!</h2>
+          <button
+            onClick={reset}
+            className="px-4 py-2 bg-primary text-primary-foreground rounded-md"
+          >
+            Try again
+          </button>
+        </div>
+      </body>
+    </html>
+  );
+}
+```
+
+---
+
+**REMEMBER**: This framework emphasizes enterprise-level quality, performance, and accessibility. Always prioritize user experience, maintain consistent patterns, and leverage modern React/Next.js features for optimal development velocity and application performance.
+
+**Last Updated**: December 2024  
+**Version**: 3.0.0  
+**Focus**: Enterprise-scale applications with modern tooling and best practices.

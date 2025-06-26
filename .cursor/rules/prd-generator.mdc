@@ -1,0 +1,90 @@
+---
+description: Professional PRD generation rules and templates for product managers
+globs: ["**/*.md", "**/*.prd"]
+---
+
+# PRD Generation Rules for Cursor
+
+@context {
+  "type": "product_requirements",
+  "purpose": "prd_generation",
+  "format_version": "2.0.0",
+  "supported_types": [
+    "feature_prd",
+    "product_prd", 
+    "epic_prd",
+    "technical_prd"
+  ]
+}
+
+## PRD Template Structure
+
+When generating a PRD, always include these sections:
+
+### 1. Executive Summary
+- Brief overview (2-3 sentences)
+- Key problem statement
+- Proposed solution summary
+- Success metrics overview
+
+### 2. Problem Statement
+- Customer pain points
+- Business impact
+- Market opportunity
+- User research insights
+
+### 3. Goals & Objectives
+- Primary business goals
+- Success metrics (KPIs)
+- Non-goals (what we're NOT doing)
+- Timeline constraints
+
+### 4. User Stories & Requirements
+- Epic-level user stories
+- Acceptance criteria
+- Edge cases
+- Technical constraints
+
+### 5. Solution Overview
+- High-level approach
+- Key features breakdown
+- User flow descriptions
+- Technical architecture notes
+
+### 6. Implementation Plan
+- Development phases
+- Resource requirements
+- Dependencies
+- Risk mitigation
+
+### 7. Success Metrics
+- Leading indicators
+- Lagging indicators
+- Measurement methodology
+- Success criteria
+
+## AI Prompt Templates
+
+@prd_generation_prompt {
+  "base_prompt": "You are an expert product manager. Generate a comprehensive PRD based on the following inputs. Follow the PRD template structure above and ensure all sections are thoroughly detailed.",
+  "context_prompt": "Consider the product context: {product_type}, target audience: {target_audience}, and business goals: {business_goals}",
+  "formatting_rules": "Use clear headings, bullet points for lists, and include placeholder sections for stakeholder input where needed."
+}
+
+## Quick Commands
+
+When user types "prd:" followed by a concept, generate a full PRD using this structure.
+
+Examples:
+- "prd: user authentication system"
+- "prd: mobile app onboarding flow" 
+- "prd: AI-powered search feature"
+
+## Quality Guidelines
+
+- Keep language clear and jargon-free
+- Include quantifiable success metrics
+- Reference user research when available
+- Specify technical requirements clearly
+- Include timeline estimates
+- Address potential risks and mitigation strategies
