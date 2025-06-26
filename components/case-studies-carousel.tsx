@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 import Image from "next/image"
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
+import { blurDataURLs } from '@/lib/utils'
 
 interface CaseStudy {
   title: string
@@ -135,6 +136,8 @@ const CaseStudiesCarousel = () => {
                   sizes="(max-width: 768px) 100vw, 980px"
                   className="object-cover transition-transform duration-700 hover:scale-105"
                   priority={index === 0 || index === currentIndex}
+                  placeholder="blur"
+                  blurDataURL={blurDataURLs.warm}
                   onLoad={() => handleImageLoad(index)}
                   onError={() => handleImageLoad(index)}
                 />
@@ -178,6 +181,8 @@ const CaseStudiesCarousel = () => {
                               fill
                               sizes="56px"
                               className="object-cover"
+                              placeholder="blur"
+                              blurDataURL={blurDataURLs.avatar}
                             />
                           </div>
                         ))}

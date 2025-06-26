@@ -10,34 +10,16 @@ import { structuredData } from '@/lib/structured-data'
 // Segment Configuration
 export const revalidate = 86400 // 24 hours
 
-// Loading fallbacks
-const HeroFallback = () => <div className="h-[calc(100vh-4rem)] bg-gradient-to-b from-zinc-100/20 to-zinc-100/10 dark:from-zinc-900/20 dark:to-zinc-900/10 animate-pulse" />
-const CaseStudiesFallback = () => (
-  <div className="w-full py-12">
-    <div className="relative mb-12 flex flex-col items-center">
-      <div className="w-32 h-6 bg-zinc-200 dark:bg-zinc-800 rounded-full mb-4 animate-pulse"></div>
-      <div className="w-64 h-12 bg-zinc-200 dark:bg-zinc-800 rounded-lg animate-pulse"></div>
-    </div>
-    
-    {/* Photo and explanation placeholder */}
-    <div className="w-full max-w-4xl mx-auto mb-16 grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-      <div className="md:col-span-1 flex justify-center">
-        <div className="w-40 h-40 md:w-48 md:h-48 rounded-full bg-zinc-200 dark:bg-zinc-800 animate-pulse"></div>
-      </div>
-      <div className="md:col-span-2">
-        <div className="w-48 h-8 bg-zinc-200 dark:bg-zinc-800 rounded mb-4 animate-pulse"></div>
-        <div className="w-full h-4 bg-zinc-200 dark:bg-zinc-800 rounded mb-2 animate-pulse"></div>
-        <div className="w-full h-4 bg-zinc-200 dark:bg-zinc-800 rounded mb-2 animate-pulse"></div>
-        <div className="w-3/4 h-4 bg-zinc-200 dark:bg-zinc-800 rounded mb-4 animate-pulse"></div>
-        <div className="w-full h-4 bg-zinc-200 dark:bg-zinc-800 rounded mb-2 animate-pulse"></div>
-        <div className="w-2/3 h-4 bg-zinc-200 dark:bg-zinc-800 rounded animate-pulse"></div>
-      </div>
-    </div>
-    
-    <div className="h-[400px] w-full bg-zinc-200/50 dark:bg-zinc-800/50 rounded-xl animate-pulse"></div>
-  </div>
-)
-const PostsFallback = () => <div className="h-[400px] w-full bg-zinc-100/20 dark:bg-zinc-900/20 rounded-lg animate-pulse" />
+import { 
+  HeroSkeleton, 
+  CaseStudiesSkeleton, 
+  BlogGridSkeleton 
+} from '@/components/ui/skeleton-loaders'
+
+// Loading fallbacks with proper skeleton loaders
+const HeroFallback = () => <HeroSkeleton />
+const CaseStudiesFallback = () => <CaseStudiesSkeleton />
+const PostsFallback = () => <BlogGridSkeleton count={3} />
 
 // Dynamically import heavy components with optimized loading
 const ClientHeroLazy = dynamic(() => import('@/components/client-hero'), {

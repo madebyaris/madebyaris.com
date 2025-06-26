@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
+import { blurDataURLs } from '@/lib/utils'
 
 const CaseStudiesCarousel = dynamic(
   () => import('@/components/case-studies-carousel'),
@@ -33,6 +34,8 @@ export function CaseStudiesWrapper() {
               sizes="(max-width: 768px) 128px, (max-width: 1024px) 160px, 192px"
               className="object-cover"
               priority
+              placeholder="blur"
+              blurDataURL={blurDataURLs.avatar}
             />
             <div className="absolute inset-0 ring-4 ring-emerald-500/20 rounded-full"></div>
           </div>

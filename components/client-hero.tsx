@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { UpworkIcon } from "@/components/icons/upwork"
 import { ReactNode } from 'react'
+import { blurDataURLs } from '@/lib/utils'
 
 interface ClientHeroProps {
   badge?: string;
@@ -93,6 +94,8 @@ export function ClientHero({
                     priority
                     quality={90}
                     sizes="(max-width: 768px) 224px, (max-width: 1200px) 288px, 320px"
+                    placeholder="blur"
+                    blurDataURL={blurDataURLs.avatar}
                   />
                   
                   {/* Decorative elements */}

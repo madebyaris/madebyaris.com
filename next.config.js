@@ -92,26 +92,71 @@ const nextConfig = {
         ...config.optimization,
         splitChunks: {
           chunks: 'all',
-          minSize: 20000,
-          maxSize: 244000,
+          minSize: 15000,
+          maxSize: 200000,
           minChunks: 1,
-          maxAsyncRequests: 30,
-          maxInitialRequests: 30,
+          maxAsyncRequests: 50,
+          maxInitialRequests: 25,
           cacheGroups: {
-            defaultVendors: {
-              test: /[\\/]node_modules[\\/]/,
-              priority: -10,
+            // Framework chunks (React, Next.js)
+            framework: {
+              chunks: 'all',
+              name: 'framework',
+              test: /(?:react|react-dom|scheduler)[\\/]/,
+              priority: 40,
+              enforce: true,
+            },
+            // Large libraries
+            lib: {
+              test: /[\\/]node_modules[\\/](framer-motion|@radix-ui|lucide-react)[\\/]/,
+              name: 'lib',
+              priority: 30,
               reuseExistingChunk: true,
             },
+            // UI Components
+            ui: {
+              test: /[\\/]components[\\/]ui[\\/]/,
+              name: 'ui',
+              priority: 25,
+              reuseExistingChunk: true,
+            },
+            // Vendor chunks (other node_modules)
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name: 'vendor',
+              priority: 20,
+              reuseExistingChunk: true,
+            },
+            // Common chunks (shared across pages)
+            common: {
+              name: 'common',
+              minChunks: 2,
+              priority: 15,
+              reuseExistingChunk: true,
+            },
+            // Default group
             default: {
               minChunks: 2,
-              priority: -20,
+              priority: 10,
               reuseExistingChunk: true,
             },
           },
         },
+        // Minimize and tree-shake more aggressively
+        usedExports: true,
+        sideEffects: false,
       }
+
+      // Optimize module concatenation
+      config.optimization.concatenateModules = true;
+      
+      // Improve tree shaking
+      config.optimization.providedExports = true;
     }
+
+    // Note: framer-motion alias removed due to export path issues
+    // The library's optimizePackageImports in experimental config handles optimization
+
     return config
   },
 }

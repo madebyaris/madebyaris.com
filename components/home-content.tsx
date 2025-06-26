@@ -6,6 +6,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import type { Post, Project, Category, Tag } from '@/lib/types'
+import { blurDataURLs } from '@/lib/utils'
 
 // Interface for posts with processed categories and tags
 interface ProcessedPost extends Omit<Post, 'categories' | 'tags'> {
@@ -48,6 +49,8 @@ export function HomeContent({ type, initialData }: HomeContentProps) {
                     width={600}
                     height={400}
                     className="object-cover w-full h-full"
+                    placeholder="blur"
+                    blurDataURL={blurDataURLs.tech}
                   />
                 </div>
               )}
@@ -124,6 +127,8 @@ export function HomeContent({ type, initialData }: HomeContentProps) {
                     loading={index === 0 ? "eager" : "lazy"}
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-cover w-full h-full"
+                    placeholder="blur"
+                    blurDataURL={blurDataURLs.default}
                   />
                 </div>
               )}

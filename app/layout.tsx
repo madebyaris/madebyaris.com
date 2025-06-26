@@ -5,17 +5,30 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import ThemeProvider from "@/components/providers/theme-provider";
 import AnalyticsWrapper from "@/components/providers/analytics-wrapper";
+import { ServiceWorkerRegistration } from "@/components/service-worker-registration";
 import { cn } from "@/lib/utils";
+import { criticalCSS } from "@/lib/critical-css";
 import "./globals.css";
 
-// Optimize font loading with display swap and adjusting preload strategy
+// Optimize font loading with display swap and strategic preload
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
   display: "swap",
   preload: true,
-  fallback: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'sans-serif']
+  adjustFontFallback: false, // Let Next.js handle fallback optimization
+  fallback: [
+    'ui-sans-serif', 
+    'system-ui', 
+    '-apple-system', 
+    'BlinkMacSystemFont', 
+    'Segoe UI', 
+    'Roboto', 
+    'Helvetica Neue', 
+    'Arial', 
+    'sans-serif'
+  ]
 });
 
 const geistMono = localFont({
@@ -24,7 +37,17 @@ const geistMono = localFont({
   weight: "100 900",
   display: "swap",
   preload: false, // Only preload primary font
-  fallback: ['SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace']
+  adjustFontFallback: false,
+  fallback: [
+    'ui-monospace',
+    'SFMono-Regular', 
+    'Menlo', 
+    'Monaco', 
+    'Consolas', 
+    'Liberation Mono', 
+    'Courier New', 
+    'monospace'
+  ]
 });
 
 const jakarta = Plus_Jakarta_Sans({ 
@@ -32,7 +55,19 @@ const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
   display: "swap",
   preload: false, // Only preload primary font
-  weight: ["400", "600", "700"], // Only load needed weights
+  weight: ["400", "500", "600", "700"], // Include medium weight for better hierarchy
+  adjustFontFallback: true, // Let Google Fonts optimize fallback
+  fallback: [
+    'ui-sans-serif',
+    'system-ui', 
+    '-apple-system', 
+    'BlinkMacSystemFont', 
+    'Segoe UI', 
+    'Roboto', 
+    'Helvetica Neue', 
+    'Arial', 
+    'sans-serif'
+  ]
 });
 
 export const metadata: Metadata = {
@@ -121,17 +156,38 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Preconnect to critical domains */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Preconnect to critical domains (Google Fonts handled automatically by Next.js) */}
         <link rel="preconnect" href="https://cdn.vercel-insights.com" />
+        <link rel="preconnect" href="https://vitals.vercel-insights.com" />
         
-        {/* DNS Prefetch for performance */}
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        {/* DNS Prefetch for performance optimization */}
         <link rel="dns-prefetch" href="https://va.vercel-scripts.com" />
+        <link rel="dns-prefetch" href="https://vitals.vercel-insights.com" />
+        
+        {/* Preconnect to WordPress API if available */}
+        {process.env.NEXT_PUBLIC_WP_API_URL && (
+          <link rel="preconnect" href={process.env.NEXT_PUBLIC_WP_API_URL} />
+        )}
         
         {/* Preload critical assets with priority hints */}
         <link rel="preload" href="/astro.png" as="image" fetchPriority="high" />
+        <link rel="preload" href="/aris.png" as="image" fetchPriority="high" />
+        
+        {/* Preload critical font files */}
+        <link 
+          rel="preload" 
+          href="/fonts/GeistVF.woff" 
+          as="font" 
+          type="font/woff" 
+          crossOrigin="anonymous"
+          fetchPriority="high"
+        />
+        
+        {/* Prefetch likely next pages */}
+        <link rel="prefetch" href="/contact" />
+        <link rel="prefetch" href="/about" />
+        <link rel="prefetch" href="/blog" />
+        <link rel="prefetch" href="/projects" />
         
         {/* Meta tags for performance */}
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -140,6 +196,11 @@ export default function RootLayout({
         
         {/* Core Web Vitals optimization hint */}
         <meta name="renderMode" content="simultaneously" />
+        
+        {/* Critical CSS inlined for faster rendering */}
+        <style id="critical-css" dangerouslySetInnerHTML={{ 
+          __html: criticalCSS.replace(/\s+/g, ' ').trim() 
+        }} />
       </head>
       <body 
         suppressHydrationWarning
@@ -186,6 +247,7 @@ export default function RootLayout({
           />
         </ThemeProvider>
         <AnalyticsWrapper />
+        <ServiceWorkerRegistration />
       </body>
     </html>
   );

@@ -628,6 +628,20 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
   }
 }
 
+/* Shimmer animation for skeleton loaders */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
 /* Improved scrollbar for blog content */
 .prose::-webkit-scrollbar {
   width: 6px;
