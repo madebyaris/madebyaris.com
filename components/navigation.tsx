@@ -37,6 +37,11 @@ export function Navigation() {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = React.useState(false)
   const [expandedItems, setExpandedItems] = React.useState<Record<string, boolean>>({})
+  const [mounted, setMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
 
   // Toggle submenu expansion
   const toggleSubmenu = (href: string) => {
@@ -57,6 +62,10 @@ export function Navigation() {
       document.body.style.overflow = 'unset'
     }
   }, [isOpen])
+
+  if (!mounted) {
+    return null
+  }
 
   return (
     <>
