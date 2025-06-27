@@ -15,34 +15,35 @@ export function CaseStudiesWrapper() {
     <div className="w-full">
       {/* Featured Case Studies */}
       <div className="relative">
-        {/* Decorative background elements */}
-        <div className="absolute inset-0 bg-gradient-to-r from-wp-sage/10 via-transparent to-wp-blue/10 dark:from-wp-navy/20 dark:via-transparent dark:to-wp-gold/10 rounded-3xl"></div>
+        {/* Enhanced decorative background elements for light mode */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/80 via-indigo-50/60 to-purple-50/80 dark:from-wp-navy/20 dark:via-transparent dark:to-wp-gold/10 rounded-3xl"></div>
+        <div className="absolute inset-0 bg-gradient-to-tr from-wp-gold/5 via-transparent to-wp-blue/10 dark:from-wp-gold/10 dark:to-wp-blue/5 rounded-3xl"></div>
         
-        {/* Glass container for carousel */}
-        <div className="relative bg-white/40 dark:bg-wp-navy/30 backdrop-blur-xl rounded-3xl p-6 md:p-10 shadow-2xl border border-wp-sage/30 dark:border-wp-blue/20">
+        {/* Enhanced glass container for better light mode appearance */}
+        <div className="relative bg-white/90 dark:bg-wp-navy/30 backdrop-blur-xl rounded-3xl p-6 md:p-10 shadow-xl border border-gray-200/60 dark:border-wp-blue/20">
           {/* Section header inside container */}
           <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-wp-gold/10 text-wp-gold dark:bg-wp-blue/10 dark:text-wp-blue mb-6 backdrop-blur-sm border border-wp-gold/20 dark:border-wp-blue/20">
-              <Award className="w-5 h-5" />
+            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-wp-gold/20 to-wp-blue/20 text-wp-navy dark:bg-wp-blue/10 dark:text-wp-blue mb-6 backdrop-blur-sm border border-wp-gold/30 dark:border-wp-blue/20 shadow-sm">
+              <Award className="w-5 h-5 text-wp-gold dark:text-wp-blue" />
               <span className="text-sm font-bold tracking-wider uppercase">Featured Section</span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              <span className="text-wp-navy dark:text-foreground">Featured Case Studies</span>
+              <span className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent dark:from-foreground dark:via-foreground dark:to-foreground dark:text-foreground">Featured Case Studies</span>
             </h2>
-            <p className="text-lg text-wp-navy/70 dark:text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg text-gray-700 dark:text-muted-foreground max-w-2xl mx-auto font-medium">
               Explore detailed breakdowns of successful projects and the impact they created
             </p>
           </div>
           
           <CaseStudiesCarousel />
           
-          {/* View all projects link */}
+          {/* Enhanced view all projects link */}
           <div className="text-center mt-8">
             <Button 
               asChild 
               variant="wp-secondary" 
               size="lg"
-              className="shadow-wp-glow-blue hover:shadow-wp-glow-blue group"
+              className="bg-gradient-to-r from-wp-blue to-indigo-600 hover:from-wp-blue/90 hover:to-indigo-600/90 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 dark:shadow-wp-glow-blue dark:hover:shadow-wp-glow-blue group"
             >
               <Link href="/projects">
                 View All Projects
