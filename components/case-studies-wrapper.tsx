@@ -12,7 +12,7 @@ const CaseStudiesCarousel = dynamic(
 
 export function CaseStudiesWrapper() {
   return (
-    <div className="w-full">
+    <div className="w-full mb-8">
       {/* Featured Case Studies */}
       <div className="relative">
         {/* Enhanced decorative background elements for light mode */}
@@ -20,14 +20,14 @@ export function CaseStudiesWrapper() {
         <div className="absolute inset-0 bg-gradient-to-tr from-wp-gold/5 via-transparent to-wp-blue/10 dark:from-wp-gold/10 dark:to-wp-blue/5 rounded-3xl"></div>
         
         {/* Enhanced glass container for better light mode appearance */}
-        <div className="relative bg-white/90 dark:bg-wp-navy/30 backdrop-blur-xl rounded-3xl p-6 md:p-10 shadow-xl border border-gray-200/60 dark:border-wp-blue/20">
+        <div className="relative bg-white/90 dark:bg-wp-navy/30 backdrop-blur-xl rounded-3xl p-6 md:p-8 shadow-xl border border-gray-200/60 dark:border-wp-blue/20">
           {/* Section header inside container */}
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-wp-gold/20 to-wp-blue/20 text-wp-navy dark:bg-wp-blue/10 dark:text-wp-blue mb-6 backdrop-blur-sm border border-wp-gold/30 dark:border-wp-blue/20 shadow-sm">
+          <div className="text-center mb-6">
+            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-wp-gold/20 to-wp-blue/20 text-wp-navy dark:bg-wp-blue/10 dark:text-wp-blue mb-4 backdrop-blur-sm border border-wp-gold/30 dark:border-wp-blue/20 shadow-sm">
               <Award className="w-5 h-5 text-wp-gold dark:text-wp-blue" />
               <span className="text-sm font-bold tracking-wider uppercase">Featured Section</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold mb-3">
               <span className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent dark:from-foreground dark:via-foreground dark:to-foreground dark:text-foreground">Featured Case Studies</span>
             </h2>
             <p className="text-lg text-gray-700 dark:text-muted-foreground max-w-2xl mx-auto font-medium">
@@ -38,7 +38,7 @@ export function CaseStudiesWrapper() {
           <CaseStudiesCarousel />
           
           {/* Enhanced view all projects link */}
-          <div className="text-center mt-8">
+          <div className="text-center mt-6">
             <Button 
               asChild 
               variant="wp-secondary" 
