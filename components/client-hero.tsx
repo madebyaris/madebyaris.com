@@ -28,7 +28,7 @@ export function ClientHero({
   return (
     <>
       {/* WordPress VIP inspired hero section */}
-      <section className="w-full min-h-[calc(100vh-5rem)] relative overflow-hidden bg-gradient-wp-hero-light dark:bg-gradient-wp-hero">
+      <section className="w-full min-h-[calc(100vh-5rem)] relative overflow-hidden bg-gradient-to-br from-blue-50/50 via-white to-purple-50/30 dark:bg-gradient-to-br dark:from-gray-900 dark:via-blue-900/20 dark:to-gray-900">
         {/* Enhanced background with WordPress VIP styling */}
         <div className="absolute inset-0 -z-10">
           {/* Light mode background */}
@@ -81,7 +81,7 @@ export function ClientHero({
                 <div className="flex flex-wrap gap-4 md:gap-6 pt-4 md:pt-6 animate-slide-up animation-delay-400">
                   <Link 
                     href="/contact" 
-                    className="btn-wp-primary px-8 py-4 md:px-10 md:py-5 text-lg md:text-xl font-semibold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-wp-glow active:scale-95 inline-flex items-center gap-2"
+                    className="inline-flex items-center gap-2 px-8 py-4 md:px-10 md:py-5 text-lg md:text-xl font-semibold rounded-xl bg-gradient-to-r from-wp-gold to-yellow-500 text-wp-gold-foreground hover:from-wp-gold/90 hover:to-yellow-500/90 hover:scale-105 shadow-lg hover:shadow-xl transition-all duration-300 active:scale-95"
                   >
                     Contact Me
                     <span className="text-2xl">👋</span>
@@ -90,7 +90,7 @@ export function ClientHero({
                     href="https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe" 
                     target="_blank"
                     rel="noopener"
-                    className="btn-wp-secondary px-8 py-4 md:px-10 md:py-5 text-lg md:text-xl font-semibold rounded-xl inline-flex items-center gap-3 transition-all duration-300 hover:scale-105 hover:shadow-wp-glow-blue active:scale-95"
+                    className="inline-flex items-center gap-3 px-8 py-4 md:px-10 md:py-5 text-lg md:text-xl font-semibold rounded-xl bg-wp-blue text-wp-blue-foreground hover:scale-105 shadow-lg hover:shadow-xl transition-transform duration-300 active:scale-95"
                   >
                     <span>UPWORK</span>
                     <UpworkIcon className="w-5 h-5 md:w-6 md:h-6" />

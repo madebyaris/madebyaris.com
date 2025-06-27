@@ -123,7 +123,7 @@ export default function HomePage() {
               </div>
               
               {/* Enhanced logo carousel with WordPress VIP styling */}
-              <div className="w-full max-w-5xl mx-auto p-8 md:p-10 card-wp-elevated rounded-2xl shadow-wp-elevated dark:shadow-wp-elevated-dark border border-wp-sage/30 dark:border-wp-blue/20">
+              <div className="w-full max-w-5xl mx-auto p-8 md:p-10 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
                 <LogoCarousel 
                   columnCount={3}
                   logos={techLogos}
@@ -164,7 +164,7 @@ export default function HomePage() {
         </section>
 
         {/* Services Section */}
-        <section className="w-full py-20 md:py-24 bg-gradient-wp-hero-light dark:bg-gradient-wp-hero cv-auto">
+        <section className="w-full py-20 md:py-24 bg-gradient-to-br from-gray-50/50 via-white to-blue-50/30 dark:bg-gradient-to-br dark:from-gray-900 dark:via-blue-900/10 dark:to-gray-900 cv-auto">
           <div className="container max-w-6xl mx-auto px-4 sm:px-6">
             {/* Enhanced section heading */}
             <div className="relative mb-16 text-center">
@@ -187,7 +187,7 @@ export default function HomePage() {
             <div className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-6 md:gap-8 lg:gap-10 max-w-5xl mx-auto">
               {/* Next.js Development Card */}
               <div className="group relative">
-                <div className="relative h-full p-8 card-wp-elevated rounded-2xl transition-all duration-300 group-hover:scale-[1.02] overflow-hidden flex flex-col">
+                <div className="relative h-full p-8 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl transition-all duration-300 group-hover:scale-[1.02] overflow-hidden flex flex-col shadow-lg border border-gray-200 dark:border-gray-700">
                   {/* Gradient background overlay */}
                   <div className="absolute inset-0 bg-gradient-to-br from-wp-blue/5 to-transparent group-hover:from-wp-blue/10 transition-all duration-300"></div>
                   
@@ -226,7 +226,7 @@ export default function HomePage() {
                     asChild 
                     variant="wp-outline" 
                     size="lg" 
-                    className="w-full group-hover:bg-wp-blue group-hover:text-wp-blue-foreground group-hover:border-wp-blue transition-all duration-300 mt-auto"
+                    className="w-full group-hover:bg-wp-blue group-hover:text-wp-blue-foreground group-hover:border-wp-blue transition-all duration-300 mt-auto relative z-10 pointer-events-auto"
                   >
                     <Link href="/services/nextjs-development">
                       Learn More
@@ -238,7 +238,7 @@ export default function HomePage() {
               
               {/* WordPress Development Card */}
               <div className="group relative">
-                <div className="relative h-full p-8 card-wp-elevated rounded-2xl transition-all duration-300 group-hover:scale-[1.02] overflow-hidden flex flex-col">
+                <div className="relative h-full p-8 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl transition-all duration-300 group-hover:scale-[1.02] overflow-hidden flex flex-col shadow-lg border border-gray-200 dark:border-gray-700">
                   <div className="absolute inset-0 bg-gradient-to-br from-wp-gold/5 to-transparent group-hover:from-wp-gold/10 transition-all duration-300"></div>
                   
                   <div className="relative mb-6 p-4 bg-wp-gold/10 dark:bg-wp-gold/20 rounded-xl w-fit group-hover:scale-110 transition-transform duration-300">
@@ -273,7 +273,7 @@ export default function HomePage() {
                     asChild 
                     variant="wp-outline" 
                     size="lg" 
-                    className="w-full group-hover:bg-wp-gold group-hover:text-wp-gold-foreground group-hover:border-wp-gold transition-all duration-300 mt-auto"
+                    className="w-full group-hover:bg-wp-gold group-hover:text-wp-gold-foreground group-hover:border-wp-gold transition-all duration-300 mt-auto relative z-10 pointer-events-auto"
                   >
                     <Link href="/services/wordpress">
                       Learn More
@@ -285,7 +285,7 @@ export default function HomePage() {
               
               {/* PHP Development Card */}
               <div className="group relative">
-                <div className="relative h-full p-8 card-wp-elevated rounded-2xl transition-all duration-300 group-hover:scale-[1.02] overflow-hidden flex flex-col">
+                <div className="relative h-full p-8 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl transition-all duration-300 group-hover:scale-[1.02] overflow-hidden flex flex-col shadow-lg border border-gray-200 dark:border-gray-700">
                   <div className="absolute inset-0 bg-gradient-to-br from-wp-sage/5 to-transparent group-hover:from-wp-sage/10 transition-all duration-300"></div>
                   
                   <div className="relative mb-6 p-4 bg-wp-sage/20 dark:bg-wp-sage/30 rounded-xl w-fit group-hover:scale-110 transition-transform duration-300">
@@ -293,7 +293,7 @@ export default function HomePage() {
                   </div>
                   
                   <div className="flex-grow">
-                    <h3 className="text-2xl md:text-3xl font-bold mb-4 text-wp-navy dark:text-foreground relative group-hover:text-wp-sage-foreground transition-colors duration-300">
+                    <h3 className="text-2xl md:text-3xl font-bold mb-4 text-wp-navy dark:text-foreground relative group-hover:text-wp-sage dark:group-hover:text-wp-sage transition-colors duration-300">
                       PHP Development
                     </h3>
                     <p className="text-wp-navy/70 dark:text-muted-foreground mb-6 relative leading-relaxed text-lg">
@@ -320,7 +320,7 @@ export default function HomePage() {
                     asChild 
                     variant="wp-outline" 
                     size="lg" 
-                    className="w-full group-hover:bg-wp-sage group-hover:text-wp-sage-foreground group-hover:border-wp-sage transition-all duration-300 mt-auto"
+                    className="w-full group-hover:bg-wp-sage group-hover:text-wp-sage-foreground group-hover:border-wp-sage transition-all duration-300 mt-auto relative z-10 pointer-events-auto"
                   >
                     <Link href="/services/php-development">
                       Learn More
@@ -332,7 +332,7 @@ export default function HomePage() {
               
               {/* Vibe Code Friend Card */}
               <div className="group relative">
-                <div className="relative h-full p-8 card-wp-elevated rounded-2xl transition-all duration-300 group-hover:scale-[1.02] overflow-hidden flex flex-col">
+                <div className="relative h-full p-8 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl transition-all duration-300 group-hover:scale-[1.02] overflow-hidden flex flex-col shadow-lg border border-gray-200 dark:border-gray-700">
                   <div className="absolute inset-0 bg-gradient-to-br from-wp-blue/5 to-wp-gold/5 group-hover:from-wp-blue/10 group-hover:to-wp-gold/10 transition-all duration-300"></div>
                   
                   <div className="relative mb-6 p-4 bg-gradient-to-br from-wp-blue/10 to-wp-gold/10 rounded-xl w-fit group-hover:scale-110 transition-transform duration-300">
@@ -367,7 +367,7 @@ export default function HomePage() {
                     asChild 
                     variant="wp-outline" 
                     size="lg" 
-                    className="w-full group-hover:bg-gradient-to-r group-hover:from-wp-blue group-hover:to-wp-gold group-hover:text-white group-hover:border-transparent transition-all duration-300 mt-auto"
+                    className="w-full group-hover:bg-gradient-to-r group-hover:from-wp-blue group-hover:to-wp-gold group-hover:text-white group-hover:border-transparent transition-all duration-300 mt-auto relative z-10 pointer-events-auto"
                   >
                     <Link href="/services/vibe-code-friend">
                       Learn More
