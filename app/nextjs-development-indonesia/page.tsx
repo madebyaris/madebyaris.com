@@ -1,7 +1,10 @@
 import type { Metadata } from 'next'
-import { Code2, ArrowRight, Rocket, Globe, Zap } from 'lucide-react'
+import { Code2, ArrowRight, Rocket, Globe, Zap, Star, Users } from 'lucide-react'
 import { Button } from '../../components/ui/button'
 import { Card } from '../../components/ui/card'
+import { PageHero } from '../../components/ui/page-hero'
+import { SectionWrapper } from '../../components/ui/section-wrapper'
+import { EnhancedCard } from '../../components/ui/enhanced-card'
 import { ImageResponse } from 'next/og'
 import Link from 'next/link'
 
@@ -324,154 +327,191 @@ const processSteps = [
 export default function NextjsDevelopmentIndonesiaPage() {
   return (
     <>
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
-    <div className="relative min-h-screen">
-      {/* Background Pattern */}
-      <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-zinc-50 dark:bg-zinc-950 [background:radial-gradient(#e5e7eb_1px,transparent_1px)] dark:[background:radial-gradient(#1f2937_1px,transparent_1px)] [background-size:32px_32px] opacity-40" />
-        <div className="absolute inset-0 bg-gradient-to-br from-zinc-100 via-transparent to-zinc-100/50 dark:from-zinc-900 dark:via-transparent dark:to-zinc-900/50" />
-      </div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+      
+      {/* Hero Section with new PageHero component */}
+      <PageHero
+        variant="services"
+        badge={{ text: "Next.js Expert Indonesia", icon: Code2 }}
+        title={
+          <>
+            <span className="text-wp-navy-foreground dark:text-foreground">Jasa Pengembangan</span>{" "}
+            <span className="bg-gradient-to-r from-wp-blue to-wp-sage bg-clip-text text-transparent">Next.js</span>{" "}
+            <span className="text-wp-navy-foreground dark:text-foreground">Profesional</span>
+          </>
+        }
+        description="Bangun aplikasi web modern yang cepat, SEO-friendly, dan skalabel menggunakan Next.js, React, dan TypeScript. Fokus pada performa tinggi, optimalisasi SEO, dan pengalaman pengguna terbaik."
+      >
+        <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+          <Button asChild variant="wp-primary" size="xl">
+            <Link href="/contact">
+              Mulai Proyek Sekarang
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Link>
+          </Button>
+          <Button asChild variant="wp-secondary" size="xl">
+            <Link href="/contact">
+              Dapatkan Konsultasi Gratis
+            </Link>
+          </Button>
+        </div>
+      </PageHero>
 
-      <div className="container relative mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8">
-        <div className="py-12 md:py-16 lg:py-24">
-          <div className="flex flex-col gap-12">
-            {/* Hero Section */}
-            <div className="text-center max-w-3xl mx-auto">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-50 mb-4">
-                <Code2 className="w-4 h-4" />
-                <span className="text-sm font-medium">Next.js Expert Indonesia</span>
-              </div>
-              <h1 className="text-4xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-700 dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-300 mb-6 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-                Jasa Pengembangan Next.js Profesional
-              </h1>
-              <p className="text-xl text-zinc-600 dark:text-zinc-400 mb-8">
-                Bangun aplikasi web modern yang cepat, SEO-friendly, dan skalabel menggunakan Next.js, React, dan TypeScript. Fokus pada performa tinggi, optimalisasi SEO, dan pengalaman pengguna terbaik.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-zinc-900 text-white hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200">
-                  Mulai Proyek Sekarang
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-                <Button size="lg" variant="outline">
-                  Dapatkan Konsultasi Gratis
-                </Button>
-              </div>
-            </div>
-
-            {/* Introduction Section */}
-            <div className="prose dark:prose-invert max-w-none">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
-                  <h2 className="text-2xl font-bold mb-4">Mengenal Next.js untuk Website Modern</h2>
-                  <p className="text-zinc-600 dark:text-zinc-400">
-                    Next.js adalah framework React modern yang dirancang khusus untuk membangun website dan aplikasi web yang powerful. 
-                    Keunggulannya tidak tertandingi dalam hal performa, optimasi SEO, dan skalabilitas. Framework ini menjadi pilihan 
-                    terbaik untuk bisnis yang menginginkan website handal dan berkinerja tinggi.
-                  </p>
-                  <p className="text-zinc-600 dark:text-zinc-400">
-                    Baik untuk website company profile, toko online, atau aplikasi web kompleks, Next.js menjamin 
-                    website Anda tampil optimal di mesin pencari, memiliki performa tinggi di semua perangkat, dan mudah 
-                    dikembangkan seiring pertumbuhan bisnis Anda.
-                  </p>
-                </div>
-                <div>
-                  <h2 className="text-2xl font-bold mb-4">Mengapa Memilih Next.js?</h2>
-                  <p className="text-zinc-600 dark:text-zinc-400">
-                    Di MadeByAris, kami memiliki keahlian khusus dalam pengembangan website menggunakan Next.js. 
-                    Fokus kami adalah membantu bisnis di Indonesia dan internasional membangun website yang cepat, 
-                    mudah berkembang, dan optimal untuk SEO.
-                  </p>
-                  <p className="text-zinc-600 dark:text-zinc-400">
-                    Dengan Next.js, website Anda mendapatkan keunggulan teknologi terkini seperti server-side rendering (SSR), 
-                    static site generation, dan integrasi API yang handal. Kami memastikan website Anda tampil sempurna di 
-                    seluruh dunia dengan pengalaman pengguna yang optimal.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Process Overview Section */}
-            <div className="prose dark:prose-invert max-w-none">
-              <h2 className="text-2xl font-bold mb-4">Proses Pengembangan Website Next.js</h2>
-              <p className="text-zinc-600 dark:text-zinc-400">
-                Kami mengutamakan tujuan bisnis Anda sebagai landasan pengembangan website. Setelah memahami kebutuhan 
-                dan target Anda, kami mulai membangun website dengan Next.js untuk memastikan kecepatan loading yang 
-                instant, peringkat tinggi di mesin pencari, dan pengalaman pengguna yang maksimal.
-              </p>
-              <p className="text-zinc-600 dark:text-zinc-400">
-                Dari tahap deployment hingga maintenance berkelanjutan, kami menjamin website Anda selalu berkinerja 
-                optimal dan siap berkembang. Dengan menggunakan tools dan teknik terbaik di industri, kami berkomitmen 
-                untuk kesuksesan website Anda jangka panjang.
-              </p>
-            </div>
-
-            {/* Features Section */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {features.map((feature, index) => (
-                <Card key={index} className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="p-2 rounded-lg bg-zinc-100 dark:bg-zinc-800">
-                      {feature.icon}
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
-                      <p className="text-zinc-600 dark:text-zinc-400">{feature.description}</p>
-                    </div>
-                  </div>
-                </Card>
-              ))}
-            </div>
-
-            {/* Benefits Section */}
-            <div className="text-center">
-              <h2 className="text-3xl font-bold mb-8">Keunggulan Next.js untuk Website Anda</h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {benefits.map((benefit, index) => (
-                  <div
-                    key={index}
-                    className="p-4 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-50"
-                  >
-                    {benefit}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Process Section */}
-            <div>
-              <h2 className="text-3xl font-bold text-center mb-8">Proses Pengembangan yang Terbukti Efektif</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {processSteps.map((step, index) => (
-                  <Card key={index} className="p-6">
-                    <div className="flex flex-col gap-4">
-                      <div className="text-4xl font-bold text-zinc-300 dark:text-zinc-700">
-                        {(index + 1).toString().padStart(2, '0')}
-                      </div>
-                      <h3 className="text-lg font-semibold">{step.title}</h3>
-                      <p className="text-zinc-600 dark:text-zinc-400">{step.description}</p>
-                    </div>
-                  </Card>
-                ))}
-              </div>
-            </div>
-
-            {/* CTA Section */}
-            <div className="text-center bg-zinc-100 dark:bg-zinc-800 rounded-2xl p-8 md:p-12">
-              <h2 className="text-3xl font-bold mb-4">Sudah siap untuk membangun proyek Next.js Anda?</h2>
-              <p className="text-xl text-zinc-600 dark:text-zinc-400 mb-8">
-                Hubungi Kami dan Mulai Membuat Website yang Cepat, SEO-Friendly, dan Scalable
-              </p>
-              <Link href="/contact">
-                <Button size="lg" className="bg-zinc-900 text-white hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200">
-                  Hubungi Kami Sekarang
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-              </Link>
-            </div>
+      {/* Introduction Section */}
+      <SectionWrapper
+        variant="default"
+        padding="default"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div>
+            <h2 className="text-3xl font-bold mb-6 text-wp-navy dark:text-foreground">Mengenal Next.js untuk Website Modern</h2>
+            <p className="text-wp-navy/70 dark:text-muted-foreground mb-6">
+              Next.js adalah framework React modern yang dirancang khusus untuk membangun website dan aplikasi web yang powerful. 
+              Keunggulannya tidak tertandingi dalam hal performa, optimasi SEO, dan skalabilitas. Framework ini menjadi pilihan 
+              terbaik untuk bisnis yang menginginkan website handal dan berkinerja tinggi.
+            </p>
+            <p className="text-wp-navy/70 dark:text-muted-foreground">
+              Baik untuk website company profile, toko online, atau aplikasi web kompleks, Next.js menjamin 
+              website Anda tampil optimal di mesin pencari, memiliki performa tinggi di semua perangkat, dan mudah 
+              dikembangkan seiring pertumbuhan bisnis Anda.
+            </p>
+          </div>
+          <div>
+            <h2 className="text-3xl font-bold mb-6 text-wp-navy dark:text-foreground">Mengapa Memilih Next.js?</h2>
+            <p className="text-wp-navy/70 dark:text-muted-foreground mb-6">
+              Di MadeByAris, kami memiliki keahlian khusus dalam pengembangan website menggunakan Next.js. 
+              Fokus kami adalah membantu bisnis di Indonesia dan internasional membangun website yang cepat, 
+              mudah berkembang, dan optimal untuk SEO.
+            </p>
+            <p className="text-wp-navy/70 dark:text-muted-foreground">
+              Dengan Next.js, website Anda mendapatkan keunggulan teknologi terkini seperti server-side rendering (SSR), 
+              static site generation, dan integrasi API yang handal. Kami memastikan website Anda tampil sempurna di 
+              seluruh dunia dengan pengalaman pengguna yang optimal.
+            </p>
           </div>
         </div>
-      </div>
-    </div>
+      </SectionWrapper>
+
+      {/* Features Section */}
+      <SectionWrapper
+        variant="accent"
+        badge={{ text: "Fitur Unggulan", icon: Star }}
+        title="Keunggulan Next.js untuk Bisnis Anda"
+        description="Teknologi terkini untuk website yang cepat, SEO-friendly, dan skalabel"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {features.map((feature) => (
+            <EnhancedCard
+              key={feature.title}
+              variant="elevated"
+              title={feature.title}
+              description={feature.description}
+            >
+              <div className="mb-6 p-4 bg-wp-blue/10 dark:bg-wp-blue/20 rounded-xl w-fit">
+                <div className="w-8 h-8 text-wp-blue">
+                  {feature.icon}
+                </div>
+              </div>
+            </EnhancedCard>
+          ))}
+        </div>
+      </SectionWrapper>
+
+      {/* Benefits Section */}
+      <SectionWrapper
+        variant="default"
+        badge={{ text: "Manfaat", icon: Rocket }}
+        title="Keunggulan Next.js untuk Website Anda"
+        description="Semua keuntungan yang Anda dapatkan dengan menggunakan Next.js"
+      >
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {benefits.map((benefit, index) => (
+            <EnhancedCard
+              key={index}
+              variant="glass"
+              title={benefit}
+            >
+              <div className="flex items-center justify-center w-12 h-12 rounded-full bg-wp-sage/20 text-wp-sage font-bold text-lg mb-4 mx-auto">
+                ✓
+              </div>
+            </EnhancedCard>
+          ))}
+        </div>
+      </SectionWrapper>
+
+      {/* Process Section */}
+      <SectionWrapper
+        variant="accent"
+        badge={{ text: "Proses", icon: Code2 }}
+        title="Proses Pengembangan yang Terbukti Efektif"
+        description="Metodologi pengembangan yang terstruktur untuk hasil yang optimal"
+      >
+        <div className="relative">
+          <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-wp-blue/30 -translate-y-1/2 z-0"></div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
+            {processSteps.map((step, index) => (
+              <EnhancedCard
+                key={step.title}
+                variant="glass"
+                title={step.title}
+                description={step.description}
+              >
+                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-wp-blue/20 text-wp-blue font-bold text-lg mb-4 mx-auto">
+                  {(index + 1).toString().padStart(2, '0')}
+                </div>
+              </EnhancedCard>
+            ))}
+          </div>
+        </div>
+      </SectionWrapper>
+
+      {/* Process Overview Section */}
+      <SectionWrapper
+        variant="default"
+        badge={{ text: "Komitmen Kami", icon: Users }}
+        title="Dedikasi untuk Kesuksesan Proyek Anda"
+        description="Kami mengutamakan tujuan bisnis Anda sebagai landasan pengembangan website"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div>
+            <p className="text-wp-navy/70 dark:text-muted-foreground mb-6">
+              Kami mengutamakan tujuan bisnis Anda sebagai landasan pengembangan website. Setelah memahami kebutuhan 
+              dan target Anda, kami mulai membangun website dengan Next.js untuk memastikan kecepatan loading yang 
+              instant, peringkat tinggi di mesin pencari, dan pengalaman pengguna yang maksimal.
+            </p>
+          </div>
+          <div>
+            <p className="text-wp-navy/70 dark:text-muted-foreground">
+              Dari tahap deployment hingga maintenance berkelanjutan, kami menjamin website Anda selalu berkinerja 
+              optimal dan siap berkembang. Dengan menggunakan tools dan teknik terbaik di industri, kami berkomitmen 
+              untuk kesuksesan website Anda jangka panjang.
+            </p>
+          </div>
+        </div>
+      </SectionWrapper>
+
+      {/* CTA Section */}
+      <SectionWrapper
+        variant="gradient"
+        padding="large"
+        title={
+          <>
+            <span className="text-wp-navy-foreground dark:text-foreground">Sudah siap untuk membangun</span>{" "}
+            <span className="bg-gradient-to-r from-wp-blue to-wp-sage bg-clip-text text-transparent">proyek Next.js Anda?</span>
+          </>
+        }
+        description="Hubungi Kami dan Mulai Membuat Website yang Cepat, SEO-Friendly, dan Scalable"
+      >
+        <div className="text-center">
+          <Button asChild variant="wp-primary" size="xl">
+            <Link href="/contact">
+              Hubungi Kami Sekarang
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Link>
+          </Button>
+        </div>
+      </SectionWrapper>
     </>
   )
 } 

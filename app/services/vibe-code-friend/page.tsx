@@ -1,9 +1,13 @@
 import type { Metadata } from 'next'
-import { VibeCodeFriendHero } from '@/components/vibe-code-friend/hero'
+import { PageHero } from '@/components/ui/page-hero'
+import { SectionWrapper } from '@/components/ui/section-wrapper'
 import { ServiceGrid } from '@/components/vibe-code-friend/services-grid'
 import { TestimonialsSection, vibeCodeTestimonials } from '@/components/vibe-code-friend/testimonials'
 import { VibeCodeFAQ } from '@/components/vibe-code-friend/faq'
 import { VibeCodeCta } from '@/components/vibe-code-friend/cta'
+import { Bot, ArrowRight } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
 // Structured Data for SEO
 const structuredData = {
@@ -209,40 +213,99 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function VibeCodeFriendPage() {
   return (
-    <div className="bg-background min-h-screen">
+    <>
       {/* Add structured data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       
-      {/* Hero Section */}
-      <VibeCodeFriendHero />
+      {/* Hero Section with new PageHero component */}
+      <PageHero
+        variant="services"
+        badge={{ text: "AI Development Partner", icon: Bot }}
+        title={
+          <>
+            <span className="text-wp-navy-foreground dark:text-foreground">Vibe</span>{" "}
+            <span className="bg-gradient-to-r from-wp-blue to-wp-sage bg-clip-text text-transparent">Code</span>{" "}
+            <span className="text-wp-navy-foreground dark:text-foreground">Friend</span>
+          </>
+        }
+        description="Your AI-powered coding companion. We help developers master AI tools like Cursor, fix stubborn bugs, set up reliable servers, and architect scalable infrastructure."
+      >
+        <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+          <Button asChild variant="wp-primary" size="xl">
+            <Link href="/contact">
+              Get Started
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Link>
+          </Button>
+          <Button asChild variant="wp-secondary" size="xl">
+            <Link href="#services">
+              View Services
+            </Link>
+          </Button>
+        </div>
+      </PageHero>
       
       {/* Services Grid */}
-      <ServiceGrid />
+      <SectionWrapper
+        variant="accent"
+        id="services"
+        badge={{ text: "Services", icon: Bot }}
+        title="AI-Powered Development Assistance"
+        description="Comprehensive coding support to accelerate your development workflow"
+      >
+        <ServiceGrid />
+      </SectionWrapper>
       
       {/* Testimonials */}
-      <TestimonialsSection testimonials={vibeCodeTestimonials} />
+      <SectionWrapper
+        variant="default"
+        badge={{ text: "Client Feedback", icon: Bot }}
+        title="What Developers Say"
+        description="Real feedback from developers who've experienced the Vibe Code Friend difference"
+      >
+        <TestimonialsSection testimonials={vibeCodeTestimonials} />
+      </SectionWrapper>
       
       {/* FAQ Section */}
-      <VibeCodeFAQ />
+      <SectionWrapper
+        variant="accent"
+        badge={{ text: "Questions", icon: Bot }}
+        title="Frequently Asked Questions"
+        description="Common questions about our AI-powered development assistance"
+      >
+        <VibeCodeFAQ />
+      </SectionWrapper>
       
       {/* CTA Section */}
-      <VibeCodeCta
-        heading="Ready to Level Up Your Coding Experience?"
+      <SectionWrapper
+        variant="gradient"
+        padding="large"
+        title={
+          <>
+            <span className="text-wp-navy-foreground dark:text-foreground">Ready to Level Up Your</span>{" "}
+            <span className="bg-gradient-to-r from-wp-blue to-wp-sage bg-clip-text text-transparent">Coding Experience?</span>
+          </>
+        }
         description="Whether you're looking to master AI tools, fix stubborn bugs, or architect your next big project, I'm here to help. Let's build something amazing together!"
-        buttons={{
-          primary: {
-            text: "Schedule Free Consultation",
-            url: "/contact",
-          },
-          secondary: {
-            text: "Explore Services",
-            url: "/services",
-          }
-        }}
-      />
-    </div>
+      >
+        <VibeCodeCta
+          heading=""
+          description=""
+          buttons={{
+            primary: {
+              text: "Schedule Free Consultation",
+              url: "/contact",
+            },
+            secondary: {
+              text: "Explore Services",
+              url: "/services",
+            }
+          }}
+        />
+      </SectionWrapper>
+    </>
   );
 } 

@@ -4,6 +4,9 @@ import type { Post, Tag, Category } from '@/lib/types'
 import { ImageResponse } from 'next/og'
 import { Suspense } from 'react'
 import { BlogContent } from '@/components/blog-content'
+import { PageHero } from '@/components/ui/page-hero'
+import { SectionWrapper } from '@/components/ui/section-wrapper'
+import { BookOpen } from 'lucide-react'
 
 export const revalidate = 3600;
 
@@ -361,55 +364,51 @@ export default async function BlogPage() {
 
   return (
     <>
-      {/* Hero Section with improved design and animated gradient */}
-      <section className="relative py-8 md:py-10 overflow-hidden animated-gradient">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(120,119,198,0.15),transparent_70%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(120,119,198,0.1),transparent_70%)]"></div>
-        
-        <div className="container max-w-6xl mx-auto px-4 sm:px-6 relative">
-          <div className="text-center max-w-3xl mx-auto">
-            <div className="inline-block px-4 py-1 bg-primary/10 dark:bg-primary/20 text-primary rounded-full text-sm font-medium mb-3 backdrop-blur-sm">
-              Web Development Insights
-            </div>
-            
-            {/* Critical LCP element - enhanced heading */}
-            <h1 className="text-2xl md:text-3xl font-bold leading-tight tracking-tighter lg:text-4xl mb-3 bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary/90 to-primary/70">
-              Web Development Insights
-            </h1>
-            
-            <p className="text-sm md:text-base text-muted-foreground mb-4 max-w-2xl mx-auto">
-              Expert tutorials and insights on Next.js, React, WordPress, and modern web development practices.
-            </p>
-            
-            <div className="flex flex-wrap justify-center gap-2 mb-4">
-              <div className="px-3 py-1 text-xs rounded-full bg-[#007acc] text-white">
-                Next.js
-              </div>
-              <div className="px-3 py-1 text-xs rounded-full bg-[#61dafb] text-black">
-                React
-              </div>
-              <div className="px-3 py-1 text-xs rounded-full bg-[#21759b] text-white">
-                WordPress
-              </div>
-            </div>
+      {/* Hero Section with new PageHero component */}
+      <PageHero
+        variant="default"
+        badge={{ text: "Web Development Insights", icon: BookOpen }}
+        title={
+          <>
+            <span className="text-wp-navy-foreground dark:text-foreground">Web Development</span>{" "}
+            <span className="bg-gradient-to-r from-wp-blue to-wp-sage bg-clip-text text-transparent">Insights</span>
+          </>
+        }
+        description="Expert tutorials and insights on Next.js, React, WordPress, and modern web development practices. Learn from real-world enterprise development experience."
+      >
+        <div className="flex flex-wrap justify-center gap-3 mt-6">
+          <div className="px-4 py-2 text-sm rounded-full bg-wp-blue/10 dark:bg-wp-blue/20 text-wp-blue font-medium">
+            Next.js
+          </div>
+          <div className="px-4 py-2 text-sm rounded-full bg-wp-sage/10 dark:bg-wp-sage/20 text-wp-sage font-medium">
+            React
+          </div>
+          <div className="px-4 py-2 text-sm rounded-full bg-wp-gold/10 dark:bg-wp-gold/20 text-wp-gold font-medium">
+            WordPress
+          </div>
+          <div className="px-4 py-2 text-sm rounded-full bg-wp-navy/10 dark:bg-wp-navy/20 text-wp-navy dark:text-wp-navy-foreground font-medium">
+            TypeScript
           </div>
         </div>
-      </section>
+      </PageHero>
       
-      {/* Main Content Section with improved layout */}
-      <section className="py-4 md:py-6">
-        <div className="container max-w-6xl mx-auto px-4 sm:px-6">
-          <Suspense fallback={
-            <div className="grid gap-4 md:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-              {[...Array(6)].map((_, i) => (
-                <div key={i} className="h-[300px] animate-pulse rounded-xl bg-muted" />
-              ))}
-            </div>
-          }>
-            <BlogContent initialPosts={posts} />
-          </Suspense>
-        </div>
-      </section>
+      {/* Main Content Section */}
+      <SectionWrapper
+        variant="default"
+        badge={{ text: "Latest Articles", icon: BookOpen }}
+        title="Latest Development Insights"
+        description="Stay updated with the latest trends, tutorials, and best practices in web development"
+      >
+        <Suspense fallback={
+          <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="h-[400px] animate-pulse rounded-xl bg-white/50 dark:bg-wp-navy/30" />
+            ))}
+          </div>
+        }>
+          <BlogContent initialPosts={posts} />
+        </Suspense>
+      </SectionWrapper>
     </>
   )
 }
