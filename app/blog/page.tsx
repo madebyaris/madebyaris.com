@@ -4,9 +4,7 @@ import type { Post, Tag, Category } from '@/lib/types'
 import { ImageResponse } from 'next/og'
 import { Suspense } from 'react'
 import { BlogContent } from '@/components/blog-content'
-import { PageHero } from '@/components/ui/page-hero'
-import { SectionWrapper } from '@/components/ui/section-wrapper'
-import { BookOpen } from 'lucide-react'
+import { BookOpen, Star } from 'lucide-react'
 
 export const revalidate = 3600;
 
@@ -364,51 +362,53 @@ export default async function BlogPage() {
 
   return (
     <>
-      {/* Hero Section with new PageHero component */}
-      <PageHero
-        variant="default"
-        badge={{ text: "Web Development Insights", icon: BookOpen }}
-        title={
-          <>
-            <span className="text-wp-navy-foreground dark:text-foreground">Web Development</span>{" "}
-            <span className="bg-gradient-to-r from-wp-blue to-wp-sage bg-clip-text text-transparent">Insights</span>
-          </>
-        }
-        description="Expert tutorials and insights on Next.js, React, WordPress, and modern web development practices. Learn from real-world enterprise development experience."
-      >
-        <div className="flex flex-wrap justify-center gap-3 mt-6">
-          <div className="px-4 py-2 text-sm rounded-full bg-wp-blue/10 dark:bg-wp-blue/20 text-wp-blue font-medium">
-            Next.js
+      {/* Enhanced Blog Section */}
+      <section className="w-full py-24 bg-gradient-to-br from-gray-50/50 via-white to-blue-50/30 dark:bg-gradient-to-br dark:from-gray-900 dark:via-blue-900/10 dark:to-gray-900">
+        <div className="container max-w-7xl mx-auto px-6">
+          {/* Enhanced section heading matching homepage style */}
+          <div className="relative mb-16 text-center">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-wp-blue/10 text-wp-blue dark:bg-wp-gold/10 dark:text-wp-gold mb-6 backdrop-blur-sm">
+              <BookOpen className="w-4 h-4" />
+              <span className="text-sm font-semibold tracking-wider uppercase">Web Development Insights</span>
+            </div>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+              <span className="text-wp-navy dark:text-foreground">Development</span>{" "}
+              <span className="bg-gradient-to-r from-wp-blue to-wp-sage bg-clip-text text-transparent">Insights</span>
+            </h1>
+            <p className="text-lg md:text-xl text-wp-navy/70 dark:text-muted-foreground max-w-3xl mx-auto mb-8">
+              Expert tutorials and insights on Next.js, React, WordPress, and modern web development practices. Learn from real-world enterprise development experience.
+            </p>
+            <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-wp-blue to-wp-sage rounded-full"></div>
+            
+            {/* Technology Tags */}
+            <div className="flex flex-wrap justify-center gap-3 mt-12">
+              <div className="px-4 py-2 text-sm rounded-full bg-wp-blue/10 dark:bg-wp-blue/20 text-wp-blue font-medium">
+                Next.js
+              </div>
+              <div className="px-4 py-2 text-sm rounded-full bg-wp-sage/10 dark:bg-wp-sage/20 text-wp-sage font-medium">
+                React
+              </div>
+              <div className="px-4 py-2 text-sm rounded-full bg-wp-gold/10 dark:bg-wp-gold/20 text-wp-gold font-medium">
+                WordPress
+              </div>
+              <div className="px-4 py-2 text-sm rounded-full bg-wp-navy/10 dark:bg-wp-navy/20 text-wp-navy dark:text-wp-navy-foreground font-medium">
+                TypeScript
+              </div>
+            </div>
           </div>
-          <div className="px-4 py-2 text-sm rounded-full bg-wp-sage/10 dark:bg-wp-sage/20 text-wp-sage font-medium">
-            React
-          </div>
-          <div className="px-4 py-2 text-sm rounded-full bg-wp-gold/10 dark:bg-wp-gold/20 text-wp-gold font-medium">
-            WordPress
-          </div>
-          <div className="px-4 py-2 text-sm rounded-full bg-wp-navy/10 dark:bg-wp-navy/20 text-wp-navy dark:text-wp-navy-foreground font-medium">
-            TypeScript
-          </div>
+
+          {/* Blog Content */}
+          <Suspense fallback={
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-6 md:gap-8 lg:gap-10 max-w-5xl mx-auto">
+              {[...Array(6)].map((_, i) => (
+                <div key={i} className="h-[400px] animate-pulse rounded-xl bg-white/50 dark:bg-wp-navy/30" />
+              ))}
+            </div>
+          }>
+            <BlogContent initialPosts={posts} />
+          </Suspense>
         </div>
-      </PageHero>
-      
-      {/* Main Content Section */}
-      <SectionWrapper
-        variant="default"
-        badge={{ text: "Latest Articles", icon: BookOpen }}
-        title="Latest Development Insights"
-        description="Stay updated with the latest trends, tutorials, and best practices in web development"
-      >
-        <Suspense fallback={
-          <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className="h-[400px] animate-pulse rounded-xl bg-white/50 dark:bg-wp-navy/30" />
-            ))}
-          </div>
-        }>
-          <BlogContent initialPosts={posts} />
-        </Suspense>
-      </SectionWrapper>
+      </section>
     </>
   )
 }
