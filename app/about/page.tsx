@@ -1,49 +1,40 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-
-import { Timeline } from "@/components/ui/timeline"
-import { UpworkIcon } from "@/components/icons/upwork"
-import { PageHero } from "@/components/ui/page-hero"
-import { SectionWrapper } from "@/components/ui/section-wrapper"
-import { EnhancedCard } from "@/components/ui/enhanced-card"
-import { Button } from "@/components/ui/button"
-import { 
-  Code2, 
-  Database, 
-  Layout, 
-  Terminal,
-  FileCode,
-  Palette,
-  Server,
+import {
+  Code2,
+  Database,
   Globe,
-  User,
-  Trophy,
   ArrowRight,
   Linkedin,
-  Github,
   MapPin,
   Calendar,
-  Award,
   Zap,
-  Target,
-  Coffee
+  Briefcase,
+  Star,
+  Cpu,
+  Server,
+  Palette,
+  Github
 } from "lucide-react"
-import { ImageResponse } from 'next/og'
+import { Timeline } from "@/components/ui/timeline"
+import { UpworkIcon } from "@/components/icons/upwork"
+import { Button } from "@/components/ui/button"
 
 // Define timeline data
 const timelineData = [
   {
-    title: "2022 - Present",
+    title: "2025 - Present",
     content: (
       <div className="bg-primary/5 rounded-lg p-6">
-        <h3 className="text-xl font-bold mb-2">Senior Full Stack Developer</h3>
+        <h3 className="text-xl font-bold mb-2">Independent Full Stack Developer & Consultant</h3>
         <p className="text-muted-foreground">
-          Working at <b>SAB Digital Marketing Agency</b>, where I:<br/>
-          • Help clients optimize website performance and codebase<br/>
-          • Develop new features and improve existing functionality<br/>
-          • Collaborate with designers and SEO specialists to deliver comprehensive solutions<br/>
-          • Stay updated with global development standards and best practices
+          Focusing on my independent consulting practice and strategic partnerships:<br/>
+          • Leading enterprise-scale web development projects<br/>
+          • Providing technical architecture consulting for modern web applications<br/>
+          • Specializing in Next.js, React, and headless WordPress solutions<br/>
+          • Mentoring development teams and establishing best practices<br/>
+          • Building long-term partnerships with innovative companies
         </p>
       </div>
     ),
@@ -61,6 +52,22 @@ const timelineData = [
           • Complete website redesigns<br/>
           • Technical consulting and architecture planning<br/><br/>
           Previously known as arisdes.com, rebranded to <b>madebyaris.com</b> to better reflect my professional growth and expanded service offerings.
+        </p>
+      </div>
+    ),
+  },
+  {
+    title: "2022 - 2025",
+    content: (
+      <div className="bg-primary/5 rounded-lg p-6">
+        <h3 className="text-xl font-bold mb-2">Senior Full Stack Developer</h3>
+        <p className="text-muted-foreground">
+          Worked at <b>SAB Digital Marketing Agency</b>, where I:<br/>
+          • Helped clients optimize website performance and codebase<br/>
+          • Developed new features and improved existing functionality<br/>
+          • Collaborated with designers and SEO specialists to deliver comprehensive solutions<br/>
+          • Stayed updated with global development standards and best practices<br/>
+          • Successfully delivered multiple enterprise-level projects
         </p>
       </div>
     ),
@@ -212,12 +219,6 @@ const structuredData = {
     "worksFor": [
       {
         "@type": "Organization",
-        "name": "SAB Digital Marketing Agency",
-        "url": "https://madebyaris.com",
-        "startDate": "2022"
-      },
-      {
-        "@type": "Organization",
         "name": "Made by Aris",
         "url": "https://madebyaris.com",
         "startDate": "2015"
@@ -261,7 +262,7 @@ const structuredData = {
       {
         "@type": "Organization",
         "name": "SAB Digital Marketing Agency",
-        "url": "https://madebyaris.com"
+        "url": "https://sabdigital.id"
       },
       {
         "@type": "Organization",
@@ -277,14 +278,14 @@ const structuredData = {
     "workExperience": [
       {
         "@type": "WorkExperience",
-        "jobTitle": "Senior Full Stack Developer",
-        "startDate": "2022",
+        "jobTitle": "Independent Full Stack Developer & Consultant",
+        "startDate": "2025",
         "endDate": "Present",
         "employer": {
           "@type": "Organization",
-          "name": "SAB Digital Marketing Agency"
+          "name": "MadeByAris"
         },
-        "description": "Leading web development projects, optimizing performance, and implementing modern development practices."
+        "description": "Leading enterprise-scale web development projects and providing technical architecture consulting for modern web applications."
       },
       {
         "@type": "WorkExperience",
@@ -296,6 +297,17 @@ const structuredData = {
           "name": "MadeByAris"
         },
         "description": "Running a successful freelance business offering full-stack web development services."
+      },
+      {
+        "@type": "WorkExperience",
+        "jobTitle": "Senior Full Stack Developer",
+        "startDate": "2022",
+        "endDate": "2024",
+        "employer": {
+          "@type": "Organization",
+          "name": "SAB Digital Marketing Agency"
+        },
+        "description": "Led web development projects, optimized performance, and implemented modern development practices."
       },
       {
         "@type": "WorkExperience",
@@ -312,78 +324,74 @@ const structuredData = {
   }
 }
 
+// Enhanced Skills Data for Auto-Fit Grid Layout
+const skillsData = [
+  {
+    id: "frontend",
+    title: "Frontend Development",
+    description: "Crafting pixel-perfect, responsive user interfaces with modern frameworks and libraries for exceptional user experiences",
+    icon: <Code2 className="w-8 h-8" />,
+    skills: [
+      { name: "Next.js 15", level: "Expert", icon: <Cpu className="w-4 h-4" /> },
+      { name: "React 19", level: "Expert", icon: <Code2 className="w-4 h-4" /> },
+      { name: "TypeScript", level: "Advanced", icon: <Code2 className="w-4 h-4" /> },
+      { name: "Tailwind CSS", level: "Expert", icon: <Palette className="w-4 h-4" /> }
+    ],
+    highlight: "Production Ready"
+  },
+  {
+    id: "backend",
+    title: "Backend & CMS",
+    description: "Building robust server-side architectures and scalable content management solutions that power modern web applications",
+    icon: <Server className="w-8 h-8" />,
+    skills: [
+      { name: "WordPress", level: "Expert", icon: <Globe className="w-4 h-4" /> },
+      { name: "PHP", level: "Expert", icon: <Server className="w-4 h-4" /> },
+      { name: "Node.js", level: "Advanced", icon: <Server className="w-4 h-4" /> },
+      { name: "Python Django", level: "Advanced", icon: <Server className="w-4 h-4" /> }
+    ],
+    highlight: "Enterprise Ready"
+  },
+  {
+    id: "database",
+    title: "Database Design",
+    description: "Architecting efficient data structures and optimizing database performance for high-traffic applications",
+    icon: <Database className="w-8 h-8" />,
+    skills: [
+      { name: "MySQL", level: "Expert", icon: <Database className="w-4 h-4" /> },
+      { name: "PostgreSQL", level: "Advanced", icon: <Database className="w-4 h-4" /> }
+    ],
+    highlight: "Optimized Queries"
+  },
+  {
+    id: "expertise",
+    title: "Technical Leadership",
+    description: "Providing strategic technical guidance and implementing best practices for scalable, maintainable software solutions",
+    icon: <Star className="w-8 h-8" />,
+    skills: [
+      { name: "System Architecture", level: "Expert", icon: <Star className="w-4 h-4" /> },
+      { name: "Performance Optimization", level: "Expert", icon: <Zap className="w-4 h-4" /> },
+      { name: "Headless CMS", level: "Advanced", icon: <Globe className="w-4 h-4" /> },
+      { name: "SEO & Core Web Vitals", level: "Expert", icon: <Star className="w-4 h-4" /> }
+    ],
+    highlight: "Proven Results"
+  },
+  {
+    id: "tools",
+    title: "Development Tools",
+    description: "Leveraging cutting-edge development tools and workflows to maximize productivity and code quality",
+    icon: <Zap className="w-8 h-8" />,
+    skills: [
+      { name: "Git & GitHub", level: "Expert", icon: <Code2 className="w-4 h-4" /> },
+      { name: "Vercel/Netlify", level: "Advanced", icon: <Globe className="w-4 h-4" /> },
+      { name: "Docker", level: "Intermediate", icon: <Server className="w-4 h-4" /> }
+    ],
+    highlight: "CI/CD Ready"
+  }
+];
+
 // Generate Metadata and Structured Data
 export async function generateMetadata(): Promise<Metadata> {
-  const ogImage = new ImageResponse(
-    (
-      <div
-        style={{
-          background: 'linear-gradient(to right, #000000, #1a1a1a)',
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '40px',
-        }}
-      >
-        <Image
-          src="https://madebyaris.com/astro.png"
-          alt="Aris Setiawan"
-          width="200"
-          height="200"
-          style={{
-            borderRadius: '50%',
-            marginBottom: '20px',
-          }}
-        />
-        <h1
-          style={{
-            fontSize: '60px',
-            fontWeight: 'bold',
-            color: 'white',
-            marginBottom: '10px',
-            textAlign: 'center',
-          }}
-        >
-          Aris Setiawan
-        </h1>
-        <p
-          style={{
-            fontSize: '30px',
-            color: '#888888',
-            marginBottom: '20px',
-            textAlign: 'center',
-          }}
-        >
-          Senior Full-Stack Developer & Web Architect
-        </p>
-        <div
-          style={{
-            display: 'flex',
-            gap: '10px',
-            marginTop: '20px',
-          }}
-        >
-          <div style={{ background: '#007acc', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
-            Next.js
-          </div>
-          <div style={{ background: '#61dafb', padding: '10px 20px', borderRadius: '20px', color: 'black' }}>
-            React
-          </div>
-          <div style={{ background: '#21759b', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
-            WordPress
-          </div>
-        </div>
-      </div>
-    ),
-    {
-      width: 1200,
-      height: 630,
-    }
-  )
-
   return {
     title: 'About Aris Setiawan | Senior Full-Stack Developer & Web Architect',
     description: 'With 12+ years of experience, I specialize in building enterprise-scale web applications using Next.js, React, and WordPress. Learn about my journey, expertise, and development philosophy.',
@@ -404,13 +412,11 @@ export async function generateMetadata(): Promise<Metadata> {
       description: 'Senior Full-Stack Developer with 12+ years of experience in Next.js, React, WordPress, and enterprise web architecture.',
       type: 'profile',
       locale: 'en_US',
-      images: [ogImage]
     },
     twitter: {
       card: 'summary_large_image',
       title: 'About Aris Setiawan | Senior Full-Stack Developer',
       description: 'Senior Full-Stack Developer with 12+ years of experience in Next.js, React, WordPress, and enterprise web architecture.',
-      images: [ogImage]
     },
     alternates: {
       canonical: 'https://madebyaris.com/about'
@@ -426,214 +432,352 @@ export default function AboutPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       
-      {/* Hero Section with Minimal Design */}
-      <section className="w-full min-h-screen relative overflow-hidden bg-white dark:bg-gray-950">
-        {/* Subtle background pattern */}
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute top-1/4 right-1/3 w-96 h-96 rounded-full bg-blue-50/50 dark:bg-blue-950/20 blur-3xl" />
-          <div className="absolute bottom-1/3 left-1/4 w-80 h-80 rounded-full bg-purple-50/50 dark:bg-purple-950/20 blur-3xl" />
-        </div>
-
-        <div className="container max-w-7xl mx-auto px-6 py-16">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300 text-sm font-medium mb-6">
-              <User className="w-4 h-4" />
-              About Me
-            </div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
-              <span className="text-gray-900 dark:text-white">Designer, Developer,</span>
-              <br />
-              <span className="text-gray-400 dark:text-gray-500">Problem Solver</span>
-            </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
-              Hallo, I am Aris, a Senior Full-Stack Developer based in Sidoarjo, Indonesia. 
-              I blend technical expertise with creative problem-solving to craft impactful digital solutions.
-            </p>
-          </div>
-
-          {/* Bento Grid Layout */}
-          <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-6 auto-rows-[200px]">
-            
-            {/* Large Profile Card */}
-            <div className="md:col-span-2 lg:col-span-2 md:row-span-2">
-              <div className="h-full bg-wp-navy/90 backdrop-blur-xl rounded-3xl p-8 flex flex-col items-center justify-center text-center group hover:bg-wp-navy transition-all duration-300 border border-white/10">
-                <div className="relative mb-6">
-                  <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white/20 shadow-xl">
-                    <Image
-                      src="/astro.png"
-                      alt="Aris Setiawan"
-                      fill
-                      sizes="128px"
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      priority
-                    />
-                  </div>
-                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-wp-sage rounded-full border-4 border-wp-navy flex items-center justify-center">
-                    <div className="w-3 h-3 bg-white rounded-full animate-pulse"></div>
+      <main className="bg-white dark:bg-gray-950">
+        
+        {/* Profile Header */}
+        <section className="w-full bg-gradient-to-br from-wp-navy via-gray-900 to-black text-white py-24 sm:py-32">
+          <div className="container max-w-6xl mx-auto px-6">
+            <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16">
+              <div className="relative w-40 h-40 md:w-48 md:h-48 flex-shrink-0">
+                <Image
+                  src="/astro.png"
+                  alt="Aris Setiawan"
+                  fill
+                  sizes="(max-width: 768px) 160px, 192px"
+                  className="object-cover rounded-full border-4 border-white/20 shadow-2xl"
+                  priority
+                />
+                <div className="absolute bottom-2 right-2 w-6 h-6 bg-green-500 rounded-full border-4 border-wp-navy animate-pulse" />
+                
+                {/* Available to hire popup */}
+                <div className="absolute -top-3 -right-3 animate-bounce">
+                  <div className="bg-green-500 text-white px-3 py-1.5 rounded-full text-xs font-medium shadow-lg border-2 border-white relative">
+                    I&apos;m available to hire
+                    <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-green-500 rotate-45 border-r border-b border-white"></div>
                   </div>
                 </div>
-                <h2 className="text-2xl font-bold text-wp-navy-foreground mb-2">
+              </div>
+              <div className="text-center">
+                <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-2">
                   Aris Setiawan
-                </h2>
-                <p className="text-wp-navy-foreground/70 text-sm mb-4">
-                  Senior Full-Stack Developer
+                </h1>
+                <p className="text-xl md:text-2xl text-wp-sage mb-6">
+                  Senior Full-Stack Developer & Web Architect
                 </p>
-                <div className="flex items-center gap-2 text-xs text-wp-navy-foreground/60">
-                  <MapPin className="w-3 h-3" />
-                  Jakarta, Indonesia
-                </div>
-              </div>
-            </div>
-
-            {/* Experience Stats */}
-            <div className="md:col-span-2 lg:col-span-2 md:row-span-1">
-              <div className="h-full bg-wp-blue rounded-3xl p-8 text-wp-blue-foreground flex flex-col justify-center border border-white/10">
-                <div className="flex items-center gap-3 mb-4">
-                  <Trophy className="w-8 h-8" />
-                  <span className="text-sm font-medium opacity-90">Experience</span>
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <div className="text-3xl font-bold">12+</div>
-                    <div className="text-sm opacity-75">Years</div>
+                <div className="flex items-center justify-center gap-4 text-wp-sage/80 mb-8">
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-4 h-4" />
+                    <span>Sidoarjo, Indonesia</span>
                   </div>
-                  <div>
-                    <div className="text-3xl font-bold">100+</div>
-                    <div className="text-sm opacity-75">Projects</div>
+                  <div className="flex items-center gap-2">
+                    <Briefcase className="w-4 h-4" />
+                    <span>12+ Years of Experience</span>
                   </div>
                 </div>
-              </div>
-            </div>
-
-            {/* Currently Available */}
-            <div className="md:col-span-2 lg:col-span-2 md:row-span-1">
-              <div className="h-full bg-gradient-to-br from-purple-500 to-pink-500 rounded-3xl p-8 text-white flex flex-col justify-center border border-white/10">
-                <div className="flex items-center gap-3 mb-4">
-                  <Zap className="w-8 h-8" />
-                  <span className="text-sm font-medium opacity-90">Currently</span>
-                </div>
-                <div className="space-y-2">
-                  <div className="text-lg font-semibold">Open for New Opportunities</div>
-                  <div className="text-sm opacity-75">Freelance & Full-time Positions</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Skills Overview */}
-            <div className="md:col-span-4 lg:col-span-4 md:row-span-2">
-              <div className="h-full bg-wp-navy/80 backdrop-blur-xl rounded-3xl p-8 border border-white/10">
-                <div className="flex items-center gap-3 mb-6">
-                  <Code2 className="w-8 h-8 text-wp-blue" />
-                  <h3 className="text-xl font-bold text-wp-navy-foreground">Tech Stack</h3>
-                </div>
-                <div className="space-y-6">
+                <div className="flex flex-wrap items-center justify-center gap-4">
+                  <Button asChild variant="wp-primary" size="lg">
+                    <Link href="/contact">
+                      Contact Me
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Link>
+                  </Button>
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-wp-blue rounded-xl flex items-center justify-center">
-                      <Code2 className="w-6 h-6 text-white" />
+                    <Link href="https://www.linkedin.com/in/arissetia/" target="_blank" className="text-white/70 hover:text-wp-gold transition-colors">
+                      <Linkedin className="w-6 h-6" />
+                    </Link>
+                    <Link href="https://github.com/madebyaris" target="_blank" className="text-white/70 hover:text-wp-gold transition-colors">
+                      <Github className="w-6 h-6" />
+                    </Link>
+                    <Link href="https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe" target="_blank" className="text-white/70 hover:text-wp-gold transition-colors">
+                      <UpworkIcon className="w-6 h-6" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Philosophy Section */}
+        <section className="w-full py-20 bg-gray-50 dark:bg-black">
+          <div className="container max-w-4xl mx-auto px-6 text-center">
+            <blockquote className="text-2xl md:text-4xl font-light text-gray-800 dark:text-gray-200 italic leading-snug">
+              &ldquo;I Have Served and I Will Be of Service&rdquo;
+            </blockquote>
+            <div className="flex items-center justify-center gap-2 text-gray-500 dark:text-gray-400 mt-6">
+              <Star className="w-5 h-5" />
+              <span className="text-sm">Fueled by wisdom and curiosity</span>
+            </div>
+          </div>
+        </section>
+
+        {/* Skills Section - Professional Style matching Services */}
+        <section className="w-full py-24 bg-gradient-to-br from-gray-50/50 via-white to-blue-50/30 dark:bg-gradient-to-br dark:from-gray-900 dark:via-blue-900/10 dark:to-gray-900">
+          <div className="container max-w-7xl mx-auto px-6">
+            {/* Enhanced section heading matching homepage style */}
+            <div className="relative mb-16 text-center">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-wp-blue/10 text-wp-blue dark:bg-wp-gold/10 dark:text-wp-gold mb-6 backdrop-blur-sm">
+                <Star className="w-4 h-4" />
+                <span className="text-sm font-semibold tracking-wider uppercase">Technical Excellence</span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold mb-4">
+                <span className="text-wp-navy dark:text-foreground">Skills &</span>{" "}
+                <span className="bg-gradient-to-r from-wp-gold to-wp-blue bg-clip-text text-transparent">Expertise</span>
+              </h2>
+              <p className="text-lg text-wp-navy/70 dark:text-muted-foreground max-w-2xl mx-auto">
+                A comprehensive toolkit for building exceptional digital experiences with modern technologies
+              </p>
+              <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-wp-gold to-wp-blue rounded-full"></div>
+            </div>
+            
+            {/* Skills Grid with Auto-Fit Layout */}
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-6 md:gap-8 lg:gap-10 max-w-5xl mx-auto">
+              {skillsData.map((skillCategory) => (
+                <div key={skillCategory.id} className="group relative">
+                  <div className="relative h-full p-8 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl transition-all duration-300 group-hover:scale-[1.02] overflow-hidden flex flex-col shadow-lg border border-gray-200 dark:border-gray-700">
+                    {/* Gradient background overlay matching homepage services */}
+                    <div className={`
+                      absolute inset-0 transition-all duration-300
+                      ${skillCategory.id === 'frontend' ? 'bg-gradient-to-br from-wp-blue/5 to-transparent group-hover:from-wp-blue/10' :
+                        skillCategory.id === 'backend' ? 'bg-gradient-to-br from-wp-gold/5 to-transparent group-hover:from-wp-gold/10' :
+                        skillCategory.id === 'database' ? 'bg-gradient-to-br from-wp-sage/5 to-transparent group-hover:from-wp-sage/10' :
+                        skillCategory.id === 'expertise' ? 'bg-gradient-to-br from-wp-navy/5 to-transparent group-hover:from-wp-navy/10' :
+                        'bg-gradient-to-br from-wp-blue/5 to-wp-gold/5 group-hover:from-wp-blue/10 group-hover:to-wp-gold/10'}
+                    `} />
+                    
+                    {/* Icon with professional styling matching homepage */}
+                    <div className={`
+                      relative mb-6 p-4 rounded-xl w-fit group-hover:scale-110 transition-transform duration-300
+                      ${skillCategory.id === 'frontend' ? 'bg-wp-blue/10 dark:bg-wp-blue/20' :
+                        skillCategory.id === 'backend' ? 'bg-wp-gold/10 dark:bg-wp-gold/20' :
+                        skillCategory.id === 'database' ? 'bg-wp-sage/20 dark:bg-wp-sage/30' :
+                        skillCategory.id === 'expertise' ? 'bg-wp-navy/10 dark:bg-wp-navy/20' :
+                        'bg-gradient-to-br from-wp-blue/10 to-wp-gold/10'}
+                    `}>
+                      <div className={`
+                        w-8 h-8 transition-colors duration-300
+                        ${skillCategory.id === 'frontend' ? 'text-wp-blue' :
+                          skillCategory.id === 'backend' ? 'text-wp-gold' :
+                          skillCategory.id === 'database' ? 'text-wp-sage-foreground' :
+                          skillCategory.id === 'expertise' ? 'text-wp-navy' :
+                          'text-wp-blue group-hover:text-wp-gold'}
+                      `}>
+                        {skillCategory.icon}
+                      </div>
                     </div>
-                    <div>
-                      <div className="text-wp-navy-foreground font-semibold">Next.js & React</div>
-                      <div className="text-wp-navy-foreground/70 text-sm">Modern React framework</div>
+                    
+                    {/* Content matching homepage services style */}
+                    <div className="flex-grow relative">
+                      <h3 className={`
+                        text-2xl md:text-3xl font-bold mb-4 transition-colors duration-300
+                        text-wp-navy dark:text-foreground relative
+                        ${skillCategory.id === 'frontend' ? 'group-hover:text-wp-blue dark:group-hover:text-wp-gold' :
+                          skillCategory.id === 'backend' ? 'group-hover:text-wp-gold' :
+                          skillCategory.id === 'database' ? 'group-hover:text-wp-sage dark:group-hover:text-wp-sage' :
+                          skillCategory.id === 'expertise' ? 'group-hover:text-wp-navy dark:group-hover:text-wp-gold' :
+                          'group-hover:text-wp-blue dark:group-hover:text-wp-gold'}
+                      `}>
+                        {skillCategory.title}
+                      </h3>
+                      <p className="text-wp-navy/70 dark:text-muted-foreground mb-6 relative leading-relaxed text-lg">
+                        {skillCategory.description}
+                      </p>
+                      
+                      {/* Skills list with homepage services styling */}
+                      <ul className="space-y-3 mb-8 relative">
+                        {skillCategory.skills.map((skill) => (
+                          <li key={skill.name} className="flex items-center justify-between text-wp-navy/80 dark:text-muted-foreground">
+                            <div className="flex items-center">
+                              <div className="w-2 h-2 rounded-full bg-wp-gold mr-3"></div>
+                              <span className="font-medium">{skill.name}</span>
+                            </div>
+                            <span className={`
+                              px-2 py-1 text-xs font-medium rounded-full ml-2
+                              ${skill.level === 'Expert' ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300' :
+                                skill.level === 'Advanced' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300' :
+                                'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300'}
+                            `}>
+                              {skill.level}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
+                    
+                    {/* Highlight badge matching homepage style */}
+                    <div className="absolute top-6 right-6">
+                      <span className="px-3 py-1 text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full">
+                        {skillCategory.highlight}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Professional Timeline Section */}
+        <section className="w-full py-24 bg-gray-50 dark:bg-gray-900">
+          <div className="container max-w-6xl mx-auto px-6">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300 text-sm font-medium mb-6">
+                <Calendar className="w-4 h-4" />
+                Career Journey
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+                Professional Timeline
+              </h2>
+              <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                A decade-plus journey of growth, learning, and building amazing digital experiences.
+              </p>
+            </div>
+            <Timeline data={timelineData} />
+          </div>
+        </section>
+
+        {/* Enhanced CTA Section */}
+        <section className="w-full py-24 bg-gradient-to-br from-gray-50/50 via-white to-blue-50/30 dark:bg-gradient-to-br dark:from-gray-900 dark:via-blue-900/10 dark:to-gray-900 relative overflow-hidden">
+          {/* Background decoration */}
+          <div className="absolute inset-0 bg-gradient-to-br from-wp-blue/5 via-transparent to-wp-gold/5 dark:from-wp-blue/10 dark:to-wp-gold/10"></div>
+          
+          <div className="container max-w-6xl mx-auto px-6 relative">
+            {/* Section header */}
+            <div className="relative mb-16 text-center">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-wp-gold/10 text-wp-gold dark:bg-wp-blue/10 dark:text-wp-blue mb-6 backdrop-blur-sm">
+                <Star className="w-4 h-4" />
+                <span className="text-sm font-semibold tracking-wider uppercase">Ready to Collaborate</span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold mb-4">
+                <span className="text-wp-navy dark:text-foreground">Let&apos;s Build</span>{" "}
+                <span className="bg-gradient-to-r from-wp-gold to-wp-blue bg-clip-text text-transparent">Something Amazing</span>{" "}
+                <span className="text-wp-navy dark:text-foreground">Together</span>
+              </h2>
+              <p className="text-lg text-wp-navy/70 dark:text-muted-foreground max-w-2xl mx-auto">
+                Ready to transform your ideas into exceptional digital experiences? Let&apos;s discuss your next project.
+              </p>
+              <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-wp-gold to-wp-blue rounded-full"></div>
+            </div>
+
+            {/* CTA Cards Grid */}
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-6 md:gap-8 lg:gap-10 max-w-5xl mx-auto mb-12">
+              {/* Project Inquiry Card */}
+              <div className="group relative">
+                <div className="relative h-full p-8 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl transition-all duration-300 group-hover:scale-[1.02] overflow-hidden flex flex-col shadow-lg border border-gray-200 dark:border-gray-700">
+                  <div className="absolute inset-0 bg-gradient-to-br from-wp-blue/5 to-transparent group-hover:from-wp-blue/10 transition-all duration-300"></div>
+                  
+                  <div className="relative mb-6 p-4 bg-wp-blue/10 dark:bg-wp-blue/20 rounded-xl w-fit group-hover:scale-110 transition-transform duration-300">
+                    <Briefcase className="w-8 h-8 text-wp-blue" />
                   </div>
                   
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
-                      <Globe className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <div className="text-wp-navy-foreground font-semibold">WordPress & PHP</div>
-                      <div className="text-wp-navy-foreground/70 text-sm">CMS & backend development</div>
-                    </div>
+                  <div className="flex-grow relative">
+                    <h3 className="text-2xl md:text-3xl font-bold mb-4 text-wp-navy dark:text-foreground relative group-hover:text-wp-blue dark:group-hover:text-wp-gold transition-colors duration-300">
+                      Start a Project
+                    </h3>
+                    <p className="text-wp-navy/70 dark:text-muted-foreground mb-6 relative leading-relaxed text-lg">
+                      Have a project in mind? Let&apos;s discuss your requirements and create something extraordinary together.
+                    </p>
+                    
+                    <ul className="space-y-3 mb-8 relative">
+                      <li className="flex items-center text-wp-navy/80 dark:text-muted-foreground">
+                        <div className="w-2 h-2 rounded-full bg-wp-gold mr-3"></div>
+                        Enterprise Web Applications
+                      </li>
+                      <li className="flex items-center text-wp-navy/80 dark:text-muted-foreground">
+                        <div className="w-2 h-2 rounded-full bg-wp-gold mr-3"></div>
+                        Performance Optimization
+                      </li>
+                      <li className="flex items-center text-wp-navy/80 dark:text-muted-foreground">
+                        <div className="w-2 h-2 rounded-full bg-wp-gold mr-3"></div>
+                        Technical Architecture
+                      </li>
+                    </ul>
                   </div>
                   
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-wp-sage rounded-xl flex items-center justify-center">
-                      <Database className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <div className="text-wp-navy-foreground font-semibold">Database Design</div>
-                      <div className="text-wp-navy-foreground/70 text-sm">MySQL & PostgreSQL</div>
-                    </div>
+                  <Button 
+                    asChild 
+                    variant="wp-outline" 
+                    size="lg" 
+                    className="w-full group-hover:bg-wp-blue group-hover:text-wp-blue-foreground group-hover:border-wp-blue transition-all duration-300 mt-auto relative z-10 pointer-events-auto"
+                  >
+                    <Link href="/contact">
+                      Get Started
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+
+              {/* Consultation Card */}
+              <div className="group relative">
+                <div className="relative h-full p-8 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl transition-all duration-300 group-hover:scale-[1.02] overflow-hidden flex flex-col shadow-lg border border-gray-200 dark:border-gray-700">
+                  <div className="absolute inset-0 bg-gradient-to-br from-wp-gold/5 to-transparent group-hover:from-wp-gold/10 transition-all duration-300"></div>
+                  
+                  <div className="relative mb-6 p-4 bg-wp-gold/10 dark:bg-wp-gold/20 rounded-xl w-fit group-hover:scale-110 transition-transform duration-300">
+                    <Star className="w-8 h-8 text-wp-gold" />
                   </div>
+                  
+                  <div className="flex-grow relative">
+                    <h3 className="text-2xl md:text-3xl font-bold mb-4 text-wp-navy dark:text-foreground relative group-hover:text-wp-gold transition-colors duration-300">
+                      Technical Consultation
+                    </h3>
+                    <p className="text-wp-navy/70 dark:text-muted-foreground mb-6 relative leading-relaxed text-lg">
+                      Need expert guidance on your current project? Let&apos;s discuss strategies and best practices.
+                    </p>
+                    
+                    <ul className="space-y-3 mb-8 relative">
+                      <li className="flex items-center text-wp-navy/80 dark:text-muted-foreground">
+                        <div className="w-2 h-2 rounded-full bg-wp-blue mr-3"></div>
+                        Code Review & Optimization
+                      </li>
+                      <li className="flex items-center text-wp-navy/80 dark:text-muted-foreground">
+                        <div className="w-2 h-2 rounded-full bg-wp-blue mr-3"></div>
+                        Architecture Planning
+                      </li>
+                      <li className="flex items-center text-wp-navy/80 dark:text-muted-foreground">
+                        <div className="w-2 h-2 rounded-full bg-wp-blue mr-3"></div>
+                        Team Mentoring
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <Button 
+                    asChild 
+                    variant="wp-outline" 
+                    size="lg" 
+                    className="w-full group-hover:bg-wp-gold group-hover:text-wp-gold-foreground group-hover:border-wp-gold transition-all duration-300 mt-auto relative z-10 pointer-events-auto"
+                  >
+                    <Link href="/contact">
+                      Book Consultation
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Link>
+                  </Button>
                 </div>
               </div>
             </div>
 
-            {/* Quote/Philosophy */}
-            <div className="md:col-span-4 lg:col-span-6 md:row-span-1">
-              <div className="h-full bg-wp-navy rounded-3xl p-8 text-wp-navy-foreground flex items-center justify-center text-center border border-white/10">
-                <div>
-                  <blockquote className="text-2xl md:text-3xl font-light italic mb-4">
-                    "I believe in creating digital experiences that not only look great but perform exceptionally and solve real business problems."
-                  </blockquote>
-                  <div className="flex items-center justify-center gap-2 text-wp-navy-foreground/60">
-                    <Coffee className="w-5 h-5" />
-                    <span className="text-sm">Fueled by coffee and curiosity</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Quick Actions */}
-            <div className="md:col-span-2 lg:col-span-2 md:row-span-1">
-              <div className="h-full bg-wp-sage rounded-3xl p-6 text-wp-sage-foreground flex flex-col justify-between border border-white/10">
-                <div className="flex items-center gap-3">
-                  <div className="w-3 h-3 bg-white rounded-full animate-pulse"></div>
-                  <span className="text-sm font-medium">Available for Projects</span>
-                </div>
-                <Button asChild className="bg-white text-wp-sage hover:bg-white/90 w-full">
-                  <Link href="/contact">
-                    Let's Talk
+            {/* Contact Information */}
+            <div className="text-center">
+              <p className="text-wp-navy/60 dark:text-muted-foreground mb-6">
+                Prefer a quick chat? Reach out directly
+              </p>
+              <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+                <Button asChild variant="wp-secondary" size="lg" className="shadow-lg hover:shadow-xl">
+                  <Link href="mailto:hello@madebyaris.com">
+                    Email Me
+                  </Link>
+                </Button>
+                <Button asChild variant="wp-outline" size="lg" className="shadow-lg hover:shadow-xl">
+                  <Link href="https://www.linkedin.com/in/arissetia/" target="_blank">
+                    LinkedIn
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
                 </Button>
               </div>
             </div>
-
-            {/* LinkedIn */}
-            <div className="md:col-span-1 lg:col-span-2 md:row-span-1">
-              <Button asChild className="h-full w-full bg-wp-blue hover:bg-wp-blue/90 text-wp-blue-foreground rounded-3xl border border-white/10">
-                <Link href="https://www.linkedin.com/in/arissetia/" target="_blank" className="flex items-center justify-center gap-3">
-                  <Linkedin className="w-6 h-6" />
-                  <span className="font-medium">LinkedIn</span>
-                </Link>
-              </Button>
-            </div>
-
-            {/* Upwork */}
-            <div className="md:col-span-1 lg:col-span-2 md:row-span-1">
-              <Button asChild className="h-full w-full bg-wp-sage hover:bg-wp-sage/90 text-wp-sage-foreground rounded-3xl border border-white/10">
-                <Link href="https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe" target="_blank" className="flex items-center justify-center gap-3">
-                  <UpworkIcon className="w-6 h-6" />
-                  <span className="font-medium">Upwork</span>
-                </Link>
-              </Button>
-            </div>
           </div>
-        </div>
-      </section>
-      
-      {/* Professional Timeline Section */}
-      <section className="w-full py-24 bg-gray-50 dark:bg-gray-900">
-        <div className="container max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300 text-sm font-medium mb-6">
-              <Calendar className="w-4 h-4" />
-              Career Journey
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-              Professional Timeline
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              A decade-plus journey of growth, learning, and building amazing digital experiences
-            </p>
-          </div>
-          
-          <Timeline data={timelineData} />
-        </div>
-      </section>
+        </section>
+      </main>
     </>
   )
 }
