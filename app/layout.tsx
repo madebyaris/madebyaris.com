@@ -211,12 +211,7 @@ export default function RootLayout({
           jakarta.variable
         )}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
+        <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
           {/* Main content - prioritize this */}
           <div className="relative flex min-h-screen flex-col">
             <Header />

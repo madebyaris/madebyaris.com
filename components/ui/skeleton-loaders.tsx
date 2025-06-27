@@ -87,17 +87,32 @@ export function CaseStudiesSkeleton() {
 // Blog post card skeleton
 export function BlogPostSkeleton() {
   return (
-    <article className="group relative overflow-hidden rounded-lg border bg-background h-full">
-      <Skeleton className="aspect-video w-full" />
-      <div className="p-3 md:p-4 space-y-3">
-        <Skeleton className="w-full h-6" />
-        <Skeleton className="w-full h-4" />
-        <Skeleton className="w-3/4 h-4" />
-        <div className="flex flex-wrap gap-1.5 md:gap-2 mt-3">
-          <Skeleton className="w-16 h-6 rounded-full" />
+    <article className="relative overflow-hidden rounded-2xl bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl border border-gray-200/60 dark:border-zinc-800/60 shadow-lg h-full flex flex-col">
+      <Skeleton className="aspect-video w-full rounded-t-2xl" />
+      <div className="p-6 space-y-4 flex flex-col flex-grow">
+        {/* Category badges */}
+        <div className="flex gap-2">
           <Skeleton className="w-20 h-6 rounded-full" />
+          <Skeleton className="w-16 h-6 rounded-full" />
         </div>
-        <Skeleton className="w-24 h-4 mt-3" />
+        
+        {/* Title */}
+        <div className="space-y-2">
+          <Skeleton className="w-full h-7" />
+          <Skeleton className="w-3/4 h-7" />
+        </div>
+        
+        {/* Excerpt */}
+        <div className="space-y-2 flex-grow">
+          <Skeleton className="w-full h-4" />
+          <Skeleton className="w-full h-4" />
+          <Skeleton className="w-2/3 h-4" />
+        </div>
+        
+        {/* Read more button */}
+        <div className="pt-4 border-t border-gray-200/50 dark:border-zinc-700/50">
+          <Skeleton className="w-28 h-5" />
+        </div>
       </div>
     </article>
   )
@@ -129,7 +144,7 @@ export function ProjectCardSkeleton() {
 // Grid of blog posts skeleton
 export function BlogGridSkeleton({ count = 3 }: { count?: number }) {
   return (
-    <div className="grid gap-4 md:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-6 md:gap-8 lg:gap-10 max-w-5xl mx-auto">
       {Array.from({ length: count }).map((_, i) => (
         <BlogPostSkeleton key={i} />
       ))}
