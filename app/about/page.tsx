@@ -590,7 +590,7 @@ export default function AboutPage() {
                             <div className="flex items-center">
                               <div className="w-2 h-2 rounded-full bg-wp-gold mr-3"></div>
                               <span className="font-medium">{skill.name}</span>
-                            </div>
+                        </div>
                             <span className={`
                               px-2 py-1 text-xs font-medium rounded-full ml-2
                               ${skill.level === 'Expert' ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300' :
@@ -599,9 +599,9 @@ export default function AboutPage() {
                             `}>
                               {skill.level}
                             </span>
-                          </li>
-                        ))}
-                      </ul>
+                      </li>
+                    ))}
+                  </ul>
                     </div>
                     
                     {/* Highlight badge matching homepage style */}
@@ -652,7 +652,7 @@ export default function AboutPage() {
                 <span className="text-wp-navy dark:text-foreground">Let&apos;s Build</span>{" "}
                 <span className="bg-gradient-to-r from-wp-gold to-wp-blue bg-clip-text text-transparent">Something Amazing</span>{" "}
                 <span className="text-wp-navy dark:text-foreground">Together</span>
-              </h2>
+            </h2>
               <p className="text-lg text-wp-navy/70 dark:text-muted-foreground max-w-2xl mx-auto">
                 Ready to transform your ideas into exceptional digital experiences? Let&apos;s discuss your next project.
               </p>
@@ -747,7 +747,7 @@ export default function AboutPage() {
                     size="lg" 
                     className="w-full group-hover:bg-wp-gold group-hover:text-wp-gold-foreground group-hover:border-wp-gold transition-all duration-300 mt-auto relative z-10 pointer-events-auto"
                   >
-                    <Link href="/contact">
+              <Link href="/contact">
                       Book Consultation
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </Link>
@@ -771,8 +771,8 @@ export default function AboutPage() {
                   <Link href="https://www.linkedin.com/in/arissetia/" target="_blank">
                     LinkedIn
                     <ArrowRight className="w-4 h-4 ml-2" />
-                  </Link>
-                </Button>
+              </Link>
+            </Button>
               </div>
             </div>
           </div>
