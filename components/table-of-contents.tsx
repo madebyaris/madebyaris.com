@@ -56,7 +56,7 @@ export function TableOfContents({ headings, isMobile = false }: TableOfContentsP
             <ul className="space-y-3 text-sm">
               {headings.map((heading, index) => (
                 <li 
-                  key={index} 
+                  key={`mobile-${heading.id}-${index}`} 
                   className={`${heading.level === 3 ? 'ml-4' : ''}`}
                 >
                   <a 
@@ -86,7 +86,7 @@ export function TableOfContents({ headings, isMobile = false }: TableOfContentsP
             <ul className="space-y-3 text-sm">
               {headings.map((heading, index) => (
                 <li 
-                  key={index} 
+                  key={`desktop-${heading.id}-${index}`} 
                   className={`${heading.level === 3 ? 'ml-4' : ''}`}
                 >
                   <a 

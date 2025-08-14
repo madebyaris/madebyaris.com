@@ -5,7 +5,6 @@ import Link from "next/link"
 import { Navigation } from "@/components/navigation"
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import { Icons } from '@/components/icons'
 
 export function Header() {
   return (

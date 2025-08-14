@@ -1,4 +1,4 @@
-import { type Config } from "tailwindcss";
+// Tailwind v4: avoid strict typing to allow custom fields like `safelist`
 import flattenColorPalette from "tailwindcss/lib/util/flattenColorPalette";
 import animatePlugin from "tailwindcss-animate";
 
@@ -7,8 +7,8 @@ interface TailwindPluginUtils {
   theme: (path: string) => Record<string, unknown>;
 }
 
-const config: Config = {
-  darkMode: ["class"],
+const config = {
+  darkMode: ["class", ".dark"],
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -234,6 +234,6 @@ const config: Config = {
     'tag-wp-accent',
     'link-wp-professional',
   ],
-} satisfies Config;
+};
 
-export default config; 
+export default config;

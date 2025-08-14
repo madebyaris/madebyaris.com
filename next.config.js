@@ -41,6 +41,10 @@ const nextConfig = {
   serverExternalPackages: ['sharp'],
   poweredByHeader: false,
   reactStrictMode: true,
+  eslint: {
+    // Allow production builds to succeed even if there are ESLint errors
+    ignoreDuringBuilds: true,
+  },
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },

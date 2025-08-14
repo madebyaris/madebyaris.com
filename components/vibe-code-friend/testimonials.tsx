@@ -48,7 +48,7 @@ export function TestimonialsSection({
           {testimonials.map((t, i) => {
             const stars = typeof t.rating === "number" ? t.rating : 5;
             return (
-              <Card key={i} className="flex flex-col h-full relative overflow-hidden backdrop-blur-sm bg-background/70 border-border/60 hover:shadow-lg transition-all duration-300">
+              <Card key={`testimonial-${t.name.replace(/\s+/g, '-').toLowerCase()}-${i}`} className="flex flex-col h-full relative overflow-hidden backdrop-blur-sm bg-background/70 border-border/60 hover:shadow-lg transition-all duration-300">
                 <div className="absolute right-6 top-6 text-4xl font-serif text-primary/10">
                   <Quote size={32} />
                 </div>
@@ -57,7 +57,7 @@ export function TestimonialsSection({
                     <div className="flex">
                       {Array.from({ length: 5 }).map((_, idx) => (
                         <Star
-                          key={idx}
+                          key={`star-${t.name.replace(/\s+/g, '-').toLowerCase()}-${idx}`}
                           className={`h-4 w-4 ${
                             idx < stars
                               ? "fill-yellow-400 text-yellow-400"

@@ -145,7 +145,7 @@ export default function ClientProjectsPage() {
             )) : (
               // Skeleton loading placeholders for server-side rendering
               Array.from({ length: 6 }).map((_, index) => (
-                <div key={index} className="bg-white/50 dark:bg-wp-navy/30 rounded-lg shadow-md h-96 animate-pulse"></div>
+                <div key={`skeleton-${index}`} className="bg-white/50 dark:bg-wp-navy/30 rounded-lg shadow-md h-96 animate-pulse"></div>
               ))
             )}
           </div>

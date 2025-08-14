@@ -106,7 +106,7 @@ const CaseStudiesCarousel = () => {
           {/* Case studies */}
           {caseStudies.map((study, index) => (
             <div
-              key={index}
+              key={`${study.title}-${index}`}
               className={`absolute top-0 left-0 w-full transition-all duration-700 ${
                 index === currentIndex 
                   ? 'opacity-100 z-10 translate-x-0' 
@@ -149,7 +149,7 @@ const CaseStudiesCarousel = () => {
                 <div className="absolute top-6 left-6 flex flex-wrap gap-2 z-10">
                   {study.tags.map((tag, tagIndex) => (
                     <span 
-                      key={tagIndex}
+                      key={`${study.title}-tag-${tag}-${tagIndex}`}
                       className="px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-medium text-white"
                     >
                       {tag}
@@ -172,7 +172,7 @@ const CaseStudiesCarousel = () => {
                       <div className="flex -space-x-3">
                         {study.authors.map((author, authorIndex) => (
                           <div
-                            key={authorIndex}
+                            key={`${study.title}-author-${authorIndex}`}
                             className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-white shadow-md"
                           >
                             <Image
@@ -200,9 +200,9 @@ const CaseStudiesCarousel = () => {
                 
                 {/* Progress indicators */}
                 <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex items-center gap-2 z-10">
-                  {caseStudies.map((_, i) => (
+                  {caseStudies.map((study, i) => (
                     <button
-                      key={i}
+                      key={`indicator-${study.title}-${i}`}
                       onClick={() => setCurrentIndex(i)}
                       className={`h-1.5 w-8 rounded-full transition-all duration-500 ${
                         i === currentIndex ? 'bg-white' : 'bg-white/30'

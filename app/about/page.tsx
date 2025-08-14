@@ -532,7 +532,7 @@ export default function AboutPage() {
             
             {/* Skills Grid with Auto-Fit Layout */}
             <div className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-6 md:gap-8 lg:gap-10 max-w-5xl mx-auto">
-              {skillsData.map((skillCategory) => (
+              {skillsData.map((skillCategory, index) => (
                 <div key={skillCategory.id} className="group relative">
                   <div className="relative h-full p-8 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl transition-all duration-300 group-hover:scale-[1.02] overflow-hidden flex flex-col shadow-lg border border-gray-200 dark:border-gray-700">
                     {/* Gradient background overlay matching homepage services */}
@@ -585,8 +585,8 @@ export default function AboutPage() {
                       
                       {/* Skills list with homepage services styling */}
                       <ul className="space-y-3 mb-8 relative">
-                        {skillCategory.skills.map((skill) => (
-                          <li key={skill.name} className="flex items-center justify-between text-wp-navy/80 dark:text-muted-foreground">
+                        {skillCategory.skills.map((skill, skillIndex) => (
+                          <li key={`${skillCategory.id}-${skill.name}-${skillIndex}`} className="flex items-center justify-between text-wp-navy/80 dark:text-muted-foreground">
                             <div className="flex items-center">
                               <div className="w-2 h-2 rounded-full bg-wp-gold mr-3"></div>
                               <span className="font-medium">{skill.name}</span>
