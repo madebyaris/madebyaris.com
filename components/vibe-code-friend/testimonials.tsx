@@ -29,7 +29,7 @@ export function TestimonialsSection({
   testimonials,
 }: TestimonialsSectionProps) {
   return (
-    <section id="testimonials" className="w-full py-16 md:py-24 relative overflow-hidden bg-gradient-to-b from-background via-background to-muted/30">
+    <div className="w-full relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(120,119,198,0.1),transparent_60%)]"></div>
       <div className="absolute w-[800px] h-[800px] -left-40 top-[20%] bg-blue-200/10 dark:bg-blue-500/5 rounded-full blur-3xl"></div>
@@ -93,7 +93,7 @@ export function TestimonialsSection({
           })}
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 

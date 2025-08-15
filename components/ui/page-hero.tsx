@@ -12,6 +12,7 @@ interface PageHeroProps {
   className?: string
   variant?: 'default' | 'services' | 'about' | 'contact'
   children?: ReactNode
+  compact?: boolean
 }
 
 export function PageHero({ 
@@ -20,15 +21,18 @@ export function PageHero({
   description, 
   className,
   variant = 'default',
-  children 
+  children,
+  compact = false
 }: PageHeroProps) {
   const IconComponent = badge?.icon
 
+  const minHeightClass = compact ? 'min-h-[60vh]' : 'min-h-[calc(100vh-5rem)]'
+
   return (
-    <section className={cn(
-      "w-full min-h-[calc(100vh-5rem)] relative overflow-hidden",
-      className
-    )}>
+    <section
+      className={cn(`w-full ${minHeightClass} relative overflow-hidden`, className)}
+      style={{ minHeight: compact ? '60vh' : 'calc(100vh - 5rem)' }}
+    >
       {/* Background gradients based on variant */}
       <div className="absolute inset-0 -z-10">
         {variant === 'default' && (
@@ -45,7 +49,7 @@ export function PageHero({
         )}
       </div>
       
-      <div className="relative z-10 flex items-center justify-center min-h-[calc(100vh-5rem)]">
+      <div className="relative z-10 flex items-center justify-center h-full">
         <div className="container max-w-6xl mx-auto px-4 sm:px-6 py-8 md:py-12">
           <div className="text-center max-w-4xl mx-auto">
             {/* Badge */}
