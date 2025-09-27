@@ -5,10 +5,31 @@ import {
   motion,
 } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
+import { useIntersectionObserver } from '@/hooks/use-intersection-observer'
 
 interface TimelineEntry {
   title: string;
   content: React.ReactNode;
+}
+
+interface TimelineItemProps {
+  // existing props
+}
+
+function TimelineItem({ ...props }) {
+  const { ref, isIntersecting } = useIntersectionObserver<HTMLDivElement>({
+    threshold: 0.1,
+    rootMargin: '0px',
+    triggerOnce: true,
+  })
+
+  const animationClass = isIntersecting ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+
+  return (
+    <div ref={ref} className={`transition-all duration-700 ease-out ${animationClass}`}>
+      {/* existing timeline item content */}
+    </div>
+  )
 }
 
 export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
@@ -78,3 +99,6 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
     </div>
   );
 };
+
+export { TimelineItem }
+export default Timeline

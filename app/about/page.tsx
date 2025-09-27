@@ -20,6 +20,10 @@ import {
 import { Timeline } from "@/components/ui/timeline"
 import { UpworkIcon } from "@/components/icons/upwork"
 import { Button } from "@/components/ui/button"
+import { AboutSkillsAnimated } from '@/components/about-skills-animated'
+import { blurDataURLs } from '@/lib/utils'
+import { trackEvent } from '@/lib/analytics' // Assume a helper
+import { SkillProgress } from '@/components/ui/skill-progress'
 
 // Define timeline data
 const timelineData = [
@@ -324,72 +328,6 @@ const structuredData = {
   }
 }
 
-// Enhanced Skills Data for Auto-Fit Grid Layout
-const skillsData = [
-  {
-    id: "frontend",
-    title: "Frontend Development",
-    description: "Crafting pixel-perfect, responsive user interfaces with modern frameworks and libraries for exceptional user experiences",
-    icon: <Code2 className="w-8 h-8" />,
-    skills: [
-      { name: "Next.js 15", level: "Expert", icon: <Cpu className="w-4 h-4" /> },
-      { name: "React 19", level: "Expert", icon: <Code2 className="w-4 h-4" /> },
-      { name: "TypeScript", level: "Advanced", icon: <Code2 className="w-4 h-4" /> },
-      { name: "Tailwind CSS", level: "Expert", icon: <Palette className="w-4 h-4" /> }
-    ],
-    highlight: "Production Ready"
-  },
-  {
-    id: "backend",
-    title: "Backend & CMS",
-    description: "Building robust server-side architectures and scalable content management solutions that power modern web applications",
-    icon: <Server className="w-8 h-8" />,
-    skills: [
-      { name: "WordPress", level: "Expert", icon: <Globe className="w-4 h-4" /> },
-      { name: "PHP", level: "Expert", icon: <Server className="w-4 h-4" /> },
-      { name: "Node.js", level: "Advanced", icon: <Server className="w-4 h-4" /> },
-      { name: "Python Django", level: "Advanced", icon: <Server className="w-4 h-4" /> }
-    ],
-    highlight: "Enterprise Ready"
-  },
-  {
-    id: "database",
-    title: "Database Design",
-    description: "Architecting efficient data structures and optimizing database performance for high-traffic applications",
-    icon: <Database className="w-8 h-8" />,
-    skills: [
-      { name: "MySQL", level: "Expert", icon: <Database className="w-4 h-4" /> },
-      { name: "PostgreSQL", level: "Advanced", icon: <Database className="w-4 h-4" /> }
-    ],
-    highlight: "Optimized Queries"
-  },
-  {
-    id: "expertise",
-    title: "Technical Leadership",
-    description: "Providing strategic technical guidance and implementing best practices for scalable, maintainable software solutions",
-    icon: <Star className="w-8 h-8" />,
-    skills: [
-      { name: "System Architecture", level: "Expert", icon: <Star className="w-4 h-4" /> },
-      { name: "Performance Optimization", level: "Expert", icon: <Zap className="w-4 h-4" /> },
-      { name: "Headless CMS", level: "Advanced", icon: <Globe className="w-4 h-4" /> },
-      { name: "SEO & Core Web Vitals", level: "Expert", icon: <Star className="w-4 h-4" /> }
-    ],
-    highlight: "Proven Results"
-  },
-  {
-    id: "tools",
-    title: "Development Tools",
-    description: "Leveraging cutting-edge development tools and workflows to maximize productivity and code quality",
-    icon: <Zap className="w-8 h-8" />,
-    skills: [
-      { name: "Git & GitHub", level: "Expert", icon: <Code2 className="w-4 h-4" /> },
-      { name: "Vercel/Netlify", level: "Advanced", icon: <Globe className="w-4 h-4" /> },
-      { name: "Docker", level: "Intermediate", icon: <Server className="w-4 h-4" /> }
-    ],
-    highlight: "CI/CD Ready"
-  }
-];
-
 // Generate Metadata and Structured Data
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -443,9 +381,11 @@ export default function AboutPage() {
                   src="/astro.png"
                   alt="Aris Setiawan"
                   fill
-                  sizes="(max-width: 768px) 160px, 192px"
+                  sizes="(max-width: 768px) 160px, (max-width: 1024px) 192px, 192px"
                   className="object-cover rounded-full border-4 border-white/20 shadow-2xl"
                   priority
+                  placeholder="blur"
+                  blurDataURL={blurDataURLs.avatar}
                 />
                 <div className="absolute bottom-2 right-2 w-6 h-6 bg-green-500 rounded-full border-4 border-wp-navy animate-pulse" />
                 
@@ -531,89 +471,7 @@ export default function AboutPage() {
             </div>
             
             {/* Skills Grid with Auto-Fit Layout */}
-            <div className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-6 md:gap-8 lg:gap-10 max-w-5xl mx-auto">
-              {skillsData.map((skillCategory, index) => (
-                <div key={skillCategory.id} className="group relative">
-                  <div className="relative h-full p-8 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl transition-all duration-300 group-hover:scale-[1.02] overflow-hidden flex flex-col shadow-lg border border-gray-200 dark:border-gray-700">
-                    {/* Gradient background overlay matching homepage services */}
-                    <div className={`
-                      absolute inset-0 transition-all duration-300
-                      ${skillCategory.id === 'frontend' ? 'bg-gradient-to-br from-wp-blue/5 to-transparent group-hover:from-wp-blue/10' :
-                        skillCategory.id === 'backend' ? 'bg-gradient-to-br from-wp-gold/5 to-transparent group-hover:from-wp-gold/10' :
-                        skillCategory.id === 'database' ? 'bg-gradient-to-br from-wp-sage/5 to-transparent group-hover:from-wp-sage/10' :
-                        skillCategory.id === 'expertise' ? 'bg-gradient-to-br from-wp-navy/5 to-transparent group-hover:from-wp-navy/10' :
-                        'bg-gradient-to-br from-wp-blue/5 to-wp-gold/5 group-hover:from-wp-blue/10 group-hover:to-wp-gold/10'}
-                    `} />
-                    
-                    {/* Icon with professional styling matching homepage */}
-                    <div className={`
-                      relative mb-6 p-4 rounded-xl w-fit group-hover:scale-110 transition-transform duration-300
-                      ${skillCategory.id === 'frontend' ? 'bg-wp-blue/10 dark:bg-wp-blue/20' :
-                        skillCategory.id === 'backend' ? 'bg-wp-gold/10 dark:bg-wp-gold/20' :
-                        skillCategory.id === 'database' ? 'bg-wp-sage/20 dark:bg-wp-sage/30' :
-                        skillCategory.id === 'expertise' ? 'bg-wp-navy/10 dark:bg-wp-navy/20' :
-                        'bg-gradient-to-br from-wp-blue/10 to-wp-gold/10'}
-                    `}>
-                      <div className={`
-                        w-8 h-8 transition-colors duration-300
-                        ${skillCategory.id === 'frontend' ? 'text-wp-blue' :
-                          skillCategory.id === 'backend' ? 'text-wp-gold' :
-                          skillCategory.id === 'database' ? 'text-wp-sage-foreground' :
-                          skillCategory.id === 'expertise' ? 'text-wp-navy' :
-                          'text-wp-blue group-hover:text-wp-gold'}
-                      `}>
-                        {skillCategory.icon}
-                      </div>
-                    </div>
-                    
-                    {/* Content matching homepage services style */}
-                    <div className="flex-grow relative">
-                      <h3 className={`
-                        text-2xl md:text-3xl font-bold mb-4 transition-colors duration-300
-                        text-wp-navy dark:text-foreground relative
-                        ${skillCategory.id === 'frontend' ? 'group-hover:text-wp-blue dark:group-hover:text-wp-gold' :
-                          skillCategory.id === 'backend' ? 'group-hover:text-wp-gold' :
-                          skillCategory.id === 'database' ? 'group-hover:text-wp-sage dark:group-hover:text-wp-sage' :
-                          skillCategory.id === 'expertise' ? 'group-hover:text-wp-navy dark:group-hover:text-wp-gold' :
-                          'group-hover:text-wp-blue dark:group-hover:text-wp-gold'}
-                      `}>
-                        {skillCategory.title}
-                      </h3>
-                      <p className="text-wp-navy/70 dark:text-muted-foreground mb-6 relative leading-relaxed text-lg">
-                        {skillCategory.description}
-                      </p>
-                      
-                      {/* Skills list with homepage services styling */}
-                      <ul className="space-y-3 mb-8 relative">
-                        {skillCategory.skills.map((skill, skillIndex) => (
-                          <li key={`${skillCategory.id}-${skill.name}-${skillIndex}`} className="flex items-center justify-between text-wp-navy/80 dark:text-muted-foreground">
-                            <div className="flex items-center">
-                              <div className="w-2 h-2 rounded-full bg-wp-gold mr-3"></div>
-                              <span className="font-medium">{skill.name}</span>
-                        </div>
-                            <span className={`
-                              px-2 py-1 text-xs font-medium rounded-full ml-2
-                              ${skill.level === 'Expert' ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300' :
-                                skill.level === 'Advanced' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300' :
-                                'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300'}
-                            `}>
-                              {skill.level}
-                            </span>
-                      </li>
-                    ))}
-                  </ul>
-                    </div>
-                    
-                    {/* Highlight badge matching homepage style */}
-                    <div className="absolute top-6 right-6">
-                      <span className="px-3 py-1 text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full">
-                        {skillCategory.highlight}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <AboutSkillsAnimated />
           </div>
         </section>
 
@@ -678,7 +536,7 @@ export default function AboutPage() {
                       Have a project in mind? Let&apos;s discuss your requirements and create something extraordinary together.
                     </p>
                     
-                    <ul className="space-y-3 mb-8 relative">
+                    <div className="space-y-3 mb-8 relative">
                       <li className="flex items-center text-wp-navy/80 dark:text-muted-foreground">
                         <div className="w-2 h-2 rounded-full bg-wp-gold mr-3"></div>
                         Enterprise Web Applications
@@ -691,14 +549,15 @@ export default function AboutPage() {
                         <div className="w-2 h-2 rounded-full bg-wp-gold mr-3"></div>
                         Technical Architecture
                       </li>
-                    </ul>
+                    </div>
                   </div>
                   
                   <Button 
                     asChild 
                     variant="wp-outline" 
                     size="lg" 
-                    className="w-full group-hover:bg-wp-blue group-hover:text-wp-blue-foreground group-hover:border-wp-blue transition-all duration-300 mt-auto relative z-10 pointer-events-auto"
+                    className="w-full group-hover:bg-wp-blue group-hover:text-wp-blue-foreground group-hover:border-wp-blue transition-all duration-300 mt-auto relative z-10 pointer-events-auto hover:scale-105 hover:shadow-lg"
+                    onClick={() => trackEvent('cta_click', { label: 'about_start_project' })}
                   >
                     <Link href="/contact">
                       Get Started
@@ -725,7 +584,7 @@ export default function AboutPage() {
                       Need expert guidance on your current project? Let&apos;s discuss strategies and best practices.
                     </p>
                     
-                    <ul className="space-y-3 mb-8 relative">
+                    <div className="space-y-3 mb-8 relative">
                       <li className="flex items-center text-wp-navy/80 dark:text-muted-foreground">
                         <div className="w-2 h-2 rounded-full bg-wp-blue mr-3"></div>
                         Code Review & Optimization
@@ -738,14 +597,15 @@ export default function AboutPage() {
                         <div className="w-2 h-2 rounded-full bg-wp-blue mr-3"></div>
                         Team Mentoring
                       </li>
-                    </ul>
+                    </div>
                   </div>
                   
                   <Button 
                     asChild 
                     variant="wp-outline" 
                     size="lg" 
-                    className="w-full group-hover:bg-wp-gold group-hover:text-wp-gold-foreground group-hover:border-wp-gold transition-all duration-300 mt-auto relative z-10 pointer-events-auto"
+                    className="w-full group-hover:bg-wp-gold group-hover:text-wp-gold-foreground group-hover:border-wp-gold transition-all duration-300 mt-auto relative z-10 pointer-events-auto hover:scale-105 hover:shadow-lg"
+                    onClick={() => trackEvent('cta_click', { label: 'about_consultation' })}
                   >
               <Link href="/contact">
                       Book Consultation
@@ -762,12 +622,12 @@ export default function AboutPage() {
                 Prefer a quick chat? Reach out directly
               </p>
               <div className="flex flex-wrap justify-center gap-4 md:gap-6">
-                <Button asChild variant="wp-secondary" size="lg" className="shadow-lg hover:shadow-xl">
+                <Button asChild variant="wp-secondary" size="lg" className="shadow-lg hover:shadow-xl hover:scale-105" onClick={() => trackEvent('cta_click', { label: 'about_email' })}>
                   <Link href="mailto:hello@madebyaris.com">
                     Email Me
                   </Link>
                 </Button>
-                <Button asChild variant="wp-outline" size="lg" className="shadow-lg hover:shadow-xl">
+                <Button asChild variant="wp-outline" size="lg" className="shadow-lg hover:shadow-xl hover:scale-105" onClick={() => trackEvent('cta_click', { label: 'about_linkedin' })}>
                   <Link href="https://www.linkedin.com/in/arissetia/" target="_blank">
                     LinkedIn
                     <ArrowRight className="w-4 h-4 ml-2" />
