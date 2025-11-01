@@ -388,42 +388,24 @@ export default function VibeCodeFriendPage() {
       {/* Development Process Section */}
       <SectionWrapper
         variant="default"
+        padding="small"
         badge={{ text: "Workflow", icon: Code2 }}
         title="AI Development Process"
         description="A structured approach to integrating AI tools into your development workflow"
       >
-        <div className="max-w-7xl mx-auto">
-          <div className="relative">
-            {/* Horizontal Timeline */}
-            <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-wp-gold/30 via-wp-blue/30 to-wp-sage/30 -translate-y-1/2 z-0"></div>
-            
-            {/* Mobile vertical layout, desktop horizontal */}
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-4 relative z-10">
-              {processSteps.map((step, index) => (
-                <div key={step.title} className="relative">
-                  {/* Connection line for mobile */}
-                  <div className="lg:hidden absolute top-0 left-1/2 w-0.5 h-8 bg-gradient-to-b from-wp-gold/30 to-wp-blue/30 -translate-x-1/2 -translate-y-full"></div>
-                  
-                  <EnhancedCard
-                    variant="glass"
-                    title={step.title}
-                    description={step.description}
-                    className="bg-white/80 dark:bg-wp-navy/50 backdrop-blur-sm border border-wp-gold/20 dark:border-wp-gold/30 relative"
-                  >
-                    {/* Step number with connection */}
-                    <div className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-wp-gold/20 to-wp-blue/20 dark:from-wp-gold/30 dark:to-wp-blue/30 text-wp-gold font-bold text-lg mb-4 mx-auto relative">
-                      {index + 1}
-                      {/* Connection dots */}
-                      <div className="hidden lg:block absolute -top-2 left-1/2 w-4 h-4 bg-gradient-to-r from-wp-gold to-wp-blue rounded-full -translate-x-1/2 border-2 border-white dark:border-wp-navy"></div>
-                    </div>
-                    
-                    {/* Arrow for mobile */}
-                    <div className="lg:hidden absolute -bottom-4 left-1/2 w-0.5 h-8 bg-gradient-to-b from-wp-blue/30 to-wp-sage/30 -translate-x-1/2"></div>
-                  </EnhancedCard>
-                </div>
-              ))}
-            </div>
-          </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {processSteps.map((step, index) => (
+            <EnhancedCard
+              key={step.title}
+              variant="glass"
+              title={step.title}
+              description={step.description}
+            >
+              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-wp-gold/20 text-wp-gold font-bold text-base mb-4 mx-auto">
+                {index + 1}
+              </div>
+            </EnhancedCard>
+          ))}
         </div>
       </SectionWrapper>
 

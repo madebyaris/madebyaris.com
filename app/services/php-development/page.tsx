@@ -127,7 +127,7 @@ const structuredData = {
         "name": "Aris Setiawan",
         "jobTitle": "Senior Full Stack Developer",
         "url": "https://madebyaris.com",
-        "image": "https://madebyaris.com/astro.png",
+        "image": "https://madebyaris.com/aris.png",
         "sameAs": [
           "https://www.linkedin.com/in/arissetia/",
           "https://github.com/madebyaris",
@@ -413,18 +413,19 @@ export default function PhpDevelopmentPage() {
       {/* Introduction Section */}
       <SectionWrapper
         variant="default"
-        padding="default"
+        padding="small"
         description="With extensive experience in modern PHP development, I create robust, scalable applications that power businesses worldwide. From custom web applications to enterprise APIs, I leverage the latest PHP frameworks and best practices to deliver solutions that perform exceptionally and scale with your business growth."
       />
 
       {/* Services Section */}
       <SectionWrapper
         variant="accent"
+        padding="small"
         badge={{ text: "Services Offered", icon: Code2 }}
         title="PHP Development Solutions"
         description="Comprehensive PHP services for modern web applications and enterprise systems"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {services.map((service) => (
             <Link key={service.title} href={service.href} className="group">
               <EnhancedCard
@@ -467,11 +468,12 @@ export default function PhpDevelopmentPage() {
       {/* Benefits Section */}
       <SectionWrapper
         variant="default"
+        padding="small"
         badge={{ text: "Advantages", icon: Star }}
         title="Why Choose My PHP Services"
         description="Experience the benefits of modern PHP development practices"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
           {benefits.map((benefit) => (
             <EnhancedCard
               key={benefit.title}
@@ -492,14 +494,12 @@ export default function PhpDevelopmentPage() {
       {/* Process Section */}
       <SectionWrapper
         variant="accent"
+        padding="small"
         badge={{ text: "Workflow", icon: Code2 }}
         title="PHP Development Process"
         description="A systematic approach to deliver exceptional PHP solutions"
       >
-        <div className="relative">
-          <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-wp-blue/30 -translate-y-1/2 z-0"></div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               {
                 title: 'Analysis',
@@ -524,12 +524,11 @@ export default function PhpDevelopmentPage() {
                 title={step.title}
                 description={step.description}
               >
-                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-wp-blue/20 text-wp-blue font-bold text-lg mb-4 mx-auto">
+                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-wp-blue/20 text-wp-blue font-bold text-base mb-4 mx-auto">
                   {index + 1}
                 </div>
               </EnhancedCard>
             ))}
-          </div>
         </div>
       </SectionWrapper>
 
@@ -540,7 +539,7 @@ export default function PhpDevelopmentPage() {
         title="What Clients Say"
         description="Real feedback from satisfied PHP development clients"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {testimonials.map((testimonial, index) => (
             <EnhancedCard
               key={index}

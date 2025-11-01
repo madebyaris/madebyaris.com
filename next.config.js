@@ -2,6 +2,11 @@ import withBundleAnalyzer from '@next/bundle-analyzer';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Next.js 16: Partial Pre-Rendering (PPR) with cacheComponents
+  // NOTE: Disabled because it's incompatible with route-level `export const revalidate`
+  // To enable PPR: Remove all `export const revalidate` from route files and use cache tags instead
+  // cacheComponents: true,
+  
   images: {
     remotePatterns: [
       {
@@ -18,6 +23,7 @@ const nextConfig = {
       },
     ],
     formats: ['image/avif', 'image/webp'],
+    // Next.js 16: Default changed to 4 hours (14400s), reverting to 60s for more frequent revalidation
     minimumCacheTTL: 60,
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
@@ -25,6 +31,16 @@ const nextConfig = {
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
+  
+  // Next.js 16: Turbopack moved from experimental to top-level config
+  // Turbopack is now default in Next.js 16, but config is at top level
+  turbopack: {
+    rules: {
+      '*.svg': ['@svgr/webpack'],
+    },
+  },
+  
+  // Next.js 16: Experimental features
   experimental: {
     optimizeCss: true,
     optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
@@ -32,19 +48,18 @@ const nextConfig = {
       allowedOrigins: ['localhost:3000', 'madebyaris.com'],
     },
     memoryBasedWorkersCount: true,
+    // Next.js 16: Enable experimental Turbopack file system caching for faster dev builds
+    turbopackFileSystemCacheForDev: true,
   },
-  turbopack: {
-    rules: {
-      '*.svg': ['@svgr/webpack'],
-    },
-  },
+  
   serverExternalPackages: ['sharp'],
   poweredByHeader: false,
   reactStrictMode: true,
-  eslint: {
-    // Allow production builds to succeed even if there are ESLint errors
-    ignoreDuringBuilds: true,
-  },
+  
+  // Next.js 16: eslint config removed - use ESLint CLI directly instead
+  // Run: npx eslint . or configure in eslint.config.js
+  // Note: next lint still works but config option removed
+  
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },

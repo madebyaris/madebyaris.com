@@ -82,7 +82,7 @@ const structuredData = {
         "name": "Aris Setiawan",
         "jobTitle": "Senior Full Stack Developer",
         "url": "https://madebyaris.com",
-        "image": "https://madebyaris.com/astro.png",
+        "image": "https://madebyaris.com/aris.png",
         "sameAs": [
           "https://www.linkedin.com/in/arissetia/",
           "https://github.com/madebyaris",
@@ -423,18 +423,19 @@ export default function NextjsDevelopmentPage() {
       {/* Introduction Section */}
       <SectionWrapper
         variant="default"
-        padding="default"
+        padding="small"
         description="My Next.js development service focuses on creating modern, high-performance web applications. Using the latest features and best practices, I build solutions that are not only fast and reliable but also maintainable and scalable for future growth."
       />
 
       {/* Key Features Section */}
       <SectionWrapper
         variant="accent"
+        padding="small"
         badge={{ text: "Key Features", icon: Zap }}
         title="What Makes Next.js Special"
         description="Discover the powerful features that make Next.js the perfect choice for modern web development"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {features.map((feature) => (
             <EnhancedCard
               key={feature.title}
@@ -442,8 +443,8 @@ export default function NextjsDevelopmentPage() {
               title={feature.title}
               description={feature.description}
             >
-              <div className="mb-6 p-4 bg-wp-blue/10 dark:bg-wp-blue/20 rounded-xl w-fit">
-                <div className="w-8 h-8 text-wp-blue">
+              <div className="mb-4 p-3 bg-wp-blue/10 dark:bg-wp-blue/20 rounded-lg w-fit">
+                <div className="w-6 h-6 text-wp-blue">
                   {feature.icon}
                 </div>
               </div>
@@ -455,15 +456,16 @@ export default function NextjsDevelopmentPage() {
       {/* Benefits Section */}
       <SectionWrapper
         variant="default"
+        padding="small"
         badge={{ text: "Advantages", icon: Trophy }}
         title="Benefits of Next.js Development"
         description="Why Next.js is the right choice for your web application"
       >
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
           {benefits.map((benefit) => (
             <div 
               key={benefit}
-              className="p-4 bg-white/80 dark:bg-wp-navy/30 backdrop-blur-sm rounded-lg border border-wp-blue/20 text-center text-wp-navy dark:text-wp-blue transition-all duration-300 hover:scale-105 hover:bg-wp-blue/10 dark:hover:bg-wp-blue/20"
+              className="p-3 bg-white/80 dark:bg-wp-navy/30 backdrop-blur-sm rounded-lg border border-wp-blue/20 text-center text-sm text-wp-navy dark:text-wp-blue transition-all duration-300 hover:bg-wp-blue/10 dark:hover:bg-wp-blue/20"
             >
               {benefit}
             </div>
@@ -474,43 +476,41 @@ export default function NextjsDevelopmentPage() {
       {/* Development Process Section */}
       <SectionWrapper
         variant="accent"
+        padding="small"
         badge={{ text: "Workflow", icon: Code2 }}
         title="Development Process"
         description="A structured approach to deliver exceptional results"
       >
-        <div className="relative">
-          <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-wp-gold/30 -translate-y-1/2 z-0"></div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
-            {processSteps.map((step, index) => (
-              <EnhancedCard
-                key={step.title}
-                variant="glass"
-                title={step.title}
-                description={step.description}
-              >
-                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-wp-gold/20 text-wp-gold font-bold text-lg mb-4 mx-auto">
-                  {index + 1}
-                </div>
-              </EnhancedCard>
-            ))}
-          </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {processSteps.map((step, index) => (
+            <EnhancedCard
+              key={step.title}
+              variant="glass"
+              title={step.title}
+              description={step.description}
+            >
+              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-wp-gold/20 text-wp-gold font-bold text-base mb-4 mx-auto">
+                {index + 1}
+              </div>
+            </EnhancedCard>
+          ))}
         </div>
       </SectionWrapper>
 
       {/* Technologies Section */}
       <SectionWrapper
         variant="default"
+        padding="small"
         badge={{ text: "Tech Stack", icon: Code2 }}
         title="Technologies I Work With"
         description="Modern tools and frameworks for cutting-edge development"
       >
-        <div className="bg-white/80 dark:bg-wp-navy/30 backdrop-blur-sm rounded-2xl p-8 border border-wp-blue/20">
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+        <div className="bg-white/80 dark:bg-wp-navy/30 backdrop-blur-sm rounded-xl p-6 border border-wp-blue/20">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
             {['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Node.js', 'Prisma', 'tRPC', 'GraphQL', 'REST API', 'MongoDB', 'PostgreSQL', 'Vercel'].map((tech) => (
               <div 
                 key={tech}
-                className="p-3 bg-wp-blue/10 dark:bg-wp-blue/20 rounded-lg text-center text-sm font-medium text-wp-blue transition-all duration-300 hover:scale-105 hover:bg-wp-blue/20"
+                className="p-2 bg-wp-blue/10 dark:bg-wp-blue/20 rounded-lg text-center text-xs font-medium text-wp-blue transition-all duration-300 hover:bg-wp-blue/20"
               >
                 {tech}
               </div>
@@ -522,11 +522,12 @@ export default function NextjsDevelopmentPage() {
       {/* Specialized Services Section */}
       <SectionWrapper
         variant="gradient"
+        padding="small"
         badge={{ text: "Specialized Services", icon: Building }}
         title="Next.js Specialized Solutions"
         description="Tailored services for specific needs and markets"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <EnhancedCard
             variant="elevated"
             title="Vercel Deployment"
@@ -608,11 +609,12 @@ export default function NextjsDevelopmentPage() {
       {/* FAQ Section */}
       <SectionWrapper
         variant="default"
+        padding="small"
         badge={{ text: "Questions", icon: Users }}
         title="Frequently Asked Questions"
         description="Common questions about Next.js development services"
       >
-        <div className="space-y-6">
+        <div className="space-y-4">
           {[
             {
               question: "What is Next.js and why should I use it for my project?",

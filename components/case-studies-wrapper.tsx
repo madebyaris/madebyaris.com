@@ -1,16 +1,27 @@
-'use client'
-
-import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { ArrowRight, Award } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { fetchCaseStudies } from '@/lib/github'
+import { CaseStudiesCarousel } from '@/components/case-studies-carousel'
 
-const CaseStudiesCarousel = dynamic(
-  () => import('@/components/case-studies-carousel'),
-  { loading: () => <div className="h-[400px] bg-zinc-100/20 dark:bg-zinc-900/20 rounded-lg animate-pulse" /> }
-)
+export async function CaseStudiesWrapper() {
+  const caseStudies = await fetchCaseStudies()
 
-export function CaseStudiesWrapper() {
+  // Fallback to empty state if no case studies
+  if (!caseStudies || caseStudies.length === 0) {
+    return (
+      <div className="w-full mb-8">
+        <div className="relative bg-white/90 dark:bg-wp-navy/30 backdrop-blur-xl rounded-3xl p-6 md:p-8 shadow-xl border border-gray-200/60 dark:border-wp-blue/20">
+          <div className="text-center py-12">
+            <p className="text-wp-navy/60 dark:text-muted-foreground">
+              Loading case studies from GitHub...
+            </p>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="w-full mb-8">
       {/* Featured Case Studies */}
@@ -31,11 +42,11 @@ export function CaseStudiesWrapper() {
               <span className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent dark:from-foreground dark:via-foreground dark:to-foreground dark:text-foreground">Featured Case Studies</span>
             </h2>
             <p className="text-lg text-gray-700 dark:text-muted-foreground max-w-2xl mx-auto font-medium">
-              Explore detailed breakdowns of successful projects and the impact they created
+              Explore real projects from my GitHub repositories with stars, forks, and technologies used
             </p>
           </div>
           
-          <CaseStudiesCarousel />
+          <CaseStudiesCarousel caseStudies={caseStudies} />
           
           {/* Enhanced view all projects link */}
           <div className="text-center mt-6">
@@ -45,8 +56,8 @@ export function CaseStudiesWrapper() {
               size="lg"
               className="bg-gradient-to-r from-wp-blue to-indigo-600 hover:from-wp-blue/90 hover:to-indigo-600/90 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 dark:shadow-wp-glow-blue dark:hover:shadow-wp-glow-blue group"
             >
-              <Link href="/projects">
-                View All Projects
+              <Link href="https://github.com/madebyaris" target="_blank" rel="noopener noreferrer">
+                View All Projects on GitHub
                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>

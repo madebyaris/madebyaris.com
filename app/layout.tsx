@@ -154,7 +154,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
         {/* Preconnect to critical domains (Google Fonts handled automatically by Next.js) */}
         <link rel="preconnect" href="https://cdn.vercel-insights.com" />
@@ -170,7 +170,6 @@ export default function RootLayout({
         )}
         
         {/* Preload critical assets with priority hints */}
-        <link rel="preload" href="/astro.png" as="image" fetchPriority="high" />
         <link rel="preload" href="/aris.png" as="image" fetchPriority="high" />
         
         {/* Preload critical font files */}

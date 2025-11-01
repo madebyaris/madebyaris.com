@@ -57,7 +57,7 @@ const structuredData = {
       "name": "Aris Setiawan",
       "jobTitle": "Senior Full Stack Developer",
       "url": "https://madebyaris.com",
-      "image": "https://madebyaris.com/astro.png"
+      "image": "https://madebyaris.com/aris.png"
     },
     "contactPoint": {
       "@type": "ContactPoint",

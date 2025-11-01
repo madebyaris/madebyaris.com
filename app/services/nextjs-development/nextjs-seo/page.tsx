@@ -451,7 +451,7 @@ export default function NextjsSeoPage() {
             </div>
 
             <div className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-zinc-200 dark:border-zinc-800">
-              <div className="space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <h3 className="text-xl font-semibold mb-2">Server-Side Rendering Advantage</h3>
                   <p className="text-muted-foreground">Next.js server-side rendering ensures search engines can fully index your content, unlike client-side rendered applications that may have indexing issues.</p>

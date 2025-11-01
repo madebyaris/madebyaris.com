@@ -20,7 +20,8 @@ import {
 import { Timeline } from "@/components/ui/timeline"
 import { UpworkIcon } from "@/components/icons/upwork"
 import { Button } from "@/components/ui/button"
-import { AboutSkillsAnimated } from '@/components/about-skills-animated'
+// TODO: Component missing - AboutSkillsAnimated
+// import { AboutSkillsAnimated } from '@/components/about-skills-animated'
 import { blurDataURLs } from '@/lib/utils'
 import { trackEvent } from '@/lib/analytics' // Assume a helper
 import { SkillProgress } from '@/components/ui/skill-progress'
@@ -214,7 +215,7 @@ const structuredData = {
     "jobTitle": "Senior Full Stack Developer",
     "description": "Senior Full Stack Developer with 12+ years of experience in Next.js, React, WordPress, and enterprise web architecture.",
     "url": "https://madebyaris.com",
-    "image": "https://madebyaris.com/astro.png",
+    "image": "https://madebyaris.com/aris.png",
     "sameAs": [
       "https://www.linkedin.com/in/arissetia/",
       "https://github.com/madebyaris",
@@ -332,7 +333,7 @@ const structuredData = {
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title: 'About Aris Setiawan | Senior Full-Stack Developer & Web Architect',
-    description: 'With 12+ years of experience, I specialize in building enterprise-scale web applications using Next.js, React, and WordPress. Learn about my journey, expertise, and development philosophy.',
+    description: 'With 12+ years of experience, I specialize in building enterprise-scale web applications using Next.js, React, and WordPress. Based in Sidoarjo, Indonesia. Learn about my journey, expertise, and development philosophy.',
     keywords: [
       'Senior Full-Stack Developer',
       'Web Architecture Expert',
@@ -343,7 +344,12 @@ export async function generateMetadata(): Promise<Metadata> {
       'PHP Expert',
       'JavaScript Developer',
       'TypeScript Developer',
-      'Headless CMS Expert'
+      'Headless CMS Expert',
+      'Next.js Developer Indonesia',
+      'WordPress Developer Indonesia',
+      'React Developer Indonesia',
+      'Full-Stack Developer Sidoarjo',
+      'Web Developer Indonesia',
     ],
     openGraph: {
       title: 'About Aris Setiawan | Senior Full-Stack Developer',
@@ -378,8 +384,8 @@ export default function AboutPage() {
             <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16">
               <div className="relative w-40 h-40 md:w-48 md:h-48 flex-shrink-0">
                 <Image
-                  src="/astro.png"
-                  alt="Aris Setiawan"
+                  src="/aris.png"
+                  alt="Aris Setiawan - Senior Full-Stack Developer & Web Architect"
                   fill
                   sizes="(max-width: 768px) 160px, (max-width: 1024px) 192px, 192px"
                   className="object-cover rounded-full border-4 border-white/20 shadow-2xl"
@@ -439,7 +445,7 @@ export default function AboutPage() {
         </section>
 
         {/* Philosophy Section */}
-        <section className="w-full py-20 bg-gray-50 dark:bg-black">
+        <section className="w-full py-16 bg-gray-50 dark:bg-black">
           <div className="container max-w-4xl mx-auto px-6 text-center">
             <blockquote className="text-2xl md:text-4xl font-light text-gray-800 dark:text-gray-200 italic leading-snug">
               &ldquo;I Have Served and I Will Be of Service&rdquo;
@@ -452,7 +458,7 @@ export default function AboutPage() {
         </section>
 
         {/* Skills Section - Professional Style matching Services */}
-        <section className="w-full py-24 bg-gradient-to-br from-gray-50/50 via-white to-blue-50/30 dark:bg-gradient-to-br dark:from-gray-900 dark:via-blue-900/10 dark:to-gray-900">
+        <section className="w-full py-16 bg-gradient-to-br from-gray-50/50 via-white to-blue-50/30 dark:bg-gradient-to-br dark:from-gray-900 dark:via-blue-900/10 dark:to-gray-900">
           <div className="container max-w-7xl mx-auto px-6">
             {/* Enhanced section heading matching homepage style */}
             <div className="relative mb-16 text-center">
@@ -471,12 +477,15 @@ export default function AboutPage() {
             </div>
             
             {/* Skills Grid with Auto-Fit Layout */}
-            <AboutSkillsAnimated />
+            {/* TODO: Add AboutSkillsAnimated component */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+              {/* Skills will be rendered here when component is created */}
+            </div>
           </div>
         </section>
 
         {/* Professional Timeline Section */}
-        <section className="w-full py-24 bg-gray-50 dark:bg-gray-900">
+        <section className="w-full py-16 bg-gray-50 dark:bg-gray-900">
           <div className="container max-w-6xl mx-auto px-6">
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300 text-sm font-medium mb-6">
@@ -495,7 +504,7 @@ export default function AboutPage() {
         </section>
 
         {/* Enhanced CTA Section */}
-        <section className="w-full py-24 bg-gradient-to-br from-gray-50/50 via-white to-blue-50/30 dark:bg-gradient-to-br dark:from-gray-900 dark:via-blue-900/10 dark:to-gray-900 relative overflow-hidden">
+        <section className="w-full py-16 bg-gradient-to-br from-gray-50/50 via-white to-blue-50/30 dark:bg-gradient-to-br dark:from-gray-900 dark:via-blue-900/10 dark:to-gray-900 relative overflow-hidden">
           {/* Background decoration */}
           <div className="absolute inset-0 bg-gradient-to-br from-wp-blue/5 via-transparent to-wp-gold/5 dark:from-wp-blue/10 dark:to-wp-gold/10"></div>
           
@@ -557,7 +566,6 @@ export default function AboutPage() {
                     variant="wp-outline" 
                     size="lg" 
                     className="w-full group-hover:bg-wp-blue group-hover:text-wp-blue-foreground group-hover:border-wp-blue transition-all duration-300 mt-auto relative z-10 pointer-events-auto hover:scale-105 hover:shadow-lg"
-                    onClick={() => trackEvent('cta_click', { label: 'about_start_project' })}
                   >
                     <Link href="/contact">
                       Get Started
@@ -605,7 +613,6 @@ export default function AboutPage() {
                     variant="wp-outline" 
                     size="lg" 
                     className="w-full group-hover:bg-wp-gold group-hover:text-wp-gold-foreground group-hover:border-wp-gold transition-all duration-300 mt-auto relative z-10 pointer-events-auto hover:scale-105 hover:shadow-lg"
-                    onClick={() => trackEvent('cta_click', { label: 'about_consultation' })}
                   >
               <Link href="/contact">
                       Book Consultation
@@ -622,17 +629,17 @@ export default function AboutPage() {
                 Prefer a quick chat? Reach out directly
               </p>
               <div className="flex flex-wrap justify-center gap-4 md:gap-6">
-                <Button asChild variant="wp-secondary" size="lg" className="shadow-lg hover:shadow-xl hover:scale-105" onClick={() => trackEvent('cta_click', { label: 'about_email' })}>
+                <Button asChild variant="wp-secondary" size="lg" className="shadow-lg hover:shadow-xl hover:scale-105">
                   <Link href="mailto:hello@madebyaris.com">
                     Email Me
                   </Link>
                 </Button>
-                <Button asChild variant="wp-outline" size="lg" className="shadow-lg hover:shadow-xl hover:scale-105" onClick={() => trackEvent('cta_click', { label: 'about_linkedin' })}>
+                <Button asChild variant="wp-outline" size="lg" className="shadow-lg hover:shadow-xl hover:scale-105">
                   <Link href="https://www.linkedin.com/in/arissetia/" target="_blank">
                     LinkedIn
                     <ArrowRight className="w-4 h-4 ml-2" />
-              </Link>
-            </Button>
+                  </Link>
+                </Button>
               </div>
             </div>
           </div>

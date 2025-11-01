@@ -9,6 +9,7 @@ import { structuredData } from '@/lib/structured-data'
 import { Button } from '@/components/ui/button'
 import { ServicesAnimatedGrid } from '@/components/services-animated-grid'
 import { TestimonialsCarousel } from '@/components/testimonials-carousel'
+import { CaseStudiesWrapper } from '@/components/case-studies-wrapper'
 
 // Segment Configuration
 export const revalidate = 86400 // 24 hours
@@ -29,10 +30,6 @@ const ClientHeroLazy = dynamic(() => import('@/components/client-hero'), {
   loading: () => <HeroFallback />
 })
 
-const CaseStudiesWrapperLazy = dynamic(() => import('@/components/case-studies-wrapper'), {
-  loading: () => <CaseStudiesFallback />
-})
-
 // Dynamically import HomeContent for Posts
 const HomeContentLazy = dynamic(() => import('@/components/home-content'), {
   loading: () => <PostsFallback />
@@ -41,7 +38,7 @@ const HomeContentLazy = dynamic(() => import('@/components/home-content'), {
 export async function generateMetadata() {
   return {
     title: 'Senior Full-Stack Developer | Next.js, React & WordPress Architect | Aris Setiawan',
-    description: 'Senior Full-Stack Developer with 12+ years of experience in Next.js, React, WordPress, and PHP. Specializing in enterprise-scale web applications and headless CMS architecture.',
+    description: 'Senior Full-Stack Developer with 12+ years of experience in Next.js, React, WordPress, and PHP. Specializing in enterprise-scale web applications and headless CMS architecture. Based in Indonesia, serving clients worldwide.',
     keywords: [
       'Senior Next.js Developer',
       'Headless WordPress Expert',
@@ -49,6 +46,12 @@ export async function generateMetadata() {
       'Full-Stack PHP Developer',
       'Web Architecture Specialist',
       'Senior Software Engineer',
+      'Next.js Developer Indonesia',
+      'WordPress Developer Indonesia',
+      'React Developer Indonesia',
+      'Full-Stack Developer Indonesia',
+      'Enterprise Web Solutions',
+      'Headless CMS Indonesia',
     ],
     other: {
       'structured-data': JSON.stringify(structuredData)
@@ -92,16 +95,16 @@ export default function HomePage() {
         </Suspense>
         
         {/* Case studies section with WordPress VIP styling */}
-        <section className="w-full py-20 md:py-24 bg-wp-sage/30 dark:bg-wp-navy/50 cv-auto">
+        <section className="w-full py-16 md:py-20 bg-wp-sage/30 dark:bg-wp-navy/50 cv-auto">
           <div className="container max-w-6xl mx-auto px-4 sm:px-6">
             <Suspense fallback={<CaseStudiesFallback />}>
-              <CaseStudiesWrapperLazy />
+              <CaseStudiesWrapper />
             </Suspense>
           </div>
         </section>
         
         {/* Trusted By Section with WordPress VIP inspired design */}
-        <section className="w-full py-20 md:py-24 relative overflow-hidden cv-auto">
+        <section className="w-full py-16 md:py-20 relative overflow-hidden cv-auto">
           {/* WordPress VIP inspired background */}
           <div className="absolute inset-0 bg-gradient-to-br from-background via-wp-sage/10 to-wp-blue/5 dark:from-background dark:via-wp-navy/20 dark:to-wp-gold/5"></div>
           

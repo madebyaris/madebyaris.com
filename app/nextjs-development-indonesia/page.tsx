@@ -74,7 +74,7 @@ const structuredData = {
       "name": "Aris Setiawan",
       "jobTitle": "Senior Full Stack Developer",
       "url": "https://madebyaris.com",
-      "image": "https://madebyaris.com/astro.png",
+        "image": "https://madebyaris.com/aris.png",
       "sameAs": [
         "https://www.linkedin.com/in/arissetia/",
         "https://github.com/madebyaris",

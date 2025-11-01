@@ -46,8 +46,8 @@ export function TableOfContents({ headings, isMobile = false }: TableOfContentsP
 
   if (isMobile) {
     return (
-      <div id="mobile-toc" className="lg:hidden mb-8">
-        <details className="bg-muted/50 rounded-xl p-4 border shadow-sm">
+      <div id="mobile-toc" className="lg:hidden mb-8 w-full">
+        <details className="bg-muted/50 rounded-xl p-4 border shadow-sm w-full">
           <summary className="text-sm font-semibold cursor-pointer flex items-center">
             <BookOpen className="h-4 w-4 mr-2 text-primary" />
             Table of Contents
@@ -75,31 +75,29 @@ export function TableOfContents({ headings, isMobile = false }: TableOfContentsP
   }
 
   return (
-    <div id="desktop-toc" className="hidden lg:block lg:col-span-3">
-      <div className="sticky top-24">
-        <div className="bg-muted/50 rounded-xl p-5 border shadow-sm">
-          <h2 className="text-sm font-semibold mb-4 flex items-center">
-            <BookOpen className="h-4 w-4 mr-2 text-primary" />
-            Table of Contents
-          </h2>
-          <nav>
-            <ul className="space-y-3 text-sm">
-              {headings.map((heading, index) => (
-                <li 
-                  key={`desktop-${heading.id}-${index}`} 
-                  className={`${heading.level === 3 ? 'ml-4' : ''}`}
+    <div id="desktop-toc" className="sticky top-24">
+      <div className="bg-muted/50 rounded-xl p-5 border shadow-sm">
+        <h2 className="text-sm font-semibold mb-4 flex items-center">
+          <BookOpen className="h-4 w-4 mr-2 text-primary" />
+          Table of Contents
+        </h2>
+        <nav>
+          <ul className="space-y-3 text-sm">
+            {headings.map((heading, index) => (
+              <li 
+                key={`desktop-${heading.id}-${index}`} 
+                className={`${heading.level === 3 ? 'ml-4' : ''}`}
+              >
+                <a 
+                  href={`#${heading.id}`} 
+                  className="text-muted-foreground hover:text-primary transition-colors line-clamp-1"
                 >
-                  <a 
-                    href={`#${heading.id}`} 
-                    className="text-muted-foreground hover:text-primary transition-colors line-clamp-1"
-                  >
-                    {heading.text}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
+                  {heading.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
     </div>
   );

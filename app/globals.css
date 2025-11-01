@@ -839,3 +839,52 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
 }
 
 
+/* Phase 1: Modern design utilities */
+/* Advanced glassmorphism */
+.glass-card-modern {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(209, 213, 219, 0.3);
+}
+
+/* Mesh/aurora style gradient background */
+.mesh-gradient {
+  background:
+    radial-gradient(at 40% 20%, hsla(var(--wp-gold), 0.30) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, hsla(var(--wp-blue), 0.30) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, hsla(var(--wp-sage), 0.20) 0px, transparent 50%);
+}
+
+/* Bento card glow helper (use via inline --glow-color) */
+.bento-card-glow {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+    0 10px 40px -10px rgba(0, 0, 0, 0.20),
+    0 0 60px -15px var(--glow-color, rgba(0,0,0,0));
+}
+
+/* Fluid typography helpers */
+.text-fluid-xl { font-size: clamp(2rem, 4vw + 0.5rem, 3.75rem); line-height: 1.1; }
+.text-fluid-lg { font-size: clamp(1.5rem, 2.5vw + 0.5rem, 2.25rem); line-height: 1.2; }
+.text-fluid-md { font-size: clamp(1.125rem, 1.2vw + 0.5rem, 1.25rem); line-height: 1.6; }
+
+/* Gradient text utilities */
+.gradient-text {
+  background-image: linear-gradient(90deg, hsl(var(--wp-gold)) 0%, hsl(var(--wp-blue)) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Subtle text depth */
+.text-depth {
+  text-shadow: 0 1px 1px rgba(0,0,0,0.05);
+}
+
+/* 3D tilt helper (set via inline style CSS variables) */
+.tilt-3d {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+

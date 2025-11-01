@@ -115,7 +115,7 @@ const structuredData = {
         "name": "Aris Setiawan",
         "jobTitle": "Senior Full Stack Developer",
         "url": "https://madebyaris.com",
-        "image": "https://madebyaris.com/astro.png",
+        "image": "https://madebyaris.com/aris.png",
         "sameAs": [
           "https://www.linkedin.com/in/arissetia/",
           "https://github.com/madebyaris",
@@ -395,11 +395,12 @@ export default function ServicesPage() {
       {/* Main Services Section */}
       <SectionWrapper
         variant="default"
+        padding="small"
         badge={{ text: "Core Offerings", icon: Code2 }}
         title="Main Services"
         description="Comprehensive development solutions tailored to your business needs"
       >
-                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
            {services.map((service) => (
                           <EnhancedCard
                key={service.title}
@@ -446,7 +447,7 @@ export default function ServicesPage() {
         title="WordPress Development Services"
         description="Specialized WordPress solutions from custom themes to headless architectures"
       >
-                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
            {wordPressServices.map((service) => (
                           <EnhancedCard
                key={service.title}

@@ -1,7 +1,9 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-export function middleware(request: NextRequest) {
+// Next.js 16: Renamed from middleware to proxy for better clarity
+// This function handles network boundary and routing at the edge
+export function proxy(request: NextRequest) {
   const response = NextResponse.next()
 
   // Add cache control headers for static assets
@@ -28,4 +30,5 @@ export const config = {
      */
     '/((?!api|_next/static|_next/image|favicon.ico).*)',
   ],
-} 
+}
+

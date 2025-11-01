@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { UpworkIcon } from "@/components/icons/upwork"
-import { ReactNode } from 'react'
+import { ReactNode, useCallback, useEffect, useRef, useState } from 'react'
 import { blurDataURLs } from '@/lib/utils'
 
 interface ClientHeroProps {
@@ -25,10 +25,47 @@ export function ClientHero({
     </>
   )
 }: ClientHeroProps) {
+  const sectionRef = useRef<HTMLElement | null>(null)
+  const tiltRef = useRef<HTMLDivElement | null>(null)
+  const [scrollProgress, setScrollProgress] = useState(0)
+
+  // Scroll progress within hero section
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el) return
+    const onScroll = () => {
+      const rect = el.getBoundingClientRect()
+      const total = Math.max(rect.height - 1, 1)
+      const visible = Math.min(Math.max(-rect.top, 0), total)
+      setScrollProgress(Math.min(Math.max(visible / total, 0), 1))
+    }
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  // 3D tilt interaction for avatar card
+  const handleTilt = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const el = tiltRef.current
+    if (!el) return
+    const rect = el.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
+    const rx = ((y / rect.height) - 0.5) * -10 // rotateX
+    const ry = ((x / rect.width) - 0.5) * 10  // rotateY
+    el.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) scale(1.03)`
+  }, [])
+
+  const resetTilt = useCallback(() => {
+    const el = tiltRef.current
+    if (!el) return
+    el.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)'
+  }, [])
+
   return (
     <>
       {/* WordPress VIP inspired hero section */}
-      <section className="w-full min-h-[calc(100vh-5rem)] relative overflow-hidden bg-gradient-to-br from-blue-50/50 via-white to-purple-50/30 dark:bg-gradient-to-br dark:from-gray-900 dark:via-blue-900/20 dark:to-gray-900">
+      <section ref={sectionRef} className="w-full min-h-[calc(100vh-5rem)] relative overflow-hidden bg-gradient-to-br from-blue-50/50 via-white to-purple-50/30 dark:bg-gradient-to-br dark:from-gray-900 dark:via-blue-900/20 dark:to-gray-900">
         {/* Enhanced background with WordPress VIP styling */}
         <div className="absolute inset-0 -z-10">
           {/* Light mode background */}
@@ -54,6 +91,7 @@ export function ClientHero({
 
         <div className="relative z-10 flex items-center justify-center min-h-[calc(100vh-5rem)]">
           <div className="container max-w-6xl mx-auto px-4 sm:px-6 py-8 md:py-12">
+            {/* Split-screen layout (3/2) on desktop */}
             <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-12 items-center">
               {/* Content - Takes 3 columns on desktop */}
               <div className="md:col-span-3 flex flex-col gap-6 md:gap-8">
@@ -64,9 +102,9 @@ export function ClientHero({
                 </div>
                 
                 {/* Main title with gradient text */}
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-wp-navy dark:text-foreground [text-wrap:balance] animate-slide-up">
+                <h1 className="text-fluid-xl font-bold tracking-tight text-wp-navy dark:text-foreground [text-wrap:balance] animate-slide-up text-depth">
                   <span className="block">Senior Full-Stack</span>
-                  <span className="block bg-gradient-to-r from-wp-gold to-wp-blue bg-clip-text text-transparent">
+                  <span className="block gradient-text">
                     Developer & Web
                   </span>
                   <span className="block">Architecture Specialist</span>
@@ -111,11 +149,16 @@ export function ClientHero({
               
               {/* Enhanced image section with WordPress VIP styling */}
               <div className="md:col-span-2 flex justify-center md:justify-end animate-scale-in animation-delay-800">
-                <div className="relative group">
+                <div
+                  className="relative group tilt-3d"
+                  ref={tiltRef}
+                  onMouseMove={handleTilt}
+                  onMouseLeave={resetTilt}
+                >
                   {/* Main image container */}
-                  <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-3xl overflow-hidden border-4 border-wp-gold/80 dark:border-wp-blue/80 shadow-wp-elevated hover:shadow-wp-glow transition-all duration-500 group-hover:scale-105 group-hover:rotate-1">
+                  <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-3xl overflow-hidden border-4 border-wp-gold/80 dark:border-wp-blue/80 shadow-wp-elevated hover:shadow-wp-glow transition-all duration-500">
                     <Image
-                      src="/astro.png"
+                      src="/aris.png"
                       alt="Aris Setiawan - Senior Full-Stack Developer"
                       width={384}
                       height={384}
@@ -137,17 +180,20 @@ export function ClientHero({
                   
                   {/* Professional badge floating element */}
                   <div className="absolute -bottom-4 -left-4 px-4 py-2 bg-wp-sage/95 dark:bg-wp-navy/95 backdrop-blur-sm rounded-xl border border-wp-sage-foreground/20 dark:border-wp-navy-foreground/20 shadow-wp-elevated">
-                    <span className="text-sm font-semibold text-wp-sage-foreground dark:text-wp-navy-foreground">12+ Years</span>
+                    <span className="text-sm font-semibold text-wp-sage-foreground dark:text-wp-navy-foreground">12+ Years of Experience</span>
                   </div>
                 </div>
               </div>
             </div>
             
-            {/* Enhanced scroll indicator with WordPress VIP styling */}
-            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
-              <span className="text-sm font-medium text-wp-blue dark:text-wp-gold mb-2 tracking-wide">Scroll</span>
-              <div className="w-6 h-10 border-2 border-wp-blue dark:border-wp-gold rounded-full flex justify-center">
-                <div className="w-1 h-3 bg-wp-blue dark:bg-wp-gold rounded-full mt-2 animate-pulse"></div>
+            {/* Scroll progress indicator */}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-[min(640px,90%)]">
+              <div className="h-1.5 w-full bg-white/40 dark:bg-white/10 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-wp-gold to-wp-blue rounded-full transition-[width] duration-200"
+                  style={{ width: `${Math.round(scrollProgress * 100)}%` }}
+                  aria-hidden="true"
+                />
               </div>
             </div>
           </div>

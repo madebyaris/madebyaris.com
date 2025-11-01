@@ -12,7 +12,6 @@ const STATIC_ASSETS = [
   '/contact',
   '/blog',
   '/projects',
-  '/astro.png',
   '/aris.png',
   '/case-1.png',
   '/favicon.ico',

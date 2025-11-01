@@ -20,10 +20,10 @@ export function ServicesAnimatedGrid() {
   return (
     <div
       ref={ref}
-      className={`grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-6 md:gap-8 lg:gap-10 max-w-5xl mx-auto transition-all duration-700 ease-out ${animationClass}`}
+      className={`grid grid-cols-1 gap-6 md:gap-8 lg:gap-10 max-w-5xl mx-auto transition-all duration-700 ease-out ${animationClass} md:grid-cols-4 md:grid-rows-3`}
     >
-      {/* Next.js Development Card */}
-      <div className="group relative">
+      {/* Next.js Development Card (featured) */}
+      <div className="group relative md:col-span-2 md:row-span-2">
         <div className="relative h-full p-8 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl transition-all duration-300 group-hover:scale-[1.02] overflow-hidden flex flex-col shadow-lg border border-gray-200 dark:border-gray-700">
           {/* Gradient background overlay */}
           <div className="absolute inset-0 bg-gradient-to-br from-wp-blue/5 to-transparent group-hover:from-wp-blue/10 transition-all duration-300"></div>
@@ -74,7 +74,7 @@ export function ServicesAnimatedGrid() {
       </div>
       
       {/* WordPress Development Card */}
-      <div className="group relative">
+      <div className="group relative md:col-span-2 md:row-span-2">
         <div className="relative h-full p-8 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl transition-all duration-300 group-hover:scale-[1.02] overflow-hidden flex flex-col shadow-lg border border-gray-200 dark:border-gray-700">
           <div className="absolute inset-0 bg-gradient-to-br from-wp-gold/5 to-transparent group-hover:from-wp-gold/10 transition-all duration-300"></div>
           
@@ -121,7 +121,7 @@ export function ServicesAnimatedGrid() {
       </div>
       
       {/* PHP Development Card */}
-      <div className="group relative">
+      <div className="group relative md:col-span-2 md:row-span-1">
         <div className="relative h-full p-8 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl transition-all duration-300 group-hover:scale-[1.02] overflow-hidden flex flex-col shadow-lg border border-gray-200 dark:border-gray-700">
           <div className="absolute inset-0 bg-gradient-to-br from-wp-sage/5 to-transparent group-hover:from-wp-sage/10 transition-all duration-300"></div>
           
@@ -168,7 +168,7 @@ export function ServicesAnimatedGrid() {
       </div>
       
       {/* Vibe Code Friend Card */}
-      <div className="group relative">
+      <div className="group relative md:col-span-2 md:row-span-1">
         <div className="relative h-full p-8 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl transition-all duration-300 group-hover:scale-[1.02] overflow-hidden flex flex-col shadow-lg border border-gray-200 dark:border-gray-700">
           <div className="absolute inset-0 bg-gradient-to-br from-wp-blue/5 to-wp-gold/5 group-hover:from-wp-blue/10 group-hover:to-wp-gold/10 transition-all duration-300"></div>
           

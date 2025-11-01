@@ -129,7 +129,7 @@ const structuredData = {
         "name": "Aris Setiawan",
         "jobTitle": "Senior Full Stack Developer",
         "url": "https://madebyaris.com",
-        "image": "https://madebyaris.com/astro.png",
+        "image": "https://madebyaris.com/aris.png",
         "sameAs": [
           "https://www.linkedin.com/in/arissetia/",
           "https://github.com/madebyaris",
@@ -417,18 +417,19 @@ export default function WordPressServicesPage() {
       {/* Introduction Section */}
       <SectionWrapper
         variant="default"
-        padding="default"
+        padding="small"
         description="With over 12 years of WordPress experience, I deliver custom solutions that combine beautiful design with powerful functionality. Whether you need a custom theme, specialized plugin, or a complete WordPress solution, I focus on creating secure, high-performance websites that drive results for your business."
       />
 
       {/* Services Section */}
       <SectionWrapper
         variant="accent"
+        padding="small"
         badge={{ text: "Services Offered", icon: Code2 }}
         title="WordPress Development Solutions"
         description="Comprehensive WordPress services tailored to your business needs"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {services.map((service) => (
             <Link key={service.title} href={service.href} className="group">
               <EnhancedCard
@@ -471,11 +472,12 @@ export default function WordPressServicesPage() {
       {/* Benefits Section */}
       <SectionWrapper
         variant="default"
+        padding="small"
         badge={{ text: "Advantages", icon: Star }}
         title="Why Choose My WordPress Services"
         description="Experience the difference of professional WordPress development"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
           {benefits.map((benefit) => (
             <EnhancedCard
               key={benefit.title}
@@ -496,14 +498,12 @@ export default function WordPressServicesPage() {
       {/* Process Section */}
       <SectionWrapper
         variant="accent"
+        padding="small"
         badge={{ text: "Workflow", icon: Code2 }}
         title="WordPress Development Process"
         description="A structured approach to deliver exceptional WordPress solutions"
       >
-        <div className="relative">
-          <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-wp-gold/30 -translate-y-1/2 z-0"></div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               {
                 title: 'Discovery',
@@ -528,12 +528,11 @@ export default function WordPressServicesPage() {
                 title={step.title}
                 description={step.description}
               >
-                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-wp-gold/20 text-wp-gold font-bold text-lg mb-4 mx-auto">
+                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-wp-gold/20 text-wp-gold font-bold text-base mb-4 mx-auto">
                   {index + 1}
                 </div>
               </EnhancedCard>
             ))}
-          </div>
         </div>
       </SectionWrapper>
 
@@ -544,7 +543,7 @@ export default function WordPressServicesPage() {
         title="What Clients Say"
         description="Real feedback from satisfied WordPress clients"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {testimonials.map((testimonial, index) => (
             <EnhancedCard
               key={index}
