@@ -1,62 +1,67 @@
-'use client'
+import Link from 'next/link'
+import { ArrowRight, Award } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { fetchCaseStudies } from '@/lib/github'
+import { CaseStudiesCarousel } from '@/components/case-studies-carousel'
 
-import dynamic from 'next/dynamic'
-import Image from 'next/image'
+export async function CaseStudiesWrapper() {
+  const caseStudies = await fetchCaseStudies()
 
-const CaseStudiesCarousel = dynamic(
-  () => import('@/components/case-studies-carousel'),
-  { loading: () => <div className="h-[400px] bg-zinc-100/20 dark:bg-zinc-900/20 rounded-lg animate-pulse" /> }
-)
-
-export function CaseStudiesWrapper() {
-  return (
-    <div className="w-full">
-      {/* Section heading with decorative elements */}
-      <div className="relative mb-8 md:mb-12 text-center">
-        <span className="inline-block px-4 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-300 rounded-full text-sm font-medium mb-4">
-          Featured Work
-        </span>
-        <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
-          Case Studies
-        </h2>
-        <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-emerald-500/50 rounded-full"></div>
-      </div>
-      
-      {/* Introduction with photo and explanation */}
-      <div className="w-full max-w-4xl mx-auto mb-10 md:mb-16 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-center">
-        <div className="md:col-span-1 flex justify-center">
-          <div className="relative w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 rounded-full overflow-hidden border-4 border-emerald-500/20 shadow-xl">
-            <Image
-              src="/aris.png"
-              alt="Aris Setiawan"
-              fill
-              sizes="(max-width: 768px) 128px, (max-width: 1024px) 160px, 192px"
-              className="object-cover"
-              priority
-            />
-            <div className="absolute inset-0 ring-4 ring-emerald-500/20 rounded-full"></div>
+  // Fallback to empty state if no case studies
+  if (!caseStudies || caseStudies.length === 0) {
+    return (
+      <div className="w-full mb-8">
+        <div className="relative bg-white/90 dark:bg-wp-navy/30 backdrop-blur-xl rounded-3xl p-6 md:p-8 shadow-xl border border-gray-200/60 dark:border-wp-blue/20">
+          <div className="text-center py-12">
+            <p className="text-wp-navy/60 dark:text-muted-foreground">
+              Loading case studies from GitHub...
+            </p>
           </div>
         </div>
-        <div className="md:col-span-2">
-          <h3 className="text-xl md:text-2xl font-bold text-zinc-900 dark:text-white mb-3 md:mb-4">
-            Crafting Digital Experiences
-          </h3>
-          <p className="text-sm md:text-base text-zinc-600 dark:text-zinc-300 mb-3 md:mb-4 leading-relaxed">
-            As a senior full-stack developer, I&apos;ve had the privilege of working on diverse projects that solve complex problems. 
-            These case studies showcase my approach to building scalable, performant, and user-friendly applications.
-          </p>
-          <p className="text-sm md:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed">
-            Each project represents a unique challenge that was addressed through thoughtful architecture, 
-            modern technologies, and close collaboration with stakeholders.
-          </p>
-        </div>
       </div>
-      
-      {/* Decorative background elements */}
+    )
+  }
+
+  return (
+    <div className="w-full mb-8">
+      {/* Featured Case Studies */}
       <div className="relative">
-        {/* Glass container for carousel */}
-        <div className="relative bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm rounded-2xl p-4 md:p-6 shadow-xl border border-zinc-200/50 dark:border-zinc-700/50">
-          <CaseStudiesCarousel />
+        {/* Enhanced decorative background elements for light mode */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/80 via-indigo-50/60 to-purple-50/80 dark:from-wp-navy/20 dark:via-transparent dark:to-wp-gold/10 rounded-3xl"></div>
+        <div className="absolute inset-0 bg-gradient-to-tr from-wp-gold/5 via-transparent to-wp-blue/10 dark:from-wp-gold/10 dark:to-wp-blue/5 rounded-3xl"></div>
+        
+        {/* Enhanced glass container for better light mode appearance */}
+        <div className="relative bg-white/90 dark:bg-wp-navy/30 backdrop-blur-xl rounded-3xl p-6 md:p-8 shadow-xl border border-gray-200/60 dark:border-wp-blue/20">
+          {/* Section header inside container */}
+          <div className="text-center mb-6">
+            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-wp-gold/20 to-wp-blue/20 text-wp-navy dark:bg-wp-blue/10 dark:text-wp-blue mb-4 backdrop-blur-sm border border-wp-gold/30 dark:border-wp-blue/20 shadow-sm">
+              <Award className="w-5 h-5 text-wp-gold dark:text-wp-blue" />
+              <span className="text-sm font-bold tracking-wider uppercase">Featured Section</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-3">
+              <span className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent dark:from-foreground dark:via-foreground dark:to-foreground dark:text-foreground">Featured Case Studies</span>
+            </h2>
+            <p className="text-lg text-gray-700 dark:text-muted-foreground max-w-2xl mx-auto font-medium">
+              Explore real projects from my GitHub repositories with stars, forks, and technologies used
+            </p>
+          </div>
+          
+          <CaseStudiesCarousel caseStudies={caseStudies} />
+          
+          {/* Enhanced view all projects link */}
+          <div className="text-center mt-6">
+            <Button 
+              asChild 
+              variant="wp-secondary" 
+              size="lg"
+              className="bg-gradient-to-r from-wp-blue to-indigo-600 hover:from-wp-blue/90 hover:to-indigo-600/90 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 dark:shadow-wp-glow-blue dark:hover:shadow-wp-glow-blue group"
+            >
+              <Link href="https://github.com/madebyaris" target="_blank" rel="noopener noreferrer">
+                View All Projects on GitHub
+                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </Button>
+          </div>
         </div>
       </div>
     </div>

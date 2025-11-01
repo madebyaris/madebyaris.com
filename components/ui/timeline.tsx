@@ -5,10 +5,31 @@ import {
   motion,
 } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
+import { useIntersectionObserver } from '@/hooks/use-intersection-observer'
 
 interface TimelineEntry {
   title: string;
   content: React.ReactNode;
+}
+
+interface TimelineItemProps {
+  // existing props
+}
+
+function TimelineItem({ ...props }) {
+  const { ref, isIntersecting } = useIntersectionObserver<HTMLDivElement>({
+    threshold: 0.1,
+    rootMargin: '0px',
+    triggerOnce: true,
+  })
+
+  const animationClass = isIntersecting ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+
+  return (
+    <div ref={ref} className={`transition-all duration-700 ease-out ${animationClass}`}>
+      {/* existing timeline item content */}
+    </div>
+  )
 }
 
 export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
@@ -38,9 +59,12 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
     >
 
       <div ref={ref} className="relative max-w-7xl mx-auto pb-20">
-        {data.map((item, index) => (
+        {data.map((item, index) => {
+          // Create a stable key from title (remove year prefix for uniqueness)
+          const keyBase = item.title.replace(/^\d{4}\s*-\s*/, '').replace(/\s+/g, '-').toLowerCase() || `item-${index}`;
+          return (
           <div
-            key={index}
+            key={keyBase}
             className="flex justify-start pt-10 md:pt-40 md:gap-10"
           >
             <div className="sticky flex flex-col md:flex-row z-40 items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full">
@@ -59,7 +83,8 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
               {item.content}{" "}
             </div>
           </div>
-        ))}
+          );
+        })}
         <div
           style={{
             height: height + "px",
@@ -71,10 +96,13 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
               height: heightTransform,
               opacity: opacityTransform,
             }}
-            className="absolute inset-x-0 top-0  w-[2px] bg-gradient-to-t from-purple-500 via-blue-500 to-transparent from-[0%] via-[10%] rounded-full"
+            className="absolute inset-x-0 top-0  w-[2px] bg-linear-to-t from-purple-500 via-blue-500 to-transparent from-[0%] via-[10%] rounded-full"
           />
         </div>
       </div>
     </div>
   );
 };
+
+export { TimelineItem }
+export default Timeline

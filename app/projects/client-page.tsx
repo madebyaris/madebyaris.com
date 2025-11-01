@@ -3,96 +3,95 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { ArrowRight, Briefcase, ShoppingCart, Film, Home, Globe, Music, Factory, Wrench, Utensils, Car, Zap } from 'lucide-react'
-import { Sparkles } from '@/components/ui/sparkles'
+import { ArrowRight, Briefcase, ShoppingCart, Film, Home, Globe, Music, Factory, Wrench, Utensils, Car, Zap, Trophy } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import { projects } from './server-page'
 
 // Import ProjectCard as a client component
 const ProjectCard = dynamic(() => import('@/components/project-card'), { 
   ssr: true,
-  loading: () => <div className="bg-white/50 dark:bg-zinc-800/50 rounded-lg shadow-md h-96 animate-pulse"></div>
+  loading: () => <div className="bg-white/50 dark:bg-wp-navy/30 rounded-lg shadow-md h-96 animate-pulse"></div>
 })
 
-// Define category colors with improved icons
+// Define category colors with improved icons using WordPress VIP colors
 const categoryColors: Record<string, { bg: string, text: string, icon: React.ReactNode, hoverBg: string }> = {
   "Education": { 
-    bg: "bg-blue-100 dark:bg-blue-900/30", 
-    text: "text-blue-800 dark:text-blue-300",
+    bg: "bg-wp-blue/10 dark:bg-wp-blue/20", 
+    text: "text-wp-blue",
     icon: <Globe className="w-4 h-4" />,
-    hoverBg: "hover:bg-blue-200 dark:hover:bg-blue-800/50"
+    hoverBg: "hover:bg-wp-blue/20"
   },
   "Agency": { 
-    bg: "bg-purple-100 dark:bg-purple-900/30", 
-    text: "text-purple-800 dark:text-purple-300",
+    bg: "bg-wp-gold/10 dark:bg-wp-gold/20", 
+    text: "text-wp-gold dark:text-wp-gold",
     icon: <Briefcase className="w-4 h-4" />,
-    hoverBg: "hover:bg-purple-200 dark:hover:bg-purple-800/50"
+    hoverBg: "hover:bg-wp-gold/20"
   },
   "Marketplace": { 
-    bg: "bg-emerald-100 dark:bg-emerald-900/30", 
-    text: "text-emerald-800 dark:text-emerald-300",
+    bg: "bg-wp-sage/10 dark:bg-wp-sage/20", 
+    text: "text-wp-sage dark:text-wp-sage",
     icon: <Globe className="w-4 h-4" />,
-    hoverBg: "hover:bg-emerald-200 dark:hover:bg-emerald-800/50"
+    hoverBg: "hover:bg-wp-sage/20"
   },
   "E-commerce": { 
-    bg: "bg-amber-100 dark:bg-amber-900/30", 
-    text: "text-amber-800 dark:text-amber-300",
+    bg: "bg-wp-gold/10 dark:bg-wp-gold/20", 
+    text: "text-wp-gold dark:text-wp-gold",
     icon: <ShoppingCart className="w-4 h-4" />,
-    hoverBg: "hover:bg-amber-200 dark:hover:bg-amber-800/50"
+    hoverBg: "hover:bg-wp-gold/20"
   },
   "Entertainment": { 
-    bg: "bg-pink-100 dark:bg-pink-900/30", 
-    text: "text-pink-800 dark:text-pink-300",
+    bg: "bg-wp-blue/10 dark:bg-wp-blue/20", 
+    text: "text-wp-blue",
     icon: <Film className="w-4 h-4" />,
-    hoverBg: "hover:bg-pink-200 dark:hover:bg-pink-800/50"
+    hoverBg: "hover:bg-wp-blue/20"
   },
   "Real Estate": { 
-    bg: "bg-indigo-100 dark:bg-indigo-900/30", 
-    text: "text-indigo-800 dark:text-indigo-300",
+    bg: "bg-wp-sage/10 dark:bg-wp-sage/20", 
+    text: "text-wp-sage dark:text-wp-sage",
     icon: <Home className="w-4 h-4" />,
-    hoverBg: "hover:bg-indigo-200 dark:hover:bg-indigo-800/50"
+    hoverBg: "hover:bg-wp-sage/20"
   },
   "Industrial Supply": { 
-    bg: "bg-orange-100 dark:bg-orange-900/30", 
-    text: "text-orange-800 dark:text-orange-300",
+    bg: "bg-wp-gold/10 dark:bg-wp-gold/20", 
+    text: "text-wp-gold dark:text-wp-gold",
     icon: <Wrench className="w-4 h-4" />,
-    hoverBg: "hover:bg-orange-200 dark:hover:bg-orange-800/50"
+    hoverBg: "hover:bg-wp-gold/20"
   },
   "Industrial": { 
-    bg: "bg-gray-100 dark:bg-gray-900/30", 
-    text: "text-gray-800 dark:text-gray-300",
+    bg: "bg-wp-blue/10 dark:bg-wp-blue/20", 
+    text: "text-wp-blue",
     icon: <Factory className="w-4 h-4" />,
-    hoverBg: "hover:bg-gray-200 dark:hover:bg-gray-800/50"
+    hoverBg: "hover:bg-wp-blue/20"
   },
   "Music Publishing": { 
-    bg: "bg-red-100 dark:bg-red-900/30", 
-    text: "text-red-800 dark:text-red-300",
+    bg: "bg-wp-sage/10 dark:bg-wp-sage/20", 
+    text: "text-wp-sage dark:text-wp-sage",
     icon: <Music className="w-4 h-4" />,
-    hoverBg: "hover:bg-red-200 dark:hover:bg-red-800/50"
+    hoverBg: "hover:bg-wp-sage/20"
   },
   "Music Industry": { 
-    bg: "bg-violet-100 dark:bg-violet-900/30", 
-    text: "text-violet-800 dark:text-violet-300",
+    bg: "bg-wp-gold/10 dark:bg-wp-gold/20", 
+    text: "text-wp-gold dark:text-wp-gold",
     icon: <Music className="w-4 h-4" />,
-    hoverBg: "hover:bg-violet-200 dark:hover:bg-violet-800/50"
+    hoverBg: "hover:bg-wp-gold/20"
   },
   "Food & Beverage": { 
-    bg: "bg-rose-100 dark:bg-rose-900/30", 
-    text: "text-rose-800 dark:text-rose-300",
+    bg: "bg-wp-blue/10 dark:bg-wp-blue/20", 
+    text: "text-wp-blue",
     icon: <Utensils className="w-4 h-4" />,
-    hoverBg: "hover:bg-rose-200 dark:hover:bg-rose-800/50"
+    hoverBg: "hover:bg-wp-blue/20"
   },
   "Rental Services": { 
-    bg: "bg-fuchsia-100 dark:bg-fuchsia-900/30", 
-    text: "text-fuchsia-800 dark:text-fuchsia-300",
+    bg: "bg-wp-sage/10 dark:bg-wp-sage/20", 
+    text: "text-wp-sage dark:text-wp-sage",
     icon: <Car className="w-4 h-4" />,
-    hoverBg: "hover:bg-fuchsia-200 dark:hover:bg-fuchsia-800/50"
+    hoverBg: "hover:bg-wp-sage/20"
   },
   "Energy": { 
-    bg: "bg-yellow-100 dark:bg-yellow-900/30", 
-    text: "text-yellow-800 dark:text-yellow-300",
+    bg: "bg-wp-gold/10 dark:bg-wp-gold/20", 
+    text: "text-wp-gold dark:text-wp-gold",
     icon: <Zap className="w-4 h-4" />,
-    hoverBg: "hover:bg-yellow-200 dark:hover:bg-yellow-800/50"
+    hoverBg: "hover:bg-wp-gold/20"
   }
 }
 
@@ -107,37 +106,35 @@ export default function ClientProjectsPage() {
 
   return (
     <div suppressHydrationWarning>
-      {/* Hero Section with enhanced design */}
-      <section className="relative py-12 md:py-16 overflow-hidden">
-        {/* Background decorative elements */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(120,119,198,0.1),transparent_60%)]"></div>
-        
-        <div className="container max-w-6xl mx-auto px-4 sm:px-6 relative">
-          <div className="text-center">
-            <div className="inline-block px-4 py-1 bg-primary/10 dark:bg-primary/20 text-primary rounded-full text-sm font-medium mb-4">
-              Enterprise Solutions
+      {/* Enhanced Projects Section */}
+      <section className="w-full py-24 bg-gradient-to-br from-gray-50/50 via-white to-blue-50/30 dark:bg-gradient-to-br dark:from-gray-900 dark:via-blue-900/10 dark:to-gray-900">
+        <div className="container max-w-7xl mx-auto px-6">
+          {/* Enhanced section heading matching homepage style */}
+          <div className="relative mb-16 text-center">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-wp-gold/10 text-wp-gold dark:bg-wp-blue/10 dark:text-wp-blue mb-6 backdrop-blur-sm">
+              <Trophy className="w-4 h-4" />
+              <span className="text-sm font-semibold tracking-wider uppercase">Enterprise Solutions</span>
             </div>
-            <Sparkles>
-              <h1 className="text-3xl md:text-4xl font-bold leading-tight tracking-tighter lg:text-5xl mb-4 md:mb-6">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-emerald-500">
-                  Client Projects Portfolio
-                </span>
-              </h1>
-            </Sparkles>
-            <div className="max-w-[700px] mx-auto bg-white/50 dark:bg-zinc-800/50 backdrop-blur-sm rounded-xl p-4 md:p-6 shadow-xl border border-zinc-200/50 dark:border-zinc-700/50">
-              <p className="text-base md:text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">
-                Explore our showcase of enterprise-level web development solutions, 
-                delivering exceptional results for clients worldwide.
-              </p>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+              <span className="text-wp-navy dark:text-foreground">Client Projects</span>{" "}
+              <span className="bg-gradient-to-r from-wp-gold to-wp-blue bg-clip-text text-transparent">Portfolio</span>
+            </h1>
+            <p className="text-lg md:text-xl text-wp-navy/70 dark:text-muted-foreground max-w-3xl mx-auto mb-8">
+              Explore our showcase of enterprise-level web development solutions, delivering exceptional results for clients across various industries worldwide.
+            </p>
+            <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-wp-gold to-wp-blue rounded-full"></div>
+            
+            {/* CTA Button */}
+            <div className="mt-12">
+              <Button asChild variant="wp-primary" size="xl" className="shadow-lg hover:shadow-xl">
+                <Link href="/contact">
+                  Start Your Project
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Link>
+              </Button>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Projects Grid with enhanced cards */}
-      <section className="py-8 md:py-12">
-        <div className="container max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                  <div className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-6 md:gap-8 lg:gap-10 max-w-5xl mx-auto">
             {isClient ? projects.map((project, index) => (
               <ProjectCard 
                 key={project.id}
@@ -148,29 +145,37 @@ export default function ClientProjectsPage() {
             )) : (
               // Skeleton loading placeholders for server-side rendering
               Array.from({ length: 6 }).map((_, index) => (
-                <div key={index} className="bg-white/50 dark:bg-zinc-800/50 rounded-lg shadow-md h-96 animate-pulse"></div>
+                <div key={`skeleton-${index}`} className="bg-white/50 dark:bg-wp-navy/30 rounded-lg shadow-md h-96 animate-pulse"></div>
               ))
             )}
           </div>
         </div>
       </section>
 
-      {/* Enhanced CTA Section with fixed button contrast */}
-      <section className="py-12 md:py-16 relative overflow-hidden">
-        
-        <div className="container max-w-6xl mx-auto px-4 sm:px-6 relative">
-          <div className="bg-white/70 dark:bg-zinc-800/70 backdrop-blur-md rounded-2xl p-6 md:p-10 shadow-xl border border-zinc-200/50 dark:border-zinc-700/50 text-center">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
-              Ready to Build Your Next Project?
+      {/* CTA Section */}
+      <section className="w-full py-24 bg-gradient-to-br from-wp-blue/5 via-transparent to-wp-gold/5 dark:from-wp-blue/10 dark:to-wp-gold/10">
+        <div className="container max-w-6xl mx-auto px-6">
+          <div className="text-center">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              <span className="text-wp-navy dark:text-foreground">Ready to Build Your</span>{" "}
+              <span className="bg-gradient-to-r from-wp-gold to-wp-blue bg-clip-text text-transparent">Next Project?</span>
             </h2>
-            <p className="text-base md:text-lg text-zinc-700 dark:text-zinc-300 mb-6 md:mb-8 max-w-2xl mx-auto">
+            <p className="text-lg text-wp-navy/70 dark:text-muted-foreground mb-10 max-w-2xl mx-auto">
               Let&apos;s collaborate to create a high-performance, visually stunning solution that meets your business needs and exceeds your expectations.
             </p>
-            <Link href="/contact">
-              <Button className="bg-primary hover:bg-primary/90 dark:bg-primary dark:text-black dark:hover:bg-primary/90 px-6 py-2 md:px-8 md:py-6 text-base md:text-lg rounded-full shadow-lg hover:shadow-xl transition-all hover:translate-y-[-2px]">
-                Start a Project <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
+            <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+              <Button asChild variant="wp-primary" size="xl">
+                <Link href="/contact">
+                  Start a Project
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Link>
               </Button>
-            </Link>
+              <Button asChild variant="wp-secondary" size="xl">
+                <Link href="/services">
+                  View Services
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>

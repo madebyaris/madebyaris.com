@@ -1,7 +1,10 @@
 import type { Metadata } from 'next'
-import { Code2, Layout, Server, Rocket, Zap, FileCode, ArrowRight, MessageSquareHeart } from 'lucide-react'
+import { Code2, Layout, Server, Rocket, Zap, FileCode, ArrowRight, MessageSquareHeart, Briefcase, Trophy } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '../../components/ui/button'
+import { PageHero } from '../../components/ui/page-hero'
+import { SectionWrapper } from '../../components/ui/section-wrapper'
+import { EnhancedCard } from '../../components/ui/enhanced-card'
 import { ImageResponse } from 'next/og'
 
 export const revalidate = 86400 // Revalidate daily
@@ -112,7 +115,7 @@ const structuredData = {
         "name": "Aris Setiawan",
         "jobTitle": "Senior Full Stack Developer",
         "url": "https://madebyaris.com",
-        "image": "https://madebyaris.com/astro.png",
+        "image": "https://madebyaris.com/aris.png",
         "sameAs": [
           "https://www.linkedin.com/in/arissetia/",
           "https://github.com/madebyaris",
@@ -367,175 +370,151 @@ export default function ServicesPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <div className="relative">
-        {/* Hero Section with improved visual design */}
-        <section className="relative py-10 md:py-12 overflow-hidden">
-          <div className="container max-w-6xl mx-auto px-4 sm:px-6 relative">
-            <div className="text-center">
-              <div className="inline-block px-4 py-1 bg-primary/10 dark:bg-primary/20 text-primary rounded-full text-sm font-medium mb-4">
-                Expert Services
+      
+      {/* Hero Section with new PageHero component */}
+      <PageHero
+        variant="services"
+        badge={{ text: "Expert Services", icon: Briefcase }}
+        title={
+          <>
+            <span className="text-wp-navy-foreground dark:text-foreground">Professional</span>{" "}
+            <span className="bg-gradient-to-r from-wp-gold to-wp-blue bg-clip-text text-transparent">Web Development</span>{" "}
+            <span className="text-wp-navy-foreground dark:text-foreground">Services</span>
+          </>
+        }
+        description="Expert development services focused on modern technologies and best practices. From blazing-fast Next.js applications to powerful WordPress solutions."
+      >
+        <Button asChild variant="wp-primary" size="xl">
+          <Link href="/contact">
+            Start Your Project
+            <ArrowRight className="w-5 h-5 ml-2" />
+          </Link>
+        </Button>
+      </PageHero>
+
+      {/* Main Services Section */}
+      <SectionWrapper
+        variant="default"
+        padding="small"
+        badge={{ text: "Core Offerings", icon: Code2 }}
+        title="Main Services"
+        description="Comprehensive development solutions tailored to your business needs"
+      >
+                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+           {services.map((service) => (
+                          <EnhancedCard
+               key={service.title}
+               variant="elevated"
+               title={service.title}
+               description={service.description}
+             >
+               {/* Icon */}
+               <div className="mb-6 p-4 bg-wp-blue/10 dark:bg-wp-blue/20 rounded-xl w-fit">
+                 <div className="w-8 h-8 text-wp-blue">
+                   {service.icon}
+                 </div>
+               </div>
+               
+               {/* Features list */}
+               <div className="mb-6 flex flex-wrap gap-2">
+                {service.features.map((feature) => (
+                  <span 
+                    key={feature} 
+                    className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-wp-blue/10 dark:bg-wp-blue/20 text-wp-blue"
+                  >
+                    {feature}
+                  </span>
+                ))}
               </div>
               
-              <h1 className="text-3xl md:text-4xl font-bold leading-tight tracking-tighter lg:text-5xl mb-4 md:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-emerald-500">
-                Professional Web Development Services
-              </h1>
-              
-              <div className="max-w-[700px] mx-auto bg-white/50 dark:bg-zinc-800/50 backdrop-blur-sm rounded-xl p-4 md:p-6 shadow-xl border border-zinc-200/50 dark:border-zinc-700/50">
-                <p className="text-base md:text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">
-                  Expert development services focused on modern technologies and best practices. From blazing-fast Next.js applications to powerful WordPress solutions.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Main Services Section */}
-        <section className="py-10 md:py-12">
-          <div className="container max-w-6xl mx-auto px-4 sm:px-6">
-            {/* Section heading with decorative elements */}
-            <div className="relative mb-8 md:mb-10 text-center">
-              <span className="inline-block px-4 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full text-sm font-medium mb-4">
-                Core Offerings
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
-                Main Services
-              </h2>
-              <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-blue-500/50 rounded-full"></div>
-            </div>
-            
-            {/* Services grid with enhanced cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-              {services.map((service) => (
-                <div 
-                  key={service.title}
-                  className="group"
-                >
-                  <div className="relative h-full p-6 md:p-8 bg-white dark:bg-zinc-800/60 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-zinc-200/50 dark:border-zinc-700/50 overflow-hidden flex flex-col">
-                    {/* Icon */}
-                    <div className="relative mb-6 p-4 bg-blue-100 dark:bg-blue-900/30 rounded-xl w-fit">
-                      <div className="w-8 h-8 text-blue-600 dark:text-blue-400">
-                        {service.icon}
-                      </div>
-                    </div>
-                    
-                    {/* Content */}
-                    <h3 className="text-xl md:text-2xl font-bold mb-4 text-zinc-900 dark:text-white relative">
-                      {service.title}
-                    </h3>
-                    <p className="text-zinc-600 dark:text-zinc-300 mb-6 relative">
-                      {service.description}
-                    </p>
-                    
-                    {/* Features list */}
-                    <div className="mb-6 relative flex flex-wrap gap-2">
-                      {service.features.map((feature) => (
-                        <span 
-                          key={feature} 
-                          className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200"
-                        >
-                          {feature}
-                        </span>
-                      ))}
-                    </div>
-                    
-                    <div className="mt-auto">
-                      <Link href={service.href}>
-                        <Button className="w-full group bg-primary hover:bg-primary/90 text-white dark:text-black rounded-full">
-                          Learn More
-                          <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                        </Button>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* WordPress Services Section */}
-        <section className="py-10 md:py-12 bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-900 dark:to-zinc-950">
-          <div className="container max-w-6xl mx-auto px-4 sm:px-6">
-            {/* Section heading with decorative elements */}
-            <div className="relative mb-8 md:mb-10 text-center">
-              <span className="inline-block px-4 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-300 rounded-full text-sm font-medium mb-4">
-                WordPress Expertise
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
-                WordPress Development Services
-              </h2>
-              <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-emerald-500/50 rounded-full"></div>
-            </div>
-            
-            {/* WordPress services grid */}
-            <div className="relative grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-              {wordPressServices.map((service) => (
-                <div 
-                  key={service.title}
-                  className="group"
-                >
-                  <div className="relative h-full p-6 md:p-8 bg-white dark:bg-zinc-800/60 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-zinc-200/50 dark:border-zinc-700/50 overflow-hidden flex flex-col">
-                    {/* Icon */}
-                    <div className="relative mb-6 p-4 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl w-fit">
-                      <div className="w-8 h-8 text-emerald-600 dark:text-emerald-400">
-                        {service.icon}
-                      </div>
-                    </div>
-                    
-                    {/* Content */}
-                    <h3 className="text-xl md:text-2xl font-bold mb-4 text-zinc-900 dark:text-white relative">
-                      {service.title}
-                    </h3>
-                    <p className="text-zinc-600 dark:text-zinc-300 mb-6 relative">
-                      {service.description}
-                    </p>
-                    
-                    {/* Benefits list */}
-                    <div className="mb-6 relative flex flex-wrap gap-2">
-                      {service.benefits.map((benefit) => (
-                        <span 
-                          key={benefit} 
-                          className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100/50 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-300"
-                        >
-                          {benefit}
-                        </span>
-                      ))}
-                    </div>
-                    
-                    <div className="mt-auto">
-                      <Link href={service.href}>
-                        <Button className="w-full group bg-emerald-600 hover:bg-emerald-700 text-white rounded-full">
-                          Learn More
-                          <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                        </Button>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className="py-10 md:py-12">
-          <div className="container max-w-6xl mx-auto px-4 sm:px-6 relative">
-            <div className="bg-white/70 dark:bg-zinc-800/70 backdrop-blur-md rounded-2xl p-6 md:p-8 shadow-xl border border-zinc-200/50 dark:border-zinc-700/50 text-center">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
-                Ready to Start Your Project?
-              </h2>
-              <p className="text-base md:text-lg text-zinc-700 dark:text-zinc-300 mb-6 md:mb-8 max-w-2xl mx-auto">
-                Let&apos;s collaborate to create a high-performance, visually stunning solution that meets your business needs and exceeds your expectations.
-              </p>
-              <Link href="/contact">
-                <Button className="bg-primary hover:bg-primary/90 dark:bg-primary dark:text-black dark:hover:bg-primary/90 px-6 py-2 md:px-8 md:py-4 text-base md:text-lg rounded-full shadow-lg hover:shadow-xl transition-all hover:translate-y-[-2px]">
-                  Get in Touch <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
+              <div className="mt-auto">
+                <Button asChild variant="wp-primary" className="w-full">
+                  <Link href={service.href}>
+                    Learn More
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
                 </Button>
+              </div>
+            </EnhancedCard>
+          ))}
+        </div>
+      </SectionWrapper>
+
+      {/* WordPress Services Section */}
+      <SectionWrapper
+        variant="accent"
+        badge={{ text: "WordPress Expertise", icon: Layout }}
+        title="WordPress Development Services"
+        description="Specialized WordPress solutions from custom themes to headless architectures"
+      >
+                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+           {wordPressServices.map((service) => (
+                          <EnhancedCard
+               key={service.title}
+               variant="elevated"
+               title={service.title}
+               description={service.description}
+             >
+               {/* Icon */}
+               <div className="mb-6 p-4 bg-wp-gold/10 dark:bg-wp-gold/20 rounded-xl w-fit">
+                 <div className="w-8 h-8 text-wp-gold">
+                   {service.icon}
+                 </div>
+               </div>
+               
+               {/* Benefits list */}
+               <div className="mb-6 flex flex-wrap gap-2">
+                {service.benefits.map((benefit) => (
+                  <span 
+                    key={benefit} 
+                    className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-wp-gold/10 dark:bg-wp-gold/20 text-wp-gold dark:text-wp-gold"
+                  >
+                    {benefit}
+                  </span>
+                ))}
+              </div>
+              
+              <div className="mt-auto">
+                <Button asChild variant="wp-secondary" className="w-full">
+                  <Link href={service.href}>
+                    Learn More
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
+            </EnhancedCard>
+          ))}
+        </div>
+      </SectionWrapper>
+
+      {/* CTA Section */}
+      <SectionWrapper
+        variant="gradient"
+        padding="large"
+        title={
+          <>
+            <span className="text-wp-navy-foreground dark:text-foreground">Ready to Start</span>{" "}
+            <span className="bg-gradient-to-r from-wp-gold to-wp-blue bg-clip-text text-transparent">Your Project?</span>
+          </>
+        }
+        description="Let's collaborate to create a high-performance, visually stunning solution that meets your business needs and exceeds your expectations."
+      >
+        <div className="text-center">
+          <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+            <Button asChild variant="wp-primary" size="xl">
+              <Link href="/contact">
+                Get in Touch
+                <ArrowRight className="w-5 h-5 ml-2" />
               </Link>
-            </div>
+            </Button>
+            <Button asChild variant="wp-secondary" size="xl">
+              <Link href="/projects">
+                View Our Work
+              </Link>
+            </Button>
           </div>
-        </section>
-      </div>
+        </div>
+      </SectionWrapper>
     </>
   )
 }

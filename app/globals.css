@@ -1,6 +1,41 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  
+  /* WordPress VIP Inspired Color Palette */
+  --color-wp-navy: hsl(var(--wp-navy));
+  --color-wp-navy-foreground: hsl(var(--wp-navy-foreground));
+  --color-wp-gold: hsl(var(--wp-gold));
+  --color-wp-gold-foreground: hsl(var(--wp-gold-foreground));
+  --color-wp-blue: hsl(var(--wp-blue));
+  --color-wp-blue-foreground: hsl(var(--wp-blue-foreground));
+  --color-wp-sage: hsl(var(--wp-sage));
+  --color-wp-sage-foreground: hsl(var(--wp-sage-foreground));
+}
+
+/* Performance optimizations */
+html {
+  scroll-behavior: smooth;
+}
 
 /* Optimize rendering performance */
 img, video {
@@ -9,12 +44,47 @@ img, video {
   display: block;
 }
 
-/* Improve text rendering */
+/* Improve text rendering and accessibility */
 body {
   font-family: Arial, Helvetica, sans-serif;
   text-rendering: optimizeSpeed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Enhanced focus management for accessibility */
+*:focus {
+  outline: 2px solid hsl(var(--wp-blue));
+  outline-offset: 2px;
+}
+
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 2px solid hsl(var(--wp-blue));
+  outline-offset: 2px;
+}
+
+/* Skip to content link for accessibility */
+.skip-to-content {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: hsl(var(--wp-navy));
+  color: hsl(var(--wp-navy-foreground));
+  padding: 8px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 9999;
+  font-weight: 600;
+}
+
+.skip-to-content:focus {
+  top: 6px;
 }
 
 /* Add content-visibility for better rendering performance */
@@ -23,7 +93,105 @@ body {
   contain-intrinsic-size: 0 500px;
 }
 
-/* Blog content responsive fixes */
+/* Enhanced WordPress VIP button variants */
+.btn-wp-primary {
+  background: linear-gradient(135deg, hsl(var(--wp-blue)) 0%, hsl(var(--wp-navy)) 100%);
+  color: hsl(var(--wp-blue-foreground));
+  border: none;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 14px 0 rgba(0, 118, 255, 0.15);
+}
+
+.btn-wp-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px 0 rgba(0, 118, 255, 0.25);
+  background: linear-gradient(135deg, hsl(var(--wp-blue), 0.9) 0%, hsl(var(--wp-navy), 0.9) 100%);
+}
+
+.btn-wp-secondary {
+  background: linear-gradient(135deg, hsl(var(--wp-gold)) 0%, hsl(var(--wp-sage)) 100%);
+  color: hsl(var(--wp-gold-foreground));
+  border: none;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 14px 0 rgba(255, 193, 7, 0.15);
+}
+
+.btn-wp-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px 0 rgba(255, 193, 7, 0.25);
+  background: linear-gradient(135deg, hsl(var(--wp-gold), 0.9) 0%, hsl(var(--wp-sage), 0.9) 100%);
+}
+
+/* Enhanced card components */
+.card-wp-glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark .card-wp-glass {
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.card-wp-glass:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px 0 rgba(31, 38, 135, 0.2);
+}
+
+.dark .card-wp-glass:hover {
+  box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* Enhanced gradient backgrounds */
+.gradient-wp-hero {
+  background: linear-gradient(135deg, 
+    hsl(var(--wp-navy)) 0%, 
+    hsl(var(--wp-blue)) 50%, 
+    hsl(var(--wp-sage)) 100%);
+}
+
+.gradient-wp-hero-light {
+  background: linear-gradient(135deg, 
+    hsl(var(--wp-navy), 0.05) 0%, 
+    hsl(var(--wp-blue), 0.1) 50%, 
+    hsl(var(--wp-sage), 0.05) 100%);
+}
+
+.gradient-wp-accent {
+  background: linear-gradient(135deg, 
+    hsl(var(--wp-gold), 0.1) 0%, 
+    hsl(var(--wp-blue), 0.1) 100%);
+}
+
+/* Enhanced animations with reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Smooth transitions for enhanced UX */
+.smooth-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
+}
+
+.smooth-transition:hover {
+  transform: translateY(-2px);
+}
+
+/* Enhanced prose styling with WordPress VIP colors */
 .prose {
   width: 100%;
   max-width: 100%;
@@ -57,10 +225,20 @@ body {
 
 .prose h2 {
   font-size: 1.875rem;
+  color: hsl(var(--wp-navy));
+}
+
+.dark .prose h2 {
+  color: hsl(var(--wp-blue));
 }
 
 .prose h3 {
   font-size: 1.5rem;
+  color: hsl(var(--wp-navy), 0.9);
+}
+
+.dark .prose h3 {
+  color: hsl(var(--wp-sage));
 }
 
 .prose h4 {
@@ -68,7 +246,7 @@ body {
 }
 
 .prose a {
-  color: hsl(var(--primary));
+  color: hsl(var(--wp-blue));
   text-decoration: underline;
   text-underline-offset: 2px;
   font-weight: 500;
@@ -76,11 +254,16 @@ body {
 }
 
 .prose a:hover {
-  color: hsl(var(--primary), 0.8);
+  color: hsl(var(--wp-blue), 0.8);
 }
 
 .prose strong, .prose b {
   font-weight: 700;
+  color: hsl(var(--wp-navy));
+}
+
+.dark .prose strong, .dark .prose b {
+  color: hsl(var(--wp-sage));
 }
 
 .prose em, .prose i {
@@ -88,14 +271,14 @@ body {
 }
 
 .prose blockquote {
-  border-left: 4px solid hsl(var(--primary));
+  border-left: 4px solid hsl(var(--wp-blue));
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   margin: 2rem 0;
   font-style: italic;
-  background-color: hsl(var(--muted), 0.3);
+  background: linear-gradient(135deg, hsl(var(--wp-blue), 0.05) 0%, hsl(var(--wp-sage), 0.05) 100%);
   border-radius: 0 0.5rem 0.5rem 0;
 }
 
@@ -130,7 +313,12 @@ body {
   height: auto;
   margin: 2rem 0;
   border-radius: 0.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.prose img:hover {
+  transform: scale(1.02);
 }
 
 .prose pre {
@@ -138,23 +326,30 @@ body {
   overflow-x: auto;
   white-space: pre-wrap;
   word-wrap: break-word;
-  background-color: hsl(var(--muted));
+  background: hsl(var(--wp-navy));
+  color: hsl(var(--wp-sage));
   padding: 1.25rem;
   border-radius: 0.5rem;
   margin: 2rem 0;
-  font-family: monospace;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
   font-size: 0.875rem;
   line-height: 1.7;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 .prose code {
-  font-family: monospace;
-  background-color: hsl(var(--muted));
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  background: hsl(var(--wp-navy), 0.1);
+  color: hsl(var(--wp-blue));
   padding: 0.2rem 0.4rem;
   border-radius: 0.25rem;
   font-size: 0.875rem;
   white-space: nowrap;
+}
+
+.dark .prose code {
+  background: hsl(var(--wp-blue), 0.2);
+  color: hsl(var(--wp-sage));
 }
 
 .prose pre code {
@@ -162,191 +357,187 @@ body {
   padding: 0;
   border-radius: 0;
   white-space: pre;
+  color: inherit;
 }
 
 .prose iframe {
   max-width: 100%;
   border-radius: 0.5rem;
   margin: 2rem 0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .prose table {
-  display: block;
   width: 100%;
-  overflow-x: auto;
   border-collapse: collapse;
   margin: 2rem 0;
-  font-size: 0.875rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .prose table th {
-  background-color: hsl(var(--muted));
-  font-weight: 600;
+  background: hsl(var(--wp-navy));
+  color: hsl(var(--wp-navy-foreground));
+  padding: 0.75rem;
   text-align: left;
-  padding: 0.75rem 1rem;
-  border: 1px solid hsl(var(--border));
+  font-weight: 600;
 }
 
 .prose table td {
-  padding: 0.75rem 1rem;
-  border: 1px solid hsl(var(--border));
+  padding: 0.75rem;
+  border-bottom: 1px solid hsl(var(--border));
 }
 
 .prose table tr:nth-child(even) {
-  background-color: hsl(var(--muted), 0.3);
+  background: hsl(var(--wp-blue), 0.05);
 }
 
 .prose hr {
-  border: 0;
-  border-top: 1px solid hsl(var(--border));
+  border: none;
+  height: 2px;
+  background: linear-gradient(135deg, hsl(var(--wp-blue)) 0%, hsl(var(--wp-sage)) 100%);
   margin: 3rem 0;
+  border-radius: 1px;
 }
 
+/* WordPress block styles with VIP colors */
 .prose .wp-block-image {
-  max-width: 100%;
   margin: 2rem 0;
 }
 
 .prose .wp-block-image img {
-  margin: 0;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .prose .wp-block-code {
-  max-width: 100%;
-  overflow-x: auto;
+  background: hsl(var(--wp-navy));
+  color: hsl(var(--wp-sage));
 }
 
 .prose .wp-block-button {
-  margin: 2rem 0;
+  margin: 1.5rem 0;
 }
 
 .prose .wp-block-button__link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0.375rem;
-  background-color: hsl(var(--primary));
+  background: linear-gradient(135deg, hsl(var(--wp-blue)) 0%, hsl(var(--wp-navy)) 100%);
+  color: hsl(var(--wp-blue-foreground));
   padding: 0.75rem 1.5rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: hsl(var(--primary-foreground));
+  border-radius: 0.5rem;
   text-decoration: none;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.2s ease;
+  font-weight: 600;
+  display: inline-block;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 14px 0 rgba(0, 118, 255, 0.15);
 }
 
 .prose .wp-block-button__link:hover {
-  background-color: hsl(var(--primary), 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px 0 rgba(0, 118, 255, 0.25);
 }
 
 .prose .wp-block-file {
-  margin: 2rem 0;
+  background: hsl(var(--wp-sage), 0.1);
   padding: 1rem;
-  border: 1px solid hsl(var(--border));
   border-radius: 0.5rem;
-  background-color: hsl(var(--muted), 0.3);
+  border-left: 4px solid hsl(var(--wp-sage));
+  margin: 1.5rem 0;
 }
 
 .prose .wp-block-quote {
-  margin: 2rem 0;
+  border-left: 4px solid hsl(var(--wp-gold));
+  background: linear-gradient(135deg, hsl(var(--wp-gold), 0.05) 0%, hsl(var(--wp-sage), 0.05) 100%);
 }
 
 .prose .wp-block-pullquote {
-  border-top: 1px solid hsl(var(--border));
-  border-bottom: 1px solid hsl(var(--border));
-  padding: 2rem 0;
+  border-top: 4px solid hsl(var(--wp-gold));
+  border-bottom: 4px solid hsl(var(--wp-gold));
+  padding: 2rem;
   margin: 2rem 0;
   text-align: center;
-  font-style: italic;
+  font-size: 1.25rem;
+  background: linear-gradient(135deg, hsl(var(--wp-gold), 0.05) 0%, hsl(var(--wp-sage), 0.05) 100%);
 }
 
 .prose .wp-block-columns {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
+  display: block;
   margin: 2rem 0;
 }
 
 @media (min-width: 768px) {
   .prose .wp-block-columns {
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    gap: 2rem;
   }
 }
 
 .prose .wp-block-column {
-  display: flex;
-  flex-direction: column;
+  flex: 1;
+  margin-bottom: 1rem;
 }
 
 .prose .wp-block-media-text {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
+  display: block;
   margin: 2rem 0;
-  align-items: center;
+  background: hsl(var(--wp-sage), 0.05);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
 }
 
 @media (min-width: 768px) {
   .prose .wp-block-media-text {
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
   }
 }
 
 .prose .wp-block-cover {
-  position: relative;
-  border-radius: 0.5rem;
-  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  padding: 3rem 1.5rem;
   margin: 2rem 0;
-  background-color: hsl(var(--muted), 0.5);
-  padding: 2rem;
+  border-radius: 0.5rem;
+  color: white;
+  text-align: center;
 }
 
-/* Add more space to blog post container */
+/* Enhanced utility classes */
 .bg-background {
-  padding-left: env(safe-area-inset-left);
-  padding-right: env(safe-area-inset-right);
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
 }
 
-/* Add shadow to the featured image */
 .aspect-\[16\/9\] {
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-  border-radius: 8px;
-  overflow: hidden;
+  aspect-ratio: 16 / 9;
 }
 
-/* Author bio styles */
 .rounded-full {
-  position: relative;
-  z-index: 1;
+  border-radius: 50%;
 }
 
 .rounded-full img {
+  border-radius: 50%;
   object-fit: cover;
-  width: 100%;
-  height: 100%;
 }
 
 .bg-muted\/30 {
-  background-color: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background-color: hsl(var(--muted), 0.3);
 }
 
-@layer utilities {
+/* Enhanced responsive design */
+@media (max-width: 640px) {
   .text-balance {
     text-wrap: balance;
   }
   
-  /* Add GPU acceleration for animations */
   .gpu {
     transform: translateZ(0);
     backface-visibility: hidden;
-    perspective: 1000px;
+    perspective: 1000;
   }
   
-  /* Add will-change optimization */
   .will-change-opacity {
     will-change: opacity;
   }
@@ -356,314 +547,344 @@ body {
   }
 }
 
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
-    --white: white;
-    --black: black;
-    --transparent: transparent;
-  }
-  .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-  }
+/* Enhanced CSS variables with WordPress VIP theme */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 3.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 3.9%;
+  --primary: 0 0% 9%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 0 0% 96.1%;
+  --secondary-foreground: 0 0% 9%;
+  --muted: 0 0% 96.1%;
+  --muted-foreground: 0 0% 45.1%;
+  --accent: 0 0% 96.1%;
+  --accent-foreground: 0 0% 9%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 89.8%;
+  --input: 0 0% 89.8%;
+  --ring: 0 0% 3.9%;
+  --radius: 0.5rem;
+  --chart-1: 12 76% 61%;
+  --chart-2: 173 58% 39%;
+  --chart-3: 197 37% 24%;
+  --chart-4: 43 74% 66%;
+  --chart-5: 27 87% 67%;
+  
+  /* WordPress VIP Color Palette */
+  --wp-navy: 220 45% 15%;
+  --wp-navy-foreground: 0 0% 98%;
+  --wp-gold: 45 100% 50%;
+  --wp-gold-foreground: 0 0% 9%;
+  --wp-blue: 210 100% 50%;
+  --wp-blue-foreground: 0 0% 98%;
+  --wp-sage: 120 15% 60%;
+  --wp-sage-foreground: 0 0% 9%;
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+.dark {
+  --background: 0 0% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 0 0% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --popover: 0 0% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 0 0% 9%;
+  --secondary: 0 0% 14.9%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 0 0% 14.9%;
+  --muted-foreground: 0 0% 63.9%;
+  --accent: 0 0% 14.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 14.9%;
+  --input: 0 0% 14.9%;
+  --ring: 0 0% 83.1%;
+  --chart-1: 220 70% 50%;
+  --chart-2: 160 60% 45%;
+  --chart-3: 30 80% 55%;
+  --chart-4: 280 65% 60%;
+  --chart-5: 340 75% 55%;
 }
 
-/* Optimize image loading */
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+/* Enhanced loading states */
 .image-loading {
-  background-color: #f0f0f0;
-  animation: pulse 1.5s infinite;
+  background: linear-gradient(90deg, hsl(var(--muted)) 25%, hsl(var(--muted), 0.5) 50%, hsl(var(--muted)) 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
 }
 
-@keyframes pulse {
-  0%, 100% {
-    opacity: 0.5;
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
   }
-  50% {
-    opacity: 0.8;
+  100% {
+    background-position: -200% 0;
   }
 }
 
-/* Add scroll margin to headings with IDs */
+/* Enhanced heading anchor links */
 h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
   scroll-margin-top: 100px;
+  position: relative;
 }
 
-/* Blog page enhancements */
+/* Enhanced blog components */
 .blog-card {
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .blog-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px -5px rgba(0, 0, 0, 0.1);
-  border-color: hsl(var(--primary), 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
-/* Tag styling */
+.dark .blog-card:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Enhanced tag styling */
 .tag {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.15rem 0.5rem;
-  border-radius: 9999px;
-  font-size: 0.7rem;
-  font-weight: 500;
-  background-color: hsl(var(--primary), 0.1);
-  color: hsl(var(--primary));
-  transition: background-color 0.2s ease, color 0.2s ease;
-  cursor: pointer;
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 transition-colors hover:bg-blue-200 dark:hover:bg-blue-900/50 cursor-pointer;
 }
 
 .tag:hover {
-  background-color: hsl(var(--primary), 0.2);
+  @apply bg-blue-200 dark:bg-blue-900/50;
 }
 
 .tag.active {
-  background-color: hsl(var(--primary));
-  color: hsl(var(--primary-foreground));
+  @apply bg-blue-600 text-white dark:bg-blue-500 dark:text-white;
 }
 
-/* Search input styling */
+/* Enhanced search input */
 .search-input {
-  transition: all 0.2s ease-in-out;
-  font-size: 0.95rem;
+  @apply w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent;
 }
 
 .search-input:focus {
-  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.2);
-  border-color: hsl(var(--primary));
+  @apply ring-2 ring-blue-500 border-transparent;
 }
 
 .search-input::placeholder {
-  color: hsl(var(--muted-foreground));
-  opacity: 0.7;
+  @apply text-gray-500 dark:text-gray-400;
 }
 
-/* Remove the default search input styling */
 .search-input::-webkit-search-decoration,
 .search-input::-webkit-search-cancel-button,
 .search-input::-webkit-search-results-button,
 .search-input::-webkit-search-results-decoration {
-  -webkit-appearance: none;
+  display: none;
 }
 
-/* Search results styling */
+/* Enhanced search results */
 .blog-grid.search-active {
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  @apply opacity-70;
 }
 
 .blog-card.search-result {
-  border-left: 3px solid hsl(var(--primary));
+  @apply opacity-100;
 }
 
-/* Highlight search matches */
 .search-highlight {
-  background-color: rgba(var(--primary-rgb), 0.1);
-  padding: 0 2px;
-  border-radius: 2px;
+  @apply bg-yellow-200 dark:bg-yellow-800 px-1 py-0.5 rounded font-medium;
 }
 
-/* Featured post styling */
+/* Enhanced featured post image */
 .featured-post-image {
-  position: relative;
-  overflow: hidden;
-  border-radius: 0.375rem;
-  box-shadow: 0 10px 40px -5px rgba(0, 0, 0, 0.2);
+  @apply relative overflow-hidden rounded-lg;
+  aspect-ratio: 16/9;
 }
 
-/* Special styling for the featured article image */
 .blog-card .grid .featured-post-image {
-  min-height: 220px;
-  max-height: none;
-  width: 100%;
+  @apply col-span-1;
 }
 
 @media (max-width: 768px) {
   .blog-card .grid .featured-post-image {
-    min-height: 200px;
+    @apply col-span-full;
   }
 }
 
-/* Make the featured image take up space in the grid */
 .blog-card .grid {
-  grid-template-columns: 1fr;
+  @apply grid grid-cols-1 md:grid-cols-3 gap-4;
 }
 
 @media (min-width: 768px) {
   .blog-card .grid {
-    grid-template-columns: 40% 60%;
+    @apply grid-cols-3;
   }
 }
 
 .featured-post-image::before {
   content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0) 70%, rgba(0,0,0,0.3) 100%);
-  z-index: 1;
-  pointer-events: none;
+  @apply absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 transition-opacity duration-300 z-10;
 }
 
 .featured-post-image img {
-  transition: transform 0.7s ease, filter 0.7s ease;
-  filter: saturate(1.05) contrast(1.05);
+  @apply w-full h-full object-cover transition-transform duration-300;
 }
 
 .featured-post-image:hover img {
-  transform: scale(1.05);
-  filter: saturate(1.1) contrast(1.1);
+  @apply scale-105;
 }
 
-/* Blog grid layout improvements */
+.featured-post-image:hover::before {
+  @apply opacity-100;
+}
+
+/* Enhanced blog grid */
 .blog-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1rem;
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
 }
 
 @media (max-width: 640px) {
   .blog-grid {
-    grid-template-columns: 1fr;
+    @apply grid-cols-1 gap-4;
   }
 }
 
-/* Animated gradient background - more subtle */
+/* Enhanced animated gradient */
 .animated-gradient {
-  background: linear-gradient(-45deg, 
-    hsl(var(--background)), 
-    hsl(var(--background), 0.95), 
-    hsl(var(--primary), 0.03), 
-    hsl(var(--background))
-  );
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 400% 400%;
-  animation: gradient 20s ease infinite;
-  padding-top: 2rem;
-  padding-bottom: 1rem;
+  animation: gradient 15s ease infinite;
 }
 
 @keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-/* Improved scrollbar for blog content */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.animate-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: shimmer 2s infinite;
+}
+
+/* Enhanced scrollbar styling */
 .prose::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
 }
 
 .prose::-webkit-scrollbar-track {
-  background: hsl(var(--muted));
-  border-radius: 3px;
+  background: transparent;
 }
 
 .prose::-webkit-scrollbar-thumb {
-  background: hsl(var(--primary), 0.3);
-  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
 }
 
 .prose::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--primary), 0.5);
+  background: rgba(0, 0, 0, 0.3);
 }
 
-/* Optimize horizontal scrolling for tags */
 .overflow-x-auto {
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
 }
 
 .overflow-x-auto::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Edge */
+  height: 8px;
 }
 
-/* Compact card styling */
+/* Enhanced responsive image handling */
 .blog-card .featured-post-image {
-  max-height: 180px;
-  border-bottom: 1px solid rgba(0,0,0,0.05);
+  @apply bg-gray-100 dark:bg-gray-800;
 }
 
-/* Reduce spacing in mobile view */
 @media (max-width: 768px) {
   .py-10 {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
+    @apply py-6;
   }
   
   .py-6 {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    @apply py-4;
   }
   
   .mb-6 {
-    margin-bottom: 1rem;
+    @apply mb-4;
   }
   
   .gap-4 {
-    gap: 0.75rem;
+    @apply gap-3;
   }
 }
+
+
+/* Phase 1: Modern design utilities */
+/* Advanced glassmorphism */
+.glass-card-modern {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(209, 213, 219, 0.3);
+}
+
+/* Mesh/aurora style gradient background */
+.mesh-gradient {
+  background:
+    radial-gradient(at 40% 20%, hsla(var(--wp-gold), 0.30) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, hsla(var(--wp-blue), 0.30) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, hsla(var(--wp-sage), 0.20) 0px, transparent 50%);
+}
+
+/* Bento card glow helper (use via inline --glow-color) */
+.bento-card-glow {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+    0 10px 40px -10px rgba(0, 0, 0, 0.20),
+    0 0 60px -15px var(--glow-color, rgba(0,0,0,0));
+}
+
+/* Fluid typography helpers */
+.text-fluid-xl { font-size: clamp(2rem, 4vw + 0.5rem, 3.75rem); line-height: 1.1; }
+.text-fluid-lg { font-size: clamp(1.5rem, 2.5vw + 0.5rem, 2.25rem); line-height: 1.2; }
+.text-fluid-md { font-size: clamp(1.125rem, 1.2vw + 0.5rem, 1.25rem); line-height: 1.6; }
+
+/* Gradient text utilities */
+.gradient-text {
+  background-image: linear-gradient(90deg, hsl(var(--wp-gold)) 0%, hsl(var(--wp-blue)) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Subtle text depth */
+.text-depth {
+  text-shadow: 0 1px 1px rgba(0,0,0,0.05);
+}
+
+/* 3D tilt helper (set via inline style CSS variables) */
+.tilt-3d {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+

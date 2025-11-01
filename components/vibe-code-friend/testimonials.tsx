@@ -29,7 +29,7 @@ export function TestimonialsSection({
   testimonials,
 }: TestimonialsSectionProps) {
   return (
-    <section id="testimonials" className="w-full py-16 md:py-24 relative overflow-hidden bg-gradient-to-b from-background via-background to-muted/30">
+    <div className="w-full relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(120,119,198,0.1),transparent_60%)]"></div>
       <div className="absolute w-[800px] h-[800px] -left-40 top-[20%] bg-blue-200/10 dark:bg-blue-500/5 rounded-full blur-3xl"></div>
@@ -48,7 +48,7 @@ export function TestimonialsSection({
           {testimonials.map((t, i) => {
             const stars = typeof t.rating === "number" ? t.rating : 5;
             return (
-              <Card key={i} className="flex flex-col h-full relative overflow-hidden backdrop-blur-sm bg-background/70 border-border/60 hover:shadow-lg transition-all duration-300">
+              <Card key={`testimonial-${t.name.replace(/\s+/g, '-').toLowerCase()}-${i}`} className="flex flex-col h-full relative overflow-hidden backdrop-blur-sm bg-background/70 border-border/60 hover:shadow-lg transition-all duration-300">
                 <div className="absolute right-6 top-6 text-4xl font-serif text-primary/10">
                   <Quote size={32} />
                 </div>
@@ -57,7 +57,7 @@ export function TestimonialsSection({
                     <div className="flex">
                       {Array.from({ length: 5 }).map((_, idx) => (
                         <Star
-                          key={idx}
+                          key={`star-${t.name.replace(/\s+/g, '-').toLowerCase()}-${idx}`}
                           className={`h-4 w-4 ${
                             idx < stars
                               ? "fill-yellow-400 text-yellow-400"
@@ -93,7 +93,7 @@ export function TestimonialsSection({
           })}
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 

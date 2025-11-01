@@ -37,6 +37,11 @@ export function Navigation() {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = React.useState(false)
   const [expandedItems, setExpandedItems] = React.useState<Record<string, boolean>>({})
+  const [mounted, setMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
 
   // Toggle submenu expansion
   const toggleSubmenu = (href: string) => {
@@ -58,6 +63,10 @@ export function Navigation() {
     }
   }, [isOpen])
 
+  if (!mounted) {
+    return null
+  }
+
   return (
     <>
       {/* Desktop Navigation */}
@@ -67,9 +76,9 @@ export function Navigation() {
             <Link
               href={item.href}
               className={cn(
-                'text-sm font-medium transition-colors hover:text-foreground/80 flex items-center',
+                'text-base font-semibold transition-colors hover:text-foreground/80 flex items-center',
                 pathname === item.href
-                  ? 'text-foreground'
+                  ? 'text-wp-gold'
                   : 'text-foreground/60'
               )}
             >
@@ -93,14 +102,14 @@ export function Navigation() {
             </Link>
 
             {item.children && (
-              <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-background border opacity-0 group-hover:opacity-100 transition-all duration-300 invisible group-hover:visible">
+              <div className="absolute left-0 mt-2 w-64 rounded-md shadow-lg py-2 bg-background border border-wp-gold/40 dark:border-wp-gold/50 opacity-0 group-hover:opacity-100 transition-all duration-300 invisible group-hover:visible">
                 <div className="absolute -top-2 left-0 right-0 h-2 bg-transparent" />
                 {item.children.map((child) => (
                   <Link
                     key={child.href}
                     href={child.href}
                     className={cn(
-                      'block px-4 py-2 text-sm transition-colors hover:text-foreground/80 hover:bg-accent',
+                      'block px-4 py-3 text-base font-medium transition-colors hover:text-foreground/80 hover:bg-accent',
                       pathname === child.href
                         ? 'text-foreground'
                         : 'text-foreground/60'

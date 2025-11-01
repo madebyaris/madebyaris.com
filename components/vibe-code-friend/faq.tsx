@@ -62,7 +62,7 @@ export function VibeCodeFAQ({
   const [openItem, setOpenItem] = React.useState<string | null>(null);
 
   return (
-    <section id="faq" className="w-full py-16 md:py-24 bg-gradient-to-b from-muted/30 to-background">
+    <div className="w-full">
       <div className="container mx-auto max-w-6xl px-4 sm:px-6 relative">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
           <div className="flex gap-8 flex-col">
@@ -90,7 +90,7 @@ export function VibeCodeFAQ({
             collapsible
             value={openItem || ""}
             onValueChange={(value) => setOpenItem(value)}
-            className={`bg-background/50 backdrop-blur-sm p-6 rounded-xl border border-border/50 shadow-sm ${className}`}
+            className={`bg-white/80 dark:bg-wp-navy/50 backdrop-blur-sm p-6 rounded-xl border border-border/50 shadow-sm ${className}`}
           >
             {faqData.map((item) => (
               <AccordionItem 
@@ -112,6 +112,6 @@ export function VibeCodeFAQ({
           </Accordion>
         </div>
       </div>
-    </section>
+    </div>
   );
 } 
