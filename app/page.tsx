@@ -1,39 +1,22 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Suspense } from 'react'
 import { getPosts } from '@/lib/wordpress'
-import dynamic from 'next/dynamic'
-import { Code2, Layout, Server, ArrowRight, MessageSquareHeart, Sparkles, Trophy, Zap, MessageSquare } from 'lucide-react'
-import { LogoCarousel } from '@/components/ui/logo-carousel'
-import { techLogos } from '@/components/ui/tech-logos'
+import { ArrowRight, ArrowUpRight, Code2, Globe, Server, Zap, Users, Clock, CheckCircle, Home } from 'lucide-react'
 import { structuredData } from '@/lib/structured-data'
-import { Button } from '@/components/ui/button'
-import { ServicesAnimatedGrid } from '@/components/services-animated-grid'
-import { TestimonialsCarousel } from '@/components/testimonials-carousel'
-import { CaseStudiesWrapper } from '@/components/case-studies-wrapper'
+import { HomeContent } from '@/components/home-content'
 
 // Segment Configuration
 export const revalidate = 86400 // 24 hours
 
-import { 
-  HeroSkeleton, 
-  CaseStudiesSkeleton, 
-  BlogGridSkeleton 
-} from '@/components/ui/skeleton-loaders'
-
-// Loading fallbacks with proper skeleton loaders
-const HeroFallback = () => <HeroSkeleton />
-const CaseStudiesFallback = () => <CaseStudiesSkeleton />
-const PostsFallback = () => <BlogGridSkeleton count={3} />
-
-// Dynamically import heavy components with optimized loading
-const ClientHeroLazy = dynamic(() => import('@/components/client-hero'), {
-  loading: () => <HeroFallback />
-})
-
-// Dynamically import HomeContent for Posts
-const HomeContentLazy = dynamic(() => import('@/components/home-content'), {
-  loading: () => <PostsFallback />
-})
+// Loading fallbacks
+const PostsFallback = () => (
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+    {[1, 2, 3].map((i) => (
+      <div key={i} className="animate-pulse bg-zinc-100 h-80 rounded-2xl" />
+    ))}
+  </div>
+)
 
 export async function generateMetadata() {
   return {
@@ -65,198 +48,399 @@ async function Posts() {
     const posts = await getPosts({ 
       per_page: 3
     })
-    return <HomeContentLazy type="posts" initialData={posts} />
+    return <HomeContent type="posts" initialData={posts} />
   } catch (error) {
     console.error('Failed to load posts:', error)
-    return <HomeContentLazy type="posts" initialData={[]} />
+    return <HomeContent type="posts" initialData={[]} />
   }
 }
+
+// Service card data
+const services = [
+  {
+    icon: Code2,
+    title: "Next.js Development",
+    description: "Build blazing-fast React applications with server-side rendering, static generation, and modern web architecture.",
+    href: "/services/nextjs-development",
+    span: 1,
+  },
+  {
+    icon: Globe,
+    title: "WordPress Development",
+    description: "Custom themes, plugins, and headless WordPress solutions for scalable content management systems.",
+    href: "/services/wordpress",
+    span: 2,
+  },
+  {
+    icon: Server,
+    title: "PHP Development",
+    description: "Enterprise-grade PHP applications with Laravel, custom APIs, and database architecture.",
+    href: "/services/php-development",
+    span: 1,
+  },
+  {
+    icon: Zap,
+    title: "Performance Optimization",
+    description: "Audit, analyze, and optimize your web applications for Core Web Vitals and user experience.",
+    href: "/services/wordpress/optimization",
+    span: 1,
+  },
+]
+
+// Feature items
+const features = [
+  {
+    icon: Clock,
+    text: "12+ years of enterprise development experience building scalable solutions.",
+  },
+  {
+    icon: Users,
+    text: "Worked with startups, agencies, and Fortune 500 companies worldwide.",
+  },
+  {
+    icon: CheckCircle,
+    text: "Comprehensive solutions from architecture planning to deployment.",
+  },
+  {
+    icon: Home,
+    text: "Remote-first workflow with clear communication and timely delivery.",
+  },
+]
+
+// Client logos (using placeholder for now)
+const clients = [
+  { name: "Hongkiat", logo: "/images/clients/learnislam.png" },
+  { name: "SAB Digital", logo: "/images/clients/bacakomik.png" },
+  { name: "Raja Kreatif", logo: "/images/clients/cipika.png" },
+  { name: "Ta-Wan", logo: "/images/clients/ta-wan.png" },
+]
 
 export default function HomePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
-      <main className="flex flex-col w-full">
-        {/* Hero section with WordPress VIP inspired design */}
-        <Suspense fallback={<HeroFallback />}>
-          <ClientHeroLazy 
-            badge="12+ Years of Enterprise Experience"
-            title="Senior Full-Stack Developer & Web Architecture Specialist"
-            description={
-              <>
-                Hi! I&apos;m <span className="font-bold text-wp-navy dark:text-wp-gold">Aris</span>, architecting{" "}
-                <span className="bg-wp-gold text-wp-gold-foreground dark:bg-wp-blue dark:text-wp-blue-foreground px-3 py-1.5 rounded-lg inline-flex items-center font-medium">
-                  scalable solutions
-                </span>{" "}
-                with Next.js, React, and WordPress for enterprise clients.
-              </>
-            }
-          />
-        </Suspense>
-        
-        {/* Case studies section with WordPress VIP styling */}
-        <section className="w-full py-16 md:py-20 bg-wp-sage/30 dark:bg-wp-navy/50 cv-auto">
-          <div className="container max-w-6xl mx-auto px-4 sm:px-6">
-            <Suspense fallback={<CaseStudiesFallback />}>
-              <CaseStudiesWrapper />
-            </Suspense>
-          </div>
-        </section>
-        
-        {/* Trusted By Section with WordPress VIP inspired design */}
-        <section className="w-full py-16 md:py-20 relative overflow-hidden cv-auto">
-          {/* WordPress VIP inspired background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-background via-wp-sage/10 to-wp-blue/5 dark:from-background dark:via-wp-navy/20 dark:to-wp-gold/5"></div>
-          
-          <div className="container max-w-6xl mx-auto px-4 sm:px-6 relative">
-            <div className="flex flex-col items-center">
-              {/* Enhanced section heading with WordPress VIP styling */}
-              <div className="relative mb-16 text-center">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-wp-blue/10 text-wp-blue dark:bg-wp-gold/10 dark:text-wp-gold mb-6 backdrop-blur-sm">
-                  <Trophy className="w-4 h-4" />
-                  <span className="text-sm font-semibold tracking-wider uppercase">Trusted Partnership</span>
+      
+      {/* Hero Section */}
+      <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 pb-8 lg:pb-0 pt-4">
+        {/* Left Column: Text Content */}
+        <div className="lg:col-span-7 flex flex-col pt-4 relative justify-center">
+          {/* Social Proof Pill */}
+          <div 
+            className="inline-flex bg-white/60 w-max rounded-full mb-8 py-1.5 pr-5 pl-1.5 shadow-sm backdrop-blur-sm items-center"
+            style={{
+              position: 'relative',
+              // @ts-expect-error CSS custom properties
+              '--border-gradient': 'linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0))',
+              '--border-radius-before': '9999px'
+            }}
+          >
+            <div className="flex -space-x-2 mr-3">
+              {clients.slice(0, 3).map((client, i) => (
+                <div key={i} className="w-6 h-6 rounded-full border-2 border-white bg-zinc-100 overflow-hidden">
+                  <Image 
+                    src={client.logo} 
+                    alt={client.name}
+                    width={24}
+                    height={24}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-                <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">
-                  <span className="text-wp-navy dark:text-foreground">Our</span>{" "}
-                  <span className="bg-gradient-to-r from-wp-gold to-wp-blue bg-clip-text text-transparent">Trusted</span>{" "}
-                  <span className="text-wp-navy dark:text-foreground">Clients</span>
-                </h2>
-                <p className="text-lg text-wp-navy/70 dark:text-muted-foreground max-w-2xl mx-auto">
-                  Partnering with innovative companies to deliver exceptional digital experiences
-                </p>
-                <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-wp-gold to-wp-blue rounded-full"></div>
+              ))}
+              <div className="w-6 h-6 rounded-full border-2 border-white bg-zinc-900 text-white flex items-center justify-center text-[9px] font-bold tracking-tighter">
+                50+
               </div>
-              
-              {/* Enhanced logo carousel with WordPress VIP styling */}
-              <div className="w-full max-w-5xl mx-auto p-8 md:p-10 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
-                <LogoCarousel 
-                  columnCount={3}
-                  logos={techLogos}
-                />
-              </div>
-              
-              {/* Enhanced call to action section */}
-              <div className="mt-16 text-center max-w-3xl mx-auto">
-                <p className="text-xl md:text-2xl text-wp-navy/80 dark:text-muted-foreground mb-8 font-light leading-relaxed">
-                  Let&apos;s work together to build your next project with modern technologies and best practices.
+            </div>
+            <span className="text-xs font-medium text-zinc-600 tracking-wide">
+              <span className="text-zinc-900">Available</span> for new projects
+            </span>
+          </div>
+
+          {/* Headline */}
+          <h1 className="leading-[0.95] lg:text-[5rem] text-5xl font-medium text-zinc-900 tracking-tighter mb-8">
+            Full-Stack
+            <span className="block gradient-text font-light">Developer &</span>
+            <span className="block">Web Architect</span>
+          </h1>
+
+          {/* Subheadline */}
+          <p className="text-sm text-zinc-500 font-medium max-w-md mb-10 leading-relaxed tracking-wide border-l-2 border-zinc-200 pl-6">
+            Hi, I&apos;m <span className="text-zinc-900 font-semibold">Aris Setiawan</span>. I architect enterprise-scale web applications 
+            using Next.js, React, WordPress, and PHP. 12+ years of experience building solutions that scale.
+          </p>
+
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-3 lg:mb-24 mb-16">
+            <Link 
+              href="/contact"
+              className="btn-primary hover:scale-[1.02] transition-all flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center justify-between"
+            >
+              <span className="text-sm font-medium tracking-tight">Start a Project</span>
+              <span className="flex items-center justify-center rounded-full bg-black/10 px-3 py-1">
+                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </span>
+            </Link>
+            <Link 
+              href="/projects"
+              className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
+              style={{
+                boxShadow: '0 18px 35px rgba(31, 41, 55, 0.25), 0 0 0 1px rgba(209, 213, 219, 0.3)',
+                position: 'relative',
+                // @ts-expect-error CSS custom properties
+                '--border-gradient': 'linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.4), rgba(255, 255, 255, 0.8))',
+                '--border-radius-before': '9999px'
+              }}
+            >
+              <span className="text-sm font-medium text-black/60 tracking-tight">View Projects</span>
+              <ArrowRight className="w-4 h-4 text-zinc-500" />
+            </Link>
+          </div>
+
+          {/* Footer Stats with Curved Lines */}
+          <div className="flex flex-wrap gap-2 md:gap-6 mt-auto items-center">
+            {/* Stat 1 */}
+            <div className="flex items-center group cursor-default">
+              <div className="px-1 text-center">
+                <p className="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mb-1 group-hover:text-zinc-600 transition-colors">
+                  Experience
                 </p>
-                <div className="flex flex-wrap justify-center gap-4 md:gap-6">
-                  <Button
-                    asChild
-                    variant="wp-primary"
-                    size="xl"
-                    className="shadow-wp-glow hover:shadow-wp-glow"
-                  >
-                    <Link href="/contact">
-                      Start Your Project
-                      <ArrowRight className="w-5 h-5 ml-2" />
-                    </Link>
-                  </Button>
-                  <Button
-                    asChild
-                    variant="wp-secondary"
-                    size="xl"
-                    className="shadow-wp-glow-blue hover:shadow-wp-glow-blue"
-                  >
-                    <Link href="/services">
-                      View Our Services
-                    </Link>
-                  </Button>
+                <p className="text-sm text-zinc-900 font-medium">12+ Years</p>
+              </div>
+              <div className="curve-separator opacity-60 ml-4 md:ml-8" />
+            </div>
+
+            {/* Stat 2 */}
+            <div className="flex items-center group cursor-default">
+              <div className="px-1 text-center">
+                <p className="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mb-1 group-hover:text-zinc-600 transition-colors">
+                  Projects
+                </p>
+                <p className="text-sm text-zinc-900 font-medium">50+ Delivered</p>
+              </div>
+              <div className="curve-separator md:ml-8 opacity-60 ml-4" />
+            </div>
+
+            {/* Stat 3 */}
+            <div className="flex items-center group cursor-default">
+              <div className="px-1 text-center">
+                <p className="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mb-1 group-hover:text-zinc-600 transition-colors">
+                  Location
+                </p>
+                <p className="text-sm text-zinc-900 font-medium">Indonesia</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column: Visual Card */}
+        <div className="lg:col-span-5 h-full min-h-[400px] lg:min-h-0 relative group perspective-midrange">
+          <div className="absolute inset-0 rounded-[2rem] overflow-hidden shadow-2xl shadow-zinc-900/20 transition-all duration-700 ease-out border border-white/20">
+            {/* Background Image */}
+            <Image
+              src="/aris.png"
+              alt="Aris Setiawan - Senior Full-Stack Developer"
+              fill
+              className="transition-transform duration-[2s] ease-in-out group-hover:scale-110 object-cover"
+              priority
+              sizes="(max-width: 768px) 100vw, 40vw"
+            />
+
+            {/* Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/90 via-zinc-900/20 to-zinc-900/10" />
+
+            {/* Overlay Content Container */}
+            <div className="flex flex-col p-8 absolute inset-0 justify-between">
+              {/* Top Row: Status Badge */}
+              <div className="flex items-start justify-between">
+                <div 
+                  className="flex gap-2 bg-gradient-to-b from-white/10 to-white/0 rounded-full py-1.5 px-3 items-center"
+                  style={{
+                    position: 'relative',
+                    // @ts-expect-error CSS custom properties
+                    '--border-gradient': 'linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0))',
+                    '--border-radius-before': '9999px'
+                  }}
+                >
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                  </span>
+                  <span className="text-[10px] uppercase font-semibold text-white tracking-wide">Available to Hire</span>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
 
-        {/* Services Section */}
-        <section className="w-full py-20 md:py-24 bg-gradient-to-br from-gray-50/50 via-white to-blue-50/30 dark:bg-gradient-to-br dark:from-gray-900 dark:via-blue-900/10 dark:to-gray-900 cv-auto">
-          <div className="container max-w-6xl mx-auto px-4 sm:px-6">
-            {/* Enhanced section heading */}
-            <div className="relative mb-16 text-center">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-wp-gold/10 text-wp-gold dark:bg-wp-blue/10 dark:text-wp-blue mb-6 backdrop-blur-sm">
-                <Sparkles className="w-4 h-4" />
-                <span className="text-sm font-semibold tracking-wider uppercase">Expert Services</span>
-              </div>
-              <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                <span className="text-wp-navy-foreground dark:text-foreground">My</span>{" "}
-                <span className="bg-gradient-to-r from-wp-gold to-wp-blue bg-clip-text text-transparent">Professional</span>{" "}
-                <span className="text-wp-navy-foreground dark:text-foreground">Services</span>
-              </h2>
-              <p className="text-lg text-wp-navy-foreground/70 dark:text-muted-foreground max-w-2xl mx-auto">
-                Enterprise-grade solutions tailored to your business needs
-              </p>
-              <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-wp-gold to-wp-blue rounded-full"></div>
-            </div>
-            
-            {/* Enhanced services grid with auto-responsive layout */}
-            <ServicesAnimatedGrid />
-          </div>
-        </section>
-
-        {/* Testimonials Section */}
-        <section className="w-full py-20 md:py-24 bg-gradient-to-br from-wp-gold/5 to-wp-blue/5 dark:from-wp-blue/10 dark:to-wp-navy/10">
-          <div className="container max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="relative mb-16 text-center">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-wp-gold/10 text-wp-gold dark:bg-wp-blue/10 dark:text-wp-blue mb-6 backdrop-blur-sm">
-                <MessageSquare className="w-4 h-4" />
-                <span className="text-sm font-semibold tracking-wider uppercase">Client Success</span>
-              </div>
-              <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                <span className="text-wp-navy dark:text-foreground">What Our</span>{" "}
-                <span className="bg-gradient-to-r from-wp-gold to-wp-blue bg-clip-text text-transparent">Clients</span>{" "}
-                <span className="text-wp-navy dark:text-foreground">Say</span>
-              </h2>
-              <p className="text-lg text-wp-navy/70 dark:text-muted-foreground max-w-2xl mx-auto">
-                Real results from real partnerships
-              </p>
-              <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-wp-gold to-wp-blue rounded-full"></div>
-            </div>
-            
-            <TestimonialsCarousel />
-            
-            {/* Optional CTA */}
-            <div className="text-center mt-12">
-              <p className="text-lg text-wp-navy/70 dark:text-muted-foreground mb-6">
-                Ready to join our satisfied clients?
-              </p>
-              <Button
-                asChild
-                variant="wp-primary"
-                size="xl"
-                className="shadow-wp-glow hover:shadow-wp-glow"
+              {/* Bottom: Info Card */}
+              <div 
+                className="self-end transform group-hover:translate-y-0 transition-transform duration-700 ease-out bg-gradient-to-b from-white/10 to-white/0 w-full max-w-[240px] rounded-xl p-4 backdrop-blur translate-y-4"
+                style={{
+                  position: 'relative',
+                  // @ts-expect-error CSS custom properties
+                  '--border-gradient': 'linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0))',
+                  '--border-radius-before': '12px'
+                }}
               >
-                <Link href="/contact">
-                  Start Your Project
-                  <ArrowRight className="w-5 h-5 ml-2" />
-                </Link>
-              </Button>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-2">
+                    <div className="w-6 h-6 rounded-full bg-orange-500 flex items-center justify-center text-white text-[10px] font-bold">
+                      A
+                    </div>
+                    <span className="text-xs text-white font-medium">Aris Setiawan</span>
+                  </div>
+                  <span className="text-[10px] text-emerald-400 font-mono">Online</span>
+                </div>
+                <div className="flex flex-col gap-1">
+                  <span className="text-[9px] text-white/60 uppercase">Specialization</span>
+                  <span className="text-sm text-white font-medium">Next.js · React · WordPress</span>
+                </div>
+              </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Recent Blog Posts section with enhanced styling */}
-        <section className="w-full py-20 md:py-24 cv-auto">
-          <div className="container max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="relative mb-16 text-center">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-wp-sage/20 text-wp-sage-foreground dark:bg-wp-navy/20 dark:text-wp-navy-foreground mb-6 backdrop-blur-sm">
-                <Zap className="w-4 h-4" />
-                <span className="text-sm font-semibold tracking-wider uppercase">Latest Insights</span>
+      {/* Separator */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mt-16 lg:mt-24 mb-16 lg:mb-24 opacity-60" />
+
+      {/* Services Bento Grid Section */}
+      <section className="flex flex-col gap-10 w-full relative">
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 px-1">
+          <div className="max-w-2xl">
+            <h2 className="md:text-5xl text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+              Expert
+              <span className="gradient-text"> Development </span>
+              Services
+            </h2>
+            <p className="leading-relaxed text-base font-normal text-zinc-500">
+              From concept to deployment. Enterprise-grade solutions built with modern technologies and best practices.
+            </p>
+          </div>
+          <Link 
+            href="/services" 
+            className="group flex items-center gap-2 hover:text-orange-500 transition-colors text-sm font-normal text-zinc-900 pb-1"
+          >
+            View all services
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </div>
+
+        {/* Bento Grid */}
+        <div className="bento-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          {services.map((service, index) => (
+            <Link
+              key={index}
+              href={service.href}
+              className={`bento-card group relative overflow-hidden ${service.span === 2 ? 'md:col-span-2' : ''}`}
+            >
+              <div className="relative z-10">
+                <div className="flex items-center gap-2 mb-3 text-zinc-400">
+                  <service.icon className="w-6 h-6" />
+                </div>
+                <h3 className="text-lg font-semibold text-zinc-900 mb-2 tracking-tight group-hover:text-orange-500 transition-colors">
+                  {service.title}
+                </h3>
+                <p className="text-sm text-zinc-500 font-medium leading-relaxed">
+                  {service.description}
+                </p>
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                <span className="text-wp-navy dark:text-foreground">Recent</span>{" "}
-                <span className="bg-gradient-to-r from-wp-gold to-wp-blue bg-clip-text text-transparent">Blog Posts</span>
-              </h2>
-              <p className="text-lg text-wp-navy/70 dark:text-muted-foreground max-w-2xl mx-auto">
-                Technical insights and development best practices
+              
+              {/* Hover Arrow */}
+              <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
+                <ArrowUpRight className="w-5 h-5 text-orange-500" />
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Separator */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mt-16 lg:mt-24 mb-16 lg:mb-24 opacity-60" />
+
+      {/* Features Row */}
+      <section className="flex flex-col gap-16 w-full relative">
+        {/* Top Feature Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+          {features.map((feature, index) => (
+            <div key={index} className="flex flex-col gap-4">
+              <div className="text-zinc-900">
+                <feature.icon className="w-7 h-7" />
+              </div>
+              <p className="leading-relaxed text-base font-medium text-zinc-900">
+                {feature.text}
               </p>
             </div>
-            
-            <Suspense fallback={<PostsFallback />}>
-              <Posts />
-            </Suspense>
+          ))}
+        </div>
+
+        {/* Main CTA Card */}
+        <div className="overflow-hidden min-h-[500px] lg:min-h-[600px] shadow-zinc-900/30 bg-zinc-900 rounded-[2rem] relative shadow-2xl">
+          {/* Grid Pattern Overlay */}
+          <div 
+            className="absolute inset-0 opacity-10" 
+            style={{
+              backgroundImage: 'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)',
+              backgroundSize: '40px 40px'
+            }}
+          />
+
+          {/* Content Container */}
+          <div className="flex flex-col p-8 md:p-12 lg:p-16 justify-center min-h-[500px] lg:min-h-[600px] relative">
+            <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-8 max-w-3xl">
+              Ready to build your next project with modern technologies and enterprise-grade architecture?
+            </h2>
+
+            <Link 
+              href="/contact"
+              className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 w-fit shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+            >
+              <span>Let&apos;s Talk</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+
+            {/* Trusted By */}
+            <div className="mt-12 pt-8 border-t border-white/10">
+              <p className="text-xs text-white/50 uppercase tracking-widest mb-4 font-medium">
+                Previously worked with
+              </p>
+              <div className="flex flex-wrap items-center gap-6 opacity-60">
+                {clients.map((client, i) => (
+                  <div key={i} className="h-8 w-20 bg-white/10 rounded flex items-center justify-center">
+                    <span className="text-white/80 text-xs font-medium">{client.name}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-        </section>
-      </main>
+        </div>
+      </section>
+
+      {/* Separator */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mt-16 lg:mt-24 mb-16 lg:mb-24 opacity-60" />
+
+      {/* Recent Blog Posts */}
+      <section className="flex flex-col gap-10 w-full relative cv-auto">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 px-1">
+          <div className="max-w-2xl">
+            <h2 className="md:text-5xl text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+              Latest
+              <span className="gradient-text"> Insights</span>
+            </h2>
+            <p className="leading-relaxed text-base font-normal text-zinc-500">
+              Technical articles, tutorials, and thoughts on web development.
+            </p>
+          </div>
+          <Link 
+            href="/blog" 
+            className="group flex items-center gap-2 hover:text-orange-500 transition-colors text-sm font-normal text-zinc-900 pb-1"
+          >
+            View all posts
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </div>
+        
+        <Suspense fallback={<PostsFallback />}>
+          <Posts />
+        </Suspense>
+      </section>
     </>
   )
 }

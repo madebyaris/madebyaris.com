@@ -1,11 +1,6 @@
 import type { Metadata } from 'next'
-import { Code2, Layout, Server, Rocket, Zap, FileCode, ArrowRight, MessageSquareHeart, Briefcase, Trophy } from 'lucide-react'
+import { Code2, Layout, Server, Zap, ArrowRight, ArrowUpRight, MessageSquareHeart, Briefcase } from 'lucide-react'
 import Link from 'next/link'
-import { Button } from '../../components/ui/button'
-import { PageHero } from '../../components/ui/page-hero'
-import { SectionWrapper } from '../../components/ui/section-wrapper'
-import { EnhancedCard } from '../../components/ui/enhanced-card'
-import { ImageResponse } from 'next/og'
 
 export const revalidate = 86400 // Revalidate daily
 
@@ -13,61 +8,61 @@ const services = [
   {
     title: 'Next.js Development',
     description: 'Modern web applications built with Next.js for optimal performance, SEO, and exceptional user experience.',
-    icon: <Code2 className="w-6 h-6" />,
+    icon: Code2,
     href: '/services/nextjs-development',
     features: ['Server Components', 'Static Generation', 'Edge Runtime', 'API Routes'],
+    span: 2,
   },
   {
     title: 'PHP Development',
     description: 'Custom PHP applications and solutions built with modern practices and robust architecture.',
-    icon: <Server className="w-6 h-6" />,
+    icon: Server,
     href: '/services/php-development',
     features: ['Custom Applications', 'API Development', 'Database Design', 'Security Focus'],
+    span: 1,
   },
   {
     title: 'WordPress Development',
     description: 'Professional WordPress development including custom themes, plugins, and headless solutions.',
-    icon: <Layout className="w-6 h-6" />,
+    icon: Layout,
     href: '/services/wordpress',
     features: ['Custom Themes', 'Plugin Development', 'Headless WordPress', 'Performance'],
+    span: 1,
   },
   {
     title: 'Vibe Code Friend',
     description: 'Your AI-powered coding companion. Get help with AI tools like Cursor, code fixes, server setup, and infrastructure architecture.',
-    icon: <MessageSquareHeart className="w-6 h-6" />,
+    icon: MessageSquareHeart,
     href: '/services/vibe-code-friend',
     features: ['AI IDE Tutoring', 'Code Fixing', 'Server Setup', 'Project Restructuring'],
+    span: 2,
   },
 ]
 
 const wordPressServices = [
   {
     title: 'Custom Theme Development',
-    description: 'Pixel-perfect WordPress themes that capture your unique style and meet your specific requirements.',
-    icon: <Layout className="w-6 h-6" />,
+    description: 'Pixel-perfect WordPress themes that capture your unique style.',
     href: '/services/wordpress/theme-development',
-    benefits: ['Unique Design', 'Mobile-First', 'SEO Optimized', 'Fast Loading'],
+    benefits: ['Unique Design', 'Mobile-First', 'SEO Optimized'],
   },
   {
     title: 'Plugin Development',
-    description: 'Custom WordPress plugins that add exactly the features you need, built with security and performance in mind.',
-    icon: <FileCode className="w-6 h-6" />,
+    description: 'Custom WordPress plugins that add exactly the features you need.',
     href: '/services/wordpress/plugin-development',
-    benefits: ['Custom Features', 'Integration Ready', 'Scalable', 'Well-Maintained'],
+    benefits: ['Custom Features', 'Integration Ready', 'Scalable'],
   },
   {
     title: 'Headless WordPress',
-    description: 'Modern headless WordPress solutions with Next.js frontends, combining the best of both worlds.',
-    icon: <Rocket className="w-6 h-6" />,
+    description: 'Modern headless WordPress solutions with Next.js frontends.',
     href: '/services/wordpress/headless-development',
-    benefits: ['Modern Stack', 'Better Performance', 'API-Driven', 'Flexible'],
+    benefits: ['Modern Stack', 'Better Performance', 'API-Driven'],
   },
   {
     title: 'WordPress Optimization',
-    description: 'Comprehensive WordPress optimization for peak performance, security, and user experience.',
-    icon: <Zap className="w-6 h-6" />,
+    description: 'Comprehensive WordPress optimization for peak performance.',
     href: '/services/wordpress/optimization',
-    benefits: ['Speed Optimization', 'Security Hardening', 'CDN Setup', 'Caching'],
+    benefits: ['Speed Optimization', 'Security Hardening', 'CDN Setup'],
   },
 ]
 
@@ -82,253 +77,10 @@ const structuredData = {
   "isPartOf": {
     "@type": "WebSite",
     "@id": "https://madebyaris.com/#website"
-  },
-  "breadcrumb": {
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "item": {
-          "@id": "https://madebyaris.com",
-          "name": "Home"
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "item": {
-          "@id": "https://madebyaris.com/services",
-          "name": "Services"
-        }
-      }
-    ]
-  },
-  "mainEntity": [
-    {
-      "@type": "Service",
-      "name": "Professional Web Development Services",
-      "description": "Expert development services focused on modern technologies and best practices. From blazing-fast Next.js applications to powerful WordPress solutions.",
-      "provider": {
-        "@type": "Person",
-        "@id": "https://madebyaris.com/#person",
-        "name": "Aris Setiawan",
-        "jobTitle": "Senior Full Stack Developer",
-        "url": "https://madebyaris.com",
-        "image": "https://madebyaris.com/aris.png",
-        "sameAs": [
-          "https://www.linkedin.com/in/arissetia/",
-          "https://github.com/madebyaris",
-          "https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe"
-        ]
-      },
-      "serviceType": "Web Development",
-      "areaServed": "Worldwide",
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Web Development Services",
-        "itemListElement": services.map((service) => ({
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": service.title,
-            "description": service.description,
-            "url": `https://madebyaris.com${service.href}`,
-            "serviceOutput": {
-              "@type": "ItemList",
-              "itemListElement": service.features.map((feature, index) => ({
-                "@type": "ListItem",
-                "position": index + 1,
-                "item": {
-                  "@type": "Service",
-                  "name": feature
-                }
-              }))
-            }
-          }
-        }))
-      }
-    },
-    {
-      "@type": "Product",
-      "@id": "https://madebyaris.com/services/#product",
-      "name": "Web Development Services",
-      "description": "Professional web development services including Next.js, WordPress, and PHP solutions for businesses worldwide.",
-      "brand": {
-        "@type": "Brand",
-        "name": "Made by Aris"
-      },
-      "offers": {
-        "@type": "AggregateOffer",
-        "priceCurrency": "USD",
-        "highPrice": 50000,
-        "lowPrice": 5000,
-        "offerCount": 6,
-        "availability": "https://schema.org/InStock"
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "25",
-        "bestRating": "5",
-        "worstRating": "1"
-      },
-      "review": [
-        {
-          "@type": "Review",
-          "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": "5",
-            "bestRating": "5"
-          },
-          "author": {
-            "@type": "Person",
-            "name": "Tech Director at E-commerce Company"
-          },
-          "reviewBody": "Working with Aris transformed our e-commerce platform. His deep understanding of Next.js and performance optimization resulted in significantly faster load times and better user engagement."
-        },
-        {
-          "@type": "Review",
-          "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": "5",
-            "bestRating": "5"
-          },
-          "author": {
-            "@type": "Person",
-            "name": "Founder of Tech Startup"
-          },
-          "reviewBody": "Aris helped us migrate our application to Next.js 14, implementing server components and the new app router. The improvement in performance and SEO was immediate."
-        }
-      ]
-    }
-  ],
-  "about": {
-    "@type": "Thing",
-    "name": "Web Development Services",
-    "description": "Comprehensive web development services including Next.js, WordPress, and PHP development. Expert solutions for modern web applications and enterprise needs."
-  },
-  "publisher": {
-    "@type": "Organization",
-    "@id": "https://madebyaris.com/#organization",
-    "name": "MadeByAris",
-    "url": "https://madebyaris.com",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://madebyaris.com/logo.png",
-      "width": "180",
-      "height": "180"
-    }
-  },
-  "offers": {
-    "@type": "AggregateOffer",
-    "priceCurrency": "USD",
-    "priceSpecification": {
-      "@type": "PriceSpecification",
-      "price": "Contact for custom pricing",
-      "priceCurrency": "USD",
-      "valueAddedTaxIncluded": true
-    },
-    "availability": "https://schema.org/InStock",
-    "highPrice": 50000,
-    "lowPrice": 5000,
-    "offerCount": services.length + wordPressServices.length
-  },
-  "subjectOf": {
-    "@type": "ItemList",
-    "name": "WordPress Development Services",
-    "description": "Comprehensive WordPress development services including custom themes, plugins, headless solutions, and optimization.",
-    "itemListElement": wordPressServices.map((service, index) => ({
-      "@type": "ListItem",
-      "position": index + 1,
-      "item": {
-        "@type": "Service",
-        "name": service.title,
-        "description": service.description,
-        "url": `https://madebyaris.com${service.href}`,
-        "provider": {
-          "@type": "Person",
-          "@id": "https://madebyaris.com/#person"
-        },
-        "serviceOutput": {
-          "@type": "ItemList",
-          "itemListElement": service.benefits.map((benefit, benefitIndex) => ({
-            "@type": "ListItem",
-            "position": benefitIndex + 1,
-            "item": {
-              "@type": "Service",
-              "name": benefit
-            }
-          }))
-        }
-      }
-    }))
   }
 }
 
-// Generate Metadata and Structured Data
 export async function generateMetadata(): Promise<Metadata> {
-  const ogImage = new ImageResponse(
-    (
-      <div
-        style={{
-          background: 'linear-gradient(to right, #000000, #1a1a1a)',
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '40px',
-        }}
-      >
-        <h1
-          style={{
-            fontSize: '60px',
-            fontWeight: 'bold',
-            color: 'white',
-            marginBottom: '20px',
-            textAlign: 'center',
-          }}
-        >
-          Professional Web Development Services
-        </h1>
-        <p
-          style={{
-            fontSize: '30px',
-            color: '#888888',
-            marginBottom: '40px',
-            textAlign: 'center',
-            maxWidth: '800px',
-          }}
-        >
-          Next.js • WordPress • PHP • Enterprise Solutions
-        </p>
-        <div
-          style={{
-            display: 'flex',
-            gap: '20px',
-            marginTop: '20px',
-          }}
-        >
-          <div style={{ background: '#0077B5', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
-            12+ Years Experience
-          </div>
-          <div style={{ background: '#333333', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
-            Enterprise Solutions
-          </div>
-          <div style={{ background: '#14a800', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
-            Full-Stack Development
-          </div>
-        </div>
-      </div>
-    ),
-    {
-      width: 1200,
-      height: 630,
-    }
-  )
-
   return {
     title: 'Web Development Services | Next.js, WordPress & PHP',
     description: 'Professional web development services including Next.js, WordPress, and PHP development. Expert solutions for modern web applications.',
@@ -349,13 +101,11 @@ export async function generateMetadata(): Promise<Metadata> {
       description: 'Professional web development services for modern businesses.',
       type: 'website',
       locale: 'en_US',
-      images: [ogImage]
     },
     twitter: {
       card: 'summary_large_image',
       title: 'Web Development Services | Modern Solutions',
       description: 'Professional web development services for modern businesses.',
-      images: [ogImage]
     },
     alternates: {
       canonical: 'https://madebyaris.com/services'
@@ -371,150 +121,238 @@ export default function ServicesPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       
-      {/* Hero Section with new PageHero component */}
-      <PageHero
-        variant="services"
-        badge={{ text: "Expert Services", icon: Briefcase }}
-        title={
-          <>
-            <span className="text-wp-navy-foreground dark:text-foreground">Professional</span>{" "}
-            <span className="bg-gradient-to-r from-wp-gold to-wp-blue bg-clip-text text-transparent">Web Development</span>{" "}
-            <span className="text-wp-navy-foreground dark:text-foreground">Services</span>
-          </>
-        }
-        description="Expert development services focused on modern technologies and best practices. From blazing-fast Next.js applications to powerful WordPress solutions."
-      >
-        <Button asChild variant="wp-primary" size="xl">
-          <Link href="/contact">
-            Start Your Project
-            <ArrowRight className="w-5 h-5 ml-2" />
-          </Link>
-        </Button>
-      </PageHero>
+      {/* Hero Section */}
+      <section className="text-center pt-8 pb-16">
+        {/* Badge */}
+        <div 
+          className="inline-flex bg-white/60 rounded-full mb-8 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2"
+          style={{
+            position: 'relative',
+            // @ts-expect-error CSS custom properties
+            '--border-gradient': 'linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0))',
+            '--border-radius-before': '9999px'
+          }}
+        >
+          <Briefcase className="w-4 h-4 text-orange-500" />
+          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Expert Services</span>
+        </div>
+
+        {/* Title */}
+        <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
+          Professional
+          <span className="block gradient-text font-light">Web Development</span>
+          <span className="block">Services</span>
+        </h1>
+
+        {/* Description */}
+        <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
+          Expert development services focused on modern technologies and best practices. 
+          From blazing-fast Next.js applications to powerful WordPress solutions.
+        </p>
+
+        {/* CTA */}
+        <Link 
+          href="/contact"
+          className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
+        >
+          <span className="text-sm font-medium tracking-tight">Start Your Project</span>
+          <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+        </Link>
+      </section>
+
+      {/* Separator */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
 
       {/* Main Services Section */}
-      <SectionWrapper
-        variant="default"
-        padding="small"
-        badge={{ text: "Core Offerings", icon: Code2 }}
-        title="Main Services"
-        description="Comprehensive development solutions tailored to your business needs"
-      >
-                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-           {services.map((service) => (
-                          <EnhancedCard
-               key={service.title}
-               variant="elevated"
-               title={service.title}
-               description={service.description}
-             >
-               {/* Icon */}
-               <div className="mb-6 p-4 bg-wp-blue/10 dark:bg-wp-blue/20 rounded-xl w-fit">
-                 <div className="w-8 h-8 text-wp-blue">
-                   {service.icon}
-                 </div>
-               </div>
-               
-               {/* Features list */}
-               <div className="mb-6 flex flex-wrap gap-2">
-                {service.features.map((feature) => (
-                  <span 
-                    key={feature} 
-                    className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-wp-blue/10 dark:bg-wp-blue/20 text-wp-blue"
-                  >
-                    {feature}
-                  </span>
-                ))}
+      <section className="mb-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+          <div>
+            <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-2">
+              Core <span className="gradient-text">Offerings</span>
+            </h2>
+            <p className="text-sm text-zinc-500 font-medium">
+              Comprehensive development solutions tailored to your business needs
+            </p>
+          </div>
+        </div>
+
+        {/* Bento Grid */}
+        <div className="bento-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          {services.map((service, index) => (
+            <Link
+              key={index}
+              href={service.href}
+              className={`bento-card group relative overflow-hidden ${service.span === 2 ? 'md:col-span-2' : ''}`}
+            >
+              <div className="relative z-10">
+                <div className="flex items-center gap-2 mb-3 text-zinc-400">
+                  <service.icon className="w-6 h-6" />
+                </div>
+                <h3 className="text-lg font-semibold text-zinc-900 mb-2 tracking-tight group-hover:text-orange-500 transition-colors">
+                  {service.title}
+                </h3>
+                <p className="text-sm text-zinc-500 font-medium leading-relaxed mb-4">
+                  {service.description}
+                </p>
+                
+                {/* Features */}
+                <div className="flex flex-wrap gap-2">
+                  {service.features.map((feature) => (
+                    <span 
+                      key={feature} 
+                      className="px-2 py-1 bg-zinc-100 rounded text-[10px] text-zinc-600 font-medium uppercase tracking-wide"
+                    >
+                      {feature}
+                    </span>
+                  ))}
+                </div>
               </div>
               
-              <div className="mt-auto">
-                <Button asChild variant="wp-primary" className="w-full">
-                  <Link href={service.href}>
-                    Learn More
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
+              {/* Hover Arrow */}
+              <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
+                <ArrowUpRight className="w-5 h-5 text-orange-500" />
               </div>
-            </EnhancedCard>
+            </Link>
           ))}
         </div>
-      </SectionWrapper>
+      </section>
+
+      {/* Separator */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
 
       {/* WordPress Services Section */}
-      <SectionWrapper
-        variant="accent"
-        badge={{ text: "WordPress Expertise", icon: Layout }}
-        title="WordPress Development Services"
-        description="Specialized WordPress solutions from custom themes to headless architectures"
-      >
-                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-           {wordPressServices.map((service) => (
-                          <EnhancedCard
-               key={service.title}
-               variant="elevated"
-               title={service.title}
-               description={service.description}
-             >
-               {/* Icon */}
-               <div className="mb-6 p-4 bg-wp-gold/10 dark:bg-wp-gold/20 rounded-xl w-fit">
-                 <div className="w-8 h-8 text-wp-gold">
-                   {service.icon}
-                 </div>
-               </div>
-               
-               {/* Benefits list */}
-               <div className="mb-6 flex flex-wrap gap-2">
+      <section className="mb-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+          <div>
+            <div 
+              className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2"
+              style={{
+                position: 'relative',
+                // @ts-expect-error CSS custom properties
+                '--border-gradient': 'linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0))',
+                '--border-radius-before': '9999px'
+              }}
+            >
+              <Layout className="w-4 h-4 text-orange-500" />
+              <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">WordPress Expertise</span>
+            </div>
+            <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-2">
+              WordPress Development <span className="gradient-text">Services</span>
+            </h2>
+            <p className="text-sm text-zinc-500 font-medium">
+              Specialized WordPress solutions from custom themes to headless architectures
+            </p>
+          </div>
+          <Link 
+            href="/services/wordpress" 
+            className="group flex items-center gap-2 hover:text-orange-500 transition-colors text-sm font-medium text-zinc-900"
+          >
+            View all WordPress services
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </div>
+
+        {/* WordPress Services Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {wordPressServices.map((service, index) => (
+            <Link
+              key={index}
+              href={service.href}
+              className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-zinc-200/60 shadow-sm hover:shadow-lg transition-all hover:-translate-y-0.5 group"
+            >
+              <h3 className="text-base font-semibold text-zinc-900 mb-2 group-hover:text-orange-500 transition-colors">
+                {service.title}
+              </h3>
+              <p className="text-sm text-zinc-500 leading-relaxed mb-4">
+                {service.description}
+              </p>
+              <div className="flex flex-wrap gap-1">
                 {service.benefits.map((benefit) => (
                   <span 
                     key={benefit} 
-                    className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-wp-gold/10 dark:bg-wp-gold/20 text-wp-gold dark:text-wp-gold"
+                    className="px-2 py-0.5 bg-orange-50 rounded text-[10px] text-orange-600 font-medium"
                   >
                     {benefit}
                   </span>
                 ))}
               </div>
-              
-              <div className="mt-auto">
-                <Button asChild variant="wp-secondary" className="w-full">
-                  <Link href={service.href}>
-                    Learn More
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-              </div>
-            </EnhancedCard>
+            </Link>
           ))}
         </div>
-      </SectionWrapper>
+      </section>
+
+      {/* Separator */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+
+      {/* Process Section */}
+      <section className="mb-16">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+            How I <span className="gradient-text">Work</span>
+          </h2>
+          <p className="text-sm text-zinc-500 max-w-lg mx-auto font-medium">
+            A structured approach to deliver exceptional results
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          {[
+            { step: 1, title: "Discovery", desc: "Understanding your goals and requirements" },
+            { step: 2, title: "Planning", desc: "Creating a detailed roadmap and specifications" },
+            { step: 3, title: "Development", desc: "Building with clean, efficient code" },
+            { step: 4, title: "Launch", desc: "Deploying and providing ongoing support" },
+          ].map((item) => (
+            <div 
+              key={item.step}
+              className="bg-zinc-50 rounded-2xl p-6 border border-zinc-200/60 text-center"
+            >
+              <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-500 font-bold text-lg flex items-center justify-center mx-auto mb-4">
+                {item.step}
+              </div>
+              <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
+              <p className="text-sm text-zinc-500">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* CTA Section */}
-      <SectionWrapper
-        variant="gradient"
-        padding="large"
-        title={
-          <>
-            <span className="text-wp-navy-foreground dark:text-foreground">Ready to Start</span>{" "}
-            <span className="bg-gradient-to-r from-wp-gold to-wp-blue bg-clip-text text-transparent">Your Project?</span>
-          </>
-        }
-        description="Let's collaborate to create a high-performance, visually stunning solution that meets your business needs and exceeds your expectations."
-      >
-        <div className="text-center">
-          <div className="flex flex-wrap justify-center gap-4 md:gap-6">
-            <Button asChild variant="wp-primary" size="xl">
-              <Link href="/contact">
-                Get in Touch
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Link>
-            </Button>
-            <Button asChild variant="wp-secondary" size="xl">
-              <Link href="/projects">
-                View Our Work
-              </Link>
-            </Button>
+      <section className="overflow-hidden min-h-[400px] shadow-zinc-900/30 bg-zinc-900 rounded-[2rem] relative shadow-2xl mb-8">
+        {/* Grid Pattern */}
+        <div 
+          className="absolute inset-0 opacity-10" 
+          style={{
+            backgroundImage: 'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)',
+            backgroundSize: '40px 40px'
+          }}
+        />
+
+        <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16 min-h-[400px] relative">
+          <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
+            Ready to Start Your Project?
+          </h2>
+          <p className="text-zinc-400 mb-8 max-w-lg font-medium">
+            Let&apos;s collaborate to create a high-performance solution that meets your business needs.
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link 
+              href="/contact"
+              className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+            >
+              <span>Get in Touch</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+            <Link 
+              href="/projects"
+              className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3"
+            >
+              <span>View Our Work</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
           </div>
         </div>
-      </SectionWrapper>
+      </section>
     </>
   )
 }

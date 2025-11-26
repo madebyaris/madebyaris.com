@@ -5,7 +5,7 @@ import { LucideIcon } from 'lucide-react'
 interface SectionWrapperProps {
   children?: ReactNode
   className?: string
-  variant?: 'default' | 'accent' | 'featured' | 'gradient'
+  variant?: 'default' | 'accent' | 'featured' | 'gradient' | 'dark'
   padding?: 'default' | 'large' | 'small'
   badge?: {
     text: string
@@ -29,50 +29,57 @@ export function SectionWrapper({
   const IconComponent = badge?.icon
 
   const paddingClasses = {
-    default: 'py-20 md:py-24',
-    large: 'py-24 md:py-32',
-    small: 'py-12 md:py-16'
+    default: 'py-16 md:py-20',
+    large: 'py-20 md:py-28',
+    small: 'py-10 md:py-14'
   }
 
   const backgroundClasses = {
-    default: 'bg-background',
-    accent: 'bg-wp-sage/30 dark:bg-wp-navy/50',
-    featured: 'bg-gradient-to-br from-background via-wp-sage/10 to-wp-blue/5 dark:from-background dark:via-wp-navy/20 dark:to-wp-gold/5',
-    gradient: 'bg-gradient-wp-hero-light dark:bg-gradient-wp-hero'
+    default: 'bg-transparent',
+    accent: 'bg-zinc-50/50',
+    featured: 'bg-gradient-to-b from-zinc-50/50 to-transparent',
+    gradient: 'bg-gradient-to-b from-zinc-50/80 via-white to-zinc-50/50',
+    dark: 'bg-zinc-900 text-white'
   }
 
   return (
     <section 
       id={id}
       className={cn(
-        "w-full relative overflow-hidden cv-auto",
+        "w-full relative",
         backgroundClasses[variant],
         paddingClasses[padding],
         className
       )}
     >
-      {/* Background decorative elements for featured variant */}
-      {variant === 'featured' && (
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-wp-sage/10 to-wp-blue/5 dark:from-background dark:via-wp-navy/20 dark:to-wp-gold/5"></div>
-      )}
-      
-      <div className="container max-w-6xl mx-auto px-4 sm:px-6 relative">
+      <div className="max-w-6xl mx-auto relative">
         {/* Section Header */}
         {(badge || title || description) && (
-          <div className="relative mb-16 text-center">
+          <div className="mb-12 text-center">
             {/* Badge */}
             {badge && (
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-wp-blue/10 text-wp-blue dark:bg-wp-gold/10 dark:text-wp-gold mb-6 backdrop-blur-sm">
-                {IconComponent && <IconComponent className="w-4 h-4" />}
-                <span className="text-sm font-semibold tracking-wider uppercase">{badge.text}</span>
+              <div 
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/60 backdrop-blur-sm mb-6 shadow-sm"
+                style={{
+                  position: 'relative',
+                  // @ts-expect-error CSS custom properties
+                  '--border-gradient': 'linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0))',
+                  '--border-radius-before': '9999px'
+                }}
+              >
+                {IconComponent && <IconComponent className="w-4 h-4 text-orange-500" />}
+                <span className="text-xs font-semibold tracking-wider uppercase text-zinc-500">{badge.text}</span>
               </div>
             )}
             
             {/* Title */}
             {title && (
-              <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              <h2 className={cn(
+                "text-3xl md:text-4xl lg:text-5xl font-medium tracking-tighter mb-4",
+                variant === 'dark' ? 'text-white' : 'text-zinc-900'
+              )}>
                 {typeof title === 'string' ? (
-                  <span className="text-wp-navy dark:text-foreground">{title}</span>
+                  <span>{title}</span>
                 ) : (
                   title
                 )}
@@ -81,14 +88,12 @@ export function SectionWrapper({
             
             {/* Description */}
             {description && (
-              <p className="text-lg text-wp-navy/70 dark:text-muted-foreground max-w-2xl mx-auto">
+              <p className={cn(
+                "text-base max-w-2xl mx-auto leading-relaxed font-medium",
+                variant === 'dark' ? 'text-zinc-400' : 'text-zinc-500'
+              )}>
                 {description}
               </p>
-            )}
-            
-            {/* Decorative line */}
-            {title && (
-              <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-wp-gold to-wp-blue rounded-full"></div>
             )}
           </div>
         )}
@@ -98,4 +103,4 @@ export function SectionWrapper({
       </div>
     </section>
   )
-} 
+}

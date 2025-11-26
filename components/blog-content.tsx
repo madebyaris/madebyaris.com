@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { BookOpen, Clock, Search } from 'lucide-react';
+import { Clock, Search, ArrowUpRight } from 'lucide-react';
 import { NextImage } from '@/components/ui/next-image';
 import type { Post } from '@/lib/types';
 
@@ -20,7 +20,7 @@ function formatDate(dateString: string) {
 function getReadingTime(content: string) {
   const text = content.replace(/<[^>]*>/g, '');
   const wordCount = text.split(/\s+/).length;
-  const readingTime = Math.ceil(wordCount / 200); // Assuming 200 words per minute
+  const readingTime = Math.ceil(wordCount / 200);
   return readingTime < 1 ? 1 : readingTime;
 }
 
@@ -48,65 +48,86 @@ export function BlogContent({ initialPosts }: BlogContentProps) {
     setFilteredPosts(filtered);
   }, [searchQuery, initialPosts]);
   
-  // Highlight search matches in text
-  const highlightSearchMatch = (text: string) => {
-    if (!searchQuery) return text;
-    const regex = new RegExp(`(${searchQuery})`, 'gi');
-    return text.replace(regex, '<mark>$1</mark>');
-  };
-  
   return (
     <div className="w-full">
-      {/* Search and filter section */}
-      <div className="mb-12 max-w-md mx-auto">
+      {/* Search section */}
+      <div className="mb-10 max-w-md mx-auto">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-wp-navy/60 dark:text-muted-foreground" size={20} />
+          <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-zinc-400" size={18} />
           <input 
             type="text"
             placeholder="Search articles..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-wp-blue/50 focus:border-wp-blue transition-all duration-300 shadow-sm hover:shadow-md"
+            className="w-full pl-11 pr-4 py-3 rounded-full border border-zinc-200 bg-white/80 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 transition-all text-sm font-medium text-zinc-900 placeholder:text-zinc-400"
           />
         </div>
       </div>
 
       {/* Posts grid */}
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-6 md:gap-8 lg:gap-10 max-w-5xl mx-auto">
-        {filteredPosts.map((post) => (
-          <div key={post.id} className="group relative">
-            <div className="relative h-full bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl transition-all duration-300 group-hover:scale-[1.02] overflow-hidden flex flex-col shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl">
-              <Link href={`/blog/${post.slug}`}>
-                <div className="relative aspect-video">
+      {filteredPosts.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredPosts.map((post) => (
+            <Link 
+              key={post.id} 
+              href={`/blog/${post.slug}`}
+              className="group"
+            >
+              <article className="bg-white/80 backdrop-blur-sm rounded-2xl overflow-hidden border border-zinc-200/60 shadow-sm hover:shadow-xl transition-all hover:-translate-y-1">
+                {/* Featured Image */}
+                <div className="relative aspect-[16/10] overflow-hidden">
                   <NextImage
                     src={post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '/placeholder.jpg'}
                     alt={post._embedded?.['wp:featuredmedia']?.[0]?.alt_text || post.title.rendered}
                     width={800}
-                    height={450}
-                    className="object-cover"
+                    height={500}
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
-                <div className="p-6 flex-grow">
-                  <h2 className="text-xl md:text-2xl font-bold mb-3 line-clamp-2 text-wp-navy dark:text-foreground group-hover:text-wp-blue dark:group-hover:text-wp-gold transition-colors duration-300">
-                    {highlightSearchMatch(post.title.rendered)}
-                  </h2>
-                  <div className="flex items-center gap-4 text-sm text-wp-navy/60 dark:text-muted-foreground">
-                    <div className="flex items-center gap-1">
-                      <Clock size={16} />
-                      <span>{getReadingTime(post.content.rendered)} min read</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <BookOpen size={16} />
-                      <span>{formatDate(post.date)}</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  
+                  {/* Hover Arrow */}
+                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="p-2 bg-white/90 backdrop-blur-sm rounded-full">
+                      <ArrowUpRight className="w-4 h-4 text-zinc-900" />
                     </div>
                   </div>
                 </div>
-              </Link>
-            </div>
-          </div>
-        ))}
-          </div>
-          </div>
+                
+                {/* Content */}
+                <div className="p-5">
+                  {/* Meta */}
+                  <div className="flex items-center gap-3 text-xs text-zinc-400 mb-3">
+                    <span>{formatDate(post.date)}</span>
+                    <span>•</span>
+                    <div className="flex items-center gap-1">
+                      <Clock size={12} />
+                      <span>{getReadingTime(post.content.rendered)} min read</span>
+                    </div>
+                  </div>
+                  
+                  {/* Title */}
+                  <h2 
+                    className="text-lg font-semibold text-zinc-900 line-clamp-2 group-hover:text-orange-500 transition-colors tracking-tight"
+                    dangerouslySetInnerHTML={{ __html: post.title.rendered }}
+                  />
+                  
+                  {/* Excerpt */}
+                  <p 
+                    className="text-sm text-zinc-500 line-clamp-2 mt-2 leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: post.excerpt.rendered.replace(/<[^>]*>/g, '').substring(0, 100) + '...' }}
+                  />
+                </div>
+              </article>
+            </Link>
+          ))}
+        </div>
+      ) : (
+        <div className="text-center py-16">
+          <div className="text-4xl mb-4">📝</div>
+          <h3 className="text-lg font-semibold text-zinc-900 mb-2">No articles found</h3>
+          <p className="text-sm text-zinc-500">Try adjusting your search query</p>
+        </div>
+      )}
+    </div>
   );
-} 
+}

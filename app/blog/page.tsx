@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { Metadata } from 'next'
 import type { Post, Tag, Category } from '@/lib/types'
-import { ImageResponse } from 'next/og'
 import { Suspense } from 'react'
 import { BlogContent } from '@/components/blog-content'
-import { BookOpen, Star } from 'lucide-react'
+import { BookOpen, ArrowRight } from 'lucide-react'
+import Link from 'next/link'
 
 export const revalidate = 3600;
 
@@ -22,51 +22,19 @@ const structuredData = {
     "name": "MadeByAris",
     "url": "https://madebyaris.com"
   },
-  "breadcrumb": {
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "item": {
-          "@id": "https://madebyaris.com",
-          "name": "Home"
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "item": {
-          "@id": "https://madebyaris.com/blog",
-          "name": "Blog"
-        }
-      }
-    ]
-  },
   "author": {
     "@type": "Person",
     "@id": "https://madebyaris.com/#person",
     "name": "Aris Setiawan",
     "jobTitle": "Senior Full Stack Developer",
     "url": "https://madebyaris.com",
-    "image": "https://madebyaris.com/aris.png",
-    "sameAs": [
-      "https://www.linkedin.com/in/arissetia/",
-      "https://github.com/madebyaris",
-      "https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe"
-    ]
+    "image": "https://madebyaris.com/aris.png"
   },
   "publisher": {
     "@type": "Organization",
     "@id": "https://madebyaris.com/#organization",
     "name": "MadeByAris",
-    "url": "https://madebyaris.com",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://madebyaris.com/logo.png",
-      "width": "180",
-      "height": "180"
-    }
+    "url": "https://madebyaris.com"
   },
   "keywords": [
     "Web Development",
@@ -75,186 +43,12 @@ const structuredData = {
     "WordPress",
     "TypeScript",
     "JavaScript",
-    "Full Stack Development",
-    "Frontend Development",
-    "Backend Development",
-    "Web Performance",
-    "Enterprise Solutions",
-    "System Architecture",
-    "Technical Leadership"
+    "Full Stack Development"
   ],
-  "about": {
-    "@type": "Thing",
-    "name": "Web Development Blog",
-    "description": "Technical blog covering modern web development topics, best practices, and industry insights. Focus on enterprise solutions and scalable architectures."
-  },
-  "inLanguage": "en-US",
-  "copyrightYear": new Date().getFullYear(),
-  "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
-  "mainEntity": {
-    "@type": "ItemList",
-    "numberOfItems": 12,
-    "itemListElement": []  // This will be populated dynamically with blog posts
-  },
-  "offers": {
-    "@type": "Offer",
-    "availability": "https://schema.org/InStock",
-    "price": "0",
-    "priceCurrency": "USD",
-    "seller": {
-      "@type": "Organization",
-      "@id": "https://madebyaris.com/#organization"
-    }
-  },
-  "audience": {
-    "@type": "Audience",
-    "audienceType": "Developers",
-    "geographicArea": {
-      "@type": "AdministrativeArea",
-      "name": "Worldwide"
-    }
-  }
+  "inLanguage": "en-US"
 }
 
-// Generate OG Image
 export async function generateMetadata(): Promise<Metadata> {
-  const ogImage = new ImageResponse(
-    (
-      <div
-        style={{
-          background: 'linear-gradient(to right, #000000, #1a1a1a)',
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '40px',
-        }}
-      >
-        <h1
-          style={{
-            fontSize: '60px',
-            fontWeight: 'bold',
-            color: 'white',
-            marginBottom: '20px',
-            textAlign: 'center',
-          }}
-        >
-          Web Development Insights
-        </h1>
-        <p
-          style={{
-            fontSize: '30px',
-            color: '#888888',
-            marginBottom: '20px',
-            textAlign: 'center',
-            maxWidth: '800px',
-          }}
-        >
-          Expert tutorials and insights on Next.js, React, WordPress, and modern web development
-        </p>
-        <div
-          style={{
-            display: 'flex',
-            gap: '10px',
-            marginTop: '20px',
-          }}
-        >
-          <div style={{ background: '#007acc', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
-            Next.js
-          </div>
-          <div style={{ background: '#61dafb', padding: '10px 20px', borderRadius: '20px', color: 'black' }}>
-            React
-          </div>
-          <div style={{ background: '#21759b', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
-            WordPress
-          </div>
-        </div>
-      </div>
-    ),
-    {
-      width: 1200,
-      height: 630,
-    }
-  )
-
-  const postsResponse = await fetch(`${process.env.NEXT_PUBLIC_WP_API_URL}/wp/v2/posts?per_page=12&_embed=wp:featuredmedia`, { next: { revalidate: 3600 } });
-  const posts = await postsResponse.json() as Post[];
-
-  // Fetch categories for processing
-  const categoriesResponse = await fetch(`${process.env.NEXT_PUBLIC_WP_API_URL}/wp/v2/categories`, { next: { revalidate: 3600 } });
-  const categories: Category[] = await categoriesResponse.json();
-
-  // Generate combined schema for structured data
-  const combinedSchema = {
-    "@context": "https://schema.org",
-    "@graph": [
-      structuredData,
-      {
-        "@context": "https://schema.org",
-        "@type": "ItemList",
-        "itemListElement": posts.map((post, index) => {
-          // Process categories and tags
-          const categoryNames = Array.isArray(post.categories) 
-            ? post.categories
-                .map(catId => {
-                  const category = categories.find(c => c.id === catId);
-                  return category?.name || '';
-                })
-                .filter(Boolean)
-                .join(", ")
-            : "Web Development";
-
-          const tagNames = Array.isArray(post.tags)
-            ? post.tags
-                .map(tag => {
-                  if (typeof tag === 'number') {
-                    return ''; // Skip numeric tag IDs
-                  }
-                  return tag.name;
-                })
-                .filter(Boolean)
-                .join(", ")
-            : "";
-
-          return {
-            "@type": "ListItem",
-            "position": index + 1,
-            "item": {
-              "@type": "BlogPosting",
-              "headline": post.title.rendered,
-              "description": post.excerpt.rendered.replace(/<[^>]*>/g, ''),
-              "url": `https://madebyaris.com/blog/${post.slug}`,
-              "author": {
-                "@type": "Person",
-                "name": "Aris Setiawan",
-                "url": "https://madebyaris.com"
-              },
-              "publisher": {
-                "@type": "Organization",
-                "name": "MadeByAris",
-                "logo": {
-                  "@type": "ImageObject",
-                  "url": "https://madebyaris.com/logo.png"
-                }
-              },
-              "datePublished": post.date,
-              "dateModified": post.modified,
-              "mainEntityOfPage": {
-                "@type": "WebPage",
-                "@id": `https://madebyaris.com/blog/${post.slug}`
-              },
-              "keywords": tagNames,
-              "articleSection": categoryNames
-            }
-          };
-        }),
-        "numberOfItems": posts.length
-      }
-    ]
-  };
-
   return {
     title: 'Web Development Blog | Next.js, React & WordPress Insights',
     description: 'Expert tutorials and insights on Next.js, React, WordPress, and modern web development practices. Learn from real-world enterprise development experience.',
@@ -275,19 +69,14 @@ export async function generateMetadata(): Promise<Metadata> {
       description: 'Expert tutorials and insights on modern web development practices.',
       type: 'website',
       locale: 'en_US',
-      images: [ogImage]
     },
     twitter: {
       card: 'summary_large_image',
       title: 'Web Development Blog | Next.js, React & WordPress Insights',
       description: 'Expert tutorials and insights on modern web development practices.',
-      images: [ogImage]
     },
     alternates: {
       canonical: 'https://madebyaris.com/blog'
-    },
-    other: {
-      'structured-data': JSON.stringify(combinedSchema)
     }
   }
 }
@@ -362,51 +151,104 @@ export default async function BlogPage() {
 
   return (
     <>
-      {/* Enhanced Blog Section */}
-      <section className="w-full py-24 bg-gradient-to-br from-gray-50/50 via-white to-blue-50/30 dark:bg-gradient-to-br dark:from-gray-900 dark:via-blue-900/10 dark:to-gray-900">
-        <div className="container max-w-7xl mx-auto px-6">
-          {/* Enhanced section heading matching homepage style */}
-          <div className="relative mb-16 text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-wp-blue/10 text-wp-blue dark:bg-wp-gold/10 dark:text-wp-gold mb-6 backdrop-blur-sm">
-              <BookOpen className="w-4 h-4" />
-              <span className="text-sm font-semibold tracking-wider uppercase">Web Development Insights</span>
-            </div>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              <span className="text-wp-navy dark:text-foreground">Development</span>{" "}
-              <span className="bg-gradient-to-r from-wp-blue to-wp-sage bg-clip-text text-transparent">Insights</span>
-            </h1>
-            <p className="text-lg md:text-xl text-wp-navy/70 dark:text-muted-foreground max-w-3xl mx-auto mb-8">
-              Expert tutorials and insights on Next.js, React, WordPress, and modern web development practices. Learn from real-world enterprise development experience.
-            </p>
-            <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-wp-blue to-wp-sage rounded-full"></div>
-            
-            {/* Technology Tags */}
-            <div className="flex flex-wrap justify-center gap-3 mt-12">
-              <div className="px-4 py-2 text-sm rounded-full bg-wp-blue/10 dark:bg-wp-blue/20 text-wp-blue font-medium">
-                Next.js
-              </div>
-              <div className="px-4 py-2 text-sm rounded-full bg-wp-sage/10 dark:bg-wp-sage/20 text-wp-sage font-medium">
-                React
-              </div>
-              <div className="px-4 py-2 text-sm rounded-full bg-wp-gold/10 dark:bg-wp-gold/20 text-wp-gold font-medium">
-                WordPress
-              </div>
-              <div className="px-4 py-2 text-sm rounded-full bg-wp-navy/10 dark:bg-wp-navy/20 text-wp-navy dark:text-wp-navy-foreground font-medium">
-                TypeScript
-              </div>
-            </div>
-          </div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
 
-          {/* Blog Content */}
-          <Suspense fallback={
-            <div className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-6 md:gap-8 lg:gap-10 max-w-5xl mx-auto">
-              {[...Array(6)].map((_, i) => (
-                <div key={i} className="h-[400px] animate-pulse rounded-xl bg-white/50 dark:bg-wp-navy/30" />
-              ))}
-            </div>
-          }>
-            <BlogContent initialPosts={posts} />
-          </Suspense>
+      {/* Hero Section */}
+      <section className="text-center pt-8 pb-16">
+        {/* Badge */}
+        <div 
+          className="inline-flex bg-white/60 rounded-full mb-8 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2"
+          style={{
+            position: 'relative',
+            // @ts-expect-error CSS custom properties
+            '--border-gradient': 'linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0))',
+            '--border-radius-before': '9999px'
+          }}
+        >
+          <BookOpen className="w-4 h-4 text-orange-500" />
+          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Web Development Insights</span>
+        </div>
+
+        {/* Title */}
+        <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
+          Development
+          <span className="block gradient-text font-light">Insights</span>
+        </h1>
+
+        {/* Description */}
+        <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
+          Expert tutorials and insights on Next.js, React, WordPress, and modern web development practices. 
+          Learn from real-world enterprise development experience.
+        </p>
+
+        {/* Technology Tags */}
+        <div className="flex flex-wrap justify-center gap-2">
+          {['Next.js', 'React', 'WordPress', 'TypeScript'].map((tech) => (
+            <span 
+              key={tech}
+              className="px-3 py-1.5 bg-zinc-100 rounded-full text-xs font-medium text-zinc-600"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+      </section>
+
+      {/* Separator */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mb-12 opacity-60" />
+
+      {/* Blog Content */}
+      <Suspense fallback={
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[...Array(6)].map((_, i) => (
+            <div key={i} className="h-[350px] animate-pulse rounded-2xl bg-zinc-100" />
+          ))}
+        </div>
+      }>
+        <BlogContent initialPosts={posts} />
+      </Suspense>
+
+      {/* Separator */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent my-16 opacity-60" />
+
+      {/* CTA Section */}
+      <section className="overflow-hidden min-h-[350px] shadow-zinc-900/30 bg-zinc-900 rounded-[2rem] relative shadow-2xl mb-8">
+        {/* Grid Pattern */}
+        <div 
+          className="absolute inset-0 opacity-10" 
+          style={{
+            backgroundImage: 'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)',
+            backgroundSize: '40px 40px'
+          }}
+        />
+
+        <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16 min-h-[350px] relative">
+          <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
+            Have a Project in Mind?
+          </h2>
+          <p className="text-zinc-400 mb-8 max-w-lg font-medium">
+            Let&apos;s discuss how I can help bring your ideas to life with modern web technologies.
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link 
+              href="/contact"
+              className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+            >
+              <span>Get in Touch</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+            <Link 
+              href="/services"
+              className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3"
+            >
+              <span>View Services</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
         </div>
       </section>
     </>
