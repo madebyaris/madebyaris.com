@@ -92,7 +92,7 @@ export default function ClientProjectsPage() {
         {filteredProjects.map((project) => (
           <article 
             key={project.id}
-            className="bg-white h-full flex flex-col hover:bg-zinc-50 transition-colors rounded-2xl overflow-hidden shadow-sm hover:shadow-lg group"
+            className="bg-white h-full flex flex-col hover:bg-zinc-50 transition-colors rounded-2xl overflow-hidden shadow-sm hover:shadow-lg group border-0"
           >
             {/* Logo/Image Area */}
             <div className="relative aspect-video overflow-hidden bg-gradient-to-br from-zinc-50 to-zinc-100 flex items-center justify-center p-8">
