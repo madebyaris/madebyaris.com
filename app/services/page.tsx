@@ -258,7 +258,7 @@ export default function ServicesPage() {
             <Link
               key={index}
               href={service.href}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-zinc-200/60 shadow-sm hover:shadow-lg transition-all hover:-translate-y-0.5 group"
+              className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all hover:-translate-y-0.5 group"
             >
               <h3 className="text-base font-semibold text-zinc-900 mb-2 group-hover:text-orange-500 transition-colors">
                 {service.title}
@@ -304,7 +304,7 @@ export default function ServicesPage() {
           ].map((item) => (
             <div 
               key={item.step}
-              className="bg-zinc-50 rounded-2xl p-6 border border-zinc-200/60 text-center"
+              className="bg-zinc-50 rounded-2xl p-6 text-center"
             >
               <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-500 font-bold text-lg flex items-center justify-center mx-auto mb-4">
                 {item.step}

@@ -20,7 +20,7 @@ interface HomeContentProps {
 
 function EmptyState({ type }: { type: 'projects' | 'posts' }) {
   return (
-    <div className="col-span-full flex flex-col items-center justify-center rounded-2xl border border-zinc-200 bg-white/50 p-12 text-center">
+    <div className="col-span-full flex flex-col items-center justify-center rounded-2xl bg-white/50 p-12 text-center">
       <p className="text-lg font-medium text-zinc-900">No {type} found</p>
       <p className="mt-2 text-sm text-zinc-500">
         Check back later for new {type}.
@@ -38,7 +38,7 @@ export function HomeContent({ type, initialData }: HomeContentProps) {
           projects.map((project) => (
             <article
               key={project.id}
-              className="group relative overflow-hidden rounded-2xl border border-zinc-200 bg-white transition-all hover:bg-zinc-50 hover:shadow-lg"
+              className="group relative overflow-hidden rounded-2xl bg-white transition-all hover:bg-zinc-50 hover:shadow-lg"
             >
               {project.acf?.featured_image && (
                 <div className="aspect-video overflow-hidden">
@@ -114,7 +114,7 @@ export function HomeContent({ type, initialData }: HomeContentProps) {
       {posts.length > 0 ? (
         posts.map((post, index) => (
           <Link href={`/blog/${post.slug}`} key={post.id} className="block group">
-            <article className="bg-white h-full flex flex-col hover:bg-zinc-50 transition-colors rounded-2xl overflow-hidden border border-zinc-200 shadow-sm hover:shadow-lg">
+            <article className="bg-white h-full flex flex-col hover:bg-zinc-50 transition-colors rounded-2xl overflow-hidden shadow-sm hover:shadow-lg">
               {/* Featured Image */}
               {post._embedded?.['wp:featuredmedia']?.[0] && (
                 <div className="relative aspect-video overflow-hidden">

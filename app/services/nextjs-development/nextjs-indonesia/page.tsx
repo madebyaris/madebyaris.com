@@ -414,7 +414,7 @@ export default function NextjsIndonesiaPage() {
           </header>
 
           {/* Introduction */}
-          <article className="mt-8 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-zinc-200 dark:border-zinc-800 shadow-lg">
+          <article className="mt-8 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl p-6 md:p-8 dark:border-zinc-800 shadow-lg">
             <p className="text-base md:text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
               Halo! Saya Aris, developer Next.js yang menyediakan jasa pembuatan website profesional untuk bisnis dan individu di Indonesia. 
               Dengan pengalaman lebih dari 8 tahun di bidang web development, saya fokus membuat website yang tidak hanya keren tampilannya, 
@@ -436,7 +436,7 @@ export default function NextjsIndonesiaPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
               {features.map((feature, index) => (
-                <Card key={index} className="bg-white/90 dark:bg-zinc-900/90 backdrop-blur-sm border border-zinc-200 dark:border-zinc-800 p-6 transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+                <Card key={index} className="bg-white/90 dark:bg-zinc-900/90 backdrop-blur-sm dark:border-zinc-800 p-6 transition-all duration-300 hover:shadow-md hover:-translate-y-1">
                   <div className="mb-4 p-2 w-12 h-12 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-700 dark:text-blue-300">
                     {feature.icon}
                   </div>
@@ -458,7 +458,7 @@ export default function NextjsIndonesiaPage() {
               </h2>
             </div>
 
-            <div className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-zinc-200 dark:border-zinc-800">
+            <div className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl p-6 md:p-8 dark:border-zinc-800">
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {services.map((item, index) => (
                   <li key={index} className="flex items-start">
@@ -483,7 +483,7 @@ export default function NextjsIndonesiaPage() {
               </h2>
             </div>
 
-            <div className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-zinc-200 dark:border-zinc-800">
+            <div className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl p-6 md:p-8 dark:border-zinc-800">
               <div className="space-y-8">
                 <div className="relative pl-10 md:pl-0">
                   <div className="md:grid md:grid-cols-5 md:gap-6">

@@ -154,7 +154,7 @@ export default function ContactPage() {
       <section id="contact-form" className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
         {/* Contact Form */}
         <div className="lg:col-span-2">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-zinc-200/60 shadow-lg">
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
             <div className="flex items-center gap-3 mb-6">
               <div className="p-3 bg-zinc-100 rounded-xl">
                 <Send className="w-5 h-5 text-zinc-600" />
@@ -171,7 +171,7 @@ export default function ContactPage() {
         {/* Contact Information */}
         <div className="space-y-6">
           {/* Contact Details Card */}
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-zinc-200/60 shadow-sm">
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
             <h3 className="font-semibold text-zinc-900 mb-6">Contact Information</h3>
             
             <div className="space-y-5">
@@ -213,7 +213,7 @@ export default function ContactPage() {
           </div>
 
           {/* Professional Profiles Card */}
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-zinc-200/60 shadow-sm">
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
             <h3 className="font-semibold text-zinc-900 mb-4">Professional Profiles</h3>
             <div className="flex flex-col gap-2">
               <Link 
@@ -247,7 +247,7 @@ export default function ContactPage() {
           </div>
 
           {/* Quick Response Card */}
-          <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl p-6 border border-orange-100">
+          <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl p-6">
             <div className="flex items-center gap-2 mb-3">
               <div className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
               <span className="text-xs font-semibold text-orange-600 uppercase tracking-wider">Quick Response</span>
@@ -293,7 +293,7 @@ export default function ContactPage() {
           ].map((service, index) => (
             <div 
               key={index}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-zinc-200/60 shadow-sm hover:shadow-lg transition-shadow group"
+              className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow group"
             >
               <div className="text-3xl mb-4">{service.icon}</div>
               <h3 className="text-lg font-semibold text-zinc-900 mb-2 group-hover:text-orange-500 transition-colors">

@@ -24,10 +24,10 @@ export function EnhancedCard({
   const baseClasses = "relative overflow-hidden rounded-2xl transition-all duration-300"
   
   const variantClasses = {
-    default: "bg-white/80 backdrop-blur-sm border border-zinc-200/60 shadow-sm",
-    elevated: "bg-white border border-zinc-200/60 shadow-lg",
-    glass: "bg-white/60 backdrop-blur-xl border border-zinc-200/40 shadow-md",
-    service: "bg-white/80 backdrop-blur-sm border border-zinc-200/60",
+    default: "bg-white/80 backdrop-blur-sm shadow-sm",
+    elevated: "bg-white shadow-lg",
+    glass: "bg-white/60 backdrop-blur-xl shadow-md",
+    service: "bg-white/80 backdrop-blur-sm",
     bento: "bento-card group"
   }
 

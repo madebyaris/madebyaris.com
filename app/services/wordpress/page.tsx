@@ -181,7 +181,7 @@ export default function WordPressServicesPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {services.map((service) => (
             <Link key={service.title} href={service.href} className="group">
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-zinc-200/60 shadow-sm hover:shadow-xl transition-all hover:-translate-y-0.5 h-full">
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all hover:-translate-y-0.5 h-full">
                 <div className="flex items-start gap-4 mb-4">
                   <div className="p-3 bg-zinc-100 rounded-xl group-hover:bg-orange-100 transition-colors">
                     <service.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
@@ -227,7 +227,7 @@ export default function WordPressServicesPage() {
           {benefits.map((benefit) => (
             <div 
               key={benefit.title}
-              className="bg-zinc-50 rounded-2xl p-5 border border-zinc-200/60 text-center"
+              className="bg-zinc-50 rounded-2xl p-5 text-center"
             >
               <div className="p-3 bg-white rounded-xl w-fit mx-auto mb-3 shadow-sm">
                 <benefit.icon className="w-5 h-5 text-zinc-600" />
@@ -266,7 +266,7 @@ export default function WordPressServicesPage() {
           {testimonials.map((testimonial, index) => (
             <div 
               key={index}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-zinc-200/60 shadow-sm"
+              className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm"
             >
               <Quote className="w-8 h-8 text-orange-200 mb-4" />
               <p className="text-zinc-600 italic mb-4 leading-relaxed">
@@ -301,7 +301,7 @@ export default function WordPressServicesPage() {
           ].map((item) => (
             <div 
               key={item.step}
-              className="bg-zinc-50 rounded-2xl p-5 border border-zinc-200/60 text-center"
+              className="bg-zinc-50 rounded-2xl p-5 text-center"
             >
               <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-500 font-bold text-lg flex items-center justify-center mx-auto mb-3">
                 {item.step}

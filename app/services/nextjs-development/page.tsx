@@ -195,7 +195,7 @@ export default function NextjsDevelopmentPage() {
           {features.map((feature) => (
             <div 
               key={feature.title}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 border border-zinc-200/60 shadow-sm hover:shadow-lg transition-all group"
+              className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm hover:shadow-lg transition-all group"
             >
               <div className="p-3 bg-zinc-100 rounded-xl w-fit mb-4 group-hover:bg-orange-100 transition-colors">
                 <feature.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
@@ -234,7 +234,7 @@ export default function NextjsDevelopmentPage() {
           {benefits.map((benefit) => (
             <div 
               key={benefit}
-              className="p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-zinc-200/60 text-center text-sm font-medium text-zinc-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
+              className="p-4 bg-white/80 backdrop-blur-sm rounded-xl text-center text-sm font-medium text-zinc-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
             >
               {benefit}
             </div>
@@ -257,7 +257,7 @@ export default function NextjsDevelopmentPage() {
           {processSteps.map((step, index) => (
             <div 
               key={step.title}
-              className="bg-zinc-50 rounded-2xl p-5 border border-zinc-200/60 text-center"
+              className="bg-zinc-50 rounded-2xl p-5 text-center"
             >
               <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-500 font-bold text-lg flex items-center justify-center mx-auto mb-3">
                 {index + 1}
@@ -280,7 +280,7 @@ export default function NextjsDevelopmentPage() {
           </h2>
         </div>
 
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-zinc-200/60">
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6">
           <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
             {['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Node.js', 'Prisma', 'tRPC', 'GraphQL', 'REST API', 'MongoDB', 'PostgreSQL', 'Vercel'].map((tech) => (
               <div 
@@ -320,7 +320,7 @@ export default function NextjsDevelopmentPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {specializedServices.map((service) => (
             <Link key={service.title} href={service.href} className="group">
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-zinc-200/60 shadow-sm hover:shadow-xl transition-all hover:-translate-y-0.5 h-full">
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all hover:-translate-y-0.5 h-full">
                 <div className="flex items-start gap-4">
                   <div className="p-3 bg-zinc-100 rounded-xl group-hover:bg-orange-100 transition-colors">
                     <service.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
@@ -385,7 +385,7 @@ export default function NextjsDevelopmentPage() {
           ].map((faq, index) => (
             <div 
               key={index}
-              className="bg-white/80 backdrop-blur-sm rounded-xl p-5 border border-zinc-200/60"
+              className="bg-white/80 backdrop-blur-sm rounded-xl p-5"
             >
               <h3 className="font-semibold text-zinc-900 mb-2">{faq.question}</h3>
               <p className="text-sm text-zinc-500 leading-relaxed">{faq.answer}</p>

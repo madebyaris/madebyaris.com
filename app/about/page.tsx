@@ -20,7 +20,7 @@ const timelineData = [
   {
     title: "2025 - Present",
     content: (
-      <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-zinc-200/60 shadow-sm">
+      <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
         <h3 className="text-lg font-semibold text-zinc-900 mb-2">Independent Full Stack Developer & Consultant</h3>
         <p className="text-sm text-zinc-500 leading-relaxed">
           Focusing on my independent consulting practice and strategic partnerships:<br/>
@@ -36,7 +36,7 @@ const timelineData = [
   {
     title: "2015 - Present",
     content: (
-      <div className="bg-zinc-50 rounded-2xl p-6 border border-zinc-200/60">
+      <div className="bg-zinc-50 rounded-2xl p-6">
         <h3 className="text-lg font-semibold text-zinc-900 mb-2">Founder - MadeByAris</h3>
         <p className="text-sm text-zinc-500 leading-relaxed">
           Running my own freelance business, offering:<br/>
@@ -53,7 +53,7 @@ const timelineData = [
   {
     title: "2022 - 2025",
     content: (
-      <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-zinc-200/60 shadow-sm">
+      <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
         <h3 className="text-lg font-semibold text-zinc-900 mb-2">Senior Full Stack Developer</h3>
         <p className="text-sm text-zinc-500 leading-relaxed">
           Worked at <b>SAB Digital Marketing Agency</b>, where I:<br/>
@@ -69,7 +69,7 @@ const timelineData = [
   {
     title: "2022",
     content: (
-      <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-zinc-200/60 shadow-sm">
+      <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
         <h3 className="text-lg font-semibold text-zinc-900 mb-2">CEO</h3>
         <p className="text-sm text-zinc-500 leading-relaxed">
           Leading <b>Raja Kreatif Asia</b> as CEO, focusing on company growth and innovation.<br/>
@@ -81,7 +81,7 @@ const timelineData = [
   {
     title: "2021",
     content: (
-      <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-zinc-200/60 shadow-sm">
+      <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
         <h3 className="text-lg font-semibold text-zinc-900 mb-2">COO & Co-Founder</h3>
         <p className="text-sm text-zinc-500 leading-relaxed">
           As COO at <b>Raja Kreatif Asia</b>, I focused on:<br/>
@@ -99,7 +99,7 @@ const timelineData = [
   {
     title: "2019",
     content: (
-      <div className="bg-zinc-50 rounded-2xl p-6 border border-zinc-200/60">
+      <div className="bg-zinc-50 rounded-2xl p-6">
         <h3 className="text-lg font-semibold text-zinc-900 mb-2">CMO & Co-Founder</h3>
         <p className="text-sm text-zinc-500 leading-relaxed">
           Started at <b>Raja Kreatif Asia</b> as CMO, where I:<br/>
@@ -114,7 +114,7 @@ const timelineData = [
   {
     title: "2016",
     content: (
-      <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-zinc-200/60 shadow-sm">
+      <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
         <h3 className="text-lg font-semibold text-zinc-900 mb-2">WordPress Developer</h3>
         <p className="text-sm text-zinc-500 leading-relaxed">
           Working at <b>Hongkiat.com</b>,<br/>
@@ -126,7 +126,7 @@ const timelineData = [
   {
     title: "2015",
     content: (
-      <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-zinc-200/60 shadow-sm">
+      <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
         <h3 className="text-lg font-semibold text-zinc-900 mb-2">Frontend Developer</h3>
         <p className="text-sm text-zinc-500 leading-relaxed">
           Working at <b>PT. DheZign Online solution</b>,<br/>
@@ -139,7 +139,7 @@ const timelineData = [
   {
     title: "2014",
     content: (
-      <div className="bg-zinc-50 rounded-2xl p-6 border border-zinc-200/60">
+      <div className="bg-zinc-50 rounded-2xl p-6">
         <h3 className="text-lg font-semibold text-zinc-900 mb-2">Junior full stack developer</h3>
         <p className="text-sm text-zinc-500 leading-relaxed">
           Working at <b>SEREWare</b>,<br/>
@@ -152,7 +152,7 @@ const timelineData = [
   {
     title: "2013",
     content: (
-      <div className="bg-zinc-50 rounded-2xl p-6 border border-zinc-200/60">
+      <div className="bg-zinc-50 rounded-2xl p-6">
         <h3 className="text-lg font-semibold text-zinc-900 mb-2">Junior backend Developer</h3>
         <p className="text-sm text-zinc-500 leading-relaxed">
           Working at <b>PT. Elkabumi Caraka Daya</b>,<br/>
@@ -495,7 +495,7 @@ export default function AboutPage() {
           {skills.map((skill) => (
             <div 
               key={skill.name}
-              className="bg-white/80 backdrop-blur-sm rounded-xl p-5 border border-zinc-200/60 shadow-sm hover:shadow-md transition-shadow"
+              className="bg-white/80 backdrop-blur-sm rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
             >
               <div className="flex items-center justify-between mb-3">
                 <span className="font-semibold text-zinc-900">{skill.name}</span>

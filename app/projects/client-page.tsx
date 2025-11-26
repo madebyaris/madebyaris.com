@@ -1,18 +1,13 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, ArrowUpRight, Briefcase, ExternalLink, Trophy } from 'lucide-react'
 import { projects } from './server-page'
 
 export default function ClientProjectsPage() {
-  const [isClient, setIsClient] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
-
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
 
   // Get unique categories
   const categories = [...new Set(projects.map(p => p.category))]
@@ -94,10 +89,10 @@ export default function ClientProjectsPage() {
 
       {/* Projects Grid - matching homepage card style */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-16">
-        {isClient ? filteredProjects.map((project) => (
+        {filteredProjects.map((project) => (
           <article 
             key={project.id}
-            className="bg-white h-full flex flex-col hover:bg-zinc-50 transition-colors rounded-2xl overflow-hidden border border-zinc-200 shadow-sm hover:shadow-lg group"
+            className="bg-white h-full flex flex-col hover:bg-zinc-50 transition-colors rounded-2xl overflow-hidden shadow-sm hover:shadow-lg group"
           >
             {/* Logo/Image Area */}
             <div className="relative aspect-video overflow-hidden bg-gradient-to-br from-zinc-50 to-zinc-100 flex items-center justify-center p-8">
@@ -132,7 +127,7 @@ export default function ClientProjectsPage() {
             <div className="p-6 flex flex-col flex-grow">
               {/* Category Badge */}
               <div className="mb-3 flex flex-wrap gap-2">
-                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-zinc-100 text-zinc-700 text-xs font-medium border border-zinc-200">
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-zinc-100 text-zinc-700 text-xs font-medium">
                   {project.category}
                 </span>
               </div>
@@ -173,12 +168,7 @@ export default function ClientProjectsPage() {
               </div>
             </div>
           </article>
-        )) : (
-          // Skeleton loading
-          Array.from({ length: 6 }).map((_, index) => (
-            <div key={`skeleton-${index}`} className="bg-white rounded-2xl h-[400px] animate-pulse border border-zinc-200" />
-          ))
-        )}
+        ))}
       </div>
 
       {/* Separator */}
