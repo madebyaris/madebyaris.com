@@ -92,35 +92,28 @@ export default function ClientProjectsPage() {
         ))}
       </div>
 
-      {/* Projects Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-        {isClient ? filteredProjects.map((project, index) => (
-          <div 
+      {/* Projects Grid - matching homepage card style */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-16">
+        {isClient ? filteredProjects.map((project) => (
+          <article 
             key={project.id}
-            className="bg-white/80 backdrop-blur-sm rounded-2xl overflow-hidden border border-zinc-200/60 shadow-sm hover:shadow-xl transition-all hover:-translate-y-1 group"
+            className="bg-white h-full flex flex-col hover:bg-zinc-50 transition-colors rounded-2xl overflow-hidden border border-zinc-200 shadow-sm hover:shadow-lg group"
           >
             {/* Logo/Image Area */}
-            <div className="relative h-40 bg-gradient-to-br from-zinc-50 to-zinc-100 flex items-center justify-center p-8">
+            <div className="relative aspect-video overflow-hidden bg-gradient-to-br from-zinc-50 to-zinc-100 flex items-center justify-center p-8">
               {project.logo ? (
                 <Image
                   src={project.logo}
                   alt={project.title}
-                  width={160}
-                  height={80}
-                  className="object-contain max-h-20 opacity-80 group-hover:opacity-100 transition-opacity"
+                  width={200}
+                  height={100}
+                  className="object-contain max-h-24 opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
                 />
               ) : (
                 <div className="w-16 h-16 rounded-full bg-zinc-200 flex items-center justify-center">
                   <Briefcase className="w-8 h-8 text-zinc-400" />
                 </div>
               )}
-              
-              {/* Category Badge */}
-              <div className="absolute top-4 left-4">
-                <span className="px-2.5 py-1 bg-white/90 backdrop-blur-sm rounded-full text-[10px] font-medium text-zinc-600 shadow-sm">
-                  {project.category}
-                </span>
-              </div>
 
               {/* External Link */}
               <a 
@@ -136,31 +129,54 @@ export default function ClientProjectsPage() {
             </div>
 
             {/* Content */}
-            <div className="p-5">
-              <h3 className="text-lg font-semibold text-zinc-900 mb-2 group-hover:text-orange-500 transition-colors">
+            <div className="p-6 flex flex-col flex-grow">
+              {/* Category Badge */}
+              <div className="mb-3 flex flex-wrap gap-2">
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-zinc-100 text-zinc-700 text-xs font-medium border border-zinc-200">
+                  {project.category}
+                </span>
+              </div>
+
+              {/* Title */}
+              <h3 className="text-lg font-semibold mb-2 line-clamp-2 text-zinc-900 group-hover:text-orange-500 transition-colors tracking-tight">
                 {project.title}
               </h3>
-              <p className="text-sm text-zinc-500 leading-relaxed mb-4 line-clamp-2">
+              
+              {/* Description */}
+              <p className="text-sm text-zinc-500 mb-4 line-clamp-2 leading-relaxed flex-grow">
                 {project.description}
               </p>
 
               {/* Tags */}
-              <div className="flex flex-wrap gap-1.5">
+              <div className="flex flex-wrap gap-1.5 mb-4">
                 {project.tags.map((tag) => (
                   <span 
                     key={tag}
-                    className="px-2 py-0.5 bg-zinc-100 rounded text-[10px] text-zinc-600 font-medium"
+                    className="px-2 py-0.5 bg-zinc-50 rounded text-[10px] text-zinc-500 font-medium"
                   >
                     {tag}
                   </span>
                 ))}
               </div>
+
+              {/* View Project */}
+              <div className="mt-auto pt-4 border-t border-zinc-100">
+                <a 
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center text-sm font-medium text-zinc-900 group-hover:text-orange-500 transition-colors"
+                >
+                  View Project
+                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                </a>
+              </div>
             </div>
-          </div>
+          </article>
         )) : (
           // Skeleton loading
           Array.from({ length: 6 }).map((_, index) => (
-            <div key={`skeleton-${index}`} className="bg-zinc-100 rounded-2xl h-[340px] animate-pulse" />
+            <div key={`skeleton-${index}`} className="bg-white rounded-2xl h-[400px] animate-pulse border border-zinc-200" />
           ))
         )}
       </div>

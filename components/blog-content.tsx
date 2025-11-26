@@ -2,26 +2,15 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Clock, Search, ArrowUpRight } from 'lucide-react';
-import { NextImage } from '@/components/ui/next-image';
-import type { Post } from '@/lib/types';
+import Image from 'next/image';
+import { ArrowRight, Search } from 'lucide-react';
+import type { Post, Category } from '@/lib/types';
+import { blurDataURLs } from '@/lib/utils';
 
-// Helper function to format date
-function formatDate(dateString: string) {
-  const date = new Date(dateString);
-  return date.toLocaleDateString('en-US', { 
-    year: 'numeric', 
-    month: 'short', 
-    day: 'numeric' 
-  });
-}
-
-// Helper function to get reading time
-function getReadingTime(content: string) {
-  const text = content.replace(/<[^>]*>/g, '');
-  const wordCount = text.split(/\s+/).length;
-  const readingTime = Math.ceil(wordCount / 200);
-  return readingTime < 1 ? 1 : readingTime;
+// Interface for posts with processed categories
+interface ProcessedPost extends Omit<Post, 'categories' | 'tags'> {
+  categories: Category[];
+  tags: { id: number; name: string; slug: string }[];
 }
 
 interface BlogContentProps {
@@ -59,73 +48,81 @@ export function BlogContent({ initialPosts }: BlogContentProps) {
             placeholder="Search articles..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-11 pr-4 py-3 rounded-full border border-zinc-200 bg-white/80 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 transition-all text-sm font-medium text-zinc-900 placeholder:text-zinc-400"
+            className="w-full pl-11 pr-4 py-3 rounded-full border border-zinc-200 bg-white focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 transition-all text-sm font-medium text-zinc-900 placeholder:text-zinc-400"
           />
         </div>
       </div>
 
-      {/* Posts grid */}
+      {/* Posts grid - matching homepage style exactly */}
       {filteredPosts.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredPosts.map((post) => (
-            <Link 
-              key={post.id} 
-              href={`/blog/${post.slug}`}
-              className="group"
-            >
-              <article className="bg-white/80 backdrop-blur-sm rounded-2xl overflow-hidden border border-zinc-200/60 shadow-sm hover:shadow-xl transition-all hover:-translate-y-1">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {filteredPosts.map((post, index) => (
+            <Link href={`/blog/${post.slug}`} key={post.id} className="block group">
+              <article className="bg-white h-full flex flex-col hover:bg-zinc-50 transition-colors rounded-2xl overflow-hidden border border-zinc-200 shadow-sm hover:shadow-lg">
                 {/* Featured Image */}
-                <div className="relative aspect-[16/10] overflow-hidden">
-                  <NextImage
-                    src={post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '/placeholder.jpg'}
-                    alt={post._embedded?.['wp:featuredmedia']?.[0]?.alt_text || post.title.rendered}
-                    width={800}
-                    height={500}
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  
-                  {/* Hover Arrow */}
-                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <div className="p-2 bg-white/90 backdrop-blur-sm rounded-full">
-                      <ArrowUpRight className="w-4 h-4 text-zinc-900" />
-                    </div>
+                {post._embedded?.['wp:featuredmedia']?.[0] && (
+                  <div className="relative aspect-video overflow-hidden">
+                    <Image
+                      src={post._embedded['wp:featuredmedia'][0].source_url}
+                      alt={post._embedded['wp:featuredmedia'][0].alt_text || ''}
+                      width={600}
+                      height={400}
+                      priority={index === 0}
+                      loading={index === 0 ? "eager" : "lazy"}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
+                      placeholder="blur"
+                      blurDataURL={blurDataURLs.default}
+                    />
                   </div>
-                </div>
+                )}
                 
                 {/* Content */}
-                <div className="p-5">
-                  {/* Meta */}
-                  <div className="flex items-center gap-3 text-xs text-zinc-400 mb-3">
-                    <span>{formatDate(post.date)}</span>
-                    <span>•</span>
-                    <div className="flex items-center gap-1">
-                      <Clock size={12} />
-                      <span>{getReadingTime(post.content.rendered)} min read</span>
+                <div className="p-6 flex flex-col flex-grow">
+                  {/* Categories/Tags */}
+                  {Array.isArray(post.categories) && post.categories.length > 0 && (
+                    <div className="mb-3 flex flex-wrap gap-2">
+                      {(post.categories as unknown as Category[]).slice(0, 2).map((category) => (
+                        <span
+                          key={category.id}
+                          className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-zinc-100 text-zinc-700 text-xs font-medium border border-zinc-200"
+                        >
+                          {category.name}
+                        </span>
+                      ))}
                     </div>
-                  </div>
-                  
+                  )}
+
                   {/* Title */}
-                  <h2 
-                    className="text-lg font-semibold text-zinc-900 line-clamp-2 group-hover:text-orange-500 transition-colors tracking-tight"
+                  <h2
+                    className="text-lg font-semibold mb-2 line-clamp-2 text-zinc-900 group-hover:text-orange-500 transition-colors tracking-tight"
                     dangerouslySetInnerHTML={{ __html: post.title.rendered }}
                   />
                   
                   {/* Excerpt */}
-                  <p 
-                    className="text-sm text-zinc-500 line-clamp-2 mt-2 leading-relaxed"
-                    dangerouslySetInnerHTML={{ __html: post.excerpt.rendered.replace(/<[^>]*>/g, '').substring(0, 100) + '...' }}
+                  <div
+                    className="text-sm text-zinc-500 mb-4 line-clamp-2 leading-relaxed flex-grow"
+                    dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
                   />
+
+                  {/* Read More */}
+                  <div className="mt-auto pt-4 border-t border-zinc-100">
+                    <span className="inline-flex items-center text-sm font-medium text-zinc-900 group-hover:text-orange-500 transition-colors">
+                      Read Article
+                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  </div>
                 </div>
               </article>
             </Link>
           ))}
         </div>
       ) : (
-        <div className="text-center py-16">
-          <div className="text-4xl mb-4">📝</div>
-          <h3 className="text-lg font-semibold text-zinc-900 mb-2">No articles found</h3>
-          <p className="text-sm text-zinc-500">Try adjusting your search query</p>
+        <div className="col-span-full flex flex-col items-center justify-center rounded-2xl border border-zinc-200 bg-white/50 p-12 text-center">
+          <p className="text-lg font-medium text-zinc-900">No articles found</p>
+          <p className="mt-2 text-sm text-zinc-500">
+            Try adjusting your search query.
+          </p>
         </div>
       )}
     </div>
