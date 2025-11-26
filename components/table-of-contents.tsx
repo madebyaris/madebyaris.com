@@ -75,8 +75,33 @@ export function TableOfContents({ headings, isMobile = false }: TableOfContentsP
   }
 
   return (
-    <div id="desktop-toc" className="hidden lg:block fixed left-0 top-24 w-64 max-h-[calc(100vh-6rem)] overflow-y-auto pl-6">
-      <div className="bg-white/80 backdrop-blur-sm rounded-xl p-5 shadow-sm sticky top-0">
+    <div 
+      id="desktop-toc" 
+      className="hidden lg:block fixed left-0 top-24 w-64 max-h-[calc(100vh-6rem)] overflow-y-auto pl-6 z-10"
+      style={{
+        position: 'fixed',
+        left: 0,
+        top: '6rem',
+        width: '16rem',
+        maxHeight: 'calc(100vh - 6rem)',
+        WebkitTransform: 'translateZ(0)',
+        transform: 'translateZ(0)',
+        WebkitBackfaceVisibility: 'hidden',
+        backfaceVisibility: 'hidden',
+        willChange: 'transform',
+      }}
+    >
+      <div 
+        className="bg-white/95 backdrop-blur-sm rounded-xl p-5 shadow-sm sticky top-0"
+        style={{
+          WebkitBackdropFilter: 'blur(8px) saturate(180%)',
+          backdropFilter: 'blur(8px) saturate(180%)',
+          WebkitTransform: 'translateZ(0)',
+          transform: 'translateZ(0)',
+          position: 'sticky',
+          top: 0,
+        }}
+      >
         <h2 className="text-sm font-semibold mb-4 flex items-center text-zinc-900">
           <BookOpen className="h-4 w-4 mr-2 text-orange-500" />
           Table of Contents
