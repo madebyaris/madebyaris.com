@@ -4,36 +4,43 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow hover:bg-primary/90",
+          "bg-zinc-900 text-white shadow-lg shadow-zinc-900/20 hover:bg-zinc-800 hover:-translate-y-0.5 hover:shadow-xl",
         destructive:
-          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+          "bg-red-500 text-white shadow-sm hover:bg-red-600",
         outline:
-          "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+          "border border-zinc-200 bg-white shadow-sm hover:bg-zinc-50 hover:border-zinc-300 text-zinc-900",
         secondary:
-          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+          "bg-zinc-100 text-zinc-900 shadow-sm hover:bg-zinc-200",
+        ghost: 
+          "hover:bg-zinc-100 hover:text-zinc-900 text-zinc-600",
+        link: 
+          "text-orange-500 underline-offset-4 hover:underline",
+        primary:
+          "bg-gradient-to-b from-orange-400 to-orange-500 text-zinc-900 font-medium shadow-[0_15px_25px_-10px_rgba(248,113,22,0.7),inset_0_4px_8px_rgba(253,230,138,0.9),inset_0_-4px_8px_rgba(249,115,22,0.9)] hover:-translate-y-0.5 hover:shadow-[0_20px_30px_-10px_rgba(248,113,22,0.8),inset_0_4px_8px_rgba(253,230,138,0.9),inset_0_-4px_8px_rgba(249,115,22,0.9)]",
+        "glass":
+          "bg-white/50 backdrop-blur-sm border border-white/60 text-zinc-700 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] hover:bg-white/70",
+        // Legacy WordPress VIP variants (kept for compatibility)
         "wp-primary": 
-          "bg-wp-gold text-wp-gold-foreground border border-wp-gold shadow-[0_2px_4px_-1px_hsl(var(--wp-gold)/0.3)] hover:bg-[hsl(35_55%_50%)] hover:transform hover:-translate-y-0.5 hover:shadow-[0_4px_8px_-2px_hsl(var(--wp-gold)/0.4)] transition-all duration-200",
+          "bg-orange-500 text-white shadow-lg shadow-orange-500/30 hover:bg-orange-600 hover:-translate-y-0.5 hover:shadow-xl transition-all duration-200",
         "wp-secondary":
-          "bg-transparent text-wp-blue border-[1.5px] border-wp-blue hover:bg-wp-blue hover:text-wp-blue-foreground hover:transform hover:-translate-y-0.5 transition-all duration-200",
+          "bg-transparent text-zinc-900 border-2 border-zinc-900 hover:bg-zinc-900 hover:text-white hover:-translate-y-0.5 transition-all duration-200",
         "wp-outline":
-          "border border-wp-sage bg-background text-wp-sage-foreground hover:bg-wp-sage hover:text-wp-sage-foreground shadow-sm",
+          "border border-zinc-300 bg-white text-zinc-700 hover:bg-zinc-50 hover:border-zinc-400 shadow-sm",
         "wp-navy":
-          "bg-wp-navy text-wp-navy-foreground hover:bg-wp-navy/90 shadow-md hover:shadow-lg transition-all duration-200",
+          "bg-zinc-900 text-white hover:bg-zinc-800 shadow-md hover:shadow-lg transition-all duration-200",
         "wp-sage":
-          "bg-wp-sage text-wp-sage-foreground hover:bg-wp-sage/90 border border-wp-sage/50",
+          "bg-zinc-100 text-zinc-700 hover:bg-zinc-200 border border-zinc-200",
       },
       size: {
         default: "h-9 px-4 py-2",
         sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-10 rounded-md px-8",
-        xl: "h-12 rounded-lg px-10 text-lg",
+        lg: "h-10 rounded-lg px-6",
+        xl: "h-12 rounded-full px-8 text-base",
         icon: "h-9 w-9",
       },
     },

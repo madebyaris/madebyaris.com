@@ -225,7 +225,7 @@ export default function DatabaseSolutionsPage() {
               {features.map((feature, index) => (
                 <div
                   key={feature.title}
-                  className="p-6 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl border border-zinc-200 dark:border-zinc-800 shadow-lg"
+                  className="p-6 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl dark:border-zinc-800 shadow-lg"
                   style={{ animationDelay: `${(index + 1) * 150}ms` }}
                 >
                   <div className="w-12 h-12 rounded-lg bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-4">
@@ -250,7 +250,7 @@ export default function DatabaseSolutionsPage() {
                 {deliverables.map((item) => (
                   <div
                     key={item}
-                    className="flex items-center gap-3 p-4 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-lg border border-zinc-200 dark:border-zinc-800"
+                    className="flex items-center gap-3 p-4 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-lg dark:border-zinc-800"
                   >
                     <CheckCircle2 className="w-5 h-5 text-indigo-600 dark:text-indigo-400 flex-shrink-0" />
                     <span className="text-zinc-700 dark:text-zinc-300">{item}</span>

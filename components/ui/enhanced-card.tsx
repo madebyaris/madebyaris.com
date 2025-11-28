@@ -5,7 +5,7 @@ import { LucideIcon } from 'lucide-react'
 interface EnhancedCardProps {
   children?: ReactNode
   className?: string
-  variant?: 'default' | 'elevated' | 'glass' | 'service'
+  variant?: 'default' | 'elevated' | 'glass' | 'service' | 'bento'
   icon?: LucideIcon
   title?: string
   description?: string
@@ -24,13 +24,14 @@ export function EnhancedCard({
   const baseClasses = "relative overflow-hidden rounded-2xl transition-all duration-300"
   
   const variantClasses = {
-    default: "bg-white/80 dark:bg-zinc-800/80 backdrop-blur-sm border border-zinc-200/70 dark:border-zinc-700/70",
-    elevated: "card-wp-elevated shadow-wp-elevated dark:shadow-wp-elevated-dark border border-wp-sage/30 dark:border-wp-blue/20",
-    glass: "bg-white/90 dark:bg-wp-navy/30 backdrop-blur-xl border border-gray-200/60 dark:border-wp-blue/20 shadow-xl",
-    service: "bg-gradient-to-br from-wp-blue/5 to-transparent group-hover:from-wp-blue/10 border border-wp-blue/10 dark:border-wp-blue/20"
+    default: "bg-white/80 backdrop-blur-sm shadow-sm",
+    elevated: "bg-white shadow-lg",
+    glass: "bg-white/60 backdrop-blur-xl shadow-md",
+    service: "bg-white/80 backdrop-blur-sm",
+    bento: "bento-card group"
   }
 
-  const hoverClasses = hover ? "hover:shadow-lg hover:scale-[1.02]" : ""
+  const hoverClasses = hover && variant !== 'bento' ? "hover:shadow-xl hover:-translate-y-0.5" : ""
 
   return (
     <div className={cn(
@@ -40,27 +41,22 @@ export function EnhancedCard({
       "group",
       className
     )}>
-      {/* Background gradient overlay for service variant */}
-      {variant === 'service' && (
-        <div className="absolute inset-0 bg-gradient-to-br from-wp-blue/5 to-transparent group-hover:from-wp-blue/10 transition-all duration-300"></div>
-      )}
-      
       <div className="relative p-6 md:p-8 h-full flex flex-col">
         {/* Icon and Title Header */}
         {(Icon || title) && (
-          <div className="mb-6">
+          <div className="mb-4">
             {Icon && (
-              <div className="mb-4 p-4 bg-wp-blue/10 dark:bg-wp-blue/20 rounded-xl w-fit group-hover:scale-110 transition-transform duration-300">
-                <Icon className="w-8 h-8 text-wp-blue" />
+              <div className="mb-4 p-3 bg-zinc-100 rounded-xl w-fit group-hover:bg-orange-100 transition-colors">
+                <Icon className="w-6 h-6 text-zinc-600 group-hover:text-orange-500 transition-colors" />
               </div>
             )}
             {title && (
-              <h3 className="text-xl md:text-2xl font-bold text-wp-navy dark:text-foreground mb-2">
+              <h3 className="text-lg md:text-xl font-semibold text-zinc-900 mb-2 tracking-tight group-hover:text-orange-500 transition-colors">
                 {title}
               </h3>
             )}
             {description && (
-              <p className="text-wp-navy/70 dark:text-muted-foreground">
+              <p className="text-sm text-zinc-500 leading-relaxed font-medium">
                 {description}
               </p>
             )}
@@ -76,4 +72,4 @@ export function EnhancedCard({
       </div>
     </div>
   )
-} 
+}

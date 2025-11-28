@@ -378,7 +378,7 @@ export default function HeadlessWordPressPage() {
               </div>
 
               {/* Introduction */}
-              <div className="mt-8 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm rounded-lg p-8 border border-zinc-200 dark:border-zinc-800 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-300">
+              <div className="mt-8 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm rounded-lg p-8 dark:border-zinc-800 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-300">
                 <p className="text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
                   My headless WordPress development service combines the power of WordPress as a backend 
                   with modern frontend technologies like Next.js. This approach delivers exceptional 
@@ -415,7 +415,7 @@ export default function HeadlessWordPressPage() {
                   {processSteps.map((step, index) => (
                     <div 
                       key={step.title}
-                      className="p-6 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm rounded-lg border border-zinc-200 dark:border-zinc-800 transition-all duration-300 hover:shadow-lg"
+                      className="p-6 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm rounded-lg dark:border-zinc-800 transition-all duration-300 hover:shadow-lg"
                       style={{ animationDelay: `${(index + 1) * 200}ms` }}
                     >
                       <div className="flex items-center gap-4 mb-4">
@@ -439,7 +439,7 @@ export default function HeadlessWordPressPage() {
                   {benefits.map((benefit, index) => (
                     <div 
                       key={benefit}
-                      className="p-4 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm rounded-lg border border-zinc-200 dark:border-zinc-800 text-center text-zinc-600 dark:text-zinc-400 transition-all duration-300 hover:scale-105 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                      className="p-4 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm rounded-lg dark:border-zinc-800 text-center text-zinc-600 dark:text-zinc-400 transition-all duration-300 hover:scale-105 hover:bg-zinc-100 dark:hover:bg-zinc-800"
                       style={{ animationDelay: `${(index + 1) * 100}ms` }}
                     >
                       {benefit}

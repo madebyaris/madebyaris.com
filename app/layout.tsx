@@ -1,73 +1,18 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Inter } from "next/font/google";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import ThemeProvider from "@/components/providers/theme-provider";
 import AnalyticsWrapper from "@/components/providers/analytics-wrapper";
 import { ServiceWorkerRegistration } from "@/components/service-worker-registration";
 import { cn } from "@/lib/utils";
-import { criticalCSS } from "@/lib/critical-css";
 import "./globals.css";
 
-// Optimize font loading with display swap and strategic preload
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-  display: "swap",
-  preload: true,
-  adjustFontFallback: false, // Let Next.js handle fallback optimization
-  fallback: [
-    'ui-sans-serif', 
-    'system-ui', 
-    '-apple-system', 
-    'BlinkMacSystemFont', 
-    'Segoe UI', 
-    'Roboto', 
-    'Helvetica Neue', 
-    'Arial', 
-    'sans-serif'
-  ]
-});
-
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-  display: "swap",
-  preload: false, // Only preload primary font
-  adjustFontFallback: false,
-  fallback: [
-    'ui-monospace',
-    'SFMono-Regular', 
-    'Menlo', 
-    'Monaco', 
-    'Consolas', 
-    'Liberation Mono', 
-    'Courier New', 
-    'monospace'
-  ]
-});
-
-const jakarta = Plus_Jakarta_Sans({ 
+// Inter font - matching reference design
+const inter = Inter({ 
   subsets: ["latin"],
-  variable: "--font-jakarta",
+  variable: "--font-inter",
   display: "swap",
-  preload: false, // Only preload primary font
-  weight: ["400", "500", "600", "700"], // Include medium weight for better hierarchy
-  adjustFontFallback: true, // Let Google Fonts optimize fallback
-  fallback: [
-    'ui-sans-serif',
-    'system-ui', 
-    '-apple-system', 
-    'BlinkMacSystemFont', 
-    'Segoe UI', 
-    'Roboto', 
-    'Helvetica Neue', 
-    'Arial', 
-    'sans-serif'
-  ]
+  weight: ["200", "300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -154,9 +99,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
+    <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Preconnect to critical domains (Google Fonts handled automatically by Next.js) */}
+        {/* Preconnect to critical domains */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://cdn.vercel-insights.com" />
         <link rel="preconnect" href="https://vitals.vercel-insights.com" />
         
@@ -172,16 +119,6 @@ export default function RootLayout({
         {/* Preload critical assets with priority hints */}
         <link rel="preload" href="/aris.png" as="image" fetchPriority="high" />
         
-        {/* Preload critical font files */}
-        <link 
-          rel="preload" 
-          href="/fonts/GeistVF.woff" 
-          as="font" 
-          type="font/woff" 
-          crossOrigin="anonymous"
-          fetchPriority="high"
-        />
-        
         {/* Prefetch likely next pages */}
         <link rel="prefetch" href="/contact" />
         <link rel="prefetch" href="/about" />
@@ -190,56 +127,51 @@ export default function RootLayout({
         
         {/* Meta tags for performance */}
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-        <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
-        <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-        
-        {/* Core Web Vitals optimization hint */}
-        <meta name="renderMode" content="simultaneously" />
-        
-        {/* Critical CSS inlined for faster rendering */}
-        <style id="critical-css" dangerouslySetInnerHTML={{ 
-          __html: criticalCSS.replace(/\s+/g, ' ').trim() 
-        }} />
+        <meta name="theme-color" content="#ffffff" />
       </head>
       <body 
         suppressHydrationWarning
         className={cn(
-          "min-h-screen font-sans antialiased",
-          geistSans.variable,
-          geistMono.variable,
-          jakarta.variable
+          "min-h-screen antialiased selection:bg-slate-900 selection:text-white",
+          inter.variable,
+          "font-sans"
         )}
+        style={{
+          fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
+        }}
       >
-        <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
-          {/* Main content - prioritize this */}
-          <div className="relative flex min-h-screen flex-col">
-            <Header />
-            <div className="flex-1">{children}</div>
-            <Footer />
-          </div>
+        {/* Background - matching reference design */}
+        <div 
+          className="fixed inset-0 -z-10 bg-zinc-400"
+          style={{
+            backgroundImage: "url('/images/bg-pattern.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+          aria-hidden="true"
+        />
 
-          {/* Light mode gradient - Optimized with will-change and contain */}
-          <div 
-            className="fixed inset-0 -z-10 h-full w-full opacity-0 animate-fade-in dark:hidden"
-            style={{
-              background: "radial-gradient(100% 50% at 50% 0%, rgba(0,163,255,0.13) 0, rgba(0,163,255,0) 50%, rgba(0,163,255,0) 100%)",
-              willChange: "opacity",
-              contain: "paint",
-            }}
-            aria-hidden="true"
-          />
-          
-          {/* Dark mode gradient - Optimized with will-change and contain */}
-          <div 
-            className="fixed inset-0 -z-10 hidden h-full w-full bg-neutral-950 opacity-0 animate-fade-in dark:block"
-            style={{
-              background: "radial-gradient(ellipse 80% 80% at 50% -20%, rgba(120,119,198,0.3), rgba(255,255,255,0))",
-              willChange: "opacity",
-              contain: "paint",
-            }}
-            aria-hidden="true"
-          />
-        </ThemeProvider>
+        {/* Main Glass Panel Container */}
+        <div className="flex justify-center items-start min-h-screen px-0 py-0 xl:p-8">
+          <main className="glass-panel overflow-hidden flex flex-col xl:max-w-[1300px] z-10 xl:border-white/50 border-none xl:border xl:rounded-[2.5rem] min-h-screen xl:min-h-[700px] w-full rounded-none relative xl:shadow-2xl">
+            
+            {/* Vertical Grid Lines */}
+            <div className="absolute inset-0 flex justify-between pointer-events-none z-0 px-6 md:px-10 xl:px-12 w-full h-full">
+              <div className="h-full w-[1px] bg-zinc-950/5"></div>
+              <div className="h-full w-[1px] bg-zinc-950/5 hidden md:block"></div>
+              <div className="h-full w-[1px] bg-zinc-950/5 hidden lg:block"></div>
+              <div className="h-full w-[1px] bg-zinc-950/5 hidden xl:block"></div>
+              <div className="h-full w-[1px] bg-zinc-950/5"></div>
+            </div>
+
+            <Header />
+            <div className="flex-1 relative z-10 px-6 md:px-10 xl:px-12 pb-8">
+              {children}
+            </div>
+            <Footer />
+          </main>
+        </div>
+
         <AnalyticsWrapper />
         <ServiceWorkerRegistration />
       </body>

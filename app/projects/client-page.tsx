@@ -1,184 +1,216 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { ArrowRight, Briefcase, ShoppingCart, Film, Home, Globe, Music, Factory, Wrench, Utensils, Car, Zap, Trophy } from 'lucide-react'
-import dynamic from 'next/dynamic'
+import Image from 'next/image'
+import { ArrowRight, ArrowUpRight, Briefcase, ExternalLink, Trophy } from 'lucide-react'
 import { projects } from './server-page'
 
-// Import ProjectCard as a client component
-const ProjectCard = dynamic(() => import('@/components/project-card'), { 
-  ssr: true,
-  loading: () => <div className="bg-white/50 dark:bg-wp-navy/30 rounded-lg shadow-md h-96 animate-pulse"></div>
-})
-
-// Define category colors with improved icons using WordPress VIP colors
-const categoryColors: Record<string, { bg: string, text: string, icon: React.ReactNode, hoverBg: string }> = {
-  "Education": { 
-    bg: "bg-wp-blue/10 dark:bg-wp-blue/20", 
-    text: "text-wp-blue",
-    icon: <Globe className="w-4 h-4" />,
-    hoverBg: "hover:bg-wp-blue/20"
-  },
-  "Agency": { 
-    bg: "bg-wp-gold/10 dark:bg-wp-gold/20", 
-    text: "text-wp-gold dark:text-wp-gold",
-    icon: <Briefcase className="w-4 h-4" />,
-    hoverBg: "hover:bg-wp-gold/20"
-  },
-  "Marketplace": { 
-    bg: "bg-wp-sage/10 dark:bg-wp-sage/20", 
-    text: "text-wp-sage dark:text-wp-sage",
-    icon: <Globe className="w-4 h-4" />,
-    hoverBg: "hover:bg-wp-sage/20"
-  },
-  "E-commerce": { 
-    bg: "bg-wp-gold/10 dark:bg-wp-gold/20", 
-    text: "text-wp-gold dark:text-wp-gold",
-    icon: <ShoppingCart className="w-4 h-4" />,
-    hoverBg: "hover:bg-wp-gold/20"
-  },
-  "Entertainment": { 
-    bg: "bg-wp-blue/10 dark:bg-wp-blue/20", 
-    text: "text-wp-blue",
-    icon: <Film className="w-4 h-4" />,
-    hoverBg: "hover:bg-wp-blue/20"
-  },
-  "Real Estate": { 
-    bg: "bg-wp-sage/10 dark:bg-wp-sage/20", 
-    text: "text-wp-sage dark:text-wp-sage",
-    icon: <Home className="w-4 h-4" />,
-    hoverBg: "hover:bg-wp-sage/20"
-  },
-  "Industrial Supply": { 
-    bg: "bg-wp-gold/10 dark:bg-wp-gold/20", 
-    text: "text-wp-gold dark:text-wp-gold",
-    icon: <Wrench className="w-4 h-4" />,
-    hoverBg: "hover:bg-wp-gold/20"
-  },
-  "Industrial": { 
-    bg: "bg-wp-blue/10 dark:bg-wp-blue/20", 
-    text: "text-wp-blue",
-    icon: <Factory className="w-4 h-4" />,
-    hoverBg: "hover:bg-wp-blue/20"
-  },
-  "Music Publishing": { 
-    bg: "bg-wp-sage/10 dark:bg-wp-sage/20", 
-    text: "text-wp-sage dark:text-wp-sage",
-    icon: <Music className="w-4 h-4" />,
-    hoverBg: "hover:bg-wp-sage/20"
-  },
-  "Music Industry": { 
-    bg: "bg-wp-gold/10 dark:bg-wp-gold/20", 
-    text: "text-wp-gold dark:text-wp-gold",
-    icon: <Music className="w-4 h-4" />,
-    hoverBg: "hover:bg-wp-gold/20"
-  },
-  "Food & Beverage": { 
-    bg: "bg-wp-blue/10 dark:bg-wp-blue/20", 
-    text: "text-wp-blue",
-    icon: <Utensils className="w-4 h-4" />,
-    hoverBg: "hover:bg-wp-blue/20"
-  },
-  "Rental Services": { 
-    bg: "bg-wp-sage/10 dark:bg-wp-sage/20", 
-    text: "text-wp-sage dark:text-wp-sage",
-    icon: <Car className="w-4 h-4" />,
-    hoverBg: "hover:bg-wp-sage/20"
-  },
-  "Energy": { 
-    bg: "bg-wp-gold/10 dark:bg-wp-gold/20", 
-    text: "text-wp-gold dark:text-wp-gold",
-    icon: <Zap className="w-4 h-4" />,
-    hoverBg: "hover:bg-wp-gold/20"
-  }
-}
-
 export default function ClientProjectsPage() {
-  // Use state to control client-side rendering
-  const [isClient, setIsClient] = useState(false)
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
 
-  // Set isClient to true after component mounts
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
+  // Get unique categories
+  const categories = [...new Set(projects.map(p => p.category))]
+
+  // Filter projects based on selected category
+  const filteredProjects = selectedCategory 
+    ? projects.filter(p => p.category === selectedCategory)
+    : projects
 
   return (
-    <div suppressHydrationWarning>
-      {/* Enhanced Projects Section */}
-      <section className="w-full py-24 bg-gradient-to-br from-gray-50/50 via-white to-blue-50/30 dark:bg-gradient-to-br dark:from-gray-900 dark:via-blue-900/10 dark:to-gray-900">
-        <div className="container max-w-7xl mx-auto px-6">
-          {/* Enhanced section heading matching homepage style */}
-          <div className="relative mb-16 text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-wp-gold/10 text-wp-gold dark:bg-wp-blue/10 dark:text-wp-blue mb-6 backdrop-blur-sm">
-              <Trophy className="w-4 h-4" />
-              <span className="text-sm font-semibold tracking-wider uppercase">Enterprise Solutions</span>
-            </div>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              <span className="text-wp-navy dark:text-foreground">Client Projects</span>{" "}
-              <span className="bg-gradient-to-r from-wp-gold to-wp-blue bg-clip-text text-transparent">Portfolio</span>
-            </h1>
-            <p className="text-lg md:text-xl text-wp-navy/70 dark:text-muted-foreground max-w-3xl mx-auto mb-8">
-              Explore our showcase of enterprise-level web development solutions, delivering exceptional results for clients across various industries worldwide.
-            </p>
-            <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-wp-gold to-wp-blue rounded-full"></div>
-            
-            {/* CTA Button */}
-            <div className="mt-12">
-              <Button asChild variant="wp-primary" size="xl" className="shadow-lg hover:shadow-xl">
-                <Link href="/contact">
-                  Start Your Project
-                  <ArrowRight className="w-5 h-5 ml-2" />
-                </Link>
-              </Button>
-            </div>
-          </div>
-                  <div className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-6 md:gap-8 lg:gap-10 max-w-5xl mx-auto">
-            {isClient ? projects.map((project, index) => (
-              <ProjectCard 
-                key={project.id}
-                project={project}
-                index={index}
-                categoryColors={categoryColors}
-              />
-            )) : (
-              // Skeleton loading placeholders for server-side rendering
-              Array.from({ length: 6 }).map((_, index) => (
-                <div key={`skeleton-${index}`} className="bg-white/50 dark:bg-wp-navy/30 rounded-lg shadow-md h-96 animate-pulse"></div>
-              ))
-            )}
-          </div>
+    <>
+      {/* Hero Section */}
+      <section className="text-center pt-8 pb-16">
+        {/* Badge */}
+        <div 
+          className="inline-flex bg-white/60 rounded-full mb-8 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2"
+          style={{
+            position: 'relative',
+            // @ts-expect-error CSS custom properties
+            '--border-gradient': 'linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0))',
+            '--border-radius-before': '9999px'
+          }}
+        >
+          <Trophy className="w-4 h-4 text-orange-500" />
+          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Portfolio</span>
         </div>
+
+        {/* Title */}
+        <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
+          Client Projects
+          <span className="block gradient-text font-light">Portfolio</span>
+        </h1>
+
+        {/* Description */}
+        <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
+          Explore our showcase of enterprise-level web development solutions, 
+          delivering exceptional results for clients across various industries.
+        </p>
+
+        {/* CTA */}
+        <Link 
+          href="/contact"
+          className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
+        >
+          <span className="text-sm font-medium tracking-tight">Start Your Project</span>
+          <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+        </Link>
       </section>
 
-      {/* CTA Section */}
-      <section className="w-full py-24 bg-gradient-to-br from-wp-blue/5 via-transparent to-wp-gold/5 dark:from-wp-blue/10 dark:to-wp-gold/10">
-        <div className="container max-w-6xl mx-auto px-6">
-          <div className="text-center">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              <span className="text-wp-navy dark:text-foreground">Ready to Build Your</span>{" "}
-              <span className="bg-gradient-to-r from-wp-gold to-wp-blue bg-clip-text text-transparent">Next Project?</span>
-            </h2>
-            <p className="text-lg text-wp-navy/70 dark:text-muted-foreground mb-10 max-w-2xl mx-auto">
-              Let&apos;s collaborate to create a high-performance, visually stunning solution that meets your business needs and exceeds your expectations.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4 md:gap-6">
-              <Button asChild variant="wp-primary" size="xl">
-                <Link href="/contact">
-                  Start a Project
-                  <ArrowRight className="w-5 h-5 ml-2" />
-                </Link>
-              </Button>
-              <Button asChild variant="wp-secondary" size="xl">
-                <Link href="/services">
-                  View Services
-                </Link>
-              </Button>
+      {/* Separator */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mb-12 opacity-60" />
+
+      {/* Category Filter */}
+      <div className="flex flex-wrap justify-center gap-2 mb-10">
+        <button
+          onClick={() => setSelectedCategory(null)}
+          className={`px-4 py-2 rounded-full text-xs font-medium transition-all ${
+            selectedCategory === null
+              ? 'bg-zinc-900 text-white'
+              : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200'
+          }`}
+        >
+          All Projects
+        </button>
+        {categories.map((category) => (
+          <button
+            key={category}
+            onClick={() => setSelectedCategory(category)}
+            className={`px-4 py-2 rounded-full text-xs font-medium transition-all ${
+              selectedCategory === category
+                ? 'bg-zinc-900 text-white'
+                : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200'
+            }`}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
+
+      {/* Projects Grid - matching homepage card style */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-16">
+        {filteredProjects.map((project) => (
+          <article 
+            key={project.id}
+            className="bg-white h-full flex flex-col hover:bg-zinc-50 transition-colors rounded-2xl overflow-hidden shadow-sm hover:shadow-lg group border-0"
+          >
+            {/* Logo/Image Area */}
+            <div className="relative aspect-video overflow-hidden bg-gradient-to-br from-zinc-50 to-zinc-100 flex items-center justify-center p-8">
+              {project.logo ? (
+                <Image
+                  src={project.logo}
+                  alt={project.title}
+                  width={200}
+                  height={100}
+                  className="object-contain max-h-24 opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+                />
+              ) : (
+                <div className="w-16 h-16 rounded-full bg-zinc-200 flex items-center justify-center">
+                  <Briefcase className="w-8 h-8 text-zinc-400" />
+                </div>
+              )}
+
+              {/* External Link */}
+              <a 
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                <div className="p-2 bg-white/90 backdrop-blur-sm rounded-full shadow-sm hover:bg-white">
+                  <ExternalLink className="w-4 h-4 text-zinc-600" />
+                </div>
+              </a>
             </div>
+
+            {/* Content */}
+            <div className="p-6 flex flex-col flex-grow">
+              {/* Category Badge */}
+              <div className="mb-3 flex flex-wrap gap-2">
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-zinc-100 text-zinc-700 text-xs font-medium">
+                  {project.category}
+                </span>
+              </div>
+
+              {/* Title */}
+              <h3 className="text-lg font-semibold mb-2 line-clamp-2 text-zinc-900 group-hover:text-orange-500 transition-colors tracking-tight">
+                {project.title}
+              </h3>
+              
+              {/* Description */}
+              <p className="text-sm text-zinc-500 mb-4 line-clamp-2 leading-relaxed flex-grow">
+                {project.description}
+              </p>
+
+              {/* Tags */}
+              <div className="flex flex-wrap gap-1.5 mb-4">
+                {project.tags.map((tag) => (
+                  <span 
+                    key={tag}
+                    className="px-2 py-0.5 bg-zinc-50 rounded text-[10px] text-zinc-500 font-medium"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              {/* View Project */}
+              <div className="mt-auto pt-4 border-t border-zinc-100">
+                <a 
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center text-sm font-medium text-zinc-900 group-hover:text-orange-500 transition-colors"
+                >
+                  View Project
+                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      {/* Separator */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+
+      {/* CTA Section */}
+      <section className="overflow-hidden min-h-[400px] shadow-zinc-900/30 bg-zinc-900 rounded-[2rem] relative shadow-2xl mb-8">
+        {/* Grid Pattern */}
+        <div 
+          className="absolute inset-0 opacity-10" 
+          style={{
+            backgroundImage: 'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)',
+            backgroundSize: '40px 40px'
+          }}
+        />
+
+        <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16 min-h-[400px] relative">
+          <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
+            Ready to Build Your Next Project?
+          </h2>
+          <p className="text-zinc-400 mb-8 max-w-lg font-medium">
+            Let&apos;s collaborate to create a high-performance solution that meets your business needs.
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link 
+              href="/contact"
+              className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+            >
+              <span>Start a Project</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+            <Link 
+              href="/services"
+              className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3"
+            >
+              <span>View Services</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
           </div>
         </div>
       </section>
-    </div>
+    </>
   )
-} 
+}

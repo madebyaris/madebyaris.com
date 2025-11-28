@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import dynamic from 'next/dynamic'
+import ClientProjectsPage from './client-page'
 
 // Projects data (shared between server and client)
 export const projects = [
@@ -198,17 +198,7 @@ export const metadata: Metadata = {
   },
 }
 
-// Import the client component from the same directory
-const ClientProjectsPage = dynamic(() => import('./client-page'), {
-  ssr: true,
-  loading: () => <div className="min-h-screen flex items-center justify-center">Loading projects...</div>
-})
-
 // Server component that renders the client component
 export default function ProjectsPage() {
-  return (
-    <>
-      <ClientProjectsPage />
-    </>
-  )
+  return <ClientProjectsPage />
 }
