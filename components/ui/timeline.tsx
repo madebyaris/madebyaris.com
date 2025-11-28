@@ -60,10 +60,11 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
 
       <div ref={ref} className="relative max-w-7xl mx-auto pb-20">
         {data.map((item, index) => {
-          // Use index as key to guarantee uniqueness
+          // Use index as the primary key - it's guaranteed to be unique
+          // Add a prefix to ensure it doesn't conflict with any content keys
           return (
           <div
-            key={`timeline-item-${index}`}
+            key={`timeline-entry-${index}`}
             className="flex justify-start pt-10 md:pt-40 md:gap-10"
           >
             <div className="sticky flex flex-col md:flex-row z-40 items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full">
