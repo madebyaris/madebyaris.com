@@ -19,3 +19,4 @@ export function MiniMaxIcon(props: React.ComponentProps<'svg'>) {
   )
 }
 
+
