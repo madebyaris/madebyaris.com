@@ -20,8 +20,6 @@
 .DS_Store
 *.pem
 
-# cursor (editor-specific)
-.cursor/
 
 # debug
 npm-debug.log*
