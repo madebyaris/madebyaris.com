@@ -1,17 +1,11 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, Search } from 'lucide-react';
 import type { Post, Category } from '@/lib/types';
 import { blurDataURLs } from '@/lib/utils';
-
-// Interface for posts with processed categories
-interface ProcessedPost extends Omit<Post, 'categories' | 'tags'> {
-  categories: Category[];
-  tags: { id: number; name: string; slug: string }[];
-}
 
 interface BlogContentProps {
   initialPosts: Post[];
@@ -19,23 +13,16 @@ interface BlogContentProps {
 
 export function BlogContent({ initialPosts }: BlogContentProps) {
   const [searchQuery, setSearchQuery] = useState('');
-  const [filteredPosts, setFilteredPosts] = useState<Post[]>(initialPosts);
-  
-  // Filter posts based on search query
-  useEffect(() => {
-    let filtered = [...initialPosts];
-    
-    // Apply search filter
-    if (searchQuery) {
-      const searchLower = searchQuery.toLowerCase();
-      filtered = filtered.filter(post => 
-        post.title.rendered.toLowerCase().includes(searchLower) || 
-        post.excerpt.rendered.toLowerCase().includes(searchLower)
-      );
-    }
-    
-    setFilteredPosts(filtered);
-  }, [searchQuery, initialPosts]);
+
+  const filteredPosts = useMemo(() => {
+    if (!searchQuery) return initialPosts
+
+    const searchLower = searchQuery.toLowerCase()
+    return initialPosts.filter((post) =>
+      post.title.rendered.toLowerCase().includes(searchLower) ||
+      post.excerpt.rendered.toLowerCase().includes(searchLower)
+    )
+  }, [searchQuery, initialPosts])
   
   return (
     <div className="w-full">

@@ -56,7 +56,7 @@ export function TestimonialsCarousel() {
             <Card className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm border border-gray-200/60 dark:border-gray-700/60 shadow-lg">
               <CardContent className="p-8">
                 <p className="text-lg md:text-xl italic text-wp-navy/80 dark:text-muted-foreground mb-6 leading-relaxed text-center">
-                  "{testimonialsData[currentIndex].quote}"
+                  &ldquo;{testimonialsData[currentIndex].quote}&rdquo;
                 </p>
                 <div className="flex items-center justify-center gap-4">
                   <div className="w-12 h-12 bg-gradient-to-br from-wp-gold/20 to-wp-blue/20 rounded-full flex items-center justify-center">

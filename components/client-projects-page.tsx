@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useMemo, useState } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { ArrowRight, Filter, Search, Briefcase, ShoppingCart, Film, Home, Globe } from 'lucide-react'
@@ -66,36 +66,36 @@ interface ClientProjectsPageProps {
 }
 
 export default function ClientProjectsPage({ projects }: ClientProjectsPageProps) {
-  // State for filtered projects and active category
-  const [filteredProjects, setFilteredProjects] = useState(projects);
+  // State for active filters
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
 
   // Get unique categories
-  const categories = Array.from(new Set(projects.map(project => project.category)));
+  const categories = useMemo(
+    () => Array.from(new Set(projects.map((project) => project.category))),
+    [projects]
+  )
 
-  // Filter projects when category or search changes
-  useEffect(() => {
-    let result = projects;
-    
-    // Apply category filter
+  const filteredProjects = useMemo(() => {
+    let result = projects
+
     if (activeCategory) {
-      result = result.filter(project => project.category === activeCategory);
+      result = result.filter((project) => project.category === activeCategory)
     }
-    
-    // Apply search filter
+
     if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase();
-      result = result.filter(project => 
-        project.title.toLowerCase().includes(query) || 
-        project.description.toLowerCase().includes(query) ||
-        project.tags.some(tag => tag.toLowerCase().includes(query))
-      );
+      const query = searchQuery.toLowerCase()
+      result = result.filter(
+        (project) =>
+          project.title.toLowerCase().includes(query) ||
+          project.description.toLowerCase().includes(query) ||
+          project.tags.some((tag) => tag.toLowerCase().includes(query))
+      )
     }
-    
-    setFilteredProjects(result);
-  }, [activeCategory, searchQuery, projects]);
+
+    return result
+  }, [activeCategory, searchQuery, projects])
 
   // Handle category click
   const handleCategoryClick = (category: string) => {

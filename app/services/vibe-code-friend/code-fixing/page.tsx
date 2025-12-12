@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
-import { Wrench, ArrowRight, CheckCircle, AlertCircle, Zap } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
+import { Wrench, ArrowRight, ArrowUpRight, CheckCircle2, AlertCircle, Zap, Shield, Clock, FileCode } from 'lucide-react'
 import Link from 'next/link'
+
+export const revalidate = 86400 // Revalidate daily
 
 // Structured Data for SEO
 const structuredData = {
@@ -73,7 +73,61 @@ const structuredData = {
       "name": "Worldwide"
     }
   }
-};
+}
+
+const process = [
+  {
+    title: 'Submit Your Issue',
+    description: 'Share your code and explain the error you\'re experiencing. More context helps us diagnose faster.',
+    icon: AlertCircle
+  },
+  {
+    title: 'Expert Analysis',
+    description: 'We analyze your code, identify the root cause of the issue, and develop an efficient solution.',
+    icon: Wrench
+  },
+  {
+    title: 'Solution Delivery',
+    description: 'Receive a fixed version of your code with clear explanations of what went wrong and how it was resolved.',
+    icon: CheckCircle2
+  }
+]
+
+const issuesWeSolve = [
+  { title: 'Runtime Errors', description: 'From null pointer exceptions to memory leaks, we diagnose and fix runtime crashes.' },
+  { title: 'Build Failures', description: 'Resolve dependency issues, compilation errors, and configuration problems.' },
+  { title: 'Performance Issues', description: 'Identify and fix bottlenecks, memory problems, and slow-running code.' },
+  { title: 'Integration Bugs', description: 'Solve issues with APIs, third-party libraries, and service integrations.' },
+  { title: 'Logic Errors', description: 'Fix algorithm issues and unexpected behavior in your application logic.' }
+]
+
+const technologies = [
+  'JavaScript/TypeScript', 'React/Next.js', 'Python', 'PHP', 'Node.js', 'Java/Kotlin', 'C#/.NET', 'Ruby/Rails'
+]
+
+const pricingPlans = [
+  {
+    name: 'Quick Fix',
+    price: '$75',
+    description: 'Ideal for simple bugs that can be resolved quickly.',
+    features: ['Simple error resolution', 'Basic explanation', '24-48 hour turnaround'],
+    popular: false
+  },
+  {
+    name: 'Standard Fix',
+    price: '$150',
+    description: 'For more complex bugs requiring deeper investigation.',
+    features: ['Complex error resolution', 'Detailed explanation & documentation', '24-hour turnaround', 'Prevention tips'],
+    popular: true
+  },
+  {
+    name: 'Advanced Fix',
+    price: '$300',
+    description: 'For critical issues or system-wide problems.',
+    features: ['Critical error resolution', 'Comprehensive documentation', 'Priority handling', 'Code review & optimization', '1-hour consultation included'],
+    popular: false
+  }
+]
 
 // Generate Metadata
 export async function generateMetadata(): Promise<Metadata> {
@@ -85,14 +139,6 @@ export async function generateMetadata(): Promise<Metadata> {
       description: "Expert code debugging and error resolution service. Get your stubborn bugs fixed quickly and efficiently.",
       url: "https://madebyaris.com/services/vibe-code-friend/code-fixing",
       siteName: "Made by Aris",
-      images: [
-        {
-          url: "https://madebyaris.com/og-code-fixing.png", 
-          width: 1200,
-          height: 630,
-          alt: "Code Fixing & Debugging Service | Vibe Code Friend",
-        },
-      ],
       locale: "en_US",
       type: "website",
     },
@@ -100,303 +146,307 @@ export async function generateMetadata(): Promise<Metadata> {
       canonical: "https://madebyaris.com/services/vibe-code-friend/code-fixing",
     },
     keywords: ["code debugging", "error fixing", "bug resolution", "code errors", "programming help", "developer assistance", "technical troubleshooting", "coding bugs", "software errors", "code issues"],
-  };
+  }
 }
 
 export default function CodeFixingPage() {
   return (
-    <div className="bg-background">
+    <>
       {/* Add structured data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       
+      {/* Breadcrumb */}
+      <nav className="mb-8">
+        <ol className="flex items-center space-x-2 text-sm text-zinc-500">
+          <li><Link href="/services" className="hover:text-orange-500 transition-colors">Services</Link></li>
+          <li><span className="px-2">/</span></li>
+          <li><Link href="/services/vibe-code-friend" className="hover:text-orange-500 transition-colors">Vibe Code Friend</Link></li>
+          <li><span className="px-2">/</span></li>
+          <li className="text-zinc-900">Code Fixing</li>
+        </ol>
+      </nav>
+      
       {/* Hero Section */}
-      <section className="relative py-16 md:py-24 overflow-hidden bg-gradient-to-b from-background via-background to-muted/30">
-        {/* Decorative elements */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(120,119,198,0.1),transparent_60%)]"></div>
-        <div className="absolute w-[800px] h-[800px] -right-40 -top-40 bg-blue-200/10 dark:bg-blue-500/5 rounded-full blur-3xl"></div>
-        
-        <div className="container mx-auto max-w-6xl px-4 sm:px-6 relative text-center">
-          <Badge variant="outline" className="mb-8 px-4 py-1.5 inline-flex border-primary/20">Bug Resolution</Badge>
-          <div className="flex items-center justify-center mb-6">
-            <div className="bg-primary/10 p-4 rounded-full">
-              <Wrench className="w-14 h-14 text-primary" />
+      <section className="text-center pt-4 pb-16">
+        {/* Badge */}
+        <div 
+          className="inline-flex bg-white/60 rounded-full mb-8 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2"
+          style={{
+            position: 'relative',
+            // @ts-expect-error CSS custom properties
+            '--border-gradient': 'linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0))',
+            '--border-radius-before': '9999px'
+          }}
+        >
+          <Wrench className="w-4 h-4 text-orange-500" />
+          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Bug Resolution</span>
+        </div>
+
+        {/* Title */}
+        <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
+          Code
+          <span className="block gradient-text font-light">Fixing</span>
+        </h1>
+
+        {/* Description */}
+        <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
+          Stuck on a stubborn bug or error? Get expert help to diagnose, fix, and prevent coding problems 
+          with clear explanations and efficient solutions.
+        </p>
+
+        {/* CTA Buttons */}
+        <div className="flex flex-wrap justify-center gap-3">
+          <Link 
+            href="/contact"
+            className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
+          >
+            <span className="text-sm font-medium tracking-tight">Fix My Code</span>
+            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </Link>
+          <Link 
+            href="/services/vibe-code-friend"
+            className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
+            style={{
+              boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)',
+              position: 'relative',
+              // @ts-expect-error CSS custom properties
+              '--border-gradient': 'linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.8))',
+              '--border-radius-before': '9999px'
+            }}
+          >
+            <span className="text-sm font-medium text-black/60 tracking-tight">Explore Other Services</span>
+            <ArrowRight className="w-4 h-4 text-zinc-500" />
+          </Link>
+        </div>
+      </section>
+
+      {/* Separator */}
+      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+
+      {/* How It Works Section */}
+      <section className="mb-16">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+            How Our Service <span className="gradient-text">Works</span>
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {process.map((step, index) => (
+            <div
+              key={step.title}
+              className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all group relative"
+            >
+              <div className="absolute top-4 right-4 w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center text-orange-500 font-bold text-sm">
+                {index + 1}
+              </div>
+              <div className="p-3 bg-zinc-100 rounded-xl w-fit mb-4 group-hover:bg-orange-100 transition-colors">
+                <step.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
+              </div>
+              <h3 className="text-lg font-semibold text-zinc-900 mb-2">{step.title}</h3>
+              <p className="text-sm text-zinc-500 leading-relaxed">{step.description}</p>
             </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Separator */}
+      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+
+      {/* Common Issues Section */}
+      <section className="mb-16">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+            Common Issues <span className="gradient-text">We Solve</span>
+          </h2>
+        </div>
+
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {issuesWeSolve.map((issue) => (
+              <div key={issue.title} className="flex items-start gap-3 p-4 bg-zinc-50 rounded-xl">
+                <CheckCircle2 className="w-5 h-5 text-orange-500 mt-0.5 shrink-0" />
+                <div>
+                  <h3 className="font-semibold text-zinc-900 mb-1">{issue.title}</h3>
+                  <p className="text-sm text-zinc-500">{issue.description}</p>
+                </div>
+              </div>
+            ))}
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Code <span className="text-primary">Fixing</span>
-          </h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Stuck on a stubborn bug or error? Get expert help to diagnose, fix, and prevent coding problems with clear explanations and efficient solutions.
+        </div>
+      </section>
+
+      {/* Separator */}
+      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+
+      {/* Technologies Section */}
+      <section className="mb-16">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+            Languages & <span className="gradient-text">Technologies</span>
+          </h2>
+          <p className="text-sm text-zinc-500 max-w-lg mx-auto">
+            Our expertise spans a wide range of programming languages and frameworks
           </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Button asChild size="lg" className="gap-2">
-              <Link href="/contact">
-                Fix My Code <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Button>
-            <Button asChild variant="outline" size="lg">
-              <Link href="/services/vibe-code-friend">
-                Explore Other Services
-              </Link>
-            </Button>
-          </div>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {technologies.map((tech) => (
+            <div 
+              key={tech}
+              className="p-4 bg-white/80 backdrop-blur-sm rounded-xl text-center text-sm font-medium text-zinc-700 hover:bg-orange-50 hover:text-orange-600 transition-colors shadow-sm"
+            >
+              {tech}
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Main Content */}
-      <section className="py-16 md:py-24">
-        <div className="container mx-auto max-w-6xl px-4 sm:px-6">
-          <div className="bg-background/70 backdrop-blur-sm rounded-xl p-8 border border-border/50 shadow-lg">
-            <div className="prose dark:prose-invert max-w-none">
-              <h2 className="text-3xl font-semibold mb-8">How Our Code Fixing Service Works</h2>
-              
-              <div className="not-prose grid md:grid-cols-3 gap-6 my-8">
-                <div className="bg-muted/50 p-6 rounded-lg border border-border/30">
-                  <div className="flex items-center mb-4">
-                    <div className="bg-primary/10 p-2 rounded-full mr-3">
-                      <AlertCircle className="w-6 h-6 text-primary" />
-                    </div>
-                    <h3 className="text-xl font-semibold m-0">Submit Your Issue</h3>
-                  </div>
-                  <p className="text-muted-foreground">Share your code and explain the error you&apos;re experiencing. More context helps us diagnose faster.</p>
-                </div>
-                
-                <div className="bg-muted/50 p-6 rounded-lg border border-border/30">
-                  <div className="flex items-center mb-4">
-                    <div className="bg-primary/10 p-2 rounded-full mr-3">
-                      <Wrench className="w-6 h-6 text-primary" />
-                    </div>
-                    <h3 className="text-xl font-semibold m-0">Expert Analysis</h3>
-                  </div>
-                  <p className="text-muted-foreground">We analyze your code, identify the root cause of the issue, and develop an efficient solution.</p>
-                </div>
-                
-                <div className="bg-muted/50 p-6 rounded-lg border border-border/30">
-                  <div className="flex items-center mb-4">
-                    <div className="bg-primary/10 p-2 rounded-full mr-3">
-                      <CheckCircle className="w-6 h-6 text-primary" />
-                    </div>
-                    <h3 className="text-xl font-semibold m-0">Solution Delivery</h3>
-                  </div>
-                  <p className="text-muted-foreground">Receive a fixed version of your code with clear explanations of what went wrong and how it was resolved.</p>
-                </div>
-              </div>
-              
-              <h2 className="text-3xl font-semibold mb-6 mt-16">Common Issues We Solve</h2>
-              <div className="bg-muted/30 p-6 rounded-xl mb-10 border border-border/30">
-                <ul className="grid md:grid-cols-2 gap-4 list-none pl-0 mb-0">
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
-                    <div>
-                      <strong className="font-medium">Runtime Errors</strong> - From null pointer exceptions to memory leaks, we diagnose and fix runtime crashes.
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
-                    <div>
-                      <strong className="font-medium">Build Failures</strong> - Resolve dependency issues, compilation errors, and configuration problems.
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
-                    <div>
-                      <strong className="font-medium">Performance Issues</strong> - Identify and fix bottlenecks, memory problems, and slow-running code.
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
-                    <div>
-                      <strong className="font-medium">Integration Bugs</strong> - Solve issues with APIs, third-party libraries, and service integrations.
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
-                    <div>
-                      <strong className="font-medium">Logic Errors</strong> - Fix algorithm issues and unexpected behavior in your application logic.
-                    </div>
-                  </li>
-                </ul>
-              </div>
+      {/* Separator */}
+      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
 
-              <h2 className="text-3xl font-semibold mb-6">Languages & Technologies We Support</h2>
-              <p className="text-lg mb-6">
-                Our expertise spans a wide range of programming languages and frameworks, including but not limited to:
-              </p>
-              
-              <div className="not-prose grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
-                <div className="bg-muted/30 p-4 rounded-lg text-center border border-border/30">
-                  <p className="font-medium mb-0">JavaScript/TypeScript</p>
-                </div>
-                <div className="bg-muted/30 p-4 rounded-lg text-center border border-border/30">
-                  <p className="font-medium mb-0">React/Next.js</p>
-                </div>
-                <div className="bg-muted/30 p-4 rounded-lg text-center border border-border/30">
-                  <p className="font-medium mb-0">Python</p>
-                </div>
-                <div className="bg-muted/30 p-4 rounded-lg text-center border border-border/30">
-                  <p className="font-medium mb-0">PHP</p>
-                </div>
-                <div className="bg-muted/30 p-4 rounded-lg text-center border border-border/30">
-                  <p className="font-medium mb-0">Node.js</p>
-                </div>
-                <div className="bg-muted/30 p-4 rounded-lg text-center border border-border/30">
-                  <p className="font-medium mb-0">Java/Kotlin</p>
-                </div>
-                <div className="bg-muted/30 p-4 rounded-lg text-center border border-border/30">
-                  <p className="font-medium mb-0">C#/.NET</p>
-                </div>
-                <div className="bg-muted/30 p-4 rounded-lg text-center border border-border/30">
-                  <p className="font-medium mb-0">Ruby/Rails</p>
-                </div>
-              </div>
-
-              <h2 className="text-3xl font-semibold mb-6">Why Choose Our Code Fixing Service?</h2>
-              <div className="not-prose space-y-6 mb-16">
-                <div className="flex items-start gap-4 bg-muted/30 p-5 rounded-lg border border-border/30">
-                  <div className="bg-primary/10 p-2 rounded-full h-fit">
-                    <Zap className="w-6 h-6 text-primary flex-shrink-0" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">Fast Turnaround Time</h3>
-                    <p className="text-muted-foreground">Most issues are resolved within 24-48 hours, with emergency options available for critical bugs.</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4 bg-muted/30 p-5 rounded-lg border border-border/30">
-                  <div className="bg-primary/10 p-2 rounded-full h-fit">
-                    <Zap className="w-6 h-6 text-primary flex-shrink-0" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">Learning Opportunity</h3>
-                    <p className="text-muted-foreground">We don&apos;t just fix your code; we explain what went wrong and how to prevent similar issues in the future.</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4 bg-muted/30 p-5 rounded-lg border border-border/30">
-                  <div className="bg-primary/10 p-2 rounded-full h-fit">
-                    <Zap className="w-6 h-6 text-primary flex-shrink-0" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">Confidentiality</h3>
-                    <p className="text-muted-foreground">Your code and business logic remain confidential. We can sign NDAs if required for sensitive projects.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            {/* Pricing Options */}
-            <h2 className="text-3xl font-semibold mb-8 text-center mt-20">Pricing Options</h2>
-            <div className="grid md:grid-cols-3 gap-8 mb-8">
-              <div className="bg-background border border-border/50 rounded-lg p-8 shadow-sm hover:shadow-md transition-shadow">
-                <h3 className="text-xl font-bold mb-2">Quick Fix</h3>
-                <p className="text-primary font-semibold text-2xl mb-4">Starting at $75</p>
-                <p className="text-muted-foreground mb-6">Ideal for simple bugs that can be resolved quickly.</p>
-                <ul className="space-y-3 mb-8">
-                  <li className="flex items-center">
-                    <CheckCircle className="w-4 h-4 text-primary mr-2 flex-shrink-0" />
-                    <span>Simple error resolution</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="w-4 h-4 text-primary mr-2 flex-shrink-0" />
-                    <span>Basic explanation</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="w-4 h-4 text-primary mr-2 flex-shrink-0" />
-                    <span>24-48 hour turnaround</span>
-                  </li>
-                </ul>
-                <Button variant="outline" asChild className="w-full">
-                  <Link href="/contact">Get Started</Link>
-                </Button>
-              </div>
-              
-              <div className="bg-primary/5 border border-primary/30 rounded-lg p-8 shadow-md relative">
-                <div className="absolute top-0 right-0 bg-primary text-primary-foreground text-xs px-3 py-1 rounded-bl-lg rounded-tr-lg font-medium">POPULAR</div>
-                <h3 className="text-xl font-bold mb-2">Standard Fix</h3>
-                <p className="text-primary font-semibold text-2xl mb-4">Starting at $150</p>
-                <p className="text-muted-foreground mb-6">For more complex bugs requiring deeper investigation.</p>
-                <ul className="space-y-3 mb-8">
-                  <li className="flex items-center">
-                    <CheckCircle className="w-4 h-4 text-primary mr-2 flex-shrink-0" />
-                    <span>Complex error resolution</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="w-4 h-4 text-primary mr-2 flex-shrink-0" />
-                    <span>Detailed explanation & documentation</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="w-4 h-4 text-primary mr-2 flex-shrink-0" />
-                    <span>24-hour turnaround</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="w-4 h-4 text-primary mr-2 flex-shrink-0" />
-                    <span>Prevention tips</span>
-                  </li>
-                </ul>
-                <Button asChild className="w-full">
-                  <Link href="/contact">Get Started</Link>
-                </Button>
-              </div>
-              
-              <div className="bg-background border border-border/50 rounded-lg p-8 shadow-sm hover:shadow-md transition-shadow">
-                <h3 className="text-xl font-bold mb-2">Advanced Fix</h3>
-                <p className="text-primary font-semibold text-2xl mb-4">Starting at $300</p>
-                <p className="text-muted-foreground mb-6">For critical issues or system-wide problems.</p>
-                <ul className="space-y-3 mb-8">
-                  <li className="flex items-center">
-                    <CheckCircle className="w-4 h-4 text-primary mr-2 flex-shrink-0" />
-                    <span>Critical error resolution</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="w-4 h-4 text-primary mr-2 flex-shrink-0" />
-                    <span>Comprehensive documentation</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="w-4 h-4 text-primary mr-2 flex-shrink-0" />
-                    <span>Priority handling</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="w-4 h-4 text-primary mr-2 flex-shrink-0" />
-                    <span>Code review & optimization</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="w-4 h-4 text-primary mr-2 flex-shrink-0" />
-                    <span>1-hour consultation included</span>
-                  </li>
-                </ul>
-                <Button variant="outline" asChild className="w-full">
-                  <Link href="/contact">Get Started</Link>
-                </Button>
-              </div>
-            </div>
-          </div>
+      {/* Why Choose Us Section */}
+      <section className="mb-16">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+            Why Choose Our <span className="gradient-text">Service</span>
+          </h2>
         </div>
-      </section>
 
-      {/* Call to Action */}
-      <section className="py-16 md:py-24">
-        <div className="container mx-auto max-w-6xl px-4 sm:px-6 relative">
-          <div className="text-center bg-gradient-to-br from-background to-muted/50 rounded-2xl p-10 shadow-lg border border-border/30 backdrop-blur-sm">
-            <h2 className="text-3xl font-semibold mb-6">Ready to Fix Your Code?</h2>
-            <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-8">
-              Stop wasting hours struggling with stubborn bugs. Get expert help and start making progress again.
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="bg-zinc-50 rounded-2xl p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 bg-white rounded-xl shadow-sm">
+                <Clock className="w-5 h-5 text-orange-500" />
+              </div>
+              <h3 className="font-semibold text-zinc-900">Fast Turnaround</h3>
+            </div>
+            <p className="text-sm text-zinc-600 leading-relaxed">
+              Most issues are resolved within 24-48 hours, with emergency options available for critical bugs.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" className="gap-2">
-                <Link href="/contact">
-                  Submit Your Bug <ArrowRight className="ml-1 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button variant="outline" asChild size="lg">
-                <Link href="/services/vibe-code-friend">
-                  Explore Other Services
-                </Link>
-              </Button>
+          </div>
+          <div className="bg-zinc-50 rounded-2xl p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 bg-white rounded-xl shadow-sm">
+                <FileCode className="w-5 h-5 text-orange-500" />
+              </div>
+              <h3 className="font-semibold text-zinc-900">Learning Opportunity</h3>
             </div>
+            <p className="text-sm text-zinc-600 leading-relaxed">
+              We don&apos;t just fix your code; we explain what went wrong and how to prevent similar issues in the future.
+            </p>
+          </div>
+          <div className="bg-zinc-50 rounded-2xl p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 bg-white rounded-xl shadow-sm">
+                <Shield className="w-5 h-5 text-orange-500" />
+              </div>
+              <h3 className="font-semibold text-zinc-900">Confidentiality</h3>
+            </div>
+            <p className="text-sm text-zinc-600 leading-relaxed">
+              Your code and business logic remain confidential. We can sign NDAs if required for sensitive projects.
+            </p>
           </div>
         </div>
       </section>
-    </div>
-  );
-} 
+
+      {/* Separator */}
+      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+
+      {/* Pricing Section */}
+      <section className="mb-16">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+            Pricing <span className="gradient-text">Options</span>
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {pricingPlans.map((plan) => (
+            <div 
+              key={plan.name}
+              className={`rounded-2xl p-6 shadow-sm transition-all hover:shadow-lg ${
+                plan.popular 
+                  ? 'bg-zinc-900 text-white relative' 
+                  : 'bg-white/80 backdrop-blur-sm'
+              }`}
+            >
+              {plan.popular && (
+                <div className="absolute top-4 right-4 px-2 py-1 bg-orange-500 rounded-full text-[10px] font-bold uppercase">
+                  Popular
+                </div>
+              )}
+              <h3 className={`text-lg font-semibold mb-1 ${plan.popular ? 'text-white' : 'text-zinc-900'}`}>
+                {plan.name}
+              </h3>
+              <p className={`text-2xl font-bold mb-2 ${plan.popular ? 'text-orange-400' : 'gradient-text'}`}>
+                {plan.price}
+              </p>
+              <p className={`text-sm mb-6 ${plan.popular ? 'text-zinc-400' : 'text-zinc-500'}`}>
+                {plan.description}
+              </p>
+              <ul className="space-y-2 mb-6">
+                {plan.features.map((feature) => (
+                  <li key={feature} className="flex items-center gap-2 text-sm">
+                    <CheckCircle2 className={`w-4 h-4 shrink-0 ${plan.popular ? 'text-orange-400' : 'text-orange-500'}`} />
+                    <span className={plan.popular ? 'text-zinc-300' : 'text-zinc-600'}>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+              <Link 
+                href="/contact"
+                className={`block w-full text-center py-2.5 rounded-full text-sm font-medium transition-all ${
+                  plan.popular 
+                    ? 'bg-white text-zinc-900 hover:bg-zinc-100' 
+                    : 'bg-zinc-900 text-white hover:bg-zinc-800'
+                }`}
+              >
+                Get Started
+              </Link>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="overflow-hidden min-h-[400px] shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
+        <div 
+          className="absolute inset-0 opacity-10" 
+          style={{
+            backgroundImage: 'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)',
+            backgroundSize: '40px 40px'
+          }}
+        />
+
+        <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16 min-h-[400px] relative">
+          <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
+            Ready to Fix Your Code?
+          </h2>
+          <p className="text-zinc-400 mb-8 max-w-lg font-medium">
+            Stop wasting hours struggling with stubborn bugs. Get expert help and start making progress again.
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link 
+              href="/contact"
+              className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+            >
+              <span>Submit Your Bug</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+            <Link 
+              href="/services/vibe-code-friend"
+              className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3"
+            >
+              <span>Explore Other Services</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+        </div>
+      </section>
+    </>
+  )
+}

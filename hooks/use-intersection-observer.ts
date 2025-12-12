@@ -59,17 +59,10 @@ export function useLazyComponent<T extends Element = Element>(
   options: UseIntersectionObserverOptions = {}
 ) {
   const { ref, shouldLoad } = useIntersectionObserver<T>(options)
-  const [isComponentMounted, setIsComponentMounted] = useState(false)
-
-  useEffect(() => {
-    if (shouldLoad && !isComponentMounted) {
-      setIsComponentMounted(true)
-    }
-  }, [shouldLoad, isComponentMounted])
 
   return {
     ref,
     shouldLoad,
-    isComponentMounted,
+    isComponentMounted: shouldLoad,
   }
-} 
+}

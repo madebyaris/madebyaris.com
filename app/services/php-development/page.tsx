@@ -1,65 +1,45 @@
 import type { Metadata } from 'next'
-import { Code2, Database, Server, Shield, ArrowRight, Rocket, Layout, Users, Star } from 'lucide-react'
-import { Button } from '../../../components/ui/button'
-import { Card } from '../../../components/ui/card'
-import { PageHero } from '../../../components/ui/page-hero'
-import { SectionWrapper } from '../../../components/ui/section-wrapper'
-import { EnhancedCard } from '../../../components/ui/enhanced-card'
+import { Code2, Database, Server, Shield, ArrowRight, ArrowUpRight, Rocket, Layout, Users, Quote } from 'lucide-react'
 import Link from 'next/link'
-import { ImageResponse } from 'next/og'
+
+export const revalidate = 86400 // Revalidate daily
 
 const services = [
   {
     title: 'Custom Web Applications',
     description: 'Develop tailored PHP applications that meet your specific business requirements and scale with your growth.',
-    icon: <Code2 className="w-6 h-6" />,
+    icon: Code2,
     href: '/services/php-development/custom-applications',
     features: ['Modern PHP', 'Scalable Architecture', 'Custom Features', 'High Performance'],
   },
   {
     title: 'API Development',
     description: 'Create robust RESTful APIs and web services using modern PHP frameworks and best practices.',
-    icon: <Server className="w-6 h-6" />,
+    icon: Server,
     href: '/services/php-development/api-development',
     features: ['RESTful APIs', 'GraphQL', 'API Security', 'Documentation'],
   },
   {
     title: 'Database Solutions',
     description: 'Design and implement efficient database architectures optimized for your application needs.',
-    icon: <Database className="w-6 h-6" />,
+    icon: Database,
     href: '/services/php-development/database-solutions',
     features: ['Database Design', 'Optimization', 'Migration', 'Scaling'],
   },
   {
     title: 'Legacy Modernization',
     description: 'Upgrade and modernize legacy PHP applications to use current best practices and technologies.',
-    icon: <Rocket className="w-6 h-6" />,
+    icon: Rocket,
     href: '/services/php-development/modernization',
     features: ['Code Refactoring', 'Security Updates', 'Performance Boost', 'Modern Stack'],
   },
 ]
 
 const benefits = [
-  {
-    title: 'Modern Development',
-    description: 'Using latest PHP versions and modern development practices.',
-    icon: <Code2 className="w-6 h-6" />,
-  },
-  {
-    title: 'Scalable Solutions',
-    description: 'Applications that grow with your business needs.',
-    icon: <Layout className="w-6 h-6" />,
-  },
-  {
-    title: 'Performance Focus',
-    description: 'Optimized code for maximum speed and efficiency.',
-    icon: <Rocket className="w-6 h-6" />,
-  },
-  {
-    title: 'Security First',
-    description: 'Following PHP security best practices and standards.',
-    icon: <Shield className="w-6 h-6" />,
-  },
+  { title: 'Modern Development', description: 'Using latest PHP versions and practices', icon: Code2 },
+  { title: 'Scalable Solutions', description: 'Applications that grow with you', icon: Layout },
+  { title: 'Performance Focus', description: 'Optimized for speed and efficiency', icon: Rocket },
+  { title: 'Security First', description: 'Following security best practices', icon: Shield },
 ]
 
 const testimonials = [
@@ -82,261 +62,10 @@ const structuredData = {
   "@id": "https://madebyaris.com/services/php-development/#webpage",
   "name": "PHP Development Services | Custom Applications & APIs",
   "description": "Professional PHP development services for custom web applications, APIs, and enterprise solutions. Expert in modern PHP frameworks and best practices.",
-  "url": "https://madebyaris.com/services/php-development",
-  "isPartOf": {
-    "@type": "WebSite",
-    "@id": "https://madebyaris.com/#website"
-  },
-  "breadcrumb": {
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "item": {
-          "@id": "https://madebyaris.com",
-          "name": "Home"
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "item": {
-          "@id": "https://madebyaris.com/services",
-          "name": "Services"
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "item": {
-          "@id": "https://madebyaris.com/services/php-development",
-          "name": "PHP Development"
-        }
-      }
-    ]
-  },
-  "mainEntity": [
-    {
-      "@type": "Service",
-      "name": "PHP Development Services",
-      "description": "Professional PHP development services for custom web applications, APIs, and enterprise solutions. Expert in modern PHP frameworks and best practices.",
-      "provider": {
-        "@type": "Person",
-        "@id": "https://madebyaris.com/#person",
-        "name": "Aris Setiawan",
-        "jobTitle": "Senior Full Stack Developer",
-        "url": "https://madebyaris.com",
-        "image": "https://madebyaris.com/aris.png",
-        "sameAs": [
-          "https://www.linkedin.com/in/arissetia/",
-          "https://github.com/madebyaris",
-          "https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe"
-        ]
-      },
-      "serviceType": "PHP Development",
-      "areaServed": {
-        "@type": "Country",
-        "name": "Worldwide"
-      },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "PHP Development Services",
-        "itemListElement": services.map((service) => ({
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": service.title,
-            "description": service.description,
-            "url": `https://madebyaris.com${service.href}`,
-            "serviceOutput": {
-              "@type": "ItemList",
-              "itemListElement": service.features.map((feature, index) => ({
-                "@type": "ListItem",
-                "position": index + 1,
-                "item": {
-                  "@type": "Service",
-                  "name": feature
-                }
-              }))
-            }
-          }
-        }))
-      }
-    },
-    {
-      "@type": "Product",
-      "@id": "https://madebyaris.com/services/php-development/#product",
-      "name": "PHP Development Services",
-      "description": "Professional PHP development services for custom web applications, APIs, and enterprise solutions.",
-      "brand": {
-        "@type": "Brand",
-        "name": "Made by Aris"
-      },
-      "offers": {
-        "@type": "AggregateOffer",
-        "priceCurrency": "USD",
-        "highPrice": 50000,
-        "lowPrice": 5000,
-        "offerCount": 6,
-        "availability": "https://schema.org/InStock"
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "25",
-        "bestRating": "5",
-        "worstRating": "1"
-      },
-      "review": testimonials.map((testimonial) => ({
-        "@type": "Review",
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": "5",
-          "bestRating": "5"
-        },
-        "author": {
-          "@type": "Person",
-          "name": testimonial.author,
-          "jobTitle": testimonial.company
-        },
-        "reviewBody": testimonial.quote
-      }))
-    }
-  ],
-  "about": {
-    "@type": "Thing",
-    "name": "PHP Development Expertise",
-    "description": "Expert PHP development services focusing on modern practices, security, and scalability. Specializing in custom applications, APIs, and enterprise solutions."
-  },
-  "publisher": {
-    "@type": "Organization",
-    "@id": "https://madebyaris.com/#organization",
-    "name": "MadeByAris",
-    "url": "https://madebyaris.com",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://madebyaris.com/logo.png",
-      "width": "180",
-      "height": "180"
-    }
-  },
-  "offers": {
-    "@type": "AggregateOffer",
-    "priceCurrency": "USD",
-    "priceSpecification": {
-      "@type": "PriceSpecification",
-      "price": "Contact for custom pricing",
-      "priceCurrency": "USD",
-      "valueAddedTaxIncluded": true
-    },
-    "availability": "https://schema.org/InStock",
-    "highPrice": 50000,
-    "lowPrice": 5000,
-    "offerCount": services.length
-  },
-  "mainEntityOfPage": {
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "What PHP versions do you work with?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "I work with modern PHP versions (7.4+, 8.x) and follow PHP-FIG standards and best practices. I can also help upgrade legacy applications to newer PHP versions."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What PHP frameworks do you use?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "I have extensive experience with Laravel, Symfony, CodeIgniter, and other modern PHP frameworks. The choice of framework depends on your project's specific requirements."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can you help with legacy PHP applications?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, I specialize in modernizing legacy PHP applications. This includes code refactoring, security updates, performance optimization, and migration to modern PHP versions and frameworks."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Do you provide ongoing maintenance?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, I offer comprehensive maintenance services including security updates, bug fixes, performance optimization, and feature enhancements for PHP applications."
-        }
-      }
-    ]
-  }
+  "url": "https://madebyaris.com/services/php-development"
 }
 
-// Generate OG Image
 export async function generateMetadata(): Promise<Metadata> {
-  const ogImage = new ImageResponse(
-    (
-      <div
-        style={{
-          background: 'linear-gradient(to right, #000000, #1a1a1a)',
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '40px',
-        }}
-      >
-        <h1
-          style={{
-            fontSize: '60px',
-            fontWeight: 'bold',
-            color: 'white',
-            marginBottom: '20px',
-            textAlign: 'center',
-          }}
-        >
-          PHP Development Services
-        </h1>
-        <p
-          style={{
-            fontSize: '30px',
-            color: '#888888',
-            marginBottom: '40px',
-            textAlign: 'center',
-            maxWidth: '800px',
-          }}
-        >
-          Custom Applications • APIs • Database Solutions
-        </p>
-        <div
-          style={{
-            display: 'flex',
-            gap: '20px',
-            marginTop: '20px',
-          }}
-        >
-          <div style={{ background: '#777BB3', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
-            PHP Expert
-          </div>
-          <div style={{ background: '#333333', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
-            Modern PHP
-          </div>
-          <div style={{ background: '#14a800', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
-            Enterprise Solutions
-          </div>
-        </div>
-      </div>
-    ),
-    {
-      width: 1200,
-      height: 630,
-    }
-  )
-
   return {
     title: 'PHP Development Services | Custom Applications & APIs',
     description: 'Professional PHP development services for custom web applications, APIs, and enterprise solutions. Expert in modern PHP frameworks and best practices.',
@@ -357,19 +86,14 @@ export async function generateMetadata(): Promise<Metadata> {
       description: 'Professional PHP development services for modern web applications.',
       type: 'website',
       locale: 'en_US',
-      images: [ogImage]
     },
     twitter: {
       card: 'summary_large_image',
       title: 'PHP Development Services | Custom Solutions',
       description: 'Professional PHP development services for modern web applications.',
-      images: [ogImage]
     },
     alternates: {
       canonical: 'https://madebyaris.com/services/php-development'
-    },
-    other: {
-      'structured-data': JSON.stringify(structuredData)
     }
   }
 }
@@ -382,240 +106,249 @@ export default function PhpDevelopmentPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       
-      {/* Hero Section with new PageHero component */}
-      <PageHero
-        variant="services"
-        badge={{ text: "PHP Expert", icon: Code2 }}
-        title={
-          <>
-            <span className="text-wp-navy-foreground dark:text-foreground">Professional</span>{" "}
-            <span className="bg-gradient-to-r from-wp-blue to-wp-sage bg-clip-text text-transparent">PHP</span>{" "}
-            <span className="text-wp-navy-foreground dark:text-foreground">Development</span>
-          </>
-        }
-        description="Custom PHP applications, APIs, and enterprise solutions built with modern frameworks and best practices for scalable, secure, and high-performance results."
-      >
-        <div className="flex flex-wrap justify-center gap-4 md:gap-6">
-          <Button asChild variant="wp-primary" size="xl">
-            <Link href="/contact">
-              Start Your Project
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Link>
-          </Button>
-          <Button asChild variant="wp-secondary" size="xl">
-            <Link href="/projects">
-              View Portfolio
-            </Link>
-          </Button>
+      {/* Hero Section */}
+      <section className="text-center pt-8 pb-16">
+        {/* Badge */}
+        <div 
+          className="inline-flex bg-white/60 rounded-full mb-8 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2"
+          style={{
+            position: 'relative',
+            // @ts-expect-error CSS custom properties
+            '--border-gradient': 'linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0))',
+            '--border-radius-before': '9999px'
+          }}
+        >
+          <Server className="w-4 h-4 text-orange-500" />
+          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">PHP Expert</span>
         </div>
-      </PageHero>
 
-      {/* Introduction Section */}
-      <SectionWrapper
-        variant="default"
-        padding="small"
-        description="With extensive experience in modern PHP development, I create robust, scalable applications that power businesses worldwide. From custom web applications to enterprise APIs, I leverage the latest PHP frameworks and best practices to deliver solutions that perform exceptionally and scale with your business growth."
-      />
+        {/* Title */}
+        <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
+          Professional
+          <span className="block gradient-text font-light">PHP Development</span>
+          <span className="block">Services</span>
+        </h1>
+
+        {/* Description */}
+        <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
+          Custom PHP applications, APIs, and enterprise solutions built with modern frameworks 
+          and best practices for scalable, secure, and high-performance results.
+        </p>
+
+        {/* CTA Buttons */}
+        <div className="flex flex-wrap justify-center gap-3">
+          <Link 
+            href="/contact"
+            className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
+          >
+            <span className="text-sm font-medium tracking-tight">Start Your Project</span>
+            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </Link>
+          <Link 
+            href="/projects"
+            className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
+            style={{
+              boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)',
+              position: 'relative',
+              // @ts-expect-error CSS custom properties
+              '--border-gradient': 'linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.8))',
+              '--border-radius-before': '9999px'
+            }}
+          >
+            <span className="text-sm font-medium text-black/60 tracking-tight">View Portfolio</span>
+            <ArrowRight className="w-4 h-4 text-zinc-500" />
+          </Link>
+        </div>
+      </section>
+
+      {/* Separator */}
+      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
 
       {/* Services Section */}
-      <SectionWrapper
-        variant="accent"
-        padding="small"
-        badge={{ text: "Services Offered", icon: Code2 }}
-        title="PHP Development Solutions"
-        description="Comprehensive PHP services for modern web applications and enterprise systems"
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <section className="mb-16">
+        <div className="text-center mb-10">
+          <div 
+            className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2"
+            style={{
+              position: 'relative',
+              // @ts-expect-error CSS custom properties
+              '--border-gradient': 'linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0))',
+              '--border-radius-before': '9999px'
+            }}
+          >
+            <Code2 className="w-4 h-4 text-orange-500" />
+            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Services Offered</span>
+          </div>
+          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+            PHP Development <span className="gradient-text">Solutions</span>
+          </h2>
+          <p className="text-sm text-zinc-500 max-w-lg mx-auto font-medium">
+            Comprehensive PHP services for modern web applications and enterprise systems
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {services.map((service) => (
             <Link key={service.title} href={service.href} className="group">
-              <EnhancedCard
-                variant="elevated"
-                title={service.title}
-                description={service.description}
-                hover={true}
-              >
-                {/* Icon */}
-                <div className="mb-6 p-4 bg-wp-blue/10 dark:bg-wp-blue/20 rounded-xl w-fit">
-                  <div className="w-8 h-8 text-wp-blue">
-                    {service.icon}
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all hover:-translate-y-0.5 h-full">
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="p-3 bg-zinc-100 rounded-xl group-hover:bg-orange-100 transition-colors">
+                    <service.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold text-zinc-900 mb-1 group-hover:text-orange-500 transition-colors">
+                      {service.title}
+                    </h3>
+                    <p className="text-sm text-zinc-500 leading-relaxed">
+                      {service.description}
+                    </p>
                   </div>
                 </div>
                 
-                {/* Features list */}
-                <div className="mb-6 flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1.5">
                   {service.features.map((feature) => (
                     <span 
                       key={feature} 
-                      className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-wp-blue/10 dark:bg-wp-blue/20 text-wp-blue"
+                      className="px-2 py-0.5 bg-zinc-100 rounded text-[10px] text-zinc-600 font-medium"
                     >
                       {feature}
                     </span>
                   ))}
                 </div>
-                
-                <div className="mt-auto">
-                  <Button variant="wp-primary" className="w-full">
-                    Learn More
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </div>
-              </EnhancedCard>
+              </div>
             </Link>
           ))}
         </div>
-      </SectionWrapper>
+      </section>
+
+      {/* Separator */}
+      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
 
       {/* Benefits Section */}
-      <SectionWrapper
-        variant="default"
-        padding="small"
-        badge={{ text: "Advantages", icon: Star }}
-        title="Why Choose My PHP Services"
-        description="Experience the benefits of modern PHP development practices"
-      >
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+      <section className="mb-16">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+            Why Choose My <span className="gradient-text">PHP Services</span>
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {benefits.map((benefit) => (
-            <EnhancedCard
+            <div 
               key={benefit.title}
-              variant="glass"
-              title={benefit.title}
-              description={benefit.description}
+              className="bg-zinc-50 rounded-2xl p-5 text-center"
             >
-              <div className="mb-6 p-4 bg-wp-sage/10 dark:bg-wp-sage/20 rounded-xl w-fit mx-auto">
-                <div className="w-8 h-8 text-wp-sage">
-                  {benefit.icon}
-                </div>
+              <div className="p-3 bg-white rounded-xl w-fit mx-auto mb-3 shadow-sm">
+                <benefit.icon className="w-5 h-5 text-zinc-600" />
               </div>
-            </EnhancedCard>
+              <h3 className="font-semibold text-zinc-900 mb-1 text-sm">{benefit.title}</h3>
+              <p className="text-xs text-zinc-500">{benefit.description}</p>
+            </div>
           ))}
         </div>
-      </SectionWrapper>
+      </section>
 
-      {/* Process Section */}
-      <SectionWrapper
-        variant="accent"
-        padding="small"
-        badge={{ text: "Workflow", icon: Code2 }}
-        title="PHP Development Process"
-        description="A systematic approach to deliver exceptional PHP solutions"
-      >
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              {
-                title: 'Analysis',
-                description: 'Understanding your requirements and technical specifications for the PHP project.'
-              },
-              {
-                title: 'Architecture',
-                description: 'Designing scalable and maintainable PHP application architecture.'
-              },
-              {
-                title: 'Development',
-                description: 'Building your PHP solution with modern frameworks and best practices.'
-              },
-              {
-                title: 'Deployment',
-                description: 'Launching your PHP application with monitoring and support.'
-              }
-            ].map((step, index) => (
-              <EnhancedCard
-                key={step.title}
-                variant="glass"
-                title={step.title}
-                description={step.description}
-              >
-                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-wp-blue/20 text-wp-blue font-bold text-base mb-4 mx-auto">
-                  {index + 1}
-                </div>
-              </EnhancedCard>
-            ))}
-        </div>
-      </SectionWrapper>
+      {/* Separator */}
+      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
 
       {/* Testimonials Section */}
-      <SectionWrapper
-        variant="default"
-        badge={{ text: "Client Feedback", icon: Users }}
-        title="What Clients Say"
-        description="Real feedback from satisfied PHP development clients"
-      >
+      <section className="mb-16">
+        <div className="text-center mb-10">
+          <div 
+            className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2"
+            style={{
+              position: 'relative',
+              // @ts-expect-error CSS custom properties
+              '--border-gradient': 'linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0))',
+              '--border-radius-before': '9999px'
+            }}
+          >
+            <Users className="w-4 h-4 text-orange-500" />
+            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Client Feedback</span>
+          </div>
+          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter">
+            What Clients <span className="gradient-text">Say</span>
+          </h2>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {testimonials.map((testimonial, index) => (
-            <EnhancedCard
+            <div 
               key={index}
-              variant="elevated"
-              title={testimonial.author}
-              description={testimonial.company}
+              className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm"
             >
-              <div className="mb-6 text-wp-blue">
-                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path>
-                  <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"></path>
-                </svg>
+              <Quote className="w-8 h-8 text-orange-200 mb-4" />
+              <p className="text-zinc-600 italic mb-4 leading-relaxed">
+                &ldquo;{testimonial.quote}&rdquo;
+              </p>
+              <div>
+                <p className="font-semibold text-zinc-900 text-sm">{testimonial.author}</p>
+                <p className="text-xs text-zinc-500">{testimonial.company}</p>
               </div>
-              <p className="text-wp-navy/70 dark:text-muted-foreground mb-4 italic">"{testimonial.quote}"</p>
-            </EnhancedCard>
+            </div>
           ))}
         </div>
-      </SectionWrapper>
+      </section>
 
-      {/* FAQ Section */}
-      <SectionWrapper
-        variant="accent"
-        badge={{ text: "Questions", icon: Users }}
-        title="Frequently Asked Questions"
-        description="Common questions about PHP development services"
-      >
-        <div className="space-y-6">
+      {/* Separator */}
+      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+
+      {/* Process Section */}
+      <section className="mb-16">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+            Development <span className="gradient-text">Process</span>
+          </h2>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {[
-            {
-              question: "What PHP frameworks do you work with?",
-              answer: "I work with modern PHP frameworks including Laravel, Symfony, CodeIgniter, and custom PHP solutions. I choose the framework based on your project requirements and long-term maintenance needs."
-            },
-            {
-              question: "How do you ensure PHP application security?",
-              answer: "I follow PHP security best practices including input validation, SQL injection prevention, XSS protection, CSRF tokens, and secure authentication. All applications undergo security testing before deployment."
-            },
-            {
-              question: "Can you modernize legacy PHP applications?",
-              answer: "Yes, I specialize in modernizing legacy PHP applications. This includes upgrading to newer PHP versions, refactoring code, improving security, optimizing performance, and implementing modern development practices."
-            },
-            {
-              question: "What is your approach to PHP performance optimization?",
-              answer: "I optimize PHP applications through code profiling, database query optimization, caching strategies, memory management, and server configuration. This ensures your application runs efficiently at scale."
-            }
-          ].map((faq, index) => (
-            <EnhancedCard
-              key={index}
-              variant="glass"
-              title={faq.question}
-              description={faq.answer}
-            />
+            { step: 1, title: "Analysis", desc: "Understanding your requirements" },
+            { step: 2, title: "Architecture", desc: "Designing scalable solutions" },
+            { step: 3, title: "Development", desc: "Building with clean code" },
+            { step: 4, title: "Deployment", desc: "Launch and ongoing support" },
+          ].map((item) => (
+            <div 
+              key={item.step}
+              className="bg-zinc-50 rounded-2xl p-5 text-center"
+            >
+              <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-500 font-bold text-lg flex items-center justify-center mx-auto mb-3">
+                {item.step}
+              </div>
+              <h3 className="font-semibold text-zinc-900 mb-1">{item.title}</h3>
+              <p className="text-sm text-zinc-500">{item.desc}</p>
+            </div>
           ))}
         </div>
-      </SectionWrapper>
+      </section>
 
       {/* CTA Section */}
-      <SectionWrapper
-        variant="gradient"
-        padding="large"
-        title={
-          <>
-            <span className="text-wp-navy-foreground dark:text-foreground">Ready to Build Your</span>{" "}
-            <span className="bg-gradient-to-r from-wp-blue to-wp-sage bg-clip-text text-transparent">PHP Application?</span>
-          </>
-        }
-        description="Let's discuss your PHP project requirements and create a solution that delivers exceptional performance and scalability."
-      >
-        <div className="text-center">
-          <Button asChild variant="wp-primary" size="xl">
-            <Link href="/contact">
-              Start Your Project
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Link>
-          </Button>
+      <section className="overflow-hidden min-h-[400px] shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
+        <div 
+          className="absolute inset-0 opacity-10" 
+          style={{
+            backgroundImage: 'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)',
+            backgroundSize: '40px 40px'
+          }}
+        />
+
+        <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16 min-h-[400px] relative">
+          <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
+            Ready to Build Your PHP Application?
+          </h2>
+          <p className="text-zinc-400 mb-8 max-w-lg font-medium">
+            Let&apos;s discuss your PHP project requirements and create a solution that delivers exceptional performance and scalability.
+          </p>
+
+          <Link 
+            href="/contact"
+            className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+          >
+            <span>Start Your Project</span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </Link>
         </div>
-      </SectionWrapper>
+      </section>
     </>
   )
 }

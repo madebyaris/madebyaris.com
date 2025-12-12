@@ -17,11 +17,11 @@ const CaseStudiesCarousel = ({ caseStudies }: CaseStudiesCarouselProps) => {
 
   const nextSlide = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % caseStudies.length);
-  }, []);
+  }, [caseStudies.length]);
 
   const prevSlide = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + caseStudies.length) % caseStudies.length);
-  }, []);
+  }, [caseStudies.length]);
 
   useEffect(() => {
     const timer = setInterval(nextSlide, 7000);

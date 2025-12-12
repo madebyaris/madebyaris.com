@@ -24,6 +24,8 @@ const mainRoutes = [
   { path: 'blog', priority: 0.8, changeFreq: 'weekly' },
   { path: 'projects', priority: 0.8, changeFreq: 'weekly' },
   { path: 'contact', priority: 0.8, changeFreq: 'monthly' },
+  { path: 'cursor-ambassador', priority: 0.7, changeFreq: 'monthly' },
+  { path: 'minimax-ambassador', priority: 0.7, changeFreq: 'monthly' },
 ]
 
 const serviceRoutes = [

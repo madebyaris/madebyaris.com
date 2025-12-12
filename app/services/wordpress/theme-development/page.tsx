@@ -1,29 +1,66 @@
 import type { Metadata } from 'next'
-import { Layout, Palette, FileCode, Code2, ArrowRight, Brush } from 'lucide-react'
-import { Button } from '../../../../components/ui/button'
-import { Card } from '../../../../components/ui/card'
-import { ImageResponse } from 'next/og'
+import Link from 'next/link'
+import { ArrowRight, ArrowUpRight, Layout, Palette, FileCode, Code2, CheckCircle2, Trophy, Zap } from 'lucide-react'
+
+export const revalidate = 86400 // Revalidate daily
+
+// Structured Data
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "WordPress Theme Development",
+  "description": "Professional WordPress theme development services for custom and unique websites. Expert in creating responsive, high-performance WordPress themes.",
+  "url": "https://madebyaris.com/services/wordpress/theme-development",
+  "provider": {
+    "@type": "Person",
+    "name": "Aris Setiawan",
+    "url": "https://madebyaris.com"
+  }
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'WordPress Theme Development | Custom Themes',
+    description: 'Professional WordPress theme development services for custom and unique websites. Expert in creating responsive, high-performance WordPress themes.',
+    keywords: [
+      'WordPress Theme Development',
+      'Custom WordPress Theme',
+      'WordPress Developer',
+      'Theme Development',
+      'Responsive Theme',
+      'WordPress Design'
+    ],
+    openGraph: {
+      title: 'WordPress Theme Development | Custom Themes',
+      description: 'Professional WordPress theme development services.',
+      type: 'website',
+    },
+    alternates: {
+      canonical: 'https://madebyaris.com/services/wordpress/theme-development'
+    }
+  }
+}
 
 const features = [
   {
-    title: 'Custom Design Implementation',
+    title: 'Custom Design',
     description: 'Pixel-perfect implementation of your design into a fully functional WordPress theme.',
-    icon: <Palette className="w-6 h-6" />,
+    icon: Palette,
   },
   {
     title: 'Responsive & Mobile-First',
     description: 'Themes that look and work perfectly across all devices and screen sizes.',
-    icon: <Layout className="w-6 h-6" />,
+    icon: Layout,
   },
   {
     title: 'Performance Optimized',
     description: 'Lightweight and fast-loading themes following WordPress coding standards.',
-    icon: <Code2 className="w-6 h-6" />,
+    icon: Code2,
   },
   {
     title: 'Custom Functionality',
     description: 'Integration of custom post types, taxonomies, and theme-specific features.',
-    icon: <FileCode className="w-6 h-6" />,
+    icon: FileCode,
   },
 ]
 
@@ -35,456 +72,201 @@ const benefits = [
   'Easy Updates',
   'Custom Features',
   'Brand Aligned',
-  'Future Proof',
+  'Future Proof'
+]
+
+const deliverables = [
+  'Custom theme development',
+  'Responsive design implementation',
+  'Custom post types & taxonomies',
+  'Theme options panel',
+  'Block editor support',
+  'Performance optimization',
+  'Cross-browser testing',
+  'Documentation & training'
 ]
 
 const processSteps = [
-  {
-    title: 'Requirements Analysis',
-    description: 'Understanding your specific needs, design requirements, and functionality expectations.',
-  },
-  {
-    title: 'Design Integration',
-    description: 'Converting your design into a responsive, WordPress-compatible theme structure.',
-  },
-  {
-    title: 'Development & Testing',
-    description: 'Building the theme with clean, efficient code and thorough testing across devices.',
-  },
-  {
-    title: 'Optimization & Launch',
-    description: 'Performance optimization, security checks, and deployment to your live site.',
-  },
+  { step: 1, title: 'Analysis', desc: 'Understand requirements' },
+  { step: 2, title: 'Design', desc: 'Convert to WordPress' },
+  { step: 3, title: 'Develop', desc: 'Build & test theme' },
+  { step: 4, title: 'Launch', desc: 'Optimize & deploy' },
 ]
 
-// Structured Data
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "WordPress Theme Development Services",
-  "description": "Professional WordPress theme development services for custom and unique websites. Expert in creating responsive, high-performance WordPress themes.",
-  "provider": {
-    "@type": "Person",
-    "name": "Aris Setiawan",
-    "jobTitle": "WordPress Theme Developer",
-    "url": "https://madebyaris.com"
-  },
-  "mainEntity": {
-    "@type": "Service",
-    "name": "WordPress Theme Development",
-    "serviceType": "WordPress Theme Development",
-    "areaServed": "Worldwide",
-    "provider": {
-      "@type": "Person",
-      "name": "Aris Setiawan",
-      "jobTitle": "WordPress Theme Developer",
-      "url": "https://madebyaris.com"
-    },
-    "offers": {
-      "@type": "AggregateOffer",
-      "priceCurrency": "USD",
-      "priceSpecification": {
-        "@type": "PriceSpecification",
-        "price": "Contact for pricing",
-        "priceCurrency": "USD",
-        "valueAddedTaxIncluded": true
-      },
-      "availability": "https://schema.org/InStock",
-      "highPrice": 5000,
-      "lowPrice": 1000,
-      "offerCount": 4
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "reviewCount": "27",
-      "bestRating": "5",
-      "worstRating": "1"
-    },
-    "review": [
-      {
-        "@type": "Review",
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": "5",
-          "bestRating": "5"
-        },
-        "author": {
-          "@type": "Person",
-          "name": "Marketing Director at RetailBrand"
-        },
-        "reviewBody": "The WordPress theme developed for our business perfectly captures our brand identity. The attention to detail and performance optimization exceeded our expectations."
-      },
-      {
-        "@type": "Review",
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": "5",
-          "bestRating": "5"
-        },
-        "author": {
-          "@type": "Person",
-          "name": "CEO at EducationalPlatform"
-        },
-        "reviewBody": "Outstanding work on our custom WordPress theme. The performance improvements and modern design have significantly enhanced our user experience."
-      }
-    ],
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "WordPress Theme Services",
-      "itemListElement": [
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Custom Theme Development",
-            "description": "Fully custom WordPress themes built from scratch"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Theme Customization",
-            "description": "Modification and enhancement of existing WordPress themes"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Child Theme Development",
-            "description": "Custom child themes for extending parent theme functionality"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Theme Optimization",
-            "description": "Performance optimization and responsive design implementation"
-          }
-        }
-      ]
-    }
-  },
-  "breadcrumb": {
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "item": {
-          "@id": "https://madebyaris.com",
-          "name": "Home"
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "item": {
-          "@id": "https://madebyaris.com/services",
-          "name": "Services"
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "item": {
-          "@id": "https://madebyaris.com/services/wordpress",
-          "name": "WordPress Development"
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 4,
-        "item": {
-          "@id": "https://madebyaris.com/services/wordpress/theme-development",
-          "name": "Theme Development"
-        }
-      }
-    ]
-  },
-  "mainEntityOfPage": {
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "What is included in your WordPress theme development service?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Our WordPress theme development service includes custom design implementation, responsive layouts, performance optimization, SEO-friendly structure, custom functionality integration, and comprehensive documentation. We also provide post-launch support and maintenance."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How long does it take to develop a custom WordPress theme?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "The development timeline typically ranges from 4-8 weeks, depending on the complexity of the design and required functionality. We provide a detailed timeline during the initial consultation based on your specific requirements."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Do you provide ongoing support after the theme is launched?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, we offer comprehensive post-launch support including bug fixes, updates, and maintenance. We also provide documentation and training to help you manage your theme effectively."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Are your WordPress themes optimized for performance?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Absolutely. All our themes are built with performance in mind, implementing best practices for code optimization, image optimization, caching, and Core Web Vitals compliance."
-        }
-      }
-    ]
-  },
-  "about": {
-    "@type": "Thing",
-    "name": "WordPress Theme Development",
-    "description": "Professional WordPress theme development services including custom themes, child themes, and theme optimization."
-  },
-  "keywords": [
-    "WordPress Theme Development",
-    "Custom WordPress Themes",
-    "Theme Customization",
-    "WordPress Development",
-    "Child Theme Development",
-    "WordPress Design",
-    "Theme Expert",
-    "Custom Design",
-    "Theme Optimization",
-    "Enterprise WordPress"
-  ],
-  "url": "https://madebyaris.com/services/wordpress/theme-development",
-  "potentialAction": {
-    "@type": "CommunicateAction",
-    "target": "https://madebyaris.com/contact",
-    "name": "Contact for WordPress Theme Development"
-  }
-}
-
-// Generate OG Image
-export async function generateMetadata(): Promise<Metadata> {
-  const ogImage = new ImageResponse(
-    (
-      <div
-        style={{
-          background: 'linear-gradient(to right, #000000, #1a1a1a)',
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '40px',
-        }}
-      >
-        <h1
-          style={{
-            fontSize: '60px',
-            fontWeight: 'bold',
-            color: 'white',
-            marginBottom: '20px',
-            textAlign: 'center',
-          }}
-        >
-          WordPress Theme Development
-        </h1>
-        <p
-          style={{
-            fontSize: '30px',
-            color: '#888888',
-            marginBottom: '40px',
-            textAlign: 'center',
-            maxWidth: '800px',
-          }}
-        >
-          Custom Themes • Modern Design • Performance
-        </p>
-        <div
-          style={{
-            display: 'flex',
-            gap: '20px',
-            marginTop: '20px',
-          }}
-        >
-          <div style={{ background: '#0073AA', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
-            Theme Expert
-          </div>
-          <div style={{ background: '#333333', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
-            Custom Design
-          </div>
-          <div style={{ background: '#14a800', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
-            Enterprise Grade
-          </div>
-        </div>
-      </div>
-    ),
-    {
-      width: 1200,
-      height: 630,
-    }
-  )
-
-  return {
-    title: 'WordPress Theme Development | Custom Design & Development',
-    description: 'Professional WordPress theme development services for unique, high-performance websites. Custom themes built with modern best practices and optimal user experience.',
-    keywords: [
-      'WordPress Theme Development',
-      'Custom WordPress Themes',
-      'Theme Customization',
-      'WordPress Development',
-      'Child Theme Development',
-      'WordPress Design',
-      'Theme Expert',
-      'Custom Design',
-      'Theme Optimization',
-      'Enterprise WordPress'
-    ],
-    openGraph: {
-      title: 'WordPress Theme Development | Custom Solutions',
-      description: 'Expert WordPress theme development for unique websites.',
-      type: 'website',
-      locale: 'en_US',
-      images: [ogImage]
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: 'WordPress Theme Development | Custom Solutions',
-      description: 'Expert WordPress theme development for unique websites.',
-      images: [ogImage]
-    },
-    alternates: {
-      canonical: 'https://madebyaris.com/services/wordpress/theme-development'
-    },
-    other: {
-      'structured-data': JSON.stringify(structuredData)
-    }
-  }
-}
-
-export default function WordPressThemeDevelopmentPage() {
+export default function ThemeDevelopmentPage() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <div className="relative min-h-screen">
-        {/* Background Pattern */}
-        <div className="fixed inset-0 -z-10">
-          <div className="absolute inset-0 bg-zinc-50 dark:bg-zinc-950 [background:radial-gradient(#e5e7eb_1px,transparent_1px)] dark:[background:radial-gradient(#1f2937_1px,transparent_1px)] [background-size:32px_32px] opacity-40" />
-          <div className="absolute inset-0 bg-gradient-to-br from-zinc-100 via-transparent to-zinc-100/50 dark:from-zinc-900 dark:via-transparent dark:to-zinc-900/50" />
+      
+      {/* Breadcrumb */}
+      <nav className="mb-8">
+        <ol className="flex items-center space-x-2 text-sm text-zinc-500">
+          <li><Link href="/services" className="hover:text-orange-500 transition-colors">Services</Link></li>
+          <li><span className="px-2">/</span></li>
+          <li><Link href="/services/wordpress" className="hover:text-orange-500 transition-colors">WordPress</Link></li>
+          <li><span className="px-2">/</span></li>
+          <li className="text-zinc-900">Theme Development</li>
+        </ol>
+      </nav>
+      
+      {/* Hero Section */}
+      <section className="text-center pt-4 pb-16">
+        <div className="inline-flex bg-white/60 rounded-full mb-8 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
+          <Palette className="w-4 h-4 text-orange-500" />
+          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Theme Expert</span>
         </div>
 
-        <div className="container relative mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8">
-          <div className="py-12 md:py-16 lg:py-24">
-            <div className="flex flex-col gap-12">
-              {/* Hero Section */}
-              <div className="text-center max-w-3xl mx-auto">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-50 mb-4">
-                  <Brush className="w-4 h-4" />
-                  <span className="text-sm font-medium">WordPress Theme Expert</span>
-                </div>
-                <h1 className="text-4xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-700 dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-300 mb-6 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-                  WordPress Theme Development
-                </h1>
-                <p className="text-xl text-zinc-600 dark:text-zinc-400 max-w-[700px] mx-auto mb-8 animate-in fade-in slide-in-from-bottom-5 duration-1000 delay-200">
-                  Custom WordPress themes that bring your design vision to life. Pixel-perfect implementation with optimal performance.
-                </p>
-              </div>
+        <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
+          WordPress
+          <span className="block gradient-text font-light">Theme Development</span>
+        </h1>
 
-              {/* Introduction */}
-              <div className="mt-8 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm rounded-lg p-8 dark:border-zinc-800 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-300">
-                <p className="text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
-                  My WordPress theme development service focuses on creating custom, high-performance themes 
-                  that perfectly match your brand identity and business requirements. I follow WordPress 
-                  best practices and coding standards to ensure your theme is maintainable, secure, and scalable.
-                </p>
-              </div>
+        <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
+          Custom WordPress themes built to match your brand perfectly with 
+          responsive design, fast performance, and clean code.
+        </p>
 
-              {/* Features Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-                {features.map((feature, index) => (
-                  <Card 
-                    key={feature.title}
-                    className="p-6 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm border-zinc-200 dark:border-zinc-800 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] animate-in fade-in slide-in-from-bottom duration-1000"
-                    style={{ animationDelay: `${(index + 1) * 200}ms` }}
-                  >
-                    <div className="flex flex-col gap-4">
-                      <div className="w-12 h-12 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-900 dark:text-zinc-50 transition-transform hover:scale-110">
-                        {feature.icon}
-                      </div>
-                      <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">{feature.title}</h2>
-                      <p className="text-zinc-600 dark:text-zinc-400">{feature.description}</p>
-                    </div>
-                  </Card>
-                ))}
-              </div>
+        <div className="flex flex-wrap justify-center gap-3">
+          <Link 
+            href="/contact"
+            className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
+          >
+            <span className="text-sm font-medium tracking-tight">Start Project</span>
+            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </Link>
+          <Link 
+            href="/services/wordpress"
+            className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
+            style={{ boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)' }}
+          >
+            <span className="text-sm font-medium text-black/60 tracking-tight">Back to WordPress</span>
+            <ArrowRight className="w-4 h-4 text-zinc-500" />
+          </Link>
+        </div>
+      </section>
 
-              {/* Development Process */}
-              <div className="mt-16 animate-in fade-in slide-in-from-bottom duration-1000 delay-400">
-                <h2 className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-700 dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-300">
-                  Theme Development Process
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                  {processSteps.map((step, index) => (
-                    <div 
-                      key={step.title}
-                      className="p-6 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm rounded-lg dark:border-zinc-800 transition-all duration-300 hover:shadow-lg"
-                      style={{ animationDelay: `${(index + 1) * 200}ms` }}
-                    >
-                      <div className="flex items-center gap-4 mb-4">
-                        <div className="w-8 h-8 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-900 dark:text-zinc-50 font-semibold">
-                          {index + 1}
-                        </div>
-                        <h3 className="font-semibold text-zinc-900 dark:text-zinc-50">{step.title}</h3>
-                      </div>
-                      <p className="text-zinc-600 dark:text-zinc-400">{step.description}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
+      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
 
-              {/* Benefits Section */}
-              <div className="mt-16 animate-in fade-in slide-in-from-bottom duration-1000 delay-500">
-                <h2 className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-700 dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-300">
-                  Benefits of Custom Theme Development
-                </h2>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {benefits.map((benefit, index) => (
-                    <div 
-                      key={benefit}
-                      className="p-4 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm rounded-lg dark:border-zinc-800 text-center text-zinc-600 dark:text-zinc-400 transition-all duration-300 hover:scale-105 hover:bg-zinc-100 dark:hover:bg-zinc-800"
-                      style={{ animationDelay: `${(index + 1) * 100}ms` }}
-                    >
-                      {benefit}
-                    </div>
-                  ))}
-                </div>
-              </div>
+      {/* Features Section */}
+      <section className="mb-16">
+        <div className="text-center mb-10">
+          <div className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
+            <Zap className="w-4 h-4 text-orange-500" />
+            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Features</span>
+          </div>
+          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+            Theme Development <span className="gradient-text">Expertise</span>
+          </h2>
+        </div>
 
-              {/* CTA Section */}
-              <div className="mt-24 text-center bg-gradient-to-r from-zinc-100 via-zinc-50 to-zinc-100 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900 rounded-2xl p-12 animate-in fade-in slide-in-from-bottom duration-1000">
-                <h2 className="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-700 dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-300">
-                  Ready to Create Your Custom Theme?
-                </h2>
-                <p className="text-xl text-zinc-600 dark:text-zinc-400 max-w-[600px] mx-auto mb-8">
-                  Let&apos;s discuss how I can help you build a beautiful, high-performance WordPress theme that perfectly represents your brand.
-                </p>
-                <Button size="lg" className="min-w-[200px] group bg-zinc-900 dark:bg-zinc-50 text-zinc-50 dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200 hover:scale-105 transition-all duration-300">
-                  Start Your Theme Project
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Button>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {features.map((feature) => (
+            <div key={feature.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm hover:shadow-lg transition-all group">
+              <div className="p-3 bg-zinc-100 rounded-xl w-fit mb-4 group-hover:bg-orange-100 transition-colors">
+                <feature.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
               </div>
+              <h3 className="font-semibold text-zinc-900 mb-2">{feature.title}</h3>
+              <p className="text-sm text-zinc-500 leading-relaxed">{feature.description}</p>
             </div>
+          ))}
+        </div>
+      </section>
+
+      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+
+      {/* Benefits Section */}
+      <section className="mb-16">
+        <div className="text-center mb-10">
+          <div className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
+            <Trophy className="w-4 h-4 text-orange-500" />
+            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Advantages</span>
+          </div>
+          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter">
+            Theme <span className="gradient-text">Benefits</span>
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {benefits.map((benefit) => (
+            <div key={benefit} className="p-4 bg-white/80 backdrop-blur-sm rounded-xl text-center text-sm font-medium text-zinc-700 hover:bg-orange-50 hover:text-orange-600 transition-colors">
+              {benefit}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+
+      {/* Deliverables Section */}
+      <section className="mb-16">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+            What You <span className="gradient-text">Get</span>
+          </h2>
+        </div>
+
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {deliverables.map((item) => (
+              <div key={item} className="flex items-center gap-3 p-3 bg-zinc-50 rounded-xl">
+                <CheckCircle2 className="w-5 h-5 text-orange-500 shrink-0" />
+                <span className="text-sm text-zinc-700 font-medium">{item}</span>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
+      </section>
+
+      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+
+      {/* Process Section */}
+      <section className="mb-16">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+            Development <span className="gradient-text">Process</span>
+          </h2>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          {processSteps.map((item) => (
+            <div key={item.step} className="bg-zinc-50 rounded-2xl p-5 text-center">
+              <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-500 font-bold text-lg flex items-center justify-center mx-auto mb-3">
+                {item.step}
+              </div>
+              <h3 className="font-semibold text-zinc-900 mb-1">{item.title}</h3>
+              <p className="text-sm text-zinc-500">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="overflow-hidden min-h-[400px] shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+
+        <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16 min-h-[400px] relative">
+          <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
+            Need a Custom Theme?
+          </h2>
+          <p className="text-zinc-400 mb-8 max-w-lg font-medium">
+            Let&apos;s create a unique WordPress theme that perfectly represents your brand.
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link href="/contact" className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+              <span>Start Your Theme Project</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+            <Link href="/services/wordpress" className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3">
+              <span>Explore WordPress Services</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+        </div>
+      </section>
     </>
   )
 }

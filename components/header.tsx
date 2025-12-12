@@ -50,7 +50,8 @@ export function Header() {
   }
 
   useEffect(() => {
-    setMounted(true)
+    const id = requestAnimationFrame(() => setMounted(true))
+    return () => cancelAnimationFrame(id)
   }, [])
 
   // Toggle submenu expansion
@@ -74,10 +75,12 @@ export function Header() {
   }, [isOpen])
 
   if (!mounted) {
+    const headerClass =
+      "flex md:mb-16 md:gap-0 z-50 mb-10 relative gap-x-6 gap-y-6 items-center justify-between pt-6 md:pt-10 xl:pt-12 px-6 md:px-10 xl:px-12"
     return (
-      <header className="flex md:mb-16 md:gap-0 z-10 mb-10 relative gap-x-6 gap-y-6 items-center justify-between pt-6 md:pt-10 xl:pt-12 px-6 md:px-10 xl:px-12">
+      <header className={headerClass}>
         <div className="flex items-center gap-2 text-zinc-900">
-          <div className="flex text-white bg-gradient-to-b from-black/60 to-black/20 w-8 h-8 rounded-full items-center justify-center">
+          <div className="flex text-white bg-linear-to-b from-black/60 to-black/20 w-8 h-8 rounded-full items-center justify-center">
             <Layers className="w-4 h-4" />
           </div>
           <span className="text-lg font-medium tracking-tight">MADE<span className="text-zinc-400">BYARIS</span></span>
@@ -86,12 +89,15 @@ export function Header() {
     )
   }
 
+  const headerClass =
+    "flex md:mb-16 md:gap-0 z-50 mb-10 relative gap-x-6 gap-y-6 items-center justify-between pt-6 md:pt-10 xl:pt-12 px-6 md:px-10 xl:px-12"
+
   return (
-    <header className="flex md:mb-16 md:gap-0 z-10 mb-10 relative gap-x-6 gap-y-6 items-center justify-between pt-6 md:pt-10 xl:pt-12 px-6 md:px-10 xl:px-12">
+    <header className={headerClass}>
       {/* Logo */}
       <Link href="/" className="flex items-center gap-2 text-zinc-900 hover:opacity-80 transition-opacity">
         <div 
-          className="flex text-white bg-gradient-to-b from-black/60 to-black/20 w-8 h-8 rounded-full items-center justify-center relative"
+          className="flex text-white bg-linear-to-b from-black/60 to-black/20 w-8 h-8 rounded-full items-center justify-center relative"
           style={{
             position: 'relative',
             // @ts-expect-error CSS custom properties

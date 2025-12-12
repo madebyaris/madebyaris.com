@@ -218,14 +218,14 @@ export default function PrivacyPolicyPage() {
                 To exercise any of these rights, please contact me using the information provided at the end of this policy.
               </p>
 
-              <h2>Children's Privacy</h2>
+              <h2>Children&apos;s Privacy</h2>
               <p>
                 My website is not intended for children under 16 years of age. I do not knowingly collect personal information from children under 16. If you are a parent or guardian and believe your child has provided me with personal information, please contact me, and I will take steps to remove that information.
               </p>
 
               <h2>Changes to This Privacy Policy</h2>
               <p>
-                I may update this Privacy Policy from time to time to reflect changes in my practices or for other operational, legal, or regulatory reasons. I will post the updated Privacy Policy on this page with a revised "Last updated" date.
+                I may update this Privacy Policy from time to time to reflect changes in my practices or for other operational, legal, or regulatory reasons. I will post the updated Privacy Policy on this page with a revised &quot;Last updated&quot; date.
               </p>
               <p>
                 I encourage you to review this Privacy Policy periodically to stay informed about how I protect your information.

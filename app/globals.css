@@ -322,6 +322,14 @@ body {
   color: transparent;
 }
 
+.gradient-text-minimax {
+  /* MiniMax red gradient (matched to provided reference image) */
+  background-image: linear-gradient(to right, #fe604a 0%, #f6433d 45%, #dc0f12 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
 /* ========================================
    PROSE STYLING
    ======================================== */
