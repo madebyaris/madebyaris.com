@@ -153,7 +153,7 @@ export default function WordPressServicesPage() {
       </section>
 
       {/* Separator */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
 
       {/* Services Section */}
       <section className="mb-16">
@@ -213,7 +213,7 @@ export default function WordPressServicesPage() {
       </section>
 
       {/* Separator */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
 
       {/* Benefits Section */}
       <section className="mb-16">
@@ -240,7 +240,7 @@ export default function WordPressServicesPage() {
       </section>
 
       {/* Separator */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
 
       {/* Testimonials Section */}
       <section className="mb-16">
@@ -282,7 +282,7 @@ export default function WordPressServicesPage() {
       </section>
 
       {/* Separator */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
 
       {/* Process Section */}
       <section className="mb-16">
@@ -314,7 +314,7 @@ export default function WordPressServicesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="overflow-hidden min-h-[400px] shadow-zinc-900/30 bg-zinc-900 rounded-[2rem] relative shadow-2xl mb-8">
+      <section className="overflow-hidden min-h-[400px] shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
         <div 
           className="absolute inset-0 opacity-10" 
           style={{
