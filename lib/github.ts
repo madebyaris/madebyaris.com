@@ -31,6 +31,21 @@ export interface CaseStudy {
   authors: { avatar: string }[]
 }
 
+interface GitHubApiRepo {
+  name: string
+  description: string | null
+  stargazers_count: number
+  forks_count: number
+  homepage: string | null
+  html_url: string
+  topics?: string[]
+  language: string | null
+  created_at: string
+  updated_at: string
+  fork: boolean
+  private: boolean
+}
+
 const GITHUB_USERNAME = process.env.GITHUB_USERNAME || 'madebyaris'
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN
 
@@ -64,13 +79,13 @@ export async function fetchPinnedRepos(): Promise<GitHubRepo[]> {
       throw new Error(`GitHub API error: ${response.status}`)
     }
 
-    const repos: any[] = await response.json()
+    const repos = (await response.json()) as GitHubApiRepo[]
 
     // Transform to our format
     const transformedRepos: GitHubRepo[] = repos
       .filter(repo => !repo.fork && repo.private === false) // Only non-fork, public repos
       .slice(0, 6) // Limit to 6 repos
-      .map((repo: any) => ({
+      .map((repo) => ({
         name: repo.name,
         description: repo.description || 'No description available',
         stars: repo.stargazers_count || 0,

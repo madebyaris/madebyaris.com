@@ -44,15 +44,16 @@ export async function generateMetadata() {
 
 // Optimize Posts component with error handling and fallback
 async function Posts() {
+  let posts: Awaited<ReturnType<typeof getPosts>> = []
   try {
-    const posts = await getPosts({ 
-      per_page: 3
+    posts = await getPosts({
+      per_page: 3,
     })
-    return <HomeContent type="posts" initialData={posts} />
   } catch (error) {
     console.error('Failed to load posts:', error)
-    return <HomeContent type="posts" initialData={[]} />
   }
+
+  return <HomeContent type="posts" initialData={posts} />
 }
 
 // Service card data

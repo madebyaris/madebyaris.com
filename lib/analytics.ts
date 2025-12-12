@@ -1,4 +1,4 @@
-export const trackEvent = (action: string, data?: Record<string, any>) => {
+export const trackEvent = (action: string, data?: Record<string, unknown>) => {
   // Log to console for development and debugging
   console.log('Analytics Event:', { action, ...data })
   

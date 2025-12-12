@@ -36,7 +36,8 @@ export function NextImage({
 
   // Only run on client side
   useEffect(() => {
-    setMounted(true)
+    const id = requestAnimationFrame(() => setMounted(true))
+    return () => cancelAnimationFrame(id)
   }, [])
 
   const handleError = () => {

@@ -50,7 +50,8 @@ export function Header() {
   }
 
   useEffect(() => {
-    setMounted(true)
+    const id = requestAnimationFrame(() => setMounted(true))
+    return () => cancelAnimationFrame(id)
   }, [])
 
   // Toggle submenu expansion

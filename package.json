@@ -9,7 +9,7 @@
     "build:webpack": "next build --webpack",
     "start": "next start",
     "start:standalone": "node .next/standalone/server.js",
-    "lint": "next lint",
+    "lint": "eslint .",
     "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
