@@ -12,37 +12,24 @@ import { SmoothScroll } from '@/components/smooth-scroll'
 import { Post, Tag as TagType } from '@/lib/types'
 import { WordPressContent } from '@/components/wordpress-content'
 import { NextImage } from '@/components/ui/next-image'
-import { convertBlocks } from 'wp-block-to-html/core'
+import { convertBlocks, enhanceRenderedHTML } from 'wp-block-to-html/core'
 import { FeaturedImage } from '@/components/featured-image'
 import { AuthorImage } from '@/components/author-image'
 import { RelatedPostCard } from '@/components/related-post-card'
+import { getPost, getPosts } from '@/lib/wordpress'
 
 export const revalidate = 3600 // Revalidate every hour
 
 interface BlogPostPageProps {
-  params: Promise<{
+  params: {
     slug: string
-  }>
+  }
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
-  const { slug } = await params
+  const { slug } = params
   try {
-    const postResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_WP_API_URL}/wp/v2/posts?slug=${slug}&_embed=wp:featuredmedia`,
-      { next: { revalidate: 3600 } }
-    );
-
-    if (!postResponse.ok) {
-      return {
-        title: 'Post Not Found',
-        description: 'The requested blog post could not be found.'
-      }
-    }
-
-    const posts = await postResponse.json();
-    const post = posts[0];
-    
+    const post = await getPost(slug)
     if (!post) {
       return {
         title: 'Post Not Found',
@@ -82,18 +69,8 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 
 export async function generateStaticParams() {
   try {
-    const postsResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_WP_API_URL}/wp/v2/posts?per_page=1`,
-      { next: { revalidate: 3600 } }
-    );
-
-    if (!postsResponse.ok) {
-      console.error('Error fetching posts:', postsResponse.statusText);
-      return [];
-    }
-
-    const posts = await postsResponse.json();
-    return posts.map((post: Post) => ({
+    const posts = await getPosts({ per_page: 20 })
+    return posts.map((post) => ({
       slug: post.slug,
     }));
   } catch (error) {
@@ -211,78 +188,45 @@ function transformTheImage(content: string): string {
 }
 
 export default async function BlogPost({ params }: BlogPostPageProps) {
-  const { slug } = await params
+  const { slug } = params
   
   try {
-    // Fetch post data directly from WordPress API
-    const postResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_WP_API_URL}/wp/v2/posts?slug=${slug}&_embed=wp:featuredmedia&_fields=id,date,modified,slug,status,type,link,title,content,excerpt,author,featured_media,categories,tags,blocks`,
-      { next: { revalidate: 3600 } }
-    );
-
-    if (!postResponse.ok) {
-      notFound();
-    }
-
-    const posts = await postResponse.json();
-    const post = posts[0];
-
+    const post = await getPost(slug)
     if (!post) {
       notFound();
     }
 
-    // Fetch featured media data if available
-    let featuredImageUrl = '';
-    if (post.featured_media) {
-      const mediaResponse = await fetch(
-        `${process.env.NEXT_PUBLIC_WP_API_URL}/wp/v2/media/${post.featured_media}`,
-        { next: { revalidate: 3600 } }
-      );
-      
-      if (mediaResponse.ok) {
-        const mediaData = await mediaResponse.json();
-        featuredImageUrl = mediaData.source_url;
-      }
-    }
+    const featuredImageUrl = post._embedded?.['wp:featuredmedia']?.[0]?.source_url || ''
 
     // Get related posts (for now, just get recent posts)
-    const relatedPostsResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_WP_API_URL}/wp/v2/posts?per_page=6&_embed=wp:featuredmedia`,
-      { next: { revalidate: 3600 } }
-    );
-
-    if (!relatedPostsResponse.ok) {
-      throw new Error('Failed to fetch related posts');
-    }
-
-    const allPosts = await relatedPostsResponse.json();
-    const relatedPosts = allPosts
-      .filter((p: Post) => p.id !== post.id)
-      .slice(0, 3);
+    const allPosts = await getPosts({ per_page: 6 })
+    const relatedPosts = allPosts.filter((p) => p.id !== post.id).slice(0, 3)
 
     // Extract headings for table of contents and transform content on the server
     let headings: Heading[] = [];
     let transformedContent = '';
     
     try {
-      // First, process content with wp-block-to-html if available
-      if (post.content) {
-        // Process blocks with wp-block-to-html
-        transformedContent = convertBlocks(post.content, {
-          cssFramework: 'tailwind',
-          contentHandling: 'hybrid',
-          ssrOptions: {
-            enabled: true,
-            lazyLoadMedia: true,
-            preconnect: true,
-            criticalPathOnly: true,
-            removeDuplicateStyles: true
-          }
-        }) as string;
-        // transform the content to use the NextImage component
+      const conversionOptions = {
+        cssFramework: 'tailwind',
+        contentHandling: 'hybrid',
+        ssrOptions: {
+          enabled: true,
+          lazyLoadMedia: true,
+          preconnect: true,
+          criticalPathOnly: true,
+          removeDuplicateStyles: true,
+        },
+      } as const
+
+      // If the WP API exposes parsed blocks, convert them; otherwise enhance rendered HTML.
+      if (Array.isArray(post.blocks) && post.blocks.length > 0) {
+        transformedContent = convertBlocks(
+          { blocks: post.blocks, rendered: post.content?.rendered },
+          conversionOptions as never
+        ) as string
       } else {
-        // Use rendered content if blocks not available
-        transformedContent = post.content.rendered;
+        transformedContent = enhanceRenderedHTML(post.content.rendered, conversionOptions as never)
       }
       
       // Add IDs to the transformed content
@@ -501,9 +445,8 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
                       </h3>
                       <div className="flex flex-wrap gap-2">
                         {post.tags
-                          .filter((tag: TagType) => typeof tag === 'object' && tag.name)
-                          .map((tag: TagType) => {
-                            if (typeof tag !== 'object') return null;
+                          .filter((tag): tag is TagType => typeof tag === 'object' && tag !== null && 'name' in tag)
+                          .map((tag) => {
                             return (
                               <Link 
                                 key={tag.id} 
