@@ -21,13 +21,13 @@ import { getPost, getPosts } from '@/lib/wordpress'
 export const revalidate = 3600 // Revalidate every hour
 
 interface BlogPostPageProps {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
-  const { slug } = params
+  const { slug } = await params
   try {
     const post = await getPost(slug)
     if (!post) {
@@ -188,7 +188,7 @@ function transformTheImage(content: string): string {
 }
 
 export default async function BlogPost({ params }: BlogPostPageProps) {
-  const { slug } = params
+  const { slug } = await params
   
   try {
     const post = await getPost(slug)
