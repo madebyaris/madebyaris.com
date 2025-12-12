@@ -9,7 +9,7 @@ export const structuredData = {
       "jobTitle": "Senior Full-Stack Developer & Web Architecture Specialist",
       "description": "Senior Full-Stack Developer with 12+ years of enterprise experience, specializing in Next.js, React, WordPress, and modern web architecture.",
       "url": "https://madebyaris.com",
-      "image": "https://madebyaris.com/astro.png",
+      "image": "https://madebyaris.com/aris.png",
       "sameAs": [
         "https://github.com/madebyaris",
         "https://www.linkedin.com/in/arissetia",
@@ -35,7 +35,7 @@ export const structuredData = {
         "name": "MadeByAris",
         "description": "Professional web development services specializing in Next.js, React, and WordPress solutions",
         "url": "https://madebyaris.com",
-        "logo": "https://madebyaris.com/astro.png",
+        "logo": "https://madebyaris.com/aris.png",
         "sameAs": [
           "https://github.com/madebyaris",
           "https://www.linkedin.com/in/arissetia",

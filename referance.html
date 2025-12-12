@@ -1,0 +1,1123 @@
+<html lang="en"><head><meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Finance Learning Lab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&amp;display=swap" rel="stylesheet">
+    <style>
+    body { font-family: 'Inter', sans-serif; }
+    /* Curve separators */
+    .curve-separator {
+    background-image: url("data:image/svg+xml,%3Csvg width='20' height='60' viewBox='0 0 20 60' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M18 1C18 1 1 15 1 30C1 45 18 59 18 59' stroke='%23CBD5E1' stroke-width='0.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 20px;
+    height: 40px;
+    }
+    .curve-separator-right { transform: scaleX(-1); }
+    /* Glass effects */
+    .glass-panel {
+    background: rgba(255, 255, 255, 0.90);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    }
+    .glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    }
+    /* Carousel Animation */
+    .carousel-track {
+    animation: vertical-scroll 12s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    @keyframes vertical-scroll {
+    0%, 25% { transform: translateY(0); }
+    33.33%, 58.33% { transform: translateY(-33.33%); }
+    66.66%, 91.66% { transform: translateY(-66.66%); }
+    100% { transform: translateY(0); }
+    }
+    </style>
+    <meta name="disabled-font-classes" content="font-geist,font-roboto,font-montserrat,font-poppins,font-playfair,font-instrument-serif,font-merriweather,font-bricolage,font-jakarta,font-manrope,font-space-grotesk,font-work-sans,font-pt-serif,font-geist-mono,font-space-mono,font-quicksand,font-nunito">
+    <script>
+    // Configure Tailwind to include our custom 3D transform utilities
+    tailwind.config = {
+    theme: {
+    extend: {
+    // Add any custom theme extensions here if needed
+    }
+    },
+    plugins: [
+    function({ addUtilities }) {
+    const rotateXUtilities = {};
+    const rotateYUtilities = {};
+    const rotateZUtilities = {};
+    const rotateValues = [0, 5, 10, 15, 20, 30, 45, 75];
+    // Generate rotate-x utilities
+    rotateValues.forEach((value) => {
+    rotateXUtilities[`.rotate-x-${value}`] = {
+    '--tw-rotate-x': `${value}deg`,
+    transform: `
+    translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0))
+    rotateX(var(--tw-rotate-x, 0))
+    rotateY(var(--tw-rotate-y, 0))
+    rotateZ(var(--tw-rotate-z, 0))
+    skewX(var(--tw-skew-x, 0))
+    skewY(var(--tw-skew-y, 0))
+    scaleX(var(--tw-scale-x, 1))
+    scaleY(var(--tw-scale-y, 1))
+    `.replace(/\\s+/g, ' ').trim(),
+    };
+    if (value !== 0) {
+    rotateXUtilities[`.-rotate-x-${value}`] = {
+    '--tw-rotate-x': `-${value}deg`,
+    transform: `
+    translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0))
+    rotateX(var(--tw-rotate-x, 0))
+    rotateY(var(--tw-rotate-y, 0))
+    rotateZ(var(--tw-rotate-z, 0))
+    skewX(var(--tw-skew-x, 0))
+    skewY(var(--tw-skew-y, 0))
+    scaleX(var(--tw-scale-x, 1))
+    scaleY(var(--tw-scale-y, 1))
+    `.replace(/\\s+/g, ' ').trim(),
+    };
+    }
+    });
+    // Generate rotate-y utilities
+    rotateValues.forEach((value) => {
+    rotateYUtilities[`.rotate-y-${value}`] = {
+    '--tw-rotate-y': `${value}deg`,
+    transform: `
+    translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0))
+    rotateX(var(--tw-rotate-x, 0))
+    rotateY(var(--tw-rotate-y, 0))
+    rotateZ(var(--tw-rotate-z, 0))
+    skewX(var(--tw-skew-x, 0))
+    skewY(var(--tw-skew-y, 0))
+    scaleX(var(--tw-scale-x, 1))
+    scaleY(var(--tw-scale-y, 1))
+    `.replace(/\\s+/g, ' ').trim(),
+    };
+    if (value !== 0) {
+    rotateYUtilities[`.-rotate-y-${value}`] = {
+    '--tw-rotate-y': `-${value}deg`,
+    transform: `
+    translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0))
+    rotateX(var(--tw-rotate-x, 0))
+    rotateY(var(--tw-rotate-y, 0))
+    rotateZ(var(--tw-rotate-z, 0))
+    skewX(var(--tw-skew-x, 0))
+    skewY(var(--tw-skew-y, 0))
+    scaleX(var(--tw-scale-x, 1))
+    scaleY(var(--tw-scale-y, 1))
+    `.replace(/\\s+/g, ' ').trim(),
+    };
+    }
+    });
+    // Generate rotate-z utilities
+    rotateValues.forEach((value) => {
+    rotateZUtilities[`.rotate-z-${value}`] = {
+    '--tw-rotate-z': `${value}deg`,
+    transform: `
+    translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0))
+    rotateX(var(--tw-rotate-x, 0))
+    rotateY(var(--tw-rotate-y, 0))
+    rotateZ(var(--tw-rotate-z, 0))
+    skewX(var(--tw-skew-x, 0))
+    skewY(var(--tw-skew-y, 0))
+    scaleX(var(--tw-scale-x, 1))
+    scaleY(var(--tw-scale-y, 1))
+    `.replace(/\\s+/g, ' ').trim(),
+    };
+    if (value !== 0) {
+    rotateZUtilities[`.-rotate-z-${value}`] = {
+    '--tw-rotate-z': `-${value}deg`,
+    transform: `
+    translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0))
+    rotateX(var(--tw-rotate-x, 0))
+    rotateY(var(--tw-rotate-y, 0))
+    rotateZ(var(--tw-rotate-z, 0))
+    skewX(var(--tw-skew-x, 0))
+    skewY(var(--tw-skew-y, 0))
+    scaleX(var(--tw-scale-x, 1))
+    scaleY(var(--tw-scale-y, 1))
+    `.replace(/\\s+/g, ' ').trim(),
+    };
+    }
+    });
+    // Perspective utilities
+    const perspectiveUtilities = {
+    ".perspective-none": { perspective: "none" },
+    ".perspective-dramatic": { perspective: "100px" },
+    ".perspective-near": { perspective: "300px" },
+    ".perspective-normal": { perspective: "500px" },
+    ".perspective-midrange": { perspective: "800px" },
+    ".perspective-distant": { perspective: "1200px" },
+    };
+    // Transform style utilities
+    const transformStyleUtilities = {
+    ".transform-style-preserve-3d": { "transform-style": "preserve-3d" },
+    ".transform-style-flat": { "transform-style": "flat" },
+    };
+    addUtilities({
+    ...rotateXUtilities,
+    ...rotateYUtilities,
+    ...rotateZUtilities,
+    ...perspectiveUtilities,
+    ...transformStyleUtilities,
+    });
+    }
+    ]
+    };
+    </script>
+    <style id="aura-editor-visibility-style">
+    .invisible { visibility: hidden !important; }
+    </style>
+    <style id="border-gradient-shared-style">
+    [style*="--border-gradient"]::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: var(--border-radius-before, inherit);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    background: var(--border-gradient);
+    pointer-events: none;
+    }</style>  <style>
+    /* 3D Transform utilities */
+    .perspective-none { perspective: none !important; }
+    .perspective-dramatic { perspective: 100px !important; }
+    .perspective-near { perspective: 300px !important; }
+    .perspective-normal { perspective: 500px !important; }
+    .perspective-midrange { perspective: 800px !important; }
+    .perspective-distant { perspective: 1200px !important; }
+    .transform-style-preserve-3d { transform-style: preserve-3d !important; }
+    .transform-style-flat { transform-style: flat !important; }
+    </style><style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.pointer-events-none{pointer-events:none}.absolute{position:absolute}.relative{position:relative}.inset-0{inset:0px}.inset-0\.5{inset:0.125rem}.-bottom-40{bottom:-10rem}.-left-2{left:-0.5rem}.bottom-0{bottom:0px}.bottom-2{bottom:0.5rem}.bottom-8{bottom:2rem}.bottom-\[15\%\]{bottom:15%}.left-0{left:0px}.left-1\/2{left:50%}.left-4{left:1rem}.right-0{right:0px}.right-12{right:3rem}.right-32{right:8rem}.right-4{right:1rem}.top-0{top:0px}.top-1\/2{top:50%}.top-2{top:0.5rem}.top-\[20\%\]{top:20%}.z-0{z-index:0}.z-10{z-index:10}.z-20{z-index:20}.mb-1{margin-bottom:0.25rem}.mb-10{margin-bottom:2.5rem}.mb-16{margin-bottom:4rem}.mb-2{margin-bottom:0.5rem}.mb-3{margin-bottom:0.75rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.ml-4{margin-left:1rem}.ml-auto{margin-left:auto}.mr-3{margin-right:0.75rem}.mt-12{margin-top:3rem}.mt-16{margin-top:4rem}.mt-2{margin-top:0.5rem}.mt-60{margin-top:15rem}.mt-8{margin-top:2rem}.mt-auto{margin-top:auto}.line-clamp-2{overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.h-1\.5{height:0.375rem}.h-10{height:2.5rem}.h-12{height:3rem}.h-14{height:3.5rem}.h-16{height:4rem}.h-2{height:0.5rem}.h-24{height:6rem}.h-3{height:0.75rem}.h-32{height:8rem}.h-4{height:1rem}.h-6{height:1.5rem}.h-8{height:2rem}.h-\[100px\]{height:100px}.h-\[14px\]{height:14px}.h-\[16px\]{height:16px}.h-\[20px\]{height:20px}.h-\[300px\]{height:300px}.h-\[40\%\]{height:40%}.h-\[50\%\]{height:50%}.h-\[70\%\]{height:70%}.h-\[85\%\]{height:85%}.h-\[95\%\]{height:95%}.h-full{height:100%}.h-px{height:1px}.min-h-\[340px\]{min-height:340px}.min-h-\[400px\]{min-height:400px}.min-h-\[500px\]{min-height:500px}.min-h-screen{min-height:100vh}.w-1\.5{width:0.375rem}.w-1\/2{width:50%}.w-1\/5{width:20%}.w-10{width:2.5rem}.w-14{width:3.5rem}.w-16{width:4rem}.w-2{width:0.5rem}.w-20{width:5rem}.w-24{width:6rem}.w-3{width:0.75rem}.w-3\/4{width:75%}.w-32{width:8rem}.w-4{width:1rem}.w-48{width:12rem}.w-6{width:1.5rem}.w-8{width:2rem}.w-\[100px\]{width:100px}.w-\[14px\]{width:14px}.w-\[16px\]{width:16px}.w-\[1px\]{width:1px}.w-\[20px\]{width:20px}.w-\[280px\]{width:280px}.w-\[60px\]{width:60px}.w-\[80px\]{width:80px}.w-\[90px\]{width:90px}.w-fit{width:-moz-fit-content;width:fit-content}.w-full{width:100%}.w-max{width:max-content}.w-px{width:1px}.max-w-2xl{max-width:42rem}.max-w-\[240px\]{max-width:240px}.max-w-md{max-width:28rem}.flex-1{flex:1 1 0%}.flex-grow{flex-grow:1}.-translate-x-1\/2{--tw-translate-x:-50%;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.-translate-y-1\/2{--tw-translate-y:-50%;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.-translate-y-\[20\%\]{--tw-translate-y:-20%;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.-translate-y-\[60\%\]{--tw-translate-y:-60%;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.translate-y-4{--tw-translate-y:1rem;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.translate-y-8{--tw-translate-y:2rem;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.-rotate-12{--tw-rotate:-12deg;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.rotate-6{--tw-rotate:6deg;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.scale-50{--tw-scale-x:.5;--tw-scale-y:.5;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.transform{transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@keyframes ping{75%, 100%{transform:scale(2);opacity:0}}.animate-ping{animation:ping 1s cubic-bezier(0, 0, 0.2, 1) infinite}@keyframes pulse{50%{opacity:.5}}.animate-pulse{animation:pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite}.cursor-default{cursor:default}.cursor-pointer{cursor:pointer}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.items-baseline{align-items:baseline}.justify-start{justify-content:flex-start}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:0.25rem}.gap-1\.5{gap:0.375rem}.gap-10{gap:2.5rem}.gap-12{gap:3rem}.gap-16{gap:4rem}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.gap-8{gap:2rem}.gap-x-0{column-gap:0px}.gap-x-10{column-gap:2.5rem}.gap-x-16{column-gap:4rem}.gap-x-2{column-gap:0.5rem}.gap-x-3{column-gap:0.75rem}.gap-x-4{column-gap:1rem}.gap-x-6{column-gap:1.5rem}.gap-x-8{column-gap:2rem}.gap-x-px{column-gap:1px}.gap-y-0{row-gap:0px}.gap-y-10{row-gap:2.5rem}.gap-y-16{row-gap:4rem}.gap-y-2{row-gap:0.5rem}.gap-y-3{row-gap:0.75rem}.gap-y-4{row-gap:1rem}.gap-y-6{row-gap:1.5rem}.gap-y-8{row-gap:2rem}.gap-y-px{row-gap:1px}.-space-x-2 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(-0.5rem * var(--tw-space-x-reverse));margin-left:calc(-0.5rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-5 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.25rem * var(--tw-space-y-reverse))}.self-end{align-self:flex-end}.overflow-hidden{overflow:hidden}.rounded-2xl{border-radius:1rem}.rounded-\[2\.5rem\]{border-radius:2.5rem}.rounded-\[2rem\]{border-radius:2rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-none{border-radius:0px}.rounded-sm{border-radius:0.125rem}.rounded-xl{border-radius:0.75rem}.rounded-b-2xl{border-bottom-right-radius:1rem;border-bottom-left-radius:1rem}.rounded-t-sm{border-top-left-radius:0.125rem;border-top-right-radius:0.125rem}.border{border-width:1px}.border-2{border-width:2px}.border-b{border-bottom-width:1px}.border-l{border-left-width:1px}.border-l-2{border-left-width:2px}.border-r{border-right-width:1px}.border-t{border-top-width:1px}.border-none{border-style:none}.border-white{--tw-border-opacity:1;border-color:rgb(255 255 255 / var(--tw-border-opacity, 1))}.border-white\/10{border-color:rgb(255 255 255 / 0.1)}.border-white\/20{border-color:rgb(255 255 255 / 0.2)}.border-white\/60{border-color:rgb(255 255 255 / 0.6)}.border-zinc-100{--tw-border-opacity:1;border-color:rgb(244 244 245 / var(--tw-border-opacity, 1))}.border-zinc-200{--tw-border-opacity:1;border-color:rgb(228 228 231 / var(--tw-border-opacity, 1))}.border-zinc-300{--tw-border-opacity:1;border-color:rgb(212 212 216 / var(--tw-border-opacity, 1))}.border-zinc-400{--tw-border-opacity:1;border-color:rgb(161 161 170 / var(--tw-border-opacity, 1))}.bg-black\/10{background-color:rgb(0 0 0 / 0.1)}.bg-emerald-400{--tw-bg-opacity:1;background-color:rgb(52 211 153 / var(--tw-bg-opacity, 1))}.bg-emerald-500{--tw-bg-opacity:1;background-color:rgb(16 185 129 / var(--tw-bg-opacity, 1))}.bg-indigo-500{--tw-bg-opacity:1;background-color:rgb(99 102 241 / var(--tw-bg-opacity, 1))}.bg-orange-500{--tw-bg-opacity:1;background-color:rgb(249 115 22 / var(--tw-bg-opacity, 1))}.bg-transparent{background-color:transparent}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-white\/20{background-color:rgb(255 255 255 / 0.2)}.bg-white\/30{background-color:rgb(255 255 255 / 0.3)}.bg-white\/50{background-color:rgb(255 255 255 / 0.5)}.bg-white\/60{background-color:rgb(255 255 255 / 0.6)}.bg-zinc-100{--tw-bg-opacity:1;background-color:rgb(244 244 245 / var(--tw-bg-opacity, 1))}.bg-zinc-200{--tw-bg-opacity:1;background-color:rgb(228 228 231 / var(--tw-bg-opacity, 1))}.bg-zinc-300{--tw-bg-opacity:1;background-color:rgb(212 212 216 / var(--tw-bg-opacity, 1))}.bg-zinc-400{--tw-bg-opacity:1;background-color:rgb(161 161 170 / var(--tw-bg-opacity, 1))}.bg-zinc-50{--tw-bg-opacity:1;background-color:rgb(250 250 250 / var(--tw-bg-opacity, 1))}.bg-zinc-500{--tw-bg-opacity:1;background-color:rgb(113 113 122 / var(--tw-bg-opacity, 1))}.bg-zinc-700{--tw-bg-opacity:1;background-color:rgb(63 63 70 / var(--tw-bg-opacity, 1))}.bg-zinc-800{--tw-bg-opacity:1;background-color:rgb(39 39 42 / var(--tw-bg-opacity, 1))}.bg-zinc-900{--tw-bg-opacity:1;background-color:rgb(24 24 27 / var(--tw-bg-opacity, 1))}.bg-zinc-950\/5{background-color:rgb(9 9 11 / 0.05)}.bg-\[url\(https\:\/\/hoirqrkdgbmvpwutwuwj\.supabase\.co\/storage\/v1\/object\/public\/assets\/assets\/a5387a0b-52c6-40c2-b3be-ef86329b19cc_1600w\.webp\)\]{background-image:url(https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/a5387a0b-52c6-40c2-b3be-ef86329b19cc_1600w.webp)}.bg-gradient-to-b{background-image:linear-gradient(to bottom, var(--tw-gradient-stops))}.bg-gradient-to-l{background-image:linear-gradient(to left, var(--tw-gradient-stops))}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.bg-gradient-to-t{background-image:linear-gradient(to top, var(--tw-gradient-stops))}.from-black\/10{--tw-gradient-from:rgb(0 0 0 / 0.1) var(--tw-gradient-from-position);--tw-gradient-to:rgb(0 0 0 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-black\/60{--tw-gradient-from:rgb(0 0 0 / 0.6) var(--tw-gradient-from-position);--tw-gradient-to:rgb(0 0 0 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-indigo-500{--tw-gradient-from:#6366f1 var(--tw-gradient-from-position);--tw-gradient-to:rgb(99 102 241 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-neutral-400{--tw-gradient-from:#a3a3a3 var(--tw-gradient-from-position);--tw-gradient-to:rgb(163 163 163 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-transparent{--tw-gradient-from:transparent var(--tw-gradient-from-position);--tw-gradient-to:rgb(0 0 0 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-white{--tw-gradient-from:#fff var(--tw-gradient-from-position);--tw-gradient-to:rgb(255 255 255 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-white\/10{--tw-gradient-from:rgb(255 255 255 / 0.1) var(--tw-gradient-from-position);--tw-gradient-to:rgb(255 255 255 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-zinc-400{--tw-gradient-from:#a1a1aa var(--tw-gradient-from-position);--tw-gradient-to:rgb(161 161 170 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-zinc-50{--tw-gradient-from:#fafafa var(--tw-gradient-from-position);--tw-gradient-to:rgb(250 250 250 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-zinc-900\/0{--tw-gradient-from:rgb(24 24 27 / 0) var(--tw-gradient-from-position);--tw-gradient-to:rgb(24 24 27 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-zinc-900\/50{--tw-gradient-from:rgb(24 24 27 / 0.5) var(--tw-gradient-from-position);--tw-gradient-to:rgb(24 24 27 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-zinc-900\/90{--tw-gradient-from:rgb(24 24 27 / 0.9) var(--tw-gradient-from-position);--tw-gradient-to:rgb(24 24 27 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-black\/20{--tw-gradient-to:rgb(0 0 0 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), rgb(0 0 0 / 0.2) var(--tw-gradient-via-position), var(--tw-gradient-to)}.via-white\/80{--tw-gradient-to:rgb(255 255 255 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), rgb(255 255 255 / 0.8) var(--tw-gradient-via-position), var(--tw-gradient-to)}.via-zinc-200{--tw-gradient-to:rgb(228 228 231 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #e4e4e7 var(--tw-gradient-via-position), var(--tw-gradient-to)}.via-zinc-900\/20{--tw-gradient-to:rgb(24 24 27 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), rgb(24 24 27 / 0.2) var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-black\/10{--tw-gradient-to:rgb(0 0 0 / 0.1) var(--tw-gradient-to-position)}.to-black\/20{--tw-gradient-to:rgb(0 0 0 / 0.2) var(--tw-gradient-to-position)}.to-neutral-600{--tw-gradient-to:#525252 var(--tw-gradient-to-position)}.to-transparent{--tw-gradient-to:transparent var(--tw-gradient-to-position)}.to-violet-500{--tw-gradient-to:#8b5cf6 var(--tw-gradient-to-position)}.to-white\/0{--tw-gradient-to:rgb(255 255 255 / 0) var(--tw-gradient-to-position)}.to-zinc-100{--tw-gradient-to:#f4f4f5 var(--tw-gradient-to-position)}.to-zinc-200{--tw-gradient-to:#e4e4e7 var(--tw-gradient-to-position)}.to-zinc-900\/10{--tw-gradient-to:rgb(24 24 27 / 0.1) var(--tw-gradient-to-position)}.bg-cover{background-size:cover}.bg-clip-text{-webkit-background-clip:text;background-clip:text}.bg-center{background-position:center}.object-cover{object-fit:cover}.p-3{padding:0.75rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-8{padding:2rem}.px-0{padding-left:0px;padding-right:0px}.px-1{padding-left:0.25rem;padding-right:0.25rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-0{padding-top:0px;padding-bottom:0px}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-4{padding-top:1rem;padding-bottom:1rem}.pb-1{padding-bottom:0.25rem}.pb-1\.5{padding-bottom:0.375rem}.pb-2{padding-bottom:0.5rem}.pb-2\.5{padding-bottom:0.625rem}.pb-3{padding-bottom:0.75rem}.pb-4{padding-bottom:1rem}.pb-6{padding-bottom:1.5rem}.pb-8{padding-bottom:2rem}.pl-1\.5{padding-left:0.375rem}.pl-3{padding-left:0.75rem}.pl-4{padding-left:1rem}.pl-5{padding-left:1.25rem}.pl-6{padding-left:1.5rem}.pl-8{padding-left:2rem}.pr-12{padding-right:3rem}.pr-3{padding-right:0.75rem}.pr-4{padding-right:1rem}.pr-5{padding-right:1.25rem}.pr-6{padding-right:1.5rem}.pr-8{padding-right:2rem}.pt-1\.5{padding-top:0.375rem}.pt-2{padding-top:0.5rem}.pt-2\.5{padding-top:0.625rem}.pt-3{padding-top:0.75rem}.pt-4{padding-top:1rem}.pt-6{padding-top:1.5rem}.pt-8{padding-top:2rem}.text-center{text-align:center}.font-mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-5xl{font-size:3rem;line-height:1}.text-6xl{font-size:3.75rem;line-height:1}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-\[9px\]{font-size:9px}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-bold{font-weight:700}.font-light{font-weight:300}.font-medium{font-weight:500}.font-normal{font-weight:400}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.italic{font-style:italic}.leading-\[0\.95\]{line-height:0.95}.leading-none{line-height:1}.leading-relaxed{line-height:1.625}.leading-snug{line-height:1.375}.leading-tight{line-height:1.25}.tracking-tight{letter-spacing:-0.025em}.tracking-tighter{letter-spacing:-0.05em}.tracking-wide{letter-spacing:0.025em}.tracking-wider{letter-spacing:0.05em}.tracking-widest{letter-spacing:0.1em}.text-black\/60{color:rgb(0 0 0 / 0.6)}.text-emerald-400{--tw-text-opacity:1;color:rgb(52 211 153 / var(--tw-text-opacity, 1))}.text-emerald-600{--tw-text-opacity:1;color:rgb(5 150 105 / var(--tw-text-opacity, 1))}.text-indigo-400{--tw-text-opacity:1;color:rgb(129 140 248 / var(--tw-text-opacity, 1))}.text-neutral-800{--tw-text-opacity:1;color:rgb(38 38 38 / var(--tw-text-opacity, 1))}.text-orange-500{--tw-text-opacity:1;color:rgb(249 115 22 / var(--tw-text-opacity, 1))}.text-slate-800{--tw-text-opacity:1;color:rgb(30 41 59 / var(--tw-text-opacity, 1))}.text-transparent{color:transparent}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-white\/50{color:rgb(255 255 255 / 0.5)}.text-white\/60{color:rgb(255 255 255 / 0.6)}.text-white\/80{color:rgb(255 255 255 / 0.8)}.text-zinc-300{--tw-text-opacity:1;color:rgb(212 212 216 / var(--tw-text-opacity, 1))}.text-zinc-400{--tw-text-opacity:1;color:rgb(161 161 170 / var(--tw-text-opacity, 1))}.text-zinc-500{--tw-text-opacity:1;color:rgb(113 113 122 / var(--tw-text-opacity, 1))}.text-zinc-600{--tw-text-opacity:1;color:rgb(82 82 91 / var(--tw-text-opacity, 1))}.text-zinc-900{--tw-text-opacity:1;color:rgb(24 24 27 / var(--tw-text-opacity, 1))}.underline{-webkit-text-decoration-line:underline;text-decoration-line:underline}.underline-offset-4{text-underline-offset:4px}.opacity-0{opacity:0}.opacity-10{opacity:0.1}.opacity-50{opacity:0.5}.opacity-60{opacity:0.6}.opacity-75{opacity:0.75}.opacity-80{opacity:0.8}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0_0_10px_rgba\(16\2c 185\2c 129\2c 0\.5\)\]{--tw-shadow:0 0 10px rgba(16,185,129,0.5);--tw-shadow-colored:0 0 10px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0px_0px_0px_1px_rgba\(0\2c 0\2c 0\2c 0\.06\)\2c 0px_1px_1px_-0\.5px_rgba\(0\2c 0\2c 0\2c 0\.06\)\2c 0px_3px_3px_-1\.5px_rgba\(0\2c 0\2c 0\2c 0\.06\)\2c _0px_6px_6px_-3px_rgba\(0\2c 0\2c 0\2c 0\.06\)\2c 0px_12px_12px_-6px_rgba\(0\2c 0\2c 0\2c 0\.06\)\2c 0px_24px_24px_-12px_rgba\(0\2c 0\2c 0\2c 0\.06\)\]{--tw-shadow:0px 0px 0px 1px rgba(0,0,0,0.06),0px 1px 1px -0.5px rgba(0,0,0,0.06),0px 3px 3px -1.5px rgba(0,0,0,0.06), 0px 6px 6px -3px rgba(0,0,0,0.06),0px 12px 12px -6px rgba(0,0,0,0.06),0px 24px 24px -12px rgba(0,0,0,0.06);--tw-shadow-colored:0px 0px 0px 1px var(--tw-shadow-color), 0px 1px 1px -0.5px var(--tw-shadow-color), 0px 3px 3px -1.5px var(--tw-shadow-color), 0px 6px 6px -3px var(--tw-shadow-color), 0px 12px 12px -6px var(--tw-shadow-color), 0px 24px 24px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0px_2px_3px_-1px_rgba\(0\2c 0\2c 0\2c 0\.1\)\2c 0px_1px_0px_0px_rgba\(25\2c 28\2c 33\2c 0\.02\)\2c 0px_0px_0px_1px_rgba\(25\2c 28\2c 33\2c 0\.08\)\]{--tw-shadow:0px 2px 3px -1px rgba(0,0,0,0.1),0px 1px 0px 0px rgba(25,28,33,0.02),0px 0px 0px 1px rgba(25,28,33,0.08);--tw-shadow-colored:0px 2px 3px -1px var(--tw-shadow-color), 0px 1px 0px 0px var(--tw-shadow-color), 0px 0px 0px 1px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-none{--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-zinc-900\/10{--tw-shadow-color:rgb(24 24 27 / 0.1);--tw-shadow:var(--tw-shadow-colored)}.shadow-zinc-900\/20{--tw-shadow-color:rgb(24 24 27 / 0.2);--tw-shadow:var(--tw-shadow-colored)}.shadow-zinc-900\/30{--tw-shadow-color:rgb(24 24 27 / 0.3);--tw-shadow:var(--tw-shadow-colored)}.shadow-zinc-900\/5{--tw-shadow-color:rgb(24 24 27 / 0.05);--tw-shadow:var(--tw-shadow-colored)}.outline-none{outline:2px solid transparent;outline-offset:2px}.ring-4{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.ring-zinc-200{--tw-ring-opacity:1;--tw-ring-color:rgb(228 228 231 / var(--tw-ring-opacity, 1))}.grayscale{--tw-grayscale:grayscale(100%);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.saturate-50{--tw-saturate:saturate(.5);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.saturate-\[0\.8\]{--tw-saturate:saturate(0.8);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.backdrop-blur{--tw-backdrop-blur:blur(8px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.backdrop-blur-sm{--tw-backdrop-blur:blur(4px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-opacity{transition-property:opacity;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-shadow{transition-property:box-shadow;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.delay-100{transition-delay:100ms}.duration-300{transition-duration:300ms}.duration-500{transition-duration:500ms}.duration-700{transition-duration:700ms}.duration-\[2s\]{transition-duration:2s}.ease-in-out{transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1)}.ease-out{transition-timing-function:cubic-bezier(0, 0, 0.2, 1)}.selection\:bg-slate-900 *::selection{--tw-bg-opacity:1;background-color:rgb(15 23 42 / var(--tw-bg-opacity, 1))}.selection\:text-white *::selection{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.selection\:bg-slate-900::selection{--tw-bg-opacity:1;background-color:rgb(15 23 42 / var(--tw-bg-opacity, 1))}.selection\:text-white::selection{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.hover\:-translate-y-0\.5:hover{--tw-translate-y:-0.125rem;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:bg-black:hover{--tw-bg-opacity:1;background-color:rgb(0 0 0 / var(--tw-bg-opacity, 1))}.hover\:bg-white\/20:hover{background-color:rgb(255 255 255 / 0.2)}.hover\:bg-zinc-100:hover{--tw-bg-opacity:1;background-color:rgb(244 244 245 / var(--tw-bg-opacity, 1))}.hover\:bg-zinc-50:hover{--tw-bg-opacity:1;background-color:rgb(250 250 250 / var(--tw-bg-opacity, 1))}.hover\:text-indigo-600:hover{--tw-text-opacity:1;color:rgb(79 70 229 / var(--tw-text-opacity, 1))}.hover\:text-orange-500:hover{--tw-text-opacity:1;color:rgb(249 115 22 / var(--tw-text-opacity, 1))}.hover\:text-orange-600:hover{--tw-text-opacity:1;color:rgb(234 88 12 / var(--tw-text-opacity, 1))}.hover\:text-zinc-900:hover{--tw-text-opacity:1;color:rgb(24 24 27 / var(--tw-text-opacity, 1))}.hover\:shadow-2xl:hover{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.hover\:shadow-xl:hover{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.hover\:shadow-zinc-900\/20:hover{--tw-shadow-color:rgb(24 24 27 / 0.2);--tw-shadow:var(--tw-shadow-colored)}.group:hover .group-hover\:translate-x-1{--tw-translate-x:0.25rem;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group:hover .group-hover\:translate-y-0{--tw-translate-y:0px;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group:hover .group-hover\:translate-y-2{--tw-translate-y:0.5rem;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group:hover .group-hover\:-rotate-6{--tw-rotate:-6deg;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group:hover .group-hover\:rotate-12{--tw-rotate:12deg;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group:hover .group-hover\:rotate-3{--tw-rotate:3deg;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group:hover .group-hover\:scale-105{--tw-scale-x:1.05;--tw-scale-y:1.05;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group:hover .group-hover\:scale-110{--tw-scale-x:1.1;--tw-scale-y:1.1;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group:hover .group-hover\:text-orange-500{--tw-text-opacity:1;color:rgb(249 115 22 / var(--tw-text-opacity, 1))}.group:hover .group-hover\:text-zinc-600{--tw-text-opacity:1;color:rgb(82 82 91 / var(--tw-text-opacity, 1))}.group:hover .group-hover\:opacity-100{opacity:1}.group:hover .group-hover\:shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.group:hover .group-hover\:shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.group:hover .group-hover\:grayscale-0{--tw-grayscale:grayscale(0);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}@media (min-width: 640px){.sm\:block{display:block}.sm\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.sm\:flex-row{flex-direction:row}}@media (min-width: 768px){.md\:col-span-2{grid-column:span 2 / span 2}.md\:mb-16{margin-bottom:4rem}.md\:ml-8{margin-left:2rem}.md\:block{display:block}.md\:flex{display:flex}.md\:w-2\/3{width:66.666667%}.md\:w-\[320px\]{width:320px}.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:flex-row{flex-direction:row}.md\:items-end{align-items:flex-end}.md\:gap-0{gap:0px}.md\:gap-6{gap:1.5rem}.md\:p-12{padding:3rem}.md\:px-10{padding-left:2.5rem;padding-right:2.5rem}.md\:pb-10{padding-bottom:2.5rem}.md\:pl-10{padding-left:2.5rem}.md\:pr-10{padding-right:2.5rem}.md\:pt-10{padding-top:2.5rem}.md\:text-2xl{font-size:1.5rem;line-height:2rem}.md\:text-4xl{font-size:2.25rem;line-height:2.5rem}.md\:text-5xl{font-size:3rem;line-height:1}.md\:text-7xl{font-size:4.5rem;line-height:1}}@media (min-width: 1024px){.lg\:col-span-5{grid-column:span 5 / span 5}.lg\:col-span-7{grid-column:span 7 / span 7}.lg\:mb-20{margin-bottom:5rem}.lg\:mb-24{margin-bottom:6rem}.lg\:mt-24{margin-top:6rem}.lg\:block{display:block}.lg\:min-h-0{min-height:0px}.lg\:min-h-\[600px\]{min-height:600px}.lg\:translate-y-16{--tw-translate-y:4rem;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.lg\:scale-100{--tw-scale-x:1;--tw-scale-y:1;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.lg\:grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.lg\:grid-cols-12{grid-template-columns:repeat(12, minmax(0, 1fr))}.lg\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.lg\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.lg\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.lg\:items-end{align-items:flex-end}.lg\:justify-end{justify-content:flex-end}.lg\:gap-12{gap:3rem}.lg\:gap-20{gap:5rem}.lg\:gap-6{gap:1.5rem}.lg\:p-0{padding:0px}.lg\:p-16{padding:4rem}.lg\:pb-0{padding-bottom:0px}.lg\:pr-12{padding-right:3rem}.lg\:text-right{text-align:right}.lg\:text-5xl{font-size:3rem;line-height:1}.lg\:text-9xl{font-size:8rem;line-height:1}.lg\:text-\[5rem\]{font-size:5rem}}@media (min-width: 1280px){.xl\:block{display:block}.xl\:min-h-\[700px\]{min-height:700px}.xl\:max-w-\[1300px\]{max-width:1300px}.xl\:rounded-\[2\.5rem\]{border-radius:2.5rem}.xl\:border{border-width:1px}.xl\:border-white\/50{border-color:rgb(255 255 255 / 0.5)}.xl\:p-8{padding:2rem}.xl\:px-12{padding-left:3rem;padding-right:3rem}.xl\:pb-12{padding-bottom:3rem}.xl\:pl-12{padding-left:3rem}.xl\:pr-12{padding-right:3rem}.xl\:pt-12{padding-top:3rem}.xl\:shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}}</style></head>
+    <body class="flex justify-center items-center min-h-screen bg-center selection:bg-slate-900 selection:text-white xl:p-8 text-slate-800 bg-zinc-500 bg-cover px-0 py-0 relative">
+        
+        <!-- Main Frame Container -->
+        <!-- Changes: 
+             - rounded-[2.5rem] -> xl:rounded-[2.5rem] rounded-none
+             - border -> xl:border border-none
+             - shadow-2xl -> xl:shadow-2xl shadow-none
+             - min-h -> min-h-screen xl:min-h-[700px]
+             - padding -> p-6 md:p-12 xl:p-12
+        -->
+        <main class="glass-panel overflow-hidden flex flex-col xl:max-w-[1300px] z-10 xl:border-white/50 border-none xl:border xl:rounded-[2.5rem] md:pt-10 md:pr-10 md:pb-10 md:pl-10 xl:pt-12 xl:pr-12 xl:pb-12 xl:pl-12 xl:shadow-2xl min-h-screen xl:min-h-[700px] w-full rounded-none pt-6 pr-6 pb-6 pl-6 relative shadow-none">
+    
+        <!-- Vertical Grid Lines -->
+        <div class="absolute inset-0 flex justify-between pointer-events-none z-0 px-6 md:px-10 xl:px-12 w-full h-full">
+            <div class="h-full w-[1px] bg-zinc-950/5"></div>
+            <div class="h-full w-[1px] bg-zinc-950/5 hidden md:block"></div>
+            <div class="h-full w-[1px] bg-zinc-950/5 hidden lg:block"></div>
+            <div class="h-full w-[1px] bg-zinc-950/5 hidden xl:block"></div>
+            <div class="h-full w-[1px] bg-zinc-950/5"></div>
+        </div>
+    
+        <!-- Header -->
+        <header class="flex md:mb-16 md:gap-0 z-10 mb-16 relative gap-x-6 gap-y-6 items-center justify-between">
+            <!-- Logo -->
+            <div class="flex items-center gap-2 text-zinc-900">
+                <div class="flex text-white bg-gradient-to-b from-black/60 to-black/20 w-8 h-8 rounded-full items-center justify-center" style="position: relative; --border-gradient: linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1)); --border-radius-before: 9999px">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" style="width: 16px; height: 16px; color: rgb(255, 255, 255)" class="lucide lucide-layers w-[16px] h-[16px]" aria-hidden="true" role="img" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" data-solar="link-circle-bold-duotone" data-icon-set="solar" data-icon-replaced="true" stroke-width="0.5">
+                        <path fill="#ffffff" d="M3.464 20.536C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535" opacity=".5" class=""></path>
+                        <path fill="#ffffff" d="M9.5 8.75A3.25 3.25 0 1 0 12.75 12a.75.75 0 0 1 1.5 0A4.75 4.75 0 1 1 9.5 7.25a.75.75 0 0 1 0 1.5">
+                        </path>
+                        <path fill="#ffffff" d="M17.75 12a3.25 3.25 0 0 1-3.25 3.25a.75.75 0 0 0 0 1.5A4.75 4.75 0 1 0 9.75 12a.75.75 0 0 0 1.5 0a3.25 3.25 0 0 1 6.5 0" class=""></path>
+                    </svg>
+                </div>
+                <span class="text-lg font-medium tracking-tight">GEN<span class="text-zinc-400">LABS</span></span>
+            </div>
+    
+            <!-- Navigation -->
+            <nav class="hidden md:flex uppercase text-xs font-medium text-zinc-500 tracking-widest bg-white/50 border-white/60 border rounded-full pt-2 pr-6 pb-2 pl-6 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] backdrop-blur-sm gap-x-8 gap-y-8 items-center">
+                <a href="#" class="hover:text-zinc-900 transition-colors duration-300">Curriculum</a>
+                <a href="#" class="hover:text-zinc-900 transition-colors duration-300">Pricing</a>
+                <a href="#" class="hover:text-zinc-900 transition-colors duration-300">Mentors</a>
+                <a href="#" class="hover:text-zinc-900 transition-colors duration-300 hidden lg:block">Community</a>
+            </nav>
+    
+            <!-- CTA -->
+            <a href="#" class="-all flex items-center gap-2 group hover:bg-zinc-50 text-xs font-medium text-zinc-600 tracking-wide bg-gradient-to-b from-black/10 via-black/20 to-black/10 rounded-lg pt-2.5 pr-5 pb-2.5 pl-5 shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)]" style="box-shadow: 0 18px 35px rgba(31, 41, 55, 0.25), 0 0 0 1px rgba(209, 213, 219, 0.3);  color: #e5e7eb; position: relative; --border-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.4), rgba(255, 255, 255, 0.8)); --border-radius-before: 8px">
+                <span class="text-[11px] uppercase font-medium text-black/60 tracking-tight">
+                        Join waitlist
+                    </span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-[14px] h-[14px] group-hover:translate-x-1 transition-transform" data-lucide="arrow-right">
+                    <path d="M5 12h14"></path>
+                    <path d="m12 5 7 7-7 7"></path>
+                </svg>
+            </a>
+        </header>
+    
+        <!-- Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 h-full flex-grow relative z-10 pb-8 lg:pb-0">
+    
+            <!-- Left Column: Text Content -->
+            <div class="lg:col-span-7 flex flex-col pt-4 relative justify-center">
+    
+                <!-- Social Proof Pill -->
+                <div class="inline-flex bg-white/60 w-max rounded-full mb-8 pt-1.5 pr-5 pb-1.5 pl-1.5 shadow-sm backdrop-blur-sm items-center" style="position: relative; --border-gradient: linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0)); --border-radius-before: 9999px">
+                    <div class="flex -space-x-2 mr-3">
+                        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/578a5bc5-2c9f-4285-8ae6-0d7dafefba84_320w.webp" alt="User" class="w-6 h-6 rounded-full border-2 border-white object-cover">
+                        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/1a99aa12-9c50-44fe-bb7d-5dfef28b7d59_320w.webp" alt="User" class="w-6 h-6 rounded-full border-2 border-white object-cover">
+                        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/2e91b8c7-be64-41b5-8bd8-75efab28bdbe_320w.webp" alt="User" class="w-6 h-6 rounded-full border-2 border-white object-cover">
+                        <div class="w-6 h-6 rounded-full border-2 border-white bg-zinc-900 text-white flex items-center justify-center text-[9px] font-bold tracking-tighter">
+                            2k+
+                        </div>
+                    </div>
+                    <span class="text-xs font-medium text-zinc-600 tracking-wide">
+                            <span class="text-zinc-900">New Cohort</span> starts in 3 days
+                    </span>
+                </div>
+    
+                <!-- Headline -->
+                <h1 class="leading-[0.95] lg:text-[5rem] text-5xl font-medium text-zinc-900 tracking-tighter mb-8">
+                    Web3 Finance
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-zinc-400 to-zinc-200 font-light">Mastery Lab</span>
+                </h1>
+    
+                <!-- Subheadline -->
+                <p class="text-sm text-zinc-500 font-medium max-w-md mb-10 leading-relaxed tracking-wide border-l-2 border-zinc-200 pl-6">
+                    Unlock the potential of decentralized markets. A comprehensive curriculum designed meticulously for the
+                    next generation of digital asset investors.
+                </p>
+    
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row gap-3 lg:mb-24 mb-16 gap-x-3 gap-y-3">
+                    <button class="hover:bg-black transition-all flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full pt-3 pr-6 pb-3 pl-6 shadow-xl gap-x-3 gap-y-3 items-center justify-between" style="background: radial-gradient(circle at 10% 0%, #fed7aa 0%, #fb923c 100%); box-shadow: 0 15px 25px -10px rgba(248, 113, 22, 0.7), inset 0 4px 8px rgba(253, 230, 138, 0.9), inset 0 -4px 8px rgba(249, 115, 22, 0.9)">
+                            <span class="text-sm font-medium tracking-tight text-zinc-900">
+                                Start free trial
+                            </span>
+                            <span class="flex items-center justify-center rounded-full bg-black/10 px-3 py-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform" data-lucide="arrow-up-right" data-icon-set="lucide" data-icon-replaced="true" style="color: rgb(15, 23, 42);"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+                            </span>
+                        </button>
+                    <button class="hover:bg-zinc-50 hover:text-zinc- transition-all flex text-sm font-medium text-zinc-600 bg-gradient-to-b from-black/10 via-black/20 to-black/10 rounded-full pt-3 pr-6 pb-3 pl-6 shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)] gap-x-2 gap-y-2 items-center" style="box-shadow: 0 18px 35px rgba(31, 41, 55, 0.25), 0 0 0 1px rgba(209, 213, 219, 0.3); color: #e5e7eb; position: relative; --border-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.4), rgba(255, 255, 255, 0.8)); --border-radius-before: 9999px">
+                            <span class="text-sm font-medium text-black/60 tracking-tight">
+                                Demo Lesson
+                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="" data-lucide="arrow-right" data-icon-set="lucide" data-icon-replaced="true" style="color: rgb(229, 231, 235);"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                        </button>
+                </div>
+    
+                <!-- Footer Stats with Curved Lines -->
+                <div class="flex flex-wrap gap-2 md:gap-6 mt-auto gap-x-2 gap-y-2 items-center">
+    
+                    <!-- Stat 1 -->
+                    <div class="flex items-center group cursor-default">
+                        <div class="px-1 text-center">
+                            <p class="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mb-1 group-hover:text-zinc-600 transition-colors">
+                                Duration</p>
+                            <p class="text-sm text-zinc-900 font-medium">8 weeks</p>
+                        </div>
+                        <div class="curve-separator opacity-60 ml-4 md:ml-8"></div>
+                    </div>
+    
+                    <!-- Stat 2 -->
+                    <div class="flex items-center group cursor-default">
+                        <div class="px-1 text-center">
+                            <p class="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mb-1 group-hover:text-zinc-600 transition-colors">
+                                Level</p>
+                            <p class="text-sm text-zinc-900 font-medium">Intermediate</p>
+                        </div>
+                        <div class="curve-separator md:ml-8 opacity-60 ml-4"></div>
+                    </div>
+    
+                    <!-- Stat 3 -->
+                    <div class="flex items-center group cursor-default">
+                        <div class="px-1 text-center">
+                            <p class="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mb-1 group-hover:text-zinc-600 transition-colors">
+                                Format</p>
+                            <p class="text-sm text-zinc-900 font-medium">Hybrid</p>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+    
+            <!-- Right Column: Visual Card -->
+            <div class="lg:col-span-5 h-full min-h-[400px] lg:min-h-0 relative group perspective-1000">
+                <div class="absolute inset-0 rounded-[2rem] overflow-hidden shadow-2xl shadow-zinc-900/20 transition-all duration-700 ease-out border border-white/20">
+    
+                    <!-- Background Asset -->
+                    <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/96e3ccfa-3799-4c9c-9f2a-263c0ff6a449_1600w.webp" alt="Sci-fi landscape" class="transition-transform duration-[2s] ease-in-out group-hover:scale-110 filter saturate-[0.8] w-full h-full object-cover absolute top-0 right-0 bottom-0 left-0">
+    
+                    <!-- Gradient Overlay -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-zinc-900/90 via-zinc-900/20 to-zinc-900/10"></div>
+    
+                    <!-- Overlay Content Container -->
+                    <div class="flex flex-col pt-8 pr-8 pb-8 pl-8 absolute top-0 right-0 bottom-0 left-0 justify-between">
+    
+                        <!-- Top Row: Status Badges -->
+                        <div class="flex items-start justify-between">
+                            <div class="flex gap-2 bg-gradient-to-b from-white/10 to-white/0 rounded-full pt-1.5 pr-3 pb-1.5 pl-3 gap-x-2 gap-y-2 items-center" style="position: relative; --border-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0)); --border-radius-before: 9999px">
+                                <span class="relative flex h-2 w-2">
+                                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                                </span>
+                                <span class="text-[10px] uppercase font-semibold text-white tracking-wide">Live Market</span>
+                            </div>
+    
+                            <div class="flex hover:bg-white/20 transition-colors cursor-pointer text-white bg-gradient-to-b from-white/10 to-white/0 w-10 h-10 rounded-full items-center justify-center" style="position: relative; --border-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0)); --border-radius-before: 9999px">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bell">
+                                    <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" class=""></path>
+                                    <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+                                </svg>
+                            </div>
+                        </div>
+    
+                        <!-- Middle: Floating Widget -->
+                        <div class="self-end transform group-hover:translate-y-0 transition-transform duration-700 ease-out bg-gradient-to-b from-white/10 to-white/0 w-full max-w-[240px] rounded-xl mt-60 pt-4 pr-4 pb-4 pl-4 backdrop-blur translate-y-4" style="position: relative; --border-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0)); --border-radius-before: 12px">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-6 h-6 rounded-full bg-orange-500 flex items-center justify-center text-white text-[10px] font-bold">
+                                        ₿</div>
+                                    <span class="text-xs text-white font-medium">Bitcoin</span>
+                                </div>
+                                <span class="text-[10px] text-emerald-400 font-mono">+2.4%</span>
+                            </div>
+                            <div class="h-12 w-full mb-2 flex items-end gap-1">
+                                <div class="w-1/5 bg-white/20 rounded-t-sm h-[40%]"></div>
+                                <div class="w-1/5 bg-white/20 rounded-t-sm h-[70%]"></div>
+                                <div class="w-1/5 bg-white/20 rounded-t-sm h-[50%]"></div>
+                                <div class="w-1/5 bg-white/30 rounded-t-sm h-[85%]"></div>
+                                <div class="w-1/5 bg-emerald-500 rounded-t-sm h-[95%] shadow-[0_0_10px_rgba(16,185,129,0.5)]">
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-end">
+                                <div class="flex flex-col">
+                                    <span class="text-[9px] text-white/60 uppercase">Current Value</span>
+                                    <span class="text-sm text-white font-mono font-medium">$64,231</span>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <!-- Bottom: Animated Carousel -->
+                        <div class="overflow-hidden w-full h-[100px] border-white/10 rounded-xl border-t mt-auto pt-4 relative">
+                            <div class="carousel-track flex flex-col h-[300px]">
+                                <!-- Item 1 -->
+                                <div class="flex flex-col h-[100px] justify-start">
+                                    <div class="flex gap-3 mb-2 gap-x-3 gap-y-3 items-center">
+                                        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/7b1ee7e8-7554-433d-a435-029da35fee50_320w.webp" alt="Reviewer" class="w-8 h-8 rounded-full object-cover border border-white/20">
+                                        <div class="flex flex-col">
+                                            <span class="text-white text-xs font-semibold tracking-wide">Elena Stone</span>
+                                            <span class="text-white/50 text-[9px] uppercase tracking-wider">Portfolio Manager</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-white/80 text-xs font-light leading-relaxed line-clamp-2">
+                                        "A complete ecosystem for mastering the digital economy. The interface is pristine
+                                        and the data is real-time."
+                                    </p>
+                                </div>
+                                <!-- Item 2 -->
+                                <div class="h-[100px] flex flex-col justify-start">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/b3f17582-5cb8-4efd-895a-b59c93e3ac02_320w.webp" alt="Reviewer" class="w-8 h-8 rounded-full object-cover border border-white/20">
+                                        <div class="flex flex-col">
+                                            <span class="text-white text-xs font-semibold tracking-wide">Marcus Chen</span>
+                                            <span class="text-white/50 text-[9px] uppercase tracking-wider">DeFi Analyst</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-white/80 text-xs font-light leading-relaxed line-clamp-2">
+                                        "This lab provided the exact framework I needed to understand liquidity pools and
+                                        staking mechanisms."
+                                    </p>
+                                </div>
+                                <!-- Item 3 -->
+                                <div class="h-[100px] flex flex-col justify-start">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/08cf0e21-ab10-49b1-b896-e0bfbcc58fdc_320w.webp" alt="Reviewer" class="w-8 h-8 rounded-full object-cover border border-white/20">
+                                        <div class="flex flex-col">
+                                            <span class="text-white text-xs font-semibold tracking-wide">Sarah Jenks</span>
+                                            <span class="text-white/50 text-[9px] uppercase tracking-wider">Crypto Trader</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-white/80 text-xs font-light leading-relaxed line-clamp-2">
+                                        "The hybrid format is perfect. I could learn at my own pace while still getting
+                                        mentorship."
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Fade overlay for smooth exit/entry visually -->
+                            <div class="absolute top-0 left-0 w-full h-4 bg-gradient-to-b from-zinc-900/0 to-transparent pointer-events-none">
+                            </div>
+                            <div class="absolute bottom-0 left-0 w-full h-8 bg-gradient-to-t from-zinc-900/50 to-transparent pointer-events-none">
+                            </div>
+                        </div>
+    
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+        <div class="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mt-16 lg:mt-24 mb-16 lg:mb-24 opacity-60">
+        </div>
+        <div class="flex flex-col gap-10 z-10 w-full relative gap-x-10 gap-y-10">
+    
+            <!-- Section Header -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 px-1">
+                <div class="max-w-2xl">
+                    <h2 class="md:text-5xl text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+                        Master the
+                        <span class="bg-clip-text text-transparent bg-gradient-to-b from-neutral-400 to-neutral-600">DeFi Stack</span>
+                    </h2>
+                    <p class="leading-relaxed text-base font-normal text-zinc-500">
+                        From consensus mechanisms to advanced yield strategies. A complete toolkit designed for the modern
+                        financial architect.
+                    </p>
+                </div>
+                <a href="#" class="group flex items-center gap-2 hover:text-indigo-600 transition-colors text-sm font-normal text-zinc-900 pb-1">
+                    View full syllabus
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24" data-icon="solar:arrow-right-linear" style="font-size: 16px;" class="iconify group-hover:translate-x-1 transition-transform iconify--solar">
+                        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 12h16m0 0l-6-6m6 6l-6 6"></path>
+                    </svg>
+                </a>
+            </div>
+    
+            <!-- Bento Grid Container -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 overflow-hidden shadow-zinc-900/5 bg-zinc-200 rounded-[2rem] shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)] gap-x-px gap-y-px">
+    
+                <!-- Card 1: Governance (Span 1) -->
+                <div class="group hover:bg-zinc-50 transition-colors flex flex-col min-h-[340px] bg-white h-full pt-8 pr-8 pb-8 pl-8 relative justify-between">
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-2 mb-3 text-zinc-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24" data-icon="solar:users-group-rounded-bold-duotone" style="font-size: 24px;" class="iconify iconify--solar">
+                                <circle cx="15" cy="6" r="3" fill="currentColor" opacity=".4"></circle>
+                                <ellipse cx="16" cy="17" fill="currentColor" opacity=".4" rx="5" ry="3"></ellipse>
+                                <circle cx="9.001" cy="6" r="4" fill="currentColor"></circle>
+                                <ellipse cx="9.001" cy="17.001" fill="currentColor" rx="7" ry="4"></ellipse>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-zinc-900 mb-2 tracking-tight">DAO Governance</h3>
+                        <p class="text-sm text-zinc-500 font-medium leading-relaxed font-normal">Structure decentralized organizations,
+                            manage proposals, and implement voting mechanics.</p>
+                    </div>
+    
+                    <!-- Visual: Governance Flow -->
+                    <div class="flex flex-col flex-grow mt-8 pt-4 pb-4 relative items-center justify-center">
+                        <!-- Connecting Lines -->
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[60%] w-32 h-12 border-b border-r border-l border-zinc-200 rounded-b-2xl pointer-events-none">
+                        </div>
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[20%] h-6 w-px bg-zinc-200 pointer-events-none">
+                        </div>
+    
+                        <!-- Avatars -->
+                        <div class="flex gap-4 mb-6 relative z-10">
+                            <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/578a5bc5-2c9f-4285-8ae6-0d7dafefba84_320w.webp" class="w-10 h-10 rounded-full border-2 border-white shadow-sm object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all" alt="User">
+                            <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/1a99aa12-9c50-44fe-bb7d-5dfef28b7d59_320w.webp" class="w-10 h-10 rounded-full border-2 border-white shadow-sm object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all" alt="User">
+                            <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/2e91b8c7-be64-41b5-8bd8-75efab28bdbe_320w.webp" class="w-10 h-10 rounded-full border-2 border-white shadow-sm object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all" alt="User">
+                        </div>
+    
+                        <!-- Action Button -->
+                        <div class="flex text-[10px] uppercase shadow-zinc-900/20 group-hover:scale-105 transition-transform font-bold text-white tracking-wider bg-zinc-900 rounded-full mt-2 px-4 py-2 shadow-lg gap-x-2 gap-y-2 items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24" data-icon="solar:check-circle-bold-duotone" class="iconify iconify--solar">
+                                <path fill="currentColor" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2s10 4.477 10 10" opacity=".5">
+                                </path>
+                                <path fill="currentColor" d="M16.03 8.97a.75.75 0 0 1 0 1.06l-5 5a.75.75 0 0 1-1.06 0l-2-2a.75.75 0 1 1 1.06-1.06l1.47 1.47l2.235-2.235L14.97 8.97a.75.75 0 0 1 1.06 0">
+                                </path>
+                            </svg>
+                            <span>Cast Vote</span>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Card 2: Tokenomics (Span 2) -->
+                <div class="group relative bg-white hover:bg-zinc-50 transition-colors p-8 flex flex-col justify-between h-full min-h-[340px] md:col-span-2 overflow-hidden">
+                    <div class="relative z-10 max-w-md">
+                        <div class="flex items-center gap-2 mb-3 text-zinc-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24" data-icon="solar:chart-square-bold-duotone" style="font-size: 24px;" class="iconify iconify--solar">
+                                <path fill="currentColor" d="M12 22c-4.714 0-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12s0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22" opacity=".5"></path>
+                                <path fill="currentColor" d="M12 5.25a.75.75 0 0 1 .75.75v12a.75.75 0 0 1-1.5 0V6a.75.75 0 0 1 .75-.75m-5 3a.75.75 0 0 1 .75.75v9a.75.75 0 0 1-1.5 0V9A.75.75 0 0 1 7 8.25m10 4a.75.75 0 0 1 .75.75v5a.75.75 0 0 1-1.5 0v-5a.75.75 0 0 1 .75-.75">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-zinc-900 mb-2 tracking-tight">Tokenomics &amp; Incentives</h3>
+                        <p class="text-sm text-zinc-500 font-medium leading-relaxed font-normal">Design sustainable economic models,
+                            calculate APY curves, and engineer liquidity mining programs that align stakeholder interests.
+                        </p>
+                    </div>
+    
+                    <!-- Visual: Floating Assets -->
+                    <div class="absolute right-0 bottom-0 top-0 w-full md:w-2/3 pointer-events-none">
+                        <div class="absolute inset-0 bg-gradient-to-l from-white via-white/80 to-transparent z-10"></div>
+    
+                        <!-- Floating Card 1 -->
+                        <div class="absolute top-[20%] right-12 w-48 h-32 bg-white border border-zinc-100 rounded-xl shadow-xl rotate-6 flex flex-col p-4 group-hover:rotate-3 group-hover:scale-105 transition-all duration-700 ease-out z-0">
+                            <div class="flex items-center gap-2 mb-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24" data-icon="solar:wallet-money-bold-duotone" style="font-size: 24px;">
+                                    <path fill="currentColor" d="M4.892 9.614c0-.402.323-.728.722-.728H9.47c.4 0 .723.326.723.728a.726.726 0 0 1-.723.729H5.614a.726.726 0 0 1-.722-.729">
+                                    </path>
+                                    <path fill="currentColor" fill-rule="evenodd" d="M21.188 10.004q-.094-.005-.2-.004h-2.773C15.944 10 14 11.736 14 14s1.944 4 4.215 4h2.773q.106.001.2-.004c.923-.056 1.739-.757 1.808-1.737c.004-.064.004-.133.004-.197v-4.124c0-.064 0-.133-.004-.197c-.069-.98-.885-1.68-1.808-1.737m-3.217 5.063c.584 0 1.058-.478 1.058-1.067c0-.59-.474-1.067-1.058-1.067s-1.06.478-1.06 1.067c0 .59.475 1.067 1.06 1.067" clip-rule="evenodd"></path>
+                                    <path fill="currentColor" d="M21.14 10.002c0-1.181-.044-2.448-.798-3.355a4 4 0 0 0-.233-.256c-.749-.748-1.698-1.08-2.87-1.238C16.099 5 14.644 5 12.806 5h-2.112C8.856 5 7.4 5 6.26 5.153c-1.172.158-2.121.49-2.87 1.238c-.748.749-1.08 1.698-1.238 2.87C2 10.401 2 11.856 2 13.694v.112c0 1.838 0 3.294.153 4.433c.158 1.172.49 2.121 1.238 2.87c.749.748 1.698 1.08 2.87 1.238c1.14.153 2.595.153 4.433.153h2.112c1.838 0 3.294 0 4.433-.153c1.172-.158 2.121-.49 2.87-1.238q.305-.308.526-.66c.45-.72.504-1.602.504-2.45l-.15.001h-2.774C15.944 18 14 16.264 14 14s1.944-4 4.215-4h2.773q.079 0 .151.002" opacity=".5"></path>
+                                    <path fill="currentColor" d="M10.101 2.572L8 3.992l-1.733 1.16C7.405 5 8.859 5 10.694 5h2.112c1.838 0 3.294 0 4.433.153q.344.045.662.114L16 4l-2.113-1.428a3.42 3.42 0 0 0-3.786 0">
+                                    </path>
+                                </svg>
+                                <span class="text-xs font-bold text-zinc-900">Liquidity Pool</span>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="h-1.5 w-full bg-zinc-100 rounded-full overflow-hidden">
+                                    <div class="h-full w-3/4 bg-indigo-500 rounded-full"></div>
+                                </div>
+                                <div class="h-1.5 w-full bg-zinc-100 rounded-full overflow-hidden">
+                                    <div class="h-full w-1/2 bg-zinc-300 rounded-full"></div>
+                                </div>
+                            </div>
+                            <div class="mt-auto flex justify-between items-end">
+                                <span class="text-[10px] text-zinc-400 font-medium">APR</span>
+                                <span class="text-sm font-bold text-zinc-900">12.4%</span>
+                            </div>
+                        </div>
+    
+                        <!-- Floating Card 2 -->
+                        <div class="absolute bottom-[15%] right-32 w-16 h-16 bg-white border border-zinc-100 rounded-2xl shadow-lg -rotate-12 flex items-center justify-center group-hover:-rotate-6 group-hover:translate-y-2 transition-all duration-700 delay-100 z-20">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24" data-icon="solar:dollar-minimalistic-bold-duotone" style="font-size: 32px;">
+                                <path fill="currentColor" fill-rule="evenodd" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2s10 4.477 10 10" clip-rule="evenodd" opacity=".5"></path>
+                                <path fill="currentColor" d="M12.75 6a.75.75 0 0 0-1.5 0v.317c-1.63.292-3 1.517-3 3.183c0 1.917 1.813 3.25 3.75 3.25c1.377 0 2.25.906 2.25 1.75s-.873 1.75-2.25 1.75c-1.376 0-2.25-.906-2.25-1.75a.75.75 0 0 0-1.5 0c0 1.666 1.37 2.891 3 3.183V18a.75.75 0 0 0 1.5 0v-.317c1.63-.292 3-1.517 3-3.183c0-1.917-1.813-3.25-3.75-3.25c-1.376 0-2.25-.906-2.25-1.75s.874-1.75 2.25-1.75c1.377 0 2.25.906 2.25 1.75a.75.75 0 0 0 1.5 0c0-1.666-1.37-2.891-3-3.183z">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Card 3: Smart Contracts (Span 1) -->
+                <div class="group relative bg-white hover:bg-zinc-50 transition-colors p-8 flex flex-col justify-between h-full min-h-[340px]">
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-2 mb-3 text-zinc-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24" data-icon="solar:code-square-bold-duotone" style="font-size: 24px;" class="iconify iconify--solar">
+                                <path fill="currentColor" d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12" opacity=".5" class=""></path>
+                                <path fill="currentColor" d="M13.488 6.446a.75.75 0 0 1 .53.918l-2.588 9.66a.75.75 0 0 1-1.449-.389l2.589-9.659a.75.75 0 0 1 .918-.53M14.97 8.47a.75.75 0 0 1 1.06 0l.209.208c.635.635 1.165 1.165 1.529 1.642c.384.504.654 1.036.654 1.68s-.27 1.176-.654 1.68c-.364.477-.894 1.007-1.53 1.642l-.208.208a.75.75 0 1 1-1.06-1.06l.171-.172c.682-.682 1.139-1.14 1.434-1.528c.283-.37.347-.586.347-.77s-.064-.4-.347-.77c-.295-.387-.752-.846-1.434-1.528l-.171-.172a.75.75 0 0 1 0-1.06m-7 0a.75.75 0 0 1 1.06 1.06l-.171.172c-.682.682-1.138 1.14-1.434 1.528c-.283.37-.346.586-.346.77s.063.4.346.77c.296.387.752.846 1.434 1.528l.172.172a.75.75 0 1 1-1.061 1.06l-.208-.208c-.636-.635-1.166-1.165-1.53-1.642c-.384-.504-.653-1.036-.653-1.68s.27-1.176.653-1.68c.364-.477.894-1.007 1.53-1.642z" class=""></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-zinc-900 mb-2 tracking-tight">Smart Contract Logic</h3>
+                        <p class="leading-relaxed text-sm font-medium text-zinc-500 font-normal">Write secure, gas-efficient Solidity
+                            primitives for AMMs, lending pools, and NFT marketplaces.</p>
+                    </div>
+    
+                    <!-- Visual: Hex Nodes -->
+                    <div class="mt-8 flex items-center justify-center py-4 relative flex-grow">
+                        <div class="group-hover:opacity-100 transition-opacity opacity-80 w-48 h-32 relative">
+                            <!-- Center Node -->
+                            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 bg-zinc-800 rounded-full flex items-center justify-center z-10 shadow-lg ring-4 ring-zinc-200">
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24" data-icon="solar:programming-bold-duotone" style="font-size: 20px;" class="text-zinc-300">
+                                    <path fill="currentColor" d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12" opacity=".5"></path>
+                                    <path fill="currentColor" d="M6.424 9.52a.75.75 0 0 1 1.056-.096l.277.23c.605.504 1.12.933 1.476 1.328c.379.42.674.901.674 1.518s-.295 1.099-.674 1.518c-.356.395-.871.824-1.476 1.328l-.277.23a.75.75 0 1 1-.96-1.152l.234-.195c.659-.55 1.09-.91 1.366-1.216c.262-.29.287-.427.287-.513s-.025-.222-.287-.513c-.277-.306-.707-.667-1.366-1.216l-.234-.195a.75.75 0 0 1-.096-1.056M17.75 15a.75.75 0 0 1-.75.75h-5a.75.75 0 0 1 0-1.5h5a.75.75 0 0 1 .75.75">
+                                    </path>
+                                </svg>
+                            </div>
+                            <!-- Satellite Nodes -->
+                            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-8 bg-zinc-100 border border-zinc-300 shadow-sm rounded-full flex items-center justify-center">
+                                <div class="w-3 h-3 bg-zinc-400 rounded-full"></div>
+                            </div>
+                            <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-8 bg-zinc-100 border border-zinc-300 shadow-sm rounded-full flex items-center justify-center">
+                                <div class="w-3 h-3 bg-zinc-500 rounded-full"></div>
+                            </div>
+                            <div class="absolute top-1/2 left-0 -translate-y-1/2 w-8 h-8 bg-zinc-100 border border-zinc-300 shadow-sm rounded-full flex items-center justify-center">
+                                <div class="w-3 h-3 bg-zinc-400 rounded-full"></div>
+                            </div>
+                            <div class="absolute top-1/2 right-0 -translate-y-1/2 w-8 h-8 bg-zinc-100 border border-zinc-300 shadow-sm rounded-full flex items-center justify-center">
+                                <div class="w-3 h-3 bg-zinc-500 rounded-full"></div>
+                            </div>
+                            <!-- Diagonal Nodes -->
+                            <div class="absolute top-2 left-4 w-6 h-6 bg-zinc-200 border border-zinc-300 shadow-sm rounded-full flex items-center justify-center">
+                                <div class="w-2 h-2 bg-zinc-400 rounded-full"></div>
+                            </div>
+                            <div class="absolute top-2 right-4 w-6 h-6 bg-zinc-200 border border-zinc-300 shadow-sm rounded-full flex items-center justify-center">
+                                <div class="w-2 h-2 bg-zinc-400 rounded-full"></div>
+                            </div>
+                            <div class="absolute bottom-2 left-4 w-6 h-6 bg-zinc-200 border border-zinc-300 shadow-sm rounded-full flex items-center justify-center">
+                                <div class="w-2 h-2 bg-zinc-400 rounded-full"></div>
+                            </div>
+                            <div class="absolute bottom-2 right-4 w-6 h-6 bg-zinc-200 border border-zinc-300 shadow-sm rounded-full flex items-center justify-center">
+                                <div class="w-2 h-2 bg-zinc-400 rounded-full"></div>
+                            </div>
+                            <!-- Connectors -->
+                            <svg class="absolute inset-0 w-full h-full pointer-events-none text-zinc-300" style="z-index: 0;">
+                                <line x1="96" y1="64" x2="96" y2="16" stroke="currentColor" stroke-width="1.5"></line>
+                                <line x1="96" y1="64" x2="96" y2="112" stroke="currentColor" stroke-width="1.5"></line>
+                                <line x1="96" y1="64" x2="16" y2="64" stroke="currentColor" stroke-width="1.5"></line>
+                                <line x1="96" y1="64" x2="176" y2="64" stroke="currentColor" stroke-width="1.5"></line>
+                                <line x1="96" y1="64" x2="32" y2="16" stroke="currentColor" stroke-width="1"></line>
+                                <line x1="96" y1="64" x2="160" y2="16" stroke="currentColor" stroke-width="1"></line>
+                                <line x1="96" y1="64" x2="32" y2="112" stroke="currentColor" stroke-width="1"></line>
+                                <line x1="96" y1="64" x2="160" y2="112" stroke="currentColor" stroke-width="1"></line>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Card 4: Analytics (Span 1) -->
+                <div class="group relative bg-white hover:bg-zinc-50 transition-colors p-8 flex flex-col justify-between h-full min-h-[340px] overflow-hidden">
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-2 mb-3 text-zinc-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24" data-icon="solar:graph-up-bold-duotone" style="font-size: 24px;" class="iconify iconify--solar">
+                                <path fill="currentColor" d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12" opacity=".5"></path>
+                                <path fill="currentColor" d="M14.5 10.75a.75.75 0 0 1 0-1.5H17a.75.75 0 0 1 .75.75v2.5a.75.75 0 0 1-1.5 0v-.69l-2.013 2.013a1.75 1.75 0 0 1-2.474 0l-1.586-1.586a.25.25 0 0 0-.354 0L7.53 14.53a.75.75 0 0 1-1.06-1.06l2.293-2.293a1.75 1.75 0 0 1 2.474 0l1.586 1.586a.25.25 0 0 0 .354 0l2.012-2.013z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-zinc-900 mb-2 tracking-tight">On-Chain Analytics</h3>
+                        <p class="text-sm text-zinc-500 font-medium leading-relaxed font-normal">Query complex blockchain data, track
+                            whale
+                            movements, and visualize protocol health.</p>
+                    </div>
+    
+                    <!-- Visual: Search UI -->
+                    <div class="mt-8 relative flex flex-col items-center justify-center flex-grow">
+                        <div class="w-full bg-zinc-50 border border-zinc-200 rounded-xl p-3 shadow-sm flex items-center gap-3 relative z-10 group-hover:shadow-md transition-all duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24" data-icon="solar:magnifer-linear" style="font-size: 20px;" class="iconify text-zinc-400 iconify--solar">
+                                <g fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <circle cx="11.5" cy="11.5" r="9.5"></circle>
+                                    <path stroke-linecap="round" d="M18.5 18.5L22 22"></path>
+                                </g>
+                            </svg>
+                            <div class="h-2 w-20 bg-zinc-200 rounded-full"></div>
+                            <div class="ml-auto flex items-center gap-1.5">
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24" data-icon="simple-icons:ethereum" style="font-size: 14px;">
+                                    <path fill="currentColor" d="M11.944 17.97L4.58 13.62L11.943 24l7.37-10.38l-7.372 4.35zM12.056 0L4.69 12.223l7.365 4.354l7.365-4.35z">
+                                    </path>
+                                </svg>
+                                <span class="text-[10px] font-bold text-zinc-400">ETH</span>
+                            </div>
+                        </div>
+                        <!-- Floating Elements -->
+    
+                        <div class="absolute -left-2 bottom-8 w-10 h-10 bg-zinc-900 rounded-lg flex items-center justify-center shadow-lg group-hover:rotate-12 transition-all duration-500 delay-100 z-20">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24" data-icon="solar:database-bold-duotone" style="font-size: 20px;" class="iconify text-white iconify--solar">
+                                <path fill="currentColor" d="M12 10c4.418 0 8-1.79 8-4s-3.582-4-8-4s-8 1.79-8 4s3.582 4 8 4">
+                                </path>
+                                <path fill="currentColor" d="M4 12v6c0 2.21 3.582 4 8 4s8-1.79 8-4v-6c0 2.21-3.582 4-8 4s-8-1.79-8-4" opacity=".5">
+                                </path>
+                                <path fill="currentColor" d="M4 6v6c0 2.21 3.582 4 8 4s8-1.79 8-4V6c0 2.21-3.582 4-8 4S4 8.21 4 6" opacity=".7">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Card 5: Security (Span 1) -->
+                <div class="group hover:bg-zinc-50 transition-colors flex flex-col min-h-[340px] bg-white h-full pt-8 pr-8 pb-8 pl-8 relative justify-between">
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-2 mb-3 text-zinc-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24" data-icon="solar:shield-check-bold-duotone" style="font-size: 24px;" class="iconify iconify--solar">
+                                <path fill="currentColor" d="M3.378 5.082C3 5.62 3 7.22 3 10.417v1.574c0 5.638 4.239 8.375 6.899 9.536c.721.315 1.082.473 2.101.473c1.02 0 1.38-.158 2.101-.473C16.761 20.365 21 17.63 21 11.991v-1.574c0-3.198 0-4.797-.378-5.335c-.377-.537-1.88-1.052-4.887-2.081l-.573-.196C13.595 2.268 12.812 2 12 2s-1.595.268-3.162.805L8.265 3c-3.007 1.03-4.51 1.545-4.887 2.082" opacity=".5"></path>
+                                <path fill="currentColor" d="M15.06 10.5a.75.75 0 0 0-1.12-1l-3.011 3.374l-.87-.974a.75.75 0 0 0-1.118 1l1.428 1.6a.75.75 0 0 0 1.119 0z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-zinc-900 mb-2 tracking-tight">Protocol Security</h3>
+                        <p class="leading-relaxed text-sm font-medium text-zinc-500 font-normal">Identify re-entrancy attacks,
+                            front-running risks, and implement defensive architecture.</p>
+                    </div>
+    
+                    <!-- Visual: Security Shield -->
+                    <div class="mt-8 flex items-end justify-center relative flex-grow">
+                        <div class="flex overflow-hidden group-hover:shadow-lg transition-shadow duration-500 bg-gradient-to-b from-zinc-50 to-zinc-100 w-24 h-24 border-zinc-200 border rounded-full relative scale-50 items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24" data-icon="solar:lock-password-unlocked-bold-duotone" style="font-size: 40px;" class="">
+                                <path fill="currentColor" d="M2 16c0-2.828 0-4.243.879-5.121C3.757 10 5.172 10 8 10h8c2.828 0 4.243 0 5.121.879C22 11.757 22 13.172 22 16s0 4.243-.879 5.121C20.243 22 18.828 22 16 22H8c-2.828 0-4.243 0-5.121-.879C2 20.243 2 18.828 2 16" opacity=".5" class=""></path>
+                                <path fill="currentColor" d="M8 17a1 1 0 1 0 0-2a1 1 0 0 0 0 2m4 0a1 1 0 1 0 0-2a1 1 0 0 0 0 2m5-1a1 1 0 1 1-2 0a1 1 0 0 1 2 0M6.75 8a5.25 5.25 0 0 1 10.335-1.313a.75.75 0 0 0 1.452-.374A6.75 6.75 0 0 0 5.25 8v2.055a24 24 0 0 1 1.5-.051z" class=""></path>
+                            </svg>
+    
+                            <!-- Scanning Effect -->
+    
+                        </div>
+    
+                        <!-- Status Indicators -->
+                        <div class="absolute top-0 right-4 flex items-center gap-1.5 bg-white border border-zinc-100 px-2 py-1 rounded-full shadow-sm">
+                            <div class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></div>
+                            <span class="text-[9px] font-bold text-zinc-600 uppercase tracking-wide">Audited</span>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+        <div class="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mt-16 lg:mt-24 mb-16 lg:mb-24 opacity-60">
+        </div>
+        <div class="flex flex-col gap-16 z-10 w-full relative gap-x-16 gap-y-16">
+    
+            <!-- Top Feature Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+    
+                <!-- Feature 1 -->
+                <div class="flex flex-col gap-4">
+                    <div class="text-zinc-900">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="28" height="28" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10s10-4.477 10-10S17.523 2 12 2" opacity=".5">
+                            </path>
+                            <path fill="currentColor" d="M12 6a1 1 0 0 1 1 1v4.586l2.707 2.707a1 1 0 0 1-1.414 1.414l-3-3A1 1 0 0 1 11 12V7a1 1 0 0 1 1-1">
+                            </path>
+                        </svg>
+                    </div>
+                    <p class="leading-relaxed text-base font-medium text-zinc-900 font-normal">
+                        Your learning path adapts based on progress and skill assessments.
+                    </p>
+                </div>
+    
+                <!-- Feature 2 -->
+                <div class="flex flex-col gap-4">
+                    <div class="text-zinc-900">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="28" height="28" viewBox="0 0 24 24" class="">
+                            <path fill="currentColor" d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12" opacity=".5" class=""></path>
+                            <path fill="currentColor" d="M12 7.75a.75.75 0 0 1 .75.75v3.69l2.28 2.28a.75.75 0 1 1-1.06 1.06l-2.5-2.5a.75.75 0 0 1-.22-.53V8.5a.75.75 0 0 1 .75-.75">
+                            </path>
+                        </svg>
+                    </div>
+                    <p class="leading-relaxed text-base font-medium text-zinc-900 font-normal">
+                        The system knows when to push or hold back — based on mastery zones.
+                    </p>
+                </div>
+    
+                <!-- Feature 3 -->
+                <div class="flex flex-col gap-4">
+                    <div class="text-zinc-900">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="28" height="28" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M12 22c-4.714 0-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12s0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22" opacity=".5"></path>
+                            <path fill="currentColor" d="M16.03 8.97a.75.75 0 0 1 0 1.06l-5 5a.75.75 0 0 1-1.06 0l-2-2a.75.75 0 1 1 1.06-1.06l1.47 1.47l4.47-4.47a.75.75 0 0 1 1.06 0">
+                            </path>
+                        </svg>
+                    </div>
+                    <p class="leading-relaxed text-base font-medium text-zinc-900 font-normal">
+                        No more switching platforms. Theory, practice, and labs unified.
+                    </p>
+                </div>
+    
+                <!-- Feature 4 -->
+                <div class="flex flex-col gap-4">
+                    <div class="text-zinc-900">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="28" height="28" viewBox="0 0 24 24" class="">
+                            <path fill="currentColor" d="M19.83 8.7L12 2.1a.08.08 0 0 0-.07 0L4.17 8.7A1 1 0 0 0 4 9.6V20a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9.6a1 1 0 0 0-.17-.9" opacity=".5" class=""></path>
+                            <path fill="currentColor" d="M12.75 18a.75.75 0 0 1-1.5 0v-4a.75.75 0 0 1 1.5 0z"></path>
+                        </svg>
+                    </div>
+                    <p class="leading-relaxed text-base font-medium text-zinc-900 font-normal">
+                        Portfolio, skills, and credentials tracked. Always know your value.
+                    </p>
+                </div>
+    
+            </div>
+    
+            <!-- Main CTA Card -->
+            <div class="overflow-hidden min-h-[500px] lg:min-h-[600px] shadow-zinc-900/30 bg-zinc-900 rounded-[2rem] relative shadow-2xl">
+    
+                <!-- Grid Pattern Overlay -->
+                <div class="absolute inset-0 opacity-10" style="background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 40px 40px;">
+                </div>
+    
+                <!-- Content Container -->
+                <div class="grid grid-cols-1 lg:grid-cols-1 min-h-[500px] lg:min-h-[600px] relative h-full">
+    
+                    <!-- Left: Text Content -->
+                    <div class="flex flex-col md:p-12 lg:p-16 bg-center bg-[url(https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/a5387a0b-52c6-40c2-b3be-ef86329b19cc_1600w.webp)] bg-cover pt-8 pr-8 pb-8 pl-8 saturate-50 justify-center">
+                        <h2 class="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-8">We unify your missions, telemetry, and crew insights into one adaptive command console that evolves as you explore deeper into space — no clutter, no guesswork.</h2>
+    
+                        <button class="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 w-fit shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+                        <span class="">Try For Free</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                    </button>
+    
+                        <!-- Trusted By -->
+                        <div class="mt-12 pt-8 border-t border-white/10">
+                            <p class="text-xs text-white/50 uppercase tracking-widest mb-4 font-medium">Trusted by teams at
+                            </p>
+                            <div class="flex flex-wrap items-center gap-6 opacity-60">
+                                <!-- Coinbase -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="20" viewBox="0 0 512 127.964" style="color: rgb(255, 255, 255); width: 100px; height: 20px;" class="w-[100px] h-[20px]" data-logos="linear" data-icon-set="logos" data-icon-replaced="true" stroke-width="2">
+                                    <path fill="#ffffff" d="m4.086 51.292l72.586 72.587c1.06 1.06.549 2.859-.924 3.134a64 64 0 0 1-7.508.947a1.9 1.9 0 0 1-1.46-.554L.558 61.184a1.9 1.9 0 0 1-.554-1.46c.17-2.546.489-5.051.948-7.507c.275-1.473 2.074-1.984 3.134-.925M2.04 80.682c-.484-1.806 1.65-2.946 2.973-1.623l43.893 43.893c1.322 1.322.183 3.457-1.624 2.972c-22.009-5.9-39.34-23.233-45.242-45.242m6.362-48.609c.616-1.067 2.073-1.23 2.945-.36l84.904 84.905c.871.871.708 2.328-.36 2.945a64 64 0 0 1-5.548 2.851a1.885 1.885 0 0 1-2.11-.394L5.945 39.732a1.885 1.885 0 0 1-.395-2.11a64 64 0 0 1 2.852-5.549M63.912 0c35.375 0 64.052 28.677 64.052 64.052c0 18.78-8.081 35.672-20.957 47.387c-.743.677-1.883.632-2.594-.079L16.604 23.551a1.88 1.88 0 0 1-.079-2.594C28.241 8.082 45.133 0 63.912 0m194.14 35.248c4.591 0 8.313-3.735 8.313-8.343s-3.722-8.343-8.313-8.343c-4.59 0-8.312 3.735-8.312 8.343c0 4.507 3.561 8.18 8.014 8.338zm-71.202 72.761V18.567h14.773v76.356h39.83v13.086zm105.144-36.497v36.497H277.7V44.62h14.115v10.865l.179-.12q2.153-5.102 6.938-8.524q4.784-3.482 12.201-3.482q6.578 0 11.961 2.942q5.383 2.88 8.612 8.464q3.23 5.583 3.23 13.686v39.56h-14.294V70.43q0-7.203-3.828-10.925q-3.766-3.781-10.108-3.782q-4.066 0-7.415 1.681q-3.35 1.68-5.323 5.163q-1.974 3.48-1.974 8.944m147.608-28.154q5.98 0 10.764 1.561q4.786 1.5 8.134 4.322q3.41 2.821 5.204 6.664q1.793 3.84 1.794 8.464v43.64h-13.696v-8.944h-.239q-1.435 2.701-3.888 4.982q-2.392 2.282-6.1 3.662q-3.708 1.32-8.912 1.32q-6.338 0-11.243-2.1q-4.904-2.16-7.775-6.363q-2.87-4.263-2.87-10.565q0-5.463 2.033-8.944a15.7 15.7 0 0 1 5.502-5.583q3.529-2.1 8.014-3.182q4.485-1.08 9.33-1.62l2.647-.301q4.076-.472 6.684-.84q3.467-.48 4.904-1.5q1.494-1.022 1.495-3.182v-.48q0-2.881-1.436-5.043q-1.436-2.16-4.126-3.421q-2.632-1.26-6.4-1.261t-6.638 1.26q-2.871 1.2-4.546 3.362a9.16 9.16 0 0 0-1.914 4.922h-13.816q.3-5.882 3.648-10.565q3.35-4.681 9.271-7.443q5.981-2.822 14.175-2.822m11.84 34.037q-.582.426-1.783.806l-.31.094q-1.374.42-3.348.84l-4.246.78q-2.274.361-4.666.721q-3.29.42-6.1 1.501t-4.546 2.941q-1.674 1.86-1.674 4.863q0 3.84 3.05 6.063q3.05 2.16 8.195 2.16q5.082 0 8.552-1.86q3.468-1.92 5.142-4.983q1.735-3.12 1.735-6.843zm26.527 30.614V44.62h13.755v10.445h.18q1.735-5.403 5.442-8.224q3.768-2.88 9.869-2.881q1.496 0 2.69.12l1.49.08q.326.02.605.04v12.906l-.322-.046a67 67 0 0 0-2.429-.254a46 46 0 0 0-4.187-.18q-3.529 0-6.46 1.62q-2.93 1.622-4.664 4.983q-1.675 3.301-1.675 8.344v36.437zm-227.094 0V44.62h14.294v63.39zM374.38 43.18q6.758 0 12.26 2.4q5.564 2.401 9.51 6.844q3.947 4.382 6.1 10.445q2.153 6.003 2.154 13.326v3.842h-45.976q.165 4.962 1.957 8.884q1.974 4.263 5.742 6.663q3.827 2.402 9.15 2.402q3.947 0 6.938-1.201q2.99-1.2 4.963-3.302a12.9 12.9 0 0 0 2.932-4.982h13.456q-1.196 6.183-5.203 10.925q-4.007 4.683-10.048 7.384q-5.98 2.64-13.277 2.641q-9.45 0-16.328-4.262q-6.877-4.261-10.585-11.706q-3.709-7.503-3.709-17.108q0-9.665 3.828-17.168T358.83 47.44q6.76-4.261 15.55-4.262m.179 11.525q-4.904 0-8.553 2.221q-3.586 2.22-5.62 6.303q-1.452 2.956-1.836 6.723h32.078q-.384-3.766-1.834-6.723q-1.974-4.082-5.622-6.303q-3.649-2.22-8.613-2.221">
+                                    </path>
+                                </svg>
+                                <!-- Chainlink -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="20" viewBox="0 0 512 99" style="color: rgb(255, 255, 255); width: 80px; height: 20px;" class="w-[80px] h-[20px]" data-logos="zendesk" data-icon-set="logos" data-icon-replaced="true" stroke-width="2">
+                                    <path fill="#ffffff" d="M340.962 29.149c21.899 0 34.319 16.728 33.204 39.946h-51.657c1.49 9.834 10.433 16.77 20.328 15.765a25.35 25.35 0 0 0 18.199-7.097l9.023 9.784a35.5 35.5 0 0 1-27.12 10.747c-22.052 0-36.297-14.701-36.297-34.573a33.81 33.81 0 0 1 34.32-34.572m-236.382 0c21.9 0 34.319 16.728 33.204 39.946H86.178c1.49 9.812 10.4 16.74 20.277 15.765a25.35 25.35 0 0 0 18.2-7.097l9.023 9.784a35.5 35.5 0 0 1-27.121 10.747c-22.052 0-36.296-14.701-36.296-34.573A33.81 33.81 0 0 1 104.58 29.15m333.51 12.42l-11.812 6.894a17.13 17.13 0 0 0-14.853-7.554c-7.553 0-11.406 3.7-11.406 7.96c0 4.257 6.083 6.082 15.664 8.211l.656.145l.658.148q.495.111.991.229l.662.158q.331.08.663.163l.663.168l.661.174c9.364 2.507 18.264 6.865 18.264 18.586c0 9.175-7.96 21.494-26.817 21.392a31.02 31.02 0 0 1-29.098-15.36l12.724-6.843a18.91 18.91 0 0 0 16.982 9.682c7.96 0 12.065-4.106 12.065-8.77s-7.705-6.489-16.07-8.212l-.678-.145l-.679-.148l-.34-.076l-.678-.154c-10.504-2.427-20.588-6.518-20.588-19.247c0-10.494 10.138-20.278 25.65-20.278a30.42 30.42 0 0 1 26.716 12.876M293.31 0v96.925h-14.093V87.8a28.24 28.24 0 0 1-22.152 10.494a33.41 33.41 0 0 1-33.103-34.573A33.103 33.103 0 0 1 257.166 29.2a28.59 28.59 0 0 1 22.051 10.139V0zM58.297 30.77v12.978L18.452 84.303h40.555v12.774H0V84.15l39.845-40.554H.912V30.771zM464.399 0v63.468l29.858-33.052h17.135l-25.904 28.439L512 96.925h-15.867l-20.581-29.453l-11.153 12.218v17.286h-14.092V0zM182.09 29.2c16.73 0 30.822 10.898 30.822 28.945v38.78h-14.498V59.92c0-10.848-5.272-17.388-15.918-17.388a15.715 15.715 0 0 0-16.78 17.388v37.006H151.37v-38.78c0-18.047 13.99-28.946 30.72-28.946m76.902 13.534c-11.59 0-20.987 9.396-20.987 20.987s9.396 20.987 20.987 20.987s20.987-9.396 20.987-20.987s-9.396-20.987-20.987-20.987m63.468 15.259l36.144.05c-.491-9.14-8.298-16.153-17.439-15.664c-9.38-.55-17.57 6.287-18.705 15.614m-236.28 0l36.042.05c-.518-9.12-8.316-16.102-17.438-15.613c-9.325-.498-17.448 6.297-18.605 15.563" class="">
+                                    </path>
+                                </svg>
+                                <!-- Uniswap -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="90" height="20" viewBox="0 0 512 89" style="color: rgb(255, 255, 255); width: 90px; height: 20px;" class="w-[90px] h-[20px]" data-logos="apache-superset" data-icon-set="logos" data-icon-replaced="true" stroke-width="2">
+                                    <path fill="#ffffff" d="M125.807 0c-14.517 0-27.89 8.167-40.814 22.437C72.293 7.943 58.696 0 43.506 0C18.354 0 0 17.95 0 42.115s18.354 41.89 43.506 41.89c15.46 0 27.441-7.247 40.814-21.696c12.924 14.494 26.072 21.742 41.487 21.742c25.152-.045 43.506-17.703 43.506-41.936C169.313 17.883 150.959 0 125.807 0M43.686 58.651c-10.658 0-17.008-7.022-17.008-16.312c0-9.289 6.35-16.514 17.008-16.514c8.975 0 16.312 7.225 24.255 16.963c-7.495 9.065-15.415 15.863-24.255 15.863m81.358 0c-8.84 0-16.312-7.022-24.255-16.312c8.167-9.737 15.19-16.514 24.255-16.514c10.658 0 16.94 7.315 16.94 16.514c0 9.2-6.282 16.312-16.94 16.312">
+                                    </path>
+                                    <path fill="#ffffff" d="m103.257 78.015l16.918-20.194c-6.731-2.02-12.946-8.077-19.386-15.594L84.319 62.31a74 74 0 0 0 18.938 15.706M84.993 22.415A76.1 76.1 0 0 0 66.168 6.35l-16.94 20.418c6.44 2.244 12.138 8.032 18.197 15.414l.673.472z">
+                                    </path>
+                                    <path fill="#ffffff" d="M222.13 56.453a6.73 6.73 0 0 0-2.378-5.363a24.2 24.2 0 0 0-6.878-3.443l-1.49-.416a47.1 47.1 0 0 1-15.707-7.135a13.47 13.47 0 0 1-5.34-11.219a14 14 0 0 1 6.125-11.712a25.3 25.3 0 0 1 15.706-4.488a23.47 23.47 0 0 1 15.707 5.116a15.33 15.33 0 0 1 5.834 11.486v1.348h-11.354a8.5 8.5 0 0 0-2.715-6.552a10.77 10.77 0 0 0-7.584-2.49c-2.587-.16-5.151.57-7.27 2.064a6.73 6.73 0 0 0-2.557 5.34a5.73 5.73 0 0 0 2.58 4.667a37.7 37.7 0 0 0 9.424 3.972a36.7 36.7 0 0 1 14.629 7.09a14.75 14.75 0 0 1 4.98 10.5l.001 1.1a13.88 13.88 0 0 1-5.923 11.825a25.72 25.72 0 0 1-15.707 4.33a28.45 28.45 0 0 1-16.626-4.914a15.37 15.37 0 0 1-6.938-12.682l.027-1.341h11.645a8.99 8.99 0 0 0 3.187 7.65a14.43 14.43 0 0 0 8.975 2.424c2.582.175 5.151-.52 7.292-1.974a6.25 6.25 0 0 0 2.356-5.183m45.504 8.997a14.7 14.7 0 0 1-5.093 5.25c-5.866 3.25-13.227 2.2-17.95-2.557q-3.86-4.488-3.86-13.642V28.316H252.4v26.32a11.4 11.4 0 0 0 1.593 6.73a5.66 5.66 0 0 0 4.056 2.067l.678-.002c1.654.036 3.294-.27 4.824-.898a8.14 8.14 0 0 0 3.276-2.692V28.316h11.712v43.372h-9.984zm58.045-14.248a24.8 24.8 0 0 1-4.487 15.482a14.73 14.73 0 0 1-12.43 5.856a14.1 14.1 0 0 1-6.058-1.256a12.6 12.6 0 0 1-4.488-3.725v20.822H286.55V28.316h10.545l.696 5.116a14.04 14.04 0 0 1 4.622-4.376a12.6 12.6 0 0 1 6.327-1.548a14.44 14.44 0 0 1 12.498 6.305a27.98 27.98 0 0 1 4.487 16.56zm-11.712-.897a21.3 21.3 0 0 0-2.042-9.962a6.74 6.74 0 0 0-6.26-3.815a8.84 8.84 0 0 0-4.487 1.077a8.03 8.03 0 0 0-2.962 3.097V59.75a7.3 7.3 0 0 0 2.962 2.805a9.7 9.7 0 0 0 3.56.944l.927.02a6.74 6.74 0 0 0 6.238-3.343a17.57 17.57 0 0 0 1.997-8.975zm38.784 22.216l-1.627.02a19.56 19.56 0 0 1-15.011-6.014a21.53 21.53 0 0 1-5.617-13.984l.008-2.889a23.73 23.73 0 0 1 5.317-15.93c7.418-7.86 19.97-8.275 27.89-.92a20.38 20.38 0 0 1 4.891 14.315v6.372h-25.96v.247a11.22 11.22 0 0 0 2.872 7.023a8.98 8.98 0 0 0 6.91 2.76a22.8 22.8 0 0 0 6.463-.786a29.8 29.8 0 0 0 5.61-2.468l3.163 7.247a21.6 21.6 0 0 1-6.933 3.59a29.8 29.8 0 0 1-7.976 1.417m-2.682-35.88a6.13 6.13 0 0 0-5.138 2.49a12.9 12.9 0 0 0-2.244 6.53l.112.201h14.36V44.83a9.4 9.4 0 0 0-1.75-5.968a6.29 6.29 0 0 0-5.34-2.334zm48.375 1.727h-4.308a7.83 7.83 0 0 0-4.285 1.077a6.86 6.86 0 0 0-2.558 3.052v29.19h-11.668v-43.37h10.927l.516 6.416c.866-2.07 2.23-3.9 3.972-5.318a8.8 8.8 0 0 1 5.61-1.907q.811-.007 1.615.135l1.503.336zm29.214 21.383a4.09 4.09 0 0 0-1.863-3.343a19.2 19.2 0 0 0-5.458-2.19l-1.452-.278a28 28 0 0 1-11.6-4.645a10.01 10.01 0 0 1-3.927-8.347a11.97 11.97 0 0 1 4.712-9.536a19.17 19.17 0 0 1 12.61-3.904a20.8 20.8 0 0 1 13.215 3.882a11.53 11.53 0 0 1 4.716 8.868l-.004 1.206h-11.219a5.77 5.77 0 0 0-1.66-4.263a6.74 6.74 0 0 0-4.13-1.648l-.761.01a6.74 6.74 0 0 0-4.488 1.391a4.35 4.35 0 0 0-1.615 3.456a3.93 3.93 0 0 0 1.705 3.298a18.6 18.6 0 0 0 6.91 2.244c4.282.63 8.36 2.244 11.915 4.712a10.35 10.35 0 0 1 3.882 8.548a11.45 11.45 0 0 1-5.004 9.581a21.8 21.8 0 0 1-13.238 3.702a20.05 20.05 0 0 1-13.687-4.487a12.26 12.26 0 0 1-4.916-8.818l-.043-1.279h10.703a6.03 6.03 0 0 0 2.244 5.048c1.393.924 3 1.46 4.656 1.562l.998.01a8.1 8.1 0 0 0 4.936-1.302a4.11 4.11 0 0 0 1.863-3.478M466.4 72.52l-1.63.02a19.5 19.5 0 0 1-14.989-6.014a21.53 21.53 0 0 1-5.617-13.984l.008-2.889a23.83 23.83 0 0 1 5.295-15.93c7.418-7.86 19.97-8.275 27.89-.92a20.2 20.2 0 0 1 4.869 14.315v6.372H456.31v.247a11.22 11.22 0 0 0 2.85 7.023a8.98 8.98 0 0 0 5.962 2.755l.971.004a22.6 22.6 0 0 0 6.44-.785a29.3 29.3 0 0 0 5.631-2.468l3.164 7.247a21.8 21.8 0 0 1-6.933 3.59a30 30 0 0 1-7.995 1.417m-2.663-35.88a6.08 6.08 0 0 0-5.138 2.49a12.94 12.94 0 0 0-2.244 6.53l.135.201h14.36V44.83a9.4 9.4 0 0 0-1.75-5.968a6.29 6.29 0 0 0-5.363-2.334zm40.275-18.96v10.635h7.315v8.212h-7.315V58.63a5.12 5.12 0 0 0 1.055 3.612a3.7 3.7 0 0 0 2.805 1.077q.789.006 1.57-.112a14 14 0 0 0 1.548-.336L512 71.33c-1.126.392-2.282.7-3.455.92q-1.203.193-2.419.259l-1.216.032a12.48 12.48 0 0 1-9.334-3.32a14.63 14.63 0 0 1-3.276-10.546V36.528h-6.327v-8.212h6.327V17.681z">
+                                    </path>
+                                </svg>
+                                <!-- Aave -->
+                                
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-- Right: App Preview -->
+                    <div class="lg:justify-end lg:p-0 lg:pr-12 -bottom-40 lg:scale-100 hidden sm:block pt-8 pr-12 pb-8 pl-8 absolute right-0 scale-50 items-end justify-center">
+                        <!-- Phone Mockup -->
+                        <div class="relative w-[280px] md:w-[320px] transform translate-y-8 lg:translate-y-16">
+                            <!-- Phone Frame -->
+                            <div class="bg-zinc-800 rounded-[2.5rem] pt-3 pr-3 pb-3 pl-3 relative shadow-2xl" style="box-shadow: 0 50px 100px -20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1)">
+                                <!-- Notch -->
+    
+    
+                                <!-- Screen -->
+                                <div class="relative bg-white rounded-[2rem] overflow-hidden">
+                                    <!-- Status Bar -->
+                                    <div class="flex items-center justify-between px-6 py-3 bg-zinc-50">
+                                        <span class="text-xs font-semibold text-zinc-900">9:41</span>
+                                        <div class="flex items-center gap-1">
+                                            <div class="w-4 h-2 bg-zinc-400 rounded-sm"></div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" class="text-zinc-400">
+                                                <path fill="currentColor" d="M12 3C7.5 3 3.75 4.95 1 8l11 13l11-13c-2.75-3.05-6.5-5-11-5"></path>
+                                            </svg>
+                                            <div class="w-6 h-3 border border-zinc-400 rounded-sm relative">
+                                                <div class="absolute inset-0.5 bg-emerald-500 rounded-sm" style="width: 70%;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+    
+                                    <!-- App Content -->
+                                    <div class="p-5 space-y-5">
+                                        <!-- Greeting -->
+                                        <div class="flex items-center justify-between">
+                                            <div class="">
+                                                <p class="text-lg font-normal text-zinc-900 tracking-tight">Hi, Marcus</p>
+                                            </div>
+                                            <div class="w-8 h-8 bg-zinc-100 rounded-full flex items-center justify-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" class="text-zinc-600">
+                                                    <path fill="currentColor" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4s-4 1.79-4 4s1.79 4 4 4m0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4">
+                                                    </path>
+                                                </svg>
+                                            </div>
+                                        </div>
+    
+                                        <!-- Daily Suggestion Card -->
+                                        <div class="bg-zinc-700 rounded-2xl px-4 py-4">
+                                            <p class="text-[10px] text-zinc-400 uppercase tracking-wider mb-1">Today's
+                                                suggestion</p>
+                                            <p class="text-base font-normal text-white tracking-tight mb-3">Complete Module
+                                                3
+                                            </p>
+                                            <div class="space-y-2">
+                                                <div class="h-1.-700 rounded-full overflow-hidden">
+                                                    <div class="h-full bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full" style="width: 65%;"></div>
+                                                </div>
+                                                <div class="flex justify-between text-[10px]">
+                                                    <span class="text-zinc-400">2h 15m · Zone 2</span>
+                                                    <span class="text-indigo-400">65%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+    
+                                        <!-- Weekly Progress Card -->
+                                        <div class="bg-zinc-50 border border-zinc-100 rounded-2xl p-4">
+                                            <p class="text-[10px] text-zinc-400 uppercase tracking-wider mb-1">Weekly
+                                                Progress
+                                            </p>
+                                            <p class="text-xl font-normal text-zinc-900 tracking-tight mb-2">87% Learning
+                                                Load</p>
+                                            <div class="flex items-center gap-2">
+                                                <div class="flex-1 h-2 bg-zinc-200 rounded-full overflow-hidden">
+                                                    <div class="h-full bg-emerald-500 rounded-full" style="width: 87%;">
+                                                    </div>
+                                                </div>
+                                                <span class="text-[10px] text-emerald-600 font-medium">Optimal</span>
+                                            </div>
+                                        </div>
+    
+                                        <!-- XP Balance Card -->
+                                        <div class="bg-zinc-50 border border-zinc-100 rounded-2xl p-4">
+                                            <p class="text-[10px] text-zinc-400 uppercase tracking-wider mb-1">XP Balance
+                                            </p>
+                                            <div class="flex items-baseline gap-1">
+                                                <p class="text-xl font-semibold text-zinc-900 tracking-tight">4,850</p>
+                                                <span class="text-sm text-zinc-400">XP</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+    
+        </div>
+        <div class="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mt-16 lg:mt-24 mb-16 lg:mb-24 opacity-60">
+        </div>
+        <footer class="z-10 w-full relative">
+    
+            <!-- Top Section: Brand + Location -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 mb-16 lg:mb-20">
+    
+                <!-- Left: Brand -->
+                <div class="flex flex-col gap-6">
+                    <div class="flex items-start gap-1">
+                        <h2 class="leading-none md:text-7xl lg:text-9xl text-6xl font-semibold text-neutral-800 tracking-tighter">
+                            GenLabs
+                        </h2>
+    
+                    </div>
+                    <p class="text-znic-400 md:text-2xl text-xl font-light italic text-zinc-500">
+                        The LearningPlatform—
+                    </p>
+                </div>
+    
+                <!-- Right: Location & Time -->
+                <div class="flex flex-col gap-4 lg:items-end lg:text-right gap-x-4 gap-y-4">
+        <div class="flex items-start gap-2">
+            <div class="w-2 h-2 bg-orange-500 rounded-full mt-2 animate-pulse"></div>
+            <p class="leading-snug md:text-2xl text-znic-700 text-base font-light tracking-tight">
+                We are currently deploying learning infrastructure in orbit and operating remotely from space.
+            </p>
+        </div>
+        <div class="flex items-center gap-2 text-znic-500">
+            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="16" height="16" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12 2C6.477 2 2 .477 2 12s4.477 10 10 10s10-4.477 10-10S17.523 2 12 2" opacity=".5">
+                </path>
+                <path fill="currentColor" d="M12 6a1 1 0 0 1 1 1v4.586l2.707 2.707a1 1 0 0 1-1.414 1.414l-3-3A1 1 0 0 1 11 12V7a1 1 0 0 1 1-1">
+                </path>
+            </svg>
+            <span class="text-sm font-medium">Orbit Time (UTC)</span>
+        </div>
+        <p class="md:text-5xl text-4xl font-medium text-znic-900 tracking-tighter font-mono">
+            14:27:38
+        </p>
+    </div>
+            </div>
+    
+            <!-- Bottom Section: Links + Newsletter + Socials -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+    
+                <!-- Column 1: Navigation -->
+                <div class="flex flex-col gap-4">
+                    <a href="#" class="text-base text-znic-700 hover:text-orange-500 transition-colors font-medium font-normal">Home</a>
+                    <a href="#" class="text-base text-znic-700 hover:text-orange-500 transition-colors font-medium font-normal">Curriculum</a>
+                    <a href="#" class="text-base text-znic-700 hover:text-orange-500 transition-colors font-medium font-normal">About</a>
+                    <a href="#" class="text-base text-znic-700 hover:text-orange-500 transition-colors font-medium font-normal">Pricing</a>
+                    <a href="#" class="text-base text-znic-700 hover:text-orange-500 transition-colors font-medium font-normal">Community</a>
+                    <a href="#" class="text-base text-znic-700 hover:text-orange-500 transition-colors font-medium font-normal">Contact</a>
+                </div>
+    
+                <!-- Column 2: Legal -->
+                <div class="flex flex-col gap-4">
+                    <a href="#" class="text-base text-znic-700 hover:text-orange-500 transition-colors font-medium font-normal">Privacy
+                        Policy</a>
+                    <a href="#" class="text-base text-znic-700 hover:text-orange-500 transition-colors font-medium font-normal">Terms
+                        of Service</a>
+                    <a href="#" class="text-base text-znic-700 hover:text-orange-500 transition-colors font-medium font-normal">Disclaimer</a>
+                    <a href="#" class="text-base text-znic-700 hover:text-orange-500 transition-colors font-medium font-normal">404</a>
+                    <a href="#" class="text-base text-znic-700 hover:text-orange-500 transition-colors font-medium underline decoration-znic-300 underline-offset-4 font-normal">More
+                        Resources</a>
+                </div>
+    
+                <!-- Column 3: Newsletter -->
+                <div class="flex flex-col gap-4 border-znic-100 border rounded-2xl pt-6 pr-6 pb-6 pl-6 shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)] gap-x-4 gap-y-4">
+        <h3 class="text-xl font-semibold text-znic-900 tracking-tight">Stay in Orbit</h3>
+        <p class="text-sm text-znic-500 font-medium leading-relaxed">
+            Receive mission logs, orbital updates, and new module drops from the GenLabs Space Station directly to your inbox.
+        </p>
+        
+        <div class="flex items-center justify-between border-b border-znic-200 pb-3 mt-2 group">
+            <input type="email" placeholder="Your email frequency" class="text-znic-700 placeholder:text-znic-400 outline-none flex-1 text-sm font-medium bg-transparent">
+            <button class="text-orange-500 hover:text-orange-600 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" style="color: rgb(234, 88, 12); width: 20px; height: 20px" class="w-[20px] h-[20px]" aria-hidden="true" role="img" data-mingcute="arrow-right-circle-line" data-icon-set="mingcute" data-icon-replaced="true" stroke-width="2"><g fill="none"><path d="M24 0v24H0V0zM12.594 23.258l-.012.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.105.074l.014.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.016-.018m.264-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.008l.201.092q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.092l.01-.009l.004-.011l.017-.43l-.003-.012l-.01-.01z"></path><path fill="#ea580c" d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2m0 2a8 8 0 1 0 0 16a8 8 0 0 0 0-16m.005 3.758a1 1 0 0 1 1.32-.084l.094.084l3.535 3.535a1 1 0 0 1 .083 1.32l-.083.094l-3.535 3.536a1 1 0 0 1-1.498-1.32l.084-.094l1.828-1.83H7.757a1 1 0 0 1-.116-1.992L7.757 11h6.076l-1.828-1.828a1 1 0 0 1 0-1.414"></path></g></svg>
+            </button>
+        </div></div>
+    
+                <!-- Column 4: Social Links -->
+                <div class="flex flex-col overflow-hidden bg-white border-znic-100 border rounded-2xl shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)] gap-x-0 gap-y-0">
+                    <!-- Discord -->
+                    <a href="#" class="group flex items-center justify-between hover:bg-znic-50 transition-colors border-znic-100 border-b pt-4 pr-5 pb-4 pl-5">
+                        <div class="flex items-center gap-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="text-znic-400 group-hover:text-orange-500 transition-colors">
+                                <path fill="currentColor" d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.09.09 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.09 16.09 0 0 0-4.8 0c-.14-.34-.36-.76-.54-1.09c-.01-.02-.04-.03-.07-.03c-1.5.26-2.93.71-4.27 1.33c-.01 0-.02.01-.03.02c-2.72 4.07-3.47 8.03-3.1 11.95c0 .02.01.04.03.05c1.8 1.32 3.53 2.12 5.24 2.65c.03.01.06 0 .07-.02c.4-.55.76-1.13 1.07-1.74c.02-.04 0-.08-.04-.09c-.57-.22-1.11-.48-1.64-.78c-.04-.02-.04-.08-.01-.11c.11-.08.22-.17.33-.25c.02-.02.05-.02.07-.01c3.44 1.57 7.15 1.57 10.55 0c.02-.01.05-.01.07.01c.11.09.22.17.33.26c.04.03.04.09-.01.11c-.52.31-1.07.56-1.64.78c-.04.01-.05.06-.04.09c.32.61.68 1.19 1.07 1.74c.03.01.06.02.09.01c1.72-.53 3.45-1.33 5.25-2.65c.02-.01.03-.03.03-.05c.44-4.53-.73-8.46-3.1-11.95c-.01-.01-.02-.02-.04-.02M8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.84 2.12-1.89 2.12m6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.83 2.12-1.89 2.12" class=""></path>
+                            </svg>
+                            <span class="text-base font-medium text-znic-700 group-hover:text-znic-900 transition-colors">Discord</span>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" class="text-orange-500 opacity-0 group-hover:opacity-100 group-hover:tranznic-x-1 transition-all">
+                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m9 5l6 7l-6 7"></path>
+                        </svg>
+                    </a>
+                    <!-- X / Twitter -->
+                    <a href="#" class="group flex items-center justify-between px-5 py-4 border-b border-znic-100 hover:bg-znic-50 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" class="text-znic-400 group-hover:text-orange-500 transition-colors">
+                                <path fill="currentColor" d="M18.205 2.25h3.308l-7.227 8.26l8.502 11.24H16.13l-5.214-6.817L4.95 21.75H1.64l7.73-8.835L1.215 2.25H8.04l4.713 6.231zm-1.161 17.52h1.833L7.045 4.126H5.078z">
+                                </path>
+                            </svg>
+                            <span class="text-base font-medium text-znic-700 group-hover:text-znic-900 transition-colors">X</span>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" class="text-orange-500 opacity-0 group-hover:opacity-100 group-hover:tranznic-x-1 transition-all">
+                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m9 5l6 7l-6 7"></path>
+                        </svg>
+                    </a>
+                    <!-- LinkedIn -->
+                    <a href="#" class="group flex items-center justify-between px-5 py-4 border-b border-znic-100 hover:bg-znic-50 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="text-znic-400 group-hover:text-orange-500 transition-colors">
+                                <path fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37z">
+                                </path>
+                            </svg>
+                            <span class="text-base font-medium text-znic-700 group-hover:text-znic-900 transition-colors">LinkedIn</span>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" class="text-orange-500 opacity-0 group-hover:opacity-100 group-hover:tranznic-x-1 transition-all">
+                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m9 5l6 7l-6 7"></path>
+                        </svg>
+                    </a>
+                    <!-- YouTube -->
+                    <a href="#" class="group flex items-center justify-between px-5 py-4 border-b border-znic-100 hover:bg-znic-50 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="text-znic-400 group-hover:text-orange-500 transition-colors">
+                                <path fill="currentColor" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z">
+                                </path>
+                            </svg>
+                            <span class="text-base font-medium text-znic-700 group-hover:text-znic-900 transition-colors">YouTube</span>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" class="text-orange-500 opacity-0 group-hover:opacity-100 group-hover:tranznic-x-1 transition-all">
+                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m9 5l6 7l-6 7"></path>
+                        </svg>
+                    </a>
+                    <!-- Email -->
+                    <a href="#" class="group flex items-center justify-between px-5 py-4 hover:bg-znic-50 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="20" height="20" viewBox="0 0 24 24" class="text-znic-400 group-hover:text-orange-500 transition-colors">
+                                <path fill="currentColor" d="M2 12c0-3.771 0-5.657 1.172-6.828S6.229 4 10 4h4c3.771 0 5.657 0 6.828 1.172S22 8.229 22 12s0 5.657-1.172 6.828S17.771 20 14 20h-4c-3.771 0-5.657 0-6.828-1.172S2 15.771 2 12" opacity=".5"></path>
+                                <path fill="currentColor" d="M18.572 7.473a.75.75 0 0 1 .044 1.06l-4.142 4.47a2.75 2.75 0 0 1-4.034 0l-4.142-4.47a.75.75 0 0 1 1.1-1.016l4.143 4.469a1.25 1.25 0 0 0 1.834 0l4.142-4.47a.75.75 0 0 1 1.055-.043">
+                                </path>
+                            </svg>
+                            <span class="text-base font-medium text-znic-700 group-hover:text-znic-900 transition-colors">Email</span>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" class="text-orange-500 opacity-0 group-hover:opacity-100 group-hover:tranznic-x-1 transition-all">
+                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m9 5l6 7l-6 7"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+    
+            <!-- Copyright Bar -->
+            <div class="flex flex-col md:flex-row border-znic-100 border-t mt-12 pt-8 gap-x-4 gap-y-4 items-center justify-between">
+                <p class="text-znic-400 text-sm font-normal">
+                    © 2024 GenLabs. All rights reserved.
+                </p>
+                <div class="flex items-center gap-6">
+                    <span class="text-xs text-znic-400 uppercase tracking-widest font-medium">Built with</span>
+                    <div class="flex items-center gap-4 opacity-50">
+                        <!-- Vercel Logo -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="14" viewBox="0 0 512 126" style="color: rgb(71, 85, 105); width: 60px; height: 14px;" class="w-[60px] h-[14px]" data-logos="openai" data-icon-set="logos" data-icon-replaced="true" stroke-width="2">
+                            <path d="M365.131 49.074c-7.537 0-12.917 2.575-15.557 7.45l-1.42 2.64v-8.819H335.89v53.61h12.901V72.06c0-7.62 4.142-11.991 11.356-11.991c6.88 0 10.825 4.256 10.825 11.674v32.211h12.907V69.442c0-12.764-7.007-20.368-18.747-20.368m-62.565 0c-15.224 0-24.652 9.5-24.652 24.789v7.527c0 14.703 9.538 23.835 24.893 23.835c10.271 0 17.47-3.763 22-11.504l-7.998-4.602c-3.347 4.465-8.694 7.231-13.997 7.231c-7.773 0-12.413-4.798-12.413-12.84v-2.131h36.008v-8.891c0-14.243-9.352-23.414-23.83-23.414zm12.1 23.638h-24.311v-1.287c0-8.825 4.333-13.695 12.2-13.695c7.576 0 12.101 4.798 12.101 12.84zM512 41.52V31.265h-44.625V41.52h15.646v52.157h-15.646v10.255H512V93.677h-15.651V41.52zM173.638 29.786c-19.93 0-32.32 12.419-32.32 32.42v10.813c0 19.995 12.385 32.42 32.32 32.42s32.321-12.425 32.321-32.42V62.205c-.005-20.022-12.408-32.42-32.321-32.42m18.987 43.973c0 13.279-6.919 20.893-18.987 20.893s-18.982-7.614-18.982-20.893V61.46c0-13.279 6.925-20.893 18.988-20.893S192.63 48.18 192.63 61.46zm53.856-24.685c-6.771 0-12.633 2.805-15.69 7.5l-1.386 2.136v-8.365h-12.27V122.4h12.906V96.3l1.38 2.049c2.904 4.306 8.574 6.875 15.17 6.875c11.125 0 22.35-7.27 22.35-23.518v-9.115c0-11.707-6.919-23.518-22.46-23.518m9.554 32.003c0 8.64-5.04 14.008-13.148 14.008c-7.56 0-12.835-5.675-12.835-13.794v-8.064c0-8.217 5.319-14.002 12.945-14.002c8.047 0 13.048 5.363 13.048 14.002zM419.54 31.27l-26.037 72.684h13.109l4.985-15.58h29.932l.05.154l4.93 15.426h13.104l-26.082-72.69zm-4.744 46.855l11.745-36.748l11.625 36.748zM116.085 51.561a31.37 31.37 0 0 0-2.695-25.774a31.77 31.77 0 0 0-34.184-15.224A31.4 31.4 0 0 0 55.536.001a31.74 31.74 0 0 0-30.278 21.99A31.4 31.4 0 0 0 4.282 37.213a31.77 31.77 0 0 0 3.906 37.218a31.4 31.4 0 0 0 2.695 25.748a31.77 31.77 0 0 0 34.21 15.256a31.4 31.4 0 0 0 23.644 10.562a31.74 31.74 0 0 0 30.278-21.99a31.4 31.4 0 0 0 20.97-15.223a31.73 31.73 0 0 0-3.9-37.224m-47.348 66.22a23.52 23.52 0 0 1-15.108-5.478c.186-.104.548-.285.756-.422l25.09-14.484a4.07 4.07 0 0 0 2.06-3.567V58.453l10.6 6.119a.37.37 0 0 1 .208.296v29.28c0 13.041-10.564 23.618-23.606 23.633M18.015 96.12a23.56 23.56 0 0 1-2.82-15.821c.185.115.514.312.744.443l25.096 14.49a4.08 4.08 0 0 0 4.12 0L75.77 77.528v12.238a.37.37 0 0 1-.148.328L50.26 104.732c-11.292 6.502-25.716 2.637-32.245-8.64zm-6.573-54.782a23.5 23.5 0 0 1 12.287-10.354v29.823a4.08 4.08 0 0 0 2.06 3.567l30.623 17.683l-10.639 6.141a.37.37 0 0 1-.356.033L20.059 73.589c-11.282-6.527-15.148-20.957-8.64-32.25zm87.102 20.27L67.92 43.924l10.59-6.125a.38.38 0 0 1 .355-.033l25.359 14.643a23.61 23.61 0 0 1-3.649 42.598V65.191a4.08 4.08 0 0 0-2.049-3.583zM109.1 45.721a30 30 0 0 0-.745-.444L83.26 30.788a4.08 4.08 0 0 0-4.12 0L48.517 48.466V36.233a.4.4 0 0 1 .154-.328l25.358-14.638a23.61 23.61 0 0 1 35.06 24.46zM42.738 67.546l-10.605-6.119a.4.4 0 0 1-.203-.295V31.85a23.605 23.605 0 0 1 38.714-18.155c-.186.105-.52.285-.756.422l-25.09 14.484a4.08 4.08 0 0 0-2.06 3.567zm5.758-12.418l13.64-7.878l13.635 7.878v15.744l-13.64 7.877l-13.64-7.877z">
+                            </path>
+                        </svg>
+                        <!-- React Logo -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 228" style="color: rgb(71, 85, 105); width: 20px; height: 20px" class="text-znic-600 w-[20px] h-[20px]" data-logos="react" data-icon-set="logos" data-icon-replaced="true" stroke-width="2">
+                            <path fill="#475569" d="M210.483 73.824a172 172 0 0 0-8.24-2.597c.465-1.9.893-3.777 1.273-5.621c6.238-30.281 2.16-54.676-11.769-62.708c-13.355-7.7-35.196.329-57.254 19.526a171 171 0 0 0-6.375 5.848a156 156 0 0 0-4.241-3.917C100.759 3.829 77.587-4.822 63.673 3.233C50.33 10.957 46.379 33.89 51.995 62.588a171 171 0 0 0 1.892 8.48c-3.28.932-6.445 1.924-9.474 2.98C17.309 83.498 0 98.307 0 113.668c0 15.865 18.582 31.778 46.812 41.427a146 146 0 0 0 6.921 2.165a168 168 0 0 0-2.01 9.138c-5.354 28.2-1.173 50.591 12.134 58.266c13.744 7.926 36.812-.22 59.273-19.855a146 146 0 0 0 5.342-4.923a168 168 0 0 0 6.92 6.314c21.758 18.722 43.246 26.282 56.54 18.586c13.731-7.949 18.194-32.003 12.4-61.268a145 145 0 0 0-1.535-6.842c1.62-.48 3.21-.974 4.76-1.488c29.348-9.723 48.443-25.443 48.443-41.52c0-15.417-17.868-30.326-45.517-39.844m-6.365 70.984q-2.102.694-4.3 1.345c-3.24-10.257-7.612-21.163-12.963-32.432c5.106-11 9.31-21.767 12.459-31.957c2.619.758 5.16 1.557 7.61 2.4c23.69 8.156 38.14 20.213 38.14 29.504c0 9.896-15.606 22.743-40.946 31.14m-10.514 20.834c2.562 12.94 2.927 24.64 1.23 33.787c-1.524 8.219-4.59 13.698-8.382 15.893c-8.067 4.67-25.32-1.4-43.927-17.412a157 157 0 0 1-6.437-5.87c7.214-7.889 14.423-17.06 21.459-27.246c12.376-1.098 24.068-2.894 34.671-5.345q.785 3.162 1.386 6.193M87.276 214.515c-7.882 2.783-14.16 2.863-17.955.675c-8.075-4.657-11.432-22.636-6.853-46.752a157 157 0 0 1 1.869-8.499c10.486 2.32 22.093 3.988 34.498 4.994c7.084 9.967 14.501 19.128 21.976 27.15a135 135 0 0 1-4.877 4.492c-9.933 8.682-19.886 14.842-28.658 17.94M50.35 144.747c-12.483-4.267-22.792-9.812-29.858-15.863c-6.35-5.437-9.555-10.836-9.555-15.216c0-9.322 13.897-21.212 37.076-29.293c2.813-.98 5.757-1.905 8.812-2.773c3.204 10.42 7.406 21.315 12.477 32.332c-5.137 11.18-9.399 22.249-12.634 32.792a135 135 0 0 1-6.318-1.979m12.378-84.26c-4.811-24.587-1.616-43.134 6.425-47.789c8.564-4.958 27.502 2.111 47.463 19.835a144 144 0 0 1 3.841 3.545c-7.438 7.987-14.787 17.08-21.808 26.988c-12.04 1.116-23.565 2.908-34.161 5.309a160 160 0 0 1-1.76-7.887m110.427 27.268a348 348 0 0 0-7.785-12.803c8.168 1.033 15.994 2.404 23.343 4.08c-2.206 7.072-4.956 14.465-8.193 22.045a381 381 0 0 0-7.365-13.322m-45.032-43.861c5.044 5.465 10.096 11.566 15.065 18.186a322 322 0 0 0-30.257-.006c4.974-6.559 10.069-12.652 15.192-18.18M82.802 87.83a323 323 0 0 0-7.227 13.238c-3.184-7.553-5.909-14.98-8.134-22.152c7.304-1.634 15.093-2.97 23.209-3.984a322 322 0 0 0-7.848 12.897m8.081 65.352c-8.385-.936-16.291-2.203-23.593-3.793c2.26-7.3 5.045-14.885 8.298-22.6a321 321 0 0 0 7.257 13.246c2.594 4.48 5.28 8.868 8.038 13.147m37.542 31.03c-5.184-5.592-10.354-11.779-15.403-18.433c4.902.192 9.899.29 14.978.29c5.218 0 10.376-.117 15.453-.343c-4.985 6.774-10.018 12.97-15.028 18.486m52.198-57.817c3.422 7.8 6.306 15.345 8.596 22.52c-7.422 1.694-15.436 3.058-23.88 4.071a382 382 0 0 0 7.859-13.026a347 347 0 0 0 7.425-13.565m-16.898 8.101a359 359 0 0 1-12.281 19.815a329 329 0 0 1-23.444.823c-7.967 0-15.716-.248-23.178-.732a310 310 0 0 1-12.513-19.846h.001a307 307 0 0 1-10.923-20.627a310 310 0 0 1 10.89-20.637l-.001.001a307 307 0 0 1 12.413-19.761c7.613-.576 15.42-.876 23.31-.876H128c7.926 0 15.743.303 23.354.883a329 329 0 0 1 12.335 19.695a359 359 0 0 1 11.036 20.54a330 330 0 0 1-11 20.722m22.56-122.124c8.572 4.944 11.906 24.881 6.52 51.026q-.518 2.504-1.15 5.09c-10.622-2.452-22.155-4.275-34.23-5.408c-7.034-10.017-14.323-19.124-21.64-27.008a161 161 0 0 1 5.888-5.4c18.9-16.447 36.564-22.941 44.612-18.3M128 90.808c12.625 0 22.86 10.235 22.86 22.86s-10.235 22.86-22.86 22.86s-22.86-10.235-22.86-22.86s10.235-22.86 22.86-22.86">
+                            </path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+    
+        </footer>
+    </main>
+    </body></html>

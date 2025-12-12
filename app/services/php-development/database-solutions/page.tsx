@@ -1,31 +1,66 @@
 import type { Metadata } from 'next'
-import { Database, ArrowRight, CheckCircle2, Zap, Shield, BarChart } from 'lucide-react'
-import { Button } from '../../../../components/ui/button'
 import Link from 'next/link'
-import { ImageResponse } from 'next/og'
+import { ArrowRight, ArrowUpRight, Database, Zap, Shield, BarChart, CheckCircle2, Trophy } from 'lucide-react'
 
 export const revalidate = 86400 // Revalidate daily
+
+// Structured Data
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "PHP Database Solutions",
+  "description": "Professional PHP database solutions including design, optimization, security, and analytics. Expert services for efficient and scalable database architecture.",
+  "url": "https://madebyaris.com/services/php-development/database-solutions",
+  "provider": {
+    "@type": "Person",
+    "name": "Aris Setiawan",
+    "url": "https://madebyaris.com"
+  }
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'PHP Database Solutions | Design & Optimization',
+    description: 'Professional PHP database solutions including design, optimization, security, and analytics. Expert services for efficient and scalable database architecture.',
+    keywords: [
+      'PHP Database Solutions',
+      'Database Design',
+      'Database Optimization',
+      'MySQL Development',
+      'PostgreSQL Development',
+      'Data Security'
+    ],
+    openGraph: {
+      title: 'PHP Database Solutions | Design & Optimization',
+      description: 'Professional PHP database solutions.',
+      type: 'website',
+    },
+    alternates: {
+      canonical: 'https://madebyaris.com/services/php-development/database-solutions'
+    }
+  }
+}
 
 const features = [
   {
     title: 'Database Design',
     description: 'Create efficient and scalable database schemas optimized for your application needs.',
-    icon: <Database className="w-6 h-6" />,
+    icon: Database,
   },
   {
     title: 'Performance Optimization',
     description: 'Optimize queries and database structure for maximum performance and efficiency.',
-    icon: <Zap className="w-6 h-6" />,
+    icon: Zap,
   },
   {
     title: 'Data Security',
     description: 'Implement robust security measures to protect your valuable data.',
-    icon: <Shield className="w-6 h-6" />,
+    icon: Shield,
   },
   {
     title: 'Analytics & Reporting',
     description: 'Build powerful reporting systems and data analytics solutions.',
-    icon: <BarChart className="w-6 h-6" />,
+    icon: BarChart,
   },
 ]
 
@@ -34,12 +69,10 @@ const deliverables = [
   'Schema Optimization',
   'Query Performance Tuning',
   'Data Migration Services',
-  'Database Security Implementation',
-  'Backup & Recovery Solutions',
-  'Replication Setup',
+  'Database Security',
+  'Backup & Recovery',
   'Monitoring & Maintenance',
-  'Custom Reporting Tools',
-  'Database Documentation',
+  'Custom Reporting Tools'
 ]
 
 const technologies = [
@@ -50,133 +83,17 @@ const technologies = [
   'MongoDB',
   'Elasticsearch',
   'ORM (Eloquent, Doctrine)',
-  'Database Sharding',
-  'Docker',
-  'AWS RDS/Digital Ocean',
+  'AWS RDS'
 ]
 
-// Structured Data for SEO
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "name": "PHP Database Solutions",
-  "description": "Professional PHP database solutions including design, optimization, security, and analytics. Expert services for efficient and scalable database architecture.",
-  "provider": {
-    "@type": "Person",
-    "name": "Aris Setiawan",
-    "jobTitle": "Senior PHP Developer",
-    "url": "https://madebyaris.com"
-  },
-  "serviceType": "Database Development",
-  "areaServed": "Worldwide",
-  "offers": {
-    "@type": "Offer",
-    "description": "PHP database development and optimization services"
-  },
-  "keywords": [
-    "PHP database solutions",
-    "database design",
-    "database optimization",
-    "data security",
-    "database migration",
-    "MySQL development",
-    "PostgreSQL development",
-    "database architecture"
-  ]
-}
-
-export async function generateMetadata(): Promise<Metadata> {
-  const ogImage = new ImageResponse(
-    (
-      <div
-        style={{
-          background: 'linear-gradient(to right, #4F46E5, #7C3AED)',
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '40px',
-        }}
-      >
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: '#000',
-            opacity: 0.2,
-          }}
-        />
-        <h1
-          style={{
-            fontSize: '60px',
-            fontWeight: 'bold',
-            color: 'white',
-            marginBottom: '20px',
-            textAlign: 'center',
-            lineHeight: 1.2,
-          }}
-        >
-          PHP Database Solutions
-        </h1>
-        <p
-          style={{
-            fontSize: '30px',
-            color: '#E5E7EB',
-            marginBottom: '40px',
-            textAlign: 'center',
-            maxWidth: '800px',
-          }}
-        >
-          Optimized Database Design & Management
-        </p>
-      </div>
-    ),
-    {
-      width: 1200,
-      height: 630,
-    }
-  )
-
-  return {
-    title: 'PHP Database Solutions | Design & Optimization Services',
-    description: 'Expert database design, optimization, and management services for PHP applications. Create efficient, secure, and scalable database solutions.',
-    keywords: [
-      'PHP database solutions',
-      'database optimization',
-      'MySQL development',
-      'PostgreSQL development',
-      'database design',
-      'database security',
-      'performance tuning',
-      'database architecture',
-      'PHP development',
-      'database management'
-    ],
-    openGraph: {
-      title: 'PHP Database Solutions',
-      description: 'Expert database design and optimization services.',
-      type: 'website',
-      images: [ogImage],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: 'PHP Database Solutions',
-      description: 'Expert database design and optimization services.',
-      images: [ogImage],
-    },
-    alternates: {
-      canonical: 'https://madebyaris.com/services/php-development/database-solutions'
-    },
-    other: {
-      'structured-data': JSON.stringify(structuredData)
-    }
-  }
-}
+const benefits = [
+  'Fast Queries',
+  'Data Security',
+  'Scalable Design',
+  'High Availability',
+  'Easy Backup',
+  'Reliable'
+]
 
 export default function DatabaseSolutionsPage() {
   return (
@@ -185,115 +102,171 @@ export default function DatabaseSolutionsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <div className="relative min-h-screen">
-        {/* Background Pattern */}
-        <div className="fixed inset-0 -z-10">
-          <div className="absolute inset-0 bg-zinc-50 dark:bg-zinc-950 [background:radial-gradient(#e5e7eb_1px,transparent_1px)] dark:[background:radial-gradient(#1f2937_1px,transparent_1px)] [background-size:32px_32px] opacity-40" />
-          <div className="absolute inset-0 bg-gradient-to-br from-zinc-100 via-transparent to-zinc-100/50 dark:from-zinc-900 dark:via-transparent dark:to-zinc-900/50" />
+      
+      {/* Breadcrumb */}
+      <nav className="mb-8">
+        <ol className="flex items-center space-x-2 text-sm text-zinc-500">
+          <li><Link href="/services" className="hover:text-orange-500 transition-colors">Services</Link></li>
+          <li><span className="px-2">/</span></li>
+          <li><Link href="/services/php-development" className="hover:text-orange-500 transition-colors">PHP Development</Link></li>
+          <li><span className="px-2">/</span></li>
+          <li className="text-zinc-900">Database Solutions</li>
+        </ol>
+      </nav>
+      
+      {/* Hero Section */}
+      <section className="text-center pt-4 pb-16">
+        <div className="inline-flex bg-white/60 rounded-full mb-8 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
+          <Database className="w-4 h-4 text-orange-500" />
+          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Database Expert</span>
         </div>
 
-        <div className="container relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <div className="py-12 md:py-16">
-            {/* Breadcrumb */}
-            <nav className="mb-8">
-              <ol className="flex items-center space-x-2 text-sm text-zinc-600 dark:text-zinc-400">
-                <li><Link href="/services" className="hover:text-indigo-600 dark:hover:text-indigo-400">Services</Link></li>
-                <li><span className="px-2">/</span></li>
-                <li><Link href="/services/php-development" className="hover:text-indigo-600 dark:hover:text-indigo-400">PHP Development</Link></li>
-                <li><span className="px-2">/</span></li>
-                <li className="text-zinc-900 dark:text-zinc-100">Database Solutions</li>
-              </ol>
-            </nav>
+        <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
+          PHP Database
+          <span className="block gradient-text font-light">Solutions</span>
+        </h1>
 
-            {/* Hero Section */}
-            <header className="text-center">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-300 mb-4">
-                <Database className="w-4 h-4" />
-                <span className="text-sm font-medium">Database Solutions</span>
+        <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
+          Design, optimize, and secure your database infrastructure with 
+          professional PHP database solutions.
+        </p>
+
+        <div className="flex flex-wrap justify-center gap-3">
+          <Link 
+            href="/contact"
+            className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
+          >
+            <span className="text-sm font-medium tracking-tight">Start Project</span>
+            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </Link>
+          <Link 
+            href="/services/php-development"
+            className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
+            style={{ boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)' }}
+          >
+            <span className="text-sm font-medium text-black/60 tracking-tight">Back to PHP Services</span>
+            <ArrowRight className="w-4 h-4 text-zinc-500" />
+          </Link>
+        </div>
+      </section>
+
+      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+
+      {/* Features Section */}
+      <section className="mb-16">
+        <div className="text-center mb-10">
+          <div className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
+            <Zap className="w-4 h-4 text-orange-500" />
+            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Features</span>
+          </div>
+          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+            Database <span className="gradient-text">Expertise</span>
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {features.map((feature) => (
+            <div key={feature.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm hover:shadow-lg transition-all group">
+              <div className="p-3 bg-zinc-100 rounded-xl w-fit mb-4 group-hover:bg-orange-100 transition-colors">
+                <feature.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 dark:from-indigo-400 dark:via-indigo-300 dark:to-purple-400 mb-6 tracking-tight">
-                PHP Database Solutions
-              </h1>
-              <p className="text-xl text-zinc-600 dark:text-zinc-400 max-w-3xl mx-auto">
-                Design, optimize, and manage database solutions that scale with your business. 
-                From schema design to performance tuning, we ensure your data is efficient and secure.
-              </p>
-            </header>
+              <h3 className="font-semibold text-zinc-900 mb-2">{feature.title}</h3>
+              <p className="text-sm text-zinc-500 leading-relaxed">{feature.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
-            {/* Main Features */}
-            <section className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
-              {features.map((feature, index) => (
-                <div
-                  key={feature.title}
-                  className="p-6 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl border border-zinc-200 dark:border-zinc-800 shadow-lg"
-                  style={{ animationDelay: `${(index + 1) * 150}ms` }}
-                >
-                  <div className="w-12 h-12 rounded-lg bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-4">
-                    {feature.icon}
-                  </div>
-                  <h3 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50 mb-2">
-                    {feature.title}
-                  </h3>
-                  <p className="text-zinc-600 dark:text-zinc-400">
-                    {feature.description}
-                  </p>
-                </div>
-              ))}
-            </section>
+      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
 
-            {/* What You Get */}
-            <section className="mt-16">
-              <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
-                What You Get
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {deliverables.map((item) => (
-                  <div
-                    key={item}
-                    className="flex items-center gap-3 p-4 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-lg border border-zinc-200 dark:border-zinc-800"
-                  >
-                    <CheckCircle2 className="w-5 h-5 text-indigo-600 dark:text-indigo-400 flex-shrink-0" />
-                    <span className="text-zinc-700 dark:text-zinc-300">{item}</span>
-                  </div>
-                ))}
+      {/* Benefits Section */}
+      <section className="mb-16">
+        <div className="text-center mb-10">
+          <div className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
+            <Trophy className="w-4 h-4 text-orange-500" />
+            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Advantages</span>
+          </div>
+          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter">
+            Database <span className="gradient-text">Benefits</span>
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+          {benefits.map((benefit) => (
+            <div key={benefit} className="p-4 bg-white/80 backdrop-blur-sm rounded-xl text-center text-sm font-medium text-zinc-700 hover:bg-orange-50 hover:text-orange-600 transition-colors">
+              {benefit}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+
+      {/* Deliverables Section */}
+      <section className="mb-16">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+            What You <span className="gradient-text">Get</span>
+          </h2>
+        </div>
+
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {deliverables.map((item) => (
+              <div key={item} className="flex items-center gap-3 p-3 bg-zinc-50 rounded-xl">
+                <CheckCircle2 className="w-5 h-5 text-orange-500 shrink-0" />
+                <span className="text-sm text-zinc-700 font-medium">{item}</span>
               </div>
-            </section>
-
-            {/* Technologies */}
-            <section className="mt-16">
-              <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
-                Technologies We Use
-              </h2>
-              <div className="flex flex-wrap gap-3 justify-center">
-                {technologies.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-4 py-2 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 text-sm font-medium"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </section>
-
-            {/* CTA Section */}
-            <section className="mt-16 text-center bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-950/50 dark:to-purple-950/50 rounded-2xl p-8 md:p-12 shadow-lg border border-indigo-100 dark:border-indigo-900/30">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400">
-                Ready to Optimize Your Database?
-              </h2>
-              <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto mb-8">
-                Let&apos;s discuss your database requirements and create an efficient solution that scales with your needs.
-              </p>
-              <Link href="/contact">
-                <Button size="lg" className="min-w-[200px] group bg-indigo-600 hover:bg-indigo-700 text-white hover:scale-105 transition-all duration-300 rounded-full">
-                  Start Your Project
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </Link>
-            </section>
+            ))}
           </div>
         </div>
-      </div>
+      </section>
+
+      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+
+      {/* Technologies Section */}
+      <section className="mb-16">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+            Tech <span className="gradient-text">Stack</span>
+          </h2>
+        </div>
+
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {technologies.map((tech) => (
+              <div key={tech} className="p-3 bg-zinc-50 rounded-xl text-center text-sm font-medium text-zinc-600 hover:bg-orange-50 hover:text-orange-600 transition-colors">
+                {tech}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="overflow-hidden min-h-[400px] shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+
+        <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16 min-h-[400px] relative">
+          <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
+            Need Database Solutions?
+          </h2>
+          <p className="text-zinc-400 mb-8 max-w-lg font-medium">
+            Let&apos;s optimize your database infrastructure for better performance and reliability.
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link href="/contact" className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+              <span>Start Your Project</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+            <Link href="/services/php-development" className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3">
+              <span>Explore PHP Services</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+        </div>
+      </section>
     </>
   )
-} 
+}

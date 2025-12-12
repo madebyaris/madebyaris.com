@@ -17,7 +17,8 @@ export async function GET(request: NextRequest) {
     const tag = request.nextUrl.searchParams.get('tag');
     
     if (tag) {
-      revalidateTag(tag);
+      // Next.js 16: revalidateTag now requires 2 arguments (tag, revalidationType)
+      revalidateTag(tag, 'max');
       return NextResponse.json({ 
         revalidated: true, 
         message: `Tag ${tag} revalidated` 

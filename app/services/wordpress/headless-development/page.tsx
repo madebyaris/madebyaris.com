@@ -1,31 +1,71 @@
 import type { Metadata } from 'next'
-import { Rocket, ArrowRight, Globe, Zap, Code2 } from 'lucide-react'
-import { Button } from '../../../../components/ui/button'
-import { Card } from '../../../../components/ui/card'
-import { ImageResponse } from 'next/og'
+import Link from 'next/link'
+import { ArrowRight, ArrowUpRight, Rocket, Globe, Zap, Code2, CheckCircle2, Trophy, Server } from 'lucide-react'
 
 export const revalidate = 86400 // Revalidate daily
+
+// Structured Data
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Headless WordPress Development",
+  "description": "Expert headless WordPress development services using Next.js. Build fast, secure, and scalable web applications.",
+  "url": "https://madebyaris.com/services/wordpress/headless-development",
+  "provider": {
+    "@type": "Person",
+    "name": "Aris Setiawan",
+    "url": "https://madebyaris.com"
+  }
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'Headless WordPress Development | Next.js Integration',
+    description: 'Expert headless WordPress development services using Next.js. Build fast, secure, and scalable web applications with modern technology stack.',
+    keywords: [
+      'Headless WordPress',
+      'WordPress Next.js',
+      'Headless CMS',
+      'WordPress API',
+      'Decoupled WordPress',
+      'JAMstack WordPress'
+    ],
+    openGraph: {
+      title: 'Headless WordPress Development | Next.js Integration',
+      description: 'Expert headless WordPress development services using Next.js.',
+      type: 'website',
+    },
+    alternates: {
+      canonical: 'https://madebyaris.com/services/wordpress/headless-development'
+    }
+  }
+}
 
 const features = [
   {
     title: 'Next.js Integration',
     description: 'Modern frontend development using Next.js for optimal performance and SEO.',
-    icon: <Rocket className="w-6 h-6" />,
+    icon: Rocket,
   },
   {
     title: 'API Development',
     description: 'Custom REST API endpoints and GraphQL schema development.',
-    icon: <Code2 className="w-6 h-6" />,
+    icon: Code2,
   },
   {
     title: 'Global Performance',
     description: 'Lightning-fast content delivery through edge caching and CDNs.',
-    icon: <Globe className="w-6 h-6" />,
+    icon: Globe,
   },
   {
     title: 'Optimized Backend',
     description: 'WordPress backend optimization for headless architecture.',
-    icon: <Zap className="w-6 h-6" />,
+    icon: Zap,
+  },
+  {
+    title: 'Serverless Ready',
+    description: 'Deploy to serverless platforms for unlimited scalability.',
+    icon: Server,
   },
 ]
 
@@ -37,314 +77,26 @@ const benefits = [
   'Scalable Design',
   'SEO Optimized',
   'Fast Loading',
-  'Future Proof',
+  'Future Proof'
+]
+
+const deliverables = [
+  'Headless WordPress backend setup',
+  'Next.js frontend development',
+  'Custom REST API or GraphQL',
+  'Content migration assistance',
+  'CDN and caching configuration',
+  'Deployment and hosting setup',
+  'Performance optimization',
+  'Documentation and training'
 ]
 
 const processSteps = [
-  {
-    title: 'Architecture Planning',
-    description: 'Designing the optimal headless WordPress architecture for your needs.',
-  },
-  {
-    title: 'API Development',
-    description: 'Building robust APIs to connect WordPress with the Next.js frontend.',
-  },
-  {
-    title: 'Frontend Creation',
-    description: 'Developing a fast, modern frontend using Next.js and React.',
-  },
-  {
-    title: 'Deployment & Testing',
-    description: 'Comprehensive testing and optimized deployment setup.',
-  },
+  { step: 1, title: 'Architecture', desc: 'Design the optimal headless structure' },
+  { step: 2, title: 'API Development', desc: 'Build robust APIs for data flow' },
+  { step: 3, title: 'Frontend', desc: 'Create fast Next.js frontend' },
+  { step: 4, title: 'Deployment', desc: 'Testing and optimized launch' },
 ]
-
-// Structured Data
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "Headless WordPress Development Services",
-  "description": "Expert headless WordPress development services using Next.js. Build fast, secure, and scalable web applications with modern technology stack.",
-  "provider": {
-    "@type": "Person",
-    "name": "Aris Setiawan",
-    "jobTitle": "Headless WordPress Developer",
-    "url": "https://madebyaris.com"
-  },
-  "mainEntity": {
-    "@type": "Service",
-    "name": "Headless WordPress Development",
-    "serviceType": "Headless WordPress Development",
-    "areaServed": "Worldwide",
-    "provider": {
-      "@type": "Person",
-      "name": "Aris Setiawan",
-      "jobTitle": "Headless WordPress Developer",
-      "url": "https://madebyaris.com"
-    },
-    "offers": {
-      "@type": "AggregateOffer",
-      "priceCurrency": "USD",
-      "priceSpecification": {
-        "@type": "PriceSpecification",
-        "price": "Contact for pricing",
-        "priceCurrency": "USD",
-        "valueAddedTaxIncluded": true
-      },
-      "availability": "https://schema.org/InStock",
-      "highPrice": 2000,
-      "lowPrice": 500,
-      "offerCount": 4
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "reviewCount": "18",
-      "bestRating": "5",
-      "worstRating": "1"
-    },
-    "review": [
-      {
-        "@type": "Review",
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": "5",
-          "bestRating": "5"
-        },
-        "author": {
-          "@type": "Person",
-          "name": "Digital Agency Owner"
-        },
-        "reviewBody": "The headless WordPress solution delivered exceptional performance and flexibility for our client's e-commerce platform."
-      },
-      {
-        "@type": "Review",
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": "5",
-          "bestRating": "5"
-        },
-        "author": {
-          "@type": "Person",
-          "name": "Marketing Director"
-        },
-        "reviewBody": "Our content team loves the WordPress backend while our developers appreciate the modern Next.js frontend. Best of both worlds!"
-      }
-    ],
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Headless WordPress Services",
-      "itemListElement": [
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Next.js Integration",
-            "description": "Seamless integration of Next.js with WordPress"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "API Development",
-            "description": "Custom REST API and GraphQL endpoint development"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Performance Optimization",
-            "description": "Speed optimization and caching implementation"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Deployment Setup",
-            "description": "Server configuration and deployment automation"
-          }
-        }
-      ]
-    }
-  },
-  "breadcrumb": {
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "item": {
-          "@id": "https://madebyaris.com",
-          "name": "Home"
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "item": {
-          "@id": "https://madebyaris.com/services",
-          "name": "Services"
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "item": {
-          "@id": "https://madebyaris.com/services/wordpress",
-          "name": "WordPress Development"
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 4,
-        "item": {
-          "@id": "https://madebyaris.com/services/wordpress/headless-development",
-          "name": "Headless Development"
-        }
-      }
-    ]
-  },
-  "mainEntityOfPage": {
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "What is headless WordPress development?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Headless WordPress development separates the frontend (Next.js) from the backend (WordPress), allowing for faster performance, better security, and more flexibility in content delivery while maintaining WordPress's familiar admin interface."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Why choose Next.js for headless WordPress?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Next.js offers superior performance through static site generation and server-side rendering, better SEO capabilities, improved security, and a modern development experience while leveraging WordPress as a powerful content management system."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How does headless WordPress improve performance?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Headless WordPress with Next.js delivers faster page loads through static generation, efficient caching, and optimized asset delivery. This architecture also reduces server load and improves overall application responsiveness."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Do you provide ongoing support for headless WordPress sites?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, we offer comprehensive support including performance monitoring, security updates, content delivery optimization, and technical maintenance for both the WordPress backend and Next.js frontend."
-        }
-      }
-    ]
-  }
-}
-
-// Generate Metadata and Structured Data
-export async function generateMetadata(): Promise<Metadata> {
-  const ogImage = new ImageResponse(
-    (
-      <div
-        style={{
-          background: 'linear-gradient(to right, #000000, #1a1a1a)',
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '40px',
-        }}
-      >
-        <h1
-          style={{
-            fontSize: '60px',
-            fontWeight: 'bold',
-            color: 'white',
-            marginBottom: '20px',
-            textAlign: 'center',
-          }}
-        >
-          Headless WordPress Development
-        </h1>
-        <p
-          style={{
-            fontSize: '30px',
-            color: '#888888',
-            marginBottom: '40px',
-            textAlign: 'center',
-            maxWidth: '800px',
-          }}
-        >
-          Next.js • WordPress API • Modern Architecture
-        </p>
-        <div
-          style={{
-            display: 'flex',
-            gap: '20px',
-            marginTop: '20px',
-          }}
-        >
-          <div style={{ background: '#0073AA', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
-            Headless Expert
-          </div>
-          <div style={{ background: '#0070F3', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
-            Next.js Frontend
-          </div>
-          <div style={{ background: '#14a800', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
-            Enterprise Solutions
-          </div>
-        </div>
-      </div>
-    ),
-    {
-      width: 1200,
-      height: 630,
-    }
-  )
-
-  return {
-    title: 'Headless WordPress Development | Modern Web Solutions',
-    description: 'Expert headless WordPress development services combining the power of WordPress CMS with modern frontend technologies like Next.js.',
-    keywords: [
-      'Headless WordPress',
-      'WordPress Development',
-      'Next.js WordPress',
-      'Decoupled WordPress',
-      'WordPress API',
-      'Modern WordPress',
-      'JAMstack WordPress',
-      'WordPress REST API',
-      'WordPress Frontend',
-      'WordPress Architecture'
-    ],
-    openGraph: {
-      title: 'Headless WordPress Development | Modern Solutions',
-      description: 'Expert headless WordPress development services.',
-      type: 'website',
-      locale: 'en_US',
-      images: [ogImage]
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: 'Headless WordPress Development | Modern Solutions',
-      description: 'Expert headless WordPress development services.',
-      images: [ogImage]
-    },
-    alternates: {
-      canonical: 'https://madebyaris.com/services/wordpress/headless-development'
-    },
-    other: {
-      'structured-data': JSON.stringify(structuredData)
-    }
-  }
-}
 
 export default function HeadlessWordPressPage() {
   return (
@@ -353,118 +105,173 @@ export default function HeadlessWordPressPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <div className="relative min-h-screen">
-        {/* Background Pattern */}
-        <div className="fixed inset-0 -z-10">
-          <div className="absolute inset-0 bg-zinc-50 dark:bg-zinc-950 [background:radial-gradient(#e5e7eb_1px,transparent_1px)] dark:[background:radial-gradient(#1f2937_1px,transparent_1px)] [background-size:32px_32px] opacity-40" />
-          <div className="absolute inset-0 bg-gradient-to-br from-zinc-100 via-transparent to-zinc-100/50 dark:from-zinc-900 dark:via-transparent dark:to-zinc-900/50" />
+      
+      {/* Breadcrumb */}
+      <nav className="mb-8">
+        <ol className="flex items-center space-x-2 text-sm text-zinc-500">
+          <li><Link href="/services" className="hover:text-orange-500 transition-colors">Services</Link></li>
+          <li><span className="px-2">/</span></li>
+          <li><Link href="/services/wordpress" className="hover:text-orange-500 transition-colors">WordPress</Link></li>
+          <li><span className="px-2">/</span></li>
+          <li className="text-zinc-900">Headless Development</li>
+        </ol>
+      </nav>
+      
+      {/* Hero Section */}
+      <section className="text-center pt-4 pb-16">
+        <div className="inline-flex bg-white/60 rounded-full mb-8 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
+          <Rocket className="w-4 h-4 text-orange-500" />
+          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Headless WordPress</span>
         </div>
 
-        <div className="container relative mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8">
-          <div className="py-12 md:py-16 lg:py-24">
-            <div className="flex flex-col gap-12">
-              {/* Hero Section */}
-              <div className="text-center max-w-3xl mx-auto">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-50 mb-4">
-                  <Rocket className="w-4 h-4" />
-                  <span className="text-sm font-medium">Headless WordPress Expert</span>
-                </div>
-                <h1 className="text-4xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-700 dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-300 mb-6 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-                  Headless WordPress Development
-                </h1>
-                <p className="text-xl text-zinc-600 dark:text-zinc-400 max-w-[700px] mx-auto mb-8 animate-in fade-in slide-in-from-bottom-5 duration-1000 delay-200">
-                  Modern headless WordPress solutions with Next.js frontend for superior performance, flexibility, and user experience.
-                </p>
-              </div>
+        <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
+          Headless
+          <span className="block gradient-text font-light">WordPress</span>
+        </h1>
 
-              {/* Introduction */}
-              <div className="mt-8 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm rounded-lg p-8 border border-zinc-200 dark:border-zinc-800 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-300">
-                <p className="text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
-                  My headless WordPress development service combines the power of WordPress as a backend 
-                  with modern frontend technologies like Next.js. This approach delivers exceptional 
-                  performance, enhanced security, and a superior development experience while maintaining 
-                  the ease of content management that WordPress provides.
-                </p>
-              </div>
+        <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
+          Combine the power of WordPress as a CMS with Next.js for a modern, 
+          blazing-fast frontend experience.
+        </p>
 
-              {/* Features Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-                {features.map((feature, index) => (
-                  <Card 
-                    key={feature.title}
-                    className="p-6 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm border-zinc-200 dark:border-zinc-800 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] animate-in fade-in slide-in-from-bottom duration-1000"
-                    style={{ animationDelay: `${(index + 1) * 200}ms` }}
-                  >
-                    <div className="flex flex-col gap-4">
-                      <div className="w-12 h-12 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-900 dark:text-zinc-50 transition-transform hover:scale-110">
-                        {feature.icon}
-                      </div>
-                      <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">{feature.title}</h2>
-                      <p className="text-zinc-600 dark:text-zinc-400">{feature.description}</p>
-                    </div>
-                  </Card>
-                ))}
-              </div>
+        <div className="flex flex-wrap justify-center gap-3">
+          <Link 
+            href="/contact"
+            className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
+          >
+            <span className="text-sm font-medium tracking-tight">Start Project</span>
+            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </Link>
+          <Link 
+            href="/services/wordpress"
+            className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
+            style={{ boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)' }}
+          >
+            <span className="text-sm font-medium text-black/60 tracking-tight">Back to WordPress</span>
+            <ArrowRight className="w-4 h-4 text-zinc-500" />
+          </Link>
+        </div>
+      </section>
 
-              {/* Development Process */}
-              <div className="mt-16 animate-in fade-in slide-in-from-bottom duration-1000 delay-400">
-                <h2 className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-700 dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-300">
-                  Headless Development Process
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                  {processSteps.map((step, index) => (
-                    <div 
-                      key={step.title}
-                      className="p-6 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm rounded-lg border border-zinc-200 dark:border-zinc-800 transition-all duration-300 hover:shadow-lg"
-                      style={{ animationDelay: `${(index + 1) * 200}ms` }}
-                    >
-                      <div className="flex items-center gap-4 mb-4">
-                        <div className="w-8 h-8 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-900 dark:text-zinc-50 font-semibold">
-                          {index + 1}
-                        </div>
-                        <h3 className="font-semibold text-zinc-900 dark:text-zinc-50">{step.title}</h3>
-                      </div>
-                      <p className="text-zinc-600 dark:text-zinc-400">{step.description}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
+      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
 
-              {/* Benefits Section */}
-              <div className="mt-16 animate-in fade-in slide-in-from-bottom duration-1000 delay-500">
-                <h2 className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-700 dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-300">
-                  Benefits of Headless WordPress
-                </h2>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {benefits.map((benefit, index) => (
-                    <div 
-                      key={benefit}
-                      className="p-4 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm rounded-lg border border-zinc-200 dark:border-zinc-800 text-center text-zinc-600 dark:text-zinc-400 transition-all duration-300 hover:scale-105 hover:bg-zinc-100 dark:hover:bg-zinc-800"
-                      style={{ animationDelay: `${(index + 1) * 100}ms` }}
-                    >
-                      {benefit}
-                    </div>
-                  ))}
-                </div>
-              </div>
+      {/* Features Section */}
+      <section className="mb-16">
+        <div className="text-center mb-10">
+          <div className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
+            <Zap className="w-4 h-4 text-orange-500" />
+            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Features</span>
+          </div>
+          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+            Headless WordPress <span className="gradient-text">Expertise</span>
+          </h2>
+        </div>
 
-              {/* CTA Section */}
-              <div className="mt-24 text-center bg-gradient-to-r from-zinc-100 via-zinc-50 to-zinc-100 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900 rounded-2xl p-12 animate-in fade-in slide-in-from-bottom duration-1000">
-                <h2 className="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-700 dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-300">
-                  Ready to Go Headless?
-                </h2>
-                <p className="text-xl text-zinc-600 dark:text-zinc-400 max-w-[600px] mx-auto mb-8">
-                  Let&apos;s discuss how a headless WordPress setup can transform your website&apos;s performance and capabilities.
-                </p>
-                <Button size="lg" className="min-w-[200px] group bg-zinc-900 dark:bg-zinc-50 text-zinc-50 dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200 hover:scale-105 transition-all duration-300">
-                  Start Your Headless Project
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Button>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {features.map((feature) => (
+            <div key={feature.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm hover:shadow-lg transition-all group">
+              <div className="p-3 bg-zinc-100 rounded-xl w-fit mb-4 group-hover:bg-orange-100 transition-colors">
+                <feature.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
               </div>
+              <h3 className="font-semibold text-zinc-900 mb-2">{feature.title}</h3>
+              <p className="text-sm text-zinc-500 leading-relaxed">{feature.description}</p>
             </div>
+          ))}
+        </div>
+      </section>
+
+      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+
+      {/* Benefits Section */}
+      <section className="mb-16">
+        <div className="text-center mb-10">
+          <div className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
+            <Trophy className="w-4 h-4 text-orange-500" />
+            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Advantages</span>
+          </div>
+          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter">
+            Headless <span className="gradient-text">Benefits</span>
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {benefits.map((benefit) => (
+            <div key={benefit} className="p-4 bg-white/80 backdrop-blur-sm rounded-xl text-center text-sm font-medium text-zinc-700 hover:bg-orange-50 hover:text-orange-600 transition-colors">
+              {benefit}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+
+      {/* Deliverables Section */}
+      <section className="mb-16">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+            What You <span className="gradient-text">Get</span>
+          </h2>
+        </div>
+
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {deliverables.map((item) => (
+              <div key={item} className="flex items-center gap-3 p-3 bg-zinc-50 rounded-xl">
+                <CheckCircle2 className="w-5 h-5 text-orange-500 shrink-0" />
+                <span className="text-sm text-zinc-700 font-medium">{item}</span>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
+      </section>
+
+      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+
+      {/* Process Section */}
+      <section className="mb-16">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+            Development <span className="gradient-text">Process</span>
+          </h2>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          {processSteps.map((item) => (
+            <div key={item.step} className="bg-zinc-50 rounded-2xl p-5 text-center">
+              <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-500 font-bold text-lg flex items-center justify-center mx-auto mb-3">
+                {item.step}
+              </div>
+              <h3 className="font-semibold text-zinc-900 mb-1">{item.title}</h3>
+              <p className="text-sm text-zinc-500">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="overflow-hidden min-h-[400px] shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+
+        <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16 min-h-[400px] relative">
+          <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
+            Ready to Go Headless?
+          </h2>
+          <p className="text-zinc-400 mb-8 max-w-lg font-medium">
+            Let&apos;s build a modern, fast, and scalable headless WordPress solution for your business.
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link href="/contact" className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+              <span>Start Your Project</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+            <Link href="/services/wordpress" className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3">
+              <span>Explore WordPress Services</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+        </div>
+      </section>
     </>
   )
 }

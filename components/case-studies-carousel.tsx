@@ -2,67 +2,26 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import Image from "next/image"
-import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
+import { ArrowRight, ChevronLeft, ChevronRight, Star, GitFork, ExternalLink } from 'lucide-react'
 import Link from 'next/link'
+import { blurDataURLs } from '@/lib/utils'
+import type { CaseStudy } from '@/lib/github'
 
-interface CaseStudy {
-  title: string
-  description: string
-  image: string
-  authors: { avatar: string }[]
-  ctaText: string
-  tags: string[]
-  link: string
+interface CaseStudiesCarouselProps {
+  caseStudies: CaseStudy[]
 }
 
-const caseStudies: CaseStudy[] = [
-  {
-    title: "Building Once UI, a Customizable Design System",
-    description: "Development of a flexible and highly customizable design system using Next.js, with a focus on performance and accessibility.",
-    image: "/case-1.png",
-    authors: [
-      { avatar: "/aris.png" },
-    ],
-    ctaText: "Read case study",
-    tags: ["Next.js", "Design System", "Accessibility"],
-    link: "/case-studies/once-ui"
-  },
-  {
-    title: "Creating a Component Library",
-    description: "A comprehensive look at how we built our component system that scales across products, ensuring consistency and developer experience.",
-    image: "/case-1.png",
-    authors: [
-      { avatar: "/aris.png" },
-    ],
-    ctaText: "Read case study",
-    tags: ["React", "TypeScript", "Component Library"],
-    link: "/case-studies/component-library"
-  },
-  {
-    title: "Design System Evolution",
-    description: "The journey of evolving our design system to meet the needs of a growing organization, with insights into our process and decisions.",
-    image: "/case-1.png",
-    authors: [
-      { avatar: "/aris.png" },
-      { avatar: "/aris.png" },
-    ],
-    ctaText: "Read case study",
-    tags: ["Design", "UX", "System Design"],
-    link: "/case-studies/design-system-evolution"
-  },
-]
-
-const CaseStudiesCarousel = () => {
+const CaseStudiesCarousel = ({ caseStudies }: CaseStudiesCarouselProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [imagesLoaded, setImagesLoaded] = useState<boolean[]>(caseStudies.map(() => false));
 
   const nextSlide = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % caseStudies.length);
-  }, []);
+  }, [caseStudies.length]);
 
   const prevSlide = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + caseStudies.length) % caseStudies.length);
-  }, []);
+  }, [caseStudies.length]);
 
   useEffect(() => {
     const timer = setInterval(nextSlide, 7000);
@@ -105,7 +64,7 @@ const CaseStudiesCarousel = () => {
           {/* Case studies */}
           {caseStudies.map((study, index) => (
             <div
-              key={index}
+              key={`${study.title}-${index}`}
               className={`absolute top-0 left-0 w-full transition-all duration-700 ${
                 index === currentIndex 
                   ? 'opacity-100 z-10 translate-x-0' 
@@ -135,6 +94,8 @@ const CaseStudiesCarousel = () => {
                   sizes="(max-width: 768px) 100vw, 980px"
                   className="object-cover transition-transform duration-700 hover:scale-105"
                   priority={index === 0 || index === currentIndex}
+                  placeholder="blur"
+                  blurDataURL={blurDataURLs.warm}
                   onLoad={() => handleImageLoad(index)}
                   onError={() => handleImageLoad(index)}
                 />
@@ -142,16 +103,28 @@ const CaseStudiesCarousel = () => {
                 {/* Gradient overlay for better text readability */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/20"></div>
                 
-                {/* Tags */}
-                <div className="absolute top-6 left-6 flex flex-wrap gap-2 z-10">
-                  {study.tags.map((tag, tagIndex) => (
-                    <span 
-                      key={tagIndex}
-                      className="px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-medium text-white"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                {/* Tags and GitHub Stats */}
+                <div className="absolute top-6 left-6 right-6 flex flex-wrap items-center justify-between gap-2 z-10">
+                  <div className="flex flex-wrap gap-2">
+                    {study.tags.map((tag, tagIndex) => (
+                      <span 
+                        key={`${study.title}-tag-${tag}-${tagIndex}`}
+                        className="px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-medium text-white"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-1 px-2 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-medium text-white">
+                      <Star className="w-3 h-3" />
+                      <span>{study.stars}</span>
+                    </div>
+                    <div className="flex items-center gap-1 px-2 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-medium text-white">
+                      <GitFork className="w-3 h-3" />
+                      <span>{study.forks}</span>
+                    </div>
+                  </div>
                 </div>
                 
                 {/* Content overlay */}
@@ -169,7 +142,7 @@ const CaseStudiesCarousel = () => {
                       <div className="flex -space-x-3">
                         {study.authors.map((author, authorIndex) => (
                           <div
-                            key={authorIndex}
+                            key={`${study.title}-author-${authorIndex}`}
                             className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-white shadow-md"
                           >
                             <Image
@@ -178,26 +151,43 @@ const CaseStudiesCarousel = () => {
                               fill
                               sizes="56px"
                               className="object-cover"
+                              placeholder="blur"
+                              blurDataURL={blurDataURLs.avatar}
                             />
                           </div>
                         ))}
                       </div>
-                      <Link 
-                        href={study.link}
-                        className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full font-medium transition-all hover:shadow-lg"
-                      >
-                        {study.ctaText}
-                        <ArrowRight className="w-4 h-4" />
-                      </Link>
+                      <div className="flex items-center gap-3">
+                        {study.homepageUrl && (
+                          <Link 
+                            href={study.homepageUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-md hover:bg-white/30 text-white rounded-full font-medium transition-all text-sm"
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                            Visit Site
+                          </Link>
+                        )}
+                        <Link 
+                          href={study.repoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full font-medium transition-all hover:shadow-lg"
+                        >
+                          View Repository
+                          <ArrowRight className="w-4 h-4" />
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
                 
                 {/* Progress indicators */}
                 <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex items-center gap-2 z-10">
-                  {caseStudies.map((_, i) => (
+                  {caseStudies.map((study, i) => (
                     <button
-                      key={i}
+                      key={`indicator-${study.title}-${i}`}
                       onClick={() => setCurrentIndex(i)}
                       className={`h-1.5 w-8 rounded-full transition-all duration-500 ${
                         i === currentIndex ? 'bg-white' : 'bg-white/30'
@@ -215,5 +205,6 @@ const CaseStudiesCarousel = () => {
   );
 };
 
+export { CaseStudiesCarousel }
 export default CaseStudiesCarousel;
 

@@ -1,34 +1,34 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Sparkles } from "@/components/ui/sparkles"
+import {
+  Code2,
+  ArrowRight,
+  Linkedin,
+  MapPin,
+  Calendar,
+  Briefcase,
+  Github,
+  ArrowUpRight
+} from "lucide-react"
 import { Timeline } from "@/components/ui/timeline"
 import { UpworkIcon } from "@/components/icons/upwork"
-import { 
-  Code2, 
-  Database, 
-  Layout, 
-  Terminal,
-  FileCode,
-  Palette,
-  Server,
-  Globe
-} from "lucide-react"
-import { ImageResponse } from 'next/og'
+import { blurDataURLs } from '@/lib/utils'
 
 // Define timeline data
 const timelineData = [
   {
-    title: "2022 - Present",
+    title: "2025 - Present",
     content: (
-      <div className="bg-primary/5 rounded-lg p-6">
-        <h3 className="text-xl font-bold mb-2">Senior Full Stack Developer</h3>
-        <p className="text-muted-foreground">
-          Working at <b>SAB Digital Marketing Agency</b>, where I:<br/>
-          • Help clients optimize website performance and codebase<br/>
-          • Develop new features and improve existing functionality<br/>
-          • Collaborate with designers and SEO specialists to deliver comprehensive solutions<br/>
-          • Stay updated with global development standards and best practices
+      <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
+        <h3 className="text-lg font-semibold text-zinc-900 mb-2">Independent Full Stack Developer & Consultant</h3>
+        <p className="text-sm text-zinc-500 leading-relaxed">
+          Focusing on my independent consulting practice and strategic partnerships:<br/>
+          • Leading enterprise-scale web development projects<br/>
+          • Providing technical architecture consulting for modern web applications<br/>
+          • Specializing in Next.js, React, and headless WordPress solutions<br/>
+          • Mentoring development teams and establishing best practices<br/>
+          • Building long-term partnerships with innovative companies
         </p>
       </div>
     ),
@@ -36,9 +36,9 @@ const timelineData = [
   {
     title: "2015 - Present",
     content: (
-      <div className="bg-secondary/5 rounded-lg p-6">
-        <h3 className="text-xl font-bold mb-2">Founder - MadeByAris</h3>
-        <p className="text-muted-foreground">
+      <div className="bg-zinc-50 rounded-2xl p-6">
+        <h3 className="text-lg font-semibold text-zinc-900 mb-2">Founder - MadeByAris</h3>
+        <p className="text-sm text-zinc-500 leading-relaxed">
           Running my own freelance business, offering:<br/>
           • Full-stack web development using <b>Next.js</b>, <b>React</b>, and <b>Laravel</b><br/>
           • Website optimization and performance improvements<br/>
@@ -51,11 +51,27 @@ const timelineData = [
     ),
   },
   {
+    title: "2022 - 2025",
+    content: (
+      <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
+        <h3 className="text-lg font-semibold text-zinc-900 mb-2">Senior Full Stack Developer</h3>
+        <p className="text-sm text-zinc-500 leading-relaxed">
+          Worked at <b>SAB Digital Marketing Agency</b>, where I:<br/>
+          • Helped clients optimize website performance and codebase<br/>
+          • Developed new features and improved existing functionality<br/>
+          • Collaborated with designers and SEO specialists to deliver comprehensive solutions<br/>
+          • Stayed updated with global development standards and best practices<br/>
+          • Successfully delivered multiple enterprise-level projects
+        </p>
+      </div>
+    ),
+  },
+  {
     title: "2022",
     content: (
-      <div className="bg-primary/5 rounded-lg p-6">
-        <h3 className="text-xl font-bold mb-2">CEO</h3>
-        <p className="text-muted-foreground">
+      <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
+        <h3 className="text-lg font-semibold text-zinc-900 mb-2">CEO</h3>
+        <p className="text-sm text-zinc-500 leading-relaxed">
           Leading <b>Raja Kreatif Asia</b> as CEO, focusing on company growth and innovation.<br/>
           Under my leadership, we&apos;ve expanded our services and reached new markets while maintaining our core values of excellence and client satisfaction.
         </p>
@@ -65,9 +81,9 @@ const timelineData = [
   {
     title: "2021",
     content: (
-      <div className="bg-primary/5 rounded-lg p-6">
-        <h3 className="text-xl font-bold mb-2">COO & Co-Founder</h3>
-        <p className="text-muted-foreground">
+      <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
+        <h3 className="text-lg font-semibold text-zinc-900 mb-2">COO & Co-Founder</h3>
+        <p className="text-sm text-zinc-500 leading-relaxed">
           As COO at <b>Raja Kreatif Asia</b>, I focused on:<br/>
           • Building sustainable business practices and improving office environment<br/>
           • Launched <b>Raja Kreatif Class</b> (kelas.rajakreatif.com) - WordPress learning platform<br/>
@@ -83,9 +99,9 @@ const timelineData = [
   {
     title: "2019",
     content: (
-      <div className="bg-secondary/5 rounded-lg p-6">
-        <h3 className="text-xl font-bold mb-2">CMO & Co-Founder</h3>
-        <p className="text-muted-foreground">
+      <div className="bg-zinc-50 rounded-2xl p-6">
+        <h3 className="text-lg font-semibold text-zinc-900 mb-2">CMO & Co-Founder</h3>
+        <p className="text-sm text-zinc-500 leading-relaxed">
           Started at <b>Raja Kreatif Asia</b> as CMO, where I:<br/>
           • Helped small businesses, enterprises, and government agencies with website development, branding, and SEO optimization<br/>
           • Acted as a bridge between our team and clients, ensuring excellent service delivery<br/>
@@ -98,9 +114,9 @@ const timelineData = [
   {
     title: "2016",
     content: (
-      <div className="bg-primary/5 rounded-lg p-6">
-        <h3 className="text-xl font-bold mb-2">WordPress Developer</h3>
-        <p className="text-muted-foreground">
+      <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
+        <h3 className="text-lg font-semibold text-zinc-900 mb-2">WordPress Developer</h3>
+        <p className="text-sm text-zinc-500 leading-relaxed">
           Working at <b>Hongkiat.com</b>,<br/>
           Created new features and improved website performance using <b>WordPress</b>, <b>PHP</b>, <b>MySQL</b>, <b>HTML</b>, <b>CSS</b>, <b>JavaScript</b>, and <b>jQuery</b>
         </p>
@@ -110,9 +126,9 @@ const timelineData = [
   {
     title: "2015",
     content: (
-      <div className="bg-primary/5 rounded-lg p-6">
-        <h3 className="text-xl font-bold mb-2">Frontend Developer</h3>
-        <p className="text-muted-foreground">
+      <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
+        <h3 className="text-lg font-semibold text-zinc-900 mb-2">Frontend Developer</h3>
+        <p className="text-sm text-zinc-500 leading-relaxed">
           Working at <b>PT. DheZign Online solution</b>,<br/>
           We build a Mockup website & Mobile appliaction, convert it to the HTML and building website with WordPress.
           using <b>WordPress</b>, <b>PHP</b> , <b>MySQL</b>, <b>HTML</b>, <b>CSS</b>, <b>JavaScript</b>, <b>JQuery</b>, <b>Bootstrap</b>, <b>CodeIgniter</b>
@@ -123,9 +139,9 @@ const timelineData = [
   {
     title: "2014",
     content: (
-      <div className="bg-secondary/5 rounded-lg p-6">
-        <h3 className="text-xl font-bold mb-2">Junior full stack developer</h3>
-        <p className="text-muted-foreground">
+      <div className="bg-zinc-50 rounded-2xl p-6">
+        <h3 className="text-lg font-semibold text-zinc-900 mb-2">Junior full stack developer</h3>
+        <p className="text-sm text-zinc-500 leading-relaxed">
           Working at <b>SEREWare</b>,<br/>
           building web application, design system and database, I also build Web App animation here.<br/>
           using <b>PHP</b> and <b>MySQL</b>
@@ -136,9 +152,9 @@ const timelineData = [
   {
     title: "2013",
     content: (
-      <div className="bg-secondary/5 rounded-lg p-6">
-        <h3 className="text-xl font-bold mb-2">Junior backend Developer</h3>
-        <p className="text-muted-foreground">
+      <div className="bg-zinc-50 rounded-2xl p-6">
+        <h3 className="text-lg font-semibold text-zinc-900 mb-2">Junior backend Developer</h3>
+        <p className="text-sm text-zinc-500 leading-relaxed">
           Working at <b>PT. Elkabumi Caraka Daya</b>,<br/>
           Building backend for their clients, making repot using Ireport and make create a design database.
           Using PHP, MySQL, and JavaScript.
@@ -146,6 +162,18 @@ const timelineData = [
       </div>
     ),
   },
+]
+
+// Skills data
+const skills = [
+  { name: "Next.js", level: 95 },
+  { name: "React", level: 95 },
+  { name: "TypeScript", level: 90 },
+  { name: "WordPress", level: 95 },
+  { name: "PHP/Laravel", level: 90 },
+  { name: "Node.js", level: 85 },
+  { name: "MySQL/PostgreSQL", level: 90 },
+  { name: "Tailwind CSS", level: 95 },
 ]
 
 // Structured Data
@@ -188,19 +216,13 @@ const structuredData = {
     "jobTitle": "Senior Full Stack Developer",
     "description": "Senior Full Stack Developer with 12+ years of experience in Next.js, React, WordPress, and enterprise web architecture.",
     "url": "https://madebyaris.com",
-    "image": "https://madebyaris.com/astro.png",
+    "image": "https://madebyaris.com/aris.png",
     "sameAs": [
       "https://www.linkedin.com/in/arissetia/",
       "https://github.com/madebyaris",
       "https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe"
     ],
     "worksFor": [
-      {
-        "@type": "Organization",
-        "name": "SAB Digital Marketing Agency",
-        "url": "https://madebyaris.com",
-        "startDate": "2022"
-      },
       {
         "@type": "Organization",
         "name": "Made by Aris",
@@ -217,161 +239,15 @@ const structuredData = {
       "Enterprise Solutions",
       "Performance Optimization",
       "Technical Leadership"
-    ],
-    "hasOccupation": {
-      "@type": "Occupation",
-      "name": "Full Stack Developer",
-      "occupationLocation": {
-        "@type": "City",
-        "name": "Sidoarjo",
-        "address": {
-          "@type": "PostalAddress",
-          "addressCountry": "Indonesia"
-        }
-      },
-      "skills": [
-        "Next.js",
-        "React",
-        "TypeScript",
-        "WordPress",
-        "PHP",
-        "MySQL",
-        "Node.js",
-        "GraphQL",
-        "System Architecture",
-        "Performance Optimization"
-      ]
-    },
-    "alumniOf": [
-      {
-        "@type": "Organization",
-        "name": "SAB Digital Marketing Agency",
-        "url": "https://madebyaris.com"
-      },
-      {
-        "@type": "Organization",
-        "name": "Raja Kreatif Asia",
-        "url": "https://rajakreatif.com"
-      },
-      {
-        "@type": "Organization",
-        "name": "Hongkiat.com",
-        "url": "https://www.hongkiat.com"
-      }
-    ],
-    "workExperience": [
-      {
-        "@type": "WorkExperience",
-        "jobTitle": "Senior Full Stack Developer",
-        "startDate": "2022",
-        "endDate": "Present",
-        "employer": {
-          "@type": "Organization",
-          "name": "SAB Digital Marketing Agency"
-        },
-        "description": "Leading web development projects, optimizing performance, and implementing modern development practices."
-      },
-      {
-        "@type": "WorkExperience",
-        "jobTitle": "Founder",
-        "startDate": "2015",
-        "endDate": "Present",
-        "employer": {
-          "@type": "Organization",
-          "name": "MadeByAris"
-        },
-        "description": "Running a successful freelance business offering full-stack web development services."
-      },
-      {
-        "@type": "WorkExperience",
-        "jobTitle": "CEO",
-        "startDate": "2022",
-        "endDate": "2022",
-        "employer": {
-          "@type": "Organization",
-          "name": "Raja Kreatif Asia"
-        },
-        "description": "Led company growth and innovation initiatives."
-      }
     ]
   }
 }
 
 // Generate Metadata and Structured Data
 export async function generateMetadata(): Promise<Metadata> {
-  const ogImage = new ImageResponse(
-    (
-      <div
-        style={{
-          background: 'linear-gradient(to right, #000000, #1a1a1a)',
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '40px',
-        }}
-      >
-        <Image
-          src="https://madebyaris.com/astro.png"
-          alt="Aris Setiawan"
-          width="200"
-          height="200"
-          style={{
-            borderRadius: '50%',
-            marginBottom: '20px',
-          }}
-        />
-        <h1
-          style={{
-            fontSize: '60px',
-            fontWeight: 'bold',
-            color: 'white',
-            marginBottom: '10px',
-            textAlign: 'center',
-          }}
-        >
-          Aris Setiawan
-        </h1>
-        <p
-          style={{
-            fontSize: '30px',
-            color: '#888888',
-            marginBottom: '20px',
-            textAlign: 'center',
-          }}
-        >
-          Senior Full-Stack Developer & Web Architect
-        </p>
-        <div
-          style={{
-            display: 'flex',
-            gap: '10px',
-            marginTop: '20px',
-          }}
-        >
-          <div style={{ background: '#007acc', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
-            Next.js
-          </div>
-          <div style={{ background: '#61dafb', padding: '10px 20px', borderRadius: '20px', color: 'black' }}>
-            React
-          </div>
-          <div style={{ background: '#21759b', padding: '10px 20px', borderRadius: '20px', color: 'white' }}>
-            WordPress
-          </div>
-        </div>
-      </div>
-    ),
-    {
-      width: 1200,
-      height: 630,
-    }
-  )
-
   return {
     title: 'About Aris Setiawan | Senior Full-Stack Developer & Web Architect',
-    description: 'With 12+ years of experience, I specialize in building enterprise-scale web applications using Next.js, React, and WordPress. Learn about my journey, expertise, and development philosophy.',
+    description: 'With 12+ years of experience, I specialize in building enterprise-scale web applications using Next.js, React, and WordPress. Based in Sidoarjo, Indonesia. Learn about my journey, expertise, and development philosophy.',
     keywords: [
       'Senior Full-Stack Developer',
       'Web Architecture Expert',
@@ -382,20 +258,23 @@ export async function generateMetadata(): Promise<Metadata> {
       'PHP Expert',
       'JavaScript Developer',
       'TypeScript Developer',
-      'Headless CMS Expert'
+      'Headless CMS Expert',
+      'Next.js Developer Indonesia',
+      'WordPress Developer Indonesia',
+      'React Developer Indonesia',
+      'Full-Stack Developer Sidoarjo',
+      'Web Developer Indonesia',
     ],
     openGraph: {
       title: 'About Aris Setiawan | Senior Full-Stack Developer',
       description: 'Senior Full-Stack Developer with 12+ years of experience in Next.js, React, WordPress, and enterprise web architecture.',
       type: 'profile',
       locale: 'en_US',
-      images: [ogImage]
     },
     twitter: {
       card: 'summary_large_image',
       title: 'About Aris Setiawan | Senior Full-Stack Developer',
       description: 'Senior Full-Stack Developer with 12+ years of experience in Next.js, React, WordPress, and enterprise web architecture.',
-      images: [ogImage]
     },
     alternates: {
       canonical: 'https://madebyaris.com/about'
@@ -411,249 +290,286 @@ export default function AboutPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       
-      {/* Hero Section with improved visual design */}
-      <section className="relative py-12 md:py-16 overflow-hidden">
-        {/* Background decorative elements */}
-        
-        <div className="container max-w-6xl mx-auto px-4 sm:px-6 relative">
-          <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center">
-            {/* Profile Image with enhanced styling */}
-            <div className="md:order-2 mb-6 md:mb-0 flex-shrink-0">
-              <div className="relative">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-emerald-500 rounded-full blur opacity-70 animate-pulse"></div>
-                <Sparkles>
-                  <div className="relative w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-white dark:border-zinc-800 shadow-2xl">
-                    <Image
-                      src="/astro.png"
-                      alt="Aris Setiawan"
-                      fill
-                      sizes="(max-width: 768px) 192px, 224px"
-                      className="object-cover"
-                      priority
-                      loading="eager"
-                    />
-                  </div>
-                </Sparkles>
+      {/* Hero Section */}
+      <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 pb-8 pt-4">
+        {/* Left Column: Profile Image */}
+        <div className="lg:col-span-5 relative">
+          <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl shadow-zinc-900/20 border border-white/20">
+            <Image
+              src="/aris.png"
+              alt="Aris Setiawan - Senior Full-Stack Developer & Web Architect"
+              fill
+              sizes="(max-width: 768px) 100vw, 40vw"
+              className="object-cover"
+              priority
+              placeholder="blur"
+              blurDataURL={blurDataURLs.avatar}
+            />
+            
+            {/* Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/80 via-transparent to-transparent" />
+            
+            {/* Available Badge */}
+            <div className="absolute top-6 left-6">
+              <div 
+                className="flex gap-2 bg-gradient-to-b from-white/20 to-white/5 rounded-full py-1.5 px-3 items-center backdrop-blur-sm"
+                style={{
+                  position: 'relative',
+                  // @ts-expect-error CSS custom properties
+                  '--border-gradient': 'linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0))',
+                  '--border-radius-before': '9999px'
+                }}
+              >
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                </span>
+                <span className="text-[10px] uppercase font-semibold text-white tracking-wide">Available to Hire</span>
               </div>
             </div>
             
-            {/* Hero Content with improved typography */}
-            <div className="md:order-1 flex-1 text-center md:text-left">
-              <div className="inline-block px-4 py-1 bg-primary/10 dark:bg-primary/20 text-primary rounded-full text-sm font-medium mb-4">
-                12+ Years of Experience
-              </div>
-              <h1 className="text-3xl md:text-4xl font-bold leading-tight tracking-tighter lg:text-5xl mb-4 md:mb-6">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-emerald-500">
-                  Full Stack Developer
-                </span>
-              </h1>
-              <div className="bg-white/50 dark:bg-zinc-800/50 backdrop-blur-sm rounded-xl p-4 md:p-6 shadow-xl border border-zinc-200/50 dark:border-zinc-700/50">
-                <p className="text-base md:text-lg leading-relaxed mb-3 md:mb-4 text-zinc-700 dark:text-zinc-300">
-                  Hi! I&apos;m <span className="font-bold text-black dark:text-white">Aris Setiawan</span>, a Full Stack Web Developer with over <span className="font-bold text-primary">12 years</span> of experience in building scalable web applications. 
-                  Currently, I&apos;m focused on creating high-performance applications using Next.js while maintaining robust backend architectures.
-                </p>
-                <p className="text-base md:text-lg leading-relaxed mb-0 text-zinc-700 dark:text-zinc-300">
-                  I&apos;m <span className="font-bold text-emerald-600 dark:text-emerald-400">open to new opportunities</span>
-                </p>
+            {/* Info Card at Bottom */}
+            <div className="absolute bottom-6 left-6 right-6">
+              <div 
+                className="bg-gradient-to-b from-white/15 to-white/5 rounded-xl p-4 backdrop-blur-md"
+                style={{
+                  position: 'relative',
+                  // @ts-expect-error CSS custom properties
+                  '--border-gradient': 'linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0))',
+                  '--border-radius-before': '12px'
+                }}
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-white text-sm font-bold">
+                    A
+                  </div>
+                  <div>
+                    <p className="text-white font-semibold">Aris Setiawan</p>
+                    <p className="text-white/60 text-xs">Full-Stack Developer</p>
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <span className="px-2 py-1 bg-white/10 rounded text-[10px] text-white/80 font-medium">Next.js</span>
+                  <span className="px-2 py-1 bg-white/10 rounded text-[10px] text-white/80 font-medium">React</span>
+                  <span className="px-2 py-1 bg-white/10 rounded text-[10px] text-white/80 font-medium">WordPress</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
-      
-      {/* Connect Section with improved styling */}
-      <section className="py-8 md:py-12 ">
-        <div className="container max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="flex flex-wrap justify-center gap-3 md:gap-4">
-            <Link 
-              href="https://www.linkedin.com/in/arissetia/"
-              target="_blank"
-              className="inline-flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 rounded-full bg-[#0077B5] text-white hover:bg-[#0077B5]/90 transition-all shadow-lg hover:shadow-xl hover:translate-y-[-2px] text-sm md:text-base"
-            >
-              <svg className="w-4 h-4 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-              </svg>
-              LinkedIn
-            </Link>
-            <Link
-              href="https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe"
-              target="_blank"
-              className="inline-flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 rounded-full bg-[#14a800] hover:bg-[#14a800]/90 text-white transition-all shadow-lg hover:shadow-xl hover:translate-y-[-2px] text-sm md:text-base"
-            >
-              <span>UPWORK</span>
-              <UpworkIcon className="w-4 h-4 md:w-5 md:h-5" />
-            </Link>
+
+        {/* Right Column: Content */}
+        <div className="lg:col-span-7 flex flex-col justify-center">
+          {/* Badge */}
+          <div 
+            className="inline-flex bg-white/60 w-max rounded-full mb-6 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2"
+            style={{
+              position: 'relative',
+              // @ts-expect-error CSS custom properties
+              '--border-gradient': 'linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0))',
+              '--border-radius-before': '9999px'
+            }}
+          >
+            <Briefcase className="w-4 h-4 text-orange-500" />
+            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">About Me</span>
+          </div>
+
+          {/* Name */}
+          <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
+            Aris Setiawan
+            <span className="block gradient-text font-light text-3xl lg:text-4xl mt-2">Senior Full-Stack Developer</span>
+          </h1>
+
+          {/* Bio */}
+          <p className="text-base text-zinc-500 font-medium max-w-xl mb-8 leading-relaxed">
+            With over 12 years of experience in web development, I specialize in building enterprise-scale 
+            applications using modern technologies. My expertise spans Next.js, React, WordPress, and PHP, 
+            with a focus on creating performant, scalable, and user-friendly solutions.
+          </p>
+
+          {/* Quick Info */}
+          <div className="flex flex-wrap gap-4 mb-8">
+            <div className="flex items-center gap-2 text-sm text-zinc-600">
+              <MapPin className="w-4 h-4 text-orange-500" />
+              <span>Sidoarjo, Indonesia</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm text-zinc-600">
+              <Calendar className="w-4 h-4 text-orange-500" />
+              <span>12+ Years Experience</span>
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex flex-wrap gap-3 mb-10">
             <Link 
               href="/contact"
-              className="inline-flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 rounded-full bg-black dark:bg-white text-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all shadow-lg hover:shadow-xl hover:translate-y-[-2px] text-sm md:text-base"
+              className="btn-primary hover:scale-[1.02] transition-all flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
             >
-              Get in Touch
-              <svg className="w-3 h-3 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
+              <span className="text-sm font-medium tracking-tight">Contact Me</span>
+              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </Link>
+            <Link 
+              href="/projects"
+              className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
+              style={{
+                boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)',
+                position: 'relative',
+                // @ts-expect-error CSS custom properties
+                '--border-gradient': 'linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.8))',
+                '--border-radius-before': '9999px'
+              }}
+            >
+              <span className="text-sm font-medium text-black/60 tracking-tight">View Projects</span>
+              <ArrowRight className="w-4 h-4 text-zinc-500" />
             </Link>
           </div>
-        </div>
-      </section>
-      
-      {/* Expertise Section with improved layout */}
-      <section className="py-12 md:py-16">
-        <div className="container max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-10 md:mb-12">
-            <span className="inline-block px-4 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full text-sm font-medium mb-4">
-              My Skills
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
-              Technical Expertise
-            </h2>
-            <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-blue-500/50 rounded-full"></div>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-            {/* Frontend Card */}
-            <div className="group">
-              <div className="relative h-full p-6 md:p-8 bg-white dark:bg-zinc-800/60 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-zinc-200/50 dark:border-zinc-700/50 overflow-hidden">
-                {/* Card decoration */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-blue-100/50 dark:bg-blue-900/20 rounded-bl-full -mr-10 -mt-10 transition-transform group-hover:scale-110"></div>
-                
-                {/* Icon */}
-                <div className="relative mb-6 p-4 bg-blue-100 dark:bg-blue-900/30 rounded-xl w-fit">
-                  <Layout className="w-8 h-8 text-blue-600 dark:text-blue-400" />
-                </div>
-                
-                {/* Content */}
-                <h3 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-zinc-900 dark:text-white relative">
-                  Frontend Development
-                </h3>
-                
-                {/* Skills list */}
-                <ul className="space-y-4 relative">
-                  <li className="flex items-center gap-3 text-zinc-700 dark:text-zinc-300">
-                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
-                      <Code2 className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                    </div>
-                    <div>
-                      <span className="font-medium">Next.js & React</span>
-                      <div className="w-full bg-zinc-200 dark:bg-zinc-700 h-1.5 rounded-full mt-1">
-                        <div className="bg-blue-500 h-1.5 rounded-full" style={{ width: '95%' }}></div>
-                      </div>
-                    </div>
-                  </li>
-                  <li className="flex items-center gap-3 text-zinc-700 dark:text-zinc-300">
-                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
-                      <FileCode className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                    </div>
-                    <div>
-                      <span className="font-medium">TypeScript</span>
-                      <div className="w-full bg-zinc-200 dark:bg-zinc-700 h-1.5 rounded-full mt-1">
-                        <div className="bg-blue-500 h-1.5 rounded-full" style={{ width: '90%' }}></div>
-                      </div>
-                    </div>
-                  </li>
-                  <li className="flex items-center gap-3 text-zinc-700 dark:text-zinc-300">
-                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
-                      <Palette className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                    </div>
-                    <div>
-                      <span className="font-medium">TailwindCSS & Framer Motion</span>
-                      <div className="w-full bg-zinc-200 dark:bg-zinc-700 h-1.5 rounded-full mt-1">
-                        <div className="bg-blue-500 h-1.5 rounded-full" style={{ width: '85%' }}></div>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            
-            {/* Backend Card */}
-            <div className="group">
-              <div className="relative h-full p-8 bg-white dark:bg-zinc-800/60 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-zinc-200/50 dark:border-zinc-700/50 overflow-hidden">
-                {/* Card decoration */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-100/50 dark:bg-emerald-900/20 rounded-bl-full -mr-10 -mt-10 transition-transform group-hover:scale-110"></div>
-                
-                {/* Icon */}
-                <div className="relative mb-6 p-4 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl w-fit">
-                  <Server className="w-8 h-8 text-emerald-600 dark:text-emerald-400" />
-                </div>
-                
-                {/* Content */}
-                <h3 className="text-2xl font-bold mb-6 text-zinc-900 dark:text-white relative">
-                  Backend Development
-                </h3>
-                
-                {/* Skills list */}
-                <ul className="space-y-4 relative">
-                  <li className="flex items-center gap-3 text-zinc-700 dark:text-zinc-300">
-                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
-                      <Terminal className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
-                    </div>
-                    <div>
-                      <span className="font-medium">Node.js & Python</span>
-                      <div className="w-full bg-zinc-200 dark:bg-zinc-700 h-1.5 rounded-full mt-1">
-                        <div className="bg-emerald-500 h-1.5 rounded-full" style={{ width: '85%' }}></div>
-                      </div>
-                    </div>
-                  </li>
-                  <li className="flex items-center gap-3 text-zinc-700 dark:text-zinc-300">
-                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
-                      <Globe className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
-                    </div>
-                    <div>
-                      <span className="font-medium">WordPress REST API</span>
-                      <div className="w-full bg-zinc-200 dark:bg-zinc-700 h-1.5 rounded-full mt-1">
-                        <div className="bg-emerald-500 h-1.5 rounded-full" style={{ width: '95%' }}></div>
-                      </div>
-                    </div>
-                  </li>
-                  <li className="flex items-center gap-3 text-zinc-700 dark:text-zinc-300">
-                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
-                      <Database className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
-                    </div>
-                    <div>
-                      <span className="font-medium">Database Design & ORM</span>
-                      <div className="w-full bg-zinc-200 dark:bg-zinc-700 h-1.5 rounded-full mt-1">
-                        <div className="bg-emerald-500 h-1.5 rounded-full" style={{ width: '90%' }}></div>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
+
+          {/* Social Links */}
+          <div className="flex items-center gap-4">
+            <span className="text-xs text-zinc-400 uppercase tracking-wider font-medium">Connect</span>
+            <div className="flex gap-2">
+              <Link 
+                href="https://www.linkedin.com/in/arissetia/" 
+                target="_blank"
+                className="p-2 rounded-full bg-zinc-100 hover:bg-orange-100 text-zinc-600 hover:text-orange-500 transition-colors"
+              >
+                <Linkedin className="w-4 h-4" />
+              </Link>
+              <Link 
+                href="https://github.com/madebyaris" 
+                target="_blank"
+                className="p-2 rounded-full bg-zinc-100 hover:bg-orange-100 text-zinc-600 hover:text-orange-500 transition-colors"
+              >
+                <Github className="w-4 h-4" />
+              </Link>
+              <Link 
+                href="https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe" 
+                target="_blank"
+                className="p-2 rounded-full bg-zinc-100 hover:bg-orange-100 text-zinc-600 hover:text-orange-500 transition-colors"
+              >
+                <UpworkIcon className="w-4 h-4" />
+              </Link>
             </div>
           </div>
         </div>
       </section>
-      
-      {/* Professional Journey Section with improved design */}
-      <section className="py-20 bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-900 dark:to-zinc-950">
-        <div className="container mx-auto max-w-[1100px] px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <span className="inline-block px-4 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 rounded-full text-sm font-medium mb-4">
-              My Story
-            </span>
-            <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400">
-              Professional Journey
-            </h2>
-            <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-purple-500/50 rounded-full"></div>
+
+      {/* Separator */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent my-16 lg:my-20 opacity-60" />
+
+      {/* Philosophy Section */}
+      <section className="text-center max-w-3xl mx-auto mb-16 lg:mb-20">
+        <blockquote className="text-2xl md:text-3xl font-medium text-zinc-900 italic leading-relaxed tracking-tight mb-6">
+          &ldquo;I Have Served and I Will Be of Service&rdquo;
+        </blockquote>
+        <p className="text-sm text-zinc-500 font-medium">Fueled by wisdom and curiosity</p>
+      </section>
+
+      {/* Separator */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mb-16 lg:mb-20 opacity-60" />
+
+      {/* Skills Section */}
+      <section className="mb-16 lg:mb-20">
+        <div className="text-center mb-12">
+          <div 
+            className="inline-flex bg-white/60 rounded-full mb-6 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2"
+            style={{
+              position: 'relative',
+              // @ts-expect-error CSS custom properties
+              '--border-gradient': 'linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0))',
+              '--border-radius-before': '9999px'
+            }}
+          >
+            <Code2 className="w-4 h-4 text-orange-500" />
+            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Technical Excellence</span>
           </div>
-          
-          <div className="relative">
-            {/* Decorative elements */}
-            
-            {/* Journey container with glass effect */}
-            <div className="relative bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-zinc-200/50 dark:border-zinc-700/50 mb-16">
-              <p className="text-xl leading-relaxed text-zinc-700 dark:text-zinc-300">
-                I began my career as a junior developer, specializing in CodeIgniter to build system applications.
-                Over time, I gained extensive experience in WordPress development, which I worked on for nearly a decade. 
-                Recently, I have shifted my focus to Next.js and backend technologies, 
-                where I now concentrate on building high-performance applications that deliver exceptional user experiences and scalability.
-              </p>
+          <h2 className="text-3xl md:text-4xl font-medium text-zinc-900 tracking-tighter mb-4">
+            Skills & <span className="gradient-text">Expertise</span>
+          </h2>
+          <p className="text-base text-zinc-500 max-w-xl mx-auto font-medium">
+            A comprehensive toolkit for building exceptional digital experiences
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {skills.map((skill) => (
+            <div 
+              key={skill.name}
+              className="bg-white/80 backdrop-blur-sm rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div className="flex items-center justify-between mb-3">
+                <span className="font-semibold text-zinc-900">{skill.name}</span>
+                <span className="text-sm text-zinc-500 font-medium">{skill.level}%</span>
+              </div>
+              <div className="h-2 bg-zinc-100 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-gradient-to-r from-orange-400 to-orange-500 rounded-full transition-all duration-1000"
+                  style={{ width: `${skill.level}%` }}
+                />
+              </div>
             </div>
-            
-            {/* Timeline with enhanced styling */}
-            <div className="relative">
-              <Timeline data={timelineData} />
-            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Separator */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mb-16 lg:mb-20 opacity-60" />
+
+      {/* Timeline Section */}
+      <section className="mb-16 lg:mb-20">
+        <div className="text-center mb-12">
+          <div 
+            className="inline-flex bg-white/60 rounded-full mb-6 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2"
+            style={{
+              position: 'relative',
+              // @ts-expect-error CSS custom properties
+              '--border-gradient': 'linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0))',
+              '--border-radius-before': '9999px'
+            }}
+          >
+            <Calendar className="w-4 h-4 text-orange-500" />
+            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Career Journey</span>
           </div>
+          <h2 className="text-3xl md:text-4xl font-medium text-zinc-900 tracking-tighter mb-4">
+            Professional <span className="gradient-text">Timeline</span>
+          </h2>
+          <p className="text-base text-zinc-500 max-w-xl mx-auto font-medium">
+            A decade-plus journey of growth, learning, and building amazing digital experiences.
+          </p>
+        </div>
+
+        <Timeline data={timelineData} />
+      </section>
+
+      {/* Separator */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mb-16 lg:mb-20 opacity-60" />
+
+      {/* CTA Section */}
+      <section className="overflow-hidden min-h-[400px] shadow-zinc-900/30 bg-zinc-900 rounded-[2rem] relative shadow-2xl mb-8">
+        {/* Grid Pattern */}
+        <div 
+          className="absolute inset-0 opacity-10" 
+          style={{
+            backgroundImage: 'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)',
+            backgroundSize: '40px 40px'
+          }}
+        />
+
+        <div className="flex flex-col p-8 md:p-12 lg:p-16 justify-center min-h-[400px] relative">
+          <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
+            Let&apos;s build something amazing together
+          </h2>
+          <p className="text-zinc-400 mb-8 max-w-xl font-medium">
+            Ready to collaborate on your next project? I&apos;d love to hear about your ideas and discuss how we can work together.
+          </p>
+
+          <Link 
+            href="/contact"
+            className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 w-fit shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+          >
+            <span>Get in Touch</span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </Link>
         </div>
       </section>
     </>
