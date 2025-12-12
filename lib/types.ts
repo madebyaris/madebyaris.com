@@ -56,7 +56,7 @@ export interface Post {
   }
   author: number
   featured_media: number
-  categories: number[]
+  categories: Category[] | number[]
   tags: Tag[] | number[]
   _embedded?: {
     author?: Array<{

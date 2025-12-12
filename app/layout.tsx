@@ -144,9 +144,8 @@ export default function RootLayout({
         <div 
           className="fixed inset-0 -z-10 bg-zinc-400"
           style={{
-            backgroundImage: "url('/images/bg-pattern.jpg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
+            backgroundImage:
+              'radial-gradient(circle at 20% 10%, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 55%), radial-gradient(circle at 80% 30%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 60%), linear-gradient(180deg, rgba(161,161,170,1) 0%, rgba(212,212,216,1) 100%)',
           }}
           aria-hidden="true"
         />

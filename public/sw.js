@@ -15,8 +15,6 @@ const STATIC_ASSETS = [
   '/aris.png',
   '/case-1.png',
   '/favicon.ico',
-  '/fonts/GeistVF.woff',
-  '/fonts/GeistMonoVF.woff',
 ];
 
 // Cache strategies

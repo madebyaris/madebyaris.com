@@ -1,10 +1,24 @@
 import { Post, Project, Category, Tag } from './types'
 
-const WP_API_URL = process.env.NEXT_PUBLIC_WP_API_URL
-
-if (!WP_API_URL) {
-  throw new Error('NEXT_PUBLIC_WP_API_URL is not defined')
+function normalizeWpApiUrl(input: string): string {
+  const trimmed = input.trim().replace(/\/+$/, '')
+  // Allow either:
+  // - https://example.com
+  // - https://example.com/wp-json
+  // - https://example.com/wp-json/
+  if (trimmed.endsWith('/wp-json')) return trimmed
+  return `${trimmed}/wp-json`
 }
+
+const RAW_WP_API_URL = process.env.NEXT_PUBLIC_WP_API_URL
+
+if (!RAW_WP_API_URL) {
+  throw new Error(
+    'NEXT_PUBLIC_WP_API_URL is not defined. Set it to your WP site base URL (e.g. https://example.com or https://example.com/wp-json).'
+  )
+}
+
+const WP_API_URL = normalizeWpApiUrl(RAW_WP_API_URL)
 
 // In-memory cache for WordPress API responses
 const cache = new Map<string, { data: unknown; timestamp: number; ttl: number }>();
@@ -295,12 +309,14 @@ export async function getPosts(params: PaginationParams = {}): Promise<Processed
 
       // Fetch full category objects if we have category IDs
       if (post.categories && Array.isArray(post.categories) && post.categories.length > 0) {
-        processedPost.categories = await getCategoriesByIds(post.categories);
+        const categoryIds = post.categories.filter((c): c is number => typeof c === 'number')
+        processedPost.categories = await getCategoriesByIds(categoryIds);
       }
       
       // Fetch full tag objects if we have tag IDs
       if (post.tags && Array.isArray(post.tags) && post.tags.length > 0) {
-        processedPost.tags = await getTagsByIds(post.tags as unknown as number[]);
+        const tagIds = post.tags.filter((t): t is number => typeof t === 'number')
+        processedPost.tags = await getTagsByIds(tagIds);
       }
       
       return processedPost;
