@@ -166,7 +166,7 @@ export default function HomePage() {
           {/* Subheadline */}
           <p className="text-sm text-zinc-500 font-medium max-w-md mb-10 leading-relaxed tracking-wide border-l-2 border-zinc-200 pl-6">
             Hi, I&apos;m <span className="text-zinc-900 font-semibold">Aris Setiawan</span>. I architect enterprise-scale web applications 
-            using Next.js, React, WordPress, and PHP. 12+ years of experience building solutions that scale.
+            using Next.js, React, WordPress, and PHP. 13+ years of experience building solutions that scale.
           </p>
 
           {/* Action Buttons */}
@@ -193,6 +193,42 @@ export default function HomePage() {
             >
               <span className="text-sm font-medium text-black/60 tracking-tight">View Projects</span>
               <ArrowRight className="w-4 h-4 text-zinc-500" />
+            </Link>
+          </div>
+
+          {/* Ambassador Links */}
+          <div className="flex flex-wrap gap-3 -mt-8 mb-16 lg:-mt-16 lg:mb-24">
+            <Link
+              href="/minimax-ambassador"
+              className="btn-secondary hover:bg-white/50 transition-all flex group text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center justify-between backdrop-blur-sm"
+              style={{
+                background: 'linear-gradient(to bottom, rgba(239, 61, 93, 0.48), rgba(239, 61, 93, 0.32))',
+                boxShadow: '0 18px 35px rgba(239, 61, 93, 0.22), 0 0 0 1px rgba(239, 61, 93, 0.35)',
+                position: 'relative',
+                // @ts-expect-error CSS custom properties
+                '--border-gradient': 'linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(239, 61, 93, 0.55), rgba(255, 255, 255, 0.8))',
+                '--border-radius-before': '9999px',
+                color: '#111827',
+                fontWeight: 500,
+              }}
+            >
+              MiniMax Dev Community Expert
+            </Link>
+            <Link
+              href="/cursor-ambassador"
+              className="btn-secondary hover:bg-white/40 transition-all flex group text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center justify-between backdrop-blur-sm"
+              style={{
+                background: 'linear-gradient(to bottom, rgba(9, 9, 11, 0.52), rgba(9, 9, 11, 0.36))',
+                boxShadow: '0 18px 35px rgba(9, 9, 11, 0.36), 0 0 0 1px rgba(9, 9, 11, 0.5)',
+                position: 'relative',
+                // @ts-expect-error CSS custom properties
+                '--border-gradient': 'linear-gradient(180deg, rgba(255, 255, 255, 0.75), rgba(9, 9, 11, 0.7), rgba(255, 255, 255, 0.75))',
+                '--border-radius-before': '9999px',
+                color: '#111827',
+                fontWeight: 500,
+              }}
+            >
+              Cursor Ambassador
             </Link>
           </div>
 

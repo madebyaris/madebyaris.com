@@ -5,7 +5,7 @@ import { BookOpen, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { getAllTags, getPosts } from '@/lib/wordpress'
 
-export const revalidate = 3600;
+export const revalidate = 600;
 
 // Structured Data
 const structuredData = {

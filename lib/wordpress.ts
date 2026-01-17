@@ -25,7 +25,7 @@ const cache = new Map<string, { data: unknown; timestamp: number; ttl: number }>
 
 // Cache TTL in milliseconds
 const CACHE_TTL = {
-  POSTS: 10 * 60 * 1000, // 10 minutes
+  POSTS: 5 * 60 * 1000, // 5 minutes
   CATEGORIES: 30 * 60 * 1000, // 30 minutes
   TAGS: 30 * 60 * 1000, // 30 minutes
   PROJECTS: 15 * 60 * 1000, // 15 minutes
@@ -111,7 +111,7 @@ async function fetchAPI<T>(endpoint: string, params: Record<string, string | num
       },
       headers: {
         'Accept': 'application/json',
-        'Cache-Control': `s-maxage=${Math.floor(ttl / 1000)}, stale-while-revalidate`
+        'Cache-Control': `s-maxage=${Math.floor(ttl / 1000)}, stale-while-revalidate=${Math.floor(ttl / 1000)}`
       }
     })
 
@@ -270,33 +270,23 @@ export async function getAllTags(limit: number = 10): Promise<Tag[]> {
 
 export async function getPosts(params: PaginationParams = {}): Promise<ProcessedPost[]> {
   try {
-    const searchParams = new URLSearchParams()
-    
-    if (params.per_page) {
-      searchParams.set('per_page', params.per_page.toString())
+    const queryParams: Record<string, string | number> = {
+      _embed: 'wp:featuredmedia'
     }
-    
+
+    if (params.per_page) {
+      queryParams.per_page = params.per_page
+    }
+
     if (params.page) {
-      searchParams.set('page', params.page.toString())
+      queryParams.page = params.page
     }
 
     if (params._fields) {
-      searchParams.set('_fields', params._fields.join(','))
+      queryParams._fields = params._fields.join(',')
     }
 
-    // Ensure we get featured media in the response
-    searchParams.set('_embed', 'wp:featuredmedia')
-
-    const response = await fetch(
-      `${WP_API_URL}/wp/v2/posts?${searchParams.toString()}`,
-      { next: { } }
-    )
-
-    if (!response.ok) {
-      throw new Error('Failed to fetch posts')
-    }
-
-    const posts = await response.json() as Post[];
+    const posts = await fetchAPI<Post[]>('posts', queryParams, CACHE_TTL.POSTS)
     
     // Process posts to fetch and add full category and tag objects
     const processedPosts = await Promise.all(posts.map(async (post) => {
