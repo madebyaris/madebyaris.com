@@ -146,6 +146,29 @@ export default function MiniMaxAmbassadorPage() {
 
       <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
 
+      {/* MiniMax Indonesia callout */}
+      <section className="mb-16">
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div>
+            <h2 className="text-xl md:text-2xl font-semibold text-zinc-900 tracking-tight mb-2">
+              MiniMax Indonesia untuk coding
+            </h2>
+            <p className="text-sm text-zinc-500 leading-relaxed max-w-2xl">
+              Ringkasan singkat tentang MiniMax AI, MiniMax M-2.1, dan cara memulai dengan API untuk kebutuhan coding.
+            </p>
+          </div>
+          <Link
+            href="/minimax-ambassador/minimax-indonesia"
+            className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+          >
+            <span>Lihat halaman</span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </div>
+      </section>
+
+      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+
       {/* What I do */}
       <section className="mb-16">
         <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-sm">
