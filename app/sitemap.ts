@@ -26,6 +26,7 @@ const mainRoutes = [
   { path: 'contact', priority: 0.8, changeFreq: 'monthly' },
   { path: 'cursor-ambassador', priority: 0.7, changeFreq: 'monthly' },
   { path: 'minimax-ambassador', priority: 0.7, changeFreq: 'monthly' },
+  { path: 'minimax-ambassador/minimax-indonesia', priority: 0.7, changeFreq: 'monthly' },
 ]
 
 const serviceRoutes = [

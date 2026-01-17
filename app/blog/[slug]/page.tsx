@@ -18,7 +18,7 @@ import { AuthorImage } from '@/components/author-image'
 import { RelatedPostCard } from '@/components/related-post-card'
 import { getPost, getPosts } from '@/lib/wordpress'
 
-export const revalidate = 3600 // Revalidate every hour
+export const revalidate = 1800 // Revalidate every 30 minutes
 
 interface BlogPostPageProps {
   params: Promise<{
