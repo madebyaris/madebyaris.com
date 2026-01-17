@@ -8,19 +8,19 @@ export const revalidate = 86400
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "ProfilePage",
-  "name": "MiniMax Ambassador | Made by Aris",
-  "description": "About Aris Setiawan as a MiniMax Ambassador: community, education, and building with AI tools.",
+  "name": "MiniMax Dev Community Expert | Made by Aris",
+  "description": "About Aris Setiawan as a MiniMax Dev Community Expert: community, education, and building with AI tools.",
   "url": "https://madebyaris.com/minimax-ambassador"
 }
 
 export const metadata: Metadata = {
-  title: 'MiniMax Ambassador | Made by Aris',
-  description: 'About Aris Setiawan as a MiniMax Ambassador: community, education, and building with AI tools.',
+  title: 'MiniMax Dev Community Expert | Made by Aris',
+  description: 'About Aris Setiawan as a MiniMax Dev Community Expert: community, education, and building with AI tools.',
   alternates: {
     canonical: 'https://madebyaris.com/minimax-ambassador',
   },
   openGraph: {
-    title: 'MiniMax Ambassador | Made by Aris',
+    title: 'MiniMax Dev Community Expert | Made by Aris',
     description: 'Community, education, and building with MiniMax tools.',
     type: 'website',
     locale: 'en_US',
@@ -68,7 +68,7 @@ export default function MiniMaxAmbassadorPage() {
           <li>
             <span className="px-2">/</span>
           </li>
-          <li className="text-zinc-900">MiniMax Ambassador</li>
+          <li className="text-zinc-900">MiniMax Dev Community Expert</li>
         </ol>
       </nav>
 
@@ -83,17 +83,17 @@ export default function MiniMaxAmbassadorPage() {
             className="h-[25px] w-[100px]"
             priority
           />
-          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">MiniMax Ambassador</span>
+          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">MiniMax Dev Community Expert</span>
         </div>
 
         <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
           <span className="gradient-text-minimax">MiniMax</span>
-          <span className="block font-light">Ambassador</span>
+          <span className="block font-light">Dev Community Expert</span>
         </h1>
 
-        <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
-          I support builders shipping AI products—by sharing practical learnings, real-world patterns, and community-first guidance.
-        </p>
+          <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
+            I support builders shipping AI products—by sharing practical learnings, real-world patterns, and community-first guidance.
+          </p>
 
         <div className="flex flex-wrap justify-center gap-3">
           <Link
@@ -150,7 +150,7 @@ export default function MiniMaxAmbassadorPage() {
       <section className="mb-16">
         <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-sm">
           <h2 className="text-xl md:text-2xl font-semibold text-zinc-900 tracking-tight mb-6">
-            What I do as a MiniMax Ambassador
+            What I do as a MiniMax Dev Community Expert
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
