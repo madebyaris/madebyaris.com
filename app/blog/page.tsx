@@ -84,9 +84,11 @@ export default async function BlogPage() {
   let posts: Awaited<ReturnType<typeof getPosts>> = []
   
   try {
-    // Preload popular tags (for cache warmth / future UI usage)
-    await getAllTags(6)
-    posts = await getPosts({ per_page: 12 })
+    const [, fetchedPosts] = await Promise.all([
+      getAllTags(6),
+      getPosts({ per_page: 12 })
+    ])
+    posts = fetchedPosts
   } catch (error) {
     console.error('Failed to fetch data:', error)
   }
