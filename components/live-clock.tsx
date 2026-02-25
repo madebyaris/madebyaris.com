@@ -7,13 +7,12 @@ export function LiveClock() {
 
   useEffect(() => {
     const updateTime = () => {
-      const now = new Date()
-      const wibTime = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Jakarta' }))
-      setCurrentTime(wibTime.toLocaleTimeString('en-US', { 
-        hour12: false, 
-        hour: '2-digit', 
-        minute: '2-digit', 
-        second: '2-digit' 
+      setCurrentTime(new Date().toLocaleTimeString('en-US', {
+        timeZone: 'Asia/Jakarta',
+        hour12: false,
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
       }))
     }
     

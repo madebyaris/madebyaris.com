@@ -173,25 +173,34 @@ async function getCategoriesByIds(categoryIds: number[]): Promise<Category[]> {
 
   if (uncachedIds.length > 0) {
     try {
-      const response = await fetch(
-        `${WP_API_URL}/wp/v2/categories?include=${uncachedIds.join(',')}&per_page=${uncachedIds.length}`,
-        {
-          headers: { 'Accept': 'application/json' },
-          next: { revalidate: Math.floor(CACHE_TTL.CATEGORIES / 1000) }
-        }
+      const WP_MAX_PER_PAGE = 100;
+      const batches: number[][] = [];
+      for (let i = 0; i < uncachedIds.length; i += WP_MAX_PER_PAGE) {
+        batches.push(uncachedIds.slice(i, i + WP_MAX_PER_PAGE));
+      }
+
+      const batchResults = await Promise.all(batches.map(async (batch) => {
+        const response = await fetch(
+          `${WP_API_URL}/wp/v2/categories?include=${batch.join(',')}&per_page=${batch.length}`,
+          {
+            headers: { 'Accept': 'application/json' },
+            next: { revalidate: Math.floor(CACHE_TTL.CATEGORIES / 1000) }
+          }
+        );
+        if (!response.ok) return [];
+        return response.json() as Promise<Array<{ id: number; name: string; slug: string }>>;
+      }));
+
+      const fetchedMap = new Map(
+        batchResults.flat().map(c => [c.id, { id: c.id, name: c.name, slug: c.slug }])
       );
 
-      if (response.ok) {
-        const fetched: Array<{ id: number; name: string; slug: string }> = await response.json();
-        const fetchedMap = new Map(fetched.map(c => [c.id, { id: c.id, name: c.name, slug: c.slug }]));
-
-        for (const [idx, cat] of results.entries()) {
-          if (cat === null) {
-            const id = categoryIds[idx];
-            const fresh = fetchedMap.get(id) ?? null;
-            if (fresh) setCache(`category-${id}`, fresh, CACHE_TTL.CATEGORIES);
-            results[idx] = fresh;
-          }
+      for (const [idx, cat] of results.entries()) {
+        if (cat === null) {
+          const id = categoryIds[idx];
+          const fresh = fetchedMap.get(id) ?? null;
+          if (fresh) setCache(`category-${id}`, fresh, CACHE_TTL.CATEGORIES);
+          results[idx] = fresh;
         }
       }
     } catch (error) {
@@ -220,27 +229,34 @@ async function getTagsByIds(tagIds: number[]): Promise<Tag[]> {
 
   if (uncachedIds.length > 0) {
     try {
-      const response = await fetch(
-        `${WP_API_URL}/wp/v2/tags?include=${uncachedIds.join(',')}&per_page=${uncachedIds.length}`,
-        {
-          headers: { 'Accept': 'application/json' },
-          next: { revalidate: Math.floor(CACHE_TTL.TAGS / 1000) }
-        }
+      const WP_MAX_PER_PAGE = 100;
+      const batches: number[][] = [];
+      for (let i = 0; i < uncachedIds.length; i += WP_MAX_PER_PAGE) {
+        batches.push(uncachedIds.slice(i, i + WP_MAX_PER_PAGE));
+      }
+
+      const batchResults = await Promise.all(batches.map(async (batch) => {
+        const response = await fetch(
+          `${WP_API_URL}/wp/v2/tags?include=${batch.join(',')}&per_page=${batch.length}`,
+          {
+            headers: { 'Accept': 'application/json' },
+            next: { revalidate: Math.floor(CACHE_TTL.TAGS / 1000) }
+          }
+        );
+        if (!response.ok) return [];
+        return response.json() as Promise<Array<{ id: number; name: string; slug: string; count?: number }>>;
+      }));
+
+      const fetchedMap = new Map(
+        batchResults.flat().map(t => [t.id, { id: t.id, name: t.name, slug: t.slug, count: t.count || 0 }])
       );
 
-      if (response.ok) {
-        const fetched: Array<{ id: number; name: string; slug: string; count?: number }> = await response.json();
-        const fetchedMap = new Map(
-          fetched.map(t => [t.id, { id: t.id, name: t.name, slug: t.slug, count: t.count || 0 }])
-        );
-
-        for (const [idx, tag] of results.entries()) {
-          if (tag === null) {
-            const id = tagIds[idx];
-            const fresh = fetchedMap.get(id) ?? null;
-            if (fresh) setCache(`tag-${id}`, fresh, CACHE_TTL.TAGS);
-            results[idx] = fresh;
-          }
+      for (const [idx, tag] of results.entries()) {
+        if (tag === null) {
+          const id = tagIds[idx];
+          const fresh = fetchedMap.get(id) ?? null;
+          if (fresh) setCache(`tag-${id}`, fresh, CACHE_TTL.TAGS);
+          results[idx] = fresh;
         }
       }
     } catch (error) {
