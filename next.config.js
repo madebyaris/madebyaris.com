@@ -43,7 +43,7 @@ const nextConfig = {
   // Next.js 16: Experimental features
   experimental: {
     optimizeCss: true,
-    optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
+    optimizePackageImports: ['lucide-react', '@radix-ui/react-icons', 'framer-motion'],
     serverActions: {
       allowedOrigins: ['localhost:3000', 'madebyaris.com'],
     },

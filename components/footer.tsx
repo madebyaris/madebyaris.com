@@ -1,57 +1,35 @@
-'use client'
-
 import Link from 'next/link'
 import { Github, Linkedin, ArrowUpRight } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { LiveClock } from './live-clock'
+
+const navigationLinks = [
+  { name: 'Home', href: '/' },
+  { name: 'About', href: '/about' },
+  { name: 'Projects', href: '/projects' },
+  { name: 'Services', href: '/services' },
+  { name: 'Blog', href: '/blog' },
+  { name: 'Contact', href: '/contact' },
+]
+
+const serviceLinks = [
+  { name: 'Next.js Development', href: '/services/nextjs-development' },
+  { name: 'WordPress Development', href: '/services/wordpress' },
+  { name: 'PHP Development', href: '/services/php-development' },
+  { name: 'Headless WordPress', href: '/services/wordpress/headless-development' },
+]
+
+const socialLinks: Array<{ name: string; href: string; icon?: typeof Github }> = [
+  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/arissetia/', icon: Linkedin },
+  { name: 'GitHub', href: 'https://github.com/madebyaris', icon: Github },
+  { name: 'Upwork', href: 'https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe' },
+]
+
+const legalLinks = [
+  { name: 'Privacy Policy', href: '/privacy-policy' },
+  { name: 'Terms of Service', href: '/terms-of-service' },
+]
 
 export function Footer() {
-  const [currentTime, setCurrentTime] = useState<string>('')
-
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date()
-      // Indonesia time (WIB - UTC+7)
-      const wibTime = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Jakarta' }))
-      setCurrentTime(wibTime.toLocaleTimeString('en-US', { 
-        hour12: false, 
-        hour: '2-digit', 
-        minute: '2-digit', 
-        second: '2-digit' 
-      }))
-    }
-    
-    updateTime()
-    const interval = setInterval(updateTime, 1000)
-    return () => clearInterval(interval)
-  }, [])
-
-  const navigationLinks = [
-    { name: 'Home', href: '/' },
-    { name: 'About', href: '/about' },
-    { name: 'Projects', href: '/projects' },
-    { name: 'Services', href: '/services' },
-    { name: 'Blog', href: '/blog' },
-    { name: 'Contact', href: '/contact' },
-  ]
-
-  const serviceLinks = [
-    { name: 'Next.js Development', href: '/services/nextjs-development' },
-    { name: 'WordPress Development', href: '/services/wordpress' },
-    { name: 'PHP Development', href: '/services/php-development' },
-    { name: 'Headless WordPress', href: '/services/wordpress/headless-development' },
-  ]
-
-  const socialLinks = [
-    { name: 'LinkedIn', href: 'https://www.linkedin.com/in/arissetia/', icon: Linkedin },
-    { name: 'GitHub', href: 'https://github.com/madebyaris', icon: Github },
-    { name: 'Upwork', href: 'https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe' },
-  ]
-
-  const legalLinks = [
-    { name: 'Privacy Policy', href: '/privacy-policy' },
-    { name: 'Terms of Service', href: '/terms-of-service' },
-  ]
-
   return (
     <footer className="z-10 w-full relative px-6 md:px-10 xl:px-12 pb-8">
       {/* Separator */}
@@ -86,9 +64,7 @@ export function Footer() {
             </svg>
             <span className="text-sm font-medium">Indonesia Time (WIB)</span>
           </div>
-          <p className="md:text-5xl text-4xl font-medium text-zinc-900 tracking-tighter font-mono">
-            {currentTime || '00:00:00'}
-          </p>
+          <LiveClock />
         </div>
       </div>
 
@@ -159,7 +135,7 @@ export function Footer() {
       <div className="mt-16 pt-8 border-t border-zinc-200/60">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-sm text-zinc-500">
-            © {new Date().getFullYear()} MadeByAris. All rights reserved.
+            &copy; {new Date().getFullYear()} MadeByAris. All rights reserved.
           </p>
           <nav className="flex items-center gap-6">
             {legalLinks.map((link) => (
