@@ -431,7 +431,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
                 
                 {/* Main Content */}
                 <div>
-                  {/* Article Content - Server-rendered with client hydration */}
+                  {/* Article content is server-rendered and can opt into hydration when markers are present. */}
                   <WordPressContent 
                     content={transformedContent} 
                     estimatedReadTime={readingTime}
