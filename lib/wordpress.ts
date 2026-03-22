@@ -82,9 +82,6 @@ export interface PaginationParams {
   per_page?: number
   _fields?: string[]
 }
-export const fetchCache = 'force-no-store';
-
-
 async function fetchAPI<T>(endpoint: string, params: Record<string, string | number> = {}, ttl: number = CACHE_TTL.POSTS): Promise<T> {
   try {
     // Check cache first
@@ -158,93 +155,116 @@ export async function getPost(slug: string): Promise<Post | null> {
   }
 }
 
-// Function to fetch categories by IDs
 async function getCategoriesByIds(categoryIds: number[]): Promise<Category[]> {
   if (!categoryIds || categoryIds.length === 0) return [];
-  
-  try {
-    const categoryPromises = categoryIds.map(async id => {
-      const cacheKey = `category-${id}`;
-      const cached = getFromCache<Category>(cacheKey);
-      
-      if (cached) {
-        return cached;
-      }
-      
-      try {
-        const response = await fetch(`${WP_API_URL}/wp/v2/categories/${id}`, {
-          headers: { 'Accept': 'application/json' },
-          next: { revalidate: Math.floor(CACHE_TTL.CATEGORIES / 1000) }
-        });
-        
-        if (!response.ok) return null;
-        
-        const cat = await response.json();
-        const category = {
-          id: cat.id,
-          name: cat.name,
-          slug: cat.slug
-        };
-        
-        setCache(cacheKey, category, CACHE_TTL.CATEGORIES);
-        return category;
-      } catch (err) {
-        console.error(`Failed to fetch category ${id}:`, err);
-        return null;
-      }
-    });
-    
-    const categories = await Promise.all(categoryPromises);
-    return categories.filter(cat => cat !== null) as Category[];
-  } catch (error) {
-    console.error('Failed to fetch categories:', error);
-    return [];
+
+  const uncachedIds: number[] = [];
+  const results: (Category | null)[] = [];
+
+  for (const id of categoryIds) {
+    const cached = getFromCache<Category>(`category-${id}`);
+    if (cached) {
+      results.push(cached);
+    } else {
+      results.push(null);
+      uncachedIds.push(id);
+    }
   }
+
+  if (uncachedIds.length > 0) {
+    try {
+      const WP_MAX_PER_PAGE = 100;
+      const batches: number[][] = [];
+      for (let i = 0; i < uncachedIds.length; i += WP_MAX_PER_PAGE) {
+        batches.push(uncachedIds.slice(i, i + WP_MAX_PER_PAGE));
+      }
+
+      const batchResults = await Promise.all(batches.map(async (batch) => {
+        const response = await fetch(
+          `${WP_API_URL}/wp/v2/categories?include=${batch.join(',')}&per_page=${batch.length}`,
+          {
+            headers: { 'Accept': 'application/json' },
+            next: { revalidate: Math.floor(CACHE_TTL.CATEGORIES / 1000) }
+          }
+        );
+        if (!response.ok) return [];
+        return response.json() as Promise<Array<{ id: number; name: string; slug: string }>>;
+      }));
+
+      const fetchedMap = new Map(
+        batchResults.flat().map(c => [c.id, { id: c.id, name: c.name, slug: c.slug }])
+      );
+
+      for (const [idx, cat] of results.entries()) {
+        if (cat === null) {
+          const id = categoryIds[idx];
+          const fresh = fetchedMap.get(id) ?? null;
+          if (fresh) setCache(`category-${id}`, fresh, CACHE_TTL.CATEGORIES);
+          results[idx] = fresh;
+        }
+      }
+    } catch (error) {
+      console.error('Failed to batch-fetch categories:', error);
+    }
+  }
+
+  return results.filter((c): c is Category => c !== null);
 }
 
-// Function to fetch tags by IDs
 async function getTagsByIds(tagIds: number[]): Promise<Tag[]> {
   if (!tagIds || tagIds.length === 0) return [];
-  
-  try {
-    const tagPromises = tagIds.map(async id => {
-      const cacheKey = `tag-${id}`;
-      const cached = getFromCache<Tag>(cacheKey);
-      
-      if (cached) {
-        return cached;
-      }
-      
-      try {
-        const response = await fetch(`${WP_API_URL}/wp/v2/tags/${id}`, {
-          headers: { 'Accept': 'application/json' },
-          next: { revalidate: Math.floor(CACHE_TTL.TAGS / 1000) }
-        });
-        
-        if (!response.ok) return null;
-        
-        const tag = await response.json();
-        const tagObj = {
-          id: tag.id,
-          name: tag.name,
-          slug: tag.slug,
-          count: tag.count || 0
-        };
-        
-        setCache(cacheKey, tagObj, CACHE_TTL.TAGS);
-        return tagObj;
-      } catch (err) {
-        console.error(`Failed to fetch tag ${id}:`, err);
-        return null;
-      }
-    });
-    
-    const tags = await Promise.all(tagPromises);
-    return tags.filter(Boolean) as Tag[];
-  } catch (error) {
-    console.error('Failed to fetch tags:', error);
-    return [];
+
+  const uncachedIds: number[] = [];
+  const results: (Tag | null)[] = [];
+
+  for (const id of tagIds) {
+    const cached = getFromCache<Tag>(`tag-${id}`);
+    if (cached) {
+      results.push(cached);
+    } else {
+      results.push(null);
+      uncachedIds.push(id);
+    }
   }
+
+  if (uncachedIds.length > 0) {
+    try {
+      const WP_MAX_PER_PAGE = 100;
+      const batches: number[][] = [];
+      for (let i = 0; i < uncachedIds.length; i += WP_MAX_PER_PAGE) {
+        batches.push(uncachedIds.slice(i, i + WP_MAX_PER_PAGE));
+      }
+
+      const batchResults = await Promise.all(batches.map(async (batch) => {
+        const response = await fetch(
+          `${WP_API_URL}/wp/v2/tags?include=${batch.join(',')}&per_page=${batch.length}`,
+          {
+            headers: { 'Accept': 'application/json' },
+            next: { revalidate: Math.floor(CACHE_TTL.TAGS / 1000) }
+          }
+        );
+        if (!response.ok) return [];
+        return response.json() as Promise<Array<{ id: number; name: string; slug: string; count?: number }>>;
+      }));
+
+      const fetchedMap = new Map(
+        batchResults.flat().map(t => [t.id, { id: t.id, name: t.name, slug: t.slug, count: t.count || 0 }])
+      );
+
+      for (const [idx, tag] of results.entries()) {
+        if (tag === null) {
+          const id = tagIds[idx];
+          const fresh = fetchedMap.get(id) ?? null;
+          if (fresh) setCache(`tag-${id}`, fresh, CACHE_TTL.TAGS);
+          results[idx] = fresh;
+        }
+      }
+    } catch (error) {
+      console.error('Failed to batch-fetch tags:', error);
+    }
+  }
+
+  return results.filter((t): t is Tag => t !== null);
 }
 
 // Function to get all tags sorted by popularity (count)
