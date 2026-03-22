@@ -32,9 +32,9 @@ const nextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   
-  // Next.js 16: Turbopack moved from experimental to top-level config
-  // Turbopack is now default in Next.js 16, but config is at top level
+  // Next.js 16: Turbopack configuration (default bundler)
   turbopack: {
+    // Support for SVG imports via @svgr/webpack
     rules: {
       '*.svg': ['@svgr/webpack'],
     },
@@ -50,6 +50,11 @@ const nextConfig = {
     memoryBasedWorkersCount: true,
     // Dev-only: Disable FS cache to avoid stale HMR module references after upgrades
     turbopackFileSystemCacheForDev: false,
+  },
+  
+  // Next.js 16.2: Browser log forwarding - errors go to terminal
+  logging: {
+    browserToTerminal: 'error',
   },
   
   serverExternalPackages: ['sharp'],
@@ -112,81 +117,12 @@ const nextConfig = {
       }
     ]
   },
-  webpack: (config, { dev, isServer }) => {
-    if (!dev && !isServer) {
-      config.optimization = {
-        ...config.optimization,
-        splitChunks: {
-          chunks: 'all',
-          minSize: 15000,
-          maxSize: 200000,
-          minChunks: 1,
-          maxAsyncRequests: 50,
-          maxInitialRequests: 25,
-          cacheGroups: {
-            // Framework chunks (React, Next.js)
-            framework: {
-              chunks: 'all',
-              name: 'framework',
-              test: /(?:react|react-dom|scheduler)[\\/]/,
-              priority: 40,
-              enforce: true,
-            },
-            // Large libraries
-            lib: {
-              test: /[\\/]node_modules[\\/](framer-motion|@radix-ui|lucide-react)[\\/]/,
-              name: 'lib',
-              priority: 30,
-              reuseExistingChunk: true,
-            },
-            // UI Components
-            ui: {
-              test: /[\\/]components[\\/]ui[\\/]/,
-              name: 'ui',
-              priority: 25,
-              reuseExistingChunk: true,
-            },
-            // Vendor chunks (other node_modules)
-            vendor: {
-              test: /[\\/]node_modules[\\/]/,
-              name: 'vendor',
-              priority: 20,
-              reuseExistingChunk: true,
-            },
-            // Common chunks (shared across pages)
-            common: {
-              name: 'common',
-              minChunks: 2,
-              priority: 15,
-              reuseExistingChunk: true,
-            },
-            // Default group
-            default: {
-              minChunks: 2,
-              priority: 10,
-              reuseExistingChunk: true,
-            },
-          },
-        },
-        // Minimize and tree-shake more aggressively
-        usedExports: true,
-        sideEffects: false,
-      }
-
-      // Optimize module concatenation
-      config.optimization.concatenateModules = true;
-      
-      // Improve tree shaking
-      config.optimization.providedExports = true;
-    }
-
-    // Note: framer-motion alias removed due to export path issues
-    // The library's optimizePackageImports in experimental config handles optimization
-
-    return config
-  },
+  // NOTE: Custom webpack config removed
+  // Turbopack (default in Next.js 16) handles code splitting, tree-shaking,
+  // and module concatenation automatically with optimized defaults.
+  // If you need custom chunking, use Next.js built-in dynamic() imports instead.
 }
 
 export default withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
-})(nextConfig); 
+})(nextConfig);

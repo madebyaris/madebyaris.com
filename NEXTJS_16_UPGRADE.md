@@ -222,6 +222,51 @@ export async function updateUserProfile(userId: string) {
 ---
 
 **Upgrade Date**: 2025-01-XX  
-**Next.js Version**: 16.0.0  
+**Next.js Version**: 16.2.0  
 **Status**: ✅ Complete
+
+---
+
+## 📦 Next.js 16.2 Upgrade (March 2026)
+
+### Dependencies Updated
+- ✅ `next`: `16.1.6` → `16.2.0`
+- ✅ `@next/bundle-analyzer`: `16.1.6` → `16.2.0`
+- ✅ `eslint-config-next`: `16.1.6` → `16.2.0`
+
+### New Features Added
+
+#### 1. AGENTS.md
+- Created `AGENTS.md` for AI coding agents
+- Created `CLAUDE.md` referencing AGENTS.md
+- Gives AI agents version-matched Next.js documentation
+- Achieves 100% pass rate on Next.js evals
+
+#### 2. Browser Log Forwarding
+- Added `logging.browserToTerminal: 'error'` to config
+- Browser errors now show in terminal during development
+- Helpful for terminal-first AI agents
+
+#### 3. Dev Server Lock File
+- Already handled by Next.js 16
+- `.next/dev/lock` file prevents multiple dev servers
+
+### Code Changes Applied
+
+#### 1. Turbopack Migration ✅
+- Removed custom webpack configuration
+- Turbopack handles code splitting, tree-shaking, and chunking automatically
+- Added note about using `dynamic()` imports for custom chunking needs
+
+#### 2. Async Request APIs ✅
+- Project already uses `await params` pattern (Next.js 16 compatible)
+- No changes needed
+
+#### 3. Sitemap & Image Generation ✅
+- No dynamic sitemap/image generation with async params
+- No changes needed
+
+#### 4. React 19.2 Compatibility ✅
+- Project already on React 19.x
+- Compatible with View Transitions, Activity, useEffectEvent (when available)
 
