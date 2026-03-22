@@ -191,15 +191,16 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
   const { slug } = await params
   
   try {
-    const post = await getPost(slug)
+    const [post, allPosts] = await Promise.all([
+      getPost(slug),
+      getPosts({ per_page: 6 })
+    ])
     if (!post) {
       notFound();
     }
 
     const featuredImageUrl = post._embedded?.['wp:featuredmedia']?.[0]?.source_url || ''
 
-    // Get related posts (for now, just get recent posts)
-    const allPosts = await getPosts({ per_page: 6 })
     const relatedPosts = allPosts.filter((p) => p.id !== post.id).slice(0, 3)
 
     // Extract headings for table of contents and transform content on the server
