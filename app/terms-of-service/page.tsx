@@ -1,20 +1,22 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, FileText, Shield, Scale, Users, Mail } from 'lucide-react'
+import { JsonLd } from '@/components/seo/json-ld'
+import { productionUrl } from '@/lib/seo/config'
 
 export const revalidate = 86400 // Revalidate daily
 
+const termsStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': `${productionUrl}/terms-of-service/#webpage`,
+  name: 'Terms of Service | Made by Aris',
+  description: 'Terms of service and conditions for Made by Aris website and services.',
+  url: `${productionUrl}/terms-of-service`,
+}
+
 // Generate Metadata and Structured Data
 export function generateMetadata(): Metadata {
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "@id": "https://madebyaris.com/terms-of-service/#webpage",
-    "name": "Terms of Service | Made by Aris",
-    "description": "Terms of service and conditions for Made by Aris website and services.",
-    "url": "https://madebyaris.com/terms-of-service"
-  }
-
   return {
     title: 'Terms of Service | Made by Aris',
     description: 'Terms of service and conditions for Made by Aris website and services.',
@@ -35,9 +37,6 @@ export function generateMetadata(): Metadata {
       locale: 'en_US',
       type: 'website',
     },
-    other: {
-      'structured-data': JSON.stringify(structuredData),
-    },
   }
 }
 
@@ -57,6 +56,7 @@ export default function TermsOfServicePage() {
 
   return (
     <>
+      <JsonLd data={termsStructuredData} />
       {/* Breadcrumb */}
       <nav className="mb-8">
         <ol className="flex items-center space-x-2 text-sm text-zinc-500">

@@ -78,6 +78,9 @@ Disallow: /static/
 
 # no crawl delay
 
+# AI-readable site summary (llms.txt standard)
+# See ${baseUrl}/llms.txt
+
 # Sitemaps
 Sitemap: ${baseUrl}/sitemap.xml`
 
