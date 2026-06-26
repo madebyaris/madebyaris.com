@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import ClientProjectsPage from './client-page'
+import { JsonLd } from '@/components/seo/json-ld'
+import { productionUrl } from '@/lib/seo/config'
 
 // Projects data (shared between server and client)
 export const projects = [
@@ -149,6 +151,28 @@ export const projects = [
   }
 ]
 
+export const projectsStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Projects | Made by Aris',
+  description:
+    'Explore my portfolio of web development projects, featuring Next.js, WordPress, and full-stack solutions. See real examples of my work and expertise.',
+  url: `${productionUrl}/projects`,
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: projects.map((project, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'WebSite',
+        name: project.title,
+        description: project.description,
+        url: project.link,
+      },
+    })),
+  },
+}
+
 // Metadata for SEO
 export const metadata: Metadata = {
   title: 'Projects | Made by Aris',
@@ -174,31 +198,14 @@ export const metadata: Metadata = {
     locale: 'en_US',
     type: 'website',
   },
-  other: {
-    'structured-data': JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "CollectionPage",
-      "name": "Projects | Made by Aris",
-      "description": "Explore my portfolio of web development projects, featuring Next.js, WordPress, and full-stack solutions. See real examples of my work and expertise.",
-      "url": "https://madebyaris.com/projects",
-      "mainEntity": {
-        "@type": "ItemList",
-        "itemListElement": projects.map((project, index) => ({
-          "@type": "ListItem",
-          "position": index + 1,
-          "item": {
-            "@type": "WebSite",
-            "name": project.title,
-            "description": project.description,
-            "url": project.link
-          }
-        }))
-      }
-    }),
-  },
 }
 
 // Server component that renders the client component
 export default function ProjectsPage() {
-  return <ClientProjectsPage />
+  return (
+    <>
+      <JsonLd data={projectsStructuredData} />
+      <ClientProjectsPage />
+    </>
+  )
 }

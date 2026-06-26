@@ -4,6 +4,8 @@ import { Suspense } from 'react'
 import { getPosts } from '@/lib/wordpress'
 import { ArrowRight, ArrowUpRight, Code2, Globe, Server, Zap, Users, Clock, CheckCircle, Home } from 'lucide-react'
 import { structuredData } from '@/lib/structured-data'
+import { buildPageMetadata } from '@/lib/seo'
+import { JsonLd } from '@/components/seo/json-ld'
 import { HomeContent } from '@/components/home-content'
 
 // Segment Configuration
@@ -19,9 +21,15 @@ const PostsFallback = () => (
 )
 
 export async function generateMetadata() {
+  const metadata = buildPageMetadata({
+    title: 'Senior Full-Stack Developer | Next.js & WordPress',
+    description:
+      '12+ years building enterprise apps with Next.js, React, WordPress, and PHP. Headless CMS and scalable architecture. Indonesia-based, worldwide clients.',
+    path: '/',
+  })
+
   return {
-    title: 'Senior Full-Stack Developer | Next.js, React & WordPress Architect | Aris Setiawan',
-    description: 'Senior Full-Stack Developer with 12+ years of experience in Next.js, React, WordPress, and PHP. Specializing in enterprise-scale web applications and headless CMS architecture. Based in Indonesia, serving clients worldwide.',
+    ...metadata,
     keywords: [
       'Senior Next.js Developer',
       'Headless WordPress Expert',
@@ -36,9 +44,6 @@ export async function generateMetadata() {
       'Enterprise Web Solutions',
       'Headless CMS Indonesia',
     ],
-    other: {
-      'structured-data': JSON.stringify(structuredData)
-    }
   }
 }
 
@@ -119,7 +124,7 @@ const clients = [
 export default function HomePage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+      <JsonLd data={structuredData} />
       
       {/* Hero Section */}
       <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 pb-8 lg:pb-0 pt-4">
