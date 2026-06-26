@@ -1,4 +1,8 @@
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import withBundleAnalyzer from '@next/bundle-analyzer';
+
+const projectRoot = path.dirname(fileURLToPath(import.meta.url))
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -34,6 +38,8 @@ const nextConfig = {
   
   // Next.js 16: Turbopack configuration (default bundler)
   turbopack: {
+    // Pin root to this project — avoids picking up stray lockfiles outside the repo
+    root: projectRoot,
     // Support for SVG imports via @svgr/webpack
     rules: {
       '*.svg': ['@svgr/webpack'],

@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import AnalyticsWrapper from "@/components/providers/analytics-wrapper";
 import { ServiceWorkerRegistration } from "@/components/service-worker-registration";
+import { productionUrl, siteConfig } from "@/lib/seo/config";
 import { cn } from "@/lib/utils";
 import "./globals.css";
 
@@ -15,12 +16,19 @@ const inter = Inter({
   weight: ["300", "400", "500", "600", "700"],
 });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#ffffff",
+};
+
 export const metadata: Metadata = {
   title: {
-    default: "Senior Full-Stack Developer | Next.js, React & WordPress Architect | Aris Setiawan",
+    default: "Senior Full-Stack Developer | Next.js & WordPress | MadeByAris",
     template: "%s | Aris Setiawan"
   },
-  description: "Expert Full-Stack Developer specializing in enterprise-scale applications. Delivering high-performance solutions with Next.js, React, and WordPress. 12+ years of experience in architecting scalable web systems and headless CMS solutions.",
+  description: "12+ years building enterprise apps with Next.js, React, WordPress, and PHP. Headless CMS and scalable architecture. Indonesia-based, worldwide clients.",
   keywords: [
     "Senior Next.js Developer",
     "Enterprise React Development",
@@ -52,28 +60,28 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "en_US",
-    url: "https://madebyaris.com",
-    title: "Senior Full-Stack Developer | Next.js, React & WordPress Architect | Aris Setiawan",
-    description: "Senior Full-Stack Developer with 12+ years of experience specializing in Next.js, React, WordPress, and enterprise-scale web applications. Expert in headless CMS architecture and high-performance systems.",
-    siteName: "Aris Setiawan - Senior Full-Stack Developer",
+    locale: siteConfig.locale,
+    url: productionUrl,
+    title: "Senior Full-Stack Developer | Next.js & WordPress | MadeByAris",
+    description: "12+ years building enterprise apps with Next.js, React, WordPress, and PHP. Headless CMS and scalable architecture.",
+    siteName: siteConfig.name,
     images: [
       {
-        url: '/favicon.ico',
-        width: 800,
-        height: 800,
-        alt: 'Aris Setiawan - Senior Full-Stack Developer',
+        url: siteConfig.ogImage,
+        width: 1200,
+        height: 630,
+        alt: "Aris Setiawan - Senior Full-Stack Developer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Senior Full-Stack Developer | Next.js & WordPress Architect",
-    description: "12+ years of experience building enterprise-scale web applications with Next.js, React, and WordPress.",
-    creator: "@madebyaris",
-    images: ['/favicon.ico'],
+    title: "Senior Full-Stack Developer | Next.js & WordPress",
+    description: "12+ years building enterprise apps with Next.js, React, WordPress, and PHP.",
+    creator: siteConfig.twitterHandle,
+    images: [siteConfig.ogImage],
   },
-  metadataBase: new URL('https://madebyaris.com'),
+  metadataBase: new URL(productionUrl),
   alternates: {
     canonical: '/',
   },
@@ -125,9 +133,6 @@ export default function RootLayout({
         <link rel="prefetch" href="/blog" />
         <link rel="prefetch" href="/projects" />
         
-        {/* Meta tags for performance */}
-        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-        <meta name="theme-color" content="#ffffff" />
       </head>
       <body 
         suppressHydrationWarning

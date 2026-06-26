@@ -17,6 +17,8 @@ import { FeaturedImage } from '@/components/featured-image'
 import { AuthorImage } from '@/components/author-image'
 import { RelatedPostCard } from '@/components/related-post-card'
 import { getPost, getPosts } from '@/lib/wordpress'
+import { buildBlogPostGraph, buildBlogPostMetadata } from '@/lib/seo'
+import { JsonLd } from '@/components/seo/json-ld'
 
 export const revalidate = 1800 // Revalidate every 30 minutes
 
@@ -33,36 +35,16 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     if (!post) {
       return {
         title: 'Post Not Found',
-        description: 'The requested blog post could not be found.'
+        description: 'The requested blog post could not be found.',
       }
     }
 
-    const seo = post.rank_math_seo
     const featuredImage = post._embedded?.['wp:featuredmedia']?.[0]?.source_url
-
-    return {
-      title: seo?.title || post.title.rendered,
-      description: seo?.description || post.excerpt.rendered.replace(/<[^>]*>/g, ''),
-      openGraph: {
-        title: seo?.title || post.title.rendered,
-        description: seo?.description || post.excerpt.rendered.replace(/<[^>]*>/g, ''),
-        type: 'article',
-        publishedTime: post.date,
-        modifiedTime: post.modified,
-        authors: ['https://madebyaris.com'],
-        images: [{ url: featuredImage || '/og.png' }],
-      },
-      twitter: {
-        card: 'summary_large_image',
-        title: seo?.title || post.title.rendered,
-        description: seo?.description || post.excerpt.rendered.replace(/<[^>]*>/g, ''),
-        images: [featuredImage || '/og.png'],
-      },
-    }
-  } catch (error) {
+    return buildBlogPostMetadata(post, featuredImage)
+  } catch {
     return {
       title: 'Error',
-      description: 'There was an error loading the blog post.'
+      description: 'There was an error loading the blog post.',
     }
   }
 }
@@ -247,49 +229,22 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
 
     // Calculate reading time
     const readingTime = getReadingTime(transformedContent);
+    const featuredImage =
+      post._embedded?.['wp:featuredmedia']?.[0]?.source_url
 
-    // Structured data for the article
-    const articleStructuredData = {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "headline": post.title.rendered,
-      "description": post.excerpt.rendered.replace(/<[^>]*>/g, ''),
-      "image": post._embedded?.['wp:featuredmedia']?.[0]?.source_url || "https://madebyaris.com/og.png",
-      "author": {
-        "@type": "Person",
-        "@id": "https://madebyaris.com/#person",
-        "name": "Aris Setiawan",
-        "url": "https://madebyaris.com",
-        "image": "https://madebyaris.com/aris.png",
-        "sameAs": [
-          "https://www.linkedin.com/in/arissetia/",
-          "https://github.com/madebyaris",
-          "https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe"
-        ]
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "MadeByAris",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://madebyaris.com/logo.png"
-        }
-      },
-      "datePublished": post.date,
-      "dateModified": post.modified,
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": `https://madebyaris.com/blog/${post.slug}`
-      }
-    };
+    const articleStructuredData = buildBlogPostGraph({
+      slug: post.slug,
+      headline: post.title.rendered,
+      description: post.excerpt.rendered,
+      image: featuredImage,
+      datePublished: post.date,
+      dateModified: post.modified,
+    })
 
     return (
       <>
         <SmoothScroll />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleStructuredData) }}
-        />
+        <JsonLd data={articleStructuredData} />
         
         <div className="bg-background py-12 md:py-16">
           <div className="container mx-auto max-w-[1080px] px-5 sm:px-8 lg:px-10">
