@@ -77,6 +77,28 @@ const nextConfig = {
   output: 'standalone',
   compress: true,
   generateEtags: true,
+  redirects: async () => [
+    {
+      source: '/about-me',
+      destination: '/about',
+      permanent: true,
+    },
+    {
+      source: '/about-me/',
+      destination: '/about',
+      permanent: true,
+    },
+    {
+      source: '/contact-us',
+      destination: '/contact',
+      permanent: true,
+    },
+    {
+      source: '/contact-us/',
+      destination: '/contact',
+      permanent: true,
+    },
+  ],
   headers: async () => {
     // IMPORTANT: Never set long-lived cache headers in dev.
     // It will cause the browser to cache `/_next/static/*` bundles and trigger hydration mismatches
