@@ -13,9 +13,11 @@ const navigationLinks = [
 
 const serviceLinks = [
   { name: 'Next.js Development', href: '/services/nextjs-development' },
+  { name: 'AI Development', href: '/services/ai-development' },
   { name: 'WordPress Development', href: '/services/wordpress' },
-  { name: 'PHP Development', href: '/services/php-development' },
+  { name: 'Cursor / AI Workflows', href: '/services/vibe-code-friend' },
   { name: 'Headless WordPress', href: '/services/wordpress/headless-development' },
+  { name: 'PHP Development', href: '/services/php-development' },
 ]
 
 const socialLinks: Array<{ name: string; href: string; icon?: typeof Github }> = [

@@ -32,6 +32,10 @@ const mainRoutes = [
 const serviceRoutes = [
   { path: 'services', priority: 0.9, changeFreq: 'weekly' },
   { path: 'services/nextjs-development', priority: 1.0, changeFreq: 'daily' },
+  { path: 'services/ai-development', priority: 0.9, changeFreq: 'weekly' },
+  { path: 'services/vibe-code-friend', priority: 0.8, changeFreq: 'weekly' },
+  { path: 'services/vibe-code-friend/ai-ide-tutoring', priority: 0.7, changeFreq: 'monthly' },
+  { path: 'services/vibe-code-friend/code-fixing', priority: 0.7, changeFreq: 'monthly' },
   { path: 'services/nextjs-development/vercel', priority: 0.9, changeFreq: 'weekly' },
   { path: 'services/nextjs-development/nextjs-indonesia', priority: 1.0, changeFreq: 'daily' },
   { path: 'services/nextjs-development/nextjs-seo', priority: 0.9, changeFreq: 'weekly' },
