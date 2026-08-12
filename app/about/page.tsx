@@ -182,8 +182,8 @@ const structuredData = {
   "@type": "AboutPage",
   "@id": "https://madebyaris.com/about/#webpage",
   "url": "https://madebyaris.com/about",
-  "name": "About Aris Setiawan | AI-Optimized Full-Stack Developer",
-  "description": "Learn about Aris Setiawan's 13+ years building web products — Next.js, AI integrations, WordPress. Cursor Ambassador Indonesia. Build products or level up your team.",
+  "name": "About Aris Setiawan | Next.js, AI & Cursor | Build & Level up",
+  "description": "13+ years building web products with Next.js, AI, and WordPress. Cursor Ambassador Indonesia. Hire me to build (Build) or coach your team on AI workflows (Level up). Remote worldwide.",
   "isPartOf": {
     "@type": "WebSite",
     "@id": "https://madebyaris.com/#website"
@@ -213,8 +213,8 @@ const structuredData = {
     "@type": "Person",
     "@id": "https://madebyaris.com/#person",
     "name": "Aris Setiawan",
-    "jobTitle": "AI-Optimized Full-Stack Developer",
-    "description": "AI-Optimized Full-Stack Developer with 13+ years of experience in Next.js, React, WordPress, and practical AI workflows. Cursor Ambassador Indonesia.",
+    "jobTitle": "Next.js, AI & WordPress Developer",
+    "description": "Next.js, AI, and WordPress developer with 13+ years of experience. Cursor Ambassador Indonesia. Build products or level up your team with practical AI workflows.",
     "url": "https://madebyaris.com",
     "image": "https://madebyaris.com/aris.png",
     "sameAs": [
@@ -244,39 +244,35 @@ const structuredData = {
 }
 
 // Generate Metadata and Structured Data
-const aboutPageTitle = 'About Aris Setiawan | AI-Optimized Full-Stack Developer | Cursor Ambassador'
+const aboutPageTitle = 'About Aris Setiawan | Next.js, AI & Cursor | Build & Level up'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title: { absolute: aboutPageTitle },
-    description: '13+ years building web products with Next.js, AI, and WordPress. Cursor Ambassador Indonesia. I build for teams worldwide (Build) and coach practical AI workflows (Level up). Based in Sidoarjo, Indonesia.',
+    description: '13+ years building web products with Next.js, AI, and WordPress. Cursor Ambassador Indonesia. Hire me to build products or level up your team with Cursor workflows. Remote worldwide.',
     keywords: [
-      'Senior Full-Stack Developer',
-      'Web Architecture Expert',
+      'About Aris Setiawan',
       'Next.js Developer',
       'WordPress Developer',
-      'React Specialist',
-      'Enterprise Solutions Architect',
-      'PHP Expert',
-      'JavaScript Developer',
-      'TypeScript Developer',
-      'Headless CMS Expert',
+      'AI Developer',
+      'Cursor Ambassador Indonesia',
+      'Full-Stack Developer',
+      'Remote Developer',
+      'Headless WordPress',
       'Next.js Developer Indonesia',
       'WordPress Developer Indonesia',
-      'React Developer Indonesia',
-      'Full-Stack Developer Sidoarjo',
       'Web Developer Indonesia',
     ],
     openGraph: {
       title: aboutPageTitle,
-      description: 'AI-Optimized Full-Stack Developer with 13+ years in Next.js, React, WordPress, and practical AI workflows. Cursor Ambassador Indonesia.',
+      description: '13+ years with Next.js, WordPress, and AI. Cursor Ambassador Indonesia. Build products or level up your team with practical Cursor workflows.',
       type: 'profile',
       locale: 'en_US',
     },
     twitter: {
       card: 'summary_large_image',
       title: aboutPageTitle,
-      description: 'AI-Optimized Full-Stack Developer with 13+ years in Next.js, React, WordPress, and practical AI workflows. Cursor Ambassador Indonesia.',
+      description: '13+ years with Next.js, WordPress, and AI. Cursor Ambassador Indonesia. Build products or level up your team with practical Cursor workflows.',
     },
     alternates: {
       canonical: 'https://madebyaris.com/about'

@@ -1,45 +1,48 @@
 import type { Metadata } from 'next'
-import { Layout, Globe, FileCode, Code2, ArrowRight, ArrowUpRight, Brush, Rocket, Zap, Users, Star, Quote } from 'lucide-react'
+import { Layout, Globe, FileCode, Code2, ArrowRight, ArrowUpRight, Brush, Rocket, Zap, Users, Quote } from 'lucide-react'
 import Link from 'next/link'
+import { buildPageMetadata } from '@/lib/seo'
 
 export const revalidate = 86400
+
+const pageTitle = 'Hire a WordPress Developer | Themes, Plugins, Headless | Aris Setiawan'
 
 const services = [
   {
     title: 'Theme Development',
-    description: 'Custom WordPress themes that perfectly align with your brand identity. From design to deployment.',
+    description: 'Custom WordPress themes built for your brand — mobile-first, fast, and maintainable.',
     icon: Brush,
     href: '/services/wordpress/theme-development',
-    features: ['Custom Design', 'Mobile-First', 'SEO Optimized', 'Fast Loading'],
+    features: ['Custom Design', 'Mobile-First', 'SEO Ready', 'Fast Loading'],
   },
   {
     title: 'Plugin Development',
-    description: 'Extend WordPress functionality with custom plugins that deliver exactly what your business needs.',
+    description: 'Custom plugins when off-the-shelf does not cut it — integrations, memberships, APIs.',
     icon: FileCode,
     href: '/services/wordpress/plugin-development',
-    features: ['Custom Features', 'API Integration', 'Secure Code', 'Scalable'],
+    features: ['Custom Features', 'API Integration', 'Secure Code', 'Maintainable'],
   },
   {
     title: 'Headless WordPress',
-    description: 'Modern headless WordPress implementations with Next.js frontend for superior performance.',
+    description: 'WordPress as CMS, Next.js as frontend — better performance and a modern dev experience.',
     icon: Rocket,
     href: '/services/wordpress/headless-development',
-    features: ['Next.js Frontend', 'API-Driven', 'Better Performance', 'Modern Stack'],
+    features: ['Next.js Frontend', 'REST/GraphQL', 'Better Performance', 'Modern Stack'],
   },
   {
     title: 'Performance Optimization',
-    description: 'Boost your WordPress site&apos;s speed and security with comprehensive optimization services.',
+    description: 'Slow site? I find the bottlenecks — caching, assets, queries — and fix what actually matters.',
     icon: Zap,
     href: '/services/wordpress/optimization',
-    features: ['Speed Optimization', 'Security Hardening', 'CDN Setup', 'Caching'],
+    features: ['Speed Fixes', 'Security Hardening', 'CDN Setup', 'Caching'],
   },
 ]
 
 const benefits = [
-  { title: 'Expert Development', description: 'Years of WordPress expertise', icon: Code2 },
-  { title: 'Custom Solutions', description: 'Tailored to your needs', icon: Layout },
-  { title: 'Modern Approach', description: 'Latest technologies', icon: Rocket },
-  { title: 'Global Standards', description: 'WordPress best practices', icon: Globe },
+  { title: '13+ years with WP', description: 'Themes, plugins, headless', icon: Code2 },
+  { title: 'Ships to production', description: 'Not just mockups', icon: Layout },
+  { title: 'Headless when it fits', description: 'WP + Next.js stacks', icon: Rocket },
+  { title: 'Remote worldwide', description: 'Async-friendly', icon: Globe },
 ]
 
 const testimonials = [
@@ -60,32 +63,34 @@ const structuredData = {
   "@context": "https://schema.org",
   "@type": "WebPage",
   "@id": "https://madebyaris.com/services/wordpress/#webpage",
-  "name": "WordPress Development Services | Custom Solutions",
-  "description": "Professional WordPress development services including custom themes, plugins, and optimization.",
+  "name": pageTitle,
+  "description": "Hire a WordPress developer for custom themes, plugins, headless WP + Next.js, and performance work. 13+ years. Remote worldwide.",
   "url": "https://madebyaris.com/services/wordpress"
 }
 
 export async function generateMetadata(): Promise<Metadata> {
+  const metadata = buildPageMetadata({
+    title: 'Hire a WordPress Developer | Themes, Plugins, Headless',
+    description:
+      'Hire a WordPress developer for custom themes, plugins, headless WP + Next.js, and performance work. 13+ years. Remote worldwide.',
+    path: '/services/wordpress',
+  })
+
   return {
-    title: 'WordPress Development Services | Custom Solutions',
-    description: 'Expert WordPress development services including custom themes, plugins, and optimization. Professional solutions for modern WordPress websites.',
+    ...metadata,
+    title: { absolute: pageTitle },
+    openGraph: { ...metadata.openGraph, title: pageTitle },
+    twitter: { ...metadata.twitter, title: pageTitle },
     keywords: [
-      'WordPress Development',
-      'Custom Themes',
-      'Plugin Development',
-      'WordPress Solutions',
-      'Theme Development',
-      'WordPress Expert'
+      'Hire WordPress Developer',
+      'WordPress Developer',
+      'Custom WordPress Themes',
+      'WordPress Plugin Development',
+      'Headless WordPress',
+      'WordPress Next.js',
+      'WordPress Performance',
+      'Remote WordPress Developer',
     ],
-    openGraph: {
-      title: 'WordPress Development Services | Custom Solutions',
-      description: 'Expert WordPress development services for modern websites.',
-      type: 'website',
-      locale: 'en_US',
-    },
-    alternates: {
-      canonical: 'https://madebyaris.com/services/wordpress'
-    }
   }
 }
 
@@ -110,20 +115,19 @@ export default function WordPressServicesPage() {
           }}
         >
           <Layout className="w-4 h-4 text-orange-500" />
-          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">WordPress Expert</span>
+          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">WordPress Developer</span>
         </div>
 
         {/* Title */}
         <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
-          WordPress
-          <span className="block gradient-text font-light">Development</span>
-          <span className="block">Services</span>
+          Hire a WordPress developer
+          <span className="block gradient-text font-light">who ships</span>
         </h1>
 
         {/* Description */}
         <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
-          From custom themes to headless implementations, I provide comprehensive WordPress 
-          development services to help you get the most out of your website.
+          Custom themes, plugins, headless WordPress with Next.js, and performance fixes.
+          13+ years building WP for teams worldwide. Remote-friendly.
         </p>
 
         {/* CTA Buttons */}
@@ -132,7 +136,7 @@ export default function WordPressServicesPage() {
             href="/contact"
             className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
           >
-            <span className="text-sm font-medium tracking-tight">Start Your Project</span>
+            <span className="text-sm font-medium tracking-tight">Hire me to build</span>
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </Link>
           <Link 
@@ -146,7 +150,7 @@ export default function WordPressServicesPage() {
               '--border-radius-before': '9999px'
             }}
           >
-            <span className="text-sm font-medium text-black/60 tracking-tight">View Portfolio</span>
+            <span className="text-sm font-medium text-black/60 tracking-tight">View portfolio</span>
             <ArrowRight className="w-4 h-4 text-zinc-500" />
           </Link>
         </div>
@@ -168,13 +172,13 @@ export default function WordPressServicesPage() {
             }}
           >
             <Code2 className="w-4 h-4 text-orange-500" />
-            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Services Offered</span>
+            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">What I build</span>
           </div>
           <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            WordPress Development <span className="gradient-text">Solutions</span>
+            WordPress <span className="gradient-text">services</span>
           </h2>
           <p className="text-sm text-zinc-500 max-w-lg mx-auto font-medium">
-            Comprehensive WordPress services tailored to your business needs
+            Themes, plugins, headless stacks, and speed work — pick what you need
           </p>
         </div>
 
@@ -219,7 +223,7 @@ export default function WordPressServicesPage() {
       <section className="mb-16">
         <div className="text-center mb-10">
           <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            Why Choose My <span className="gradient-text">WordPress Services</span>
+            Why teams <span className="gradient-text">hire me</span>
           </h2>
         </div>
 
@@ -258,7 +262,7 @@ export default function WordPressServicesPage() {
             <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Client Feedback</span>
           </div>
           <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter">
-            What Clients <span className="gradient-text">Say</span>
+            What clients <span className="gradient-text">say</span>
           </h2>
         </div>
 
@@ -288,16 +292,16 @@ export default function WordPressServicesPage() {
       <section className="mb-16">
         <div className="text-center mb-10">
           <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            Development <span className="gradient-text">Process</span>
+            How we <span className="gradient-text">work</span>
           </h2>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {[
-            { step: 1, title: "Discovery", desc: "Understanding your business goals" },
-            { step: 2, title: "Planning", desc: "Creating technical specifications" },
-            { step: 3, title: "Development", desc: "Building with clean code" },
-            { step: 4, title: "Launch", desc: "Deployment and support" },
+            { step: 1, title: "Discovery", desc: "Scope, stack, and timeline" },
+            { step: 2, title: "Plan", desc: "Clear milestones and deliverables" },
+            { step: 3, title: "Build", desc: "Clean code, regular updates" },
+            { step: 4, title: "Ship", desc: "Deploy, handoff, and support" },
           ].map((item) => (
             <div 
               key={item.step}
@@ -325,17 +329,17 @@ export default function WordPressServicesPage() {
 
         <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16 min-h-[400px] relative">
           <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
-            Ready to Build Your WordPress Project?
+            Need a WordPress developer?
           </h2>
           <p className="text-zinc-400 mb-8 max-w-lg font-medium">
-            Let&apos;s discuss your WordPress project and create a solution that perfectly matches your needs.
+            Tell me about your site, stack, and timeline. I&apos;ll reply within 24 hours.
           </p>
 
           <Link 
             href="/contact"
             className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
           >
-            <span>Start Your Project</span>
+            <span>Hire me to build</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>

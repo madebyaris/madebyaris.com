@@ -20,29 +20,34 @@ const PostsFallback = () => (
   </div>
 )
 
+const pageTitle = 'Hire a Next.js & AI Developer | Cursor Ambassador | Aris Setiawan'
+
 export async function generateMetadata() {
   const metadata = buildPageMetadata({
-    title: 'AI-Optimized Full-Stack Developer | Cursor Ambassador Indonesia',
+    title: 'Hire a Next.js & AI Developer | Cursor Ambassador',
     description:
-      'Aris Setiawan — Cursor Ambassador Indonesia and AI-optimized full-stack developer. Enterprise Next.js, React, and WordPress apps with practical AI workflows. 13+ years experience, Indonesia-based.',
+      'Hire Aris Setiawan to build Next.js, WordPress, and AI products — or level up with Cursor mentoring. 13+ years. Cursor Ambassador Indonesia. Remote worldwide.',
     path: '/',
   })
 
   return {
     ...metadata,
+    title: { absolute: pageTitle },
+    openGraph: { ...metadata.openGraph, title: pageTitle },
+    twitter: { ...metadata.twitter, title: pageTitle },
     keywords: [
+      'Hire Next.js Developer',
+      'Hire WordPress Developer',
+      'Hire AI Developer',
       'Cursor Ambassador Indonesia',
-      'AI-Optimized Full-Stack Developer',
-      'MiniMax Dev Community Expert',
-      'Senior Next.js Developer',
-      'Headless WordPress Expert',
-      'Enterprise React Architect',
-      'Full-Stack PHP Developer',
+      'Next.js Developer',
+      'WordPress Developer',
+      'AI Product Development',
+      'Cursor Mentoring',
+      'Remote Full-Stack Developer',
+      'Headless WordPress',
       'Next.js Developer Indonesia',
       'WordPress Developer Indonesia',
-      'React Developer Indonesia',
-      'Full-Stack Developer Indonesia',
-      'AI Workflows Developer',
     ],
   }
 }
@@ -170,7 +175,7 @@ export default function HomePage() {
 
           {/* Subheadline */}
           <p className="text-sm text-zinc-500 font-medium max-w-md mb-10 leading-relaxed tracking-wide border-l-2 border-zinc-200 pl-6">
-            Hi, I&apos;m <span className="text-zinc-900 font-semibold">Aris Setiawan</span>. First Cursor Ambassador in Indonesia. I build enterprise Next.js, React, and WordPress apps — and help teams ship faster with practical AI workflows. 13+ years experience.
+            Hi, I&apos;m <span className="text-zinc-900 font-semibold">Aris Setiawan</span>. Cursor Ambassador in Indonesia. I build Next.js, WordPress, and AI products for teams worldwide — and coach developers on practical Cursor workflows. 13+ years.
           </p>
 
           {/* Action Buttons */}
@@ -316,7 +321,7 @@ export default function HomePage() {
               Services
             </h2>
             <p className="leading-relaxed text-base font-normal text-zinc-500">
-              Build enterprise-grade web products — from concept to deployment with modern technologies and proven delivery.
+              Next.js, WordPress, AI features, and performance work — shipped to production, remote-friendly.
             </p>
           </div>
           <Link 
