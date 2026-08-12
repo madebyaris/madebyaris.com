@@ -3,14 +3,17 @@ import { Mail, MapPin, Clock, ArrowRight, Linkedin, Github, Send, MessageSquare,
 import Link from 'next/link'
 import { ContactForm } from '@/components/contact-form'
 import { UpworkIcon } from '@/components/icons/upwork'
+import { buildPageMetadata } from '@/lib/seo'
+
+const pageTitle = 'Contact | Hire Next.js, AI & WordPress | Aris Setiawan'
 
 // Structured Data
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "ContactPage",
   "@id": "https://madebyaris.com/contact/#webpage",
-  "name": "Contact Aris Setiawan | Enterprise Web Development Solutions",
-  "description": "Get in touch with Aris Setiawan for enterprise web development projects, technical consultations, and collaborations.",
+  "name": pageTitle,
+  "description": "Contact Aris Setiawan to hire for Next.js, WordPress, and AI product builds — or for Cursor mentoring and practical AI workflows. Remote worldwide. English and Indonesian.",
   "url": "https://madebyaris.com/contact",
   "isPartOf": {
     "@type": "WebSite",
@@ -45,7 +48,7 @@ const structuredData = {
     "founder": {
       "@type": "Person",
       "name": "Aris Setiawan",
-      "jobTitle": "Senior Full Stack Developer",
+      "jobTitle": "Next.js & WordPress Developer",
       "url": "https://madebyaris.com",
       "image": "https://madebyaris.com/aris.png"
     },
@@ -58,7 +61,6 @@ const structuredData = {
     },
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": "Sidoarjo",
       "addressCountry": "Indonesia"
     },
     "sameAs": [
@@ -70,35 +72,30 @@ const structuredData = {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
+  const metadata = buildPageMetadata({
+    title: 'Contact | Hire Next.js, AI & WordPress',
+    description:
+      'Hire me to build Next.js, WordPress, or AI products — or book Cursor mentoring to level up your workflow. Remote worldwide. 13+ years. English and Indonesian OK.',
+    path: '/contact',
+  })
+
   return {
-    title: 'Contact Aris Setiawan | Enterprise Web Development Solutions',
-    description: 'Get in touch for enterprise-level web development solutions, technical consultations, or project collaborations. Specializing in Next.js, React, and WordPress.',
+    ...metadata,
+    title: { absolute: pageTitle },
+    openGraph: { ...metadata.openGraph, title: pageTitle },
+    twitter: { ...metadata.twitter, title: pageTitle },
     keywords: [
       'Contact Developer',
-      'Hire Web Developer',
-      'Enterprise Solutions',
-      'Technical Consultation',
-      'Next.js Development',
-      'React Development',
-      'WordPress Development',
+      'Hire Next.js Developer',
+      'Hire WordPress Developer',
+      'Hire AI Developer',
+      'Cursor Mentoring',
+      'Remote Developer',
       'Full Stack Developer',
-      'Web Architecture',
-      'Project Collaboration'
+      'Next.js Development',
+      'WordPress Development',
+      'AI Product Development',
     ],
-    openGraph: {
-      title: 'Contact Aris Setiawan | Enterprise Web Development',
-      description: 'Let\'s collaborate on your next web development project.',
-      type: 'website',
-      locale: 'en_US',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: 'Contact Aris Setiawan | Enterprise Web Development',
-      description: 'Let\'s collaborate on your next web development project.',
-    },
-    alternates: {
-      canonical: 'https://madebyaris.com/contact'
-    }
   }
 }
 
@@ -128,13 +125,15 @@ export default function ContactPage() {
 
         {/* Title */}
         <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
-          Let&apos;s Build
-          <span className="block gradient-text font-light">Something Amazing</span>
+          Tell me what
+          <span className="block gradient-text font-light">you&apos;re building</span>
         </h1>
 
         {/* Description */}
         <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
-          Enterprise-level solutions & technical consultation to help turn your vision into reality.
+          Two paths: <strong className="font-semibold text-zinc-700">Build</strong> — hire me to ship your Next.js, WordPress, or AI product — or{' '}
+          <strong className="font-semibold text-zinc-700">Level up</strong> — Cursor mentoring and practical AI workflows.
+          Remote worldwide. English and Indonesian OK.
         </p>
 
         {/* CTA */}
@@ -142,7 +141,7 @@ export default function ContactPage() {
           href="#contact-form"
           className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
         >
-          <span className="text-sm font-medium tracking-tight">Start Your Project</span>
+          <span className="text-sm font-medium tracking-tight">Send a message</span>
           <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
         </Link>
       </section>
@@ -266,34 +265,38 @@ export default function ContactPage() {
       <section className="mb-16">
         <div className="text-center mb-10">
           <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            Services I <span className="gradient-text">Provide</span>
+            How I can <span className="gradient-text">help</span>
           </h2>
           <p className="text-sm text-zinc-500 max-w-lg mx-auto font-medium">
-            Comprehensive web development solutions tailored to your business needs
+            Pick the path that fits — product build or workflow mentoring
           </p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {[
             {
-              title: "Enterprise Web Applications",
-              description: "Scalable solutions with modern tech stack and robust architecture for businesses of all sizes.",
-              icon: "🚀"
+              title: "Build — Next.js & AI products",
+              description: "Ship web apps, migrations, AI features, and APIs. App Router, TypeScript, production-ready code.",
+              icon: "🚀",
+              href: "/services/nextjs-development"
             },
             {
-              title: "E-commerce Solutions",
-              description: "Custom online stores with seamless user experience and secure transactions.",
-              icon: "🛒"
+              title: "Build — WordPress",
+              description: "Custom themes, plugins, headless WP with Next.js, and performance fixes that actually stick.",
+              icon: "🛠️",
+              href: "/services/wordpress"
             },
             {
-              title: "Technical Consultation",
-              description: "Expert advice on architecture, performance optimization, and best practices.",
-              icon: "💡"
+              title: "Level up — Cursor mentoring",
+              description: "Practical AI workflows, Cursor setup, and coaching so your team ships faster without messy code.",
+              icon: "⚡",
+              href: "/cursor-ambassador"
             }
           ].map((service, index) => (
-            <div 
+            <Link
               key={index}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow group"
+              href={service.href}
+              className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow group block"
             >
               <div className="text-3xl mb-4">{service.icon}</div>
               <h3 className="text-lg font-semibold text-zinc-900 mb-2 group-hover:text-orange-500 transition-colors">
@@ -302,7 +305,7 @@ export default function ContactPage() {
               <p className="text-sm text-zinc-500 leading-relaxed">
                 {service.description}
               </p>
-            </div>
+            </Link>
           ))}
         </div>
       </section>
@@ -320,10 +323,10 @@ export default function ContactPage() {
 
         <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16 min-h-[350px] relative">
           <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
-            Ready to Start Your Project?
+            Ready to build or level up?
           </h2>
           <p className="text-zinc-400 mb-8 max-w-lg font-medium">
-            Let&apos;s discuss your requirements and create something amazing together
+            Tell me about your product, timeline, and stack — or ask about Cursor mentoring for your team.
           </p>
 
           <div className="flex flex-wrap justify-center gap-3">
@@ -331,14 +334,14 @@ export default function ContactPage() {
               href="#contact-form"
               className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
             >
-              <span>Send Message</span>
+              <span>Send message</span>
               <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link 
               href="/services"
               className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3"
             >
-              <span>View Services</span>
+              <span>View services</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
