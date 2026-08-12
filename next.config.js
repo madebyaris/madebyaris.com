@@ -149,6 +149,14 @@ const nextConfig = {
   // Turbopack (default in Next.js 16) handles code splitting, tree-shaking,
   // and module concatenation automatically with optimized defaults.
   // If you need custom chunking, use Next.js built-in dynamic() imports instead.
+
+  redirects: async () => [
+    {
+      source: '/services/wordpress-development',
+      destination: '/services/wordpress',
+      permanent: true,
+    },
+  ],
 }
 
 export default withBundleAnalyzer({
