@@ -20,7 +20,7 @@ const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
   '@id': 'https://madebyaris.com/services/nextjs-development/#webpage',
-  name: 'Hire a Next.js Developer | Remote Full-Stack | Aris Setiawan',
+  name: 'Hire a Next.js Developer | Remote Full-Stack',
   description:
     'Hire a Next.js developer for product builds, migrations, and performance work. Remote-friendly. 13+ years. Cursor Ambassador — AI-accelerated delivery.',
   url: 'https://madebyaris.com/services/nextjs-development',
@@ -28,7 +28,7 @@ const structuredData = {
 
 export async function generateMetadata(): Promise<Metadata> {
   const metadata = buildPageMetadata({
-    title: 'Hire a Next.js Developer | Remote Full-Stack | Aris Setiawan',
+    title: 'Hire a Next.js Developer | Remote Full-Stack',
     description:
       'Hire a Next.js developer for product builds, migrations, and performance work. Remote-friendly. 13+ years. Cursor Ambassador — AI-accelerated delivery.',
     path: '/services/nextjs-development',
