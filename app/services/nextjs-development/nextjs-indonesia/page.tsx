@@ -165,7 +165,7 @@ export default function NextjsIndonesiaPage() {
         <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-sm">
           <p className="text-zinc-600 leading-relaxed text-lg">
             Halo! Saya Aris, developer Next.js yang menyediakan jasa pembuatan website profesional untuk bisnis dan individu di Indonesia. 
-            Dengan pengalaman lebih dari 8 tahun di bidang web development, saya fokus membuat website yang tidak hanya keren tampilannya, 
+            Dengan pengalaman lebih dari 13 tahun di bidang web development, saya fokus membuat website yang tidak hanya keren tampilannya,
             tapi juga cepat, mudah dikelola, dan SEO-friendly.
           </p>
         </div>

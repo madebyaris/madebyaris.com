@@ -1,192 +1,229 @@
 import type { Metadata } from 'next'
-import { Bot, ArrowRight, ArrowUpRight, Zap, Trophy, Code2, MessageSquare, Clock, Shield, Users, Target, Sparkles } from 'lucide-react'
+import {
+  Bot,
+  ArrowRight,
+  ArrowUpRight,
+  Zap,
+  Trophy,
+  Code2,
+  MessageSquare,
+  Shield,
+  Users,
+  Target,
+  Sparkles,
+  TrendingUp,
+} from 'lucide-react'
 import Link from 'next/link'
+import { buildPageMetadata } from '@/lib/seo'
 
-export const revalidate = 86400 // Revalidate daily
+export const revalidate = 86400
 
-// Structured Data for SEO
+const pageTitle = 'Cursor Mentoring & AI Workflow Coaching | Level up | Aris Setiawan'
+
 const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "@id": "https://madebyaris.com/services/vibe-code-friend/#webpage",
-  "name": "Vibe Code Friend - AI Coding Assistance & Mentorship | Made by Aris",
-  "description": "Get expert help with AI tools like Cursor, code fixes, server setup, and infrastructure architecture. Elevate your development workflow with personalized guidance.",
-  "url": "https://madebyaris.com/services/vibe-code-friend"
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': 'https://madebyaris.com/services/vibe-code-friend/#webpage',
+  name: pageTitle,
+  description:
+    'Level up your team with Cursor mentoring and practical AI coding workflows. From the first Cursor Ambassador in Indonesia.',
+  url: 'https://madebyaris.com/services/vibe-code-friend',
 }
 
-// Key Features Data
 const features = [
   {
-    title: "AI-Powered Assistance",
-    description: "Leverage cutting-edge AI tools like Cursor, GitHub Copilot, and Claude to accelerate your development workflow.",
-    icon: Sparkles
+    title: 'Cursor-first workflows',
+    description:
+      'Learn how to use Cursor effectively — prompts, context, and habits that stick after the session ends.',
+    icon: Sparkles,
   },
   {
-    title: "Real-Time Problem Solving",
-    description: "Get instant help with debugging, code optimization, and architectural decisions.",
-    icon: Target
+    title: 'Hands-on problem solving',
+    description:
+      'Work through real bugs, refactors, and architecture questions on your codebase, not toy examples.',
+    icon: Target,
   },
   {
-    title: "Personalized Learning",
-    description: "Tailored guidance based on your skill level, project requirements, and learning goals.",
-    icon: Users
+    title: 'Personalized coaching',
+    description:
+      'Sessions matched to your skill level, stack, and what your team actually needs to ship.',
+    icon: Users,
   },
   {
-    title: "Infrastructure Expertise",
-    description: "From server setup to cloud architecture, get expert guidance on building scalable solutions.",
-    icon: Shield
-  }
+    title: 'Practical guardrails',
+    description:
+      'When to trust AI output, when to review hard, and how to keep quality high as you speed up.',
+    icon: Shield,
+  },
 ]
 
-// Services Data
 const services = [
   {
     title: 'AI IDE Tutoring',
-    description: 'Master AI-powered IDEs like Cursor with personalized tutoring and hands-on guidance.',
+    description: 'Master Cursor and AI-powered IDEs with guided sessions on your real projects.',
     icon: Code2,
     href: '/services/vibe-code-friend/ai-ide-tutoring',
-    features: ['Cursor Mastery', 'Prompt Engineering', 'Workflow Integration', 'Best Practices'],
+    features: ['Cursor setup', 'Prompt patterns', 'Workflow integration', 'Team habits'],
   },
   {
     title: 'Code Fixing',
-    description: 'Quick and efficient debugging and error resolution with clear explanations.',
+    description: 'Debug stubborn issues together — with clear explanations so you learn the fix.',
     icon: Zap,
     href: '/services/vibe-code-friend/code-fixing',
-    features: ['Bug Resolution', 'Error Diagnosis', 'Performance Fixes', 'Code Review'],
+    features: ['Bug resolution', 'Error diagnosis', 'Performance fixes', 'Code review'],
   },
 ]
 
-// Benefits Data
 const benefits = [
-  "Faster Development Cycles",
-  "Reduced Debugging Time", 
-  "Improved Code Quality",
-  "Better Architecture Decisions",
-  "Enhanced Learning Experience",
-  "24/7 Expert Support",
-  "Cost-Effective Solutions",
-  "Scalable Infrastructure"
+  'Ship faster with confidence',
+  'Less time stuck debugging',
+  'Better code review habits',
+  'Clearer architecture decisions',
+  'Team-wide AI workflow alignment',
+  'Flexible session scheduling',
+  'Cost-effective vs. hiring blindly',
+  'Skills that compound over time',
 ]
 
-// Technologies Data
 const technologies = [
-  "Cursor IDE", "GitHub Copilot", "Claude", "ChatGPT", "Next.js", "React", "TypeScript", 
-  "Node.js", "Python", "Docker", "AWS", "Vercel", "PostgreSQL", "MongoDB"
+  'Cursor',
+  'GitHub Copilot',
+  'Claude',
+  'ChatGPT',
+  'Next.js',
+  'React',
+  'TypeScript',
+  'Node.js',
+  'Python',
+  'Docker',
+  'Vercel',
 ]
 
-// Generate Metadata
 export async function generateMetadata(): Promise<Metadata> {
+  const metadata = buildPageMetadata({
+    title: 'Cursor Mentoring & AI Workflow Coaching | Level up',
+    description:
+      'Level up your team with Cursor mentoring and practical AI coding workflows. From the first Cursor Ambassador in Indonesia.',
+    path: '/services/vibe-code-friend',
+  })
+
   return {
-    title: "Vibe Code Friend - AI Coding Assistance & Mentorship | Made by Aris",
-    description: "Get expert help with AI tools like Cursor, code fixes, server setup, and infrastructure architecture. Elevate your development workflow with personalized guidance.",
-    openGraph: {
-      title: "Vibe Code Friend - AI Coding Assistance & Mentorship",
-      description: "Level up your coding with AI tools and expert guidance.",
-      url: "https://madebyaris.com/services/vibe-code-friend",
-      siteName: "Made by Aris",
-      locale: "en_US",
-      type: "website",
-    },
-    alternates: {
-      canonical: "https://madebyaris.com/services/vibe-code-friend",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: "Vibe Code Friend - AI Coding Assistance & Mentorship",
-      description: "Get expert help with AI tools like Cursor, code fixes, server setup, and infrastructure architecture.",
-    },
+    ...metadata,
+    title: { absolute: pageTitle },
+    openGraph: { ...metadata.openGraph, title: pageTitle },
+    twitter: { ...metadata.twitter, title: pageTitle },
+    keywords: [
+      'Cursor Mentoring',
+      'AI Workflow Coaching',
+      'Cursor Ambassador Indonesia',
+      'AI IDE Tutoring',
+      'Vibe Code Friend',
+      'Developer Coaching',
+      'Cursor Training',
+    ],
   }
 }
 
 export default function VibeCodeFriendPage() {
   return (
     <>
-      {/* Add structured data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      
+
       {/* Hero Section */}
       <section className="text-center pt-8 pb-16">
-        {/* Badge */}
-        <div 
+        <div
           className="inline-flex bg-white/60 rounded-full mb-8 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2"
           style={{
             position: 'relative',
             // @ts-expect-error CSS custom properties
             '--border-gradient': 'linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0))',
-            '--border-radius-before': '9999px'
+            '--border-radius-before': '9999px',
           }}
         >
-          <Bot className="w-4 h-4 text-orange-500" />
-          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">AI Development Partner</span>
+          <TrendingUp className="w-4 h-4 text-orange-500" />
+          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">
+            Level up · Cursor · Remote
+          </span>
         </div>
 
-        {/* Title */}
-        <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
-          Vibe Code
-          <span className="block gradient-text font-light">Friend</span>
+        <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-4">
+          Level up with Cursor
+          <span className="block gradient-text font-light">& AI workflows</span>
         </h1>
 
-        {/* Description */}
+        <div
+          className="inline-flex bg-orange-50 rounded-full mb-6 py-1.5 px-4 items-center gap-2"
+        >
+          <Bot className="w-4 h-4 text-orange-500" />
+          <span className="text-xs font-semibold tracking-wide text-orange-700">
+            Vibe Code Friend
+          </span>
+        </div>
+
         <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
-          Your AI-powered coding companion. We help developers master AI tools like Cursor, 
-          fix stubborn bugs, set up reliable servers, and architect scalable infrastructure.
+          Mentoring and workflow coaching for developers and teams — not product builds. Learn
+          practical Cursor habits from Indonesia&apos;s first Cursor Ambassador.
         </p>
 
-        {/* CTA Buttons */}
         <div className="flex flex-wrap justify-center gap-3">
-          <Link 
+          <Link
             href="/contact"
             className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
           >
-            <span className="text-sm font-medium tracking-tight">Get Started</span>
+            <span className="text-sm font-medium tracking-tight">Book a session</span>
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </Link>
-          <Link 
-            href="/services"
+          <Link
+            href="/services/ai-development"
             className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
             style={{
-              boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)',
+              boxShadow:
+                '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)',
               position: 'relative',
               // @ts-expect-error CSS custom properties
-              '--border-gradient': 'linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.8))',
-              '--border-radius-before': '9999px'
+              '--border-gradient':
+                'linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.8))',
+              '--border-radius-before': '9999px',
             }}
           >
-            <span className="text-sm font-medium text-black/60 tracking-tight">View Services</span>
+            <span className="text-sm font-medium text-black/60 tracking-tight">
+              Need AI built for you?
+            </span>
             <ArrowRight className="w-4 h-4 text-zinc-500" />
           </Link>
         </div>
       </section>
 
-      {/* Separator */}
       <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
 
       {/* Key Features Section */}
       <section className="mb-16">
         <div className="text-center mb-10">
-          <div 
+          <div
             className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2"
             style={{
               position: 'relative',
               // @ts-expect-error CSS custom properties
               '--border-gradient': 'linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0))',
-              '--border-radius-before': '9999px'
+              '--border-radius-before': '9999px',
             }}
           >
             <Zap className="w-4 h-4 text-orange-500" />
-            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Key Features</span>
+            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">
+              What you get
+            </span>
           </div>
           <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            What Makes Vibe Code Friend <span className="gradient-text">Special</span>
+            Coaching that <span className="gradient-text">sticks</span>
           </h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {features.map((feature) => (
-            <div 
+            <div
               key={feature.title}
               className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm hover:shadow-lg transition-all group"
             >
@@ -200,29 +237,30 @@ export default function VibeCodeFriendPage() {
         </div>
       </section>
 
-      {/* Separator */}
       <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
 
       {/* Services Section */}
       <section className="mb-16">
         <div className="text-center mb-10">
-          <div 
+          <div
             className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2"
             style={{
               position: 'relative',
               // @ts-expect-error CSS custom properties
               '--border-gradient': 'linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0))',
-              '--border-radius-before': '9999px'
+              '--border-radius-before': '9999px',
             }}
           >
-            <Bot className="w-4 h-4 text-orange-500" />
-            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Services</span>
+            <MessageSquare className="w-4 h-4 text-orange-500" />
+            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">
+              Formats
+            </span>
           </div>
           <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            AI-Powered Development <span className="gradient-text">Assistance</span>
+            How we can <span className="gradient-text">work together</span>
           </h2>
           <p className="text-sm text-zinc-500 max-w-lg mx-auto font-medium">
-            Comprehensive coding support to accelerate your development workflow
+            Tutoring, pairing, and targeted fixes — pick what fits your team.
           </p>
         </div>
 
@@ -238,17 +276,15 @@ export default function VibeCodeFriendPage() {
                     <h3 className="text-lg font-semibold text-zinc-900 mb-1 group-hover:text-orange-500 transition-colors">
                       {service.title}
                     </h3>
-                    <p className="text-sm text-zinc-500 leading-relaxed">
-                      {service.description}
-                    </p>
+                    <p className="text-sm text-zinc-500 leading-relaxed">{service.description}</p>
                   </div>
                   <ArrowUpRight className="w-5 h-5 text-zinc-400 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
-                
+
                 <div className="flex flex-wrap gap-1.5">
                   {service.features.map((feature) => (
-                    <span 
-                      key={feature} 
+                    <span
+                      key={feature}
                       className="px-2 py-0.5 bg-zinc-100 rounded text-[10px] text-zinc-600 font-medium"
                     >
                       {feature}
@@ -261,32 +297,33 @@ export default function VibeCodeFriendPage() {
         </div>
       </section>
 
-      {/* Separator */}
       <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
 
       {/* Benefits Section */}
       <section className="mb-16">
         <div className="text-center mb-10">
-          <div 
+          <div
             className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2"
             style={{
               position: 'relative',
               // @ts-expect-error CSS custom properties
               '--border-gradient': 'linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0))',
-              '--border-radius-before': '9999px'
+              '--border-radius-before': '9999px',
             }}
           >
             <Trophy className="w-4 h-4 text-orange-500" />
-            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Advantages</span>
+            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">
+              Outcomes
+            </span>
           </div>
           <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter">
-            Benefits of AI-Assisted <span className="gradient-text">Development</span>
+            What teams <span className="gradient-text">gain</span>
           </h2>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {benefits.map((benefit) => (
-            <div 
+            <div
               key={benefit}
               className="p-4 bg-white/80 backdrop-blur-sm rounded-xl text-center text-sm font-medium text-zinc-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
             >
@@ -296,28 +333,24 @@ export default function VibeCodeFriendPage() {
         </div>
       </section>
 
-      {/* Separator */}
       <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
 
       {/* Process Section */}
       <section className="mb-16">
         <div className="text-center mb-10">
           <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            How It <span className="gradient-text">Works</span>
+            How it <span className="gradient-text">works</span>
           </h2>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {[
-            { step: 1, title: "Consultation", desc: "Discuss your challenges and goals" },
-            { step: 2, title: "Setup & Training", desc: "Configure AI tools and learn best practices" },
-            { step: 3, title: "Active Support", desc: "Real-time assistance during development" },
-            { step: 4, title: "Optimization", desc: "Continuous improvement of your workflow" },
+            { step: 1, title: 'Intake', desc: 'Your stack, goals, and where you get stuck' },
+            { step: 2, title: 'Setup', desc: 'Cursor config and workflow baseline' },
+            { step: 3, title: 'Sessions', desc: 'Live pairing and tutoring on real work' },
+            { step: 4, title: 'Iterate', desc: 'Refine habits as your team adopts AI tools' },
           ].map((item) => (
-            <div 
-              key={item.step}
-              className="bg-zinc-50 rounded-2xl p-5 text-center"
-            >
+            <div key={item.step} className="bg-zinc-50 rounded-2xl p-5 text-center">
               <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-500 font-bold text-lg flex items-center justify-center mx-auto mb-3">
                 {item.step}
               </div>
@@ -328,21 +361,20 @@ export default function VibeCodeFriendPage() {
         </div>
       </section>
 
-      {/* Separator */}
       <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
 
       {/* Technologies Section */}
       <section className="mb-16">
         <div className="text-center mb-10">
           <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            Tools & <span className="gradient-text">Technologies</span>
+            Tools we <span className="gradient-text">cover</span>
           </h2>
         </div>
 
         <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6">
-          <div className="grid grid-cols-3 md:grid-cols-7 gap-3">
+          <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
             {technologies.map((tech) => (
-              <div 
+              <div
                 key={tech}
                 className="p-3 bg-zinc-50 rounded-xl text-center text-xs font-medium text-zinc-600 hover:bg-orange-50 hover:text-orange-600 transition-colors"
               >
@@ -355,35 +387,37 @@ export default function VibeCodeFriendPage() {
 
       {/* CTA Section */}
       <section className="overflow-hidden min-h-[400px] shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
-        <div 
-          className="absolute inset-0 opacity-10" 
+        <div
+          className="absolute inset-0 opacity-10"
           style={{
-            backgroundImage: 'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)',
-            backgroundSize: '40px 40px'
+            backgroundImage:
+              'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)',
+            backgroundSize: '40px 40px',
           }}
         />
 
         <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16 min-h-[400px] relative">
           <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
-            Ready to Level Up Your Coding Experience?
+            Ready to level up your team?
           </h2>
           <p className="text-zinc-400 mb-8 max-w-lg font-medium">
-            Whether you&apos;re looking to master AI tools, fix stubborn bugs, or architect your next big project, I&apos;m here to help.
+            Whether you&apos;re new to Cursor or want tighter AI workflows across the team — let&apos;s
+            talk about what would help most.
           </p>
 
           <div className="flex flex-wrap justify-center gap-3">
-            <Link 
+            <Link
               href="/contact"
               className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
             >
-              <span>Schedule Free Consultation</span>
+              <span>Get in touch</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
-            <Link 
+            <Link
               href="/services"
               className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3"
             >
-              <span>Explore Services</span>
+              <span>All services</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>

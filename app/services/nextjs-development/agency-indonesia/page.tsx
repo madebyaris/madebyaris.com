@@ -8,8 +8,8 @@ export const revalidate = 86400 // Revalidate daily
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "Service",
-  "name": "Agensi Next.js Indonesia",
-  "description": "Agensi Next.js terpercaya di Indonesia untuk pengembangan website enterprise. Website modern, performa tinggi, dan SEO-friendly.",
+  "name": "Next.js Indonesia — Solo Specialist",
+  "description": "Spesialis Next.js solo di Indonesia untuk website modern dan performa tinggi. Praktik personal — bisa kolaborasi dengan partner tepercaya saat proyek membutuhkan.",
   "url": "https://madebyaris.com/services/nextjs-development/agency-indonesia",
   "provider": {
     "@type": "Person",
@@ -22,8 +22,8 @@ const structuredData = {
 // Generate Metadata
 export function generateMetadata(): Metadata {
   return {
-    title: 'Agensi Next.js Indonesia | Solusi Website Enterprise',
-    description: 'Agensi Next.js terpercaya di Indonesia untuk pengembangan website enterprise. Website modern, performa tinggi, dan SEO-friendly untuk perusahaan besar.',
+    title: 'Next.js Agency Indonesia | Solo Specialist · Enterprise Sites',
+    description: 'Spesialis Next.js solo di Indonesia untuk website perusahaan dan enterprise. Praktik personal — bukan tim besar. Website modern, performa tinggi, SEO-friendly.',
     keywords: [
       'Agensi Next.js Indonesia',
       'Website Enterprise Next.js',
@@ -32,8 +32,8 @@ export function generateMetadata(): Metadata {
       'Website Perusahaan Modern'
     ],
     openGraph: {
-      title: 'Agensi Next.js Indonesia | Solusi Website Enterprise',
-      description: 'Agensi Next.js terpercaya di Indonesia untuk pengembangan website enterprise.',
+      title: 'Next.js Agency Indonesia | Solo Specialist · Enterprise Sites',
+      description: 'Spesialis Next.js solo di Indonesia untuk website perusahaan dan enterprise.',
       type: 'website',
       locale: 'id_ID',
     },
@@ -46,27 +46,27 @@ export function generateMetadata(): Metadata {
 const features = [
   {
     title: 'Solusi untuk Perusahaan',
-    description: 'Solusi Next.js lengkap untuk website perusahaan dengan kebutuhan yang kompleks.',
+    description: 'Next.js untuk website perusahaan dengan kebutuhan kompleks — dikerjakan langsung oleh spesialis, bukan dioper ke tim junior.',
     icon: Building,
   },
   {
     title: 'Layanan Lengkap',
-    description: 'Pembuatan website dari awal sampai akhir, mulai dari perencanaan sampai pemeliharaan.',
+    description: 'Dari perencanaan sampai peluncuran dan pemeliharaan — satu titik kontak, komunikasi jelas.',
     icon: Briefcase,
   },
   {
-    title: 'Tim Profesional',
-    description: 'Didukung oleh tim developer Next.js, desainer, dan manajer proyek yang berpengalaman.',
+    title: 'Spesialis Berpengalaman',
+    description: '13+ tahun web development. Saya kerjakan sendiri; untuk kebutuhan desain atau QA ekstra, kolaborasi dengan partner tepercaya.',
     icon: Users,
   },
   {
     title: 'Teknologi Terkini',
-    description: 'Bikin website cepat dan keren pakai teknologi Next.js terbaru yang sudah terbukti handal.',
+    description: 'Website cepat dan modern dengan Next.js terbaru — App Router, TypeScript, dan praktik produksi.',
     icon: Code2,
   },
   {
     title: 'Tepat Waktu',
-    description: 'Manajemen proyek yang terstruktur untuk memastikan website kamu selesai tepat waktu.',
+    description: 'Scope dan milestone yang jelas supaya proyek selesai sesuai rencana.',
     icon: Clock,
   },
 ]
@@ -84,12 +84,12 @@ const services = [
 ]
 
 const benefits = [
-  'Tim Berpengalaman',
+  'Spesialis Berpengalaman',
   'Teknologi Modern',
-  'Proses Terstruktur',
+  'Proses Jelas',
   'Tepat Waktu',
   'Support Berkelanjutan',
-  'Harga Kompetitif'
+  'Harga Transparan',
 ]
 
 const processSteps = [
@@ -124,19 +124,20 @@ export default function AgencyIndonesiaPage() {
         {/* Badge */}
         <div className="inline-flex bg-white/60 rounded-full mb-8 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
           <Building className="w-4 h-4 text-orange-500" />
-          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Layanan Agensi</span>
+          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Spesialis Solo</span>
         </div>
 
         {/* Title */}
         <h1 className="leading-[0.95] lg:text-[3.5rem] text-3xl font-medium text-zinc-900 tracking-tighter mb-6">
-          Agensi Next.js
+          Next.js Agency
           <span className="block gradient-text font-light">Indonesia</span>
         </h1>
 
         {/* Description */}
         <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
-          Agensi pembuatan website Next.js untuk perusahaan Indonesia. 
-          Solusi website modern dan cepat untuk bisnis kamu.
+          Spesialis Next.js solo untuk perusahaan di Indonesia — bukan agensi dengan tim besar.
+          Website modern, cepat, dan siap produksi. Kolaborasi dengan partner tepercaya jika proyek
+          butuh kapasitas extra.
         </p>
 
         {/* CTA Buttons */}
@@ -145,7 +146,7 @@ export default function AgencyIndonesiaPage() {
             href="/contact"
             className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
           >
-            <span className="text-sm font-medium tracking-tight">Hubungi Kami</span>
+            <span className="text-sm font-medium tracking-tight">Hubungi Saya</span>
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </Link>
           <Link 
@@ -168,9 +169,11 @@ export default function AgencyIndonesiaPage() {
       <section className="mb-16">
         <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-sm">
           <p className="text-zinc-600 leading-relaxed text-lg">
-            Sebagai agensi Next.js di Indonesia, kami menyediakan jasa pembuatan website yang lengkap 
-            untuk perusahaan dan organisasi. Pendekatan kami menggabungkan keahlian teknis 
-            dengan manajemen proyek yang terstruktur untuk menghasilkan website Next.js berkualitas tinggi.
+            Saya Aris — spesialis Next.js solo di Indonesia. Halaman ini memakai kata &ldquo;agency&rdquo; karena
+            banyak pencarian enterprise di Indonesia, tapi yang kamu dapat adalah praktik personal:
+            saya yang mengerjakan, komunikasi langsung, tanpa lapisan account manager. Untuk proyek
+            besar, saya bisa kolaborasi dengan partner desain atau QA tepercaya — tetap dengan saya
+            sebagai lead developer.
           </p>
         </div>
       </section>
@@ -186,7 +189,7 @@ export default function AgencyIndonesiaPage() {
             <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Keunggulan</span>
           </div>
           <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            Kenapa Pilih <span className="gradient-text">Agensi Kami</span>
+            Kenapa Pilih <span className="gradient-text">Spesialis Ini</span>
           </h2>
         </div>
 
@@ -240,7 +243,7 @@ export default function AgencyIndonesiaPage() {
       <section className="mb-16">
         <div className="text-center mb-10">
           <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            Apa Saja yang <span className="gradient-text">Kami Tawarkan</span>
+            Apa Saja yang <span className="gradient-text">Saya Tawarkan</span>
           </h2>
         </div>
 
@@ -263,7 +266,7 @@ export default function AgencyIndonesiaPage() {
       <section className="mb-16">
         <div className="text-center mb-10">
           <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            Cara <span className="gradient-text">Kerja Kami</span>
+            Cara <span className="gradient-text">Kerja Saya</span>
           </h2>
         </div>
         
@@ -298,7 +301,7 @@ export default function AgencyIndonesiaPage() {
             Siap Buat Website Perusahaan?
           </h2>
           <p className="text-zinc-400 mb-8 max-w-lg font-medium">
-            Yuk, diskusi bagaimana kami bisa bantu bisnis atau organisasi kamu memiliki website modern yang keren!
+            Yuk, diskusi bagaimana saya bisa bantu bisnis atau organisasi kamu punya website Next.js modern!
           </p>
 
           <div className="flex flex-wrap justify-center gap-3">
@@ -306,7 +309,7 @@ export default function AgencyIndonesiaPage() {
               href="/contact"
               className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
             >
-              <span>Hubungi Kami Sekarang</span>
+              <span>Hubungi Saya Sekarang</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link 

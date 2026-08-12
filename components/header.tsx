@@ -24,9 +24,10 @@ const navigationItems: NavigationItem[] = [
     label: 'Services',
     children: [
       { href: '/services/nextjs-development', label: 'Next.js Development' },
+      { href: '/services/ai-development', label: 'AI Development' },
       { href: '/services/wordpress', label: 'WordPress Development' },
+      { href: '/services/vibe-code-friend', label: 'Cursor / AI Workflows' },
       { href: '/services/php-development', label: 'PHP Development' },
-      { href: '/services/vibe-code-friend', label: 'Vibe Code Friend' },
     ]
   },
   { href: '/blog', label: 'Blog' },
