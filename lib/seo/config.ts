@@ -5,7 +5,7 @@ export const siteConfig = {
   shortName: 'MadeByAris',
   url: process.env.NEXT_PUBLIC_SITE_URL ?? productionUrl,
   description:
-    'Senior Full-Stack Developer specializing in Next.js, React, WordPress, and enterprise-scale web applications.',
+    'AI-optimized full-stack developer and Cursor Ambassador Indonesia. Enterprise Next.js, React, and WordPress apps with modern AI workflows. 13+ years experience, Indonesia-based.',
   author: 'Aris Setiawan',
   locale: 'en_US',
   logo: '/logo.png',
@@ -15,8 +15,9 @@ export const siteConfig = {
     'https://github.com/madebyaris',
     'https://www.linkedin.com/in/arissetia',
     'https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe',
+    'https://x.com/arisberikut',
   ],
-  twitterHandle: '@madebyaris',
+  twitterHandle: '@arisberikut',
 } as const
 
 export function absoluteUrl(path: string): string {

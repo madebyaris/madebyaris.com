@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Suspense } from 'react'
 import { getPosts } from '@/lib/wordpress'
-import { ArrowRight, ArrowUpRight, Code2, Globe, Server, Zap, Users, Clock, CheckCircle, Home } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Code2, Globe, Server, Zap, Users, Clock, Award, Home, Sparkles } from 'lucide-react'
 import { structuredData } from '@/lib/structured-data'
 import { buildPageMetadata } from '@/lib/seo'
 import { JsonLd } from '@/components/seo/json-ld'
@@ -22,27 +22,27 @@ const PostsFallback = () => (
 
 export async function generateMetadata() {
   const metadata = buildPageMetadata({
-    title: 'Senior Full-Stack Developer | Next.js & WordPress',
+    title: 'AI-Optimized Full-Stack Developer | Cursor Ambassador Indonesia',
     description:
-      '12+ years building enterprise apps with Next.js, React, WordPress, and PHP. Headless CMS and scalable architecture. Indonesia-based, worldwide clients.',
+      'Aris Setiawan — Cursor Ambassador Indonesia and AI-optimized full-stack developer. Enterprise Next.js, React, and WordPress apps with practical AI workflows. 13+ years experience, Indonesia-based.',
     path: '/',
   })
 
   return {
     ...metadata,
     keywords: [
+      'Cursor Ambassador Indonesia',
+      'AI-Optimized Full-Stack Developer',
+      'MiniMax Dev Community Expert',
       'Senior Next.js Developer',
       'Headless WordPress Expert',
       'Enterprise React Architect',
       'Full-Stack PHP Developer',
-      'Web Architecture Specialist',
-      'Senior Software Engineer',
       'Next.js Developer Indonesia',
       'WordPress Developer Indonesia',
       'React Developer Indonesia',
       'Full-Stack Developer Indonesia',
-      'Enterprise Web Solutions',
-      'Headless CMS Indonesia',
+      'AI Workflows Developer',
     ],
   }
 }
@@ -97,15 +97,15 @@ const services = [
 const features = [
   {
     icon: Clock,
-    text: "12+ years of enterprise development experience building scalable solutions.",
+    text: "13+ years building scalable web products for startups, agencies, and enterprises.",
   },
   {
     icon: Users,
-    text: "Worked with startups, agencies, and Fortune 500 companies worldwide.",
+    text: "Named collaborators include Hongkiat, SAB Digital, Raja Kreatif, and Ta-Wan.",
   },
   {
-    icon: CheckCircle,
-    text: "Comprehensive solutions from architecture planning to deployment.",
+    icon: Award,
+    text: "Cursor Ambassador Indonesia and MiniMax Dev Community Expert.",
   },
   {
     icon: Home,
@@ -157,21 +157,20 @@ export default function HomePage() {
               </div>
             </div>
             <span className="text-xs font-medium text-zinc-600 tracking-wide">
-              <span className="text-zinc-900">Available</span> for new projects
+              <span className="text-zinc-900">Cursor Ambassador · MiniMax Expert · Available for hire</span>
             </span>
           </div>
 
           {/* Headline */}
           <h1 className="leading-[0.95] lg:text-[5rem] text-5xl font-medium text-zinc-900 tracking-tighter mb-8">
-            Full-Stack
-            <span className="block gradient-text font-light">Developer &</span>
-            <span className="block">Web Architect</span>
+            AI-Optimized
+            <span className="block gradient-text font-light">Full-Stack</span>
+            <span className="block">Developer</span>
           </h1>
 
           {/* Subheadline */}
           <p className="text-sm text-zinc-500 font-medium max-w-md mb-10 leading-relaxed tracking-wide border-l-2 border-zinc-200 pl-6">
-            Hi, I&apos;m <span className="text-zinc-900 font-semibold">Aris Setiawan</span>. I architect enterprise-scale web applications 
-            using Next.js, React, WordPress, and PHP. 13+ years of experience building solutions that scale.
+            Hi, I&apos;m <span className="text-zinc-900 font-semibold">Aris Setiawan</span>. First Cursor Ambassador in Indonesia. I build enterprise Next.js, React, and WordPress apps — and help teams ship faster with practical AI workflows. 13+ years experience.
           </p>
 
           {/* Action Buttons */}
@@ -180,13 +179,13 @@ export default function HomePage() {
               href="/contact"
               className="btn-primary hover:scale-[1.02] transition-all flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center justify-between"
             >
-              <span className="text-sm font-medium tracking-tight">Start a Project</span>
+              <span className="text-sm font-medium tracking-tight">Hire me to build</span>
               <span className="flex items-center justify-center rounded-full bg-black/10 px-3 py-1">
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </span>
             </Link>
             <Link 
-              href="/projects"
+              href="/cursor-ambassador"
               className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
               style={{
                 boxShadow: '0 18px 35px rgba(31, 41, 55, 0.25), 0 0 0 1px rgba(209, 213, 219, 0.3)',
@@ -196,44 +195,8 @@ export default function HomePage() {
                 '--border-radius-before': '9999px'
               }}
             >
-              <span className="text-sm font-medium text-black/60 tracking-tight">View Projects</span>
+              <span className="text-sm font-medium text-black/60 tracking-tight">Learn AI workflows</span>
               <ArrowRight className="w-4 h-4 text-zinc-500" />
-            </Link>
-          </div>
-
-          {/* Ambassador Links */}
-          <div className="flex flex-wrap gap-3 -mt-8 mb-16 lg:-mt-16 lg:mb-24">
-            <Link
-              href="/minimax-ambassador"
-              className="btn-secondary hover:bg-white/50 transition-all flex group text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center justify-between backdrop-blur-sm"
-              style={{
-                background: 'linear-gradient(to bottom, rgba(239, 61, 93, 0.48), rgba(239, 61, 93, 0.32))',
-                boxShadow: '0 18px 35px rgba(239, 61, 93, 0.22), 0 0 0 1px rgba(239, 61, 93, 0.35)',
-                position: 'relative',
-                // @ts-expect-error CSS custom properties
-                '--border-gradient': 'linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(239, 61, 93, 0.55), rgba(255, 255, 255, 0.8))',
-                '--border-radius-before': '9999px',
-                color: '#111827',
-                fontWeight: 500,
-              }}
-            >
-              MiniMax Dev Community Expert
-            </Link>
-            <Link
-              href="/cursor-ambassador"
-              className="btn-secondary hover:bg-white/40 transition-all flex group text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center justify-between backdrop-blur-sm"
-              style={{
-                background: 'linear-gradient(to bottom, rgba(9, 9, 11, 0.52), rgba(9, 9, 11, 0.36))',
-                boxShadow: '0 18px 35px rgba(9, 9, 11, 0.36), 0 0 0 1px rgba(9, 9, 11, 0.5)',
-                position: 'relative',
-                // @ts-expect-error CSS custom properties
-                '--border-gradient': 'linear-gradient(180deg, rgba(255, 255, 255, 0.75), rgba(9, 9, 11, 0.7), rgba(255, 255, 255, 0.75))',
-                '--border-radius-before': '9999px',
-                color: '#111827',
-                fontWeight: 500,
-              }}
-            >
-              Cursor Ambassador
             </Link>
           </div>
 
@@ -245,7 +208,7 @@ export default function HomePage() {
                 <p className="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mb-1 group-hover:text-zinc-600 transition-colors">
                   Experience
                 </p>
-                <p className="text-sm text-zinc-900 font-medium">12+ Years</p>
+                <p className="text-sm text-zinc-900 font-medium">13+ Years</p>
               </div>
               <div className="curve-separator opacity-60 ml-4 md:ml-8" />
             </div>
@@ -279,7 +242,7 @@ export default function HomePage() {
             {/* Background Image */}
             <Image
               src="/aris.png"
-              alt="Aris Setiawan - Senior Full-Stack Developer"
+              alt="Aris Setiawan - AI-Optimized Full-Stack Developer and Cursor Ambassador Indonesia"
               fill
               className="transition-transform duration-[2s] ease-in-out group-hover:scale-110 object-cover"
               priority
@@ -331,7 +294,7 @@ export default function HomePage() {
                 </div>
                 <div className="flex flex-col gap-1">
                   <span className="text-[9px] text-white/60 uppercase">Specialization</span>
-                  <span className="text-sm text-white font-medium">Next.js · React · WordPress</span>
+                  <span className="text-sm text-white font-medium">Cursor · Next.js · WordPress</span>
                 </div>
               </div>
             </div>
@@ -353,7 +316,7 @@ export default function HomePage() {
               Services
             </h2>
             <p className="leading-relaxed text-base font-normal text-zinc-500">
-              From concept to deployment. Enterprise-grade solutions built with modern technologies and best practices.
+              Build enterprise-grade web products — from concept to deployment with modern technologies and proven delivery.
             </p>
           </div>
           <Link 
@@ -397,6 +360,75 @@ export default function HomePage() {
       {/* Separator */}
       <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mt-16 lg:mt-24 mb-16 lg:mb-24 opacity-60" />
 
+      {/* Level Up Section */}
+      <section className="flex flex-col gap-8 w-full relative">
+        <div className="bento-card group relative overflow-hidden p-8 md:p-10">
+          <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+            <div className="max-w-2xl">
+              <div className="flex items-center gap-2 mb-3 text-zinc-400">
+                <Sparkles className="w-6 h-6" />
+              </div>
+              <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+                Level up with
+                <span className="gradient-text"> AI workflows</span>
+              </h2>
+              <p className="leading-relaxed text-base font-normal text-zinc-500">
+                Mentoring, Cursor workflows, and community learning for teams and builders who want to ship faster with AI.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href="/cursor-ambassador"
+                className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
+                style={{
+                  boxShadow: '0 18px 35px rgba(31, 41, 55, 0.25), 0 0 0 1px rgba(209, 213, 219, 0.3)',
+                  position: 'relative',
+                  // @ts-expect-error CSS custom properties
+                  '--border-gradient': 'linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.4), rgba(255, 255, 255, 0.8))',
+                  '--border-radius-before': '9999px'
+                }}
+              >
+                Cursor Ambassador
+                <ArrowRight className="w-4 h-4 text-zinc-500" />
+              </Link>
+              <Link
+                href="/minimax-ambassador"
+                className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
+                style={{
+                  boxShadow: '0 18px 35px rgba(31, 41, 55, 0.25), 0 0 0 1px rgba(209, 213, 219, 0.3)',
+                  position: 'relative',
+                  // @ts-expect-error CSS custom properties
+                  '--border-gradient': 'linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.4), rgba(255, 255, 255, 0.8))',
+                  '--border-radius-before': '9999px'
+                }}
+              >
+                MiniMax Expert
+                <ArrowRight className="w-4 h-4 text-zinc-500" />
+              </Link>
+              <Link
+                href="https://bootcamp.madebyaris.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
+                style={{
+                  boxShadow: '0 18px 35px rgba(31, 41, 55, 0.25), 0 0 0 1px rgba(209, 213, 219, 0.3)',
+                  position: 'relative',
+                  // @ts-expect-error CSS custom properties
+                  '--border-gradient': 'linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.4), rgba(255, 255, 255, 0.8))',
+                  '--border-radius-before': '9999px'
+                }}
+              >
+                Bootcamp
+                <ArrowUpRight className="w-4 h-4 text-zinc-500" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Separator */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mt-16 lg:mt-24 mb-16 lg:mb-24 opacity-60" />
+
       {/* Features Row */}
       <section className="flex flex-col gap-16 w-full relative">
         {/* Top Feature Grid */}
@@ -427,16 +459,24 @@ export default function HomePage() {
           {/* Content Container */}
           <div className="flex flex-col p-8 md:p-12 lg:p-16 justify-center min-h-[500px] lg:min-h-[600px] relative">
             <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-8 max-w-3xl">
-              Ready to build your next project with modern technologies and enterprise-grade architecture?
+              Ready to build with modern architecture — or level up your team&apos;s AI workflow?
             </h2>
 
-            <Link 
-              href="/contact"
-              className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 w-fit shadow-lg hover:shadow-xl hover:-translate-y-0.5"
-            >
-              <span>Let&apos;s Talk</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+              <Link 
+                href="/contact"
+                className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 w-fit shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+              >
+                <span>Hire me to build</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <Link
+                href="/cursor-ambassador"
+                className="text-sm font-medium text-white/70 hover:text-white transition-colors"
+              >
+                Learn AI workflows →
+              </Link>
+            </div>
 
             {/* Trusted By */}
             <div className="mt-12 pt-8 border-t border-white/10">
