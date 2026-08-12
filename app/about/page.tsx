@@ -182,8 +182,8 @@ const structuredData = {
   "@type": "AboutPage",
   "@id": "https://madebyaris.com/about/#webpage",
   "url": "https://madebyaris.com/about",
-  "name": "About Aris Setiawan | Senior Full-Stack Developer & Web Architect",
-  "description": "Learn about Aris Setiawan's 12+ years of experience in enterprise web development, specializing in Next.js, React, WordPress, and modern web architecture.",
+  "name": "About Aris Setiawan | AI-Optimized Full-Stack Developer",
+  "description": "Learn about Aris Setiawan's 13+ years building web products — Next.js, AI integrations, WordPress. Cursor Ambassador Indonesia. Build products or level up your team.",
   "isPartOf": {
     "@type": "WebSite",
     "@id": "https://madebyaris.com/#website"
@@ -213,8 +213,8 @@ const structuredData = {
     "@type": "Person",
     "@id": "https://madebyaris.com/#person",
     "name": "Aris Setiawan",
-    "jobTitle": "Senior Full Stack Developer",
-    "description": "Senior Full Stack Developer with 12+ years of experience in Next.js, React, WordPress, and enterprise web architecture.",
+    "jobTitle": "AI-Optimized Full-Stack Developer",
+    "description": "AI-Optimized Full-Stack Developer with 13+ years of experience in Next.js, React, WordPress, and practical AI workflows. Cursor Ambassador Indonesia.",
     "url": "https://madebyaris.com",
     "image": "https://madebyaris.com/aris.png",
     "sameAs": [
@@ -232,11 +232,11 @@ const structuredData = {
     ],
     "knowsAbout": [
       "Next.js Development",
-      "React Development",
+      "AI Product Development",
+      "Cursor Workflows",
       "WordPress Development",
       "Full Stack Development",
       "Web Architecture",
-      "Enterprise Solutions",
       "Performance Optimization",
       "Technical Leadership"
     ]
@@ -244,10 +244,12 @@ const structuredData = {
 }
 
 // Generate Metadata and Structured Data
+const aboutPageTitle = 'About Aris Setiawan | AI-Optimized Full-Stack Developer | Cursor Ambassador'
+
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'About Aris Setiawan | Senior Full-Stack Developer & Web Architect',
-    description: 'With 12+ years of experience, I specialize in building enterprise-scale web applications using Next.js, React, and WordPress. Based in Sidoarjo, Indonesia. Learn about my journey, expertise, and development philosophy.',
+    title: { absolute: aboutPageTitle },
+    description: '13+ years building web products with Next.js, AI, and WordPress. Cursor Ambassador Indonesia. I build for teams worldwide (Build) and coach practical AI workflows (Level up). Based in Sidoarjo, Indonesia.',
     keywords: [
       'Senior Full-Stack Developer',
       'Web Architecture Expert',
@@ -266,15 +268,15 @@ export async function generateMetadata(): Promise<Metadata> {
       'Web Developer Indonesia',
     ],
     openGraph: {
-      title: 'About Aris Setiawan | Senior Full-Stack Developer',
-      description: 'Senior Full-Stack Developer with 12+ years of experience in Next.js, React, WordPress, and enterprise web architecture.',
+      title: aboutPageTitle,
+      description: 'AI-Optimized Full-Stack Developer with 13+ years in Next.js, React, WordPress, and practical AI workflows. Cursor Ambassador Indonesia.',
       type: 'profile',
       locale: 'en_US',
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'About Aris Setiawan | Senior Full-Stack Developer',
-      description: 'Senior Full-Stack Developer with 12+ years of experience in Next.js, React, WordPress, and enterprise web architecture.',
+      title: aboutPageTitle,
+      description: 'AI-Optimized Full-Stack Developer with 13+ years in Next.js, React, WordPress, and practical AI workflows. Cursor Ambassador Indonesia.',
     },
     alternates: {
       canonical: 'https://madebyaris.com/about'
@@ -297,7 +299,7 @@ export default function AboutPage() {
           <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl shadow-zinc-900/20 border border-white/20">
             <Image
               src="/aris.png"
-              alt="Aris Setiawan - Senior Full-Stack Developer & Web Architect"
+              alt="Aris Setiawan - AI-Optimized Full-Stack Developer & Cursor Ambassador"
               fill
               sizes="(max-width: 768px) 100vw, 40vw"
               className="object-cover"
@@ -345,7 +347,7 @@ export default function AboutPage() {
                   </div>
                   <div>
                     <p className="text-white font-semibold">Aris Setiawan</p>
-                    <p className="text-white/60 text-xs">Full-Stack Developer</p>
+                    <p className="text-white/60 text-xs">AI-Optimized Developer</p>
                   </div>
                 </div>
                 <div className="flex gap-2">
@@ -377,14 +379,18 @@ export default function AboutPage() {
           {/* Name */}
           <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
             Aris Setiawan
-            <span className="block gradient-text font-light text-3xl lg:text-4xl mt-2">Senior Full-Stack Developer</span>
+            <span className="block gradient-text font-light text-3xl lg:text-4xl mt-2">
+              AI-Optimized Full-Stack Developer · Cursor Ambassador Indonesia
+            </span>
           </h1>
 
           {/* Bio */}
           <p className="text-base text-zinc-500 font-medium max-w-xl mb-8 leading-relaxed">
-            With over 12 years of experience in web development, I specialize in building enterprise-scale 
-            applications using modern technologies. My expertise spans Next.js, React, WordPress, and PHP, 
-            with a focus on creating performant, scalable, and user-friendly solutions.
+            13+ years building web products for teams worldwide. Two ways to work with me:{' '}
+            <strong className="font-semibold text-zinc-700">Build</strong> — Next.js, AI features, and
+            WordPress shipped to production — and{' '}
+            <strong className="font-semibold text-zinc-700">Level up</strong> — Cursor mentoring and
+            practical AI workflows for developers who want to move faster without messy code.
           </p>
 
           {/* Quick Info */}
@@ -395,7 +401,7 @@ export default function AboutPage() {
             </div>
             <div className="flex items-center gap-2 text-sm text-zinc-600">
               <Calendar className="w-4 h-4 text-orange-500" />
-              <span>12+ Years Experience</span>
+              <span>13+ Years Experience</span>
             </div>
           </div>
 

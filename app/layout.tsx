@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     default: "Senior Full-Stack Developer | Next.js & WordPress | MadeByAris",
     template: "%s | Aris Setiawan"
   },
-  description: "12+ years building enterprise apps with Next.js, React, WordPress, and PHP. Headless CMS and scalable architecture. Indonesia-based, worldwide clients.",
+  description: "13+ years building web products with Next.js, React, WordPress, and AI. Cursor Ambassador Indonesia. Indonesia-based, worldwide clients.",
   keywords: [
     "Senior Next.js Developer",
     "Enterprise React Development",
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     locale: siteConfig.locale,
     url: productionUrl,
     title: "Senior Full-Stack Developer | Next.js & WordPress | MadeByAris",
-    description: "12+ years building enterprise apps with Next.js, React, WordPress, and PHP. Headless CMS and scalable architecture.",
+    description: "13+ years building web products with Next.js, React, WordPress, and AI. Cursor Ambassador Indonesia. Indonesia-based, worldwide clients.",
     siteName: siteConfig.name,
     images: [
       {
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Senior Full-Stack Developer | Next.js & WordPress",
-    description: "12+ years building enterprise apps with Next.js, React, WordPress, and PHP.",
+    description: "13+ years building web products with Next.js, React, WordPress, and AI.",
     creator: siteConfig.twitterHandle,
     images: [siteConfig.ogImage],
   },
