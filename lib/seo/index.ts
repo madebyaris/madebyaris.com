@@ -4,6 +4,7 @@ export {
   buildOrganizationSchema,
   buildArticleSchema,
   buildBreadcrumbSchema,
+  buildProfilePageSchema,
   buildBlogPostGraph,
 } from './schema'
 export {
