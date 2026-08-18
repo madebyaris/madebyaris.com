@@ -45,6 +45,28 @@ export function buildBreadcrumbSchema(
   }).jsonLd
 }
 
+export function buildProfilePageSchema(input: {
+  name: string
+  description: string
+  url: string
+  jobTitle: string
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    name: input.name,
+    description: input.description,
+    url: input.url,
+    mainEntity: {
+      '@type': 'Person',
+      name: siteConfig.author,
+      url: absoluteUrl('/about'),
+      jobTitle: input.jobTitle,
+      sameAs: [...siteConfig.sameAs],
+    },
+  }
+}
+
 export function buildBlogPostGraph(input: {
   slug: string
   headline: string

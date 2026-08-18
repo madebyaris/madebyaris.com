@@ -2,16 +2,17 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, ArrowUpRight, Sparkles, Users, Lightbulb, ExternalLink } from 'lucide-react'
+import { buildProfilePageSchema } from '@/lib/seo'
 
 export const revalidate = 86400
 
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "ProfilePage",
-  "name": "MiniMax Dev Community Expert | Made by Aris",
-  "description": "About Aris Setiawan as a MiniMax Dev Community Expert: community, education, and building with AI tools.",
-  "url": "https://madebyaris.com/minimax-ambassador"
-}
+const structuredData = buildProfilePageSchema({
+  name: 'MiniMax Dev Community Expert | Made by Aris',
+  description:
+    'About Aris Setiawan as a MiniMax Dev Community Expert: community, education, and building with AI tools.',
+  url: 'https://madebyaris.com/minimax-ambassador',
+  jobTitle: 'MiniMax Dev Community Expert',
+})
 
 export const metadata: Metadata = {
   title: 'MiniMax Dev Community Expert | Made by Aris',

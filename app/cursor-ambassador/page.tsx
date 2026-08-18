@@ -2,16 +2,17 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, ArrowUpRight, BookOpen, Users, Sparkles, ExternalLink } from 'lucide-react'
 import { CursorIcon } from '@/components/icons/cursor'
+import { buildProfilePageSchema } from '@/lib/seo'
 
 export const revalidate = 86400
 
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "ProfilePage",
-  "name": "Cursor Ambassador | Made by Aris",
-  "description": "About Aris Setiawan as a Cursor Ambassador: community, education, and building with Cursor.",
-  "url": "https://madebyaris.com/cursor-ambassador"
-}
+const structuredData = buildProfilePageSchema({
+  name: 'Cursor Ambassador | Made by Aris',
+  description:
+    'About Aris Setiawan as a Cursor Ambassador: community, education, and building with Cursor.',
+  url: 'https://madebyaris.com/cursor-ambassador',
+  jobTitle: 'Cursor Ambassador',
+})
 
 export const metadata: Metadata = {
   title: 'Cursor Ambassador | Made by Aris',

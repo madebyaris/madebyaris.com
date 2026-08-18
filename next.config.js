@@ -134,6 +134,16 @@ const nextConfig = {
       destination: '/services/wordpress',
       permanent: true,
     },
+    {
+      source: '/author/madebyaris',
+      destination: '/about',
+      permanent: true,
+    },
+    {
+      source: '/author/madebyaris/',
+      destination: '/about',
+      permanent: true,
+    },
   ],
 }
 
