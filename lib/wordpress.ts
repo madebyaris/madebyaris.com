@@ -43,19 +43,29 @@ export interface PaginationParams {
   _fields?: string[]
 }
 
-async function fetchAPI<T>(
-  endpoint: WpEndpoint,
-  params: Record<string, string | number> = {},
-  revalidateSeconds: number = REVALIDATE_SECONDS.POSTS
-): Promise<T> {
+export const BLOG_POSTS_PER_PAGE = 12
+
+export interface PaginatedResult<T> {
+  data: T[]
+  total: number
+  totalPages: number
+}
+
+function buildWpUrl(endpoint: WpEndpoint, params: Record<string, string | number> = {}): string {
   const queryString = new URLSearchParams()
   Object.entries(params).forEach(([key, value]) => {
     queryString.append(key, String(value))
   })
 
-  const url = `${WP_API_URL}/wp/v2/${endpoint}${queryString.toString() ? `?${queryString}` : ''}`
+  return `${WP_API_URL}/wp/v2/${endpoint}${queryString.toString() ? `?${queryString}` : ''}`
+}
 
-  const response = await fetch(url, {
+async function fetchWpResponse(
+  endpoint: WpEndpoint,
+  params: Record<string, string | number> = {},
+  revalidateSeconds: number = REVALIDATE_SECONDS.POSTS
+): Promise<Response> {
+  const response = await fetch(buildWpUrl(endpoint, params), {
     next: {
       tags: [WP_CACHE_TAGS[endpoint]],
       revalidate: revalidateSeconds,
@@ -71,7 +81,31 @@ async function fetchAPI<T>(
     throw new Error(`HTTP error! status: ${response.status}`)
   }
 
+  return response
+}
+
+async function fetchAPI<T>(
+  endpoint: WpEndpoint,
+  params: Record<string, string | number> = {},
+  revalidateSeconds: number = REVALIDATE_SECONDS.POSTS
+): Promise<T> {
+  const response = await fetchWpResponse(endpoint, params, revalidateSeconds)
   return response.json() as Promise<T>
+}
+
+async function fetchAPIPaginated<T>(
+  endpoint: WpEndpoint,
+  params: Record<string, string | number> = {},
+  revalidateSeconds: number = REVALIDATE_SECONDS.POSTS
+): Promise<PaginatedResult<T>> {
+  const response = await fetchWpResponse(endpoint, params, revalidateSeconds)
+  const data = (await response.json()) as T[]
+
+  return {
+    data,
+    total: Number.parseInt(response.headers.get('X-WP-Total') ?? '0', 10),
+    totalPages: Number.parseInt(response.headers.get('X-WP-TotalPages') ?? '0', 10),
+  }
 }
 
 async function fetchCategoriesByIds(categoryIds: number[]): Promise<Category[]> {
@@ -213,30 +247,64 @@ export async function getAllTags(limit: number = 10): Promise<Tag[]> {
   }
 }
 
-export async function getPosts(params: PaginationParams = {}): Promise<ProcessedPost[]> {
-  try {
-    const queryParams: Record<string, string | number> = {
-      _embed: 'wp:featuredmedia',
-    }
-
-    if (params.per_page) {
-      queryParams.per_page = params.per_page
-    }
-
-    if (params.page) {
-      queryParams.page = params.page
-    }
-
-    if (params._fields) {
-      queryParams._fields = params._fields.join(',')
-    }
-
-    const posts = await fetchAPI<Post[]>('posts', queryParams)
-    return Promise.all(posts.map(hydratePost))
-  } catch (error) {
-    console.error('Failed to fetch posts:', error)
-    return []
+function buildPostsQueryParams(params: PaginationParams = {}): Record<string, string | number> {
+  const queryParams: Record<string, string | number> = {
+    _embed: 'wp:featuredmedia',
   }
+
+  if (params.per_page) {
+    queryParams.per_page = params.per_page
+  }
+
+  if (params.page) {
+    queryParams.page = params.page
+  }
+
+  if (params._fields) {
+    queryParams._fields = params._fields.join(',')
+  }
+
+  return queryParams
+}
+
+export async function getPostsPaginated(
+  params: PaginationParams = {}
+): Promise<PaginatedResult<ProcessedPost>> {
+  try {
+    const result = await fetchAPIPaginated<Post>('posts', buildPostsQueryParams(params))
+    const posts = await Promise.all(result.data.map(hydratePost))
+
+    return {
+      data: posts,
+      total: result.total,
+      totalPages: result.totalPages,
+    }
+  } catch (error) {
+    if (params.page && params.page > 1) {
+      try {
+        const totals = await fetchAPIPaginated<Post>('posts', buildPostsQueryParams({
+          per_page: params.per_page,
+          page: 1,
+        }))
+
+        return {
+          data: [],
+          total: totals.total,
+          totalPages: totals.totalPages,
+        }
+      } catch (totalsError) {
+        console.error('Failed to fetch post totals after pagination error:', totalsError)
+      }
+    }
+
+    console.error('Failed to fetch posts:', error)
+    return { data: [], total: 0, totalPages: 0 }
+  }
+}
+
+export async function getPosts(params: PaginationParams = {}): Promise<ProcessedPost[]> {
+  const result = await getPostsPaginated(params)
+  return result.data
 }
 
 export async function getProjects(params: PaginationParams = {}): Promise<Project[]> {

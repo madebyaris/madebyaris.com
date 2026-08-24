@@ -6,12 +6,15 @@ import Image from 'next/image';
 import { ArrowRight, Search } from 'lucide-react';
 import type { Post, Category } from '@/lib/types';
 import { blurDataURLs } from '@/lib/utils';
+import { BlogPagination } from '@/components/blog-pagination';
 
 interface BlogContentProps {
   initialPosts: Post[];
+  currentPage: number;
+  totalPages: number;
 }
 
-export function BlogContent({ initialPosts }: BlogContentProps) {
+export function BlogContent({ initialPosts, currentPage, totalPages }: BlogContentProps) {
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredPosts = useMemo(() => {
@@ -38,6 +41,11 @@ export function BlogContent({ initialPosts }: BlogContentProps) {
             className="w-full pl-11 pr-4 py-3 rounded-full border border-zinc-200 bg-white focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 transition-all text-sm font-medium text-zinc-900 placeholder:text-zinc-400"
           />
         </div>
+        {searchQuery ? (
+          <p className="mt-2 text-center text-xs font-medium text-zinc-500">
+            Search applies to the {totalPages > 1 ? `${initialPosts.length} articles on this page` : 'articles shown here'}.
+          </p>
+        ) : null}
       </div>
 
       {/* Posts grid - matching homepage style exactly */}
@@ -108,10 +116,16 @@ export function BlogContent({ initialPosts }: BlogContentProps) {
         <div className="col-span-full flex flex-col items-center justify-center rounded-2xl border border-zinc-200 bg-white/50 p-12 text-center">
           <p className="text-lg font-medium text-zinc-900">No articles found</p>
           <p className="mt-2 text-sm text-zinc-500">
-            Try adjusting your search query.
+            {searchQuery
+              ? 'Try adjusting your search query on this page.'
+              : 'No articles are available on this page.'}
           </p>
         </div>
       )}
+
+      {!searchQuery ? (
+        <BlogPagination currentPage={currentPage} totalPages={totalPages} />
+      ) : null}
     </div>
   );
 }
