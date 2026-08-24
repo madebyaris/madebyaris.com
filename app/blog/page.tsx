@@ -1,56 +1,82 @@
 import type { Metadata } from 'next'
 import { Suspense } from 'react'
+import { redirect } from 'next/navigation'
 import { BlogContent } from '@/components/blog-content'
 import { BookOpen, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
-import { getAllTags, getPosts } from '@/lib/wordpress'
+import { BLOG_POSTS_PER_PAGE, getAllTags, getPostsPaginated } from '@/lib/wordpress'
 
-export const revalidate = 600;
+export const revalidate = 600
 
-// Structured Data
 const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "Blog",
-  "@id": "https://madebyaris.com/blog/#webpage",
-  "name": "Web Development Insights & Tutorials",
-  "description": "Expert insights on Next.js, React, WordPress, and modern web development practices. Technical tutorials and industry best practices.",
-  "url": "https://madebyaris.com/blog",
-  "isPartOf": {
-    "@type": "WebSite",
-    "@id": "https://madebyaris.com/#website",
-    "name": "MadeByAris",
-    "url": "https://madebyaris.com"
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  '@id': 'https://madebyaris.com/blog/#webpage',
+  name: 'Web Development Insights & Tutorials',
+  description:
+    'Expert insights on Next.js, React, WordPress, and modern web development practices. Technical tutorials and industry best practices.',
+  url: 'https://madebyaris.com/blog',
+  isPartOf: {
+    '@type': 'WebSite',
+    '@id': 'https://madebyaris.com/#website',
+    name: 'MadeByAris',
+    url: 'https://madebyaris.com',
   },
-  "author": {
-    "@type": "Person",
-    "@id": "https://madebyaris.com/#person",
-    "name": "Aris Setiawan",
-    "jobTitle": "Senior Full Stack Developer",
-    "url": "https://madebyaris.com",
-    "image": "https://madebyaris.com/aris.png"
+  author: {
+    '@type': 'Person',
+    '@id': 'https://madebyaris.com/#person',
+    name: 'Aris Setiawan',
+    jobTitle: 'Senior Full Stack Developer',
+    url: 'https://madebyaris.com',
+    image: 'https://madebyaris.com/aris.png',
   },
-  "publisher": {
-    "@type": "Organization",
-    "@id": "https://madebyaris.com/#organization",
-    "name": "MadeByAris",
-    "url": "https://madebyaris.com"
+  publisher: {
+    '@type': 'Organization',
+    '@id': 'https://madebyaris.com/#organization',
+    name: 'MadeByAris',
+    url: 'https://madebyaris.com',
   },
-  "keywords": [
-    "Web Development",
-    "Next.js",
-    "React",
-    "WordPress",
-    "TypeScript",
-    "JavaScript",
-    "Full Stack Development"
+  keywords: [
+    'Web Development',
+    'Next.js',
+    'React',
+    'WordPress',
+    'TypeScript',
+    'JavaScript',
+    'Full Stack Development',
   ],
-  "inLanguage": "en-US"
+  inLanguage: 'en-US',
 }
 
-export async function generateMetadata(): Promise<Metadata> {
+interface BlogPageProps {
+  searchParams: Promise<{ page?: string }>
+}
+
+function parseBlogPageParam(pageParam?: string): number {
+  if (!pageParam) return 1
+
+  const parsedPage = Number.parseInt(pageParam, 10)
+  if (!Number.isFinite(parsedPage)) return 1
+
+  return parsedPage
+}
+
+function getBlogCanonicalPath(currentPage: number): string {
+  return currentPage <= 1 ? '/blog' : `/blog?page=${currentPage}`
+}
+
+export async function generateMetadata({ searchParams }: BlogPageProps): Promise<Metadata> {
+  const { page: pageParam } = await searchParams
+  const currentPage = parseBlogPageParam(pageParam)
+  const canonicalPath = getBlogCanonicalPath(currentPage)
+
   return {
-    title: 'Web Development Blog | Next.js, React & WordPress Insights',
-    description: 'Expert tutorials and insights on Next.js, React, WordPress, and modern web development practices. Learn from real-world enterprise development experience.',
+    title:
+      currentPage > 1
+        ? `Web Development Blog - Page ${currentPage} | Next.js, React & WordPress Insights`
+        : 'Web Development Blog | Next.js, React & WordPress Insights',
+    description:
+      'Expert tutorials and insights on Next.js, React, WordPress, and modern web development practices. Learn from real-world enterprise development experience.',
     keywords: [
       'Web Development Blog',
       'Next.js Tutorials',
@@ -61,37 +87,63 @@ export async function generateMetadata(): Promise<Metadata> {
       'Full Stack Development',
       'Web Performance',
       'Enterprise Solutions',
-      'Development Best Practices'
+      'Development Best Practices',
     ],
     openGraph: {
-      title: 'Web Development Blog | Next.js, React & WordPress Insights',
+      title:
+        currentPage > 1
+          ? `Web Development Blog - Page ${currentPage} | Next.js, React & WordPress Insights`
+          : 'Web Development Blog | Next.js, React & WordPress Insights',
       description: 'Expert tutorials and insights on modern web development practices.',
       type: 'website',
       locale: 'en_US',
+      url: `https://madebyaris.com${canonicalPath}`,
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Web Development Blog | Next.js, React & WordPress Insights',
+      title:
+        currentPage > 1
+          ? `Web Development Blog - Page ${currentPage} | Next.js, React & WordPress Insights`
+          : 'Web Development Blog | Next.js, React & WordPress Insights',
       description: 'Expert tutorials and insights on modern web development practices.',
     },
     alternates: {
-      canonical: 'https://madebyaris.com/blog'
-    }
+      canonical: `https://madebyaris.com${canonicalPath}`,
+    },
   }
 }
 
-export default async function BlogPage() {
-  let posts: Awaited<ReturnType<typeof getPosts>> = []
-  
+export default async function BlogPage({ searchParams }: BlogPageProps) {
+  const { page: pageParam } = await searchParams
+  const requestedPage = parseBlogPageParam(pageParam)
+
+  if (requestedPage < 1 || (pageParam === '1')) {
+    redirect('/blog')
+  }
+
+  let posts: Awaited<ReturnType<typeof getPostsPaginated>>['data'] = []
+  let totalPages = 0
+
   try {
-    const [, fetchedPosts] = await Promise.all([
+    const [, paginatedPosts] = await Promise.all([
       getAllTags(6),
-      getPosts({ per_page: 12 })
+      getPostsPaginated({
+        per_page: BLOG_POSTS_PER_PAGE,
+        page: requestedPage,
+      }),
     ])
-    posts = fetchedPosts
+
+    posts = paginatedPosts.data
+    totalPages = paginatedPosts.totalPages
   } catch (error) {
     console.error('Failed to fetch data:', error)
   }
+
+  if (requestedPage > 1 && totalPages > 0 && requestedPage > totalPages) {
+    redirect('/blog')
+  }
+
+  const currentPage = requestedPage
 
   return (
     <>
@@ -100,38 +152,35 @@ export default async function BlogPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
-      {/* Hero Section */}
       <section className="text-center pt-8 pb-16">
-        {/* Badge */}
-        <div 
+        <div
           className="inline-flex bg-white/60 rounded-full mb-8 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2"
           style={{
             position: 'relative',
             // @ts-expect-error CSS custom properties
             '--border-gradient': 'linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0))',
-            '--border-radius-before': '9999px'
+            '--border-radius-before': '9999px',
           }}
         >
           <BookOpen className="w-4 h-4 text-orange-500" />
-          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Web Development Insights</span>
+          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">
+            Web Development Insights
+          </span>
         </div>
 
-        {/* Title */}
         <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
           Development
           <span className="block gradient-text font-light">Insights</span>
         </h1>
 
-        {/* Description */}
         <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
-          Expert tutorials and insights on Next.js, React, WordPress, and modern web development practices. 
-          Learn from real-world enterprise development experience.
+          Expert tutorials and insights on Next.js, React, WordPress, and modern web development
+          practices. Learn from real-world enterprise development experience.
         </p>
 
-        {/* Technology Tags */}
         <div className="flex flex-wrap justify-center gap-2">
           {['Next.js', 'React', 'WordPress', 'TypeScript'].map((tech) => (
-            <span 
+            <span
               key={tech}
               className="px-3 py-1.5 bg-zinc-100 rounded-full text-xs font-medium text-zinc-600"
             >
@@ -141,31 +190,33 @@ export default async function BlogPage() {
         </div>
       </section>
 
-      {/* Separator */}
       <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mb-12 opacity-60" />
 
-      {/* Blog Content */}
-      <Suspense fallback={
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[...Array(6)].map((_, i) => (
-            <div key={i} className="h-[350px] animate-pulse rounded-2xl bg-zinc-100" />
-          ))}
-        </div>
-      }>
-        <BlogContent initialPosts={posts} />
+      <Suspense
+        fallback={
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="h-[350px] animate-pulse rounded-2xl bg-zinc-100" />
+            ))}
+          </div>
+        }
+      >
+        <BlogContent
+          initialPosts={posts}
+          currentPage={currentPage}
+          totalPages={totalPages}
+        />
       </Suspense>
 
-      {/* Separator */}
       <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent my-16 opacity-60" />
 
-      {/* CTA Section */}
       <section className="overflow-hidden min-h-[350px] shadow-zinc-900/30 bg-zinc-900 rounded-[2rem] relative shadow-2xl mb-8">
-        {/* Grid Pattern */}
-        <div 
-          className="absolute inset-0 opacity-10" 
+        <div
+          className="absolute inset-0 opacity-10"
           style={{
-            backgroundImage: 'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)',
-            backgroundSize: '40px 40px'
+            backgroundImage:
+              'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)',
+            backgroundSize: '40px 40px',
           }}
         />
 
@@ -178,14 +229,14 @@ export default async function BlogPage() {
           </p>
 
           <div className="flex flex-wrap justify-center gap-3">
-            <Link 
+            <Link
               href="/contact"
               className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
             >
               <span>Get in Touch</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
-            <Link 
+            <Link
               href="/services"
               className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3"
             >
