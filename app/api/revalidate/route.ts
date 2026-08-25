@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { revalidatePath, revalidateTag } from 'next/cache'
+import { notifyIndexNow, revalidatedItemsToUrls } from '@/lib/indexnow'
 import { WP_CACHE_TAGS } from '@/lib/wordpress'
 
 const WP_BLOG_TAGS = [
@@ -72,11 +73,14 @@ export async function GET(request: NextRequest) {
     }
 
     const uniqueItems = [...new Set(revalidated)]
+    const indexNowUrls = revalidatedItemsToUrls(uniqueItems)
+    const indexNow = await notifyIndexNow(indexNowUrls)
 
     return NextResponse.json({
       revalidated: true,
       message: `Revalidated: ${uniqueItems.join(', ')}`,
       items: uniqueItems,
+      indexNow,
     })
   } catch (err) {
     return NextResponse.json(
