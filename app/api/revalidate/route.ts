@@ -9,18 +9,34 @@ const WP_BLOG_TAGS = [
   WP_CACHE_TAGS.tags,
 ] as const
 
+const SITEMAP_PATH = '/sitemap.xml'
+
+function pushUnique(revalidated: string[], item: string) {
+  if (!revalidated.includes(item)) {
+    revalidated.push(item)
+  }
+}
+
+function revalidateSitemap(revalidated: string[]) {
+  revalidatePath(SITEMAP_PATH)
+  pushUnique(revalidated, SITEMAP_PATH)
+}
+
 function revalidateWpBlogTags(revalidated: string[]) {
   for (const tag of WP_BLOG_TAGS) {
     revalidateTag(tag, 'max')
-    revalidated.push(`tag:${tag}`)
+    pushUnique(revalidated, `tag:${tag}`)
   }
+  revalidateSitemap(revalidated)
 }
 
 function revalidateBlogIndex(revalidated: string[]) {
   revalidatePath('/blog')
-  if (!revalidated.includes('/blog')) {
-    revalidated.push('/blog')
-  }
+  pushUnique(revalidated, '/blog')
+}
+
+function isBlogSurfacePath(path: string): boolean {
+  return path === '/blog' || path.startsWith('/blog/') || path === SITEMAP_PATH
 }
 
 export async function GET(request: NextRequest) {
@@ -47,21 +63,26 @@ export async function GET(request: NextRequest) {
 
     if (tag) {
       revalidateTag(tag, 'max')
-      revalidated.push(`tag:${tag}`)
+      pushUnique(revalidated, `tag:${tag}`)
 
       if ((WP_BLOG_TAGS as readonly string[]).includes(tag)) {
         revalidateBlogIndex(revalidated)
+        revalidateSitemap(revalidated)
       }
     }
 
     if (path) {
       revalidatePath(path)
-      revalidated.push(path)
+      pushUnique(revalidated, path)
 
-      if (path === '/blog' || path.startsWith('/blog/')) {
+      if (isBlogSurfacePath(path)) {
         revalidateWpBlogTags(revalidated)
 
         if (path.startsWith('/blog/') && path !== '/blog') {
+          revalidateBlogIndex(revalidated)
+        }
+
+        if (path === SITEMAP_PATH) {
           revalidateBlogIndex(revalidated)
         }
       }
