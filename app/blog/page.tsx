@@ -6,7 +6,7 @@ import { BookOpen, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { BLOG_POSTS_PER_PAGE, getAllTags, getPostsPaginated } from '@/lib/wordpress'
 
-export const revalidate = 600
+export const dynamic = 'force-dynamic'
 
 const structuredData = {
   '@context': 'https://schema.org',

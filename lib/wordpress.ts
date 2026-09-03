@@ -307,6 +307,18 @@ export async function getPosts(params: PaginationParams = {}): Promise<Processed
   return result.data
 }
 
+export async function getPostsForSitemap(): Promise<Array<{ slug: string; date: string; modified: string }>> {
+  try {
+    return await fetchAPI<Array<{ slug: string; date: string; modified: string }>>('posts', {
+      per_page: 100,
+      _fields: 'slug,date,modified',
+    })
+  } catch (error) {
+    console.error('Failed to fetch posts for sitemap:', error)
+    return []
+  }
+}
+
 export async function getProjects(params: PaginationParams = {}): Promise<Project[]> {
   try {
     return await fetchAPI<Project[]>(
