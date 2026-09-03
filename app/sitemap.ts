@@ -1,23 +1,8 @@
 import type { MetadataRoute } from 'next'
-
+import { getPostsForSitemap } from '@/lib/wordpress'
 
 export const dynamic = 'force-dynamic'
 
-// Define types directly instead of importing
-interface Post {
-  slug: string;
-  date: string;
-  modified: string;
-  title: { rendered: string };
-  content: { rendered: string };
-  excerpt: { rendered: string };
-  categories?: Array<{ id: number; name: string; slug: string }>;
-  tags?: Array<{ id: number; name: string; slug: string; count?: number }>;
-}
-
-export const revalidate = 3600 // Revalidate hourly instead of daily
-
-// Define route groups for better organization
 const mainRoutes = [
   { path: '', priority: 1.0, changeFreq: 'monthly' },
   { path: 'about', priority: 0.8, changeFreq: 'monthly' },
@@ -60,7 +45,6 @@ const legalRoutes = [
   { path: 'terms-of-service', priority: 0.5, changeFreq: 'yearly' },
 ]
 
-// Helper function to create sitemap entries
 function createSitemapEntry(baseUrl: string, route: { path: string; priority: number; changeFreq: string }) {
   return {
     url: `${baseUrl}/${route.path}`,
@@ -73,7 +57,6 @@ function createSitemapEntry(baseUrl: string, route: { path: string; priority: nu
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 
-  // Create static route entries
   const staticRoutes = [
     ...mainRoutes,
     ...serviceRoutes,
@@ -83,44 +66,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ].map(route => createSitemapEntry(baseUrl, route))
 
   try {
-    // Fetch dynamic content with direct fetch calls and proper revalidation
-    const [postsResponse, projectsResponse] = await Promise.all([
-      fetch(`${process.env.NEXT_PUBLIC_WP_API_URL}/wp/v2/posts?per_page=100`, {
-        next: { revalidate: 3600 }
-      }).catch(error => {
-        console.error('Failed to fetch posts:', error)
-        return new Response(JSON.stringify([]), { status: 200 })
-      }),
-      fetch(`${process.env.NEXT_PUBLIC_WP_API_URL}/wp/v2/project?per_page=100`, {
-        next: { revalidate: 3600 }
-      }).catch(error => {
-        console.error('Failed to fetch projects:', error)
-        return new Response(JSON.stringify([]), { status: 200 })
-      }),
-    ])
+    const posts = await getPostsForSitemap()
 
-    if (!postsResponse.ok || !projectsResponse.ok) {
-      throw new Error('Failed to fetch data for sitemap')
-    }
-
-    // Parse responses
-    const posts = await postsResponse.json() as Post[]
-
-    // Create dynamic route entries with proper date handling
-    const postRoutes = posts.map((post: Post) => ({
+    const postRoutes = posts.map((post) => ({
       url: `${baseUrl}/blog/${post.slug}`,
       lastModified: new Date(post.modified || post.date),
       changeFrequency: 'weekly' as const,
       priority: 0.6,
     }))
 
-    // Combine all routes and sort by priority
     const allRoutes = [...staticRoutes, ...postRoutes]
     return allRoutes.sort((a, b) => (b.priority || 0) - (a.priority || 0))
-
   } catch (error) {
     console.error('Failed to generate sitemap:', error)
-    // Return static routes if dynamic content fails
     return staticRoutes
   }
 }
