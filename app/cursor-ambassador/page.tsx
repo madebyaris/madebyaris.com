@@ -6,23 +6,26 @@ import { buildProfilePageSchema } from '@/lib/seo'
 
 export const revalidate = 86400
 
+const pageTitle = 'Cursor Ambassador Indonesia | Aris Setiawan'
+const pageDescription =
+  'I am a Cursor Ambassador for Indonesia. Practical Cursor workflows, community support, and clear examples. Cursor is now part of SpaceX.'
+
 const structuredData = buildProfilePageSchema({
-  name: 'Cursor Ambassador | Made by Aris',
-  description:
-    'About Aris Setiawan as a Cursor Ambassador: community, education, and building with Cursor.',
+  name: pageTitle,
+  description: pageDescription,
   url: 'https://madebyaris.com/cursor-ambassador',
   jobTitle: 'Cursor Ambassador',
 })
 
 export const metadata: Metadata = {
-  title: 'Cursor Ambassador | Made by Aris',
-  description: 'About Aris Setiawan as a Cursor Ambassador: community, education, and building with Cursor.',
+  title: { absolute: pageTitle },
+  description: pageDescription,
   alternates: {
     canonical: 'https://madebyaris.com/cursor-ambassador',
   },
   openGraph: {
-    title: 'Cursor Ambassador | Made by Aris',
-    description: 'Community, education, and building with Cursor.',
+    title: pageTitle,
+    description: pageDescription,
     type: 'website',
     locale: 'en_US',
   },
@@ -31,17 +34,17 @@ export const metadata: Metadata = {
 const highlights = [
   {
     title: 'Community support',
-    description: 'Helping developers adopt Cursor effectively—workflows, prompts, and best practices.',
+    description: 'Helping developers adopt Cursor with workflows, prompts, and best practices.',
     icon: Users,
   },
   {
-    title: 'Education & content',
-    description: 'Sharing guides, examples, and patterns for building faster with modern tooling.',
+    title: 'Education and content',
+    description: 'Guides, examples, and patterns for real projects.',
     icon: BookOpen,
   },
   {
     title: 'Practical experiments',
-    description: 'Testing real project setups, UX, and team workflows to share what actually works.',
+    description: 'Testing setups and team workflows, then sharing what actually works.',
     icon: Sparkles,
   },
 ]
@@ -50,7 +53,7 @@ const whatIDo = [
   'Share practical Cursor workflows for real projects',
   'Create examples and reusable patterns for teams',
   'Help developers avoid common pitfalls (DX, performance, correctness)',
-  'Collect feedback and communicate it back to the ecosystem'
+  'Collect feedback and pass it back to the ecosystem',
 ]
 
 export default function CursorAmbassadorPage() {
@@ -85,16 +88,21 @@ export default function CursorAmbassadorPage() {
           <span className="block gradient-text font-light">Ambassador</span>
         </h1>
 
-        <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
-          I help developers learn, ship, and iterate faster with Cursor—through community support, practical workflows, and clear examples.
+        <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-4 leading-relaxed font-medium">
+          I am a Cursor Ambassador for Indonesia. I help developers ship with Cursor through community support, practical workflows, and clear examples.
+        </p>
+
+        <p className="text-sm text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed">
+          Cursor is now part of SpaceX, under the SpaceXAI work. My Cursor Ambassador page stays here. For the SpaceXAI side, see{' '}
+          <Link href="/spacexai-ambassador" className="hover:text-orange-500 transition-colors">SpaceXAI Ambassador</Link>.
         </p>
 
         <div className="flex flex-wrap justify-center gap-3">
           <Link
-            href="/contact"
+            href="/services/vibe-code-friend"
             className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
           >
-            <span className="text-sm font-medium tracking-tight">Work with me</span>
+            <span className="text-sm font-medium tracking-tight">Level up with Cursor</span>
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </Link>
 
@@ -155,10 +163,6 @@ export default function CursorAmbassadorPage() {
               </div>
             ))}
           </div>
-
-          <div className="mt-8 text-sm text-zinc-500">
-            Want me to tailor this page with your exact LinkedIn copy (role description + dates + achievements)? Paste it here and I’ll update it precisely.
-          </div>
         </div>
       </section>
 
@@ -182,10 +186,10 @@ export default function CursorAmbassadorPage() {
           </p>
 
           <Link
-            href="/contact"
+            href="/services/vibe-code-friend"
             className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
           >
-            <span>Contact me</span>
+            <span>Level up with Cursor</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
@@ -193,5 +197,3 @@ export default function CursorAmbassadorPage() {
     </>
   )
 }
-
-
