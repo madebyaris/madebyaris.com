@@ -1,27 +1,26 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowRight, ArrowUpRight, BookOpen, Users, Sparkles, ExternalLink } from 'lucide-react'
-import { CursorIcon } from '@/components/icons/cursor'
+import { ArrowRight, ArrowUpRight, Users, Sparkles, Code2, Shield } from 'lucide-react'
 import { buildProfilePageSchema } from '@/lib/seo'
 
 export const revalidate = 86400
 
-const pageTitle = 'Cursor Ambassador Indonesia | Aris Setiawan'
+const pageTitle = 'SpaceXAI Ambassador | Aris Setiawan'
 const pageDescription =
-  'I am a Cursor Ambassador for Indonesia. Practical Cursor workflows, community support, and clear examples. Cursor is now part of SpaceX.'
+  'SpaceXAI Ambassador (Indonesia). Cursor is part of SpaceX. I help builders with practical AI coding workflows in this era.'
 
 const structuredData = buildProfilePageSchema({
   name: pageTitle,
   description: pageDescription,
-  url: 'https://madebyaris.com/cursor-ambassador',
-  jobTitle: 'Cursor Ambassador',
+  url: 'https://madebyaris.com/spacexai-ambassador',
+  jobTitle: 'SpaceXAI Ambassador',
 })
 
 export const metadata: Metadata = {
   title: { absolute: pageTitle },
   description: pageDescription,
   alternates: {
-    canonical: 'https://madebyaris.com/cursor-ambassador',
+    canonical: 'https://madebyaris.com/spacexai-ambassador',
   },
   openGraph: {
     title: pageTitle,
@@ -33,30 +32,29 @@ export const metadata: Metadata = {
 
 const highlights = [
   {
-    title: 'Community support',
-    description: 'Helping developers adopt Cursor with workflows, prompts, and best practices.',
+    title: 'Practical AI coding',
+    description: 'Workflows that help teams ship, not demo slides.',
+    icon: Code2,
+  },
+  {
+    title: 'Community',
+    description: 'Clear answers for Indonesia and remote builders who ask how to start.',
     icon: Users,
   },
   {
-    title: 'Education and content',
-    description: 'Guides, examples, and patterns for real projects.',
-    icon: BookOpen,
-  },
-  {
-    title: 'Practical experiments',
-    description: 'Testing setups and team workflows, then sharing what actually works.',
-    icon: Sparkles,
+    title: 'Honest scope',
+    description: 'What Cursor and related tools are good for, and when to stop.',
+    icon: Shield,
   },
 ]
 
 const whatIDo = [
-  'Share practical Cursor workflows for real projects',
-  'Create examples and reusable patterns for teams',
-  'Help developers avoid common pitfalls (DX, performance, correctness)',
-  'Collect feedback and pass it back to the ecosystem',
+  'Share workflows that survive a real repo',
+  'Point people to the right door: mentoring vs a product build',
+  'Keep the Cursor Ambassador history visible so search does not break',
 ]
 
-export default function CursorAmbassadorPage() {
+export default function SpaceXAIAmbassadorPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
@@ -72,29 +70,28 @@ export default function CursorAmbassadorPage() {
           <li>
             <span className="px-2">/</span>
           </li>
-          <li className="text-zinc-900">Cursor Ambassador</li>
+          <li className="text-zinc-900">SpaceXAI Ambassador</li>
         </ol>
       </nav>
 
       {/* Hero */}
       <section className="text-center pt-4 pb-16">
         <div className="inline-flex bg-white/60 rounded-full mb-8 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
-          <CursorIcon className="h-4 w-auto text-zinc-900" />
-          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Cursor Ambassador</span>
+          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">SpaceXAI Ambassador</span>
         </div>
 
         <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
-          Cursor
+          SpaceXAI
           <span className="block gradient-text font-light">Ambassador</span>
         </h1>
 
         <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-4 leading-relaxed font-medium">
-          I am a Cursor Ambassador for Indonesia. I help developers ship with Cursor through community support, practical workflows, and clear examples.
+          I am a SpaceXAI Ambassador. Cursor is now part of SpaceX, and SpaceXAI is the AI side of that story. This page is that role. My Cursor Ambassador page stays at{' '}
+          <Link href="/cursor-ambassador" className="hover:text-orange-500 transition-colors">/cursor-ambassador</Link>.
         </p>
 
         <p className="text-sm text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed">
-          Cursor is now part of SpaceX, under the SpaceXAI work. My Cursor Ambassador page stays here. For the SpaceXAI side, see{' '}
-          <Link href="/spacexai-ambassador" className="hover:text-orange-500 transition-colors">SpaceXAI Ambassador</Link>.
+          In August 2026 Cursor announced it is part of SpaceX, continuing the SpaceXAI partnership. I keep teaching practical shipping with Cursor and the wider AI coding stack. I do not invent seat counts or program perks here.
         </p>
 
         <div className="flex flex-wrap justify-center gap-3">
@@ -106,16 +103,14 @@ export default function CursorAmbassadorPage() {
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </Link>
 
-          <a
-            href="https://www.linkedin.com/in/arissetia/"
-            target="_blank"
-            rel="noreferrer"
+          <Link
+            href="/cursor-ambassador"
             className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
             style={{ boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)' }}
           >
-            <span className="text-sm font-medium text-black/60 tracking-tight">View LinkedIn</span>
-            <ExternalLink className="w-4 h-4 text-zinc-500" />
-          </a>
+            <span className="text-sm font-medium text-black/60 tracking-tight">See Cursor Ambassador</span>
+            <ArrowRight className="w-4 h-4 text-zinc-500" />
+          </Link>
         </div>
       </section>
 
@@ -152,7 +147,7 @@ export default function CursorAmbassadorPage() {
       <section className="mb-16">
         <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-sm">
           <h2 className="text-xl md:text-2xl font-semibold text-zinc-900 tracking-tight mb-6">
-            What I do as a Cursor Ambassador
+            What I do as a SpaceXAI Ambassador
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
