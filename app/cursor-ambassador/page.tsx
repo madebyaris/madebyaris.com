@@ -32,6 +32,12 @@ const structuredData = {
 export const metadata: Metadata = {
   title: { absolute: pageTitle },
   description: pageDescription,
+  keywords: [
+    'Cursor Ambassador Indonesia',
+    'Cursor Mentoring',
+    'Sidoarjo',
+    'Jawa Timur',
+  ],
   alternates: { canonical: 'https://madebyaris.com/cursor-ambassador' },
   openGraph: {
     title: pageTitle,
