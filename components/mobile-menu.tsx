@@ -19,6 +19,7 @@ interface MobileMenuProps {
   navigationItems: NavigationItem[]
   expandedItems: Record<string, boolean>
   toggleSubmenu: (href: string) => void
+  showHireCta: boolean
 }
 
 export default function MobileMenu({
@@ -28,6 +29,7 @@ export default function MobileMenu({
   navigationItems,
   expandedItems,
   toggleSubmenu,
+  showHireCta,
 }: MobileMenuProps) {
   return (
     <AnimatePresence>
@@ -139,20 +141,22 @@ export default function MobileMenu({
                   </div>
                 ))}
 
-                <Link
-                  href="https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={onClose}
-                  className="mt-8 rounded-full py-4 px-10 text-base font-semibold flex items-center gap-3 text-white"
-                  style={{
-                    background: 'linear-gradient(135deg, #14a800 0%, #0d7a00 100%)',
-                    boxShadow: '0 10px 30px rgba(20, 168, 0, 0.4)',
-                  }}
-                >
-                  Hire Me on Upwork
-                  <ArrowRight className="w-5 h-5" />
-                </Link>
+                {showHireCta && (
+                  <Link
+                    href="https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={onClose}
+                    className="mt-8 rounded-full py-4 px-10 text-base font-semibold flex items-center gap-3 text-white"
+                    style={{
+                      background: 'linear-gradient(135deg, #14a800 0%, #0d7a00 100%)',
+                      boxShadow: '0 10px 30px rgba(20, 168, 0, 0.4)',
+                    }}
+                  >
+                    Hire Me on Upwork
+                    <ArrowRight className="w-5 h-5" />
+                  </Link>
+                )}
               </nav>
             </div>
           </motion.div>

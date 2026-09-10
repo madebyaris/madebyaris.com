@@ -34,6 +34,16 @@ const navigationItems: NavigationItem[] = [
   { href: '/contact', label: 'Contact' },
 ]
 
+function hidesBuildHireCta(pathname: string | null) {
+  if (!pathname) return false
+  return (
+    pathname === '/cursor-ambassador' ||
+    pathname.startsWith('/cursor-ambassador/') ||
+    pathname === '/spacexai-ambassador' ||
+    pathname.startsWith('/spacexai-ambassador/')
+  )
+}
+
 export function Header() {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
@@ -94,6 +104,7 @@ export function Header() {
 
   const headerClass =
     "flex md:mb-16 md:gap-0 z-50 mb-10 relative gap-x-6 gap-y-6 items-center justify-between pt-6 md:pt-10 xl:pt-12 px-6 md:px-10 xl:px-12"
+  const showHireCta = !hidesBuildHireCta(pathname)
 
   return (
     <header className={headerClass}>
@@ -175,20 +186,21 @@ export function Header() {
         ))}
       </nav>
 
-      {/* CTA Button - Upwork Style matching View Projects */}
-      <Link 
-        href="https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe" 
-        target="_blank"
-        rel="noopener noreferrer"
-        className="hidden md:flex items-center gap-2 group text-sm font-medium text-white tracking-tight rounded-full py-3 px-6 transition-all hover:-translate-y-0.5 hover:shadow-2xl relative"
-        style={{
-          background: 'linear-gradient(to bottom, rgba(20, 168, 0, 0.9), rgba(13, 122, 0, 1))',
-          boxShadow: '0 18px 35px rgba(20, 168, 0, 0.35), 0 0 0 1px rgba(20, 168, 0, 0.3)',
-        }}
-      >
-        <span className="text-sm font-medium tracking-tight">Hire Me</span>
-        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-      </Link>
+      {showHireCta && (
+        <Link 
+          href="https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe" 
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hidden md:flex items-center gap-2 group text-sm font-medium text-white tracking-tight rounded-full py-3 px-6 transition-all hover:-translate-y-0.5 hover:shadow-2xl relative"
+          style={{
+            background: 'linear-gradient(to bottom, rgba(20, 168, 0, 0.9), rgba(13, 122, 0, 1))',
+            boxShadow: '0 18px 35px rgba(20, 168, 0, 0.35), 0 0 0 1px rgba(20, 168, 0, 0.3)',
+          }}
+        >
+          <span className="text-sm font-medium tracking-tight">Hire Me</span>
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </Link>
+      )}
 
       {/* Mobile Menu Button */}
       <button
@@ -207,6 +219,7 @@ export function Header() {
         navigationItems={navigationItems}
         expandedItems={expandedItems}
         toggleSubmenu={toggleSubmenu}
+        showHireCta={showHireCta}
       />
     </header>
   )
