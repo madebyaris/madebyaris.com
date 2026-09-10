@@ -13,14 +13,14 @@ export const ambassadorCopy = {
     'In August 2026 Cursor announced it is part of SpaceX, continuing the SpaceXAI partnership. I keep teaching practical shipping with Cursor and the wider AI coding stack. I do not invent seat counts or program perks here.',
   faqH2: 'How is SpaceXAI Ambassador different from Cursor Ambassador?',
   faqBefore:
-    'SpaceXAI Ambassador. Practical AI coding workflows and community answers. Cursor Ambassador Indonesia stays at',
+    'Same person. This page is the SpaceXAI Ambassador label. The Cursor Ambassador Indonesia entity for classic queries stays on',
   faqHref: '/cursor-ambassador',
   faqHrefLabel: '/cursor-ambassador',
-  faqAfter: '. Based in Sidoarjo, Jawa Timur.',
+  faqAfter: '.',
   answerReady:
     'SpaceXAI Ambassador. Practical AI coding workflows and community answers. Cursor Ambassador Indonesia stays at /cursor-ambassador.',
-  closerH2: 'Need help shipping faster with Cursor?',
-  closerBody: 'I can help you set up reliable workflows, improve quality, and get more done with the same team.',
+  closerH2: 'Want mentoring on AI coding workflows?',
+  closerBody: 'Level up is mentoring and workflows. A product build is a different door.',
   primaryCta: 'Level up with Cursor',
   primaryHref: '/services/vibe-code-friend',
   secondaryCta: 'See Cursor Ambassador',

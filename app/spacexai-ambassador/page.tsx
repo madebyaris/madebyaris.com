@@ -31,12 +31,7 @@ const structuredData = {
 export const metadata: Metadata = {
   title: { absolute: pageTitle },
   description: pageDescription,
-  keywords: [
-    'SpaceXAI Ambassador',
-    'Cursor Ambassador Indonesia',
-    'Sidoarjo',
-    'Jawa Timur',
-  ],
+  keywords: ['SpaceXAI Ambassador', 'Sidoarjo', 'Jawa Timur'],
   alternates: { canonical: 'https://madebyaris.com/spacexai-ambassador' },
   openGraph: {
     title: pageTitle,
