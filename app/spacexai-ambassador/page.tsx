@@ -76,7 +76,7 @@ export default function SpaceXAIAmbassadorPage() {
         </div>
 
         <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
-          SpaceXAI
+          SpaceXAI{' '}
           <span className="block gradient-text font-light">Ambassador</span>
         </h1>
 
@@ -224,10 +224,9 @@ export default function SpaceXAIAmbassadorPage() {
             </Link>
             <Link
               href={ambassadorCopy.contactHref}
-              className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
-              style={{ boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)' }}
+              className="group flex items-center gap-3 border border-white/40 hover:bg-white/10 transition-all text-white text-sm font-medium rounded-full px-6 py-3"
             >
-              <span className="text-sm font-medium text-black/60 tracking-tight">{ambassadorCopy.contactCta}</span>
+              <span>{ambassadorCopy.contactCta}</span>
             </Link>
           </div>
         </div>
