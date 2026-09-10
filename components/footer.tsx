@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Github, Linkedin, ArrowUpRight } from 'lucide-react'
+import { FooterBleed } from './footer-bleed'
 import { LiveClock } from './live-clock'
 
 const navigationLinks = [
@@ -55,9 +56,7 @@ export function Footer() {
         <div className="flex flex-col gap-4 lg:items-end lg:text-right">
           <div className="flex items-start gap-2 lg:flex-row-reverse lg:text-right">
             <div className="w-2 h-2 bg-orange-500 rounded-full mt-2 animate-pulse" />
-            <p className="leading-snug md:text-xl text-zinc-700 text-base font-light tracking-tight max-w-md">
-              Currently building enterprise web solutions and available for new projects.
-            </p>
+            <FooterBleed />
           </div>
           <div className="flex items-center gap-2 text-zinc-500 lg:flex-row-reverse">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="opacity-50">
