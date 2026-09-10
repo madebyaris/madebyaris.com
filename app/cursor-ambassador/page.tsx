@@ -214,10 +214,9 @@ export default function CursorAmbassadorPage() {
             </Link>
             <Link
               href={ambassadorCopy.secondaryHref}
-              className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
-              style={{ boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)' }}
+              className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3"
             >
-              <span className="text-sm font-medium text-black/60 tracking-tight">{ambassadorCopy.secondaryCta}</span>
+              <span>{ambassadorCopy.secondaryCta}</span>
             </Link>
           </div>
         </div>
