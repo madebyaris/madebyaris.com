@@ -9,10 +9,13 @@ export const ambassadorCopy = {
   spaceXNoteLink: 'SpaceXAI Ambassador',
   spaceXNoteHref: '/spacexai-ambassador',
   faqH2: 'Who are Cursor Ambassadors in Indonesia?',
-  faqAnswer: 'I am a Cursor Ambassador for Indonesia. I help developers ship with Cursor through community support, practical workflows, and clear examples. Based in Sidoarjo, Jawa Timur. I help with Cursor community meetups in Jawa Timur. Not product builds.',
-  answerReady: 'I am a Cursor Ambassador for Indonesia. I help developers ship with Cursor through community support, practical workflows, and clear examples.',
+  faqAnswer:
+    'Aris Setiawan is a Cursor Ambassador for Indonesia, based in Sidoarjo, Jawa Timur. He organizes Cursor community meetups and helps developers adopt practical Cursor workflows through mentoring. Not product-build hiring. Other Ambassadors also serve Indonesia; this page is Aris’s entity page.',
+  answerReady:
+    'Aris Setiawan is a Cursor Ambassador for Indonesia, based in Sidoarjo, Jawa Timur. He organizes Cursor community meetups and helps developers adopt practical Cursor workflows through mentoring. Not product-build hiring.',
   closerH2: 'Want practical Cursor mentoring?',
-  closerBody: 'I help developers ship with Cursor through community support, practical workflows, and clear examples.',
+  closerBody:
+    'I help teams set up reliable Cursor workflows and ship with fewer false starts. This page is mentoring. Not a product build hire.',
   primaryCta: 'Level up with Cursor',
   primaryHref: '/services/vibe-code-friend',
   secondaryCta: 'Contact for Level up',
