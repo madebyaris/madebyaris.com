@@ -1,67 +1,56 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowRight, ArrowUpRight, BookOpen, Users, Sparkles, ExternalLink } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, BookOpen, Users, Sparkles } from 'lucide-react'
 import { CursorIcon } from '@/components/icons/cursor'
 import { buildProfilePageSchema } from '@/lib/seo'
+import { ambassadorCopy, highlights, pageDescription, pageTitle, whatIDo } from './copy'
 
 export const revalidate = 86400
 
-const pageTitle = 'Cursor Ambassador Indonesia | Aris Setiawan'
-const pageDescription =
-  'I am a Cursor Ambassador for Indonesia. Practical Cursor workflows, community support, and clear examples. Cursor is now part of SpaceX.'
+const highlightIcons = [Users, BookOpen, Sparkles] as const
 
-const structuredData = buildProfilePageSchema({
+const profileSchema = buildProfilePageSchema({
   name: pageTitle,
   description: pageDescription,
   url: 'https://madebyaris.com/cursor-ambassador',
   jobTitle: 'Cursor Ambassador',
 })
 
+const structuredData = {
+  ...profileSchema,
+  mainEntity: {
+    ...profileSchema.mainEntity,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Sidoarjo',
+      addressRegion: 'Jawa Timur',
+      addressCountry: 'Indonesia',
+    },
+  },
+}
+
 export const metadata: Metadata = {
   title: { absolute: pageTitle },
   description: pageDescription,
-  alternates: {
-    canonical: 'https://madebyaris.com/cursor-ambassador',
-  },
+  alternates: { canonical: 'https://madebyaris.com/cursor-ambassador' },
   openGraph: {
     title: pageTitle,
     description: pageDescription,
     type: 'website',
     locale: 'en_US',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: pageTitle,
+    description: pageDescription,
+  },
 }
-
-const highlights = [
-  {
-    title: 'Community support',
-    description: 'Helping developers adopt Cursor with workflows, prompts, and best practices.',
-    icon: Users,
-  },
-  {
-    title: 'Education and content',
-    description: 'Guides, examples, and patterns for real projects.',
-    icon: BookOpen,
-  },
-  {
-    title: 'Practical experiments',
-    description: 'Testing setups and team workflows, then sharing what actually works.',
-    icon: Sparkles,
-  },
-]
-
-const whatIDo = [
-  'Share practical Cursor workflows for real projects',
-  'Create examples and reusable patterns for teams',
-  'Help developers avoid common pitfalls (DX, performance, correctness)',
-  'Collect feedback and pass it back to the ecosystem',
-]
 
 export default function CursorAmbassadorPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
 
-      {/* Breadcrumb */}
       <nav className="mb-8">
         <ol className="flex items-center space-x-2 text-sm text-zinc-500">
           <li>
@@ -72,15 +61,14 @@ export default function CursorAmbassadorPage() {
           <li>
             <span className="px-2">/</span>
           </li>
-          <li className="text-zinc-900">Cursor Ambassador</li>
+          <li className="text-zinc-900">{ambassadorCopy.h1}</li>
         </ol>
       </nav>
 
-      {/* Hero */}
       <section className="text-center pt-4 pb-16">
         <div className="inline-flex bg-white/60 rounded-full mb-8 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
           <CursorIcon className="h-4 w-auto text-zinc-900" />
-          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Cursor Ambassador</span>
+          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">{ambassadorCopy.h1}</span>
         </div>
 
         <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
@@ -89,39 +77,48 @@ export default function CursorAmbassadorPage() {
         </h1>
 
         <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-4 leading-relaxed font-medium">
-          I am a Cursor Ambassador for Indonesia. I help developers ship with Cursor through community support, practical workflows, and clear examples.
+          {ambassadorCopy.lead}
+        </p>
+
+        <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-4 leading-relaxed font-medium">
+          {ambassadorCopy.nap}
         </p>
 
         <p className="text-sm text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed">
-          Cursor is now part of SpaceX, under the SpaceXAI work. My Cursor Ambassador page stays here. For the SpaceXAI side, see{' '}
-          <Link href="/spacexai-ambassador" className="hover:text-orange-500 transition-colors">SpaceXAI Ambassador</Link>.
+          {ambassadorCopy.spaceXNoteLead}{' '}
+          <Link href={ambassadorCopy.spaceXNoteHref} className="hover:text-orange-500 transition-colors">
+            {ambassadorCopy.spaceXNoteLink}
+          </Link>
+          .
         </p>
 
         <div className="flex flex-wrap justify-center gap-3">
           <Link
-            href="/services/vibe-code-friend"
+            href={ambassadorCopy.primaryHref}
             className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
           >
-            <span className="text-sm font-medium tracking-tight">Level up with Cursor</span>
+            <span className="text-sm font-medium tracking-tight">{ambassadorCopy.primaryCta}</span>
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </Link>
 
-          <a
-            href="https://www.linkedin.com/in/arissetia/"
-            target="_blank"
-            rel="noreferrer"
+          <Link
+            href={ambassadorCopy.secondaryHref}
             className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
             style={{ boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)' }}
           >
-            <span className="text-sm font-medium text-black/60 tracking-tight">View LinkedIn</span>
-            <ExternalLink className="w-4 h-4 text-zinc-500" />
-          </a>
+            <span className="text-sm font-medium text-black/60 tracking-tight">{ambassadorCopy.secondaryCta}</span>
+          </Link>
         </div>
+
+        <p className="mt-6">
+          <Link href={ambassadorCopy.relatedHref} className="text-sm text-zinc-500 hover:text-orange-500 transition-colors">
+            {ambassadorCopy.relatedLabel}
+          </Link>
+        </p>
       </section>
 
       <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
 
-      {/* Highlights */}
       <section className="mb-16">
         <div className="text-center mb-10">
           <div className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
@@ -134,25 +131,27 @@ export default function CursorAmbassadorPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {highlights.map((item) => (
-            <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all group">
-              <div className="p-3 bg-zinc-100 rounded-xl w-fit mb-4 group-hover:bg-orange-100 transition-colors">
-                <item.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
+          {highlights.map((item, index) => {
+            const Icon = highlightIcons[index]
+            return (
+              <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all group">
+                <div className="p-3 bg-zinc-100 rounded-xl w-fit mb-4 group-hover:bg-orange-100 transition-colors">
+                  <Icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
+                </div>
+                <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
+                <p className="text-sm text-zinc-500 leading-relaxed">{item.description}</p>
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{item.description}</p>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </section>
 
       <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
 
-      {/* What I do */}
       <section className="mb-16">
         <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-sm">
           <h2 className="text-xl md:text-2xl font-semibold text-zinc-900 tracking-tight mb-6">
-            What I do as a Cursor Ambassador
+            {ambassadorCopy.whatIDoH2}
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -166,7 +165,21 @@ export default function CursorAmbassadorPage() {
         </div>
       </section>
 
-      {/* CTA */}
+      <section className="mb-16">
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-sm">
+          <h2 className="text-xl md:text-2xl font-semibold text-zinc-900 tracking-tight mb-6">
+            {ambassadorCopy.faqH2}
+          </h2>
+          <p className="text-sm text-zinc-700 leading-relaxed font-medium">{ambassadorCopy.faqAnswer}</p>
+        </div>
+      </section>
+
+      <section className="mb-16">
+        <blockquote className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-sm text-base md:text-lg text-zinc-700 leading-relaxed font-medium">
+          {ambassadorCopy.answerReady}
+        </blockquote>
+      </section>
+
       <section className="overflow-hidden min-h-[320px] shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
         <div
           className="absolute inset-0 opacity-10"
@@ -179,19 +192,28 @@ export default function CursorAmbassadorPage() {
 
         <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 min-h-[320px] relative">
           <h2 className="md:text-3xl lg:text-4xl leading-tight text-2xl font-normal text-white tracking-tight mb-6 max-w-2xl">
-            Need help shipping faster with Cursor?
+            {ambassadorCopy.closerH2}
           </h2>
           <p className="text-zinc-400 mb-8 max-w-lg font-medium">
-            I can help you set up reliable workflows, improve quality, and get more done with the same team.
+            {ambassadorCopy.closerBody}
           </p>
 
-          <Link
-            href="/services/vibe-code-friend"
-            className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
-          >
-            <span>Level up with Cursor</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link
+              href={ambassadorCopy.primaryHref}
+              className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+            >
+              <span>{ambassadorCopy.primaryCta}</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+            <Link
+              href={ambassadorCopy.secondaryHref}
+              className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
+              style={{ boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)' }}
+            >
+              <span className="text-sm font-medium text-black/60 tracking-tight">{ambassadorCopy.secondaryCta}</span>
+            </Link>
+          </div>
         </div>
       </section>
     </>
