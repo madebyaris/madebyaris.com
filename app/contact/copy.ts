@@ -47,3 +47,35 @@ export const contactCopy = {
   closerBody: 'Tell me about your product, timeline, and stack. Or ask about Cursor mentoring for your team.',
   footerBleed: 'Build or Level up. Pick a door above.',
 } as const
+
+const h1Accent = "you're building"
+
+export const contactH1Lead = contactCopy.h1.endsWith(h1Accent)
+  ? contactCopy.h1.slice(0, -h1Accent.length).trimEnd()
+  : contactCopy.h1
+
+export const contactH1Accent = contactCopy.h1.endsWith(h1Accent)
+  ? h1Accent
+  : ''
+
+const [addressLocality, addressCountry] = contactCopy.location
+  .split(',')
+  .map((part) => part.trim())
+
+export const contactPostalAddress = {
+  addressLocality,
+  addressCountry,
+}
+
+export const contactKeywords = [
+  doors[0].label,
+  doors[1].label,
+  'Next.js',
+  'WordPress',
+  'AI',
+  'Laravel',
+  'Cursor mentoring',
+  'Contact',
+  'Remote',
+  contactPostalAddress.addressLocality,
+] as const

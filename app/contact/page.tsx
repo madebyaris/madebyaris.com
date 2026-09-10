@@ -4,7 +4,16 @@ import Link from 'next/link'
 import { ContactForm } from '@/components/contact-form'
 import { UpworkIcon } from '@/components/icons/upwork'
 import { buildPageMetadata } from '@/lib/seo'
-import { contactCopy, contactMeta, contactTitle, doors } from './copy'
+import {
+  contactCopy,
+  contactH1Accent,
+  contactH1Lead,
+  contactKeywords,
+  contactMeta,
+  contactPostalAddress,
+  contactTitle,
+  doors,
+} from './copy'
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -59,7 +68,8 @@ const structuredData = {
     },
     "address": {
       "@type": "PostalAddress",
-      "addressCountry": "Indonesia"
+      "addressLocality": contactPostalAddress.addressLocality,
+      "addressCountry": contactPostalAddress.addressCountry
     },
     "sameAs": [
       "https://www.linkedin.com/in/arissetia/",
@@ -90,18 +100,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: contactTitle,
       description: contactMeta,
     },
-    keywords: [
-      'Contact Developer',
-      'Hire Next.js Developer',
-      'Hire WordPress Developer',
-      'Hire AI Developer',
-      'Cursor Mentoring',
-      'Remote Developer',
-      'Full Stack Developer',
-      'Next.js Development',
-      'WordPress Development',
-      'AI Product Development',
-    ],
+    keywords: [...contactKeywords],
   }
 }
 
@@ -128,8 +127,10 @@ export default function ContactPage() {
         </div>
 
         <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
-          Tell me what{' '}
-          <span className="block gradient-text font-light">you&apos;re building</span>
+          {contactH1Lead}{' '}
+          {contactH1Accent ? (
+            <span className="block gradient-text font-light">{contactH1Accent}</span>
+          ) : null}
         </h1>
 
         <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
