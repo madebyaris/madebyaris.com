@@ -89,6 +89,7 @@ interface Heading {
 function extractHeadings(content: string): Heading[] {
   const headingRegex = /<h([2-3])[^>]*>(.*?)<\/h\1>/g;
   const headings: Heading[] = [];
+  const seenIds = new Set<string>();
   let match;
   
   try {
@@ -97,6 +98,10 @@ function extractHeadings(content: string): Heading[] {
       const text = match[2].replace(/<[^>]*>/g, '');
       // Create a consistent ID that will match what we use in addIdsToHeadings
       const id = text.toLowerCase().replace(/[^\w]+/g, '-');
+
+      // One TOC item per unique anchor — duplicate H2 text shares an id.
+      if (seenIds.has(id)) continue;
+      seenIds.add(id);
       
       headings.push({
         level,
@@ -378,10 +383,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
                   </div>
                 )}
                 
-                {/* Table of Contents (Mobile) */}
-                {headings.length > 0 && <TableOfContents headings={headings} isMobile={true} />}
-                
-                {/* Table of Contents (Desktop - Fixed Position) */}
+                {/* Table of Contents — one in-flow collapsible for all breakpoints */}
                 {headings.length > 0 && <TableOfContents headings={headings} />}
                 
                 {/* Main Content */}
