@@ -1,6 +1,7 @@
 'use server'
 
 import { Resend } from 'resend'
+import { doors } from '@/app/contact/copy'
 import { rateLimit } from '@/lib/rate-limit'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
@@ -24,11 +25,14 @@ export async function sendContactEmail(formData: FormData) {
     const name = formData.get('name')
     const email = formData.get('email')
     const message = formData.get('message')
+    const door = formData.get('door')
+    const selectedDoor = typeof door === 'string'
+      ? doors.find((item) => item.label === door)
+      : undefined
 
-    // Validate required fields
-    if (!name || !email || !message) {
+    if (!name || !email || !message || !selectedDoor) {
       return {
-        error: 'Name, email, and message are required.'
+        error: 'Name, email, message, and door are required.'
       }
     }
 
@@ -58,7 +62,7 @@ export async function sendContactEmail(formData: FormData) {
       from: 'Contact Form <onboarding@resend.dev>',
       to: recipients,
       subject: `New Contact Form Submission from ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+      text: `Name: ${name}\nEmail: ${email}\nDoor: ${selectedDoor.label}\nMessage: ${message}`,
       replyTo: email.toString()
     })
 
