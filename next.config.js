@@ -27,8 +27,9 @@ const nextConfig = {
       },
     ],
     formats: ['image/avif', 'image/webp'],
-    // Next.js 16: Default changed to 4 hours (14400s), reverting to 60s for more frequent revalidation
-    minimumCacheTTL: 60,
+    // WordPress upload URLs change when the file changes, so a long TTL
+    // avoids re-optimizing the same image every minute.
+    minimumCacheTTL: 2678400,
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     dangerouslyAllowSVG: true,
@@ -98,6 +99,26 @@ const nextConfig = {
       destination: '/contact',
       permanent: true,
     },
+    {
+      source: '/nextjs-development-indonesia',
+      destination: '/services/nextjs-development/nextjs-indonesia',
+      permanent: true,
+    },
+    {
+      source: '/services/wordpress-development',
+      destination: '/services/wordpress',
+      permanent: true,
+    },
+    {
+      source: '/author/madebyaris',
+      destination: '/about',
+      permanent: true,
+    },
+    {
+      source: '/author/madebyaris/',
+      destination: '/about',
+      permanent: true,
+    },
   ],
   headers: async () => [
     {
@@ -134,24 +155,6 @@ const nextConfig = {
   // Turbopack (default in Next.js 16) handles code splitting, tree-shaking,
   // and module concatenation automatically with optimized defaults.
   // If you need custom chunking, use Next.js built-in dynamic() imports instead.
-
-  redirects: async () => [
-    {
-      source: '/services/wordpress-development',
-      destination: '/services/wordpress',
-      permanent: true,
-    },
-    {
-      source: '/author/madebyaris',
-      destination: '/about',
-      permanent: true,
-    },
-    {
-      source: '/author/madebyaris/',
-      destination: '/about',
-      permanent: true,
-    },
-  ],
 }
 
 export default withBundleAnalyzer({

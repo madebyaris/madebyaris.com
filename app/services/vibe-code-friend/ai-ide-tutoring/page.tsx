@@ -1,144 +1,132 @@
 import type { Metadata } from 'next'
-import { Code, ArrowRight, ArrowUpRight, Terminal, LucideGitPullRequest, Sparkles, BookOpen, Lightbulb, MessageSquare, Zap, CheckCircle2 } from 'lucide-react'
+import { Code, ArrowRight, ArrowUpRight, LucideGitPullRequest, BookOpen, Lightbulb, MessageSquare, Shield, AlertCircle } from 'lucide-react'
 import Link from 'next/link'
+import { buildPageGraph, buildPageMetadata, type FaqItem } from '@/lib/seo'
+import { JsonLd } from '@/components/seo/json-ld'
+import { contactHref } from '@/lib/contact-services'
 
 export const revalidate = 86400 // Revalidate daily
 
-// Structured Data for SEO
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "@id": "https://madebyaris.com/services/vibe-code-friend/ai-ide-tutoring/#webpage",
-  "name": "AI IDE Tutoring - Master Cursor and Other AI Tools | Vibe Code Friend",
-  "description": "Learn how to leverage AI-powered IDEs like Cursor to boost your productivity and coding skills. Personalized tutoring and guidance for developers of all levels.",
-  "url": "https://madebyaris.com/services/vibe-code-friend/ai-ide-tutoring",
-  "isPartOf": {
-    "@type": "WebSite",
-    "@id": "https://madebyaris.com/#website"
-  },
-  "breadcrumb": {
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "item": {
-          "@id": "https://madebyaris.com",
-          "name": "Home"
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "item": {
-          "@id": "https://madebyaris.com/services",
-          "name": "Services"
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "item": {
-          "@id": "https://madebyaris.com/services/vibe-code-friend",
-          "name": "Vibe Code Friend"
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 4,
-        "item": {
-          "@id": "https://madebyaris.com/services/vibe-code-friend/ai-ide-tutoring",
-          "name": "AI IDE Tutoring"
-        }
-      }
-    ]
-  }
-}
+const path = '/services/vibe-code-friend/ai-ide-tutoring'
+const pageTitle = 'Cursor AI Tutoring on Your Own Repo'
+const pageDescription =
+  'Cursor AI tutoring for developers: learn how to use Cursor AI on your own code, with project rules, agent workflows, and a habit for checking AI output.'
 
-const learningTopics = [
-  {
-    title: 'Effective Prompting',
-    description: 'Learn how to craft effective prompts to get the most out of AI coding assistants',
-    icon: MessageSquare
-  },
-  {
-    title: 'Workflow Integration',
-    description: 'Seamlessly integrate AI tools into your existing development workflow',
-    icon: LucideGitPullRequest
-  },
-  {
-    title: 'Code Generation',
-    description: 'Generate high-quality code snippets and complete functions with AI assistance',
-    icon: Code
-  },
-  {
-    title: 'Documentation Creation',
-    description: 'Generate comprehensive documentation for your code with AI help',
-    icon: BookOpen
-  }
+export const metadata: Metadata = buildPageMetadata({
+  title: pageTitle,
+  description: pageDescription,
+  path,
+  keywords: [
+    'Cursor AI tutoring',
+    'how to use Cursor AI',
+    'Cursor AI tutorial',
+    'cara menggunakan Cursor AI',
+    'Cursor tutor',
+  ],
+})
+
+const stuckPoints = [
+  'Cursor writes code that ignores your project’s patterns',
+  'An agent run changes many files and you can’t tell which edits matter',
+  'You paste the same context into every prompt',
+  'Free tutorials use toy apps that look nothing like your repo',
 ]
 
-const benefits = [
-  'Personalized learning path',
-  'Hands-on exercises',
-  'Real-world examples',
-  'Best practices guidance',
-  'Workflow optimization',
-  'Productivity techniques'
+const outcomes = [
+  {
+    title: 'Cursor follows your conventions',
+    description: 'Project rules in your repo tell Cursor how your code is written, so you stop correcting the same mistakes.',
+    icon: BookOpen,
+  },
+  {
+    title: 'You pick the right mode',
+    description: 'You know when to ask in chat, when to hand a task to the agent, and when typing it yourself is faster.',
+    icon: MessageSquare,
+  },
+  {
+    title: 'Smaller changes you can review',
+    description: 'You split work into tasks Cursor can finish cleanly, which means diffs you can read before you commit.',
+    icon: LucideGitPullRequest,
+  },
+  {
+    title: 'Bad AI code gets caught early',
+    description: 'A short checking habit for every AI edit, so broken or invented code doesn’t reach production.',
+    icon: Shield,
+  },
 ]
 
-const tools = [
-  'Cursor IDE',
-  'GitHub Copilot',
-  'Claude AI',
-  'ChatGPT',
-  'VS Code AI Extensions',
-  'Codeium'
+const steps = [
+  { step: 1, title: 'Tell me your stack', desc: 'Your repo, your tools, and where Cursor lets you down today' },
+  { step: 2, title: 'Set up the repo', desc: 'Project rules and settings on your own code, done together' },
+  { step: 3, title: 'Work real tickets', desc: 'Screen-shared sessions on tasks you already need to ship' },
+  { step: 4, title: 'Review what stuck', desc: 'Look at your recent AI-assisted commits and fix the gaps' },
 ]
 
-// Generate Metadata
-export async function generateMetadata(): Promise<Metadata> {
-  return {
-    title: "AI IDE Tutoring - Master Cursor and Other AI Tools | Vibe Code Friend",
-    description: "Learn how to leverage AI-powered IDEs like Cursor to boost your productivity and coding skills. Personalized tutoring and guidance for developers of all levels.",
-    openGraph: {
-      title: "AI IDE Tutoring - Master Cursor and Other AI Tools",
-      description: "Learn how to leverage AI-powered IDEs like Cursor to boost your productivity and coding skills.",
-      url: "https://madebyaris.com/services/vibe-code-friend/ai-ide-tutoring",
-      siteName: "Made by Aris",
-      locale: "en_US",
-      type: "website",
-    },
-    alternates: {
-      canonical: "https://madebyaris.com/services/vibe-code-friend/ai-ide-tutoring",
-    },
-  }
-}
+const faqs: FaqItem[] = [
+  {
+    question: 'What’s the fastest way to learn how to use Cursor AI?',
+    answer:
+      'Use it on a real project, with project rules set up first. My free Cursor AI tutorial covers the basics. Tutoring adds a second pair of eyes on your own repo, so you fix bad habits while you work.',
+  },
+  {
+    question: 'Who is Cursor AI tutoring for?',
+    answer:
+      'Developers who already write code and want Cursor to fit their daily work. If you are newer to programming, we go slower and spend more time on reading and checking what Cursor writes.',
+  },
+  {
+    question: 'Can I learn cara menggunakan Cursor AI in Bahasa Indonesia?',
+    answer:
+      'Yes. I teach in English or Indonesian. I’m based in Sidoarjo and I’m the first Cursor Ambassador in Indonesia, and I also keep a written guide on cara menggunakan Cursor AI.',
+  },
+  {
+    question: 'Do you cover GitHub Copilot or other AI editors?',
+    answer:
+      'Sessions focus on Cursor, since that’s the editor I ship client work in every week. The habits we build, like project rules, small tasks, and checking output, also apply to other AI editors.',
+  },
+  {
+    question: 'What’s the difference between tutoring and team mentoring?',
+    answer:
+      'Tutoring is for one developer or a small group who want to get better with Cursor. Team mentoring rolls shared rules and a review habit out to a whole team over about 30 days.',
+  },
+]
+
+const structuredData = buildPageGraph({
+  path,
+  name: pageTitle,
+  description: pageDescription,
+  breadcrumbs: [
+    { name: 'Services', path: '/services' },
+    { name: 'Cursor mentoring', path: '/services/vibe-code-friend' },
+    { name: 'Cursor AI tutoring', path },
+  ],
+  service: {
+    name: 'Cursor AI tutoring',
+    description: pageDescription,
+    serviceType: 'Developer Tutoring',
+    offers: outcomes.map(({ title, description }) => ({ name: title, description })),
+  },
+  faqs,
+})
 
 export default function AiIdeTutoringPage() {
   return (
     <>
-      {/* Add structured data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
-      
+      <JsonLd data={structuredData} />
+
       {/* Breadcrumb */}
-      <nav className="mb-8">
+      <nav className="mb-8" aria-label="Breadcrumb">
         <ol className="flex items-center space-x-2 text-sm text-zinc-500">
           <li><Link href="/services" className="hover:text-orange-500 transition-colors">Services</Link></li>
           <li><span className="px-2">/</span></li>
-          <li><Link href="/services/vibe-code-friend" className="hover:text-orange-500 transition-colors">Vibe Code Friend</Link></li>
+          <li><Link href="/services/vibe-code-friend" className="hover:text-orange-500 transition-colors">Cursor mentoring</Link></li>
           <li><span className="px-2">/</span></li>
-          <li className="text-zinc-900">AI IDE Tutoring</li>
+          <li className="text-zinc-900">Cursor AI tutoring</li>
         </ol>
       </nav>
-      
+
       {/* Hero Section */}
       <section className="text-center pt-4 pb-16">
-        {/* Badge */}
-        <div 
+        <div
           className="inline-flex bg-white/60 rounded-full mb-8 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2"
           style={{
             position: 'relative',
@@ -148,72 +136,100 @@ export default function AiIdeTutoringPage() {
           }}
         >
           <Code className="w-4 h-4 text-orange-500" />
-          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">AI Development</span>
+          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Level up · Tutoring</span>
         </div>
 
-        {/* Title */}
         <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
-          AI IDE
-          <span className="block gradient-text font-light">Tutoring</span>
+          Cursor AI tutoring
+          <span className="block gradient-text font-light">on your own code</span>
         </h1>
 
-        {/* Description */}
-        <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
-          Master AI-powered coding tools like Cursor to supercharge your development workflow. 
-          Get personalized guidance and learn how to effectively leverage AI assistance in your daily coding tasks.
+        <p className="text-base md:text-lg text-zinc-600 max-w-2xl mx-auto mb-4 leading-relaxed font-medium">
+          For developers who installed Cursor and want it to work on real projects. I’m the first Cursor Ambassador in Indonesia, and I ship client work in Cursor every week.
         </p>
 
-        {/* CTA Buttons */}
+        <p className="text-sm text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed">
+          Remote, screen-shared sessions in English or Indonesian.
+        </p>
+
         <div className="flex flex-wrap justify-center gap-3">
-          <Link 
-            href="/contact"
+          <Link
+            href={contactHref('cursor-mentoring')}
             className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
           >
-            <span className="text-sm font-medium tracking-tight">Schedule a Session</span>
+            <span className="text-sm font-medium tracking-tight">Book Cursor AI tutoring</span>
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </Link>
-          <Link 
-            href="/services/vibe-code-friend"
+          <Link
+            href="/blog/cursor-ai-tutorial-for-beginners"
             className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
-            style={{
-              boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)',
-              position: 'relative',
-              // @ts-expect-error CSS custom properties
-              '--border-gradient': 'linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.8))',
-              '--border-radius-before': '9999px'
-            }}
+            style={{ boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)' }}
           >
-            <span className="text-sm font-medium text-black/60 tracking-tight">Explore Other Services</span>
+            <span className="text-sm font-medium text-black/60 tracking-tight">Start with the free Cursor AI tutorial</span>
             <ArrowRight className="w-4 h-4 text-zinc-500" />
           </Link>
         </div>
       </section>
 
-      {/* Separator */}
       <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
 
-      {/* What You'll Learn Section */}
+      {/* Answer first */}
+      <section className="mb-16 max-w-3xl mx-auto">
+        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+          What Cursor AI tutoring covers
+        </h2>
+        <p className="text-zinc-600 leading-relaxed mb-4">
+          Cursor AI tutoring is live, screen-shared sessions where you learn Cursor on your own project. We set up project rules so Cursor follows your conventions, practice when to use chat and when to use the agent, and build a habit for checking AI-generated code before it ships. You leave with a setup you keep using.
+        </p>
+        <p className="text-zinc-600 leading-relaxed">
+          Prefer reading first? Start with{' '}
+          <Link href="/blog/cursor-project-rules" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors">
+            Cursor project rules
+          </Link>{' '}
+          or, in Bahasa Indonesia,{' '}
+          <Link href="/blog/cara-menggunakan-cursor-ai" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors">
+            cara menggunakan Cursor AI
+          </Link>
+          .
+        </p>
+      </section>
+
+      {/* Stuck points */}
       <section className="mb-16">
         <div className="text-center mb-10">
-          <div 
-            className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2"
-            style={{
-              position: 'relative',
-              // @ts-expect-error CSS custom properties
-              '--border-gradient': 'linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0))',
-              '--border-radius-before': '9999px'
-            }}
-          >
+          <div className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
             <Lightbulb className="w-4 h-4 text-orange-500" />
-            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Curriculum</span>
+            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Sound familiar?</span>
           </div>
           <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            What You&apos;ll <span className="gradient-text">Learn</span>
+            Where developers get stuck <span className="gradient-text">with Cursor</span>
+          </h2>
+        </div>
+
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm max-w-3xl mx-auto">
+          <ul className="space-y-3">
+            {stuckPoints.map((item) => (
+              <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
+                <AlertCircle className="w-5 h-5 text-orange-500 shrink-0" />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+
+      {/* Outcomes */}
+      <section className="mb-16">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+            How to use Cursor AI <span className="gradient-text">after tutoring</span>
           </h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {learningTopics.map((topic) => (
+          {outcomes.map((topic) => (
             <div
               key={topic.title}
               className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all group"
@@ -232,116 +248,49 @@ export default function AiIdeTutoringPage() {
         </div>
       </section>
 
-      {/* Separator */}
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
-
-      {/* How It Works Section */}
+      {/* How it works */}
       <section className="mb-16">
         <div className="text-center mb-10">
           <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            How It <span className="gradient-text">Works</span>
+            How tutoring <span className="gradient-text">works</span>
           </h2>
         </div>
 
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-sm">
-          <div className="space-y-6">
-            <p className="text-zinc-600 leading-relaxed">
-              Our AI IDE tutoring sessions are personalized to your specific needs and skill level. We&apos;ll start with an assessment of your current workflow and identify areas where AI tools can provide the most benefit. Then, through hands-on exercises and real-world examples, you&apos;ll learn how to leverage these powerful tools effectively.
-            </p>
-            <p className="text-zinc-600 leading-relaxed">
-              Sessions can be conducted remotely via screen sharing, allowing for interactive guidance and immediate feedback. Whether you&apos;re a beginner just starting out with AI tools or an experienced developer looking to optimize your workflow, our tutoring will help you reach the next level.
-            </p>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          {steps.map((item) => (
+            <div key={item.step} className="bg-zinc-50 rounded-2xl p-5 text-center">
+              <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-500 font-bold text-lg flex items-center justify-center mx-auto mb-3">
+                {item.step}
+              </div>
+              <h3 className="font-semibold text-zinc-900 mb-1">{item.title}</h3>
+              <p className="text-sm text-zinc-500">{item.desc}</p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Separator */}
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
-
-      {/* Benefits & Tools Grid */}
-      <section className="mb-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Benefits */}
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 bg-orange-100 rounded-xl">
-                <Sparkles className="w-5 h-5 text-orange-500" />
-              </div>
-              <h3 className="text-lg font-semibold text-zinc-900">What You Get</h3>
-            </div>
-            <div className="space-y-3">
-              {benefits.map((benefit) => (
-                <div key={benefit} className="flex items-center gap-3">
-                  <CheckCircle2 className="w-4 h-4 text-orange-500 shrink-0" />
-                  <span className="text-sm text-zinc-600">{benefit}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Tools */}
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 bg-orange-100 rounded-xl">
-                <Terminal className="w-5 h-5 text-orange-500" />
-              </div>
-              <h3 className="text-lg font-semibold text-zinc-900">Tools We Cover</h3>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {tools.map((tool) => (
-                <span
-                  key={tool}
-                  className="px-3 py-1.5 bg-zinc-100 rounded-full text-sm text-zinc-600 font-medium"
-                >
-                  {tool}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Separator */}
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
-
-      {/* Why Choose Section */}
-      <section className="mb-16">
-        <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            Why Choose <span className="gradient-text">Vibe Code Friend</span>
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-zinc-50 rounded-2xl p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-white rounded-xl shadow-sm">
-                <Zap className="w-5 h-5 text-orange-500" />
-              </div>
-              <h3 className="font-semibold text-zinc-900">Personalized Approach</h3>
-            </div>
-            <p className="text-sm text-zinc-600 leading-relaxed">
-              Unlike generic tutorials, our tutoring is tailored specifically to your needs, projects, and learning style. We focus on practical applications rather than theoretical concepts, ensuring you can immediately apply what you learn to your actual work.
-            </p>
-          </div>
-          <div className="bg-zinc-50 rounded-2xl p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-white rounded-xl shadow-sm">
-                <Sparkles className="w-5 h-5 text-orange-500" />
-              </div>
-              <h3 className="font-semibold text-zinc-900">Expert Guidance</h3>
-            </div>
-            <p className="text-sm text-zinc-600 leading-relaxed">
-              Our expertise with tools like Cursor, GitHub Copilot, and other AI coding assistants means you&apos;re learning from someone who uses these tools daily and understands their strengths and limitations.
-            </p>
-          </div>
+      {/* FAQ */}
+      <section className="mb-16 max-w-3xl mx-auto" aria-labelledby="tutoring-faq">
+        <h2 id="tutoring-faq" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-6">
+          Cursor AI tutoring FAQ
+        </h2>
+        <div className="space-y-3">
+          {faqs.map((faq) => (
+            <details key={faq.question} className="group bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm open:shadow-md">
+              <summary className="cursor-pointer list-none font-semibold text-zinc-900 flex items-center justify-between gap-4">
+                {faq.question}
+                <span className="text-orange-500 transition-transform group-open:rotate-45 text-xl leading-none">+</span>
+              </summary>
+              <p className="mt-3 text-sm text-zinc-600 leading-relaxed">{faq.answer}</p>
+            </details>
+          ))}
         </div>
       </section>
 
       {/* CTA Section */}
       <section className="overflow-hidden min-h-[400px] shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
-        <div 
-          className="absolute inset-0 opacity-10" 
+        <div
+          className="absolute inset-0 opacity-10"
           style={{
             backgroundImage: 'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)',
             backgroundSize: '40px 40px'
@@ -350,25 +299,25 @@ export default function AiIdeTutoringPage() {
 
         <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16 min-h-[400px] relative">
           <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
-            Ready to Level Up Your AI Coding Skills?
+            Want Cursor to work on your real code?
           </h2>
           <p className="text-zinc-400 mb-8 max-w-lg font-medium">
-            Book a session today and start harnessing the full power of AI in your development workflow.
+            Tell me your stack and what you want to get better at. I’ll suggest where to start. If one of my free guides already covers it, I’ll send you that first.
           </p>
 
           <div className="flex flex-wrap justify-center gap-3">
-            <Link 
-              href="/contact"
+            <Link
+              href={contactHref('cursor-mentoring')}
               className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
             >
-              <span>Book a Session</span>
+              <span>Book Cursor AI tutoring</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
-            <Link 
+            <Link
               href="/services/vibe-code-friend"
               className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3"
             >
-              <span>Explore Other Services</span>
+              <span>See mentoring for teams</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>

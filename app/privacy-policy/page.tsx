@@ -6,108 +6,37 @@ import { PageHero } from '@/components/ui/page-hero'
 import { SectionWrapper } from '@/components/ui/section-wrapper'
 import { EnhancedCard } from '@/components/ui/enhanced-card'
 import { JsonLd } from '@/components/seo/json-ld'
-import { productionUrl } from '@/lib/seo/config'
+import { buildPageGraph, buildPageMetadata } from '@/lib/seo'
 
 export const revalidate = 86400 // Revalidate daily
 
-const privacyStructuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'WebPage',
-  '@id': `${productionUrl}/privacy-policy/#webpage`,
-  name: 'Privacy Policy | Made by Aris',
-  description:
-    'Privacy policy for Made by Aris website, detailing how we collect, use, and protect your personal information.',
-  url: `${productionUrl}/privacy-policy`,
-  isPartOf: {
-    '@type': 'WebSite',
-    '@id': `${productionUrl}/#website`,
-  },
-  breadcrumb: {
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        item: {
-          '@id': productionUrl,
-          name: 'Home',
-        },
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        item: {
-          '@id': `${productionUrl}/privacy-policy`,
-          name: 'Privacy Policy',
-        },
-      },
-    ],
-  },
-  mainEntity: {
-    '@type': 'PrivacyPolicy',
-    name: 'Made by Aris Privacy Policy',
-    text: 'At Made by Aris, I am committed to protecting your privacy and ensuring the security of your personal information.',
-    dateModified: new Date().toISOString(),
-    provider: {
-      '@type': 'Organization',
-      '@id': `${productionUrl}/#organization`,
-      name: 'MadeByAris',
-      url: productionUrl,
-      logo: {
-        '@type': 'ImageObject',
-        url: `${productionUrl}/logo.png`,
-        width: '180',
-        height: '180',
-      },
-    },
-  },
-  publisher: {
-    '@type': 'Organization',
-    '@id': `${productionUrl}/#organization`,
-    name: 'MadeByAris',
-    url: productionUrl,
-    logo: {
-      '@type': 'ImageObject',
-      url: `${productionUrl}/logo.png`,
-      width: '180',
-      height: '180',
-    },
-  },
-}
+const pageDescription =
+  'Privacy policy for Made by Aris website, detailing how we collect, use, and protect your personal information.'
 
-// Generate Metadata and Structured Data
-export function generateMetadata(): Metadata {
-  return {
-    title: 'Privacy Policy | Made by Aris',
-    description: 'Privacy policy for Made by Aris website, detailing how we collect, use, and protect your personal information.',
-    keywords: [
-      'Privacy Policy',
-      'Data Protection',
-      'Personal Information',
-      'Cookie Policy',
-      'Website Terms',
-      'User Privacy',
-      'Information Collection',
-      'Data Security',
-      'GDPR Compliance',
-      'Privacy Rights'
-    ],
-    alternates: {
-      canonical: 'https://madebyaris.com/privacy-policy'
-    },
-    openGraph: {
-      title: 'Privacy Policy | Made by Aris',
-      description: 'Privacy policy for Made by Aris website, detailing how we collect, use, and protect your personal information.',
-      url: 'https://madebyaris.com/privacy-policy',
-      siteName: 'Made by Aris',
-      locale: 'en_US',
-      type: 'website',
-    },
-    verification: {
-      google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || '',
-    },
-  }
-}
+export const metadata: Metadata = buildPageMetadata({
+  title: 'Privacy Policy',
+  description: pageDescription,
+  path: '/privacy-policy',
+  keywords: [
+    'Privacy Policy',
+    'Data Protection',
+    'Personal Information',
+    'Cookie Policy',
+    'Website Terms',
+    'User Privacy',
+    'Information Collection',
+    'Data Security',
+    'GDPR Compliance',
+    'Privacy Rights',
+  ],
+})
+
+const privacyStructuredData = buildPageGraph({
+  path: '/privacy-policy',
+  name: 'Privacy Policy',
+  description: pageDescription,
+  type: 'WebPage',
+})
 
 export default function PrivacyPolicyPage() {
   return (
@@ -143,7 +72,7 @@ export default function PrivacyPolicyPage() {
                 This Privacy Policy explains how I collect, use, and safeguard your data when you visit my website or engage my services.
               </p>
 
-              <h2>Information I Collect</h2>
+              <h2>Information I collect</h2>
               <p>I may collect the following types of information:</p>
               <ul>
                 <li>
@@ -157,7 +86,7 @@ export default function PrivacyPolicyPage() {
                 </li>
               </ul>
 
-              <h2>How I Use Your Information</h2>
+              <h2>How I use your information</h2>
               <p>I use the information I collect for the following purposes:</p>
               <ul>
                 <li>To provide and maintain my services</li>
@@ -168,13 +97,13 @@ export default function PrivacyPolicyPage() {
                 <li>To comply with legal obligations</li>
               </ul>
 
-              <h2>Data Security</h2>
+              <h2>Data security</h2>
               <p>
                 I implement appropriate security measures to protect your personal information from unauthorized access, alteration, disclosure, or destruction. 
                 However, no method of transmission over the Internet or electronic storage is 100% secure, and I cannot guarantee absolute security.
               </p>
 
-              <h2>Third-Party Services</h2>
+              <h2>Third-party services</h2>
               <p>
                 I may use third-party services to help operate my website and provide services. These third parties may have access to your personal information only to perform specific tasks on my behalf and are obligated not to disclose or use it for any other purpose.
               </p>
@@ -186,7 +115,7 @@ export default function PrivacyPolicyPage() {
                 <li>Payment processors (when applicable)</li>
               </ul>
 
-              <h2>Cookies Policy</h2>
+              <h2>Cookies policy</h2>
               <p>
                 Cookies are small text files that are placed on your device when you visit my website. I use cookies to enhance your browsing experience and understand how you interact with my site.
               </p>
@@ -200,7 +129,7 @@ export default function PrivacyPolicyPage() {
                 You can control cookies through your browser settings. However, disabling certain cookies may limit your ability to use some features of my website.
               </p>
 
-              <h2>Your Data Protection Rights</h2>
+              <h2>Your data protection rights</h2>
               <p>Depending on your location, you may have the following rights regarding your personal information:</p>
               <ul>
                 <li>The right to access your personal data</li>
@@ -214,12 +143,12 @@ export default function PrivacyPolicyPage() {
                 To exercise any of these rights, please contact me using the information provided at the end of this policy.
               </p>
 
-              <h2>Children&apos;s Privacy</h2>
+              <h2>Children&apos;s privacy</h2>
               <p>
                 My website is not intended for children under 16 years of age. I do not knowingly collect personal information from children under 16. If you are a parent or guardian and believe your child has provided me with personal information, please contact me, and I will take steps to remove that information.
               </p>
 
-              <h2>Changes to This Privacy Policy</h2>
+              <h2>Changes to this privacy policy</h2>
               <p>
                 I may update this Privacy Policy from time to time to reflect changes in my practices or for other operational, legal, or regulatory reasons. I will post the updated Privacy Policy on this page with a revised &quot;Last updated&quot; date.
               </p>
@@ -227,7 +156,7 @@ export default function PrivacyPolicyPage() {
                 I encourage you to review this Privacy Policy periodically to stay informed about how I protect your information.
               </p>
 
-              <h2>Contact Information</h2>
+              <h2>Contact information</h2>
               <p>
                 If you have any questions or concerns about this Privacy Policy or my data practices, please contact me at:
               </p>
@@ -248,7 +177,7 @@ export default function PrivacyPolicyPage() {
             <div className="inline-flex gap-4">
               <Button asChild variant="wp-primary">
                 <Link href="/contact">
-                  Contact Me
+                  Ask me about your data
                 </Link>
               </Button>
               <Button asChild variant="outline" className="border-wp-navy/20 hover:bg-wp-navy/5 dark:border-wp-blue/20 dark:hover:bg-wp-blue/10">

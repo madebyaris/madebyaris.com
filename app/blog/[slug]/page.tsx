@@ -17,10 +17,11 @@ import { FeaturedImage } from '@/components/featured-image'
 import { AuthorImage } from '@/components/author-image'
 import { RelatedPostCard } from '@/components/related-post-card'
 import { getPost, getPosts } from '@/lib/wordpress'
-import { buildBlogPostGraph, buildBlogPostMetadata } from '@/lib/seo'
+import { buildBlogPostGraph, buildBlogPostMetadata, isIndonesianSlug } from '@/lib/seo'
 import { JsonLd } from '@/components/seo/json-ld'
+import { contactHref } from '@/lib/contact-services'
 
-export const revalidate = 1800 // Revalidate every 30 minutes
+export const revalidate = 604800 // 7 days; webhook refreshes a post on publish
 
 interface BlogPostPageProps {
   params: Promise<{
@@ -119,7 +120,9 @@ function extractHeadings(content: string): Heading[] {
 // Function to add IDs to headings in content
 function addIdsToHeadings(content: string) {
   try {
-    return content.replace(
+    // The page template owns the only <h1>; headings from WordPress start at <h2>.
+    const demoted = content.replace(/<(\/?)h1(\s|>)/gi, '<$1h2$2')
+    return demoted.replace(
       /<h([2-3])([^>]*)>(.*?)<\/h\1>/g,
       (match, level, attrs, text) => {
         // Extract text without HTML tags for the ID
@@ -176,23 +179,35 @@ function transformTheImage(content: string): string {
 
 export default async function BlogPost({ params }: BlogPostPageProps) {
   const { slug } = await params
-  
+
+  let post: Awaited<ReturnType<typeof getPost>>
+  let allPosts: Post[] = []
+  let featuredImageUrl = ''
+  let relatedPosts: Post[] = []
+  let headings: Heading[] = []
+  let transformedContent = ''
+  let readingTime = 0
+  let featuredImage: string | undefined
+  let articleStructuredData: ReturnType<typeof buildBlogPostGraph> | undefined
+
   try {
-    const [post, allPosts] = await Promise.all([
+    const fetched = await Promise.all([
       getPost(slug),
       getPosts({ per_page: 6 })
     ])
+    post = fetched[0]
+    allPosts = fetched[1]
     if (!post) {
       notFound();
     }
 
-    const featuredImageUrl = post._embedded?.['wp:featuredmedia']?.[0]?.source_url || ''
+    featuredImageUrl = post._embedded?.['wp:featuredmedia']?.[0]?.source_url || ''
 
-    const relatedPosts = allPosts.filter((p) => p.id !== post.id).slice(0, 3)
+    relatedPosts = allPosts.filter((p) => p.id !== post!.id).slice(0, 3)
 
     // Extract headings for table of contents and transform content on the server
-    let headings: Heading[] = [];
-    let transformedContent = '';
+    headings = [];
+    transformedContent = '';
     
     try {
       const conversionOptions = {
@@ -232,21 +247,35 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
       headings = extractHeadings(transformedContent);
     }
 
-    // Calculate reading time
-    const readingTime = getReadingTime(transformedContent);
-    const featuredImage =
+    readingTime = getReadingTime(transformedContent);
+    featuredImage =
       post._embedded?.['wp:featuredmedia']?.[0]?.source_url
 
-    const articleStructuredData = buildBlogPostGraph({
+    articleStructuredData = buildBlogPostGraph({
       slug: post.slug,
       headline: post.title.rendered,
       description: post.excerpt.rendered,
       image: featuredImage,
       datePublished: post.date,
       dateModified: post.modified,
+      inLanguage: isIndonesianSlug(post.slug) ? 'id' : 'en',
+      section: post.categories[0]?.name,
+      keywords: post.tags.map((tag) => tag.name),
+      wordCount: transformedContent.replace(/<[^>]*>/g, ' ').split(/\s+/).filter(Boolean).length,
+      readingMinutes: readingTime,
     })
+  } catch (error) {
+    console.error('Error rendering blog post:', error);
+    notFound()
+  }
 
-    return (
+  if (!post || !articleStructuredData) {
+    notFound()
+  }
+
+  const isCursorPost = /cursor|vibe|ai-generated|copilot/i.test(post.slug)
+
+  return (
       <>
         <SmoothScroll />
         <JsonLd data={articleStructuredData} />
@@ -460,21 +489,51 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
                   </div>
                 </div>
                 
+                {/* Post CTA */}
+                <div className="mt-12 rounded-2xl bg-zinc-900 p-6 md:p-8 text-white">
+                  {isCursorPost ? (
+                    <>
+                      <h2 className="text-xl md:text-2xl font-medium tracking-tight mb-2">
+                        Want your team shipping with Cursor like this?
+                      </h2>
+                      <p className="text-sm text-zinc-400 mb-5 max-w-xl">
+                        I set up project rules and a review habit on one of your real repos, then help the rest of the team adopt it. English or Indonesian.
+                      </p>
+                      <Link
+                        href={contactHref('cursor-mentoring')}
+                        className="inline-flex items-center rounded-full bg-white px-5 py-2.5 text-sm font-medium text-zinc-900 hover:bg-zinc-100 transition-colors"
+                      >
+                        Get Cursor mentoring for your team
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      <h2 className="text-xl md:text-2xl font-medium tracking-tight mb-2">
+                        Need this built instead of read about?
+                      </h2>
+                      <p className="text-sm text-zinc-400 mb-5 max-w-xl">
+                        Send me your project. I reply within 24 hours and tell you plainly whether I’m the right fit.
+                      </p>
+                      <Link
+                        href={contactHref('nextjs')}
+                        className="inline-flex items-center rounded-full bg-white px-5 py-2.5 text-sm font-medium text-zinc-900 hover:bg-zinc-100 transition-colors"
+                      >
+                        Send me your project
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    </>
+                  )}
+                </div>
+
                 {/* Post Navigation */}
-                <div className="mt-12 pt-8 border-t flex justify-between">
+                <div className="mt-8 pt-8 border-t flex justify-between">
                   <Link
                     href="/blog"
                     className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
                   >
                     <ArrowLeft className="mr-2 h-4 w-4" />
                     Back to Blog
-                  </Link>
-                  <Link
-                    href="/contact"
-                    className="inline-flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors"
-                  >
-                    Get in Touch
-                    <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </div>
               </article>
@@ -506,8 +565,4 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
         </div>
       </>
     )
-  } catch (error) {
-    console.error('Error rendering blog post:', error);
-    notFound()
-  }
 }

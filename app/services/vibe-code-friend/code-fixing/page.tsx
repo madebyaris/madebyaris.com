@@ -1,178 +1,134 @@
 import type { Metadata } from 'next'
-import { Wrench, ArrowRight, ArrowUpRight, CheckCircle2, AlertCircle, Zap, Shield, Clock, FileCode } from 'lucide-react'
+import { Wrench, ArrowRight, ArrowUpRight, CheckCircle2, AlertCircle, Shield, FileCode, Receipt } from 'lucide-react'
 import Link from 'next/link'
+import { buildPageGraph, buildPageMetadata, type FaqItem } from '@/lib/seo'
+import { JsonLd } from '@/components/seo/json-ld'
+import { contactHref } from '@/lib/contact-services'
 
 export const revalidate = 86400 // Revalidate daily
 
-// Structured Data for SEO
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "@id": "https://madebyaris.com/services/vibe-code-friend/code-fixing/#webpage",
-  "name": "Code Fixing & Debugging Service | Vibe Code Friend",
-  "description": "Expert code debugging and error resolution service. Get your stubborn bugs fixed by a professional developer with years of experience across multiple languages and frameworks.",
-  "url": "https://madebyaris.com/services/vibe-code-friend/code-fixing",
-  "isPartOf": {
-    "@type": "WebSite",
-    "@id": "https://madebyaris.com/#website"
-  },
-  "breadcrumb": {
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "item": {
-          "@id": "https://madebyaris.com",
-          "name": "Home"
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "item": {
-          "@id": "https://madebyaris.com/services",
-          "name": "Services"
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "item": {
-          "@id": "https://madebyaris.com/services/vibe-code-friend",
-          "name": "Vibe Code Friend"
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 4,
-        "item": {
-          "@id": "https://madebyaris.com/services/vibe-code-friend/code-fixing",
-          "name": "Code Fixing"
-        }
-      }
-    ]
-  },
-  "mainEntity": {
-    "@type": "Service",
-    "name": "Code Fixing & Debugging Service",
-    "serviceType": "Code Debugging",
-    "provider": {
-      "@type": "Person",
-      "@id": "https://madebyaris.com/#person",
-      "name": "Aris Setiawan"
-    },
-    "description": "Expert code debugging and error resolution service. Get your stubborn bugs fixed by a professional developer with years of experience across multiple languages and frameworks.",
-    "offers": {
-      "@type": "Offer",
-      "price": "Contact for pricing",
-      "priceCurrency": "USD"
-    },
-    "areaServed": {
-      "@type": "Country",
-      "name": "Worldwide"
-    }
-  }
-}
+const path = '/services/vibe-code-friend/code-fixing'
+const pageTitle = 'Fix AI-Generated Code: Vibe Coding Cleanup'
+const pageDescription =
+  'Your AI-built app broke and nobody can explain the code? I fix AI-generated code, clean up vibe coding messes, and quote a fixed price after I read it.'
 
-const process = [
-  {
-    title: 'Submit Your Issue',
-    description: 'Share your code and explain the error you\'re experiencing. More context helps us diagnose faster.',
-    icon: AlertCircle
-  },
-  {
-    title: 'Expert Analysis',
-    description: 'We analyze your code, identify the root cause of the issue, and develop an efficient solution.',
-    icon: Wrench
-  },
-  {
-    title: 'Solution Delivery',
-    description: 'Receive a fixed version of your code with clear explanations of what went wrong and how it was resolved.',
-    icon: CheckCircle2
-  }
+export const metadata: Metadata = buildPageMetadata({
+  title: pageTitle,
+  description: pageDescription,
+  path,
+  keywords: [
+    'fix AI-generated code',
+    'vibe coding cleanup',
+    'code debugging service',
+    'fix Cursor code',
+    'AI code cleanup',
+  ],
+})
+
+const symptoms = [
+  'The build fails after a dependency or framework update',
+  'The app works on your laptop and breaks after deploy',
+  'Every fix the AI suggests breaks something else',
+  'Pages got slow and you can’t tell which change did it',
+  'An API or third-party integration fails without a clear error',
+  'Nobody on the team can explain what the code does anymore',
 ]
 
-const issuesWeSolve = [
-  { title: 'Runtime Errors', description: 'From null pointer exceptions to memory leaks, we diagnose and fix runtime crashes.' },
-  { title: 'Build Failures', description: 'Resolve dependency issues, compilation errors, and configuration problems.' },
-  { title: 'Performance Issues', description: 'Identify and fix bottlenecks, memory problems, and slow-running code.' },
-  { title: 'Integration Bugs', description: 'Solve issues with APIs, third-party libraries, and service integrations.' },
-  { title: 'Logic Errors', description: 'Fix algorithm issues and unexpected behavior in your application logic.' }
-]
-
-const technologies = [
-  'JavaScript/TypeScript', 'React/Next.js', 'Python', 'PHP', 'Node.js', 'Java/Kotlin', 'C#/.NET', 'Ruby/Rails'
-]
-
-const pricingPlans = [
+const deliverables = [
   {
-    name: 'Quick Fix',
-    price: '$75',
-    description: 'Ideal for simple bugs that can be resolved quickly.',
-    features: ['Simple error resolution', 'Basic explanation', '24-48 hour turnaround'],
-    popular: false
+    title: 'A working fix in your repo',
+    description: 'Delivered as a commit or pull request, with the smallest change that solves the cause.',
+    icon: CheckCircle2,
   },
   {
-    name: 'Standard Fix',
-    price: '$150',
-    description: 'For more complex bugs requiring deeper investigation.',
-    features: ['Complex error resolution', 'Detailed explanation & documentation', '24-hour turnaround', 'Prevention tips'],
-    popular: true
+    title: 'A written explanation',
+    description: 'What broke, why, and how to spot it next time, so you or your AI editor don’t repeat it.',
+    icon: FileCode,
   },
   {
-    name: 'Advanced Fix',
-    price: '$300',
-    description: 'For critical issues or system-wide problems.',
-    features: ['Critical error resolution', 'Comprehensive documentation', 'Priority handling', 'Code review & optimization', '1-hour consultation included'],
-    popular: false
-  }
+    title: 'Your code stays private',
+    description: 'Your code and business logic stay confidential. I can sign an NDA for sensitive projects.',
+    icon: Shield,
+  },
 ]
 
-// Generate Metadata
-export async function generateMetadata(): Promise<Metadata> {
-  return {
-    title: "Code Fixing & Debugging Service | Vibe Code Friend",
-    description: "Expert code debugging and error resolution service. Get your stubborn bugs fixed by a professional developer with years of experience across multiple languages and frameworks.",
-    openGraph: {
-      title: "Code Fixing & Debugging Service | Vibe Code Friend",
-      description: "Expert code debugging and error resolution service. Get your stubborn bugs fixed quickly and efficiently.",
-      url: "https://madebyaris.com/services/vibe-code-friend/code-fixing",
-      siteName: "Made by Aris",
-      locale: "en_US",
-      type: "website",
-    },
-    alternates: {
-      canonical: "https://madebyaris.com/services/vibe-code-friend/code-fixing",
-    },
-    keywords: ["code debugging", "error fixing", "bug resolution", "code errors", "programming help", "developer assistance", "technical troubleshooting", "coding bugs", "software errors", "code issues"],
-  }
-}
+const pricingSteps = [
+  { step: 1, title: 'Send the code', desc: 'Repo access or a zip, the error, and what you expected to happen' },
+  { step: 2, title: 'I read it', desc: 'I find what I think is wrong and tell you in plain words' },
+  { step: 3, title: 'Fixed quote', desc: 'One fixed price for the fix. You decide whether to go ahead' },
+  { step: 4, title: 'Fix and explain', desc: 'You get the fix plus a written note on the cause' },
+]
+
+const faqs: FaqItem[] = [
+  {
+    question: 'How much does it cost to fix AI-generated code?',
+    answer:
+      'I look at the code first, then quote a fixed price for the fix. There’s no fixed menu, because a missing environment variable and a broken login flow are very different jobs. You see the price before any work starts.',
+  },
+  {
+    question: 'What do you need from me to start?',
+    answer:
+      'Repo access or a zip of the code, the exact error message or a screen recording, the steps that trigger the bug, and what you expected to happen. If the app is deployed, tell me where.',
+  },
+  {
+    question: 'Which stacks do you fix?',
+    answer:
+      'Mostly JavaScript and TypeScript apps (React, Next.js, Node.js), plus PHP and WordPress. If your stack is outside what I know well, I’ll tell you after I look, before I quote.',
+  },
+  {
+    question: 'Will I understand the fix afterward?',
+    answer:
+      'Yes. Every fix comes with a short written explanation of the cause and how to avoid it. If you use Cursor or another AI editor, I’ll note what to add to your project rules so it stops happening.',
+  },
+  {
+    question: 'Is my code kept confidential?',
+    answer:
+      'Yes. Your code and business logic stay private, and I can sign an NDA before you share the repo.',
+  },
+]
+
+const structuredData = buildPageGraph({
+  path,
+  name: pageTitle,
+  description: pageDescription,
+  breadcrumbs: [
+    { name: 'Services', path: '/services' },
+    { name: 'Cursor mentoring', path: '/services/vibe-code-friend' },
+    { name: 'Fix AI-generated code', path },
+  ],
+  service: {
+    name: 'Fix AI-generated code and vibe coding cleanup',
+    description: pageDescription,
+    serviceType: 'Code Debugging',
+    offers: [
+      { name: 'Bug diagnosis in AI-generated code' },
+      { name: 'Build and deploy failure fixes' },
+      { name: 'Vibe coding cleanup' },
+      { name: 'Written explanation of each fix' },
+    ],
+  },
+  faqs,
+})
 
 export default function CodeFixingPage() {
   return (
     <>
-      {/* Add structured data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
-      
+      <JsonLd data={structuredData} />
+
       {/* Breadcrumb */}
-      <nav className="mb-8">
+      <nav className="mb-8" aria-label="Breadcrumb">
         <ol className="flex items-center space-x-2 text-sm text-zinc-500">
           <li><Link href="/services" className="hover:text-orange-500 transition-colors">Services</Link></li>
           <li><span className="px-2">/</span></li>
-          <li><Link href="/services/vibe-code-friend" className="hover:text-orange-500 transition-colors">Vibe Code Friend</Link></li>
+          <li><Link href="/services/vibe-code-friend" className="hover:text-orange-500 transition-colors">Cursor mentoring</Link></li>
           <li><span className="px-2">/</span></li>
-          <li className="text-zinc-900">Code Fixing</li>
+          <li className="text-zinc-900">Fix AI-generated code</li>
         </ol>
       </nav>
-      
+
       {/* Hero Section */}
       <section className="text-center pt-4 pb-16">
-        {/* Badge */}
-        <div 
+        <div
           className="inline-flex bg-white/60 rounded-full mb-8 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2"
           style={{
             position: 'relative',
@@ -182,239 +138,166 @@ export default function CodeFixingPage() {
           }}
         >
           <Wrench className="w-4 h-4 text-orange-500" />
-          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Bug Resolution</span>
+          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Level up · Code fixing</span>
         </div>
 
-        {/* Title */}
         <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
-          Code
-          <span className="block gradient-text font-light">Fixing</span>
+          Fix AI-generated code
+          <span className="block gradient-text font-light">that stopped working</span>
         </h1>
 
-        {/* Description */}
-        <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
-          Stuck on a stubborn bug or error? Get expert help to diagnose, fix, and prevent coding problems 
-          with clear explanations and efficient solutions.
+        <p className="text-base md:text-lg text-zinc-600 max-w-2xl mx-auto mb-4 leading-relaxed font-medium">
+          For founders and developers whose app was built with Cursor, Claude, or ChatGPT and now breaks in ways nobody can explain. I’ve shipped web products for 13+ years and I write client code in Cursor every week.
         </p>
 
-        {/* CTA Buttons */}
+        <p className="text-sm text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed">
+          Fixed price, quoted after I read your code.
+        </p>
+
         <div className="flex flex-wrap justify-center gap-3">
-          <Link 
-            href="/contact"
+          <Link
+            href={contactHref('code-fixing')}
             className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
           >
-            <span className="text-sm font-medium tracking-tight">Fix My Code</span>
+            <span className="text-sm font-medium tracking-tight">Send me the broken repo</span>
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </Link>
-          <Link 
-            href="/services/vibe-code-friend"
+          <Link
+            href="#pricing"
             className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
-            style={{
-              boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)',
-              position: 'relative',
-              // @ts-expect-error CSS custom properties
-              '--border-gradient': 'linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.8))',
-              '--border-radius-before': '9999px'
-            }}
+            style={{ boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)' }}
           >
-            <span className="text-sm font-medium text-black/60 tracking-tight">Explore Other Services</span>
+            <span className="text-sm font-medium text-black/60 tracking-tight">See how pricing works</span>
             <ArrowRight className="w-4 h-4 text-zinc-500" />
           </Link>
         </div>
       </section>
 
-      {/* Separator */}
       <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
 
-      {/* How It Works Section */}
-      <section className="mb-16">
-        <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            How Our Service <span className="gradient-text">Works</span>
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {process.map((step, index) => (
-            <div
-              key={step.title}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all group relative"
-            >
-              <div className="absolute top-4 right-4 w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center text-orange-500 font-bold text-sm">
-                {index + 1}
-              </div>
-              <div className="p-3 bg-zinc-100 rounded-xl w-fit mb-4 group-hover:bg-orange-100 transition-colors">
-                <step.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
-              </div>
-              <h3 className="text-lg font-semibold text-zinc-900 mb-2">{step.title}</h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{step.description}</p>
-            </div>
-          ))}
-        </div>
+      {/* Answer first */}
+      <section className="mb-16 max-w-3xl mx-auto">
+        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+          How I fix AI-generated code
+        </h2>
+        <p className="text-zinc-600 leading-relaxed mb-4">
+          I read the code before I touch it. I find the real cause of the bug, fix it with the smallest change that holds, and check that nothing around it broke. Then I explain in writing what went wrong, so you or your AI editor don’t repeat it. You get a fixed quote before any work starts.
+        </p>
+        <p className="text-zinc-600 leading-relaxed">
+          To catch this kind of bug before it merges, use my{' '}
+          <Link href="/blog/pr-review-checklist-for-ai-generated-code" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors">
+            PR review checklist for AI-generated code
+          </Link>
+          .
+        </p>
       </section>
 
-      {/* Separator */}
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
-
-      {/* Common Issues Section */}
+      {/* Symptoms */}
       <section className="mb-16">
         <div className="text-center mb-10">
+          <div className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
+            <AlertCircle className="w-4 h-4 text-orange-500" />
+            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Sound familiar?</span>
+          </div>
           <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            Common Issues <span className="gradient-text">We Solve</span>
+            When you need <span className="gradient-text">vibe coding cleanup</span>
           </h2>
+          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
+            Baca juga:{' '}
+            <Link href="/blog/technical-debt-pada-aplikasi-buatan-ai" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors">
+              technical debt pada aplikasi buatan AI
+            </Link>
+            .
+          </p>
         </div>
 
         <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {issuesWeSolve.map((issue) => (
-              <div key={issue.title} className="flex items-start gap-3 p-4 bg-zinc-50 rounded-xl">
-                <CheckCircle2 className="w-5 h-5 text-orange-500 mt-0.5 shrink-0" />
-                <div>
-                  <h3 className="font-semibold text-zinc-900 mb-1">{issue.title}</h3>
-                  <p className="text-sm text-zinc-500">{issue.description}</p>
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {symptoms.map((item) => (
+              <div key={item} className="flex items-start gap-3 p-4 bg-zinc-50 rounded-xl">
+                <AlertCircle className="w-5 h-5 text-orange-500 mt-0.5 shrink-0" />
+                <p className="text-sm text-zinc-700">{item}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Separator */}
       <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
 
-      {/* Technologies Section */}
+      {/* Deliverables */}
       <section className="mb-16">
         <div className="text-center mb-10">
           <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            Languages & <span className="gradient-text">Technologies</span>
+            What you <span className="gradient-text">get back</span>
           </h2>
-          <p className="text-sm text-zinc-500 max-w-lg mx-auto">
-            Our expertise spans a wide range of programming languages and frameworks
-          </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {technologies.map((tech) => (
-            <div 
-              key={tech}
-              className="p-4 bg-white/80 backdrop-blur-sm rounded-xl text-center text-sm font-medium text-zinc-700 hover:bg-orange-50 hover:text-orange-600 transition-colors shadow-sm"
-            >
-              {tech}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {deliverables.map((item) => (
+            <div key={item.title} className="bg-zinc-50 rounded-2xl p-6">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-white rounded-xl shadow-sm">
+                  <item.icon className="w-5 h-5 text-orange-500" />
+                </div>
+                <h3 className="font-semibold text-zinc-900">{item.title}</h3>
+              </div>
+              <p className="text-sm text-zinc-600 leading-relaxed">{item.description}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Separator */}
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
-
-      {/* Why Choose Us Section */}
-      <section className="mb-16">
+      {/* How pricing works */}
+      <section id="pricing" className="mb-16 scroll-mt-24">
         <div className="text-center mb-10">
+          <div className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
+            <Receipt className="w-4 h-4 text-orange-500" />
+            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Fixed quote</span>
+          </div>
           <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            Why Choose Our <span className="gradient-text">Service</span>
+            How <span className="gradient-text">pricing works</span>
           </h2>
+          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
+            I look at the code first, then quote a fixed price for the fix. You know the cost before I start.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-zinc-50 rounded-2xl p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-white rounded-xl shadow-sm">
-                <Clock className="w-5 h-5 text-orange-500" />
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          {pricingSteps.map((item) => (
+            <div key={item.step} className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 text-center shadow-sm">
+              <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-500 font-bold text-lg flex items-center justify-center mx-auto mb-3">
+                {item.step}
               </div>
-              <h3 className="font-semibold text-zinc-900">Fast Turnaround</h3>
+              <h3 className="font-semibold text-zinc-900 mb-1">{item.title}</h3>
+              <p className="text-sm text-zinc-500">{item.desc}</p>
             </div>
-            <p className="text-sm text-zinc-600 leading-relaxed">
-              Most issues are resolved within 24-48 hours, with emergency options available for critical bugs.
-            </p>
-          </div>
-          <div className="bg-zinc-50 rounded-2xl p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-white rounded-xl shadow-sm">
-                <FileCode className="w-5 h-5 text-orange-500" />
-              </div>
-              <h3 className="font-semibold text-zinc-900">Learning Opportunity</h3>
-            </div>
-            <p className="text-sm text-zinc-600 leading-relaxed">
-              We don&apos;t just fix your code; we explain what went wrong and how to prevent similar issues in the future.
-            </p>
-          </div>
-          <div className="bg-zinc-50 rounded-2xl p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-white rounded-xl shadow-sm">
-                <Shield className="w-5 h-5 text-orange-500" />
-              </div>
-              <h3 className="font-semibold text-zinc-900">Confidentiality</h3>
-            </div>
-            <p className="text-sm text-zinc-600 leading-relaxed">
-              Your code and business logic remain confidential. We can sign NDAs if required for sensitive projects.
-            </p>
-          </div>
+          ))}
         </div>
       </section>
 
-      {/* Separator */}
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
-
-      {/* Pricing Section */}
-      <section className="mb-16">
-        <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            Pricing <span className="gradient-text">Options</span>
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {pricingPlans.map((plan) => (
-            <div 
-              key={plan.name}
-              className={`rounded-2xl p-6 shadow-sm transition-all hover:shadow-lg ${
-                plan.popular 
-                  ? 'bg-zinc-900 text-white relative' 
-                  : 'bg-white/80 backdrop-blur-sm'
-              }`}
-            >
-              {plan.popular && (
-                <div className="absolute top-4 right-4 px-2 py-1 bg-orange-500 rounded-full text-[10px] font-bold uppercase">
-                  Popular
-                </div>
-              )}
-              <h3 className={`text-lg font-semibold mb-1 ${plan.popular ? 'text-white' : 'text-zinc-900'}`}>
-                {plan.name}
-              </h3>
-              <p className={`text-2xl font-bold mb-2 ${plan.popular ? 'text-orange-400' : 'gradient-text'}`}>
-                {plan.price}
-              </p>
-              <p className={`text-sm mb-6 ${plan.popular ? 'text-zinc-400' : 'text-zinc-500'}`}>
-                {plan.description}
-              </p>
-              <ul className="space-y-2 mb-6">
-                {plan.features.map((feature) => (
-                  <li key={feature} className="flex items-center gap-2 text-sm">
-                    <CheckCircle2 className={`w-4 h-4 shrink-0 ${plan.popular ? 'text-orange-400' : 'text-orange-500'}`} />
-                    <span className={plan.popular ? 'text-zinc-300' : 'text-zinc-600'}>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              <Link 
-                href="/contact"
-                className={`block w-full text-center py-2.5 rounded-full text-sm font-medium transition-all ${
-                  plan.popular 
-                    ? 'bg-white text-zinc-900 hover:bg-zinc-100' 
-                    : 'bg-zinc-900 text-white hover:bg-zinc-800'
-                }`}
-              >
-                Get Started
-              </Link>
-            </div>
+      {/* FAQ */}
+      <section className="mb-16 max-w-3xl mx-auto" aria-labelledby="code-fixing-faq">
+        <h2 id="code-fixing-faq" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-6">
+          Questions about fixing AI-generated code
+        </h2>
+        <div className="space-y-3">
+          {faqs.map((faq) => (
+            <details key={faq.question} className="group bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm open:shadow-md">
+              <summary className="cursor-pointer list-none font-semibold text-zinc-900 flex items-center justify-between gap-4">
+                {faq.question}
+                <span className="text-orange-500 transition-transform group-open:rotate-45 text-xl leading-none">+</span>
+              </summary>
+              <p className="mt-3 text-sm text-zinc-600 leading-relaxed">{faq.answer}</p>
+            </details>
           ))}
         </div>
       </section>
 
       {/* CTA Section */}
       <section className="overflow-hidden min-h-[400px] shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
-        <div 
-          className="absolute inset-0 opacity-10" 
+        <div
+          className="absolute inset-0 opacity-10"
           style={{
             backgroundImage: 'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)',
             backgroundSize: '40px 40px'
@@ -423,25 +306,25 @@ export default function CodeFixingPage() {
 
         <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16 min-h-[400px] relative">
           <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
-            Ready to Fix Your Code?
+            Send me the code that broke
           </h2>
           <p className="text-zinc-400 mb-8 max-w-lg font-medium">
-            Stop wasting hours struggling with stubborn bugs. Get expert help and start making progress again.
+            You’ll get a fixed quote after I read it, and you decide whether to go ahead. If the code isn’t worth fixing, or a rewrite would cost you less, I’ll tell you.
           </p>
 
           <div className="flex flex-wrap justify-center gap-3">
-            <Link 
-              href="/contact"
+            <Link
+              href={contactHref('code-fixing')}
               className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
             >
-              <span>Submit Your Bug</span>
+              <span>Send me the broken repo</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
-            <Link 
-              href="/services/vibe-code-friend"
+            <Link
+              href="/services/vibe-code-friend/ai-ide-tutoring"
               className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3"
             >
-              <span>Explore Other Services</span>
+              <span>Learn Cursor so it breaks less</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>

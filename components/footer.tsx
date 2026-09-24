@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { Github, Linkedin, ArrowUpRight } from 'lucide-react'
+import { contactHref } from '@/lib/contact-services'
+import { ArrowUpRight } from 'lucide-react'
 import { LiveClock } from './live-clock'
 
 const navigationLinks = [
@@ -20,9 +21,9 @@ const serviceLinks = [
   { name: 'PHP Development', href: '/services/php-development' },
 ]
 
-const socialLinks: Array<{ name: string; href: string; icon?: typeof Github }> = [
-  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/arissetia/', icon: Linkedin },
-  { name: 'GitHub', href: 'https://github.com/madebyaris', icon: Github },
+const socialLinks = [
+  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/arissetia/' },
+  { name: 'GitHub', href: 'https://github.com/madebyaris' },
   { name: 'Upwork', href: 'https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe' },
 ]
 
@@ -47,7 +48,7 @@ export function Footer() {
             </h2>
           </div>
           <p className="md:text-2xl text-xl font-light italic text-zinc-500">
-            Full-Stack Developer—
+            Next.js, AI &amp; WordPress developer
           </p>
         </div>
 
@@ -56,7 +57,7 @@ export function Footer() {
           <div className="flex items-start gap-2 lg:flex-row-reverse lg:text-right">
             <div className="w-2 h-2 bg-orange-500 rounded-full mt-2 animate-pulse" />
             <p className="leading-snug md:text-xl text-zinc-700 text-base font-light tracking-tight max-w-md">
-              Currently building enterprise web solutions and available for new projects.
+              Taking on new builds and Cursor mentoring for teams. Based in Indonesia, working with teams worldwide.
             </p>
           </div>
           <div className="flex items-center gap-2 text-zinc-500 lg:flex-row-reverse">
@@ -119,15 +120,15 @@ export function Footer() {
 
         {/* Column 4: Contact CTA */}
         <div className="flex flex-col gap-4">
-          <h3 className="text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-2">Start a Project</h3>
+          <h3 className="text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-2">Start a project</h3>
           <p className="text-sm text-zinc-500 mb-4">
-            Ready to build something amazing together? Let&apos;s talk.
+            Tell me what you need. I reply within 24 hours.
           </p>
           <Link
-            href="/contact"
+            href={contactHref('other')}
             className="btn-primary rounded-full py-3 px-6 text-sm font-medium text-center inline-flex items-center justify-center gap-2 w-fit"
           >
-            Get in Touch
+            Send me your project
             <ArrowUpRight className="w-4 h-4" />
           </Link>
         </div>

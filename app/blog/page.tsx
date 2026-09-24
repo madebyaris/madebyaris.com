@@ -4,49 +4,16 @@ import { redirect } from 'next/navigation'
 import { BlogContent } from '@/components/blog-content'
 import { BookOpen, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import { JsonLd } from '@/components/seo/json-ld'
+import { contactHref } from '@/lib/contact-services'
+import { buildPageGraph, buildPageMetadata } from '@/lib/seo'
 import { BLOG_POSTS_PER_PAGE, getAllTags, getPostsPaginated } from '@/lib/wordpress'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 604800 // 7 days; webhook refreshes the index on publish
 
-const structuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'Blog',
-  '@id': 'https://madebyaris.com/blog/#webpage',
-  name: 'Web Development Insights & Tutorials',
-  description:
-    'Expert insights on Next.js, React, WordPress, and modern web development practices. Technical tutorials and industry best practices.',
-  url: 'https://madebyaris.com/blog',
-  isPartOf: {
-    '@type': 'WebSite',
-    '@id': 'https://madebyaris.com/#website',
-    name: 'MadeByAris',
-    url: 'https://madebyaris.com',
-  },
-  author: {
-    '@type': 'Person',
-    '@id': 'https://madebyaris.com/#person',
-    name: 'Aris Setiawan',
-    jobTitle: 'Senior Full Stack Developer',
-    url: 'https://madebyaris.com',
-    image: 'https://madebyaris.com/aris.png',
-  },
-  publisher: {
-    '@type': 'Organization',
-    '@id': 'https://madebyaris.com/#organization',
-    name: 'MadeByAris',
-    url: 'https://madebyaris.com',
-  },
-  keywords: [
-    'Web Development',
-    'Next.js',
-    'React',
-    'WordPress',
-    'TypeScript',
-    'JavaScript',
-    'Full Stack Development',
-  ],
-  inLanguage: 'en-US',
-}
+const BLOG_TITLE = 'Next.js, Cursor & WordPress Blog'
+const BLOG_DESCRIPTION =
+  'Guides on Next.js, Cursor, headless WordPress, and AI features from 13+ years of client work: costs, workflows, migrations, and SEO that holds up.'
 
 interface BlogPageProps {
   searchParams: Promise<{ page?: string }>
@@ -65,52 +32,30 @@ function getBlogCanonicalPath(currentPage: number): string {
   return currentPage <= 1 ? '/blog' : `/blog?page=${currentPage}`
 }
 
+function getBlogTitle(currentPage: number): string {
+  return currentPage > 1 ? `${BLOG_TITLE} (Page ${currentPage})` : BLOG_TITLE
+}
+
 export async function generateMetadata({ searchParams }: BlogPageProps): Promise<Metadata> {
   const { page: pageParam } = await searchParams
   const currentPage = parseBlogPageParam(pageParam)
   const canonicalPath = getBlogCanonicalPath(currentPage)
 
-  return {
-    title:
-      currentPage > 1
-        ? `Web Development Blog - Page ${currentPage} | Next.js, React & WordPress Insights`
-        : 'Web Development Blog | Next.js, React & WordPress Insights',
-    description:
-      'Expert tutorials and insights on Next.js, React, WordPress, and modern web development practices. Learn from real-world enterprise development experience.',
+  return buildPageMetadata({
+    title: getBlogTitle(currentPage),
+    description: BLOG_DESCRIPTION,
+    path: canonicalPath,
     keywords: [
-      'Web Development Blog',
-      'Next.js Tutorials',
-      'React Development',
-      'WordPress Development',
-      'TypeScript Guides',
-      'JavaScript Tips',
-      'Full Stack Development',
-      'Web Performance',
-      'Enterprise Solutions',
-      'Development Best Practices',
+      'Next.js blog',
+      'Next.js tutorials',
+      'Cursor AI guides',
+      'Cursor AI pricing',
+      'headless WordPress with Next.js',
+      'AI integration',
+      'Next.js SEO',
+      'Next.js App Router',
     ],
-    openGraph: {
-      title:
-        currentPage > 1
-          ? `Web Development Blog - Page ${currentPage} | Next.js, React & WordPress Insights`
-          : 'Web Development Blog | Next.js, React & WordPress Insights',
-      description: 'Expert tutorials and insights on modern web development practices.',
-      type: 'website',
-      locale: 'en_US',
-      url: `https://madebyaris.com${canonicalPath}`,
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title:
-        currentPage > 1
-          ? `Web Development Blog - Page ${currentPage} | Next.js, React & WordPress Insights`
-          : 'Web Development Blog | Next.js, React & WordPress Insights',
-      description: 'Expert tutorials and insights on modern web development practices.',
-    },
-    alternates: {
-      canonical: `https://madebyaris.com${canonicalPath}`,
-    },
-  }
+  })
 }
 
 export default async function BlogPage({ searchParams }: BlogPageProps) {
@@ -145,12 +90,18 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
   const currentPage = requestedPage
 
+  const structuredData = buildPageGraph({
+    path: getBlogCanonicalPath(currentPage),
+    name: getBlogTitle(currentPage),
+    description: BLOG_DESCRIPTION,
+    type: 'CollectionPage',
+    breadcrumbs: [{ name: 'Blog', path: '/blog' }],
+    items: posts.map((post) => ({ name: post.title.rendered, path: `/blog/${post.slug}` })),
+  })
+
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
+      <JsonLd data={structuredData} />
 
       <section className="text-center pt-8 pb-16">
         <div
@@ -164,22 +115,23 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
         >
           <BookOpen className="w-4 h-4 text-orange-500" />
           <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">
-            Web Development Insights
+            Guides from client work
           </span>
         </div>
 
         <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
-          Development
-          <span className="block gradient-text font-light">Insights</span>
+          Next.js, Cursor
+          <span className="block gradient-text font-light">and WordPress guides</span>
         </h1>
 
         <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
-          Expert tutorials and insights on Next.js, React, WordPress, and modern web development
-          practices. Learn from real-world enterprise development experience.
+          What I learn shipping client projects, written up so you can use it. Read how to set up
+          Cursor so AI-written code passes review, when a WordPress site should move to Next.js,
+          what a Next.js developer costs, and how to keep your SEO through a migration.
         </p>
 
         <div className="flex flex-wrap justify-center gap-2">
-          {['Next.js', 'React', 'WordPress', 'TypeScript'].map((tech) => (
+          {['Next.js', 'Cursor', 'Headless WordPress', 'AI features'].map((tech) => (
             <span
               key={tech}
               className="px-3 py-1.5 bg-zinc-100 rounded-full text-xs font-medium text-zinc-600"
@@ -222,25 +174,26 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
         <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16 min-h-[350px] relative">
           <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
-            Have a Project in Mind?
+            Rather have me do it?
           </h2>
           <p className="text-zinc-400 mb-8 max-w-lg font-medium">
-            Let&apos;s discuss how I can help bring your ideas to life with modern web technologies.
+            Hire me to build it, or bring me in to coach your team on Cursor. I reply within 24 hours
+            and tell you plainly whether I&apos;m the right fit.
           </p>
 
           <div className="flex flex-wrap justify-center gap-3">
             <Link
-              href="/contact"
+              href={contactHref('nextjs')}
               className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
             >
-              <span>Get in Touch</span>
+              <span>Send me your project</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
-              href="/services"
+              href="/services/vibe-code-friend"
               className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3"
             >
-              <span>View Services</span>
+              <span>Get Cursor mentoring for your team</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>

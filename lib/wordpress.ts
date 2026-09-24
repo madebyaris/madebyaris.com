@@ -25,11 +25,14 @@ export const WP_CACHE_TAGS = {
 
 type WpEndpoint = keyof typeof WP_CACHE_TAGS
 
+// Safety-net only. Freshness comes from the WordPress webhook
+// (`/api/revalidate`), which invalidates these cache tags on publish.
+// A short interval rewrites every crawled URL and burns the ISR quota.
 const REVALIDATE_SECONDS = {
-  POSTS: 300,
-  CATEGORIES: 1800,
-  TAGS: 1800,
-  PROJECTS: 900,
+  POSTS: 604800,
+  CATEGORIES: 604800,
+  TAGS: 604800,
+  PROJECTS: 604800,
 } as const
 
 export interface ProcessedPost extends Omit<Post, 'categories' | 'tags'> {
@@ -315,6 +318,19 @@ export async function getPostsForSitemap(): Promise<Array<{ slug: string; date: 
     })
   } catch (error) {
     console.error('Failed to fetch posts for sitemap:', error)
+    return []
+  }
+}
+
+export async function getPostsForLlms(): Promise<Array<{ slug: string; title: string; excerpt: string }>> {
+  try {
+    const posts = await fetchAPI<Array<{ slug: string; title: { rendered: string }; excerpt: { rendered: string } }>>('posts', {
+      per_page: 100,
+      _fields: 'slug,title,excerpt',
+    })
+    return posts.map((post) => ({ slug: post.slug, title: post.title.rendered, excerpt: post.excerpt.rendered }))
+  } catch (error) {
+    console.error('Failed to fetch posts for llms.txt:', error)
     return []
   }
 }

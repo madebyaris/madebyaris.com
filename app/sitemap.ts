@@ -1,7 +1,8 @@
 import type { MetadataRoute } from 'next'
 import { getPostsForSitemap } from '@/lib/wordpress'
+import { productionUrl } from '@/lib/seo/config'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 604800 // 7 days; webhook calls revalidatePath('/sitemap.xml')
 
 const mainRoutes = [
   { path: '', priority: 1.0, changeFreq: 'monthly' },
@@ -26,7 +27,6 @@ const serviceRoutes = [
   { path: 'services/nextjs-development/nextjs-indonesia', priority: 1.0, changeFreq: 'daily' },
   { path: 'services/nextjs-development/nextjs-seo', priority: 0.9, changeFreq: 'weekly' },
   { path: 'services/nextjs-development/agency-indonesia', priority: 1.0, changeFreq: 'daily' },
-  { path: 'nextjs-development-indonesia', priority: 1.0, changeFreq: 'daily' },
 ]
 
 const wordpressRoutes = [
@@ -39,6 +39,10 @@ const wordpressRoutes = [
 
 const phpRoutes = [
   { path: 'services/php-development', priority: 0.8, changeFreq: 'monthly' },
+  { path: 'services/php-development/api-development', priority: 0.6, changeFreq: 'monthly' },
+  { path: 'services/php-development/custom-applications', priority: 0.6, changeFreq: 'monthly' },
+  { path: 'services/php-development/database-solutions', priority: 0.6, changeFreq: 'monthly' },
+  { path: 'services/php-development/modernization', priority: 0.6, changeFreq: 'monthly' },
 ]
 
 const legalRoutes = [
@@ -46,17 +50,18 @@ const legalRoutes = [
   { path: 'terms-of-service', priority: 0.5, changeFreq: 'yearly' },
 ]
 
+// Static pages have no per-page edit date, so they omit lastmod rather than
+// claim they changed on every sitemap fetch.
 function createSitemapEntry(baseUrl: string, route: { path: string; priority: number; changeFreq: string }) {
   return {
-    url: `${baseUrl}/${route.path}`,
-    lastModified: new Date(),
+    url: route.path ? `${baseUrl}/${route.path}` : baseUrl,
     changeFrequency: route.changeFreq as 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never',
     priority: route.priority,
   }
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+  const baseUrl = productionUrl
 
   const staticRoutes = [
     ...mainRoutes,

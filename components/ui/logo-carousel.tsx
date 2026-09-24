@@ -63,7 +63,7 @@ const LogoColumn = React.memo(({ logos, index, currentTime }: LogoColumnProps) =
           opacity: 1,
           filter: "blur(0px)",
           transition: {
-            type: "spring",
+            type: "spring" as const,
             stiffness: 150,
             damping: 25,
             mass: 1,
@@ -78,8 +78,8 @@ const LogoColumn = React.memo(({ logos, index, currentTime }: LogoColumnProps) =
           opacity: 0,
           filter: "blur(4px)",
           transition: {
-            type: "tween",
-            ease: "easeIn",
+            type: "tween" as const,
+            ease: "easeIn" as const,
             duration: 0.4,
           },
         }
@@ -117,7 +117,10 @@ interface LogoCarouselProps {
 }
 
 export function LogoCarousel({ columnCount = 2, logos }: LogoCarouselProps) {
-  const [logoSets, setLogoSets] = useState<Logo[][]>([])
+  const logoSets = useMemo(
+    () => distributeLogos(logos, columnCount),
+    [logos, columnCount],
+  )
   const [currentTime, setCurrentTime] = useState(0)
 
   const updateTime = useCallback(() => {
@@ -128,10 +131,6 @@ export function LogoCarousel({ columnCount = 2, logos }: LogoCarouselProps) {
     const intervalId = setInterval(updateTime, 100)
     return () => clearInterval(intervalId)
   }, [updateTime])
-
-  useEffect(() => {
-    setLogoSets(distributeLogos(logos, columnCount))
-  }, [logos, columnCount])
 
   return (
     <div className="flex items-center justify-center gap-8 md:gap-12">

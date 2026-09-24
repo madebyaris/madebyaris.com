@@ -1,150 +1,172 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowRight, ArrowUpRight, Database, Zap, Shield, BarChart, CheckCircle2, Trophy } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Database, Zap, Shield, BarChart, CheckCircle2, XCircle } from 'lucide-react'
+import { buildPageGraph, buildPageMetadata, type FaqItem } from '@/lib/seo'
+import { JsonLd } from '@/components/seo/json-ld'
+import { contactHref } from '@/lib/contact-services'
 
 export const revalidate = 86400 // Revalidate daily
 
-// Structured Data
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "name": "PHP Database Solutions",
-  "description": "Professional PHP database solutions including design, optimization, security, and analytics. Expert services for efficient and scalable database architecture.",
-  "url": "https://madebyaris.com/services/php-development/database-solutions",
-  "provider": {
-    "@type": "Person",
-    "name": "Aris Setiawan",
-    "url": "https://madebyaris.com"
-  }
-}
+const pagePath = '/services/php-development/database-solutions'
+const pageTitle = 'MySQL Database Optimization for PHP Apps'
+const pageDescription =
+  'MySQL database optimization for PHP apps: find the slow queries, add the right indexes, and fix the schema so pages and reports stop timing out.'
 
-export async function generateMetadata(): Promise<Metadata> {
-  return {
-    title: 'PHP Database Solutions | Design & Optimization',
-    description: 'Professional PHP database solutions including design, optimization, security, and analytics. Expert services for efficient and scalable database architecture.',
-    keywords: [
-      'PHP Database Solutions',
-      'Database Design',
-      'Database Optimization',
-      'MySQL Development',
-      'PostgreSQL Development',
-      'Data Security'
-    ],
-    openGraph: {
-      title: 'PHP Database Solutions | Design & Optimization',
-      description: 'Professional PHP database solutions.',
-      type: 'website',
-    },
-    alternates: {
-      canonical: 'https://madebyaris.com/services/php-development/database-solutions'
-    }
-  }
-}
+export const metadata: Metadata = buildPageMetadata({
+  title: pageTitle,
+  description: pageDescription,
+  path: pagePath,
+  keywords: [
+    'MySQL database optimization',
+    'slow MySQL queries',
+    'PHP database design',
+    'MySQL query tuning',
+    'MySQL indexing',
+  ],
+})
 
-const features = [
+const outcomes = [
   {
-    title: 'Database Design',
-    description: 'Create efficient and scalable database schemas optimized for your application needs.',
-    icon: Database,
-  },
-  {
-    title: 'Performance Optimization',
-    description: 'Optimize queries and database structure for maximum performance and efficiency.',
+    title: 'Slow queries found and fixed',
+    description: 'Each fix targets a query from your own logs, so you can see which page got faster and why.',
     icon: Zap,
   },
   {
-    title: 'Data Security',
-    description: 'Implement robust security measures to protect your valuable data.',
-    icon: Shield,
+    title: 'Indexes that match how you query',
+    description: 'Indexes built for your real WHERE and JOIN clauses, without extra ones that slow down every write.',
+    icon: Database,
   },
   {
-    title: 'Analytics & Reporting',
-    description: 'Build powerful reporting systems and data analytics solutions.',
+    title: 'A schema ready for what is next',
+    description: 'Schema changes and migrations that fit the features you plan, so new work stops needing workarounds.',
     icon: BarChart,
+  },
+  {
+    title: 'Changes that are safe to apply',
+    description: 'A backup before every change and migrations tested on a copy of your data first.',
+    icon: Shield,
   },
 ]
 
-const deliverables = [
-  'Database Architecture Design',
-  'Schema Optimization',
-  'Query Performance Tuning',
-  'Data Migration Services',
-  'Database Security',
-  'Backup & Recovery',
-  'Monitoring & Maintenance',
-  'Custom Reporting Tools'
+const goodFit = [
+  'Pages that were fast at launch now take seconds to load',
+  'Reports or exports time out once the date range grows',
+  'The database server runs at high CPU during normal traffic',
+  'A planned feature is awkward because of how the tables are laid out',
 ]
 
-const technologies = [
-  'MySQL',
-  'PostgreSQL',
-  'MariaDB',
-  'Redis',
-  'MongoDB',
-  'Elasticsearch',
-  'ORM (Eloquent, Doctrine)',
-  'AWS RDS'
+const poorFit = [
+  'The slow part is the front end, like large images or heavy scripts',
+  'You need a database administrator on call around the clock',
 ]
 
-const benefits = [
-  'Fast Queries',
-  'Data Security',
-  'Scalable Design',
-  'High Availability',
-  'Easy Backup',
-  'Reliable'
+const technologies = ['MySQL', 'MariaDB', 'PostgreSQL', 'Redis', 'Slow query log', 'EXPLAIN', 'Eloquent', 'Doctrine']
+
+const processSteps = [
+  { step: 1, title: 'Measure', desc: 'Turn on the slow query log and collect a baseline from real traffic.' },
+  { step: 2, title: 'Diagnose', desc: 'Run EXPLAIN on the worst queries and trace them back to the PHP code.' },
+  { step: 3, title: 'Fix on a copy', desc: 'Test indexes, rewrites, and schema changes against a copy of your data.' },
+  { step: 4, title: 'Roll out', desc: 'Apply with a backup and a rollback path, then compare against the baseline.' },
 ]
+
+const faqs: FaqItem[] = [
+  {
+    question: 'How much does MySQL database optimization cost?',
+    answer:
+      'It depends on the size of the database and how many queries are slow, so I scope each job separately. Send me your slow query log or a list of the slow pages. You get a scope and a quote before I change anything.',
+  },
+  {
+    question: 'Do we need a new database, or can you fix the one we have?',
+    answer:
+      'Almost always the one you have. Most slow MySQL setups need better indexes, rewritten queries, or a few schema changes. Moving to a different database is rarely the fix, and I will tell you plainly if yours is the exception.',
+  },
+  {
+    question: 'Will the site go down while you change the database?',
+    answer:
+      'Most index and query fixes run while the site stays online. Large table changes can lock writes, so I test them on a copy first, schedule them for a quiet hour, and keep a backup ready.',
+  },
+  {
+    question: 'Is the fix in Laravel Eloquent or in raw SQL?',
+    answer:
+      'Either. In Laravel I fix Eloquent code that loads too much, like missing eager loading. In plain PHP apps I tune the raw SQL directly. The aim is the same: fewer queries, and faster ones.',
+  },
+  {
+    question: 'Who keeps the database fast after you finish?',
+    answer:
+      'You get a short report on what was slow, what changed, and which queries to watch. Keep the slow query log on, and new problems show up early. I can check in again later if you want.',
+  },
+]
+
+const structuredData = buildPageGraph({
+  path: pagePath,
+  name: pageTitle,
+  description: pageDescription,
+  breadcrumbs: [
+    { name: 'Services', path: '/services' },
+    { name: 'PHP Development', path: '/services/php-development' },
+    { name: 'MySQL Optimization', path: pagePath },
+  ],
+  service: {
+    name: 'MySQL database optimization',
+    description: pageDescription,
+    serviceType: 'MySQL Database Optimization',
+    offers: outcomes.map((item) => ({ name: item.title, description: item.description })),
+  },
+  faqs,
+})
+
+const linkClass = 'underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors'
 
 export default function DatabaseSolutionsPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
-      
+      <JsonLd data={structuredData} />
+
       {/* Breadcrumb */}
-      <nav className="mb-8">
+      <nav className="mb-8" aria-label="Breadcrumb">
         <ol className="flex items-center space-x-2 text-sm text-zinc-500">
           <li><Link href="/services" className="hover:text-orange-500 transition-colors">Services</Link></li>
           <li><span className="px-2">/</span></li>
           <li><Link href="/services/php-development" className="hover:text-orange-500 transition-colors">PHP Development</Link></li>
           <li><span className="px-2">/</span></li>
-          <li className="text-zinc-900">Database Solutions</li>
+          <li className="text-zinc-900">MySQL Optimization</li>
         </ol>
       </nav>
-      
+
       {/* Hero Section */}
       <section className="text-center pt-4 pb-16">
         <div className="inline-flex bg-white/60 rounded-full mb-8 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
           <Database className="w-4 h-4 text-orange-500" />
-          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Database Expert</span>
+          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">MySQL for PHP apps</span>
         </div>
 
         <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
-          PHP Database
-          <span className="block gradient-text font-light">Solutions</span>
+          MySQL database optimization
+          <span className="block gradient-text font-light">for PHP apps that got slow</span>
         </h1>
 
-        <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
-          Design, optimize, and secure your database infrastructure with 
-          professional PHP database solutions.
+        <p className="text-base md:text-lg text-zinc-600 max-w-2xl mx-auto mb-4 leading-relaxed font-medium">
+          For teams whose PHP app gets slower as the tables grow: pages that hang, reports that time out, a database server stuck at full CPU. I’ve designed MySQL databases since my first backend job in 2013.
+        </p>
+
+        <p className="text-sm text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed">
+          In 2014 I built PHP and MySQL web applications, and the databases behind them, at SEREWare.
         </p>
 
         <div className="flex flex-wrap justify-center gap-3">
-          <Link 
-            href="/contact"
+          <Link
+            href={contactHref('php')}
             className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
           >
-            <span className="text-sm font-medium tracking-tight">Start Project</span>
+            <span className="text-sm font-medium tracking-tight">Ask about your slow queries</span>
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </Link>
-          <Link 
+          <Link
             href="/services/php-development"
             className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
             style={{ boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)' }}
           >
-            <span className="text-sm font-medium text-black/60 tracking-tight">Back to PHP Services</span>
+            <span className="text-sm font-medium text-black/60 tracking-tight">See all PHP services</span>
             <ArrowRight className="w-4 h-4 text-zinc-500" />
           </Link>
         </div>
@@ -152,94 +174,132 @@ export default function DatabaseSolutionsPage() {
 
       <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
 
-      {/* Features Section */}
+      {/* Answer first */}
+      <section className="mb-16 max-w-3xl mx-auto">
+        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+          What MySQL database optimization involves
+        </h2>
+        <p className="text-zinc-600 leading-relaxed mb-4">
+          MySQL database optimization means finding the queries that make your app slow and fixing them at the source. I read the slow query log, run EXPLAIN on the worst offenders, then add indexes, rewrite queries, or change the schema. In a PHP app the fix often sits in the code too, like a loop that runs one query per row.
+        </p>
+        <p className="text-zinc-600 leading-relaxed">
+          If the database feeds a Next.js front end through an API, caching at the API layer helps as well. See{' '}
+          <Link href="/services/php-development/api-development" className={linkClass}>PHP API development</Link>.
+        </p>
+      </section>
+
+      {/* Fit */}
       <section className="mb-16">
         <div className="text-center mb-10">
-          <div className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
-            <Zap className="w-4 h-4 text-orange-500" />
-            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Features</span>
-          </div>
           <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            Database <span className="gradient-text">Expertise</span>
+            Signs of <span className="gradient-text">slow MySQL queries</span>
           </h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {features.map((feature) => (
-            <div key={feature.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm hover:shadow-lg transition-all group">
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
+            <h3 className="font-semibold text-zinc-900 mb-4">Sounds like the database</h3>
+            <ul className="space-y-3">
+              {goodFit.map((item) => (
+                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
+                  <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
+            <h3 className="font-semibold text-zinc-900 mb-4">Probably something else</h3>
+            <ul className="space-y-3">
+              {poorFit.map((item) => (
+                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
+                  <XCircle className="w-5 h-5 text-zinc-400 shrink-0" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+
+      {/* Outcomes */}
+      <section className="mb-16">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+            What you get from <span className="gradient-text">PHP database design work</span>
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {outcomes.map((item) => (
+            <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm hover:shadow-lg transition-all group">
               <div className="p-3 bg-zinc-100 rounded-xl w-fit mb-4 group-hover:bg-orange-100 transition-colors">
-                <feature.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
+                <item.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-2">{feature.title}</h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{feature.description}</p>
+              <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
+              <p className="text-sm text-zinc-500 leading-relaxed">{item.description}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
-
-      {/* Benefits Section */}
-      <section className="mb-16">
-        <div className="text-center mb-10">
-          <div className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
-            <Trophy className="w-4 h-4 text-orange-500" />
-            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Advantages</span>
-          </div>
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter">
-            Database <span className="gradient-text">Benefits</span>
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-          {benefits.map((benefit) => (
-            <div key={benefit} className="p-4 bg-white/80 backdrop-blur-sm rounded-xl text-center text-sm font-medium text-zinc-700 hover:bg-orange-50 hover:text-orange-600 transition-colors">
-              {benefit}
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
-
-      {/* Deliverables Section */}
+      {/* Technologies */}
       <section className="mb-16">
         <div className="text-center mb-10">
           <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            What You <span className="gradient-text">Get</span>
-          </h2>
-        </div>
-
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {deliverables.map((item) => (
-              <div key={item} className="flex items-center gap-3 p-3 bg-zinc-50 rounded-xl">
-                <CheckCircle2 className="w-5 h-5 text-orange-500 shrink-0" />
-                <span className="text-sm text-zinc-700 font-medium">{item}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
-
-      {/* Technologies Section */}
-      <section className="mb-16">
-        <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            Tech <span className="gradient-text">Stack</span>
+            Databases and <span className="gradient-text">tools I use</span>
           </h2>
         </div>
 
         <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {technologies.map((tech) => (
-              <div key={tech} className="p-3 bg-zinc-50 rounded-xl text-center text-sm font-medium text-zinc-600 hover:bg-orange-50 hover:text-orange-600 transition-colors">
+              <div key={tech} className="p-3 bg-zinc-50 rounded-xl text-center text-sm font-medium text-zinc-600">
                 {tech}
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Process */}
+      <section className="mb-16">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+            How the tuning <span className="gradient-text">runs</span>
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          {processSteps.map((item) => (
+            <div key={item.step} className="bg-zinc-50 rounded-2xl p-5 text-center">
+              <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-500 font-bold text-lg flex items-center justify-center mx-auto mb-3">
+                {item.step}
+              </div>
+              <h3 className="font-semibold text-zinc-900 mb-1">{item.title}</h3>
+              <p className="text-sm text-zinc-500">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="mb-16 max-w-3xl mx-auto" aria-labelledby="mysql-faq">
+        <h2 id="mysql-faq" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-6">
+          MySQL optimization FAQ
+        </h2>
+        <div className="space-y-3">
+          {faqs.map((faq) => (
+            <details key={faq.question} className="group bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm open:shadow-md">
+              <summary className="cursor-pointer list-none font-semibold text-zinc-900 flex items-center justify-between gap-4">
+                {faq.question}
+                <span className="text-orange-500 transition-transform group-open:rotate-45 text-xl leading-none">+</span>
+              </summary>
+              <p className="mt-3 text-sm text-zinc-600 leading-relaxed">{faq.answer}</p>
+            </details>
+          ))}
         </div>
       </section>
 
@@ -249,19 +309,19 @@ export default function DatabaseSolutionsPage() {
 
         <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16 min-h-[400px] relative">
           <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
-            Need Database Solutions?
+            Pages getting slower every month?
           </h2>
           <p className="text-zinc-400 mb-8 max-w-lg font-medium">
-            Let&apos;s optimize your database infrastructure for better performance and reliability.
+            Send me the slow pages or your slow query log. I’ll tell you where the time goes and what I’d fix first, before you commit to anything.
           </p>
 
           <div className="flex flex-wrap justify-center gap-3">
-            <Link href="/contact" className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5">
-              <span>Start Your Project</span>
+            <Link href={contactHref('php')} className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+              <span>Ask about your slow queries</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
-            <Link href="/services/php-development" className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3">
-              <span>Explore PHP Services</span>
+            <Link href="/services/php-development/modernization" className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3">
+              <span>Old PHP version too? See upgrades</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>

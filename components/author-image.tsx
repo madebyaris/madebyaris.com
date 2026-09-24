@@ -18,7 +18,6 @@ export function AuthorImage({ src, alt, width, height }: AuthorImageProps) {
         width={width}
         height={height}
         className="object-cover"
-        priority
         fallback="/images/placeholder.png"
       />
     </div>
