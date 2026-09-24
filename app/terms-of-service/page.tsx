@@ -2,49 +2,37 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, FileText, Shield, Scale, Users, Mail } from 'lucide-react'
 import { JsonLd } from '@/components/seo/json-ld'
-import { productionUrl } from '@/lib/seo/config'
+import { buildPageGraph, buildPageMetadata } from '@/lib/seo'
 
 export const revalidate = 86400 // Revalidate daily
 
-const termsStructuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'WebPage',
-  '@id': `${productionUrl}/terms-of-service/#webpage`,
-  name: 'Terms of Service | Made by Aris',
-  description: 'Terms of service and conditions for Made by Aris website and services.',
-  url: `${productionUrl}/terms-of-service`,
-}
+const pageDescription =
+  'Terms of service and conditions for Made by Aris website and services.'
 
-// Generate Metadata and Structured Data
-export function generateMetadata(): Metadata {
-  return {
-    title: 'Terms of Service | Made by Aris',
-    description: 'Terms of service and conditions for Made by Aris website and services.',
-    keywords: [
-      'Terms of Service',
-      'Terms and Conditions',
-      'Legal Agreement',
-      'Service Terms'
-    ],
-    alternates: {
-      canonical: 'https://madebyaris.com/terms-of-service'
-    },
-    openGraph: {
-      title: 'Terms of Service | Made by Aris',
-      description: 'Terms of service and conditions for Made by Aris website and services.',
-      url: 'https://madebyaris.com/terms-of-service',
-      siteName: 'Made by Aris',
-      locale: 'en_US',
-      type: 'website',
-    },
-  }
-}
+export const metadata: Metadata = buildPageMetadata({
+  title: 'Terms of Service',
+  description: pageDescription,
+  path: '/terms-of-service',
+  keywords: [
+    'Terms of Service',
+    'Terms and Conditions',
+    'Legal Agreement',
+    'Service Terms',
+  ],
+})
+
+const termsStructuredData = buildPageGraph({
+  path: '/terms-of-service',
+  name: 'Terms of Service',
+  description: pageDescription,
+  type: 'WebPage',
+})
 
 const sections = [
   { id: 'services', title: '1. Services', icon: Shield },
-  { id: 'use', title: '2. Use of the Website', icon: Users },
-  { id: 'ip', title: '3. Intellectual Property', icon: Scale },
-  { id: 'projects', title: '4. Client Projects', icon: FileText },
+  { id: 'use', title: '2. Use of the website', icon: Users },
+  { id: 'ip', title: '3. Intellectual property', icon: Scale },
+  { id: 'projects', title: '4. Client projects', icon: FileText },
 ]
 
 export default function TermsOfServicePage() {
@@ -132,7 +120,7 @@ export default function TermsOfServicePage() {
               deliverables, timelines, and costs for services will be outlined in a separate agreement or proposal for each project.
             </p>
 
-            <h2 id="use" className="scroll-mt-24">2. Use of the Website</h2>
+            <h2 id="use" className="scroll-mt-24">2. Use of the website</h2>
             <p>You agree to use the Website only for lawful purposes and in a way that does not infringe upon the rights of others or restrict their use of the Website.</p>
             <p>You are prohibited from:</p>
             <ul>
@@ -143,7 +131,7 @@ export default function TermsOfServicePage() {
               <li>Collecting or harvesting any information from the Website without permission</li>
             </ul>
 
-            <h2 id="ip" className="scroll-mt-24">3. Intellectual Property</h2>
+            <h2 id="ip" className="scroll-mt-24">3. Intellectual property</h2>
             <p>
               The Website and its original content, features, and functionality are owned by Aris Setiawan and are protected by 
               international copyright, trademark, patent, trade secret, and other intellectual property laws.
@@ -153,7 +141,7 @@ export default function TermsOfServicePage() {
               download, store, or transmit any of the material on the Website without my prior written consent.
             </p>
 
-            <h2 id="projects" className="scroll-mt-24">4. Client Projects and Deliverables</h2>
+            <h2 id="projects" className="scroll-mt-24">4. Client projects and deliverables</h2>
             <p>
               For client projects, ownership of deliverables will be specified in the project agreement. Unless otherwise stated:
             </p>
@@ -163,7 +151,7 @@ export default function TermsOfServicePage() {
               <li>I reserve the right to display and link to completed client work as part of my portfolio unless otherwise agreed</li>
             </ul>
 
-            <h2 className="scroll-mt-24">5. User Content</h2>
+            <h2 className="scroll-mt-24">5. User content</h2>
             <p>
               If you submit content to the Website (such as comments, testimonials, or project information), you grant me a 
               non-exclusive, royalty-free, perpetual, irrevocable right to use, reproduce, modify, adapt, publish, translate, 
@@ -174,7 +162,7 @@ export default function TermsOfServicePage() {
               violate these Terms or any applicable laws.
             </p>
 
-            <h2 className="scroll-mt-24">6. Payment Terms</h2>
+            <h2 className="scroll-mt-24">6. Payment terms</h2>
             <p>
               Payment terms for services will be outlined in the project agreement or proposal. Unless otherwise specified:
             </p>
@@ -192,7 +180,7 @@ export default function TermsOfServicePage() {
               information, products, services, or related graphics contained on the Website for any purpose.
             </p>
 
-            <h2 className="scroll-mt-24">8. Limitation of Liability</h2>
+            <h2 className="scroll-mt-24">8. Limitation of liability</h2>
             <p>
               In no event will I be liable for any loss or damage including without limitation, indirect or consequential loss or 
               damage, or any loss or damage whatsoever arising from loss of data or profits arising out of, or in connection with, 
@@ -212,18 +200,18 @@ export default function TermsOfServicePage() {
               whatsoever, including without limitation if you breach the Terms.
             </p>
 
-            <h2 className="scroll-mt-24">11. Governing Law</h2>
+            <h2 className="scroll-mt-24">11. Governing law</h2>
             <p>
               These Terms shall be interpreted and governed by the laws of Indonesia, without regard to its conflict of law provisions.
             </p>
 
-            <h2 className="scroll-mt-24">12. Changes to Terms</h2>
+            <h2 className="scroll-mt-24">12. Changes to terms</h2>
             <p>
               I reserve the right to modify or replace these Terms at any time. If a revision is material, I will try to provide at 
               least 30 days notice prior to any new terms taking effect.
             </p>
 
-            <h2 className="scroll-mt-24">13. Contact Information</h2>
+            <h2 className="scroll-mt-24">13. Contact information</h2>
             <p>
               If you have any questions about these Terms of Service, please contact me at:
             </p>
@@ -252,10 +240,10 @@ export default function TermsOfServicePage() {
 
         <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 min-h-[300px] relative">
           <h2 className="md:text-3xl lg:text-4xl leading-tight text-2xl font-normal text-white tracking-tight mb-6 max-w-2xl">
-            Have Questions?
+            Questions about these terms?
           </h2>
           <p className="text-zinc-400 mb-8 max-w-lg font-medium">
-            Feel free to reach out if you have any questions about these terms or our services.
+            Email me or use the contact form. I reply within 24 hours and answer questions about these terms in plain language.
           </p>
 
           <div className="flex flex-wrap justify-center gap-3">
@@ -264,7 +252,7 @@ export default function TermsOfServicePage() {
               className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
             >
               <Mail className="w-4 h-4" />
-              <span>Contact Me</span>
+              <span>Ask me about these terms</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link 

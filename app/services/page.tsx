@@ -13,35 +13,35 @@ import {
   TrendingUp,
 } from 'lucide-react'
 import Link from 'next/link'
-import { buildPageMetadata } from '@/lib/seo'
+import { contactHref } from '@/lib/contact-services'
+import { buildPageGraph, buildPageMetadata } from '@/lib/seo'
+import { JsonLd } from '@/components/seo/json-ld'
 
 export const revalidate = 86400
-
-const pageTitle = 'Build & Level up | Next.js, AI & Cursor Services | Aris Setiawan'
 
 const buildServices = [
   {
     title: 'Next.js development',
     description:
-      'Production apps with App Router, TypeScript, and performance that holds up after launch.',
+      'New products and WordPress-to-Next.js migrations that stay fast and keep their rankings after launch.',
     icon: Code2,
     href: '/services/nextjs-development',
-    features: ['Product builds', 'Migrations', 'Performance & SEO', 'Headless CMS'],
+    features: ['Product builds', 'Migrations', 'Performance and SEO', 'Headless CMS'],
     span: 2,
   },
   {
     title: 'AI product development',
     description:
-      'Agents, chatbots, and LLM integrations shipped into real Next.js products — not slide decks.',
+      'Agents, chatbots, and LLM features that run inside your Next.js product and reach real users.',
     icon: Sparkles,
     href: '/services/ai-development',
-    features: ['Chatbots & assistants', 'Agent workflows', 'API integrations', 'AI MVPs'],
+    features: ['Chatbots and assistants', 'Agent workflows', 'API integrations', 'AI MVPs'],
     span: 2,
   },
   {
     title: 'WordPress / headless',
     description:
-      'Custom themes, plugins, and headless WordPress when content teams need familiar tools.',
+      'Keep the WordPress editor your team knows, with custom themes, plugins, or a headless Next.js front end.',
     icon: Layout,
     href: '/services/wordpress',
     features: ['Custom themes', 'Headless WP', 'Plugin dev', 'Performance'],
@@ -49,7 +49,7 @@ const buildServices = [
   },
   {
     title: 'PHP development',
-    description: 'Legacy PHP apps, APIs, and maintenance when your stack still needs it.',
+    description: 'Keep a legacy PHP app running, add an API to it, or plan its move to a modern stack.',
     icon: Server,
     href: '/services/php-development',
     features: ['Custom apps', 'APIs', 'Maintenance', 'Migrations'],
@@ -62,7 +62,7 @@ const levelUpServices = [
   {
     title: 'Cursor & AI workflows',
     description:
-      'Practical mentoring for Cursor, prompt workflows, and shipping faster without messy code. Vibe Code Friend.',
+      'Your team bought Cursor seats and the PRs got messier. I set up project rules and a review habit on one real repo, then help the rest of the team adopt it.',
     icon: Bot,
     href: '/services/vibe-code-friend',
     features: ['Cursor mentoring', 'AI IDE tutoring', 'Workflow coaching', 'Code fixing'],
@@ -72,78 +72,62 @@ const levelUpServices = [
 
 const wordPressServices = [
   {
-    title: 'Custom Theme Development',
-    description: 'Pixel-perfect WordPress themes that capture your unique style.',
+    title: 'Custom theme development',
+    description: 'A theme built from your design that loads fast on phones and stays easy for editors to update.',
     href: '/services/wordpress/theme-development',
-    benefits: ['Unique Design', 'Mobile-First', 'SEO Optimized'],
+    benefits: ['Your design', 'Mobile first', 'SEO ready'],
   },
   {
-    title: 'Plugin Development',
-    description: 'Custom WordPress plugins that add exactly the features you need.',
+    title: 'Plugin development',
+    description: 'A plugin for the feature no off-the-shelf plugin does, or for connecting WordPress to your other tools.',
     href: '/services/wordpress/plugin-development',
-    benefits: ['Custom Features', 'Integration Ready', 'Scalable'],
+    benefits: ['Custom features', 'Integrations', 'Maintainable code'],
   },
   {
     title: 'Headless WordPress',
-    description: 'Modern headless WordPress solutions with Next.js frontends.',
+    description: 'Editors keep wp-admin. Visitors get a fast Next.js front end. This site runs that way.',
     href: '/services/wordpress/headless-development',
-    benefits: ['Modern Stack', 'Better Performance', 'API-Driven'],
+    benefits: ['Next.js front end', 'SEO carried over', 'Publish-to-live refresh'],
   },
   {
-    title: 'WordPress Optimization',
-    description: 'Comprehensive WordPress optimization for peak performance.',
+    title: 'WordPress speed and security',
+    description: 'Find what makes the site slow or exposed, fix it, and keep plugins from undoing the work.',
     href: '/services/wordpress/optimization',
-    benefits: ['Speed Optimization', 'Security Hardening', 'CDN Setup'],
+    benefits: ['Speed', 'Security hardening', 'CDN setup'],
   },
 ]
 
-const structuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'WebPage',
-  '@id': 'https://madebyaris.com/services/#webpage',
-  url: 'https://madebyaris.com/services',
+const pageTitle = 'Next.js, AI & Cursor Services'
+const pageDescription =
+  'Hire me to build Next.js, WordPress, and AI products, or get Cursor mentoring so your team ships AI-written code you can trust. 13+ years. Remote worldwide.'
+
+export const metadata: Metadata = buildPageMetadata({
+  title: pageTitle,
+  description: pageDescription,
+  path: '/services',
+  keywords: [
+    'Next.js Developer',
+    'AI Product Development',
+    'Cursor Mentoring',
+    'WordPress Development',
+    'Remote Full-Stack Developer',
+    'Hire Next.js Developer',
+    'AI Integration Developer',
+    'Cursor Ambassador Indonesia',
+  ],
+})
+
+const structuredData = buildPageGraph({
+  path: '/services',
   name: pageTitle,
-  description:
-    'Hire me to build Next.js and AI-powered products — or level up your team with practical Cursor and AI workflows. 13+ years. Remote worldwide.',
-  isPartOf: {
-    '@type': 'WebSite',
-    '@id': 'https://madebyaris.com/#website',
-  },
-}
-
-export async function generateMetadata(): Promise<Metadata> {
-  const metadata = buildPageMetadata({
-    title: 'Build & Level up | Next.js, AI & Cursor Services',
-    description:
-      'Hire me to build Next.js and AI-powered products — or level up your team with practical Cursor and AI workflows. 13+ years. Remote worldwide.',
-    path: '/services',
-  })
-
-  return {
-    ...metadata,
-    title: { absolute: pageTitle },
-    openGraph: { ...metadata.openGraph, title: pageTitle },
-    twitter: { ...metadata.twitter, title: pageTitle },
-    keywords: [
-      'Next.js Developer',
-      'AI Product Development',
-      'Cursor Mentoring',
-      'WordPress Development',
-      'Remote Full-Stack Developer',
-      'Hire Next.js Developer',
-      'AI Integration Developer',
-      'Cursor Ambassador Indonesia',
-    ],
-  }
-}
+  description: pageDescription,
+  breadcrumbs: [{ name: 'Services', path: '/services' }],
+})
 
 export default function ServicesPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
+      <JsonLd data={structuredData} />
 
       {/* Hero Section */}
       <section className="text-center pt-8 pb-16">
@@ -168,8 +152,9 @@ export default function ServicesPage() {
         </h1>
 
         <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
-          I build production web products with Next.js, React, and WordPress — and help teams ship
-          faster with practical AI workflows. Cursor Ambassador Indonesia.
+          Hire me to build your Next.js, WordPress, or AI product. Or bring me in to train your team
+          on Cursor so AI-written code passes review. I’m the first Cursor Ambassador in Indonesia,
+          with 13+ years of shipping.
         </p>
 
         <div className="flex flex-wrap justify-center gap-3">
@@ -177,7 +162,7 @@ export default function ServicesPage() {
             href="#build"
             className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
           >
-            <span className="text-sm font-medium tracking-tight">Hire me to build</span>
+            <span className="text-sm font-medium tracking-tight">See what I build</span>
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </Link>
           <Link
@@ -194,7 +179,7 @@ export default function ServicesPage() {
             }}
           >
             <span className="text-sm font-medium text-black/60 tracking-tight">
-              Learn AI workflows
+              See Cursor mentoring
             </span>
             <ArrowRight className="w-4 h-4 text-zinc-500" />
           </Link>
@@ -226,15 +211,16 @@ export default function ServicesPage() {
               Hire me to <span className="gradient-text">ship products</span>
             </h2>
             <p className="text-sm text-zinc-500 font-medium max-w-xl">
-              Solo specialist — 13+ years building for startups and teams worldwide. US, EU, Asia,
-              and Middle East friendly. Indonesia still supported.
+              You work with me directly, from the first call to launch. I work with startups and
+              teams in the US, EU, Asia, and the Middle East, and with Indonesian companies in
+              Bahasa Indonesia.
             </p>
           </div>
           <Link
-            href="/contact"
+            href={contactHref('nextjs')}
             className="group flex items-center gap-2 hover:text-orange-500 transition-colors text-sm font-medium text-zinc-900"
           >
-            Start a build project
+            Tell me what you need built
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
@@ -300,8 +286,8 @@ export default function ServicesPage() {
               Cursor & AI <span className="gradient-text">workflow coaching</span>
             </h2>
             <p className="text-sm text-zinc-500 font-medium max-w-xl">
-              Mentoring and tutoring — not product builds. Learn practical workflows from Indonesia&apos;s
-              first Cursor Ambassador.
+              Coaching for developers who already ship. You keep writing the code; I help you and your
+              team get reliable results from Cursor. Taught by Indonesia&apos;s first Cursor Ambassador.
             </p>
           </div>
         </div>
@@ -354,7 +340,8 @@ export default function ServicesPage() {
                     Bootcamp (external)
                   </h3>
                   <p className="text-sm text-zinc-500 leading-relaxed">
-                    Structured learning at bootcamp.madebyaris.com — separate from 1:1 mentoring.
+                    Prefer a structured course? The bootcamp at bootcamp.madebyaris.com runs separately
+                    from 1:1 mentoring.
                   </p>
                 </div>
                 <ArrowUpRight className="w-5 h-5 text-zinc-400 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -389,7 +376,7 @@ export default function ServicesPage() {
               WordPress <span className="gradient-text">specialties</span>
             </h2>
             <p className="text-sm text-zinc-500 font-medium">
-              Themes, plugins, headless setups, and performance — part of the Build offer.
+              Themes, plugins, headless setups, and speed work, all part of the Build offer.
             </p>
           </div>
           <Link
@@ -436,16 +423,17 @@ export default function ServicesPage() {
             How I <span className="gradient-text">work</span>
           </h2>
           <p className="text-sm text-zinc-500 max-w-lg mx-auto font-medium">
-            Clear scope, weekly demos, and code you can maintain — whether building or coaching.
+            The same four steps whether I’m building for you or coaching your team. You see progress
+            every week.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {[
-            { step: 1, title: 'Discovery', desc: 'Goals, constraints, and what success looks like' },
-            { step: 2, title: 'Plan', desc: 'Roadmap, milestones, and honest trade-offs' },
-            { step: 3, title: 'Deliver', desc: 'Build or coach with visible progress each week' },
-            { step: 4, title: 'Handoff', desc: 'Docs, support options, and next steps' },
+            { step: 1, title: 'Scoping call', desc: 'What you need, what must not break, and what done looks like' },
+            { step: 2, title: 'Written plan', desc: 'Milestones and the trade-offs I’d make, before any code' },
+            { step: 3, title: 'Weekly progress', desc: 'A working demo or a coaching session every week' },
+            { step: 4, title: 'Handoff', desc: 'Docs your team can use, and support if you want it' },
           ].map((item) => (
             <div key={item.step} className="bg-zinc-50 rounded-2xl p-6 text-center">
               <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-500 font-bold text-lg flex items-center justify-center mx-auto mb-4">
@@ -471,18 +459,19 @@ export default function ServicesPage() {
 
         <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16 min-h-[400px] relative">
           <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
-            Build something — or level up your team
+            Tell me what you’re building
           </h2>
           <p className="text-zinc-400 mb-8 max-w-lg font-medium">
-            Tell me what you need. I&apos;ll be straight about fit, scope, and timeline.
+            Send a few lines about the project or your team. I’ll reply within 24 hours and tell you
+            plainly whether I’m the right fit.
           </p>
 
           <div className="flex flex-wrap justify-center gap-3">
             <Link
-              href="/contact"
+              href={contactHref('other')}
               className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
             >
-              <span>Get in touch</span>
+              <span>Send me your project</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link

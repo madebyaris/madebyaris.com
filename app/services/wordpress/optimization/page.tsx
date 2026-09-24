@@ -1,113 +1,151 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowRight, ArrowUpRight, Zap, Shield, Globe, Gauge, CheckCircle2, Trophy, Server } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Zap, Shield, Gauge, CheckCircle2, XCircle, Server, Image as ImageIcon, Database, Plug } from 'lucide-react'
+import { buildPageGraph, buildPageMetadata, type FaqItem } from '@/lib/seo'
+import { JsonLd } from '@/components/seo/json-ld'
+import { contactHref } from '@/lib/contact-services'
 
 export const revalidate = 86400 // Revalidate daily
 
-// Structured Data
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "name": "WordPress Optimization Services",
-  "description": "Professional WordPress optimization services to improve speed, security, and performance of your WordPress website.",
-  "url": "https://madebyaris.com/services/wordpress/optimization",
-  "provider": {
-    "@type": "Person",
-    "name": "Aris Setiawan",
-    "url": "https://madebyaris.com"
-  }
-}
+const pageTitle = 'WordPress Speed Optimization Service'
+const pagePath = '/services/wordpress/optimization'
+const pageDescription =
+  'WordPress speed optimization service for slow sites. I find the cause (hosting, plugins, images, or database), fix it on staging, and harden security.'
 
-export async function generateMetadata(): Promise<Metadata> {
-  return {
-    title: 'WordPress Optimization | Speed & Security Services',
-    description: 'Professional WordPress optimization services to improve speed, security, and performance of your WordPress website.',
-    keywords: [
-      'WordPress Optimization',
-      'WordPress Speed',
-      'WordPress Security',
-      'WordPress Performance',
-      'Core Web Vitals',
-      'WordPress Caching'
-    ],
-    openGraph: {
-      title: 'WordPress Optimization | Speed & Security Services',
-      description: 'Professional WordPress optimization services.',
-      type: 'website',
-    },
-    alternates: {
-      canonical: 'https://madebyaris.com/services/wordpress/optimization'
-    }
-  }
-}
+export const metadata: Metadata = buildPageMetadata({
+  title: pageTitle,
+  description: pageDescription,
+  path: pagePath,
+  keywords: [
+    'WordPress speed optimization service',
+    'slow WordPress site',
+    'WordPress security hardening',
+    'WordPress Core Web Vitals',
+    'WordPress caching',
+  ],
+})
 
-const features = [
+const causes = [
   {
-    title: 'Speed Optimization',
-    description: 'Comprehensive performance tuning to make your WordPress site lightning fast.',
-    icon: Zap,
+    title: 'Slow hosting',
+    description: 'If the server is slow to send the first byte, nothing on the page can fix it. Sometimes the answer is a better host.',
+    icon: Server,
   },
   {
-    title: 'Security Hardening',
-    description: 'Advanced security measures to protect your site from threats.',
-    icon: Shield,
+    title: 'Plugins loading everywhere',
+    description: 'Many plugins load their scripts and styles on every page, even pages that never use them.',
+    icon: Plug,
   },
   {
-    title: 'CDN Integration',
-    description: 'Global content delivery network setup for faster loading worldwide.',
-    icon: Globe,
+    title: 'Heavy images',
+    description: 'Full-size photos served without modern formats or sizes that fit the screen.',
+    icon: ImageIcon,
   },
   {
-    title: 'Performance Monitoring',
-    description: 'Continuous monitoring and optimization of site performance metrics.',
+    title: 'A bloated database',
+    description: 'Years of revisions, expired transients, and autoloaded options from old plugins slow down every uncached request.',
+    icon: Database,
+  },
+  {
+    title: 'No page caching',
+    description: 'Without a page cache, WordPress runs PHP and database queries for every visitor.',
     icon: Gauge,
   },
   {
-    title: 'Server Optimization',
-    description: 'Database and server-level optimizations for better response times.',
-    icon: Server,
+    title: 'Page builder markup',
+    description: 'Builders like Elementor wrap content in many nested elements and extra CSS, which phones feel first.',
+    icon: Zap,
   },
 ]
 
-const benefits = [
-  'Faster Loading',
-  'Better SEO',
-  'Higher Security',
-  'Global Reach',
-  'Better UX',
-  'Lower Bounce Rate',
-  'Mobile Optimized',
-  'Resource Efficient'
+const goodFit = [
+  'Your site feels slow on phones and PageSpeed Insights agrees',
+  'Search Console flags Core Web Vitals problems on your key pages',
+  'You installed a caching plugin and it barely helped',
+  'You are worried about outdated plugins or who has admin access',
 ]
 
-const deliverables = [
-  'Comprehensive performance audit',
-  'Speed optimization implementation',
-  'Caching configuration',
-  'Image optimization',
-  'Database optimization',
-  'Security hardening',
-  'CDN setup and configuration',
-  'Ongoing monitoring setup'
+const poorFit = [
+  'The site is fast already and you only want a higher score',
+  'The host is the whole problem and you are unwilling to move',
+  'The site needs a rebuild, which a speed pass will only delay',
+]
+
+const hardening = [
+  'Update WordPress core, themes, and plugins, and remove the ones you do not use',
+  'Review admin accounts and give each person only the role they need',
+  'Turn on two-factor login for admin accounts',
+  'Disable file editing inside wp-admin',
+  'Set up off-site backups and test a restore',
 ]
 
 const processSteps = [
-  { step: 1, title: 'Audit', desc: 'Analyze current performance' },
-  { step: 2, title: 'Plan', desc: 'Strategy for improvements' },
-  { step: 3, title: 'Implement', desc: 'Execute optimizations' },
-  { step: 4, title: 'Monitor', desc: 'Ongoing performance tracking' },
+  { step: 1, title: 'Measure', desc: 'PageSpeed Insights and Search Console data on your key pages' },
+  { step: 2, title: 'Find the cause', desc: 'Hosting, plugins, images, database, or theme' },
+  { step: 3, title: 'Fix on staging', desc: 'Check that forms, checkout, and plugins still work' },
+  { step: 4, title: 'Ship and report', desc: 'Go live and show you the before and after' },
 ]
+
+const faqs: FaqItem[] = [
+  {
+    question: 'How much does a WordPress speed optimization service cost?',
+    answer:
+      'I scope it after a first look at your site, because a caching fix and a page builder problem are very different jobs. Send me the URL and I will reply with the likely cause and a price for fixing it.',
+  },
+  {
+    question: 'How long does it take to speed up a WordPress site?',
+    answer:
+      'It depends on the cause. Caching and image fixes are usually small jobs. Replacing a heavy theme or moving hosts takes longer. The scope I send lists each fix with a timeline, so you can choose what to do first.',
+  },
+  {
+    question: 'Will speed fixes break my plugins or checkout?',
+    answer:
+      'Caching and script changes can break forms or carts when they are applied blindly. I make every change on staging first, test the pages that matter to you, and exclude pages like checkout from caching where needed.',
+  },
+  {
+    question: 'Who keeps the site fast after the fixes?',
+    answer:
+      'You get a short list of what I changed and what to avoid, like plugins that load on every page. Your team can follow the notes, or I can check in after updates.',
+  },
+  {
+    question: 'Can you speed up a site built with Elementor?',
+    answer:
+      'Yes, within limits. I cut unused widgets and scripts, fix images and caching, and tune Elementor settings. If the builder itself is the bottleneck, I will say so and we can talk about a lighter theme.',
+  },
+]
+
+const structuredData = buildPageGraph({
+  path: pagePath,
+  name: pageTitle,
+  description: pageDescription,
+  breadcrumbs: [
+    { name: 'Services', path: '/services' },
+    { name: 'WordPress', path: '/services/wordpress' },
+    { name: 'Optimization', path: pagePath },
+  ],
+  service: {
+    name: pageTitle,
+    description: pageDescription,
+    serviceType: 'WordPress Optimization',
+    offers: [
+      { name: 'WordPress speed audit' },
+      { name: 'Caching and CDN setup' },
+      { name: 'Image and asset fixes' },
+      { name: 'Database cleanup' },
+      { name: 'Plugin and theme performance fixes' },
+      { name: 'WordPress security hardening' },
+    ],
+  },
+  faqs,
+})
 
 export default function WordPressOptimizationPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
-      
+      <JsonLd data={structuredData} />
+
       {/* Breadcrumb */}
-      <nav className="mb-8">
+      <nav className="mb-8" aria-label="Breadcrumb">
         <ol className="flex items-center space-x-2 text-sm text-zinc-500">
           <li><Link href="/services" className="hover:text-orange-500 transition-colors">Services</Link></li>
           <li><span className="px-2">/</span></li>
@@ -116,38 +154,41 @@ export default function WordPressOptimizationPage() {
           <li className="text-zinc-900">Optimization</li>
         </ol>
       </nav>
-      
+
       {/* Hero Section */}
       <section className="text-center pt-4 pb-16">
         <div className="inline-flex bg-white/60 rounded-full mb-8 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
           <Zap className="w-4 h-4 text-orange-500" />
-          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Performance Expert</span>
+          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Slow WordPress site?</span>
         </div>
 
         <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
-          WordPress
-          <span className="block gradient-text font-light">Optimization</span>
+          WordPress speed
+          <span className="block gradient-text font-light">optimization service</span>
         </h1>
 
-        <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
-          Make your WordPress site faster, more secure, and optimized for search engines 
-          with professional optimization services.
+        <p className="text-base md:text-lg text-zinc-600 max-w-2xl mx-auto mb-4 leading-relaxed font-medium">
+          For site owners whose WordPress site is slow on phones or failing Core Web Vitals. I find the real cause, fix it, and lock down the admin while I am in there.
+        </p>
+
+        <p className="text-sm text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed">
+          13+ years shipping web products, including WordPress performance work at Hongkiat.com.
         </p>
 
         <div className="flex flex-wrap justify-center gap-3">
-          <Link 
-            href="/contact"
+          <Link
+            href={contactHref('wordpress')}
             className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
           >
-            <span className="text-sm font-medium tracking-tight">Optimize My Site</span>
+            <span className="text-sm font-medium tracking-tight">Find out why my site is slow</span>
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </Link>
-          <Link 
+          <Link
             href="/services/wordpress"
             className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
             style={{ boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)' }}
           >
-            <span className="text-sm font-medium text-black/60 tracking-tight">Back to WordPress</span>
+            <span className="text-sm font-medium text-black/60 tracking-tight">See all WordPress services</span>
             <ArrowRight className="w-4 h-4 text-zinc-500" />
           </Link>
         </div>
@@ -155,26 +196,46 @@ export default function WordPressOptimizationPage() {
 
       <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
 
-      {/* Features Section */}
+      {/* Answer first */}
+      <section className="mb-16 max-w-3xl mx-auto">
+        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+          What a WordPress speed optimization service does
+        </h2>
+        <p className="text-zinc-600 leading-relaxed mb-4">
+          A WordPress speed optimization service finds why your pages load slowly and fixes those causes first. I measure your key pages, trace the delay to hosting, plugins, images, the database, or the theme, and fix it on a staging copy. Then I push the changes live and show you the before and after numbers. Installing another caching plugin is rarely enough on its own.
+        </p>
+        <p className="text-zinc-600 leading-relaxed">
+          If hosting is the bottleneck, read{' '}
+          <Link href="/blog/how-to-pick-vps-for-wordpress" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors">
+            how to pick a VPS for WordPress
+          </Link>
+          .
+        </p>
+      </section>
+
+      {/* Causes Section */}
       <section className="mb-16">
         <div className="text-center mb-10">
           <div className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
             <Gauge className="w-4 h-4 text-orange-500" />
-            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Features</span>
+            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Common causes</span>
           </div>
           <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            Optimization <span className="gradient-text">Services</span>
+            Why your WordPress site <span className="gradient-text">is slow</span>
           </h2>
+          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
+            Most slow sites have one or two of these. I fix the one that costs you the most first.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {features.map((feature) => (
-            <div key={feature.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm hover:shadow-lg transition-all group">
+          {causes.map((item) => (
+            <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm hover:shadow-lg transition-all group">
               <div className="p-3 bg-zinc-100 rounded-xl w-fit mb-4 group-hover:bg-orange-100 transition-colors">
-                <feature.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
+                <item.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-2">{feature.title}</h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{feature.description}</p>
+              <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
+              <p className="text-sm text-zinc-500 leading-relaxed">{item.description}</p>
             </div>
           ))}
         </div>
@@ -182,59 +243,82 @@ export default function WordPressOptimizationPage() {
 
       <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
 
-      {/* Benefits Section */}
-      <section className="mb-16">
-        <div className="text-center mb-10">
-          <div className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
-            <Trophy className="w-4 h-4 text-orange-500" />
-            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Advantages</span>
-          </div>
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter">
-            Optimization <span className="gradient-text">Benefits</span>
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {benefits.map((benefit) => (
-            <div key={benefit} className="p-4 bg-white/80 backdrop-blur-sm rounded-xl text-center text-sm font-medium text-zinc-700 hover:bg-orange-50 hover:text-orange-600 transition-colors">
-              {benefit}
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
-
-      {/* Deliverables Section */}
+      {/* Fit */}
       <section className="mb-16">
         <div className="text-center mb-10">
           <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            What You <span className="gradient-text">Get</span>
+            Is a speed fix <span className="gradient-text">worth it for you?</span>
           </h2>
+          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
+            Sometimes the honest answer is a rebuild. See{' '}
+            <Link href="/blog/wordpress-vs-nextjs-when-worth-it" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors">
+              WordPress vs Next.js: when it’s worth it
+            </Link>
+            .
+          </p>
         </div>
 
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {deliverables.map((item) => (
-              <div key={item} className="flex items-center gap-3 p-3 bg-zinc-50 rounded-xl">
-                <CheckCircle2 className="w-5 h-5 text-orange-500 shrink-0" />
-                <span className="text-sm text-zinc-700 font-medium">{item}</span>
-              </div>
-            ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
+            <h3 className="font-semibold text-zinc-900 mb-4">Good fit</h3>
+            <ul className="space-y-3">
+              {goodFit.map((item) => (
+                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
+                  <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
+            <h3 className="font-semibold text-zinc-900 mb-4">Probably not worth it</h3>
+            <ul className="space-y-3">
+              {poorFit.map((item) => (
+                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
+                  <XCircle className="w-5 h-5 text-zinc-400 shrink-0" />
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
 
       <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+
+      {/* Security hardening */}
+      <section className="mb-16 max-w-3xl mx-auto">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-3 bg-zinc-100 rounded-xl">
+            <Shield className="w-5 h-5 text-orange-500" />
+          </div>
+          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter">
+            WordPress security hardening
+          </h2>
+        </div>
+        <p className="text-zinc-600 leading-relaxed mb-6">
+          Outdated plugins and weak admin logins are the most common ways into a WordPress site. While I am working on speed, I close those gaps so a break-in is much harder:
+        </p>
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
+          <ul className="space-y-3">
+            {hardening.map((item) => (
+              <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
+                <CheckCircle2 className="w-5 h-5 text-orange-500 shrink-0" />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
       {/* Process Section */}
       <section className="mb-16">
         <div className="text-center mb-10">
           <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            Optimization <span className="gradient-text">Process</span>
+            How the speed fix <span className="gradient-text">works</span>
           </h2>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {processSteps.map((item) => (
             <div key={item.step} className="bg-zinc-50 rounded-2xl p-5 text-center">
@@ -246,6 +330,35 @@ export default function WordPressOptimizationPage() {
             </div>
           ))}
         </div>
+        <p className="text-sm text-zinc-500 text-center mt-6">
+          Still slow after all of it? A{' '}
+          <Link href="/services/wordpress/headless-development" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors">
+            headless WordPress front end
+          </Link>
+          {' '}keeps your editor and serves pages from Next.js. Here is{' '}
+          <Link href="/blog/headless-wordpress-with-nextjs" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors">
+            how this site does it
+          </Link>
+          .
+        </p>
+      </section>
+
+      {/* FAQ */}
+      <section className="mb-16 max-w-3xl mx-auto" aria-labelledby="optimization-faq">
+        <h2 id="optimization-faq" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-6">
+          WordPress speed optimization FAQ
+        </h2>
+        <div className="space-y-3">
+          {faqs.map((faq) => (
+            <details key={faq.question} className="group bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm open:shadow-md">
+              <summary className="cursor-pointer list-none font-semibold text-zinc-900 flex items-center justify-between gap-4">
+                {faq.question}
+                <span className="text-orange-500 transition-transform group-open:rotate-45 text-xl leading-none">+</span>
+              </summary>
+              <p className="mt-3 text-sm text-zinc-600 leading-relaxed">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
       </section>
 
       {/* CTA Section */}
@@ -254,19 +367,19 @@ export default function WordPressOptimizationPage() {
 
         <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16 min-h-[400px] relative">
           <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
-            Ready to Speed Up Your Site?
+            Want to know why your site is slow?
           </h2>
           <p className="text-zinc-400 mb-8 max-w-lg font-medium">
-            Let&apos;s optimize your WordPress site for better performance, security, and user experience.
+            Send me the URL. I will reply with what I think is slowing it down and what fixing it would take, and I will tell you if the fix is outside what a speed pass can do.
           </p>
 
           <div className="flex flex-wrap justify-center gap-3">
-            <Link href="/contact" className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5">
-              <span>Start Optimization</span>
+            <Link href={contactHref('wordpress')} className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+              <span>Find out why my site is slow</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link href="/services/wordpress" className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3">
-              <span>Explore WordPress Services</span>
+              <span>Other WordPress services</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>

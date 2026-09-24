@@ -2,11 +2,12 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Suspense } from 'react'
 import { getPosts } from '@/lib/wordpress'
-import { ArrowRight, ArrowUpRight, Code2, Globe, Server, Zap, Users, Clock, Award, Home, Sparkles } from 'lucide-react'
-import { structuredData } from '@/lib/structured-data'
-import { buildPageMetadata } from '@/lib/seo'
+import { ArrowRight, ArrowUpRight, Code2, Globe, Server, Briefcase, Clock, Award, Home, Sparkles } from 'lucide-react'
+import type { Metadata } from 'next'
+import { buildPageGraph, buildPageMetadata, type FaqItem } from '@/lib/seo'
 import { JsonLd } from '@/components/seo/json-ld'
 import { HomeContent } from '@/components/home-content'
+import { contactHref } from '@/lib/contact-services'
 
 // Segment Configuration
 export const revalidate = 86400 // 24 hours
@@ -20,37 +21,46 @@ const PostsFallback = () => (
   </div>
 )
 
-const pageTitle = 'Hire a Next.js & AI Developer | Cursor Ambassador | Aris Setiawan'
+const pageTitle = 'Hire a Next.js & AI Developer'
+const pageDescription =
+  'Hire a Next.js developer with 13+ years of shipping: Aris Setiawan builds Next.js, WordPress, and AI products and trains teams on Cursor. Remote worldwide.'
 
-export async function generateMetadata() {
-  const metadata = buildPageMetadata({
-    title: 'Hire a Next.js & AI Developer | Cursor Ambassador',
-    description:
-      'Hire Aris Setiawan to build Next.js, WordPress, and AI products — or level up with Cursor mentoring. 13+ years. Cursor Ambassador Indonesia. Remote worldwide.',
-    path: '/',
-  })
+export const metadata: Metadata = buildPageMetadata({
+  title: pageTitle,
+  description: pageDescription,
+  path: '/',
+})
 
-  return {
-    ...metadata,
-    title: { absolute: pageTitle },
-    openGraph: { ...metadata.openGraph, title: pageTitle },
-    twitter: { ...metadata.twitter, title: pageTitle },
-    keywords: [
-      'Hire Next.js Developer',
-      'Hire WordPress Developer',
-      'Hire AI Developer',
-      'Cursor Ambassador Indonesia',
-      'Next.js Developer',
-      'WordPress Developer',
-      'AI Product Development',
-      'Cursor Mentoring',
-      'Remote Full-Stack Developer',
-      'Headless WordPress',
-      'Next.js Developer Indonesia',
-      'WordPress Developer Indonesia',
-    ],
-  }
-}
+const faqs: (FaqItem & { link?: { href: string; label: string } })[] = [
+  {
+    question: 'How much does it cost to hire a Next.js developer?',
+    answer:
+      'It depends on scope, so I don’t publish fixed prices. After a short scoping call you get a written plan with milestones and a quote before any code is written. My guide on hiring costs explains what moves the number.',
+    link: { href: '/blog/cost-to-hire-nextjs-developer', label: 'Read the cost guide' },
+  },
+  {
+    question: 'How long does a project take?',
+    answer:
+      'That also depends on scope, and I won’t guess a number before I see the project. The written plan lists milestones and dates up front, and you see a working demo every week.',
+  },
+  {
+    question: 'Can I work with you remotely from outside Indonesia?',
+    answer:
+      'Yes. I’m based in Sidoarjo, Indonesia, and have worked remotely with teams worldwide since going independent in 2015. I work in English or Indonesian, Monday to Saturday, 9:00 to 17:00 WIB, and we set a weekly check-in time during scoping.',
+  },
+  {
+    question: 'What is the difference between Build and Level up?',
+    answer:
+      'Build means you hire me to ship it: a Next.js site, a WordPress-to-Next.js migration, or an AI feature. Level up means your developers keep writing the code and I coach them to get reliable results from Cursor, starting on one real repo. If you’re unsure, send the project and I’ll tell you which one fits.',
+  },
+]
+
+const structuredData = buildPageGraph({
+  path: '/',
+  name: `${pageTitle} | Aris Setiawan`,
+  description: pageDescription,
+  faqs: faqs.map(({ question, answer }) => ({ question, answer })),
+})
 
 // Optimize Posts component with error handling and fallback
 async function Posts() {
@@ -70,60 +80,51 @@ async function Posts() {
 const services = [
   {
     icon: Code2,
-    title: "Next.js Development",
-    description: "Build blazing-fast React applications with server-side rendering, static generation, and modern web architecture.",
+    title: "Next.js development",
+    description: "New products and WordPress-to-Next.js migrations that load fast on phones and keep their search rankings after launch.",
     href: "/services/nextjs-development",
     span: 1,
   },
   {
-    icon: Globe,
-    title: "WordPress Development",
-    description: "Custom themes, plugins, and headless WordPress solutions for scalable content management systems.",
-    href: "/services/wordpress",
+    icon: Sparkles,
+    title: "AI product development",
+    description: "Chatbots, agents, and LLM features that run inside your Next.js product and reach real users.",
+    href: "/services/ai-development",
     span: 2,
   },
   {
+    icon: Globe,
+    title: "WordPress and headless WordPress",
+    description: "Editors keep the wp-admin they know. I build custom themes and plugins, or a Next.js front end like the one this site runs on.",
+    href: "/services/wordpress",
+    span: 1,
+  },
+  {
     icon: Server,
-    title: "PHP Development",
-    description: "Enterprise-grade PHP applications with Laravel, custom APIs, and database architecture.",
+    title: "PHP development",
+    description: "Keep a legacy PHP app running, add an API to it, or plan its move to Laravel one piece at a time.",
     href: "/services/php-development",
     span: 1,
   },
-  {
-    icon: Zap,
-    title: "Performance Optimization",
-    description: "Audit, analyze, and optimize your web applications for Core Web Vitals and user experience.",
-    href: "/services/wordpress/optimization",
-    span: 1,
-  },
 ]
 
-// Feature items
 const features = [
   {
     icon: Clock,
-    text: "13+ years building scalable web products for startups, agencies, and enterprises.",
+    text: "13+ years shipping web products, independent since 2015. You work with me directly from the first call to launch.",
   },
   {
-    icon: Users,
-    text: "Named collaborators include Hongkiat, SAB Digital, Raja Kreatif, and Ta-Wan.",
+    icon: Briefcase,
+    text: "Before going independent I worked at Hongkiat.com, co-founded Raja Kreatif Asia, and was a senior full-stack developer at SAB Digital Marketing Agency.",
   },
   {
     icon: Award,
-    text: "Cursor Ambassador Indonesia and MiniMax Dev Community Expert.",
+    text: "First Cursor Ambassador in Indonesia, SpaceXAI Ambassador, and MiniMax Dev Community Expert. I use Cursor on client work every week.",
   },
   {
     icon: Home,
-    text: "Remote-first workflow with clear communication and timely delivery.",
+    text: "This site runs on headless WordPress and Next.js on Vercel, so you can check how I build before you write to me.",
   },
-]
-
-// Client logos (using placeholder for now)
-const clients = [
-  { name: "Hongkiat", logo: "/images/clients/learnislam.png" },
-  { name: "SAB Digital", logo: "/images/clients/bacakomik.png" },
-  { name: "Raja Kreatif", logo: "/images/clients/cipika.png" },
-  { name: "Ta-Wan", logo: "/images/clients/ta-wan.png" },
 ]
 
 export default function HomePage() {
@@ -145,52 +146,39 @@ export default function HomePage() {
               '--border-radius-before': '9999px'
             }}
           >
-            <div className="flex -space-x-2 mr-3">
-              {clients.slice(0, 3).map((client, i) => (
-                <div key={i} className="w-6 h-6 rounded-full border-2 border-white bg-zinc-100 overflow-hidden">
-                  <Image 
-                    src={client.logo} 
-                    alt={client.name}
-                    width={24}
-                    height={24}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              ))}
-              <div className="w-6 h-6 rounded-full border-2 border-white bg-zinc-900 text-white flex items-center justify-center text-[9px] font-bold tracking-tighter">
-                50+
-              </div>
+            <div className="w-6 h-6 rounded-full bg-zinc-900 text-white flex items-center justify-center mr-3">
+              <Award className="w-3.5 h-3.5" />
             </div>
             <span className="text-xs font-medium text-zinc-600 tracking-wide">
-              <span className="text-zinc-900">Cursor Ambassador · MiniMax Expert · Available for hire</span>
+              <span className="text-zinc-900">First Cursor Ambassador in Indonesia · Taking new projects</span>
             </span>
           </div>
 
           {/* Headline */}
           <h1 className="leading-[0.95] lg:text-[5rem] text-5xl font-medium text-zinc-900 tracking-tighter mb-8">
-            AI-Optimized
-            <span className="block gradient-text font-light">Full-Stack</span>
+            Next.js &amp; AI
+            <span className="block gradient-text font-light">Product</span>
             <span className="block">Developer</span>
           </h1>
 
           {/* Subheadline */}
           <p className="text-sm text-zinc-500 font-medium max-w-md mb-10 leading-relaxed tracking-wide border-l-2 border-zinc-200 pl-6">
-            Hi, I&apos;m <span className="text-zinc-900 font-semibold">Aris Setiawan</span>. Cursor Ambassador in Indonesia. I build Next.js, WordPress, and AI products for teams worldwide — and coach developers on practical Cursor workflows. 13+ years.
+            Hi, I&apos;m <span className="text-zinc-900 font-semibold">Aris Setiawan</span>. Hire me to build your Next.js, headless WordPress, or AI product, or bring me in to coach your developers on Cursor so AI-written code passes review. 13+ years shipping, working remotely from Indonesia.
           </p>
 
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 lg:mb-24 mb-16">
+          <div className="flex flex-col sm:flex-row gap-3 mb-4">
             <Link 
-              href="/contact"
+              href={contactHref('nextjs')}
               className="btn-primary hover:scale-[1.02] transition-all flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center justify-between"
             >
-              <span className="text-sm font-medium tracking-tight">Hire me to build</span>
+              <span className="text-sm font-medium tracking-tight">Send me your project</span>
               <span className="flex items-center justify-center rounded-full bg-black/10 px-3 py-1">
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </span>
             </Link>
             <Link 
-              href="/cursor-ambassador"
+              href="/services/vibe-code-friend"
               className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
               style={{
                 boxShadow: '0 18px 35px rgba(31, 41, 55, 0.25), 0 0 0 1px rgba(209, 213, 219, 0.3)',
@@ -200,10 +188,13 @@ export default function HomePage() {
                 '--border-radius-before': '9999px'
               }}
             >
-              <span className="text-sm font-medium text-black/60 tracking-tight">Learn AI workflows</span>
+              <span className="text-sm font-medium text-black/60 tracking-tight">Get Cursor mentoring for your team</span>
               <ArrowRight className="w-4 h-4 text-zinc-500" />
             </Link>
           </div>
+          <p className="text-xs text-zinc-500 font-medium lg:mb-20 mb-12">
+            I reply within 24 hours and tell you plainly whether I&apos;m the right fit.
+          </p>
 
           {/* Footer Stats with Curved Lines */}
           <div className="flex flex-wrap gap-2 md:gap-6 mt-auto items-center">
@@ -213,7 +204,7 @@ export default function HomePage() {
                 <p className="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mb-1 group-hover:text-zinc-600 transition-colors">
                   Experience
                 </p>
-                <p className="text-sm text-zinc-900 font-medium">13+ Years</p>
+                <p className="text-sm text-zinc-900 font-medium">13+ years</p>
               </div>
               <div className="curve-separator opacity-60 ml-4 md:ml-8" />
             </div>
@@ -222,9 +213,9 @@ export default function HomePage() {
             <div className="flex items-center group cursor-default">
               <div className="px-1 text-center">
                 <p className="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mb-1 group-hover:text-zinc-600 transition-colors">
-                  Projects
+                  Independent
                 </p>
-                <p className="text-sm text-zinc-900 font-medium">50+ Delivered</p>
+                <p className="text-sm text-zinc-900 font-medium">Since 2015</p>
               </div>
               <div className="curve-separator md:ml-8 opacity-60 ml-4" />
             </div>
@@ -235,7 +226,7 @@ export default function HomePage() {
                 <p className="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mb-1 group-hover:text-zinc-600 transition-colors">
                   Location
                 </p>
-                <p className="text-sm text-zinc-900 font-medium">Indonesia</p>
+                <p className="text-sm text-zinc-900 font-medium">Sidoarjo, remote worldwide</p>
               </div>
             </div>
           </div>
@@ -247,7 +238,7 @@ export default function HomePage() {
             {/* Background Image */}
             <Image
               src="/aris.png"
-              alt="Aris Setiawan - AI-Optimized Full-Stack Developer and Cursor Ambassador Indonesia"
+              alt="Aris Setiawan, Next.js and AI developer and the first Cursor Ambassador in Indonesia"
               fill
               className="transition-transform duration-[2s] ease-in-out group-hover:scale-110 object-cover"
               priority
@@ -274,7 +265,7 @@ export default function HomePage() {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
                   </span>
-                  <span className="text-[10px] uppercase font-semibold text-white tracking-wide">Available to Hire</span>
+                  <span className="text-[10px] uppercase font-semibold text-white tracking-wide">Taking new projects</span>
                 </div>
               </div>
 
@@ -295,11 +286,11 @@ export default function HomePage() {
                     </div>
                     <span className="text-xs text-white font-medium">Aris Setiawan</span>
                   </div>
-                  <span className="text-[10px] text-emerald-400 font-mono">Online</span>
+                  <span className="text-[10px] text-emerald-400 font-mono">Remote</span>
                 </div>
                 <div className="flex flex-col gap-1">
-                  <span className="text-[9px] text-white/60 uppercase">Specialization</span>
-                  <span className="text-sm text-white font-medium">Cursor · Next.js · WordPress</span>
+                  <span className="text-[9px] text-white/60 uppercase">Builds with</span>
+                  <span className="text-sm text-white font-medium">Next.js · WordPress · Cursor</span>
                 </div>
               </div>
             </div>
@@ -316,19 +307,18 @@ export default function HomePage() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 px-1">
           <div className="max-w-2xl">
             <h2 className="md:text-5xl text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
-              Expert
-              <span className="gradient-text"> Development </span>
-              Services
+              Hire a Next.js
+              <span className="gradient-text"> and AI developer</span>
             </h2>
             <p className="leading-relaxed text-base font-normal text-zinc-500">
-              Next.js, WordPress, AI features, and performance work — shipped to production, remote-friendly.
+              Pick the closest fit. Each page shows what you get, how I work, and what it takes to start.
             </p>
           </div>
           <Link 
             href="/services" 
             className="group flex items-center gap-2 hover:text-orange-500 transition-colors text-sm font-normal text-zinc-900 pb-1"
           >
-            View all services
+            Compare all services
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
@@ -374,16 +364,16 @@ export default function HomePage() {
                 <Sparkles className="w-6 h-6" />
               </div>
               <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-                Level up with
-                <span className="gradient-text"> AI workflows</span>
+                Level up: Cursor mentoring
+                <span className="gradient-text"> for your team</span>
               </h2>
               <p className="leading-relaxed text-base font-normal text-zinc-500">
-                Mentoring, Cursor workflows, and community learning for teams and builders who want to ship faster with AI.
+                Your team bought Cursor seats and the PRs got messier. I set up project rules and a review habit on one real repo, then help the rest of the team adopt it. English or Indonesian.
               </p>
             </div>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-col gap-3 items-start lg:items-end">
               <Link
-                href="/cursor-ambassador"
+                href="/services/vibe-code-friend"
                 className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
                 style={{
                   boxShadow: '0 18px 35px rgba(31, 41, 55, 0.25), 0 0 0 1px rgba(209, 213, 219, 0.3)',
@@ -393,38 +383,17 @@ export default function HomePage() {
                   '--border-radius-before': '9999px'
                 }}
               >
-                Cursor Ambassador
-                <ArrowRight className="w-4 h-4 text-zinc-500" />
-              </Link>
-              <Link
-                href="/minimax-ambassador"
-                className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
-                style={{
-                  boxShadow: '0 18px 35px rgba(31, 41, 55, 0.25), 0 0 0 1px rgba(209, 213, 219, 0.3)',
-                  position: 'relative',
-                  // @ts-expect-error CSS custom properties
-                  '--border-gradient': 'linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.4), rgba(255, 255, 255, 0.8))',
-                  '--border-radius-before': '9999px'
-                }}
-              >
-                MiniMax Expert
+                See how Cursor mentoring works
                 <ArrowRight className="w-4 h-4 text-zinc-500" />
               </Link>
               <Link
                 href="https://bootcamp.madebyaris.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
-                style={{
-                  boxShadow: '0 18px 35px rgba(31, 41, 55, 0.25), 0 0 0 1px rgba(209, 213, 219, 0.3)',
-                  position: 'relative',
-                  // @ts-expect-error CSS custom properties
-                  '--border-gradient': 'linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.4), rgba(255, 255, 255, 0.8))',
-                  '--border-radius-before': '9999px'
-                }}
+                className="group flex items-center gap-1 text-xs font-medium text-zinc-500 hover:text-orange-500 transition-colors"
               >
-                Bootcamp
-                <ArrowUpRight className="w-4 h-4 text-zinc-500" />
+                Prefer a structured course? Try the bootcamp
+                <ArrowUpRight className="w-3.5 h-3.5" />
               </Link>
             </div>
           </div>
@@ -436,6 +405,16 @@ export default function HomePage() {
 
       {/* Features Row */}
       <section className="flex flex-col gap-16 w-full relative">
+        <div className="max-w-2xl px-1 -mb-6">
+          <h2 className="md:text-5xl text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+            Why teams
+            <span className="gradient-text"> hire me</span>
+          </h2>
+          <p className="leading-relaxed text-base font-normal text-zinc-500">
+            You get one senior developer who scopes the work, writes the code, and answers your messages.
+          </p>
+        </div>
+
         {/* Top Feature Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {features.map((feature, index) => (
@@ -448,6 +427,33 @@ export default function HomePage() {
               </p>
             </div>
           ))}
+        </div>
+
+        {/* FAQ */}
+        <div className="max-w-3xl w-full" aria-labelledby="home-faq">
+          <h2 id="home-faq" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-6">
+            Questions before you hire
+          </h2>
+          <div className="space-y-3">
+            {faqs.map((faq) => (
+              <details key={faq.question} className="group bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm open:shadow-md">
+                <summary className="cursor-pointer list-none font-semibold text-zinc-900 flex items-center justify-between gap-4">
+                  {faq.question}
+                  <span className="text-orange-500 transition-transform group-open:rotate-45 text-xl leading-none">+</span>
+                </summary>
+                <p className="mt-3 text-sm text-zinc-600 leading-relaxed">{faq.answer}</p>
+                {faq.link && (
+                  <Link
+                    href={faq.link.href}
+                    className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-orange-500 hover:text-orange-600"
+                  >
+                    {faq.link.label}
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                )}
+              </details>
+            ))}
+          </div>
         </div>
 
         {/* Main CTA Card */}
@@ -463,38 +469,28 @@ export default function HomePage() {
 
           {/* Content Container */}
           <div className="flex flex-col p-8 md:p-12 lg:p-16 justify-center min-h-[500px] lg:min-h-[600px] relative">
-            <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-8 max-w-3xl">
-              Ready to build with modern architecture — or level up your team&apos;s AI workflow?
+            <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-3xl">
+              Tell me what you&apos;re building
             </h2>
+            <p className="text-zinc-400 mb-8 max-w-xl font-medium">
+              A URL and two sentences is enough. I read every request myself, reply within 24 hours, and send a written plan before any code if we go ahead.
+            </p>
 
             <div className="flex flex-col sm:flex-row sm:items-center gap-4">
               <Link 
-                href="/contact"
+                href={contactHref('nextjs')}
                 className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 w-fit shadow-lg hover:shadow-xl hover:-translate-y-0.5"
               >
-                <span>Hire me to build</span>
+                <span>Send me your project</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
-                href="/cursor-ambassador"
-                className="text-sm font-medium text-white/70 hover:text-white transition-colors"
+                href="/services/vibe-code-friend"
+                className="group flex items-center gap-1 text-sm font-medium text-white/70 hover:text-white transition-colors"
               >
-                Learn AI workflows →
+                Or get Cursor mentoring for your team
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
-            </div>
-
-            {/* Trusted By */}
-            <div className="mt-12 pt-8 border-t border-white/10">
-              <p className="text-xs text-white/50 uppercase tracking-widest mb-4 font-medium">
-                Previously worked with
-              </p>
-              <div className="flex flex-wrap items-center gap-6 opacity-60">
-                {clients.map((client, i) => (
-                  <div key={i} className="h-8 w-20 bg-white/10 rounded flex items-center justify-center">
-                    <span className="text-white/80 text-xs font-medium">{client.name}</span>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
         </div>
@@ -509,17 +505,17 @@ export default function HomePage() {
           <div className="max-w-2xl">
             <h2 className="md:text-5xl text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
               Latest
-              <span className="gradient-text"> Insights</span>
+              <span className="gradient-text"> guides</span>
             </h2>
             <p className="leading-relaxed text-base font-normal text-zinc-500">
-              Technical articles, tutorials, and thoughts on web development.
+              Next.js, Cursor, headless WordPress, and AI features, written from client work I ship.
             </p>
           </div>
           <Link 
             href="/blog" 
             className="group flex items-center gap-2 hover:text-orange-500 transition-colors text-sm font-normal text-zinc-900 pb-1"
           >
-            View all posts
+            Read all guides
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>

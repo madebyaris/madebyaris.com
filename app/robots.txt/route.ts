@@ -1,93 +1,60 @@
-import { headers } from 'next/headers'
+import { productionUrl } from '@/lib/seo/config'
 
-export async function GET() {
-  const headersList = await headers()
-  const protocol = headersList.get('x-forwarded-proto') || 'http'
-  const host = headersList.get('host') || 'localhost:3000'
-  const baseUrl = `${protocol}://${host}`
+// Search engines and AI answer engines that we want crawling and citing the
+// site. A crawler matched by a named group ignores the `*` group, so every
+// group must repeat the full rule set.
+const CRAWLERS = [
+  'Googlebot',
+  'Bingbot',
+  'Applebot',
+  'DuckDuckBot',
+  'YandexBot',
+  'GPTBot',
+  'OAI-SearchBot',
+  'ChatGPT-User',
+  'ClaudeBot',
+  'Claude-SearchBot',
+  'Claude-User',
+  'anthropic-ai',
+  'PerplexityBot',
+  'Perplexity-User',
+  'Google-Extended',
+  'Applebot-Extended',
+  'DuckAssistBot',
+  'Amazonbot',
+  'meta-externalagent',
+  'MistralAI-User',
+  'cohere-ai',
+  'CCBot',
+  '*',
+]
 
-  const robotsTxt = `# https://www.robotstxt.org/robotstxt.html
-User-agent: *
-Allow: /
-Disallow: /api/
-Disallow: /_next/
-Disallow: /static/
-Disallow: /*.json$
-Disallow: /*?*
-Disallow: /actions/
+// `/_next/static` and `/_next/image` stay crawlable: Google and Bing render
+// pages with them, and image search indexes `/_next/image` URLs.
+const RULES = [
+  'Allow: /',
+  'Allow: /_next/static/',
+  'Allow: /_next/image',
+  'Disallow: /api/',
+  'Disallow: /_next/data/',
+  'Disallow: /*?_rsc=',
+]
 
-# Allow Google to index everything
-User-agent: Googlebot
-Allow: /
-Disallow: /api/
-Disallow: /_next/
-Disallow: /static/
+export function GET() {
+  const groups = CRAWLERS.map((agent) => [`User-agent: ${agent}`, ...RULES].join('\n'))
 
-# Allow Bing to index everything
-User-agent: Bingbot
-Allow: /
-Disallow: /api/
-Disallow: /_next/
-Disallow: /static/
-
-# Allow AI crawlers with specific permissions
-User-agent: GPTBot
-Allow: /
-Allow: /services/nextjs-development*
-Allow: /nextjs-development-indonesia
-Allow: /blog
-Disallow: /api/
-Disallow: /_next/
-Disallow: /static/
-
-User-agent: ChatGPT-User
-Allow: /
-Allow: /services/nextjs-development*
-Allow: /nextjs-development-indonesia
-Allow: /blog
-Disallow: /api/
-Disallow: /_next/
-Disallow: /static/
-
-User-agent: Google-Extended
-Allow: /
-Allow: /services/nextjs-development*
-Allow: /nextjs-development-indonesia
-Allow: /blog
-Disallow: /api/
-Disallow: /_next/
-Disallow: /static/
-
-User-agent: CCBot
-Allow: /
-Allow: /services/nextjs-development*
-Allow: /nextjs-development-indonesia
-Allow: /blog
-Disallow: /api/
-Disallow: /_next/
-Disallow: /static/
-
-User-agent: anthropic-ai
-Allow: /
-Allow: /services/nextjs-development*
-Allow: /nextjs-development-indonesia
-Allow: /blog
-Disallow: /api/
-Disallow: /_next/
-Disallow: /static/
-
-# no crawl delay
-
-# AI-readable site summary (llms.txt standard)
-# See ${baseUrl}/llms.txt
-
-# Sitemaps
-Sitemap: ${baseUrl}/sitemap.xml`
+  const robotsTxt = [
+    '# https://www.robotstxt.org/robotstxt.html',
+    ...groups,
+    `# AI-readable site summary: ${productionUrl}/llms.txt`,
+    `Sitemap: ${productionUrl}/sitemap.xml`,
+    '',
+  ].join('\n\n')
 
   return new Response(robotsTxt, {
     headers: {
-      'Content-Type': 'text/plain',
-      'Cache-Control': 'public, max-age=43200, s-maxage=43200', // Cache for 12 hours
+      'Content-Type': 'text/plain; charset=utf-8',
+      'Cache-Control': 'public, max-age=86400, s-maxage=86400',
     },
   })
 }

@@ -1,39 +1,35 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, ArrowUpRight, Users, Sparkles, Code2, Shield } from 'lucide-react'
-import { buildProfilePageSchema } from '@/lib/seo'
+import { JsonLd } from '@/components/seo/json-ld'
+import { buildPageGraph, buildPageMetadata } from '@/lib/seo'
+import { contactHref } from '@/lib/contact-services'
 
 export const revalidate = 86400
 
-const pageTitle = 'SpaceXAI Ambassador | Aris Setiawan'
+const path = '/spacexai-ambassador'
+const pageTitle = 'SpaceXAI Ambassador'
 const pageDescription =
-  'SpaceXAI Ambassador (Indonesia). Cursor is part of SpaceX. I help builders with practical AI coding workflows in this era.'
+  'Aris Setiawan is a SpaceXAI Ambassador in Indonesia. Cursor is part of SpaceX. I help builders ship with practical AI coding workflows in English or Indonesian.'
 
-const structuredData = buildProfilePageSchema({
-  name: pageTitle,
+const structuredData = buildPageGraph({
+  path,
+  type: 'ProfilePage',
+  name: `${pageTitle} | Aris Setiawan`,
   description: pageDescription,
-  url: 'https://madebyaris.com/spacexai-ambassador',
-  jobTitle: 'SpaceXAI Ambassador',
+  breadcrumbs: [{ name: pageTitle, path }],
 })
 
-export const metadata: Metadata = {
-  title: { absolute: pageTitle },
+export const metadata: Metadata = buildPageMetadata({
+  title: pageTitle,
   description: pageDescription,
-  alternates: {
-    canonical: 'https://madebyaris.com/spacexai-ambassador',
-  },
-  openGraph: {
-    title: pageTitle,
-    description: pageDescription,
-    type: 'website',
-    locale: 'en_US',
-  },
-}
+  path,
+})
 
 const highlights = [
   {
     title: 'Practical AI coding',
-    description: 'Workflows that help teams ship, not demo slides.',
+    description: 'Workflows your team can keep running on its own codebase after I leave.',
     icon: Code2,
   },
   {
@@ -51,13 +47,13 @@ const highlights = [
 const whatIDo = [
   'Share workflows that survive a real repo',
   'Point people to the right door: mentoring vs a product build',
-  'Keep the Cursor Ambassador history visible so search does not break',
+  'Keep my Cursor Ambassador guides up to date for teams already using Cursor',
 ]
 
 export default function SpaceXAIAmbassadorPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+      <JsonLd data={structuredData} />
 
       {/* Breadcrumb */}
       <nav className="mb-8">
@@ -91,15 +87,15 @@ export default function SpaceXAIAmbassadorPage() {
         </p>
 
         <p className="text-sm text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed">
-          In August 2026 Cursor announced it is part of SpaceX, continuing the SpaceXAI partnership. I keep teaching practical shipping with Cursor and the wider AI coding stack. I do not invent seat counts or program perks here.
+          In August 2026 Cursor announced it is part of SpaceX, continuing the SpaceXAI partnership. I keep teaching practical shipping with Cursor and the wider AI coding stack, based on client work I ship every week.
         </p>
 
         <div className="flex flex-wrap justify-center gap-3">
           <Link
-            href="/services/vibe-code-friend"
+            href={contactHref('cursor-mentoring')}
             className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
           >
-            <span className="text-sm font-medium tracking-tight">Level up with Cursor</span>
+            <span className="text-sm font-medium tracking-tight">Get Cursor mentoring for your team</span>
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </Link>
 
@@ -177,16 +173,25 @@ export default function SpaceXAIAmbassadorPage() {
             Need help shipping faster with Cursor?
           </h2>
           <p className="text-zinc-400 mb-8 max-w-lg font-medium">
-            I can help you set up reliable workflows, improve quality, and get more done with the same team.
+            Tell me how your team uses Cursor today. I’ll reply with where mentoring would help first, and I’ll tell you if it isn’t worth it.
           </p>
 
-          <Link
-            href="/services/vibe-code-friend"
-            className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
-          >
-            <span>Level up with Cursor</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link
+              href={contactHref('cursor-mentoring')}
+              className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+            >
+              <span>Get Cursor mentoring for your team</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+            <Link
+              href="/services/vibe-code-friend"
+              className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3"
+            >
+              <span>See how mentoring works</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
         </div>
       </section>
     </>

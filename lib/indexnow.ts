@@ -1,4 +1,4 @@
-import { absoluteUrl, productionUrl } from '@/lib/seo/config'
+import { productionAbsoluteUrl as absoluteUrl, productionUrl } from '@/lib/seo/config'
 
 const INDEXNOW_ENDPOINT = 'https://api.indexnow.org/indexnow'
 const INDEXNOW_HOST = new URL(productionUrl).host

@@ -93,7 +93,7 @@ const CaseStudiesCarousel = ({ caseStudies }: CaseStudiesCarouselProps) => {
                   fill
                   sizes="(max-width: 768px) 100vw, 980px"
                   className="object-cover transition-transform duration-700 hover:scale-105"
-                  priority={index === 0 || index === currentIndex}
+                  loading="lazy"
                   placeholder="blur"
                   blurDataURL={blurDataURLs.warm}
                   onLoad={() => handleImageLoad(index)}
@@ -147,7 +147,7 @@ const CaseStudiesCarousel = ({ caseStudies }: CaseStudiesCarouselProps) => {
                           >
                             <Image
                               src={author.avatar}
-                              alt="Author avatar"
+                              alt="Contributor avatar"
                               fill
                               sizes="56px"
                               className="object-cover"
@@ -166,7 +166,7 @@ const CaseStudiesCarousel = ({ caseStudies }: CaseStudiesCarouselProps) => {
                             className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-md hover:bg-white/30 text-white rounded-full font-medium transition-all text-sm"
                           >
                             <ExternalLink className="w-4 h-4" />
-                            Visit Site
+                            Visit the live site
                           </Link>
                         )}
                         <Link 
@@ -175,7 +175,7 @@ const CaseStudiesCarousel = ({ caseStudies }: CaseStudiesCarouselProps) => {
                           rel="noopener noreferrer"
                           className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full font-medium transition-all hover:shadow-lg"
                         >
-                          View Repository
+                          Read the code on GitHub
                           <ArrowRight className="w-4 h-4" />
                         </Link>
                       </div>

@@ -5,6 +5,13 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, ArrowUpRight, Briefcase, ExternalLink, Trophy } from 'lucide-react'
 import { projects } from './server-page'
+import { contactHref } from '@/lib/contact-services'
+
+const whatToCheck = [
+  { title: 'Speed on a phone', desc: 'Open a site on mobile data. That is how most of your visitors will see yours.' },
+  { title: 'The stack', desc: 'Each card lists what the site runs on, so you can find one built like yours.' },
+  { title: 'Your industry', desc: 'Filter by category to see work for businesses close to yours.' },
+]
 
 export default function ClientProjectsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
@@ -32,27 +39,37 @@ export default function ClientProjectsPage() {
           }}
         >
           <Trophy className="w-4 h-4 text-orange-500" />
-          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Portfolio</span>
+          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Client work</span>
         </div>
 
         {/* Title */}
         <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
-          Client Projects
-          <span className="block gradient-text font-light">Portfolio</span>
+          Next.js case studies
+          <span className="block gradient-text font-light">and WordPress projects</span>
         </h1>
 
         {/* Description */}
-        <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
-          Explore our showcase of enterprise-level web development solutions, 
-          delivering exceptional results for clients across various industries.
+        <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-8 leading-relaxed font-medium">
+          {projects.length} client sites I&apos;ve worked on, from schools and shops to music publishers
+          and restaurant chains. Every card links to the live site, so you can judge the work yourself
+          before you write to me.
         </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto mb-10 text-left">
+          {whatToCheck.map((item) => (
+            <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm">
+              <h2 className="text-sm font-semibold text-zinc-900 mb-1">{item.title}</h2>
+              <p className="text-sm text-zinc-500 leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
+        </div>
 
         {/* CTA */}
         <Link 
-          href="/contact"
+          href={contactHref('nextjs')}
           className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
         >
-          <span className="text-sm font-medium tracking-tight">Start Your Project</span>
+          <span className="text-sm font-medium tracking-tight">Send me your project</span>
           <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
         </Link>
       </section>
@@ -70,7 +87,7 @@ export default function ClientProjectsPage() {
               : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200'
           }`}
         >
-          All Projects
+          All projects
         </button>
         {categories.map((category) => (
           <button
@@ -115,6 +132,7 @@ export default function ClientProjectsPage() {
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`Open the ${project.title} website`}
                 className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity"
               >
                 <div className="p-2 bg-white/90 backdrop-blur-sm rounded-full shadow-sm hover:bg-white">
@@ -162,7 +180,7 @@ export default function ClientProjectsPage() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center text-sm font-medium text-zinc-900 group-hover:text-orange-500 transition-colors"
                 >
-                  View Project
+                  Visit the live site
                   <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </a>
               </div>
@@ -187,25 +205,26 @@ export default function ClientProjectsPage() {
 
         <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16 min-h-[400px] relative">
           <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
-            Ready to Build Your Next Project?
+            Want a site like one of these?
           </h2>
           <p className="text-zinc-400 mb-8 max-w-lg font-medium">
-            Let&apos;s collaborate to create a high-performance solution that meets your business needs.
+            Tell me which project is closest to what you need, and send your URL or idea. I reply within
+            24 hours with questions or a plain answer on whether I&apos;m the right fit.
           </p>
 
           <div className="flex flex-wrap justify-center gap-3">
             <Link 
-              href="/contact"
+              href={contactHref('nextjs')}
               className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
             >
-              <span>Start a Project</span>
+              <span>Send me your project</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link 
               href="/services"
               className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3"
             >
-              <span>View Services</span>
+              <span>Compare services first</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>

@@ -21,9 +21,9 @@ interface HomeContentProps {
 function EmptyState({ type }: { type: 'projects' | 'posts' }) {
   return (
     <div className="col-span-full flex flex-col items-center justify-center rounded-2xl bg-white/50 p-12 text-center">
-      <p className="text-lg font-medium text-zinc-900">No {type} found</p>
+      <p className="text-lg font-medium text-zinc-900">No {type} to show yet</p>
       <p className="mt-2 text-sm text-zinc-500">
-        Check back later for new {type}.
+        New {type} appear here as soon as I publish them.
       </p>
     </div>
   )
@@ -82,7 +82,7 @@ export function HomeContent({ type, initialData }: HomeContentProps) {
                       rel="noopener noreferrer"
                       className="text-sm font-medium text-orange-500 hover:text-orange-600 flex items-center gap-1"
                     >
-                      Visit Site
+                      Visit the live site
                       <ArrowRight className="w-3 h-3" />
                     </Link>
                   )}
@@ -93,7 +93,7 @@ export function HomeContent({ type, initialData }: HomeContentProps) {
                       rel="noopener noreferrer"
                       className="text-sm font-medium text-zinc-600 hover:text-zinc-900 flex items-center gap-1"
                     >
-                      View Code
+                      Read the code
                       <ArrowRight className="w-3 h-3" />
                     </Link>
                   )}
@@ -123,8 +123,7 @@ export function HomeContent({ type, initialData }: HomeContentProps) {
                     alt={post._embedded['wp:featuredmedia'][0].alt_text || ''}
                     width={600}
                     height={400}
-                    priority={index === 0}
-                    loading={index === 0 ? "eager" : "lazy"}
+                    loading="lazy"
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
                     placeholder="blur"
@@ -164,7 +163,7 @@ export function HomeContent({ type, initialData }: HomeContentProps) {
                 {/* Read More */}
                 <div className="mt-auto pt-4 border-t border-zinc-100">
                   <span className="inline-flex items-center text-sm font-medium text-zinc-900 group-hover:text-orange-500 transition-colors">
-                    Read Article
+                    Read the guide
                     <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                   </span>
                 </div>

@@ -2,6 +2,7 @@
 
 import { Resend } from 'resend'
 import { rateLimit } from '@/lib/rate-limit'
+import { contactServiceLabel } from '@/lib/contact-services'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -24,6 +25,7 @@ export async function sendContactEmail(formData: FormData) {
     const name = formData.get('name')
     const email = formData.get('email')
     const message = formData.get('message')
+    const serviceLabel = contactServiceLabel(formData.get('service')?.toString()) ?? 'Not specified'
 
     // Validate required fields
     if (!name || !email || !message) {
@@ -57,8 +59,8 @@ export async function sendContactEmail(formData: FormData) {
     const result = await resend.emails.send({
       from: 'Contact Form <onboarding@resend.dev>',
       to: recipients,
-      subject: `New Contact Form Submission from ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+      subject: `New project: ${serviceLabel} from ${name}`,
+      text: `Service: ${serviceLabel}\nName: ${name}\nEmail: ${email}\nMessage: ${message}`,
       replyTo: email.toString()
     })
 
