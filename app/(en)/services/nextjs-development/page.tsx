@@ -22,17 +22,17 @@ import { contactHref } from '@/lib/contact-services'
 export const revalidate = 86400 // Revalidate daily
 
 const path = '/services/nextjs-development'
-const pageTitle = 'Hire a Next.js developer (13+ years)'
+const pageTitle = 'Next.js development services'
 const pageDescription =
-  'Hire a Next.js developer with 13+ years of shipping: new builds, WordPress migrations, and App Router work. Send your project and get a written scope.'
+  'Next.js development services for new products and migrations that keep their search rankings. 13+ years shipping. You get a written scope before any code.'
 
 export const metadata: Metadata = buildPageMetadata({
   title: pageTitle,
   description: pageDescription,
   path,
   keywords: [
-    'hire a Next.js developer',
     'Next.js development services',
+    'hire a Next.js developer',
     'custom Next.js development',
     'Next.js developer for hire',
     'remote Next.js developer',
@@ -214,19 +214,19 @@ export default function NextjsDevelopmentPage() {
         >
           <Code2 className="w-4 h-4 text-orange-500" />
           <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">
-            Next.js developer, remote, taking projects
+            Flagship stack · remote · taking projects
           </span>
         </div>
 
         <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
-          Hire a Next.js developer
-          <span className="block gradient-text font-light">for your next build</span>
+          Next.js development services
+          <span className="block gradient-text font-light">for products and migrations</span>
         </h1>
 
         <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
-          For founders, agencies, and marketing teams that need a Next.js site or app built, migrated,
-          or fixed. I&apos;m Aris Setiawan. I&apos;ve shipped web products for 13+ years and worked
-          independently since 2015.
+          For founders and marketing teams that need a Next.js site or app built, migrated, or fixed.
+          I&apos;m Aris Setiawan. You can hire a Next.js developer here and work with me directly.
+          I&apos;ve shipped web products for 13+ years and worked independently since 2015.
         </p>
 
         <div className="flex flex-wrap justify-center gap-3 mb-8">
@@ -268,13 +268,41 @@ export default function NextjsDevelopmentPage() {
       {/* Answer first */}
       <section className="mb-16 max-w-3xl mx-auto">
         <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
-          What happens when you hire a Next.js developer like me
+          What Next.js development services cover
         </h2>
         <p className="text-zinc-600 leading-relaxed">
-          You work with one senior engineer from scope to launch. I write the App Router code,
-          TypeScript, and APIs myself, deploy on Vercel, and carry your SEO over if you&apos;re
-          migrating. You get a written scope before the build starts and a codebase another developer
-          can pick up later. Price is scoped per project once I know what you need.
+          You hire a Next.js developer and work with one senior engineer from scope to launch. I write
+          the App Router code, TypeScript, and APIs myself, deploy on Vercel, and carry your SEO over
+          if you&apos;re migrating. You get a written scope before the build starts and a codebase
+          another developer can pick up later. Price is scoped per project once I know what you need.
+        </p>
+      </section>
+
+      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+
+      <section className="mb-16 max-w-3xl mx-auto">
+        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+          When another stack fits
+        </h2>
+        <p className="text-zinc-600 leading-relaxed">
+          Next.js is the stack I use for new products. A site your editors update every week often
+          stays on{' '}
+          <Link href="/services/wordpress" className={linkClass}>
+            WordPress
+          </Link>
+          . An existing PHP app often needs an API or a careful modernization first, on the{' '}
+          <Link href="/services/php-development" className={linkClass}>
+            PHP development
+          </Link>{' '}
+          page. A product with logins and dashboards, where the stack is still open, is{' '}
+          <Link href="/services/web-application-development" className={linkClass}>
+            web application development
+          </Link>
+          . Care after launch is{' '}
+          <Link href="/services/website-maintenance" className={linkClass}>
+            website maintenance
+          </Link>
+          .
         </p>
       </section>
 

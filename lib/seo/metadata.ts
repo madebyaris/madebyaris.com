@@ -120,9 +120,9 @@ export interface WordPressSeoFields {
   description?: string
 }
 
-export function isIndonesianSlug(slug: string): boolean {
-  return /(^|-)(apa-itu|apakah|cara|tentang|jasa|migrasi|mengenal|untuk|pada|dan|harga|skema|kantor|buatan)(-|$)/.test(slug)
-}
+import { isIndonesianSlug } from '@/lib/i18n'
+
+export { isIndonesianSlug }
 
 export function buildBlogPostMetadata(
   post: {

@@ -36,6 +36,7 @@ const RULES = [
   'Allow: /_next/static/',
   'Allow: /_next/image',
   'Disallow: /api/',
+  'Disallow: /tulisan/',
   'Disallow: /_next/data/',
   'Disallow: /*?_rsc=',
 ]

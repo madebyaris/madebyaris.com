@@ -11,6 +11,9 @@ import {
   GraduationCap,
   Hammer,
   TrendingUp,
+  AppWindow,
+  Wrench,
+  Search,
 } from 'lucide-react'
 import Link from 'next/link'
 import { contactHref } from '@/lib/contact-services'
@@ -19,24 +22,56 @@ import { JsonLd } from '@/components/seo/json-ld'
 
 export const revalidate = 86400
 
+const problems = [
+  {
+    title: 'A new website',
+    description: 'Next.js is the stack I use first. Migrations keep the URLs that already rank.',
+    href: '/services/nextjs-development',
+  },
+  {
+    title: 'A web app people log into',
+    description: 'Accounts, dashboards, and data in the browser.',
+    href: '/services/web-application-development',
+  },
+  {
+    title: 'Editors who stay in WordPress',
+    description: 'Themes, plugins, or a headless Next.js front end. The team keeps wp-admin.',
+    href: '/services/wordpress',
+  },
+  {
+    title: 'A site that should rank',
+    description: 'Technical SEO for crawl, index, metadata, and speed.',
+    href: '/services/technical-seo',
+  },
+  {
+    title: 'Care after launch',
+    description: 'Updates and small fixes, with a written list of what is included.',
+    href: '/services/website-maintenance',
+  },
+  {
+    title: 'A team learning Cursor',
+    description: 'Project rules and a review habit on one real repo.',
+    href: '/services/vibe-code-friend',
+  },
+]
+
 const buildServices = [
   {
     title: 'Next.js development',
     description:
-      'New products and WordPress-to-Next.js migrations that stay fast and keep their rankings after launch.',
+      'The flagship stack for new products and migrations that stay fast and keep their rankings.',
     icon: Code2,
     href: '/services/nextjs-development',
-    features: ['Product builds', 'Migrations', 'Performance and SEO', 'Headless CMS'],
+    features: ['Product builds', 'Migrations', 'App Router', 'Headless CMS'],
     span: 2,
   },
   {
-    title: 'AI product development',
-    description:
-      'Agents, chatbots, and LLM features that run inside your Next.js product and reach real users.',
-    icon: Sparkles,
-    href: '/services/ai-development',
-    features: ['Chatbots and assistants', 'Agent workflows', 'API integrations', 'AI MVPs'],
-    span: 2,
+    title: 'Web application development',
+    description: 'Login, dashboards, and data. Next.js or PHP, chosen for the job.',
+    icon: AppWindow,
+    href: '/services/web-application-development',
+    features: ['Accounts', 'Dashboards', 'APIs'],
+    span: 1,
   },
   {
     title: 'WordPress / headless',
@@ -48,13 +83,54 @@ const buildServices = [
     span: 1,
   },
   {
+    title: 'Website maintenance',
+    description: 'Ongoing care after launch. One-off speed work stays on the WordPress optimization page.',
+    icon: Wrench,
+    href: '/services/website-maintenance',
+    features: ['Updates', 'Small fixes', 'Written scope'],
+    span: 1,
+  },
+  {
+    title: 'Technical SEO',
+    description: 'Crawl, index, metadata, and speed. No content writing and no link building.',
+    icon: Search,
+    href: '/services/technical-seo',
+    features: ['Audits', 'Metadata', 'Core Web Vitals'],
+    span: 1,
+  },
+  {
     title: 'PHP development',
     description: 'Keep a legacy PHP app running, add an API to it, or plan its move to a modern stack.',
     icon: Server,
     href: '/services/php-development',
     features: ['Custom apps', 'APIs', 'Maintenance', 'Migrations'],
     span: 1,
-    secondary: true,
+  },
+  {
+    title: 'AI product development',
+    description: 'Agents, chatbots, and LLM features that run inside the product and reach real users.',
+    icon: Sparkles,
+    href: '/services/ai-development',
+    features: ['Chatbots', 'Agent workflows', 'API integrations'],
+    span: 1,
+  },
+]
+
+const flagshipLinks = [
+  {
+    title: 'Next.js SEO',
+    description: 'Metadata, schema, sitemaps, and Core Web Vitals for App Router sites.',
+    href: '/services/nextjs-development/nextjs-seo',
+  },
+  {
+    title: 'Vercel hosting',
+    description: 'Deploy Next.js on Vercel, or trace a bill that keeps growing.',
+    href: '/services/nextjs-development/vercel',
+  },
+  {
+    title: 'Jasa pembuatan website',
+    description: 'The same offer in Bahasa Indonesia, with Next.js as one option.',
+    href: '/jasa-pembuatan-website',
   },
 ]
 
@@ -97,23 +173,21 @@ const wordPressServices = [
   },
 ]
 
-const pageTitle = 'Next.js, AI & Cursor Services'
+const pageTitle = 'Web development services'
 const pageDescription =
-  'Hire me to build Next.js, WordPress, and AI products, or get Cursor mentoring so your team ships AI-written code you can trust. 13+ years. Remote worldwide.'
+  'Web development services for a new site, a web app, WordPress, PHP, maintenance, or technical SEO. Next.js is the stack I use first. One senior developer.'
 
 export const metadata: Metadata = buildPageMetadata({
   title: pageTitle,
   description: pageDescription,
   path: '/services',
   keywords: [
-    'Next.js Developer',
-    'AI Product Development',
-    'Cursor Mentoring',
-    'WordPress Development',
-    'Remote Full-Stack Developer',
-    'Hire Next.js Developer',
-    'AI Integration Developer',
-    'Cursor Ambassador Indonesia',
+    'web development services',
+    'website development service',
+    'Next.js development',
+    'WordPress development',
+    'website maintenance',
+    'technical SEO',
   ],
 })
 
@@ -142,19 +216,23 @@ export default function ServicesPage() {
         >
           <Briefcase className="w-4 h-4 text-orange-500" />
           <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">
-            Build · Level up · Remote
+            One senior developer · Remote
           </span>
         </div>
 
         <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
-          Two ways to
-          <span className="block gradient-text font-light">work with me</span>
+          Web development services
+          <span className="block gradient-text font-light">for the job you have</span>
         </h1>
 
         <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
-          Hire me to build your Next.js, WordPress, or AI product. Or bring me in to train your team
-          on Cursor so AI-written code passes review. I’m the first Cursor Ambassador in Indonesia,
-          with 13+ years of shipping.
+          Web development services for a new site, a web app, WordPress, PHP, maintenance, or
+          technical SEO. Next.js is the stack I use first for new products. I’m Aris Setiawan, one
+          senior developer, with 13+ years of shipping. Untuk pembeli di Indonesia, lihat{' '}
+          <Link href="/jasa-pembuatan-website" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500">
+            jasa pembuatan website
+          </Link>
+          .
         </p>
 
         <div className="flex flex-wrap justify-center gap-3">
@@ -188,6 +266,33 @@ export default function ServicesPage() {
 
       <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
 
+      <section className="mb-16">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+            Web development services, <span className="gradient-text">by the job</span>
+          </h2>
+          <p className="text-sm text-zinc-500 max-w-xl mx-auto font-medium">
+            Start from the problem. The page you open names the stack and what you get.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {problems.map((problem) => (
+            <Link
+              key={problem.href}
+              href={problem.href}
+              className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all hover:-translate-y-0.5 group"
+            >
+              <h3 className="text-base font-semibold text-zinc-900 mb-2 group-hover:text-orange-500 transition-colors">
+                {problem.title}
+              </h3>
+              <p className="text-sm text-zinc-500 leading-relaxed">{problem.description}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+
       {/* Build Section */}
       <section id="build" className="mb-16 scroll-mt-24">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
@@ -208,7 +313,7 @@ export default function ServicesPage() {
               </span>
             </div>
             <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-2">
-              Hire me to <span className="gradient-text">ship products</span>
+              The stack for <span className="gradient-text">each job</span>
             </h2>
             <p className="text-sm text-zinc-500 font-medium max-w-xl">
               You work with me directly, from the first call to launch. I work with startups and
@@ -217,7 +322,7 @@ export default function ServicesPage() {
             </p>
           </div>
           <Link
-            href={contactHref('nextjs')}
+            href={contactHref('build')}
             className="group flex items-center gap-2 hover:text-orange-500 transition-colors text-sm font-medium text-zinc-900"
           >
             Tell me what you need built
@@ -230,7 +335,7 @@ export default function ServicesPage() {
             <Link
               key={service.href}
               href={service.href}
-              className={`bento-card group relative overflow-hidden ${service.span === 2 ? 'md:col-span-2' : ''} ${service.secondary ? 'opacity-90' : ''}`}
+              className={`bento-card group relative overflow-hidden ${service.span === 2 ? 'md:col-span-2' : ''}`}
             >
               <div className="relative z-10">
                 <div className="flex items-center gap-2 mb-3 text-zinc-400">
@@ -256,6 +361,21 @@ export default function ServicesPage() {
               <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
                 <ArrowUpRight className="w-5 h-5 text-orange-500" />
               </div>
+            </Link>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+          {flagshipLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all hover:-translate-y-0.5 group"
+            >
+              <h3 className="text-base font-semibold text-zinc-900 mb-2 group-hover:text-orange-500 transition-colors">
+                {link.title}
+              </h3>
+              <p className="text-sm text-zinc-500 leading-relaxed">{link.description}</p>
             </Link>
           ))}
         </div>

@@ -70,7 +70,9 @@ function collectRefs(value, refs = []) {
 const problems = []
 const report = (route, msg) => problems.push(`${route}: ${msg}`)
 
-const files = (await htmlFiles(appDir)).filter((f) => !/\/_(not-found|global-error)/.test(f))
+const files = (await htmlFiles(appDir)).filter(
+  (f) => !/\/_(not-found|global-error)/.test(f) && !f.includes('global-not-found'),
+)
 
 for (const file of files) {
   const route = routeOf(file)

@@ -6,9 +6,13 @@ The CTA column is the `contactHref()` id from `lib/contact-services.ts`. Every B
 
 | Page | Primary keyword | Secondary keywords | CTA id | Notes |
 |---|---|---|---|---|
-| `/` | hire Next.js developer | Next.js and AI developer, Aris Setiawan | nextjs | Brand query "aris setiawan" ranks at position 8.8 |
-| `/services/nextjs-development` | hire a Next.js developer | Next.js development services, custom Next.js development, Next.js developer for hire | nextjs | GSC: "custom next js development riyadh" (17 impressions) |
-| `/services/nextjs-development/nextjs-indonesia` | jasa pembuatan website Next.js | jasa Next.js, jasa Next.js developer Indonesia, Next.js adalah | nextjs | Bahasa Indonesia. Absorbs the redirected `/nextjs-development-indonesia` |
+| `/` | hire full stack developer | Aris Setiawan, full stack developer Indonesia | build | Outcome H1. Next.js stays the flagship stack in the subhead. |
+| `/services` | web development services | website development service, website maintenance, technical SEO | build | Problem-led hub. Next.js is one service. |
+| `/services/web-application-development` | web application development services | custom web application development, web app development services | web-app | Stack-neutral. No native iOS or Android. TODO: starting price. |
+| `/services/website-maintenance` | website maintenance services | wordpress maintenance services | maintenance | Ongoing care. Speed fixes stay on WordPress optimization. TODO: monthly price. |
+| `/services/technical-seo` | technical seo services | seo audit services | technical-seo | No content writing, no link building, no ranking promise. WordPress audit starts at Rp1.500.000. TODO: USD fee and client cap. |
+| `/services/nextjs-development` | next.js development services | hire a Next.js developer, custom Next.js development, Next.js developer for hire | nextjs | GSC: "custom next js development riyadh" (17 impressions) |
+| `/services/nextjs-development/nextjs-indonesia` | jasa pembuatan website custom | jasa Next.js, jasa Next.js developer Indonesia, Next.js adalah | nextjs | Bahasa Indonesia. Linked from /jasa-pembuatan-website. |
 | `/services/nextjs-development/agency-indonesia` | Next.js agency Indonesia | agensi Next.js, Next.js agency | nextjs | Tracked at position 5; "agensi nextjs" at position 1.6. Solo specialist positioning |
 | `/services/nextjs-development/vercel` | Vercel pricing for Next.js | Vercel hosting, deploy Next.js to Vercel, Vercel cost optimization | vercel | Gap: "vercel pricing" 720/mo KD 23, "vercel hosting" 590/mo KD 13 |
 | `/services/nextjs-development/nextjs-seo` | Next.js SEO services | technical SEO for Next.js, Next.js App Router SEO, schema markup | seo | Proof: this site's schema, sitemap, and llms.txt |
@@ -33,6 +37,12 @@ The CTA column is the `contactHref()` id from `lib/contact-services.ts`. Every B
 | `/about` | Aris Setiawan | Next.js developer Indonesia | other | |
 | `/projects` | Next.js case studies | WordPress projects | nextjs | |
 | `/contact` | (conversion page) | | | Done |
+| `/jasa-pembuatan-website` | jasa pembuatan website | jasa website, jasa web developer | build | Indonesian hub. Next.js is one service under it. |
+| `/jasa-pembuatan-website/company-profile` | jasa pembuatan website company profile | | build | TODO: starting price. |
+| `/jasa-pembuatan-website/wordpress` | jasa pembuatan website wordpress | jasa wordpress | wordpress | TODO: starting price. |
+| `/jasa-pembuatan-aplikasi-web` | jasa pembuatan aplikasi web | jasa pembuatan aplikasi (web only) | web-app | Browser apps. TODO: starting price. |
+| `/jasa-maintenance-website` | jasa maintenance website | jasa perbaikan website | maintenance | TODO: monthly price. |
+| `/jasa-seo-wordpress` | jasa seo wordpress | jasa audit seo | technical-seo | Approved price: mulai Rp1.500.000. TODO: retainer and client cap. Do not target unmapped "jasa seo". |
 
 ## Existing blog slugs you may link to
 

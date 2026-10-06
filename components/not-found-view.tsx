@@ -6,10 +6,7 @@ import Link from 'next/link'
 import { SectionWrapper } from '@/components/ui/section-wrapper'
 import { EnhancedCard } from '@/components/ui/enhanced-card'
 
-// Remove metadata export since it can't be used in client components
-// Metadata must be defined in a separate metadata.ts file or in layout.tsx
-
-export default function NotFound() {
+export function NotFoundView() {
   return (
     <SectionWrapper variant="default" padding="large">
       <div className="relative min-h-[80vh] flex flex-col items-center justify-center px-4 py-24 overflow-hidden">
@@ -19,12 +16,12 @@ export default function NotFound() {
         
         {/* Animated glitch effect for 404 with WordPress VIP colors */}
         <div className="relative mb-12">
-          <h1 className="text-[150px] md:text-[200px] font-bold text-wp-navy/10 dark:text-wp-blue/10 select-none">404</h1>
+          <div className="text-[150px] md:text-[200px] font-bold text-wp-navy/10 dark:text-wp-blue/10 select-none">404</div>
           <div className="absolute inset-0 flex items-center justify-center">
-            <h1 className="text-[150px] md:text-[200px] font-bold text-wp-blue/20 animate-pulse select-none">404</h1>
+            <div className="text-[150px] md:text-[200px] font-bold text-wp-blue/20 animate-pulse select-none">404</div>
           </div>
           <div className="absolute inset-0 flex items-center justify-center">
-            <h1 
+            <div 
               className="text-[150px] md:text-[200px] font-bold bg-clip-text text-transparent bg-gradient-to-r from-wp-blue via-wp-sage to-wp-gold select-none"
               style={{
                 position: 'relative',
@@ -32,7 +29,7 @@ export default function NotFound() {
               }}
             >
               404
-            </h1>
+            </div>
           </div>
         </div>
         
@@ -42,9 +39,9 @@ export default function NotFound() {
             <span>Page Not Found</span>
           </div>
           
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-wp-navy dark:text-foreground">
-            Oops! This page seems to have wandered off
-          </h2>
+          <h1 className="text-3xl md:text-4xl font-bold mb-6 text-wp-navy dark:text-foreground">
+            This page is not here
+          </h1>
           
           <p className="text-wp-navy/70 dark:text-muted-foreground text-lg leading-relaxed mb-8">
             The page you are looking for might have been removed, had its name changed, 

@@ -23,11 +23,17 @@ const navigationItems: NavigationItem[] = [
     href: '/services', 
     label: 'Services',
     children: [
-      { href: '/services/nextjs-development', label: 'Next.js Development' },
-      { href: '/services/ai-development', label: 'AI Development' },
-      { href: '/services/wordpress', label: 'WordPress Development' },
-      { href: '/services/vibe-code-friend', label: 'Cursor / AI Workflows' },
-      { href: '/services/php-development', label: 'PHP Development' },
+      { href: '/services/nextjs-development', label: 'Next.js development' },
+      { href: '/services/web-application-development', label: 'Web applications' },
+      { href: '/services/wordpress', label: 'WordPress' },
+      { href: '/services/website-maintenance', label: 'Website maintenance' },
+      { href: '/services/technical-seo', label: 'Technical SEO' },
+      { href: '/services/nextjs-development/nextjs-seo', label: 'Next.js SEO' },
+      { href: '/services/nextjs-development/vercel', label: 'Vercel hosting' },
+      { href: '/services/ai-development', label: 'AI development' },
+      { href: '/services/vibe-code-friend', label: 'Cursor mentoring' },
+      { href: '/services/php-development', label: 'PHP development' },
+      { href: '/jasa-pembuatan-website', label: 'Jasa pembuatan website' },
     ]
   },
   { href: '/blog', label: 'Blog' },
@@ -147,7 +153,7 @@ export function Header() {
                 />
                 {activeDropdown === item.href && (
                   <div 
-                    className="absolute left-1/2 -translate-x-1/2 top-full mt-3 w-60 z-50"
+                    className="absolute left-1/2 -translate-x-1/2 top-full mt-3 w-72 z-50"
                     onMouseEnter={() => handleDropdownEnter(item.href)}
                     onMouseLeave={handleDropdownLeave}
                   >
