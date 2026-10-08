@@ -1,6 +1,10 @@
 // Options for "What do you need?" on /contact. Pages deep-link with
 // `/contact?service=<id>#contact-form` so the form opens on the right request.
 export const contactServices = [
+  { id: 'build', label: 'Build a website or web app' },
+  { id: 'web-app', label: 'Build a web application' },
+  { id: 'maintenance', label: 'Website maintenance' },
+  { id: 'technical-seo', label: 'Technical SEO' },
   { id: 'nextjs', label: 'Build or migrate a Next.js site or app' },
   { id: 'headless-wordpress', label: 'Headless WordPress with Next.js' },
   { id: 'wordpress', label: 'WordPress theme, plugin, or speed fix' },

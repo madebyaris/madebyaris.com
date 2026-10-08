@@ -18,6 +18,7 @@ export const metadata: Metadata = buildPageMetadata({
   path,
   locale: 'id_ID',
   keywords: [
+    'jasa pembuatan website custom',
     'jasa pembuatan website Next.js',
     'jasa Next.js',
     'jasa Next.js developer Indonesia',
@@ -109,7 +110,7 @@ const structuredData = buildPageGraph({
   description: pageDescription,
   inLanguage: 'id',
   breadcrumbs: [
-    { name: 'Layanan', path: '/services' },
+    { name: 'Jasa pembuatan website', path: '/jasa-pembuatan-website' },
     { name: 'Next.js Development', path: '/services/nextjs-development' },
     { name: 'Next.js Indonesia', path },
   ],
@@ -133,7 +134,7 @@ export default function NextjsIndonesiaPage() {
       {/* Breadcrumb */}
       <nav className="mb-8" aria-label="Breadcrumb">
         <ol className="flex items-center space-x-2 text-sm text-zinc-500">
-          <li><Link href="/services" className="hover:text-orange-500 transition-colors">Layanan</Link></li>
+          <li><Link href="/jasa-pembuatan-website" className="hover:text-orange-500 transition-colors">Jasa pembuatan website</Link></li>
           <li><span className="px-2">/</span></li>
           <li><Link href="/services/nextjs-development" className="hover:text-orange-500 transition-colors">Next.js Development</Link></li>
           <li><span className="px-2">/</span></li>
@@ -154,10 +155,18 @@ export default function NextjsIndonesiaPage() {
           <span className="block">di Indonesia</span>
         </h1>
 
-        <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
+        <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-4 leading-relaxed font-medium">
           Untuk pemilik bisnis, agensi, dan tim marketing yang butuh website cepat dan gampang
           ditemukan di Google. Saya Aris, developer web 13+ tahun dan Cursor Ambassador pertama di
           Indonesia.
+        </p>
+        <p className="text-sm text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed">
+          Halaman ini untuk jasa pembuatan website custom dengan Next.js. Jenis website lain, termasuk
+          company profile dan WordPress, ada di{' '}
+          <Link href="/jasa-pembuatan-website" className={linkClass}>
+            jasa pembuatan website
+          </Link>
+          .
         </p>
 
         <div className="flex flex-wrap justify-center gap-3">

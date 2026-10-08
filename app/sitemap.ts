@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { getPostsForSitemap } from '@/lib/wordpress'
 import { productionUrl } from '@/lib/seo/config'
+import { LEGACY_SITEMAP_SLUGS } from '@/lib/legacy-redirects'
 
 export const revalidate = 604800 // 7 days; webhook calls revalidatePath('/sitemap.xml')
 
@@ -45,6 +46,18 @@ const phpRoutes = [
   { path: 'services/php-development/modernization', priority: 0.6, changeFreq: 'monthly' },
 ]
 
+const broadRoutes = [
+  { path: 'services/web-application-development', priority: 0.8, changeFreq: 'monthly' },
+  { path: 'services/website-maintenance', priority: 0.8, changeFreq: 'monthly' },
+  { path: 'services/technical-seo', priority: 0.8, changeFreq: 'monthly' },
+  { path: 'jasa-pembuatan-website', priority: 0.9, changeFreq: 'weekly' },
+  { path: 'jasa-pembuatan-website/company-profile', priority: 0.8, changeFreq: 'monthly' },
+  { path: 'jasa-pembuatan-website/wordpress', priority: 0.8, changeFreq: 'monthly' },
+  { path: 'jasa-pembuatan-aplikasi-web', priority: 0.8, changeFreq: 'monthly' },
+  { path: 'jasa-maintenance-website', priority: 0.8, changeFreq: 'monthly' },
+  { path: 'jasa-seo-wordpress', priority: 0.8, changeFreq: 'monthly' },
+]
+
 const legalRoutes = [
   { path: 'privacy-policy', priority: 0.5, changeFreq: 'yearly' },
   { path: 'terms-of-service', priority: 0.5, changeFreq: 'yearly' },
@@ -68,13 +81,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...serviceRoutes,
     ...wordpressRoutes,
     ...phpRoutes,
+    ...broadRoutes,
     ...legalRoutes,
   ].map(route => createSitemapEntry(baseUrl, route))
 
   try {
     const posts = await getPostsForSitemap()
 
-    const postRoutes = posts.map((post) => ({
+    const postRoutes = posts.filter((post) => !LEGACY_SITEMAP_SLUGS.has(post.slug)).map((post) => ({
       url: `${baseUrl}/blog/${post.slug}`,
       lastModified: new Date(post.modified || post.date),
       changeFrequency: 'weekly' as const,

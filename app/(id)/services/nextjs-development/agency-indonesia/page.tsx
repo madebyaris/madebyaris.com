@@ -115,7 +115,7 @@ const structuredData = buildPageGraph({
   description: pageDescription,
   inLanguage: 'id',
   breadcrumbs: [
-    { name: 'Layanan', path: '/services' },
+    { name: 'Jasa pembuatan website', path: '/jasa-pembuatan-website' },
     { name: 'Next.js Development', path: '/services/nextjs-development' },
     { name: 'Agensi Indonesia', path },
   ],
@@ -139,7 +139,7 @@ export default function AgencyIndonesiaPage() {
       {/* Breadcrumb */}
       <nav className="mb-8" aria-label="Breadcrumb">
         <ol className="flex items-center space-x-2 text-sm text-zinc-500">
-          <li><Link href="/services" className="hover:text-orange-500 transition-colors">Layanan</Link></li>
+          <li><Link href="/jasa-pembuatan-website" className="hover:text-orange-500 transition-colors">Jasa pembuatan website</Link></li>
           <li><span className="px-2">/</span></li>
           <li><Link href="/services/nextjs-development" className="hover:text-orange-500 transition-colors">Next.js Development</Link></li>
           <li><span className="px-2">/</span></li>

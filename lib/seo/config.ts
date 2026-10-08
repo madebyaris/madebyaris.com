@@ -5,7 +5,7 @@ export const siteConfig = {
   shortName: 'MadeByAris',
   url: process.env.NEXT_PUBLIC_SITE_URL ?? productionUrl,
   description:
-    'Aris Setiawan builds Next.js, WordPress, and AI products for teams worldwide and mentors developers on Cursor workflows. 13+ years. First Cursor Ambassador in Indonesia.',
+    'Hire a full stack developer. Aris Setiawan ships websites and web apps from Indonesia, with Next.js as the flagship stack, plus WordPress, PHP, and SEO.',
   author: 'Aris Setiawan',
   titleSuffix: ' | Aris Setiawan',
   locale: 'en_US',
@@ -26,7 +26,7 @@ export const siteConfig = {
 // in one place so every surface AI engines read tells the same story.
 export const authorProfile = {
   name: 'Aris Setiawan',
-  jobTitle: 'Full-Stack Developer (Next.js, WordPress, AI)',
+  jobTitle: 'Full-Stack Developer',
   yearsExperience: 13,
   city: 'Sidoarjo',
   region: 'East Java',

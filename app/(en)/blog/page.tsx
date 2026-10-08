@@ -36,6 +36,11 @@ function getBlogTitle(currentPage: number): string {
   return currentPage > 1 ? `${BLOG_TITLE} (Page ${currentPage})` : BLOG_TITLE
 }
 
+function getBlogDescription(currentPage: number): string {
+  if (currentPage <= 1) return BLOG_DESCRIPTION
+  return `Page ${currentPage} of the blog: older posts on hiring, migrations, pricing, and workflows for Next.js, Cursor, and WordPress.`
+}
+
 export async function generateMetadata({ searchParams }: BlogPageProps): Promise<Metadata> {
   const { page: pageParam } = await searchParams
   const currentPage = parseBlogPageParam(pageParam)
@@ -43,7 +48,7 @@ export async function generateMetadata({ searchParams }: BlogPageProps): Promise
 
   return buildPageMetadata({
     title: getBlogTitle(currentPage),
-    description: BLOG_DESCRIPTION,
+    description: getBlogDescription(currentPage),
     path: canonicalPath,
     keywords: [
       'Next.js blog',
@@ -93,7 +98,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   const structuredData = buildPageGraph({
     path: getBlogCanonicalPath(currentPage),
     name: getBlogTitle(currentPage),
-    description: BLOG_DESCRIPTION,
+    description: getBlogDescription(currentPage),
     type: 'CollectionPage',
     breadcrumbs: [{ name: 'Blog', path: '/blog' }],
     items: posts.map((post) => ({ name: post.title.rendered, path: `/blog/${post.slug}` })),

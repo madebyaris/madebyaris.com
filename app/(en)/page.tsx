@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Suspense } from 'react'
 import { getPosts } from '@/lib/wordpress'
-import { ArrowRight, ArrowUpRight, Code2, Globe, Server, Briefcase, Clock, Award, Home, Sparkles } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Code2, Globe, Server, Briefcase, Clock, Award, Home, Sparkles, AppWindow, Wrench, Search } from 'lucide-react'
 import type { Metadata } from 'next'
 import { buildPageGraph, buildPageMetadata, type FaqItem } from '@/lib/seo'
 import { JsonLd } from '@/components/seo/json-ld'
@@ -21,9 +21,9 @@ const PostsFallback = () => (
   </div>
 )
 
-const pageTitle = 'Hire a Next.js & AI Developer'
+const pageTitle = 'Hire a full stack developer'
 const pageDescription =
-  'Hire a Next.js developer with 13+ years of shipping: Aris Setiawan builds Next.js, WordPress, and AI products and trains teams on Cursor. Remote worldwide.'
+  'Hire a full stack developer to ship a website, web app, or AI feature. Next.js is the stack I use for new products. WordPress, PHP, and SEO too. Remote.'
 
 export const metadata: Metadata = buildPageMetadata({
   title: pageTitle,
@@ -51,7 +51,7 @@ const faqs: (FaqItem & { link?: { href: string; label: string } })[] = [
   {
     question: 'What is the difference between Build and Level up?',
     answer:
-      'Build means you hire me to ship it: a Next.js site, a WordPress-to-Next.js migration, or an AI feature. Level up means your developers keep writing the code and I coach them to get reliable results from Cursor, starting on one real repo. If you’re unsure, send the project and I’ll tell you which one fits.',
+      'Build means you hire me to ship it: a website, a web app, a WordPress site, or an AI feature. Next.js is the stack I use for new products. Level up means your developers keep writing the code and I coach them to get reliable results from Cursor, starting on one real repo. If you’re unsure, send the project and I’ll tell you which one fits.',
   },
 ]
 
@@ -81,16 +81,16 @@ const services = [
   {
     icon: Code2,
     title: "Next.js development",
-    description: "New products and WordPress-to-Next.js migrations that load fast on phones and keep their search rankings after launch.",
+    description: "The flagship stack for new products and migrations that load fast on phones and keep their search rankings.",
     href: "/services/nextjs-development",
-    span: 1,
+    span: 2,
   },
   {
-    icon: Sparkles,
-    title: "AI product development",
-    description: "Chatbots, agents, and LLM features that run inside your Next.js product and reach real users.",
-    href: "/services/ai-development",
-    span: 2,
+    icon: AppWindow,
+    title: "Web applications",
+    description: "Login, dashboards, and data in the browser. Next.js or PHP, chosen for the job.",
+    href: "/services/web-application-development",
+    span: 1,
   },
   {
     icon: Globe,
@@ -100,10 +100,31 @@ const services = [
     span: 1,
   },
   {
+    icon: Wrench,
+    title: "Website maintenance",
+    description: "Updates, small fixes, and a written list of what ongoing care covers after launch.",
+    href: "/services/website-maintenance",
+    span: 1,
+  },
+  {
+    icon: Search,
+    title: "Technical SEO",
+    description: "Crawl, index, metadata, and speed. I do not write the content or build links.",
+    href: "/services/technical-seo",
+    span: 1,
+  },
+  {
     icon: Server,
     title: "PHP development",
     description: "Keep a legacy PHP app running, add an API to it, or plan its move to Laravel one piece at a time.",
     href: "/services/php-development",
+    span: 1,
+  },
+  {
+    icon: Sparkles,
+    title: "AI product development",
+    description: "Chatbots, agents, and LLM features that run inside the product and reach real users.",
+    href: "/services/ai-development",
     span: 1,
   },
 ]
@@ -156,20 +177,20 @@ export default function HomePage() {
 
           {/* Headline */}
           <h1 className="leading-[0.95] lg:text-[5rem] text-5xl font-medium text-zinc-900 tracking-tighter mb-8">
-            Next.js &amp; AI
-            <span className="block gradient-text font-light">Product</span>
-            <span className="block">Developer</span>
+            A site or app
+            <span className="block gradient-text font-light">your customers</span>
+            <span className="block">can use</span>
           </h1>
 
           {/* Subheadline */}
           <p className="text-sm text-zinc-500 font-medium max-w-md mb-10 leading-relaxed tracking-wide border-l-2 border-zinc-200 pl-6">
-            Hi, I&apos;m <span className="text-zinc-900 font-semibold">Aris Setiawan</span>. Hire me to build your Next.js, headless WordPress, or AI product, or bring me in to coach your developers on Cursor so AI-written code passes review. 13+ years shipping, working remotely from Indonesia.
+            Hi, I&apos;m <span className="text-zinc-900 font-semibold">Aris Setiawan</span>. Hire a full stack developer to ship a website, a web app, or an AI feature. Next.js is the stack I use for new products. I also build with WordPress, PHP, and technical SEO, and I coach teams on Cursor. 13+ years shipping, working remotely from Indonesia.
           </p>
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-3 mb-4">
             <Link 
-              href={contactHref('nextjs')}
+              href={contactHref('build')}
               className="btn-primary hover:scale-[1.02] transition-all flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center justify-between"
             >
               <span className="text-sm font-medium tracking-tight">Send me your project</span>
@@ -238,7 +259,7 @@ export default function HomePage() {
             {/* Background Image */}
             <Image
               src="/aris.png"
-              alt="Aris Setiawan, Next.js and AI developer and the first Cursor Ambassador in Indonesia"
+              alt="Aris Setiawan, full stack developer and the first Cursor Ambassador in Indonesia"
               fill
               className="transition-transform duration-[2s] ease-in-out group-hover:scale-110 object-cover"
               priority
@@ -290,7 +311,7 @@ export default function HomePage() {
                 </div>
                 <div className="flex flex-col gap-1">
                   <span className="text-[9px] text-white/60 uppercase">Builds with</span>
-                  <span className="text-sm text-white font-medium">Next.js · WordPress · Cursor</span>
+                  <span className="text-sm text-white font-medium">Next.js · WordPress · PHP</span>
                 </div>
               </div>
             </div>
@@ -307,8 +328,8 @@ export default function HomePage() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 px-1">
           <div className="max-w-2xl">
             <h2 className="md:text-5xl text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
-              Hire a Next.js
-              <span className="gradient-text"> and AI developer</span>
+              Hire a full stack developer
+              <span className="gradient-text"> for the job</span>
             </h2>
             <p className="leading-relaxed text-base font-normal text-zinc-500">
               Pick the closest fit. Each page shows what you get, how I work, and what it takes to start.
@@ -478,7 +499,7 @@ export default function HomePage() {
 
             <div className="flex flex-col sm:flex-row sm:items-center gap-4">
               <Link 
-                href={contactHref('nextjs')}
+                href={contactHref('build')}
                 className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 w-fit shadow-lg hover:shadow-xl hover:-translate-y-0.5"
               >
                 <span>Send me your project</span>

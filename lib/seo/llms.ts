@@ -9,14 +9,34 @@ interface LlmsLink {
 
 const services: LlmsLink[] = [
   {
+    title: 'Web development services',
+    path: '/services',
+    summary: 'Problem-led hub for a new site, a web app, WordPress, PHP, maintenance, or technical SEO. Next.js is the flagship stack.',
+  },
+  {
     title: 'Next.js development',
     path: '/services/nextjs-development',
-    summary: 'Hire Aris to build or migrate a Next.js App Router product: new builds, WordPress-to-Next.js migrations, performance work.',
+    summary: 'Next.js development services: new App Router products and WordPress-to-Next.js migrations.',
+  },
+  {
+    title: 'Web application development',
+    path: '/services/web-application-development',
+    summary: 'Web application development services for logins, dashboards, and data in the browser.',
+  },
+  {
+    title: 'Website maintenance',
+    path: '/services/website-maintenance',
+    summary: 'Website maintenance services: updates and small fixes after launch.',
+  },
+  {
+    title: 'Technical SEO',
+    path: '/services/technical-seo',
+    summary: 'Technical SEO services for crawl, index, metadata, and speed. No content writing and no link building.',
   },
   {
     title: 'AI development',
     path: '/services/ai-development',
-    summary: 'AI features, agents, chatbots, and model integrations inside real Next.js products.',
+    summary: 'AI features, agents, chatbots, and model integrations inside real products.',
   },
   {
     title: 'Cursor mentoring (Level up)',
@@ -49,7 +69,42 @@ const services: LlmsLink[] = [
     summary: 'Custom PHP applications, APIs, databases, and legacy modernization.',
   },
   {
+    title: 'Jasa pembuatan website (Bahasa Indonesia)',
+    path: '/jasa-pembuatan-website',
+    summary: 'Indonesian hub for company sites, WordPress, custom Next.js, web apps, maintenance, and a WordPress SEO audit.',
+  },
+  {
+    title: 'Jasa pembuatan website company profile',
+    path: '/jasa-pembuatan-website/company-profile',
+    summary: 'Company profile websites for Indonesian businesses.',
+  },
+  {
+    title: 'Jasa pembuatan website WordPress',
+    path: '/jasa-pembuatan-website/wordpress',
+    summary: 'WordPress websites with the editor staying in wp-admin.',
+  },
+  {
+    title: 'Jasa pembuatan aplikasi web',
+    path: '/jasa-pembuatan-aplikasi-web',
+    summary: 'Browser apps with accounts and dashboards. Native mobile apps are outside this offer.',
+  },
+  {
+    title: 'Jasa maintenance website',
+    path: '/jasa-maintenance-website',
+    summary: 'Ongoing website care in Bahasa Indonesia.',
+  },
+  {
+    title: 'Jasa SEO WordPress',
+    path: '/jasa-seo-wordpress',
+    summary: 'WordPress technical SEO audit, starting at Rp1.500.000. No content writing and no link building.',
+  },
+  {
     title: 'Jasa Next.js Indonesia (Bahasa Indonesia)',
+    path: '/services/nextjs-development/nextjs-indonesia',
+    summary: 'Custom Next.js websites for Indonesian businesses.',
+  },
+  {
+    title: 'Next.js agency Indonesia',
     path: '/services/nextjs-development/agency-indonesia',
     summary: 'Next.js specialist for Indonesian companies, working solo with trusted partners when needed.',
   },
@@ -88,7 +143,7 @@ export function buildLlmsTxt(posts: LlmsPost[] = []): string {
     ...authorProfile.roles.map((role) => `Community role: ${role}.`),
     `Location: ${authorProfile.city}, ${authorProfile.region}, ${authorProfile.country}. Works remotely with teams worldwide.`,
     `Languages: ${authorProfile.languages.join(' and ')}.`,
-    `Two ways to work together: Build (hire Aris to ship Next.js, WordPress, or AI products) and Level up (Cursor mentoring for developers and teams).`,
+    `Build covers websites, web apps, WordPress, PHP, maintenance, technical SEO, and AI features. Next.js is the flagship stack for new products. Level up is Cursor mentoring for developers and teams.`,
     `Contact: ${productionUrl}/contact or ${siteConfig.email}.`,
   ]
 

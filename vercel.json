@@ -1,0 +1,16 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "www.madebyaris.com" }],
+      "destination": "https://madebyaris.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/:path+",
+      "has": [{ "type": "host", "value": "www.madebyaris.com" }],
+      "destination": "https://madebyaris.com/:path+",
+      "statusCode": 301
+    }
+  ]
+}

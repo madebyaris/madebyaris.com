@@ -13,12 +13,17 @@ const navigationLinks = [
 ]
 
 const serviceLinks = [
-  { name: 'Next.js Development', href: '/services/nextjs-development' },
-  { name: 'AI Development', href: '/services/ai-development' },
-  { name: 'WordPress Development', href: '/services/wordpress' },
-  { name: 'Cursor / AI Workflows', href: '/services/vibe-code-friend' },
-  { name: 'Headless WordPress', href: '/services/wordpress/headless-development' },
-  { name: 'PHP Development', href: '/services/php-development' },
+  { name: 'Next.js development', href: '/services/nextjs-development' },
+  { name: 'Next.js SEO', href: '/services/nextjs-development/nextjs-seo' },
+  { name: 'Vercel hosting', href: '/services/nextjs-development/vercel' },
+  { name: 'Web applications', href: '/services/web-application-development' },
+  { name: 'WordPress', href: '/services/wordpress' },
+  { name: 'Website maintenance', href: '/services/website-maintenance' },
+  { name: 'Technical SEO', href: '/services/technical-seo' },
+  { name: 'PHP development', href: '/services/php-development' },
+  { name: 'AI development', href: '/services/ai-development' },
+  { name: 'Cursor mentoring', href: '/services/vibe-code-friend' },
+  { name: 'Jasa pembuatan website', href: '/jasa-pembuatan-website' },
 ]
 
 const socialLinks = [
@@ -48,7 +53,7 @@ export function Footer() {
             </h2>
           </div>
           <p className="md:text-2xl text-xl font-light italic text-zinc-500">
-            Next.js, AI &amp; WordPress developer
+            Full stack developer. Next.js, WordPress, PHP, and AI.
           </p>
         </div>
 
