@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { productionAbsoluteUrl, productionUrl, siteConfig } from './config'
 import { decodeHtmlEntities, stripHtml } from './utils'
+import { languageAlternates } from './translations'
 
 export const TITLE_MAX = 60
 export const DESCRIPTION_MAX = 160
@@ -69,8 +70,10 @@ export function buildPageMetadata(input: PageMetaInput): Metadata {
   const title = fitTitle(input.title, { brand: input.brand })
   const description = input.description ? fitDescription(input.description) : undefined
   const url = productionAbsoluteUrl(input.path)
-  const image = input.image ?? productionAbsoluteUrl(siteConfig.ogImage)
+  const imageSource = input.image ?? siteConfig.ogImage
+  const image = /^https?:\/\//.test(imageSource) ? imageSource : productionAbsoluteUrl(imageSource)
   const ogType = input.type ?? 'website'
+  const languages = languageAlternates(input.path)
 
   return {
     title: { absolute: title },
@@ -79,6 +82,8 @@ export function buildPageMetadata(input: PageMetaInput): Metadata {
     metadataBase: new URL(productionUrl),
     alternates: {
       canonical: url,
+      ...(languages ? { languages } : {}),
+      types: { 'application/rss+xml': productionAbsoluteUrl('/feed.xml') },
     },
     openGraph: {
       title,

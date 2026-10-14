@@ -15,6 +15,7 @@ import {
 import Link from 'next/link'
 import { buildPageGraph, buildPageMetadata, type FaqItem } from '@/lib/seo'
 import { JsonLd } from '@/components/seo/json-ld'
+import { HeroImage } from '@/components/page/hero-image'
 import { contactHref } from '@/lib/contact-services'
 
 export const revalidate = 86400
@@ -28,6 +29,7 @@ export const metadata: Metadata = buildPageMetadata({
   title: pageTitle,
   description: pageDescription,
   path,
+  image: '/images/services/ai-integration.jpg',
   keywords: [
     'hire an AI developer',
     'AI integration services',
@@ -89,6 +91,19 @@ const processSteps = [
   { title: 'Prototype', description: 'A working slice on your real data early, so you judge it by using it.' },
   { title: 'Integrate', description: 'Auth, logging, error handling, and spend limits wired into your app.' },
   { title: 'Ship', description: 'Launch, watch real usage, and hand over docs your team can extend.' },
+]
+
+const aiSpokes = [
+  {
+    title: 'AI MVP development',
+    description: 'You have an AI product idea. I build the version you can launch: sign-up, payments, and the one AI workflow that has to work.',
+    href: '/services/ai-development/ai-mvp',
+  },
+  {
+    title: 'AI integration services',
+    description: 'You already run a product or a business. I add the AI feature to what you have, with spend caps and testing before launch.',
+    href: '/services/ai-development/ai-integration',
+  },
 ]
 
 const engagementOptions = [
@@ -181,7 +196,7 @@ export default function AiDevelopmentPage() {
 
         <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
           Hire an AI developer
-          <span className="block gradient-text font-light">to ship it inside your app</span>
+          {' '}<span className="block gradient-text font-light">to ship it inside your app</span>
         </h1>
 
         <p className="text-base md:text-lg text-zinc-600 max-w-2xl mx-auto mb-4 leading-relaxed font-medium">
@@ -211,7 +226,7 @@ export default function AiDevelopmentPage() {
         </div>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <HeroImage src="/images/services/ai-integration.jpg" alt="Illustration of an AI module plugging into an existing business dashboard, with documents flowing into it" />
 
       {/* Answer first */}
       <section className="mb-16 max-w-3xl mx-auto">
@@ -224,6 +239,24 @@ export default function AiDevelopmentPage() {
         <p className="text-zinc-600 leading-relaxed">
           I build product features on top of existing models. If you need a model trained from scratch, you need an ML research team.
         </p>
+      </section>
+
+      <section className="mb-16" aria-label="AI services">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {aiSpokes.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="block bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all group"
+            >
+              <h2 className="font-semibold text-lg text-zinc-900 mb-2 flex items-center justify-between gap-3 group-hover:text-orange-500 transition-colors">
+                {item.title}
+                <ArrowRight className="w-4 h-4 text-zinc-400 group-hover:text-orange-500 group-hover:translate-x-0.5 transition-all shrink-0" />
+              </h2>
+              <p className="text-sm text-zinc-500 leading-relaxed">{item.description}</p>
+            </Link>
+          ))}
+        </div>
       </section>
 
       {/* Fit */}
@@ -283,9 +316,13 @@ export default function AiDevelopmentPage() {
             AI integration, chatbots, <span className="gradient-text">and agents</span>
           </h2>
           <p className="text-sm text-zinc-500 max-w-xl mx-auto">
-            More detail in my guides to{' '}
-            <Link href="/blog/ai-integration-services" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors">
+            See my{' '}
+            <Link href="/services/ai-development/ai-integration" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors">
               AI integration services
+            </Link>
+            , or read my guides to{' '}
+            <Link href="/blog/ai-integration-services" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors">
+              how AI integration works
             </Link>{' '}
             and{' '}
             <Link href="/blog/ai-chatbot-development" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors">
@@ -365,7 +402,7 @@ export default function AiDevelopmentPage() {
       </section>
 
       {/* Closing CTA */}
-      <section className="overflow-hidden min-h-[400px] shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
+      <section className="overflow-hidden shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
         <div
           className="absolute inset-0 opacity-10"
           style={{
@@ -375,7 +412,7 @@ export default function AiDevelopmentPage() {
           }}
         />
 
-        <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16 min-h-[400px] relative">
+        <div className="flex flex-col items-center justify-center text-center px-6 py-12 md:px-12 md:py-14 relative">
           <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
             Have an AI feature in mind?
           </h2>

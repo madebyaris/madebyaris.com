@@ -15,9 +15,12 @@ import {
   CheckCircle2,
   XCircle,
   ShieldCheck,
+  Wrench,
+  ShoppingCart,
 } from 'lucide-react'
 import { buildPageGraph, buildPageMetadata, type FaqItem } from '@/lib/seo'
 import { JsonLd } from '@/components/seo/json-ld'
+import { HeroImage } from '@/components/page/hero-image'
 import { contactHref } from '@/lib/contact-services'
 
 export const revalidate = 86400
@@ -25,12 +28,13 @@ export const revalidate = 86400
 const path = '/services/wordpress'
 const pageTitle = 'Hire a WordPress Developer (Headless Too)'
 const pageDescription =
-  'Hire a WordPress developer with 13+ years of experience for custom themes, plugins, speed fixes, and headless WordPress with Next.js. Remote worldwide.'
+  'Hire a WordPress developer with 13+ years of experience for custom themes, plugins, maintenance, migrations, WooCommerce, and headless WordPress.'
 
 export const metadata: Metadata = buildPageMetadata({
   title: pageTitle,
   description: pageDescription,
   path,
+  image: '/images/services/wordpress.jpg',
   keywords: [
     'hire a WordPress developer',
     'WordPress developer for hire',
@@ -38,6 +42,8 @@ export const metadata: Metadata = buildPageMetadata({
     'custom WordPress theme development',
     'custom WordPress plugin development',
     'WordPress speed optimization service',
+    'WordPress development services',
+    'WordPress maintenance services',
     'remote WordPress developer',
   ],
 })
@@ -70,6 +76,34 @@ const services = [
     icon: Zap,
     href: '/services/wordpress/optimization',
     features: ['Speed audit', 'Caching', 'Security hardening'],
+  },
+  {
+    title: 'Maintenance and support',
+    description: 'Updates tested on staging, off-site backups, monitoring, and cleanup if the site gets hacked.',
+    icon: Wrench,
+    href: '/services/wordpress/maintenance',
+    features: ['Monthly plan', 'Backups', 'Malware removal'],
+  },
+  {
+    title: 'Website redesign',
+    description: 'A new design on a fast custom theme, with every URL kept or redirected so rankings survive.',
+    icon: Layout,
+    href: '/services/wordpress/redesign',
+    features: ['Custom theme', 'Redirect map', 'Search Console checks'],
+  },
+  {
+    title: 'Migration',
+    description: 'Move to a new host or domain, or bring another CMS into WordPress, without losing traffic.',
+    icon: Globe,
+    href: '/services/wordpress/migration',
+    features: ['Host moves', 'Domain changes', 'CMS imports'],
+  },
+  {
+    title: 'WooCommerce development',
+    description: 'Custom checkout, payment and shipping integrations, and fixes for stores that got slow.',
+    icon: ShoppingCart,
+    href: '/services/wordpress/woocommerce',
+    features: ['Custom plugins', 'Payment gateways', 'Store speed'],
   },
 ]
 
@@ -183,7 +217,7 @@ export default function WordPressServicesPage() {
 
         <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
           Hire a WordPress developer
-          <span className="block gradient-text font-light">who ships</span>
+          {' '}<span className="block gradient-text font-light">who ships</span>
         </h1>
 
         <p className="text-base md:text-lg text-zinc-600 max-w-2xl mx-auto mb-4 leading-relaxed font-medium">
@@ -213,7 +247,7 @@ export default function WordPressServicesPage() {
         </div>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <HeroImage src="/images/services/wordpress.jpg" alt="Illustration of a WordPress site layout being updated, with a security shield, maintenance tools, and a migration box" />
 
       {/* Answer first */}
       <section className="mb-16 max-w-3xl mx-auto">
@@ -271,6 +305,13 @@ export default function WordPressServicesPage() {
             </Link>
           ))}
         </div>
+        <p className="text-sm text-zinc-500 mt-6 text-center" lang="id">
+          Cari jasa pembuatan website WordPress dalam Bahasa Indonesia?{' '}
+          <Link href="/services/wordpress/jasa-wordpress" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors">
+            Baca halaman jasa WordPress
+          </Link>
+          .
+        </p>
       </section>
 
       <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
@@ -386,10 +427,10 @@ export default function WordPressServicesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="overflow-hidden min-h-[400px] shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
+      <section className="overflow-hidden shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
 
-        <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16 min-h-[400px] relative">
+        <div className="flex flex-col items-center justify-center text-center px-6 py-12 md:px-12 md:py-14 relative">
           <Globe className="w-8 h-8 text-orange-400 mb-6" />
           <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
             Tell me what your WordPress site needs

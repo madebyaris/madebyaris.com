@@ -22,4 +22,4 @@ export {
   type PageMetaInput,
   type WordPressSeoFields,
 } from './metadata'
-export { buildLlmsTxt } from './llms'
+export { buildLlmsTxt, buildLlmsFullTxt } from './llms'

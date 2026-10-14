@@ -171,7 +171,7 @@ export default function PhpDevelopmentPage() {
 
         <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
           PHP development services
-          <span className="block gradient-text font-light">for apps your business runs on</span>
+          {' '}<span className="block gradient-text font-light">for apps your business runs on</span>
         </h1>
 
         <p className="text-base md:text-lg text-zinc-600 max-w-2xl mx-auto mb-4 leading-relaxed font-medium">
@@ -371,7 +371,7 @@ export default function PhpDevelopmentPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="overflow-hidden min-h-[400px] shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
+      <section className="overflow-hidden shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
         <div
           className="absolute inset-0 opacity-10"
           style={{
@@ -380,7 +380,7 @@ export default function PhpDevelopmentPage() {
           }}
         />
 
-        <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16 min-h-[400px] relative">
+        <div className="flex flex-col items-center justify-center text-center px-6 py-12 md:px-12 md:py-14 relative">
           <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
             Have a PHP app nobody wants to touch?
           </h2>

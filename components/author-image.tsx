@@ -11,7 +11,7 @@ interface AuthorImageProps {
 
 export function AuthorImage({ src, alt, width, height }: AuthorImageProps) {
   return (
-    <div className="relative h-20 w-20 rounded-full overflow-hidden shadow-md border-2 border-primary/20 bg-muted flex-shrink-0">
+    <div className="relative h-20 w-20 rounded-full overflow-hidden shadow-md border-2 border-white bg-zinc-100 shrink-0">
       <NextImage 
         src={src} 
         alt={alt} 

@@ -44,6 +44,8 @@ export interface PaginationParams {
   page?: number
   per_page?: number
   _fields?: string[]
+  categories?: number[]
+  exclude?: number[]
 }
 
 export const BLOG_POSTS_PER_PAGE = 12
@@ -267,7 +269,42 @@ function buildPostsQueryParams(params: PaginationParams = {}): Record<string, st
     queryParams._fields = params._fields.join(',')
   }
 
+  if (params.categories?.length) {
+    queryParams.categories = params.categories.join(',')
+  }
+
+  if (params.exclude?.length) {
+    queryParams.exclude = params.exclude.join(',')
+  }
+
   return queryParams
+}
+
+export async function getAllCategories(): Promise<Category[]> {
+  try {
+    const categories = await fetchAPI<Array<{ id: number; name: string; slug: string; count: number; description?: string }>>(
+      'categories',
+      { per_page: 100, hide_empty: 'true', _fields: 'id,name,slug,count,description' },
+      REVALIDATE_SECONDS.CATEGORIES
+    )
+    return categories
+      .filter((category) => category.slug !== 'uncategorized')
+      .map((category) => ({ id: category.id, name: category.name, slug: category.slug, count: category.count }))
+  } catch (error) {
+    console.error('Failed to fetch categories:', error)
+    return []
+  }
+}
+
+export async function getCategoryBySlug(slug: string): Promise<Category | null> {
+  const categories = await getAllCategories()
+  return categories.find((category) => category.slug === slug) ?? null
+}
+
+export async function getPostsByCategory(slug: string, perPage: number = 100): Promise<ProcessedPost[]> {
+  const category = await getCategoryBySlug(slug)
+  if (!category) return []
+  return getPosts({ categories: [category.id], per_page: perPage })
 }
 
 export async function getPostsPaginated(
@@ -331,6 +368,39 @@ export async function getPostsForLlms(): Promise<Array<{ slug: string; title: st
     return posts.map((post) => ({ slug: post.slug, title: post.title.rendered, excerpt: post.excerpt.rendered }))
   } catch (error) {
     console.error('Failed to fetch posts for llms.txt:', error)
+    return []
+  }
+}
+
+export interface PostText {
+  slug: string
+  title: string
+  excerpt: string
+  content: string
+  date: string
+  modified: string
+}
+
+// One request with `content` included. Feeds and llms-full.txt use it, so the
+// payload is large but cached for a week and refreshed by the webhook.
+export async function getPostsWithContent(limit: number = 100): Promise<PostText[]> {
+  try {
+    const posts = await fetchAPI<
+      Array<{ slug: string; date: string; modified: string; title: { rendered: string }; excerpt: { rendered: string }; content: { rendered: string } }>
+    >('posts', {
+      per_page: limit,
+      _fields: 'slug,date,modified,title,excerpt,content',
+    })
+    return posts.map((post) => ({
+      slug: post.slug,
+      title: post.title.rendered,
+      excerpt: post.excerpt.rendered,
+      content: post.content.rendered,
+      date: post.date,
+      modified: post.modified,
+    }))
+  } catch (error) {
+    console.error('Failed to fetch posts with content:', error)
     return []
   }
 }

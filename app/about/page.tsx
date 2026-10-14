@@ -310,7 +310,7 @@ export default function AboutPage() {
           {/* Name */}
           <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
             Aris Setiawan
-            <span className="block gradient-text font-light text-3xl lg:text-4xl mt-2">
+            {' '}<span className="block gradient-text font-light text-3xl lg:text-4xl mt-2">
               Next.js, AI, and WordPress developer
             </span>
           </h1>
@@ -414,10 +414,10 @@ export default function AboutPage() {
       </section>
 
       {/* Separator */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent my-16 lg:my-20 opacity-60" />
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent my-12 lg:my-16 opacity-60" />
 
       {/* Philosophy Section */}
-      <section className="text-center max-w-3xl mx-auto mb-16 lg:mb-20">
+      <section className="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
         <blockquote className="text-2xl md:text-3xl font-medium text-zinc-900 italic leading-relaxed tracking-tight mb-6">
           &ldquo;I have served, and I will be of service.&rdquo;
         </blockquote>
@@ -425,10 +425,10 @@ export default function AboutPage() {
       </section>
 
       {/* Separator */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mb-16 lg:mb-20 opacity-60" />
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mb-12 lg:mb-16 opacity-60" />
 
       {/* How I work */}
-      <section className="mb-16 lg:mb-20">
+      <section className="mb-12 lg:mb-16">
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-medium text-zinc-900 tracking-tighter mb-4">
             How I <span className="gradient-text">work</span>
@@ -453,10 +453,10 @@ export default function AboutPage() {
       </section>
 
       {/* Separator */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mb-16 lg:mb-20 opacity-60" />
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mb-12 lg:mb-16 opacity-60" />
 
       {/* Skills Section */}
-      <section className="mb-16 lg:mb-20">
+      <section className="mb-12 lg:mb-16">
         <div className="text-center mb-12">
           <div 
             className="inline-flex bg-white/60 rounded-full mb-6 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2"
@@ -500,10 +500,10 @@ export default function AboutPage() {
       </section>
 
       {/* Separator */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mb-16 lg:mb-20 opacity-60" />
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mb-12 lg:mb-16 opacity-60" />
 
       {/* Timeline Section */}
-      <section className="mb-16 lg:mb-20">
+      <section className="mb-12 lg:mb-16">
         <div className="text-center mb-12">
           <div 
             className="inline-flex bg-white/60 rounded-full mb-6 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2"
@@ -529,10 +529,10 @@ export default function AboutPage() {
       </section>
 
       {/* Separator */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mb-16 lg:mb-20 opacity-60" />
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mb-12 lg:mb-16 opacity-60" />
 
       {/* CTA Section */}
-      <section className="overflow-hidden min-h-[400px] shadow-zinc-900/30 bg-zinc-900 rounded-[2rem] relative shadow-2xl mb-8">
+      <section className="overflow-hidden shadow-zinc-900/30 bg-zinc-900 rounded-[2rem] relative shadow-2xl mb-8">
         {/* Grid Pattern */}
         <div 
           className="absolute inset-0 opacity-10" 
@@ -542,7 +542,7 @@ export default function AboutPage() {
           }}
         />
 
-        <div className="flex flex-col p-8 md:p-12 lg:p-16 justify-center min-h-[400px] relative">
+        <div className="flex flex-col px-6 py-12 md:px-12 md:py-14 justify-center relative">
           <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
             Have a project that needs a senior developer?
           </h2>

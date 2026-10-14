@@ -8,6 +8,7 @@ import { JsonLd } from '@/components/seo/json-ld'
 import { contactHref } from '@/lib/contact-services'
 import { buildPageGraph, buildPageMetadata } from '@/lib/seo'
 import { BLOG_POSTS_PER_PAGE, getAllTags, getPostsPaginated } from '@/lib/wordpress'
+import { blogCategories, blogCategoryPath } from '@/lib/topics'
 
 export const revalidate = 604800 // 7 days; webhook refreshes the index on publish
 
@@ -121,7 +122,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
         <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
           Next.js, Cursor
-          <span className="block gradient-text font-light">and WordPress guides</span>
+          {' '}<span className="block gradient-text font-light">and WordPress guides</span>
         </h1>
 
         <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
@@ -130,16 +131,23 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           what a Next.js developer costs, and how to keep your SEO through a migration.
         </p>
 
-        <div className="flex flex-wrap justify-center gap-2">
-          {['Next.js', 'Cursor', 'Headless WordPress', 'AI features'].map((tech) => (
-            <span
-              key={tech}
-              className="px-3 py-1.5 bg-zinc-100 rounded-full text-xs font-medium text-zinc-600"
+        <nav aria-label="Blog topics" className="flex flex-wrap justify-center gap-2">
+          <Link
+            href="/guides/cursor"
+            className="px-3 py-1.5 bg-zinc-900 rounded-full text-xs font-medium text-white hover:bg-zinc-700 transition-colors"
+          >
+            Cursor guide
+          </Link>
+          {blogCategories.map((category) => (
+            <Link
+              key={category.slug}
+              href={blogCategoryPath(category.slug)}
+              className="px-3 py-1.5 bg-zinc-100 rounded-full text-xs font-medium text-zinc-600 hover:bg-orange-50 hover:text-orange-600 transition-colors"
             >
-              {tech}
-            </span>
+              {category.heading}
+            </Link>
           ))}
-        </div>
+        </nav>
       </section>
 
       <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mb-12 opacity-60" />

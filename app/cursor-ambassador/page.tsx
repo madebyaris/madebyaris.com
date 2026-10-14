@@ -4,11 +4,14 @@ import { contactHref } from '@/lib/contact-services'
 import { ArrowRight, ArrowUpRight, BookOpen, Users, Sparkles, Code2 } from 'lucide-react'
 import { CursorIcon } from '@/components/icons/cursor'
 import { JsonLd } from '@/components/seo/json-ld'
+import { Faq } from '@/components/page/faq'
+import { CtaBand } from '@/components/page/cta-band'
 import { buildPageGraph, buildPageMetadata, type FaqItem } from '@/lib/seo'
 
 export const revalidate = 86400
 
 const path = '/cursor-ambassador'
+const spacexAnnouncementUrl = 'https://cursor.com/blog/joining-spacex'
 const pageTitle = 'Cursor Ambassador Indonesia: Learn Cursor Faster'
 const pageDescription =
   'Aris Setiawan, the first Cursor Ambassador in Indonesia. What the role is, how I help teams ship with Cursor, and free guides on pricing, rules, and workflows.'
@@ -28,7 +31,7 @@ const faqs: FaqItem[] = [
   {
     question: 'Is Cursor part of SpaceX now?',
     answer:
-      'Yes. In August 2026 Cursor announced it is part of SpaceX, continuing the SpaceXAI partnership. I am now also a SpaceXAI Ambassador. My Cursor Ambassador work continues on this page.',
+      'Yes. Cursor announced on its blog on August 14, 2026 that SpaceX completed the acquisition, after the SpaceXAI partnership that started in April. I am now also a SpaceXAI Ambassador. My Cursor Ambassador work continues on this page.',
   },
   {
     question: 'How much does Cursor cost?',
@@ -122,7 +125,7 @@ export default function CursorAmbassadorPage() {
 
         <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
           Cursor Ambassador
-          <span className="block gradient-text font-light">Indonesia</span>
+          {' '}<span className="block gradient-text font-light">Indonesia</span>
         </h1>
 
         <p className="text-base md:text-lg text-zinc-600 max-w-2xl mx-auto mb-4 leading-relaxed font-medium">
@@ -130,7 +133,16 @@ export default function CursorAmbassadorPage() {
         </p>
 
         <p className="text-sm text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed">
-          13+ years shipping web products. I use Cursor on client work every week. Cursor is now part of SpaceX, and I’m also a{' '}
+          13+ years shipping web products. I use Cursor on client work every week.{' '}
+          <a
+            href={spacexAnnouncementUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors"
+          >
+            Cursor is now part of SpaceX
+          </a>
+          , and I’m also a{' '}
           <Link href="/spacexai-ambassador" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors">
             SpaceXAI Ambassador
           </Link>
@@ -147,7 +159,7 @@ export default function CursorAmbassadorPage() {
           </Link>
 
           <Link
-            href="#cursor-guides"
+            href="/guides/cursor"
             className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
             style={{ boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)' }}
           >
@@ -199,7 +211,11 @@ export default function CursorAmbassadorPage() {
             </h2>
           </div>
           <p className="text-sm text-zinc-500 mb-6">
-            The questions developers ask me most, answered from real projects.
+            The questions developers ask me most, answered from real projects. For the full map with rules you can copy, see the{' '}
+            <Link href="/guides/cursor" className="font-medium text-zinc-900 underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors">
+              Cursor guide for shipping teams
+            </Link>
+            .
           </p>
 
           <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -218,61 +234,14 @@ export default function CursorAmbassadorPage() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="mb-16 max-w-3xl mx-auto" aria-labelledby="cursor-faq">
-        <h2 id="cursor-faq" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-6">
-          Cursor Ambassador FAQ
-        </h2>
-        <div className="space-y-3">
-          {faqs.map((faq) => (
-            <details key={faq.question} className="group bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm open:shadow-md">
-              <summary className="cursor-pointer list-none font-semibold text-zinc-900 flex items-center justify-between gap-4">
-                {faq.question}
-                <span className="text-orange-500 transition-transform group-open:rotate-45 text-xl leading-none">+</span>
-              </summary>
-              <p className="mt-3 text-sm text-zinc-600 leading-relaxed">{faq.answer}</p>
-            </details>
-          ))}
-        </div>
-      </section>
+      <Faq id="cursor-faq" title="Cursor Ambassador FAQ" faqs={faqs} />
 
-      {/* CTA */}
-      <section className="overflow-hidden min-h-[320px] shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
-        <div
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)',
-            backgroundSize: '40px 40px',
-          }}
-        />
-
-        <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 min-h-[320px] relative">
-          <h2 className="md:text-3xl lg:text-4xl leading-tight text-2xl font-normal text-white tracking-tight mb-4 max-w-2xl">
-            Bought Cursor seats, but the PRs got worse?
-          </h2>
-          <p className="text-zinc-400 mb-8 max-w-lg font-medium">
-            I’ll set up project rules and a review habit on one of your real repos, then help the rest of the team adopt it. English or Indonesian.
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link
-              href="/services/vibe-code-friend"
-              className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
-            >
-              <span>See Cursor mentoring</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              href={contactHref('nextjs')}
-              className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3"
-            >
-              <span>Or hire me to build it</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      <CtaBand
+        title="Bought Cursor seats, but the PRs got worse?"
+        body="I’ll set up project rules and a review habit on one of your real repos, then help the rest of the team adopt it. English or Indonesian."
+        primary={{ href: '/services/vibe-code-friend', label: 'See Cursor mentoring' }}
+        secondary={{ href: contactHref('nextjs'), label: 'Or hire me to build it' }}
+      />
     </>
   )
 }

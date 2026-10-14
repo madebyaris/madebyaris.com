@@ -11,8 +11,8 @@ interface FeaturedImageProps {
 
 export function FeaturedImage({ src, alt, width, height }: FeaturedImageProps) {
   return (
-    <div className="relative mb-12 overflow-hidden rounded-xl w-full">
-      <div className="aspect-[16/9] bg-muted/20">
+    <div className="relative mb-12 overflow-hidden rounded-2xl shadow-sm w-full">
+      <div className="aspect-video bg-zinc-100">
         <NextImage
           src={src}
           alt={alt}

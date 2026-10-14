@@ -1,5 +1,7 @@
 import { authorProfile, productionUrl, siteConfig } from './config'
 import { decodeHtmlEntities, stripHtml } from './utils'
+import { blogCategories, blogCategoryPath } from '../topics'
+import { cursorRulePath, cursorRules } from '../topics/cursor-rules'
 
 interface LlmsLink {
   title: string
@@ -19,6 +21,31 @@ const services: LlmsLink[] = [
     summary: 'AI features, agents, chatbots, and model integrations inside real Next.js products.',
   },
   {
+    title: 'AI MVP development',
+    path: '/services/ai-development/ai-mvp',
+    summary: 'Turn an AI product idea into a launch-ready MVP: sign-up, payments, the core AI workflow on real inputs, and spend caps per user.',
+  },
+  {
+    title: 'AI integration services',
+    path: '/services/ai-development/ai-integration',
+    summary: 'Add AI features to an existing product or business: answers from your docs, reply drafts, document extraction, and agents with approval steps.',
+  },
+  {
+    title: 'SaaS development',
+    path: '/services/saas-development',
+    summary: 'Custom SaaS built to stay cheap to run: little work per request, scale from zero hosting, and the expected monthly cost in the plan.',
+  },
+  {
+    title: 'Technical SEO services',
+    path: '/services/seo',
+    summary: 'Technical SEO audits, keyword and competitor research, fixes made in the code, and monthly SEO with rank tracking in RankMySEO.',
+  },
+  {
+    title: 'Jasa SEO (Bahasa Indonesia)',
+    path: '/services/seo/jasa-seo',
+    summary: 'Audit SEO, riset keyword, perbaikan langsung di kode, dan SEO bulanan untuk bisnis di Indonesia.',
+  },
+  {
     title: 'Cursor mentoring (Level up)',
     path: '/services/vibe-code-friend',
     summary: 'Team training on Cursor: project rules, review habits for AI-generated code, and a 30-day rollout.',
@@ -31,7 +58,22 @@ const services: LlmsLink[] = [
   {
     title: 'WordPress development',
     path: '/services/wordpress',
-    summary: 'Custom themes, plugins, optimization, and headless WordPress.',
+    summary: 'Custom themes, plugins, optimization, maintenance, redesigns, migrations, WooCommerce, and headless WordPress.',
+  },
+  {
+    title: 'WordPress maintenance services',
+    path: '/services/wordpress/maintenance',
+    summary: 'Monthly WordPress maintenance and support: updates tested on staging, off-site backups, monitoring, and malware cleanup.',
+  },
+  {
+    title: 'WordPress migration service',
+    path: '/services/wordpress/migration',
+    summary: 'Move WordPress to a new host, domain, or stack with a redirect map and Search Console checks so rankings carry over.',
+  },
+  {
+    title: 'Jasa pembuatan website WordPress (Bahasa Indonesia)',
+    path: '/services/wordpress/jasa-wordpress',
+    summary: 'Website WordPress dengan tema custom, perbaikan website, maintenance, dan migrasi hosting.',
   },
   {
     title: 'Vercel deployment for Next.js',
@@ -53,6 +95,16 @@ const services: LlmsLink[] = [
     path: '/services/nextjs-development/agency-indonesia',
     summary: 'Next.js specialist for Indonesian companies, working solo with trusted partners when needed.',
   },
+]
+
+const guides: LlmsLink[] = [
+  {
+    title: 'Cursor guide for shipping teams',
+    path: '/guides/cursor',
+    summary: 'Reading order for every Cursor post, project rules to copy as .mdc files, a Cursor vs Copilot job split, a dated cost estimator, and recent Cursor releases.',
+  },
+  ...cursorRules.map((rule) => ({ title: `${rule.title} (${rule.file})`, path: cursorRulePath(rule.file), summary: rule.summary })),
+  ...blogCategories.map((category) => ({ title: category.title, path: blogCategoryPath(category.slug), summary: category.description })),
 ]
 
 const profilePages: LlmsLink[] = [
@@ -98,6 +150,7 @@ export function buildLlmsTxt(posts: LlmsPost[] = []): string {
     `This site is built with Next.js on Vercel. Blog posts are written in WordPress (headless) and cover Next.js, Cursor, AI-assisted development, WordPress, and SEO. English posts and Indonesian (Bahasa Indonesia) posts are both published.`,
     `## Key facts\n\n${facts.map((fact) => `- ${fact}`).join('\n')}`,
     `## Services\n\n${services.map(link).join('\n')}`,
+    `## Guides\n\n${guides.map(link).join('\n')}`,
     `## About and profiles\n\n${profilePages.map(link).join('\n')}`,
   ]
 
@@ -115,7 +168,51 @@ export function buildLlmsTxt(posts: LlmsPost[] = []): string {
     )
   }
 
-  sections.push(`## Optional\n\n- [Sitemap](${productionUrl}/sitemap.xml)\n- [Blog index](${productionUrl}/blog)`)
+  sections.push(
+    `## Optional\n\n- [Sitemap](${productionUrl}/sitemap.xml)\n- [Blog index](${productionUrl}/blog)\n- [RSS feed](${productionUrl}/feed.xml)\n- [Full article text](${productionUrl}/llms-full.txt)`,
+  )
 
   return `${sections.join('\n\n')}\n`
+}
+
+// Rough HTML to markdown for WordPress post bodies. Enough structure for an AI
+// engine to quote headings, lists, and code without the markup.
+function htmlToText(html: string): string {
+  const text = html
+    .replace(/<pre[^>]*>([\s\S]*?)<\/pre>/gi, (_m, code: string) => `\n\`\`\`\n${stripTags(code)}\n\`\`\`\n`)
+    .replace(/<h([1-6])[^>]*>([\s\S]*?)<\/h\1>/gi, (_m, level: string, inner: string) => `\n${'#'.repeat(Math.min(6, Math.max(3, Number(level) + 1)))} ${stripHtml(inner)}\n`)
+    .replace(/<li[^>]*>([\s\S]*?)<\/li>/gi, (_m, inner: string) => `\n- ${stripHtml(inner)}`)
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<\/(p|div|ul|ol|table|tr|blockquote)>/gi, '\n\n')
+    .replace(/<\/t[dh]>/gi, ' | ')
+  return decodeHtmlEntities(stripTags(text))
+    .replace(/[ \t]+\n/g, '\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim()
+}
+
+function stripTags(html: string): string {
+  return html.replace(/<[^>]*>/g, '')
+}
+
+export interface LlmsFullPost extends LlmsPost {
+  content: string
+  date: string
+  modified: string
+}
+
+export function buildLlmsFullTxt(posts: LlmsFullPost[]): string {
+  const header = [
+    `# ${siteConfig.name}: full article text`,
+    `> Every blog post by ${authorProfile.name}, as plain text. The short index is at ${productionUrl}/llms.txt.`,
+  ].join('\n\n')
+  const articles = posts.map((post) =>
+    [
+      `## ${decodeHtmlEntities(stripHtml(post.title))}`,
+      `URL: ${productionUrl}/blog/${post.slug}`,
+      `Published: ${post.date.slice(0, 10)}. Updated: ${post.modified.slice(0, 10)}.`,
+      htmlToText(post.content),
+    ].join('\n\n'),
+  )
+  return `${[header, ...articles].join('\n\n---\n\n')}\n`
 }

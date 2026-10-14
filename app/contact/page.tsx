@@ -63,7 +63,7 @@ export default function ContactPage() {
         {/* Title */}
         <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
           Tell me what
-          <span className="block gradient-text font-light">you&apos;re building</span>
+          {' '}<span className="block gradient-text font-light">you&apos;re building</span>
         </h1>
 
         {/* Description */}

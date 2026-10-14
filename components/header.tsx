@@ -4,6 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState, useEffect, useRef } from "react"
 import { cn } from "@/lib/utils"
+import { contactHref } from "@/lib/contact-services"
 import { Menu, ChevronDown, ArrowRight, Layers } from "lucide-react"
 import dynamic from "next/dynamic"
 
@@ -25,11 +26,14 @@ const navigationItems: NavigationItem[] = [
     children: [
       { href: '/services/nextjs-development', label: 'Next.js Development' },
       { href: '/services/ai-development', label: 'AI Development' },
+      { href: '/services/saas-development', label: 'SaaS Development' },
+      { href: '/services/seo', label: 'Technical SEO' },
       { href: '/services/wordpress', label: 'WordPress Development' },
       { href: '/services/vibe-code-friend', label: 'Cursor / AI Workflows' },
       { href: '/services/php-development', label: 'PHP Development' },
     ]
   },
+  { href: '/guides/cursor', label: 'Guides' },
   { href: '/blog', label: 'Blog' },
   { href: '/contact', label: 'Contact' },
 ]
@@ -175,18 +179,11 @@ export function Header() {
         ))}
       </nav>
 
-      {/* CTA Button - Upwork Style matching View Projects */}
       <Link 
-        href="https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe" 
-        target="_blank"
-        rel="noopener noreferrer"
-        className="hidden md:flex items-center gap-2 group text-sm font-medium text-white tracking-tight rounded-full py-3 px-6 transition-all hover:-translate-y-0.5 hover:shadow-2xl relative"
-        style={{
-          background: 'linear-gradient(to bottom, rgba(20, 168, 0, 0.9), rgba(13, 122, 0, 1))',
-          boxShadow: '0 18px 35px rgba(20, 168, 0, 0.35), 0 0 0 1px rgba(20, 168, 0, 0.3)',
-        }}
+        href={contactHref('nextjs')}
+        className="hidden md:flex btn-primary items-center gap-2 group text-sm font-medium text-zinc-900 tracking-tight rounded-full py-3 px-6 transition-all hover:-translate-y-0.5"
       >
-        <span className="text-sm font-medium tracking-tight">Hire Me</span>
+        <span className="text-sm font-medium tracking-tight">Hire me</span>
         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
       </Link>
 

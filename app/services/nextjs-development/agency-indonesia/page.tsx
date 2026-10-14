@@ -133,7 +133,7 @@ const linkClass = 'underline decoration-zinc-300 underline-offset-4 hover:text-o
 
 export default function AgencyIndonesiaPage() {
   return (
-    <>
+    <div lang="id">
       <JsonLd data={structuredData} />
 
       {/* Breadcrumb */}
@@ -156,7 +156,7 @@ export default function AgencyIndonesiaPage() {
 
         <h1 className="leading-[0.95] lg:text-[3.5rem] text-3xl font-medium text-zinc-900 tracking-tighter mb-6">
           Next.js agency
-          <span className="block gradient-text font-light">Indonesia</span>
+          {' '}<span className="block gradient-text font-light">Indonesia</span>
         </h1>
 
         <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
@@ -343,7 +343,7 @@ export default function AgencyIndonesiaPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="overflow-hidden min-h-[400px] shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
+      <section className="overflow-hidden shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
         <div
           className="absolute inset-0 opacity-10"
           style={{
@@ -352,7 +352,7 @@ export default function AgencyIndonesiaPage() {
           }}
         />
 
-        <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16 min-h-[400px] relative">
+        <div className="flex flex-col items-center justify-center text-center px-6 py-12 md:px-12 md:py-14 relative">
           <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
             Kirim brief, saya balas dengan scope
           </h2>
@@ -380,6 +380,6 @@ export default function AgencyIndonesiaPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowLeft, Shield } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { PageHero } from '@/components/ui/page-hero'
+import { PageHero } from '@/components/page/hero'
 import { SectionWrapper } from '@/components/ui/section-wrapper'
 import { EnhancedCard } from '@/components/ui/enhanced-card'
 import { JsonLd } from '@/components/seo/json-ld'
@@ -44,11 +44,11 @@ export default function PrivacyPolicyPage() {
       <JsonLd data={privacyStructuredData} />
       {/* Page Hero */}
       <PageHero
-        badge={{ text: "Legal Information", icon: Shield }}
+        eyebrow={{ icon: <Shield className="w-4 h-4 text-orange-500" />, label: 'Legal Information' }}
         title="Privacy Policy"
-        description="How we collect, use, and protect your personal information"
-        variant="about"
-      />
+      >
+        <p>How we collect, use, and protect your personal information</p>
+      </PageHero>
 
       {/* Main Content */}
       <SectionWrapper variant="default" padding="large">

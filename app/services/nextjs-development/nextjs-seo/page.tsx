@@ -161,7 +161,7 @@ export default function NextjsSeoPage() {
 
         <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
           Next.js SEO services
-          <span className="block gradient-text font-light">for App Router sites</span>
+          {' '}<span className="block gradient-text font-light">for App Router sites</span>
         </h1>
 
         <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-4 leading-relaxed font-medium">
@@ -206,8 +206,12 @@ export default function NextjsSeoPage() {
           Next.js SEO services fix the technical side of ranking for sites built on Next.js. I check
           what Google actually receives: rendered HTML, titles, canonicals, status codes, and
           structured data. Then I fix the gaps in your App Router code, from the Metadata API and
-          schema markup to sitemaps, redirects, and Core Web Vitals. Content and link building stay
-          with you or your SEO team.
+          schema markup to sitemaps, redirects, and Core Web Vitals. For keyword research, content
+          planning, or monthly SEO on any platform, see my{' '}
+          <Link href="/services/seo" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors">
+            technical SEO services
+          </Link>
+          .
         </p>
       </section>
 
@@ -330,7 +334,7 @@ export default function NextjsSeoPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="overflow-hidden min-h-[400px] shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
+      <section className="overflow-hidden shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
         <div
           className="absolute inset-0 opacity-10"
           style={{
@@ -339,7 +343,7 @@ export default function NextjsSeoPage() {
           }}
         />
 
-        <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16 min-h-[400px] relative">
+        <div className="flex flex-col items-center justify-center text-center px-6 py-12 md:px-12 md:py-14 relative">
           <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
             Send me the URL that should rank
           </h2>

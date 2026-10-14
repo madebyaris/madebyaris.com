@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { getPostsForSitemap } from '@/lib/wordpress'
 import { productionUrl } from '@/lib/seo/config'
+import { blogCategories, blogCategoryPath, topicHubs } from '@/lib/topics'
 
 export const revalidate = 604800 // 7 days; webhook calls revalidatePath('/sitemap.xml')
 
@@ -8,6 +9,8 @@ const mainRoutes = [
   { path: '', priority: 1.0, changeFreq: 'monthly' },
   { path: 'about', priority: 0.8, changeFreq: 'monthly' },
   { path: 'blog', priority: 0.8, changeFreq: 'weekly' },
+  ...topicHubs.map((hub) => ({ path: hub.path.slice(1), priority: 0.9, changeFreq: 'weekly' })),
+  ...blogCategories.map((category) => ({ path: blogCategoryPath(category.slug).slice(1), priority: 0.6, changeFreq: 'weekly' })),
   { path: 'projects', priority: 0.8, changeFreq: 'weekly' },
   { path: 'contact', priority: 0.8, changeFreq: 'monthly' },
   { path: 'cursor-ambassador', priority: 0.7, changeFreq: 'monthly' },
@@ -27,6 +30,12 @@ const serviceRoutes = [
   { path: 'services/nextjs-development/nextjs-indonesia', priority: 1.0, changeFreq: 'daily' },
   { path: 'services/nextjs-development/nextjs-seo', priority: 0.9, changeFreq: 'weekly' },
   { path: 'services/nextjs-development/agency-indonesia', priority: 1.0, changeFreq: 'daily' },
+  { path: 'services/ai-development/ai-mvp', priority: 0.8, changeFreq: 'monthly' },
+  { path: 'services/ai-development/ai-integration', priority: 0.8, changeFreq: 'monthly' },
+  { path: 'services/seo', priority: 0.9, changeFreq: 'weekly' },
+  { path: 'services/seo/jasa-seo', priority: 0.9, changeFreq: 'weekly' },
+  { path: 'services/saas-development', priority: 0.8, changeFreq: 'monthly' },
+  { path: 'services/saas-development/jasa-pembuatan-aplikasi-web', priority: 0.8, changeFreq: 'monthly' },
 ]
 
 const wordpressRoutes = [
@@ -35,6 +44,11 @@ const wordpressRoutes = [
   { path: 'services/wordpress/plugin-development', priority: 0.7, changeFreq: 'monthly' },
   { path: 'services/wordpress/headless-development', priority: 0.7, changeFreq: 'monthly' },
   { path: 'services/wordpress/optimization', priority: 0.7, changeFreq: 'monthly' },
+  { path: 'services/wordpress/maintenance', priority: 0.7, changeFreq: 'monthly' },
+  { path: 'services/wordpress/redesign', priority: 0.7, changeFreq: 'monthly' },
+  { path: 'services/wordpress/migration', priority: 0.7, changeFreq: 'monthly' },
+  { path: 'services/wordpress/woocommerce', priority: 0.7, changeFreq: 'monthly' },
+  { path: 'services/wordpress/jasa-wordpress', priority: 0.7, changeFreq: 'monthly' },
 ]
 
 const phpRoutes = [

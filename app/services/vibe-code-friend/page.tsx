@@ -13,6 +13,8 @@ import {
   AlertCircle,
 } from 'lucide-react'
 import Link from 'next/link'
+import { Faq } from '@/components/page/faq'
+import { CtaBand } from '@/components/page/cta-band'
 import { buildPageGraph, buildPageMetadata, type FaqItem } from '@/lib/seo'
 import { JsonLd } from '@/components/seo/json-ld'
 import { contactHref } from '@/lib/contact-services'
@@ -170,7 +172,7 @@ export default function VibeCodeFriendPage() {
 
         <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-4">
           Cursor mentoring
-          <span className="block gradient-text font-light">for developers and teams</span>
+          {' '}<span className="block gradient-text font-light">for developers and teams</span>
         </h1>
 
         <div className="inline-flex bg-orange-50 rounded-full mb-6 py-1.5 px-4 items-center gap-2">
@@ -222,7 +224,11 @@ export default function VibeCodeFriendPage() {
           <Link href="/blog/cursor-project-rules" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors">
             how I write Cursor project rules
           </Link>
-          .
+          , and the{' '}
+          <Link href="/guides/cursor" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors">
+            free Cursor guide
+          </Link>{' '}
+          has the rules file I commit, a review checklist, and a cost estimate for your team.
         </p>
       </section>
 
@@ -348,61 +354,14 @@ export default function VibeCodeFriendPage() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="mb-16 max-w-3xl mx-auto" aria-labelledby="mentoring-faq">
-        <h2 id="mentoring-faq" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-6">
-          Cursor mentoring FAQ
-        </h2>
-        <div className="space-y-3">
-          {faqs.map((faq) => (
-            <details key={faq.question} className="group bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm open:shadow-md">
-              <summary className="cursor-pointer list-none font-semibold text-zinc-900 flex items-center justify-between gap-4">
-                {faq.question}
-                <span className="text-orange-500 transition-transform group-open:rotate-45 text-xl leading-none">+</span>
-              </summary>
-              <p className="mt-3 text-sm text-zinc-600 leading-relaxed">{faq.answer}</p>
-            </details>
-          ))}
-        </div>
-      </section>
+      <Faq id="mentoring-faq" title="Cursor mentoring FAQ" faqs={faqs} />
 
-      {/* CTA Section */}
-      <section className="overflow-hidden min-h-[400px] shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
-        <div
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)',
-            backgroundSize: '40px 40px',
-          }}
-        />
-
-        <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16 min-h-[400px] relative">
-          <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
-            Start with one repo and two developers
-          </h2>
-          <p className="text-zinc-400 mb-8 max-w-lg font-medium">
-            Tell me your team size, your stack, and what’s going wrong with Cursor today. I’ll reply with how I’d run the first sessions. If your team doesn’t need mentoring yet, I’ll say so.
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link
-              href={contactHref('cursor-mentoring')}
-              className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
-            >
-              <span>Get Cursor mentoring for your team</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              href="/services/ai-development"
-              className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3"
-            >
-              <span>Or hire me to build it</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      <CtaBand
+        title="Start with one repo and two developers"
+        body="Tell me your team size, your stack, and what’s going wrong with Cursor today. I’ll reply with how I’d run the first sessions. If your team doesn’t need mentoring yet, I’ll say so."
+        primary={{ href: contactHref('cursor-mentoring'), label: 'Get Cursor mentoring for your team' }}
+        secondary={{ href: '/services/ai-development', label: 'Or hire me to build it' }}
+      />
     </>
   )
 }

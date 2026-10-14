@@ -11,6 +11,7 @@ import {
   GraduationCap,
   Hammer,
   TrendingUp,
+  Search,
 } from 'lucide-react'
 import Link from 'next/link'
 import { contactHref } from '@/lib/contact-services'
@@ -27,7 +28,6 @@ const buildServices = [
     icon: Code2,
     href: '/services/nextjs-development',
     features: ['Product builds', 'Migrations', 'Performance and SEO', 'Headless CMS'],
-    span: 2,
   },
   {
     title: 'AI product development',
@@ -36,16 +36,30 @@ const buildServices = [
     icon: Sparkles,
     href: '/services/ai-development',
     features: ['Chatbots and assistants', 'Agent workflows', 'API integrations', 'AI MVPs'],
-    span: 2,
+  },
+  {
+    title: 'SaaS development',
+    description:
+      'A SaaS or web app built to cost little to run, starting on scale-from-zero hosting, with the expected monthly bill in the plan.',
+    icon: Briefcase,
+    href: '/services/saas-development',
+    features: ['Custom SaaS', 'MVPs', 'Low running cost', 'AI features'],
+  },
+  {
+    title: 'Technical SEO',
+    description:
+      'An SEO audit, keyword and competitor research, and the fixes made in your code. Monthly SEO comes with rank tracking.',
+    icon: Search,
+    href: '/services/seo',
+    features: ['SEO audits', 'Keyword research', 'Fixes in code', 'Monthly SEO'],
   },
   {
     title: 'WordPress / headless',
     description:
-      'Keep the WordPress editor your team knows, with custom themes, plugins, or a headless Next.js front end.',
+      'Keep the WordPress editor your team knows, with custom themes, plugins, maintenance, or a headless Next.js front end.',
     icon: Layout,
     href: '/services/wordpress',
-    features: ['Custom themes', 'Headless WP', 'Plugin dev', 'Performance'],
-    span: 1,
+    features: ['Custom themes', 'Maintenance', 'Migrations', 'WooCommerce'],
   },
   {
     title: 'PHP development',
@@ -53,7 +67,6 @@ const buildServices = [
     icon: Server,
     href: '/services/php-development',
     features: ['Custom apps', 'APIs', 'Maintenance', 'Migrations'],
-    span: 1,
     secondary: true,
   },
 ]
@@ -66,7 +79,6 @@ const levelUpServices = [
     icon: Bot,
     href: '/services/vibe-code-friend',
     features: ['Cursor mentoring', 'AI IDE tutoring', 'Workflow coaching', 'Code fixing'],
-    span: 2,
   },
 ]
 
@@ -94,6 +106,30 @@ const wordPressServices = [
     description: 'Find what makes the site slow or exposed, fix it, and keep plugins from undoing the work.',
     href: '/services/wordpress/optimization',
     benefits: ['Speed', 'Security hardening', 'CDN setup'],
+  },
+  {
+    title: 'Maintenance and support',
+    description: 'Updates tested on staging, off-site backups, monitoring, and malware cleanup when a site gets hacked.',
+    href: '/services/wordpress/maintenance',
+    benefits: ['Monthly plan', 'Backups', 'Malware removal'],
+  },
+  {
+    title: 'Website redesign',
+    description: 'A new design and a fast custom theme, with URLs kept or redirected so rankings survive the launch.',
+    href: '/services/wordpress/redesign',
+    benefits: ['Custom theme', 'SEO kept', 'Staging first'],
+  },
+  {
+    title: 'Migration',
+    description: 'Move to a new host, a new domain, or into WordPress from another CMS, with a redirect map for every URL.',
+    href: '/services/wordpress/migration',
+    benefits: ['New host', 'Redirect map', 'Search Console checks'],
+  },
+  {
+    title: 'WooCommerce',
+    description: 'Custom checkout, payment gateways, and fixes for slow stores, tested with real orders on staging.',
+    href: '/services/wordpress/woocommerce',
+    benefits: ['Custom plugins', 'Payments', 'Store speed'],
   },
 ]
 
@@ -148,7 +184,7 @@ export default function ServicesPage() {
 
         <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
           Two ways to
-          <span className="block gradient-text font-light">work with me</span>
+          {' '}<span className="block gradient-text font-light">work with me</span>
         </h1>
 
         <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
@@ -225,12 +261,12 @@ export default function ServicesPage() {
           </Link>
         </div>
 
-        <div className="bento-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div className="bento-grid grid-cols-1 md:grid-cols-2">
           {buildServices.map((service) => (
             <Link
               key={service.href}
               href={service.href}
-              className={`bento-card group relative overflow-hidden ${service.span === 2 ? 'md:col-span-2' : ''} ${service.secondary ? 'opacity-90' : ''}`}
+              className={`bento-card group relative overflow-hidden ${service.secondary ? 'opacity-90' : ''}`}
             >
               <div className="relative z-10">
                 <div className="flex items-center gap-2 mb-3 text-zinc-400">
@@ -376,7 +412,7 @@ export default function ServicesPage() {
               WordPress <span className="gradient-text">specialties</span>
             </h2>
             <p className="text-sm text-zinc-500 font-medium">
-              Themes, plugins, headless setups, and speed work, all part of the Build offer.
+              Themes, plugins, headless setups, speed, maintenance, migrations, and WooCommerce, all part of the Build offer.
             </p>
           </div>
           <Link
@@ -447,7 +483,7 @@ export default function ServicesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="overflow-hidden min-h-[400px] shadow-zinc-900/30 bg-zinc-900 rounded-[2rem] relative shadow-2xl mb-8">
+      <section className="overflow-hidden shadow-zinc-900/30 bg-zinc-900 rounded-[2rem] relative shadow-2xl mb-8">
         <div
           className="absolute inset-0 opacity-10"
           style={{
@@ -457,7 +493,7 @@ export default function ServicesPage() {
           }}
         />
 
-        <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16 min-h-[400px] relative">
+        <div className="flex flex-col items-center justify-center text-center px-6 py-12 md:px-12 md:py-14 relative">
           <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
             Tell me what you’re building
           </h2>

@@ -8,6 +8,7 @@ const navigationLinks = [
   { name: 'About', href: '/about' },
   { name: 'Projects', href: '/projects' },
   { name: 'Services', href: '/services' },
+  { name: 'Guides', href: '/guides/cursor' },
   { name: 'Blog', href: '/blog' },
   { name: 'Contact', href: '/contact' },
 ]
@@ -15,6 +16,9 @@ const navigationLinks = [
 const serviceLinks = [
   { name: 'Next.js Development', href: '/services/nextjs-development' },
   { name: 'AI Development', href: '/services/ai-development' },
+  { name: 'SaaS Development', href: '/services/saas-development' },
+  { name: 'Technical SEO', href: '/services/seo' },
+  { name: 'Jasa SEO', href: '/services/seo/jasa-seo' },
   { name: 'WordPress Development', href: '/services/wordpress' },
   { name: 'Cursor / AI Workflows', href: '/services/vibe-code-friend' },
   { name: 'Headless WordPress', href: '/services/wordpress/headless-development' },
@@ -36,14 +40,14 @@ export function Footer() {
   return (
     <footer className="z-10 w-full relative px-6 md:px-10 xl:px-12 pb-8">
       {/* Separator */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mb-12 opacity-60" />
 
       {/* Top Section: Brand + Location */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 mb-16 lg:mb-20">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 mb-12">
         {/* Left: Brand */}
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-4">
           <div className="flex items-start gap-1">
-            <h2 className="leading-none md:text-7xl lg:text-8xl text-5xl font-semibold text-neutral-800 tracking-tighter">
+            <h2 className="leading-none md:text-6xl lg:text-7xl text-5xl font-semibold text-neutral-800 tracking-tighter">
               MadeByAris
             </h2>
           </div>
@@ -72,15 +76,15 @@ export function Footer() {
       </div>
 
       {/* Bottom Section: Links */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
         {/* Column 1: Navigation */}
-        <div className="flex flex-col gap-4">
-          <h3 className="text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-2">Navigation</h3>
+        <div className="flex flex-col gap-3">
+          <h3 className="text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-1">Navigation</h3>
           {navigationLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
-              className="text-base text-zinc-700 hover:text-orange-500 transition-colors font-normal"
+              className="text-sm md:text-base text-zinc-700 hover:text-orange-500 transition-colors font-normal"
             >
               {link.name}
             </Link>
@@ -88,13 +92,13 @@ export function Footer() {
         </div>
 
         {/* Column 2: Services */}
-        <div className="flex flex-col gap-4">
-          <h3 className="text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-2">Services</h3>
+        <div className="flex flex-col gap-3">
+          <h3 className="text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-1">Services</h3>
           {serviceLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
-              className="text-base text-zinc-700 hover:text-orange-500 transition-colors font-normal"
+              className="text-sm md:text-base text-zinc-700 hover:text-orange-500 transition-colors font-normal"
             >
               {link.name}
             </Link>
@@ -102,15 +106,15 @@ export function Footer() {
         </div>
 
         {/* Column 3: Social */}
-        <div className="flex flex-col gap-4">
-          <h3 className="text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-2">Connect</h3>
+        <div className="flex flex-col gap-3">
+          <h3 className="text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-1">Connect</h3>
           {socialLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-base text-zinc-700 hover:text-orange-500 transition-colors font-normal flex items-center gap-2 group"
+              className="text-sm md:text-base text-zinc-700 hover:text-orange-500 transition-colors font-normal flex items-center gap-2 group"
             >
               {link.name}
               <ArrowUpRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
@@ -119,8 +123,8 @@ export function Footer() {
         </div>
 
         {/* Column 4: Contact CTA */}
-        <div className="flex flex-col gap-4">
-          <h3 className="text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-2">Start a project</h3>
+        <div className="col-span-2 lg:col-span-1 flex flex-col gap-3">
+          <h3 className="text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-1">Start a project</h3>
           <p className="text-sm text-zinc-500 mb-4">
             Tell me what you need. I reply within 24 hours.
           </p>
@@ -135,7 +139,7 @@ export function Footer() {
       </div>
 
       {/* Copyright & Legal */}
-      <div className="mt-16 pt-8 border-t border-zinc-200/60">
+      <div className="mt-12 pt-8 border-t border-zinc-200/60">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-sm text-zinc-500">
             &copy; {new Date().getFullYear()} MadeByAris. All rights reserved.

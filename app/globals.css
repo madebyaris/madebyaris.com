@@ -241,12 +241,19 @@ body {
 
 .bento-card {
   background: white;
-  padding: 2rem;
-  min-height: 340px;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   transition: background-color 0.3s ease;
+}
+
+/* Room for the hover arrow pinned to the bottom-right corner. */
+@media (min-width: 768px) {
+  .bento-card {
+    padding: 2rem;
+    min-height: 13rem;
+  }
 }
 
 .bento-card:hover {
@@ -307,9 +314,9 @@ body {
   line-height: 1.6; 
 }
 
-/* Gradient text */
+/* Gradient text. Both stops stay above 4.5:1 on white so the H1 accent stays readable. */
 .gradient-text {
-  background-image: linear-gradient(to bottom, #a1a1aa, #e4e4e7);
+  background-image: linear-gradient(to bottom, #52525b, #71717a);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
@@ -339,7 +346,6 @@ body {
   max-width: 100%;
   overflow-wrap: break-word;
   word-wrap: break-word;
-  hyphens: auto;
   font-size: 1.125rem;
   line-height: 1.8;
   color: hsl(var(--foreground));

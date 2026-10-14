@@ -113,6 +113,13 @@ export interface BreadcrumbItem {
   path: string
 }
 
+export interface SchemaThing {
+  '@type': string
+  name: string
+  url?: string
+  sameAs?: string
+}
+
 export interface FaqItem {
   question: string
   answer: string
@@ -275,6 +282,9 @@ export function buildBlogPostGraph(input: {
   keywords?: string[]
   wordCount?: number
   readingMinutes?: number
+  category?: { name: string; path: string }
+  about?: ReadonlyArray<SchemaThing>
+  mentions?: ReadonlyArray<SchemaThing>
 }) {
   const path = `/blog/${input.slug}`
   const url = productionAbsoluteUrl(path)
@@ -310,6 +320,8 @@ export function buildBlogPostGraph(input: {
         ...(input.keywords?.length ? { keywords: input.keywords.map(cleanText) } : {}),
         ...(input.wordCount ? { wordCount: input.wordCount } : {}),
         ...(input.readingMinutes ? { timeRequired: `PT${input.readingMinutes}M` } : {}),
+        ...(input.about?.length ? { about: input.about } : {}),
+        ...(input.mentions?.length ? { mentions: input.mentions } : {}),
         mainEntityOfPage: ref(`${url}#webpage`),
         isPartOf: ref(schemaIds.website),
         author: ref(schemaIds.person),
@@ -318,6 +330,7 @@ export function buildBlogPostGraph(input: {
       },
       buildBreadcrumbNode(url, [
         { name: 'Blog', path: '/blog' },
+        ...(input.category ? [{ name: cleanText(input.category.name), path: input.category.path }] : []),
         { name: headline, path },
       ]),
     ],

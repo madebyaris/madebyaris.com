@@ -45,7 +45,7 @@ export default function ClientProjectsPage() {
         {/* Title */}
         <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
           Next.js case studies
-          <span className="block gradient-text font-light">and WordPress projects</span>
+          {' '}<span className="block gradient-text font-light">and WordPress projects</span>
         </h1>
 
         {/* Description */}
@@ -193,7 +193,7 @@ export default function ClientProjectsPage() {
       <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
 
       {/* CTA Section */}
-      <section className="overflow-hidden min-h-[400px] shadow-zinc-900/30 bg-zinc-900 rounded-[2rem] relative shadow-2xl mb-8">
+      <section className="overflow-hidden shadow-zinc-900/30 bg-zinc-900 rounded-[2rem] relative shadow-2xl mb-8">
         {/* Grid Pattern */}
         <div 
           className="absolute inset-0 opacity-10" 
@@ -203,7 +203,7 @@ export default function ClientProjectsPage() {
           }}
         />
 
-        <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 lg:p-16 min-h-[400px] relative">
+        <div className="flex flex-col items-center justify-center text-center px-6 py-12 md:px-12 md:py-14 relative">
           <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
             Want a site like one of these?
           </h2>

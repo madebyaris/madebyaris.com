@@ -83,28 +83,24 @@ const services = [
     title: "Next.js development",
     description: "New products and WordPress-to-Next.js migrations that load fast on phones and keep their search rankings after launch.",
     href: "/services/nextjs-development",
-    span: 1,
   },
   {
     icon: Sparkles,
     title: "AI product development",
     description: "Chatbots, agents, and LLM features that run inside your Next.js product and reach real users.",
     href: "/services/ai-development",
-    span: 2,
   },
   {
     icon: Globe,
     title: "WordPress and headless WordPress",
     description: "Editors keep the wp-admin they know. I build custom themes and plugins, or a Next.js front end like the one this site runs on.",
     href: "/services/wordpress",
-    span: 1,
   },
   {
     icon: Server,
     title: "PHP development",
     description: "Keep a legacy PHP app running, add an API to it, or plan its move to Laravel one piece at a time.",
     href: "/services/php-development",
-    span: 1,
   },
 ]
 
@@ -138,7 +134,7 @@ export default function HomePage() {
         <div className="lg:col-span-7 flex flex-col pt-4 relative justify-center">
           {/* Social Proof Pill */}
           <div 
-            className="inline-flex bg-white/60 w-max rounded-full mb-8 py-1.5 pr-5 pl-1.5 shadow-sm backdrop-blur-sm items-center"
+            className="inline-flex bg-white/60 max-w-full rounded-2xl sm:rounded-full mb-8 py-1.5 pr-5 pl-1.5 shadow-sm backdrop-blur-sm items-center"
             style={{
               position: 'relative',
               // @ts-expect-error CSS custom properties
@@ -146,7 +142,7 @@ export default function HomePage() {
               '--border-radius-before': '9999px'
             }}
           >
-            <div className="w-6 h-6 rounded-full bg-zinc-900 text-white flex items-center justify-center mr-3">
+            <div className="w-6 h-6 shrink-0 rounded-full bg-zinc-900 text-white flex items-center justify-center mr-3">
               <Award className="w-3.5 h-3.5" />
             </div>
             <span className="text-xs font-medium text-zinc-600 tracking-wide">
@@ -157,8 +153,8 @@ export default function HomePage() {
           {/* Headline */}
           <h1 className="leading-[0.95] lg:text-[5rem] text-5xl font-medium text-zinc-900 tracking-tighter mb-8">
             Next.js &amp; AI
-            <span className="block gradient-text font-light">Product</span>
-            <span className="block">Developer</span>
+            {' '}<span className="block gradient-text font-light">Product</span>
+            {' '}<span className="block">Developer</span>
           </h1>
 
           {/* Subheadline */}
@@ -192,7 +188,7 @@ export default function HomePage() {
               <ArrowRight className="w-4 h-4 text-zinc-500" />
             </Link>
           </div>
-          <p className="text-xs text-zinc-500 font-medium lg:mb-20 mb-12">
+          <p className="text-xs text-zinc-500 font-medium lg:mb-14 mb-10">
             I reply within 24 hours and tell you plainly whether I&apos;m the right fit.
           </p>
 
@@ -299,7 +295,7 @@ export default function HomePage() {
       </section>
 
       {/* Separator */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mt-16 lg:mt-24 mb-16 lg:mb-24 opacity-60" />
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent my-12 lg:my-16 opacity-60" />
 
       {/* Services Bento Grid Section */}
       <section className="flex flex-col gap-10 w-full relative">
@@ -324,12 +320,12 @@ export default function HomePage() {
         </div>
 
         {/* Bento Grid */}
-        <div className="bento-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, index) => (
+        <div className="bento-grid grid-cols-1 md:grid-cols-2">
+          {services.map((service) => (
             <Link
-              key={index}
+              key={service.href}
               href={service.href}
-              className={`bento-card group relative overflow-hidden ${service.span === 2 ? 'md:col-span-2' : ''}`}
+              className="bento-card group relative overflow-hidden"
             >
               <div className="relative z-10">
                 <div className="flex items-center gap-2 mb-3 text-zinc-400">
@@ -353,7 +349,7 @@ export default function HomePage() {
       </section>
 
       {/* Separator */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mt-16 lg:mt-24 mb-16 lg:mb-24 opacity-60" />
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent my-12 lg:my-16 opacity-60" />
 
       {/* Level Up Section */}
       <section className="flex flex-col gap-8 w-full relative">
@@ -401,7 +397,7 @@ export default function HomePage() {
       </section>
 
       {/* Separator */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mt-16 lg:mt-24 mb-16 lg:mb-24 opacity-60" />
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent my-12 lg:my-16 opacity-60" />
 
       {/* Features Row */}
       <section className="flex flex-col gap-16 w-full relative">
@@ -497,7 +493,7 @@ export default function HomePage() {
       </section>
 
       {/* Separator */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mt-16 lg:mt-24 mb-16 lg:mb-24 opacity-60" />
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent my-12 lg:my-16 opacity-60" />
 
       {/* Recent Blog Posts */}
       <section className="flex flex-col gap-10 w-full relative cv-auto">

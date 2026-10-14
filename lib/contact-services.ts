@@ -3,12 +3,15 @@
 export const contactServices = [
   { id: 'nextjs', label: 'Build or migrate a Next.js site or app' },
   { id: 'headless-wordpress', label: 'Headless WordPress with Next.js' },
-  { id: 'wordpress', label: 'WordPress theme, plugin, or speed fix' },
-  { id: 'ai', label: 'Add an AI feature, agent, or chatbot' },
+  { id: 'wordpress', label: 'WordPress build, redesign, migration, or speed fix' },
+  { id: 'wordpress-care', label: 'WordPress maintenance, support, or malware cleanup' },
+  { id: 'saas', label: 'Build a SaaS or web app that is cheap to run' },
+  { id: 'ai', label: 'Add an AI feature to my product or business' },
+  { id: 'ai-mvp', label: 'Turn my AI product idea into a launch-ready MVP' },
   { id: 'cursor-mentoring', label: 'Cursor mentoring for me or my team' },
   { id: 'code-fixing', label: 'Fix broken or AI-written code' },
   { id: 'vercel', label: 'Vercel deployment or hosting costs' },
-  { id: 'seo', label: 'Next.js SEO and Core Web Vitals' },
+  { id: 'seo', label: 'SEO audit, keyword research, or monthly SEO' },
   { id: 'php', label: 'PHP app, API, or legacy modernization' },
   { id: 'other', label: 'Something else' },
 ] as const

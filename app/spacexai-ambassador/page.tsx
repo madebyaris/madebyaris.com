@@ -78,7 +78,7 @@ export default function SpaceXAIAmbassadorPage() {
 
         <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
           SpaceXAI
-          <span className="block gradient-text font-light">Ambassador</span>
+          {' '}<span className="block gradient-text font-light">Ambassador</span>
         </h1>
 
         <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-4 leading-relaxed font-medium">
@@ -87,7 +87,16 @@ export default function SpaceXAIAmbassadorPage() {
         </p>
 
         <p className="text-sm text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed">
-          In August 2026 Cursor announced it is part of SpaceX, continuing the SpaceXAI partnership. I keep teaching practical shipping with Cursor and the wider AI coding stack, based on client work I ship every week.
+          On August 14, 2026{' '}
+          <a
+            href="https://cursor.com/blog/joining-spacex"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors"
+          >
+            Cursor announced it is part of SpaceX
+          </a>
+          , continuing the SpaceXAI partnership. I keep teaching practical shipping with Cursor and the wider AI coding stack, based on client work I ship every week.
         </p>
 
         <div className="flex flex-wrap justify-center gap-3">
@@ -158,7 +167,7 @@ export default function SpaceXAIAmbassadorPage() {
       </section>
 
       {/* CTA */}
-      <section className="overflow-hidden min-h-[320px] shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
+      <section className="overflow-hidden shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
         <div
           className="absolute inset-0 opacity-10"
           style={{
@@ -168,7 +177,7 @@ export default function SpaceXAIAmbassadorPage() {
           }}
         />
 
-        <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 min-h-[320px] relative">
+        <div className="flex flex-col items-center justify-center text-center px-6 py-12 md:px-12 md:py-14 relative">
           <h2 className="md:text-3xl lg:text-4xl leading-tight text-2xl font-normal text-white tracking-tight mb-6 max-w-2xl">
             Need help shipping faster with Cursor?
           </h2>
