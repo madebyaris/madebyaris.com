@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { cn } from "@/lib/utils"
+import { contactHref } from "@/lib/contact-services"
 import { X, ChevronDown, ArrowRight } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -140,19 +141,22 @@ export default function MobileMenu({
                 ))}
 
                 <Link
+                  href={contactHref('nextjs')}
+                  onClick={onClose}
+                  className="mt-8 btn-primary rounded-full py-4 px-10 text-base font-semibold flex items-center gap-3 text-zinc-900"
+                >
+                  Hire me
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
+                <a
                   href="https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={onClose}
-                  className="mt-8 rounded-full py-4 px-10 text-base font-semibold flex items-center gap-3 text-white"
-                  style={{
-                    background: 'linear-gradient(135deg, #14a800 0%, #0d7a00 100%)',
-                    boxShadow: '0 10px 30px rgba(20, 168, 0, 0.4)',
-                  }}
+                  className="mt-4 text-sm text-zinc-500 hover:text-zinc-900 transition-colors"
                 >
-                  Hire Me on Upwork
-                  <ArrowRight className="w-5 h-5" />
-                </Link>
+                  Or hire me on Upwork
+                </a>
               </nav>
             </div>
           </motion.div>

@@ -1,26 +1,23 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowLeft, ArrowRight, BookOpen, Calendar, Clock, Share2, Tag, User } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
-import { Suspense } from 'react'
+import { ArrowLeft, ArrowRight, BookOpen, Calendar, Clock, Compass, RefreshCw } from 'lucide-react'
 import { TableOfContents } from '@/components/table-of-contents'
 import { SmoothScroll } from '@/components/smooth-scroll'
-import { Post, Tag as TagType } from '@/lib/types'
 import { WordPressContent } from '@/components/wordpress-content'
-import { NextImage } from '@/components/ui/next-image'
 import { convertBlocks, enhanceRenderedHTML } from 'wp-block-to-html/core'
 import { FeaturedImage } from '@/components/featured-image'
 import { AuthorImage } from '@/components/author-image'
 import { RelatedPostCard } from '@/components/related-post-card'
-import { getPost, getPosts } from '@/lib/wordpress'
-import { buildBlogPostGraph, buildBlogPostMetadata } from '@/lib/seo'
+import { getPost, getPosts, type ProcessedPost } from '@/lib/wordpress'
+import { authorProfile, buildBlogPostGraph, buildBlogPostMetadata, isIndonesianSlug, siteConfig } from '@/lib/seo'
+import { blogCategoryCopy, blogCategoryPath, hubForCategory, primaryCategory, topicHubs } from '@/lib/topics'
 import { JsonLd } from '@/components/seo/json-ld'
+import { contactHref } from '@/lib/contact-services'
 
-export const revalidate = 1800 // Revalidate every 30 minutes
+export const revalidate = 604800 // 7 days; webhook refreshes a post on publish
+
+const RELATED_POSTS = 3
 
 interface BlogPostPageProps {
   params: Promise<{
@@ -61,7 +58,6 @@ export async function generateStaticParams() {
   }
 }
 
-// Helper function to format date
 function formatDate(dateString: string) {
   return new Date(dateString).toLocaleDateString('en-US', {
     year: 'numeric',
@@ -70,13 +66,11 @@ function formatDate(dateString: string) {
   })
 }
 
-// Helper function to get reading time
 function getReadingTime(content: string) {
   const wordsPerMinute = 200;
   const text = content.replace(/<[^>]*>/g, '');
   const wordCount = text.split(/\s+/).length;
-  const readingTime = Math.ceil(wordCount / wordsPerMinute);
-  return readingTime;
+  return Math.ceil(wordCount / wordsPerMinute);
 }
 
 interface Heading {
@@ -85,10 +79,10 @@ interface Heading {
   id: string;
 }
 
-// Function to extract headings for table of contents
 function extractHeadings(content: string): Heading[] {
   const headingRegex = /<h([2-3])[^>]*>(.*?)<\/h\1>/g;
   const headings: Heading[] = [];
+  const seenIds = new Set<string>();
   let match;
   
   try {
@@ -97,6 +91,10 @@ function extractHeadings(content: string): Heading[] {
       const text = match[2].replace(/<[^>]*>/g, '');
       // Create a consistent ID that will match what we use in addIdsToHeadings
       const id = text.toLowerCase().replace(/[^\w]+/g, '-');
+
+      // One TOC item per unique anchor — duplicate H2 text shares an id.
+      if (seenIds.has(id)) continue;
+      seenIds.add(id);
       
       headings.push({
         level,
@@ -111,19 +109,18 @@ function extractHeadings(content: string): Heading[] {
   return headings;
 }
 
-// Function to add IDs to headings in content
 function addIdsToHeadings(content: string) {
   try {
-    return content.replace(
+    // The page template owns the only <h1>; headings from WordPress start at <h2>.
+    const demoted = content.replace(/<(\/?)h1(\s|>)/gi, '<$1h2$2')
+    return demoted.replace(
       /<h([2-3])([^>]*)>(.*?)<\/h\1>/g,
       (match, level, attrs, text) => {
-        // Extract text without HTML tags for the ID
         const plainText = text.replace(/<[^>]*>/g, '');
         const id = plainText.toLowerCase().replace(/[^\w]+/g, '-');
         
-        // Check if there's already an id attribute
         if (attrs.includes('id=')) {
-          return match; // Keep existing ID
+          return match;
         }
         
         return `<h${level}${attrs} id="${id}">${text}</h${level}>`;
@@ -135,377 +132,287 @@ function addIdsToHeadings(content: string) {
   }
 }
 
-// Function to transform WordPress images to use NextImage
-function transformTheImage(content: string): string {
-  // Replace WordPress image markup with Next.js Image component
-  return content.replace(
-    /<img([^>]*?)src="([^"]*?)"([^>]*?)>/g,
-    (match, before, src, after) => {
-      // Extract attributes
-      const width = before.match(/width="(\d+)"/)?.[1] || '800';
-      const height = before.match(/height="(\d+)"/)?.[1] || '600';
-      const alt = before.match(/alt="([^"]*)"/)?.[1] || '';
-      const classMatch = before.match(/class="([^"]*)"/)?.[1] || '';
-      
-      // Calculate aspect ratio
-      const aspectRatio = (parseInt(height) / parseInt(width)) * 100;
-      
-      return `
-        <div class="img-container relative my-8" style="padding-bottom: ${aspectRatio}%; position: relative; overflow: hidden;">
-          <NextImage
-            src="${src}"
-            alt="${alt}"
-            width="${width}"
-            height="${height}"
-            className="absolute inset-0 w-full h-full object-cover rounded-lg ${classMatch}"
-            loading="lazy"
-            decoding="async"
-            quality={90}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
-          />
-        </div>
-      `.trim();
-    }
-  );
+function renderContent(post: ProcessedPost): string {
+  try {
+    const conversionOptions = {
+      cssFramework: 'tailwind',
+      contentHandling: 'hybrid',
+      ssrOptions: {
+        enabled: true,
+        lazyLoadMedia: true,
+        preconnect: true,
+        criticalPathOnly: true,
+        removeDuplicateStyles: true,
+      },
+    } as const
+
+    // If the WP API exposes parsed blocks, convert them; otherwise enhance rendered HTML.
+    const html =
+      Array.isArray(post.blocks) && post.blocks.length > 0
+        ? (convertBlocks({ blocks: post.blocks, rendered: post.content?.rendered }, conversionOptions as never) as string)
+        : enhanceRenderedHTML(post.content.rendered, conversionOptions as never)
+    return addIdsToHeadings(html)
+  } catch (error) {
+    console.error('Error processing content:', error);
+    return addIdsToHeadings(post.content.rendered)
+  }
 }
+
+async function getRelatedPosts(post: ProcessedPost, categoryId: number | undefined): Promise<ProcessedPost[]> {
+  const sameCategory = categoryId
+    ? await getPosts({ categories: [categoryId], exclude: [post.id], per_page: RELATED_POSTS })
+    : []
+  if (sameCategory.length >= RELATED_POSTS) return sameCategory
+
+  const seen = new Set([post.id, ...sameCategory.map((p) => p.id)])
+  const latest = await getPosts({ per_page: RELATED_POSTS * 2 })
+  return [...sameCategory, ...latest.filter((p) => !seen.has(p.id))].slice(0, RELATED_POSTS)
+}
+
+const authorLinks = (
+  [
+    ['GitHub', 'github.com'],
+    ['LinkedIn', 'linkedin.com'],
+    ['X', 'x.com'],
+  ] as const
+).flatMap(([label, host]) => {
+  const href = siteConfig.sameAs.find((url) => url.includes(host))
+  return href ? [{ label, href }] : []
+})
 
 export default async function BlogPost({ params }: BlogPostPageProps) {
   const { slug } = await params
-  
-  try {
-    const [post, allPosts] = await Promise.all([
-      getPost(slug),
-      getPosts({ per_page: 6 })
-    ])
-    if (!post) {
-      notFound();
-    }
 
-    const featuredImageUrl = post._embedded?.['wp:featuredmedia']?.[0]?.source_url || ''
-
-    const relatedPosts = allPosts.filter((p) => p.id !== post.id).slice(0, 3)
-
-    // Extract headings for table of contents and transform content on the server
-    let headings: Heading[] = [];
-    let transformedContent = '';
-    
-    try {
-      const conversionOptions = {
-        cssFramework: 'tailwind',
-        contentHandling: 'hybrid',
-        ssrOptions: {
-          enabled: true,
-          lazyLoadMedia: true,
-          preconnect: true,
-          criticalPathOnly: true,
-          removeDuplicateStyles: true,
-        },
-      } as const
-
-      // If the WP API exposes parsed blocks, convert them; otherwise enhance rendered HTML.
-      if (Array.isArray(post.blocks) && post.blocks.length > 0) {
-        transformedContent = convertBlocks(
-          { blocks: post.blocks, rendered: post.content?.rendered },
-          conversionOptions as never
-        ) as string
-      } else {
-        transformedContent = enhanceRenderedHTML(post.content.rendered, conversionOptions as never)
-      }
-      
-      // Add IDs to the transformed content
-      const contentWithIds = addIdsToHeadings(transformedContent);
-      
-      // Extract headings for table of contents
-      headings = extractHeadings(contentWithIds);
-      
-      // Save the processed content with IDs
-      transformedContent = contentWithIds;
-    } catch (error) {
-      console.error('Error processing content:', error);
-      // Fallback to rendered content with IDs
-      transformedContent = addIdsToHeadings(post.content.rendered);
-      headings = extractHeadings(transformedContent);
-    }
-
-    // Calculate reading time
-    const readingTime = getReadingTime(transformedContent);
-    const featuredImage =
-      post._embedded?.['wp:featuredmedia']?.[0]?.source_url
-
-    const articleStructuredData = buildBlogPostGraph({
-      slug: post.slug,
-      headline: post.title.rendered,
-      description: post.excerpt.rendered,
-      image: featuredImage,
-      datePublished: post.date,
-      dateModified: post.modified,
-    })
-
-    return (
-      <>
-        <SmoothScroll />
-        <JsonLd data={articleStructuredData} />
-        
-        <div className="bg-background py-12 md:py-16">
-          <div className="container mx-auto max-w-[1080px] px-5 sm:px-8 lg:px-10">
-            <div className="mx-auto">
-              {/* Breadcrumb Navigation */}
-              <nav className="mb-8 text-sm text-muted-foreground">
-                <ol className="flex items-center flex-wrap gap-1">
-                  <li>
-                    <Link href="/" className="hover:text-primary transition-colors">
-                      Home
-                    </Link>
-                  </li>
-                  <li>
-                    <span className="mx-2">/</span>
-                  </li>
-                  <li>
-                    <Link href="/blog" className="hover:text-primary transition-colors">
-                      Blog
-                    </Link>
-                  </li>
-                  <li>
-                    <span className="mx-2">/</span>
-                  </li>
-                  <li className="truncate max-w-[200px] sm:max-w-xs">
-                    <span className="text-foreground">
-                      {post.title.rendered.replace(/<[^>]*>/g, '')}
-                    </span>
-                  </li>
-                </ol>
-              </nav>
-              
-              <article className="w-full mx-auto bg-background rounded-xl">
-                {/* Article Header */}
-                <header className="mb-12">
-                  <h1
-                    className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tighter mb-8"
-                    dangerouslySetInnerHTML={{ __html: post.title.rendered }}
-                  />
-                  
-                  <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-10">
-                    <div className="flex items-center">
-                      <Calendar className="h-4 w-4 mr-2" />
-                      <time dateTime={post.date}>
-                        {formatDate(post.date)}
-                      </time>
-                    </div>
-                    
-                    <div className="flex items-center">
-                      <Clock className="h-4 w-4 mr-2" />
-                      <span>{readingTime} min read</span>
-                    </div>
-                    
-                    <div className="flex items-center">
-                      <User className="h-4 w-4 mr-2" />
-                      <span>By Aris Setiawan</span>
-                    </div>
-                  </div>
-                  
-                  {/* Social Share Buttons */}
-                  <div className="flex items-center gap-2 mb-10">
-                    <span className="text-sm font-medium flex items-center">
-                      <Share2 className="h-4 w-4 mr-1" /> Share:
-                    </span>
-                    <Button 
-                      size="sm" 
-                      variant="outline" 
-                      className="rounded-full h-8 w-8 p-0"
-                      asChild
-                    >
-                      <a 
-                        href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(`https://madebyaris.com/blog/${post.slug}`)}&text=${encodeURIComponent(post.title.rendered.replace(/<[^>]*>/g, ''))}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                          <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
-                        </svg>
-                        <span className="sr-only">Twitter</span>
-                      </a>
-                    </Button>
-                    <Button 
-                      size="sm" 
-                      variant="outline" 
-                      className="rounded-full h-8 w-8 p-0"
-                      asChild
-                    >
-                      <a 
-                        href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://madebyaris.com/blog/${post.slug}`)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                          <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
-                        </svg>
-                        <span className="sr-only">Facebook</span>
-                      </a>
-                    </Button>
-                    <Button 
-                      size="sm" 
-                      variant="outline" 
-                      className="rounded-full h-8 w-8 p-0"
-                      asChild
-                    >
-                      <a 
-                        href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(`https://madebyaris.com/blog/${post.slug}`)}&title=${encodeURIComponent(post.title.rendered.replace(/<[^>]*>/g, ''))}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                          <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
-                        </svg>
-                        <span className="sr-only">LinkedIn</span>
-                      </a>
-                    </Button>
-                  </div>
-                </header>
-                
-                {/* Featured Image */}
-                {featuredImageUrl ? (
-                  <FeaturedImage
-                    src={featuredImageUrl}
-                    alt={post.title.rendered.replace(/<[^>]*>/g, '')}
-                    width={800}
-                    height={450}
-                  />
-                ) : (
-                  <div className="relative mb-12 overflow-hidden rounded-xl w-full">
-                    <div className="aspect-[16/9] bg-muted/20 flex items-center justify-center">
-                      <span className="text-muted-foreground text-sm">No featured image</span>
-                    </div>
-                  </div>
-                )}
-                
-                {/* Table of Contents (Mobile) */}
-                {headings.length > 0 && <TableOfContents headings={headings} isMobile={true} />}
-                
-                {/* Table of Contents (Desktop - Fixed Position) */}
-                {headings.length > 0 && <TableOfContents headings={headings} />}
-                
-                {/* Main Content */}
-                <div>
-                  {/* Article content is server-rendered and can opt into hydration when markers are present. */}
-                  <WordPressContent 
-                    content={transformedContent} 
-                    estimatedReadTime={readingTime}
-                  />
-                  
-                  {/* Tags */}
-                  {post.tags && Array.isArray(post.tags) && post.tags.length > 0 && (
-                    <div className="mt-12 pt-8 border-t">
-                      <h3 className="text-sm font-medium mb-3 flex items-center">
-                        <Tag className="h-4 w-4 mr-2 text-primary" />
-                        Tags:
-                      </h3>
-                      <div className="flex flex-wrap gap-2">
-                        {post.tags
-                          .filter((tag): tag is TagType => typeof tag === 'object' && tag !== null && 'name' in tag)
-                          .map((tag) => {
-                            return (
-                              <Link 
-                                key={tag.id} 
-                                href={`/blog?tag=${tag.slug}`}
-                                className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary hover:bg-primary/20 transition-colors"
-                              >
-                                {tag.name}
-                              </Link>
-                            );
-                          })
-                        }
-                      </div>
-                    </div>
-                  )}
-                  
-                  {/* Author Bio */}
-                  <div className="mt-12 pt-8 border-t">
-                    <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 p-8 bg-muted/30 rounded-xl">
-                      <AuthorImage 
-                        src="/aris.png" 
-                        alt="Aris Setiawan" 
-                        width={80}
-                        height={80}
-                      />
-                      <div className="flex-1 text-center sm:text-left">
-                        <h3 className="font-semibold text-xl mb-2">Aris Setiawan</h3>
-                        <p className="text-muted-foreground mb-3">
-                          Senior Full Stack Developer specializing in Next.js, React, and WordPress. 
-                          I write about web development, performance optimization, and best practices.
-                        </p>
-                        <div className="flex justify-center sm:justify-start gap-3">
-                          <a href="https://twitter.com/arisberikut" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
-                              <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
-                            </svg>
-                            <span className="sr-only">Twitter</span>
-                          </a>
-                          <a href="https://github.com/madebyaris" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
-                              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
-                            </svg>
-                            <span className="sr-only">GitHub</span>
-                          </a>
-                          <a href="https://linkedin.com/in/arissetia" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
-                              <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
-                            </svg>
-                            <span className="sr-only">LinkedIn</span>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Post Navigation */}
-                <div className="mt-12 pt-8 border-t flex justify-between">
-                  <Link
-                    href="/blog"
-                    className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    <ArrowLeft className="mr-2 h-4 w-4" />
-                    Back to Blog
-                  </Link>
-                  <Link
-                    href="/contact"
-                    className="inline-flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors"
-                  >
-                    Get in Touch
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </div>
-              </article>
-              
-              {/* Related Posts */}
-              {relatedPosts.length > 0 && (
-                <section className="mt-20">
-                  <h2 className="text-2xl font-bold mb-10 flex items-center">
-                    <BookOpen className="mr-3 h-5 w-5 text-primary" />
-                    Related Articles
-                  </h2>
-                  <Suspense fallback={
-                    <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3">
-                      {[...Array(3)].map((_, i) => (
-                        <div key={i} className="h-[300px] animate-pulse rounded-lg bg-muted" />
-                      ))}
-                    </div>
-                  }>
-                    <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3">
-                      {relatedPosts.map((relatedPost: Post) => (
-                        <RelatedPostCard key={relatedPost.id} post={relatedPost} />
-                      ))}
-                    </div>
-                  </Suspense>
-                </section>
-              )}
-            </div>
-          </div>
-        </div>
-      </>
-    )
-  } catch (error) {
-    console.error('Error rendering blog post:', error);
+  const post = await getPost(slug)
+  if (!post) {
     notFound()
   }
+
+  const category = primaryCategory(post.categories)
+  const categoryCopy = category ? blogCategoryCopy(category.slug) : undefined
+  const hub = hubForCategory(category?.slug)
+  const relatedPosts = await getRelatedPosts(post, category?.id)
+
+  const content = renderContent(post)
+  const headings = extractHeadings(content)
+  const readingTime = getReadingTime(content)
+  const featuredImageUrl = post._embedded?.['wp:featuredmedia']?.[0]?.source_url
+  const plainTitle = post.title.rendered.replace(/<[^>]*>/g, '')
+  const isIndonesian = isIndonesianSlug(post.slug)
+  const wasUpdated = post.modified.slice(0, 10) > post.date.slice(0, 10)
+  const archivedCategories = post.categories.filter((c) => blogCategoryCopy(c.slug))
+  const plainContent = content.replace(/<[^>]*>/g, ' ')
+  const mentionedHubs = topicHubs.filter((h) => h !== hub && new RegExp(`\\b${h.name}\\b`).test(plainContent))
+
+  const articleStructuredData = buildBlogPostGraph({
+    slug: post.slug,
+    headline: post.title.rendered,
+    description: post.excerpt.rendered,
+    image: featuredImageUrl,
+    datePublished: post.date,
+    dateModified: post.modified,
+    inLanguage: isIndonesian ? 'id' : 'en',
+    section: category?.name,
+    keywords: post.tags.map((tag) => tag.name),
+    wordCount: plainContent.split(/\s+/).filter(Boolean).length,
+    readingMinutes: readingTime,
+    category: categoryCopy && category ? { name: category.name, path: blogCategoryPath(category.slug) } : undefined,
+    about: hub ? [hub.entity] : undefined,
+    mentions: mentionedHubs.map((h) => h.entity),
+  })
+
+  return (
+    <>
+      <SmoothScroll />
+      <JsonLd data={articleStructuredData} />
+
+      <div className="mx-auto max-w-[860px] pt-4 pb-8">
+        <nav className="mb-8 text-sm text-zinc-500" aria-label="Breadcrumb">
+          <ol className="flex items-center flex-wrap gap-1">
+            <li>
+              <Link href="/" className="hover:text-orange-500 transition-colors">Home</Link>
+            </li>
+            <li aria-hidden="true" className="px-2">/</li>
+            <li>
+              <Link href="/blog" className="hover:text-orange-500 transition-colors">Blog</Link>
+            </li>
+            {categoryCopy && category && (
+              <>
+                <li aria-hidden="true" className="px-2">/</li>
+                <li>
+                  <Link href={blogCategoryPath(category.slug)} className="hover:text-orange-500 transition-colors">
+                    {category.name}
+                  </Link>
+                </li>
+              </>
+            )}
+            <li aria-hidden="true" className="px-2">/</li>
+            <li className="truncate max-w-[200px] sm:max-w-xs text-zinc-900">{plainTitle}</li>
+          </ol>
+        </nav>
+
+        <article lang={isIndonesian ? 'id' : undefined}>
+          <header className="mb-10">
+            <h1
+              className="text-3xl md:text-4xl lg:text-5xl font-medium text-zinc-900 leading-[1.05] tracking-tighter mb-6"
+              dangerouslySetInnerHTML={{ __html: post.title.rendered }}
+            />
+
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-zinc-500">
+              <span>
+                By{' '}
+                <Link href="/about" className="font-medium text-zinc-900 hover:text-orange-500 transition-colors">
+                  {authorProfile.name}
+                </Link>
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Calendar className="h-4 w-4" />
+                <time dateTime={post.date}>{formatDate(post.date)}</time>
+              </span>
+              {wasUpdated && (
+                <span className="flex items-center gap-1.5">
+                  <RefreshCw className="h-4 w-4" />
+                  Updated <time dateTime={post.modified}>{formatDate(post.modified)}</time>
+                </span>
+              )}
+              <span className="flex items-center gap-1.5">
+                <Clock className="h-4 w-4" />
+                {readingTime} min read
+              </span>
+            </div>
+
+            {hub && (
+              <Link
+                href={hub.path}
+                lang="en"
+                className="mt-6 flex items-center gap-3 rounded-2xl bg-white/80 p-4 shadow-sm hover:shadow-md transition-all group"
+              >
+                <span className="p-2 bg-orange-50 rounded-xl">
+                  <Compass className="h-4 w-4 text-orange-500" />
+                </span>
+                <span className="text-sm text-zinc-600">
+                  Part of the <span className="font-medium text-zinc-900">{hub.name} guide</span>: a reading order, rules you can copy, and a cost estimate.
+                </span>
+                <ArrowRight className="ml-auto h-4 w-4 shrink-0 text-zinc-400 group-hover:text-orange-500 group-hover:translate-x-0.5 transition-all" />
+              </Link>
+            )}
+          </header>
+
+          {featuredImageUrl && (
+            <FeaturedImage src={featuredImageUrl} alt={plainTitle} width={800} height={450} />
+          )}
+
+          {headings.length > 0 && <TableOfContents headings={headings} />}
+
+          <WordPressContent content={content} estimatedReadTime={readingTime} />
+
+          {archivedCategories.length > 0 && (
+            <div className="mt-12 pt-8 border-t border-zinc-200 flex flex-wrap items-center gap-2" lang="en">
+              <span className="text-sm text-zinc-500 mr-1">More on</span>
+              {archivedCategories.map((c) => (
+                <Link
+                  key={c.id}
+                  href={blogCategoryPath(c.slug)}
+                  className="px-3 py-1.5 bg-zinc-100 rounded-full text-xs font-medium text-zinc-600 hover:bg-orange-50 hover:text-orange-600 transition-colors"
+                >
+                  {c.name}
+                </Link>
+              ))}
+            </div>
+          )}
+
+          <aside className="mt-8 flex flex-col sm:flex-row items-center sm:items-start gap-6 p-6 md:p-8 bg-white/80 rounded-2xl shadow-sm" lang="en">
+            <AuthorImage src={siteConfig.authorImage} alt={authorProfile.name} width={80} height={80} />
+            <div className="flex-1 text-center sm:text-left">
+              <p className="font-semibold text-lg text-zinc-900 mb-1">{authorProfile.name}</p>
+              <p className="text-sm text-zinc-600 leading-relaxed mb-4">
+                {authorProfile.jobTitle} with {authorProfile.yearsExperience}+ years of client work, based in{' '}
+                {authorProfile.city}, {authorProfile.country}. {authorProfile.roles.join('. ')}.
+              </p>
+              <div className="flex flex-wrap justify-center sm:justify-start gap-x-4 gap-y-2 text-sm">
+                <Link href="/about" className="font-medium text-zinc-900 hover:text-orange-500 transition-colors">
+                  About me
+                </Link>
+                <Link href="/cursor-ambassador" className="font-medium text-zinc-900 hover:text-orange-500 transition-colors">
+                  Cursor Ambassador
+                </Link>
+                {authorLinks.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer me"
+                    className="text-zinc-500 hover:text-orange-500 transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </aside>
+
+          <div className="mt-8 rounded-2xl bg-zinc-900 p-6 md:p-8 text-white" lang="en">
+            {hub ? (
+              <>
+                <h2 className="text-xl md:text-2xl font-medium tracking-tight mb-2">
+                  Want your team shipping with Cursor like this?
+                </h2>
+                <p className="text-sm text-zinc-400 mb-5 max-w-xl">
+                  I set up project rules and a review habit on one of your real repos, then help the rest of the team adopt it. English or Indonesian.
+                </p>
+                <Link
+                  href={contactHref('cursor-mentoring')}
+                  className="inline-flex items-center rounded-full bg-white px-5 py-2.5 text-sm font-medium text-zinc-900 hover:bg-zinc-100 transition-colors"
+                >
+                  Get Cursor mentoring for your team
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </>
+            ) : (
+              <>
+                <h2 className="text-xl md:text-2xl font-medium tracking-tight mb-2">
+                  Need this built instead of read about?
+                </h2>
+                <p className="text-sm text-zinc-400 mb-5 max-w-xl">
+                  Send me your project. I reply within 24 hours and tell you plainly whether I’m the right fit.
+                </p>
+                <Link
+                  href={contactHref('nextjs')}
+                  className="inline-flex items-center rounded-full bg-white px-5 py-2.5 text-sm font-medium text-zinc-900 hover:bg-zinc-100 transition-colors"
+                >
+                  Send me your project
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </>
+            )}
+          </div>
+
+          <div className="mt-8">
+            <Link
+              href={categoryCopy && category ? blogCategoryPath(category.slug) : '/blog'}
+              className="inline-flex items-center text-sm font-medium text-zinc-500 hover:text-orange-500 transition-colors"
+              lang="en"
+            >
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              {categoryCopy && category ? `All ${category.name} posts` : 'Back to the blog'}
+            </Link>
+          </div>
+        </article>
+      </div>
+
+      {relatedPosts.length > 0 && (
+        <section className="mt-12 mb-8" lang="en">
+          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-8 flex items-center gap-3">
+            <BookOpen className="h-5 w-5 text-orange-500" />
+            {category ? `More on ${category.name}` : 'Keep reading'}
+          </h2>
+          <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+            {relatedPosts.map((relatedPost) => (
+              <RelatedPostCard key={relatedPost.id} post={relatedPost} />
+            ))}
+          </div>
+        </section>
+      )}
+    </>
+  )
 }

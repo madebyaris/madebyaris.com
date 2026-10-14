@@ -1,7 +1,7 @@
 "use client";
 
-import { BookOpen } from "lucide-react";
-import { useEffect } from "react";
+import { BookOpen, ChevronDown } from "lucide-react";
+import { useEffect, useId, useRef, useState } from "react";
 
 interface Heading {
   level: number;
@@ -11,111 +11,85 @@ interface Heading {
 
 interface TableOfContentsProps {
   headings: Heading[];
-  isMobile?: boolean;
 }
 
-export function TableOfContents({ headings, isMobile = false }: TableOfContentsProps) {
-  // Add smooth scrolling behavior
+export function TableOfContents({ headings }: TableOfContentsProps) {
+  const [open, setOpen] = useState(false);
+  const detailsRef = useRef<HTMLDetailsElement>(null);
+  const panelId = useId();
+
+  // Keep React state in sync with native <details> (keyboard / summary click).
   useEffect(() => {
+    const el = detailsRef.current;
+    if (!el) return;
+    const onToggle = () => setOpen(el.open);
+    el.addEventListener("toggle", onToggle);
+    return () => el.removeEventListener("toggle", onToggle);
+  }, []);
+
+  useEffect(() => {
+    const root = detailsRef.current;
+    if (!root) return;
+
     const handleClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.tagName === 'A' && target.hasAttribute('href') && target.getAttribute('href')?.startsWith('#')) {
-        e.preventDefault();
-        const href = target.getAttribute('href');
-        if (!href) return;
-        
-        const id = href.substring(1);
-        const element = document.getElementById(id);
-        
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          // Update URL hash without jumping
-          window.history.pushState(null, '', href);
-        }
+      const target = e.target as HTMLElement | null;
+      const anchor = target?.closest?.("a[href^='#']") as HTMLAnchorElement | null;
+      if (!anchor) return;
+
+      e.preventDefault();
+      const href = anchor.getAttribute("href");
+      if (!href) return;
+      const id = href.slice(1);
+      const element = document.getElementById(id);
+      if (!element) return;
+
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.history.pushState(null, "", href);
+
+      // Auto-collapse after jump on mobile / tablet (< lg).
+      if (window.matchMedia("(max-width: 1023px)").matches) {
+        root.open = false;
+        setOpen(false);
       }
     };
 
-    // Add event listener to the table of contents
-    const tocElement = document.getElementById(isMobile ? 'mobile-toc' : 'desktop-toc');
-    tocElement?.addEventListener('click', handleClick);
+    root.addEventListener("click", handleClick);
+    return () => root.removeEventListener("click", handleClick);
+  }, []);
 
-    return () => {
-      tocElement?.removeEventListener('click', handleClick);
-    };
-  }, [isMobile]);
-
-  if (isMobile) {
-    return (
-      <div id="mobile-toc" className="lg:hidden mb-8 w-full">
-        <details className="bg-muted/50 rounded-xl p-4 border shadow-sm w-full">
-          <summary className="text-sm font-semibold cursor-pointer flex items-center">
-            <BookOpen className="h-4 w-4 mr-2 text-primary" />
-            Table of Contents
-          </summary>
-          <nav className="mt-4">
-            <ul className="space-y-3 text-sm">
-              {headings.map((heading, index) => (
-                <li 
-                  key={`mobile-${heading.id}-${index}`} 
-                  className={`${heading.level === 3 ? 'ml-4' : ''}`}
-                >
-                  <a 
-                    href={`#${heading.id}`} 
-                    className="text-muted-foreground hover:text-primary transition-colors line-clamp-1"
-                  >
-                    {heading.text}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </details>
-      </div>
-    );
-  }
+  if (!headings.length) return null;
 
   return (
-    <div 
-      id="desktop-toc" 
-      className="hidden lg:block fixed left-0 top-24 w-64 max-h-[calc(100vh-6rem)] overflow-y-auto pl-6 z-10"
-      style={{
-        position: 'fixed',
-        left: 0,
-        top: '6rem',
-        width: '16rem',
-        maxHeight: 'calc(100vh - 6rem)',
-        WebkitTransform: 'translateZ(0)',
-        transform: 'translateZ(0)',
-        WebkitBackfaceVisibility: 'hidden',
-        backfaceVisibility: 'hidden',
-        willChange: 'transform',
-      }}
-    >
-      <div 
-        className="bg-white/95 backdrop-blur-sm rounded-xl p-5 shadow-sm sticky top-0"
-        style={{
-          WebkitBackdropFilter: 'blur(8px) saturate(180%)',
-          backdropFilter: 'blur(8px) saturate(180%)',
-          WebkitTransform: 'translateZ(0)',
-          transform: 'translateZ(0)',
-          position: 'sticky',
-          top: 0,
-        }}
+    <div id="blog-toc" className="mb-8 w-full">
+      <details
+        ref={detailsRef}
+        className="w-full rounded-xl border bg-muted/50 shadow-sm"
       >
-        <h2 className="text-sm font-semibold mb-4 flex items-center text-zinc-900">
-          <BookOpen className="h-4 w-4 mr-2 text-orange-500" />
-          Table of Contents
-        </h2>
-        <nav>
+        <summary
+          className="flex cursor-pointer list-none items-center gap-2 px-4 py-3 text-sm font-semibold text-zinc-900 outline-none marker:content-none focus-visible:ring-2 focus-visible:ring-orange-500/60 focus-visible:ring-offset-2 [&::-webkit-details-marker]:hidden"
+          aria-expanded={open}
+          aria-controls={panelId}
+        >
+          <BookOpen className="h-4 w-4 shrink-0 text-orange-500" aria-hidden />
+          <span className="flex-1">Table of Contents</span>
+          <ChevronDown
+            className={`h-4 w-4 shrink-0 text-zinc-500 transition-transform ${open ? "rotate-180" : ""}`}
+            aria-hidden
+          />
+        </summary>
+        <nav
+          id={panelId}
+          className="max-h-[min(60vh,20rem)] overflow-y-auto border-t border-zinc-200/70 px-4 py-3"
+        >
           <ul className="space-y-3 text-sm">
-            {headings.map((heading, index) => (
-              <li 
-                key={`desktop-${heading.id}-${index}`} 
-                className={`${heading.level === 3 ? 'ml-4' : ''}`}
+            {headings.map((heading) => (
+              <li
+                key={heading.id}
+                className={heading.level === 3 ? "ml-4" : undefined}
               >
-                <a 
-                  href={`#${heading.id}`} 
-                  className="text-zinc-600 hover:text-orange-500 transition-colors line-clamp-2 font-medium"
+                <a
+                  href={`#${heading.id}`}
+                  className="line-clamp-2 font-medium text-zinc-600 transition-colors hover:text-orange-500"
                 >
                   {heading.text}
                 </a>
@@ -123,7 +97,7 @@ export function TableOfContents({ headings, isMobile = false }: TableOfContentsP
             ))}
           </ul>
         </nav>
-      </div>
+      </details>
     </div>
   );
-} 
+}

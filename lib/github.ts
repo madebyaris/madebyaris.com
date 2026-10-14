@@ -71,7 +71,7 @@ export async function fetchPinnedRepos(): Promise<GitHubRepo[]> {
       `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=stars&direction=desc&per_page=6&type=all`,
       {
         headers,
-        next: { revalidate: 43200 }, // Cache for 12 hours
+        next: { revalidate: 604800 }, // 7 days
       }
     )
 

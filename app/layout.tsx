@@ -5,6 +5,8 @@ import { Footer } from "@/components/footer";
 import AnalyticsWrapper from "@/components/providers/analytics-wrapper";
 import { ServiceWorkerRegistration } from "@/components/service-worker-registration";
 import { productionUrl, siteConfig } from "@/lib/seo/config";
+import { buildSiteGraph } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
 import { cn } from "@/lib/utils";
 import "./globals.css";
 
@@ -23,30 +25,19 @@ export const viewport: Viewport = {
   themeColor: "#ffffff",
 };
 
+const verificationOther: Record<string, string> = {}
+if (process.env.BING_VERIFICATION_CODE) verificationOther['msvalidate.01'] = process.env.BING_VERIFICATION_CODE
+if (process.env.YANDEX_VERIFICATION_CODE) verificationOther['yandex-verification'] = process.env.YANDEX_VERIFICATION_CODE
+
 export const metadata: Metadata = {
   title: {
-    default: "Hire a Next.js & AI Developer | Build & Level up | Aris Setiawan",
-    template: "%s | Aris Setiawan"
+    default: "Hire a Next.js & AI Developer | Aris Setiawan",
+    template: `%s${siteConfig.titleSuffix}`
   },
-  description: "Hire Aris Setiawan to build Next.js, WordPress, and AI products — or level up with Cursor mentoring. 13+ years. Cursor Ambassador Indonesia. Remote worldwide.",
-  keywords: [
-    "Hire Next.js Developer",
-    "Hire WordPress Developer",
-    "Hire AI Developer",
-    "Cursor Ambassador Indonesia",
-    "Next.js Developer",
-    "WordPress Developer",
-    "AI Product Development",
-    "Cursor Mentoring",
-    "Headless WordPress",
-    "Remote Full-Stack Developer",
-    "Next.js Architecture",
-    "Performance Optimization",
-    "Technical Leadership",
-    "Modern Web Development",
-  ],
-  authors: [{ name: "Aris Setiawan" }],
-  creator: "Aris Setiawan",
+  description: siteConfig.description,
+  authors: [{ name: siteConfig.author, url: `${productionUrl}/about` }],
+  creator: siteConfig.author,
+  publisher: siteConfig.name,
   icons: {
     icon: '/favicon.ico',
     shortcut: '/favicon.ico',
@@ -60,8 +51,8 @@ export const metadata: Metadata = {
     type: "website",
     locale: siteConfig.locale,
     url: productionUrl,
-    title: "Hire a Next.js & AI Developer | Build & Level up | Aris Setiawan",
-    description: "Hire Aris Setiawan to build Next.js, WordPress, and AI products — or level up with Cursor mentoring. 13+ years. Cursor Ambassador Indonesia. Remote worldwide.",
+    title: "Hire a Next.js & AI Developer | Aris Setiawan",
+    description: siteConfig.description,
     siteName: siteConfig.name,
     images: [
       {
@@ -74,15 +65,12 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hire a Next.js & AI Developer | Build & Level up",
-    description: "13+ years building Next.js, WordPress, and AI products. Cursor Ambassador Indonesia.",
+    title: "Hire a Next.js & AI Developer | Aris Setiawan",
+    description: siteConfig.description,
     creator: siteConfig.twitterHandle,
     images: [siteConfig.ogImage],
   },
   metadataBase: new URL(productionUrl),
-  alternates: {
-    canonical: '/',
-  },
   robots: {
     index: true,
     follow: true,
@@ -95,7 +83,8 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: process.env.GOOGLE_VERIFICATION_CODE || '',
+    ...(process.env.GOOGLE_VERIFICATION_CODE ? { google: process.env.GOOGLE_VERIFICATION_CODE } : {}),
+    ...(Object.keys(verificationOther).length ? { other: verificationOther } : {}),
   },
 };
 
@@ -106,32 +95,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        {/* Preconnect to critical domains */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://cdn.vercel-insights.com" />
-        <link rel="preconnect" href="https://vitals.vercel-insights.com" />
-        
-        {/* DNS Prefetch for performance optimization */}
-        <link rel="dns-prefetch" href="https://va.vercel-scripts.com" />
-        <link rel="dns-prefetch" href="https://vitals.vercel-insights.com" />
-        
-        {/* Preconnect to WordPress API if available */}
-        {process.env.NEXT_PUBLIC_WP_API_URL && (
-          <link rel="preconnect" href={process.env.NEXT_PUBLIC_WP_API_URL} />
-        )}
-        
-        {/* Preload critical assets with priority hints */}
-        <link rel="preload" href="/aris.png" as="image" fetchPriority="high" />
-        
-        {/* Prefetch likely next pages */}
-        <link rel="prefetch" href="/contact" />
-        <link rel="prefetch" href="/about" />
-        <link rel="prefetch" href="/blog" />
-        <link rel="prefetch" href="/projects" />
-        
-      </head>
       <body 
         suppressHydrationWarning
         className={cn(
@@ -143,6 +106,8 @@ export default function RootLayout({
           fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
         }}
       >
+        <JsonLd data={buildSiteGraph()} />
+
         {/* Background - matching reference design */}
         <div 
           className="fixed inset-0 -z-10 bg-zinc-400"

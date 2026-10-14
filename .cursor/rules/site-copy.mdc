@@ -1,0 +1,31 @@
+---
+description: Voice and anti-slop rules for any user-facing copy on madebyaris.com (page text, CTAs, meta titles, descriptions, FAQs, schema text)
+globs: app/**/*.tsx,components/**/*.tsx,lib/seo/**/*.ts
+alwaysApply: false
+---
+
+# Site copy
+
+Any string a visitor, search engine, or AI engine reads is copy. For a full rewrite, follow `.cursor/skills/site-copywriting/SKILL.md`. Run `pnpm copy:check` before you finish.
+
+## Voice
+
+First person, Aris talking to one reader. Plain, direct, a bit blunt about limits. It reads like a senior developer explaining a trade-off, never like an agency.
+
+## Hard rules
+
+- No em dashes (—) or en dashes (–) in copy. Use a period, comma, colon, or parentheses.
+- No not-X-but-Y contrasts ("not slide decks", "bukan tim besar", "it's not X, it's Y") unless the reader actually believes X.
+- No invented facts. Numbers, clients, roles, and dates must already be on the site or in `authorProfile` (`lib/seo/config.ts`).
+- Say what the reader gets. Replace a feature with an outcome, or cut it.
+- CTA buttons name the next step and what the reader gets, for example "Send me your site", "Get Cursor mentoring for your team", or "Book a scoping call". Never "Get in touch", "Learn more", "Submit", or "Get started".
+- Use sentence case for headings, chips, and buttons. Don't Title Case Every Word.
+- No banned words: seamless, leverage, robust, cutting-edge, pixel-perfect, comprehensive, innovative, world-class, unlock, elevate, empower, supercharge, blazing, next-level, solutions (as a noun for what I sell), utilize, peak performance.
+
+```tsx
+// ❌ 'Pixel-perfect WordPress themes that capture your unique style.'
+// ✅ 'A theme built from your design, fast on phones, easy for editors to update.'
+
+// ❌ 'Agents and chatbots shipped into real products — not slide decks.'
+// ✅ 'Agents and chatbots that run inside your Next.js product and reach real users.'
+```

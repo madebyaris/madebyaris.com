@@ -10,6 +10,7 @@ const WP_BLOG_TAGS = [
 ] as const
 
 const SITEMAP_PATH = '/sitemap.xml'
+const FEED_PATHS = ['/llms.txt', '/llms-full.txt', '/feed.xml'] as const
 
 function pushUnique(revalidated: string[], item: string) {
   if (!revalidated.includes(item)) {
@@ -20,6 +21,10 @@ function pushUnique(revalidated: string[], item: string) {
 function revalidateSitemap(revalidated: string[]) {
   revalidatePath(SITEMAP_PATH)
   pushUnique(revalidated, SITEMAP_PATH)
+  for (const feedPath of FEED_PATHS) {
+    revalidatePath(feedPath)
+    pushUnique(revalidated, feedPath)
+  }
 }
 
 function revalidateWpBlogTags(revalidated: string[]) {

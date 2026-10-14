@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import ClientProjectsPage from './client-page'
 import { JsonLd } from '@/components/seo/json-ld'
+import { buildPageGraph, buildPageMetadata } from '@/lib/seo'
 import { productionUrl } from '@/lib/seo/config'
 
 // Projects data (shared between server and client)
@@ -8,7 +9,7 @@ export const projects = [
   {
     id: 1,
     title: "Eton House",
-    description: "A comprehensive website redesign for an international education institution, featuring an intuitive parent portal and dynamic content management system.",
+    description: "A full website redesign for an international education institution, featuring an intuitive parent portal and dynamic content management system.",
     logo: "/images/clients/eton-house.png",
     tags: ["Next.js", "WordPress", "TypeScript"],
     link: "https://www.etonhouse.edu.sg/",
@@ -151,54 +152,52 @@ export const projects = [
   }
 ]
 
+const pageTitle = 'Next.js & WordPress Case Studies'
+const pageDescription =
+  'Next.js case studies and WordPress projects by Aris Setiawan for schools, shops, music publishers, and restaurants. Open each live site and judge the work.'
+
+const pageGraph = buildPageGraph({
+  path: '/projects',
+  name: pageTitle,
+  description: pageDescription,
+  type: 'CollectionPage',
+  breadcrumbs: [{ name: 'Projects', path: '/projects' }],
+})
+
 export const projectsStructuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'CollectionPage',
-  name: 'Projects | Made by Aris',
-  description:
-    'Explore my portfolio of web development projects, featuring Next.js, WordPress, and full-stack solutions. See real examples of my work and expertise.',
-  url: `${productionUrl}/projects`,
-  mainEntity: {
-    '@type': 'ItemList',
-    itemListElement: projects.map((project, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      item: {
-        '@type': 'WebSite',
-        name: project.title,
-        description: project.description,
-        url: project.link,
-      },
-    })),
-  },
+  ...pageGraph,
+  '@graph': [
+    ...pageGraph['@graph'],
+    {
+      '@type': 'ItemList',
+      '@id': `${productionUrl}/projects#projects`,
+      itemListElement: projects.map((project, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {
+          '@type': 'WebSite',
+          name: project.title,
+          description: project.description,
+          url: project.link,
+        },
+      })),
+    },
+  ],
 }
 
-// Metadata for SEO
-export const metadata: Metadata = {
-  title: 'Projects | Made by Aris',
-  description: 'Explore my portfolio of web development projects, featuring Next.js, WordPress, and full-stack solutions. See real examples of my work and expertise.',
+export const metadata: Metadata = buildPageMetadata({
+  title: pageTitle,
+  description: pageDescription,
+  path: '/projects',
   keywords: [
-    'web development projects',
-    'portfolio',
-    'Next.js projects',
+    'Next.js case studies',
     'WordPress projects',
-    'full-stack development',
-    'case studies',
-    'web applications',
+    'Next.js projects',
+    'headless WordPress projects',
+    'Next.js developer portfolio',
     'client projects',
   ],
-  alternates: {
-    canonical: 'https://madebyaris.com/projects'
-  },
-  openGraph: {
-    title: 'Projects | Made by Aris',
-    description: 'Explore my portfolio of web development projects, featuring Next.js, WordPress, and full-stack solutions.',
-    url: 'https://madebyaris.com/projects',
-    siteName: 'Made by Aris',
-    locale: 'en_US',
-    type: 'website',
-  },
-}
+})
 
 // Server component that renders the client component
 export default function ProjectsPage() {
