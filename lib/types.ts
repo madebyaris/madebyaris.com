@@ -83,10 +83,12 @@ export interface Post {
       alt_text: string
     }>
   }
+  rank_math_title?: string
+  rank_math_description?: string
   rank_math_seo?: {
-    title: string
-    description: string
-    robots: {
+    title?: string
+    description?: string
+    robots?: {
       index: string
       follow: string
       'max-video-preview': string

@@ -119,6 +119,26 @@ const nextConfig = {
       destination: '/about',
       permanent: true,
     },
+    {
+      source: '/blog/my-experience-using-github-copilot-after-2-months',
+      destination: '/blog/cursor-ai-vs-copilot',
+      permanent: true,
+    },
+    {
+      source: '/blog/my-experience-using-github-copilot-after-2-months/',
+      destination: '/blog/cursor-ai-vs-copilot',
+      permanent: true,
+    },
+    {
+      source: '/services/next-js-development/agency-indonesia',
+      destination: '/services/nextjs-development/agency-indonesia',
+      permanent: true,
+    },
+    {
+      source: '/services/next-js-development/agency-indonesia/',
+      destination: '/services/nextjs-development/agency-indonesia',
+      permanent: true,
+    },
   ],
   headers: async () => [
     {

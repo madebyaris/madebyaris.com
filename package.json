@@ -12,6 +12,7 @@
     "start:standalone": "node .next/standalone/server.js",
     "lint": "eslint .",
     "seo:check": "node scripts/validate-seo.mjs",
+    "test:blog-seo": "pnpm dlx tsx scripts/test-blog-rank-math-seo.ts",
     "copy:check": "node scripts/check-copy.mjs",
     "analyze": "ANALYZE=true next build"
   },

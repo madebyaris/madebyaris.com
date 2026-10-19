@@ -190,6 +190,38 @@ async function fetchTagsByIds(tagIds: number[]): Promise<Tag[]> {
   }))
 }
 
+async function fetchRankMathRestFields(
+  postId: number,
+): Promise<Pick<Post, 'rank_math_title' | 'rank_math_description'>> {
+  try {
+    const query = new URLSearchParams({
+      _fields: 'rank_math_title,rank_math_description',
+    })
+    const url = `${WP_API_URL}/wp/v2/posts/${postId}?${query}`
+    const response = await fetch(url, {
+      next: {
+        tags: [WP_CACHE_TAGS.posts],
+        revalidate: REVALIDATE_SECONDS.POSTS,
+      },
+      headers: { Accept: 'application/json' },
+    })
+    if (!response.ok) return {}
+
+    const data = (await response.json()) as {
+      rank_math_title?: string
+      rank_math_description?: string
+    }
+
+    return {
+      rank_math_title: data.rank_math_title,
+      rank_math_description: data.rank_math_description,
+    }
+  } catch (error) {
+    console.error('Failed to fetch Rank Math REST fields:', error)
+    return {}
+  }
+}
+
 async function hydratePost(post: Post): Promise<ProcessedPost> {
   const processedPost: ProcessedPost = {
     ...post,
@@ -221,7 +253,14 @@ export async function getPost(slug: string): Promise<ProcessedPost | null> {
     const post = posts[0]
     if (!post) return null
 
-    return hydratePost(post)
+    const rankMathFields = await fetchRankMathRestFields(post.id)
+    const mergedPost: Post = {
+      ...post,
+      rank_math_title: post.rank_math_title?.trim() || rankMathFields.rank_math_title,
+      rank_math_description: post.rank_math_description?.trim() || rankMathFields.rank_math_description,
+    }
+
+    return hydratePost(mergedPost)
   } catch (error) {
     console.error('Failed to fetch post:', error)
     return null

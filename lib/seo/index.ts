@@ -22,4 +22,12 @@ export {
   type PageMetaInput,
   type WordPressSeoFields,
 } from './metadata'
+export {
+  pickRankMathTitle,
+  pickRankMathDescription,
+  resolveRankMathSeoTitle,
+  resolveRankMathSeoValue,
+  hasRankMathTemplateTokens,
+  type BlogRankMathInput,
+} from './rank-math'
 export { buildLlmsTxt, buildLlmsFullTxt } from './llms'

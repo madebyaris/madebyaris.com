@@ -1,0 +1,43 @@
+import assert from 'node:assert/strict'
+import { pickRankMathDescription, pickRankMathTitle, resolveRankMathSeoTitle } from '../lib/seo/rank-math'
+import { fitDescription, fitTitle } from '../lib/seo/metadata'
+
+assert.equal(pickRankMathTitle({ rank_math_title: '' }), undefined)
+assert.equal(pickRankMathTitle({ rank_math_title: '   ' }), undefined)
+assert.equal(pickRankMathDescription({ rank_math_description: '' }), undefined)
+
+assert.equal(
+  pickRankMathTitle({ rank_math_title: 'What it costs to hire a Next.js developer' }),
+  'What it costs to hire a Next.js developer',
+)
+assert.equal(
+  pickRankMathDescription({ rank_math_description: 'Custom meta description for the post.' }),
+  'Custom meta description for the post.',
+)
+
+const withSuffix = 'Cursor AI pricing in 2026: what you actually pay – MADEBYARIS'
+assert.equal(
+  resolveRankMathSeoTitle(withSuffix),
+  'Cursor AI pricing in 2026: what you actually pay',
+)
+assert.equal(
+  resolveRankMathSeoTitle('Tentang skema harga Cursor IDE | Aris Setiawan'),
+  'Tentang skema harga Cursor IDE',
+)
+
+assert.equal(pickRankMathTitle({ rank_math_title: '%title% %sep% %sitename%' }), undefined)
+
+assert.equal(
+  fitTitle('What it costs to hire a Next.js developer'),
+  'What it costs to hire a Next.js developer | Aris Setiawan',
+)
+assert.equal(
+  fitTitle('Cursor pricing 2026: Free, Plus, Premium, Super, Ultra'),
+  'Cursor pricing 2026: Free, Plus, Premium, Super, Ultra',
+)
+assert.equal(
+  fitDescription('Custom meta description for the post.'),
+  'Custom meta description for the post.',
+)
+
+console.log('test-blog-rank-math-seo: all assertions passed')
