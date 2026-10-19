@@ -85,6 +85,7 @@ export interface Post {
   }
   rank_math_title?: string
   rank_math_description?: string
+  rank_math_facebook_description?: string
   rank_math_seo?: {
     title?: string
     description?: string

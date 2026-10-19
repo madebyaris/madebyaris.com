@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { productionAbsoluteUrl, productionUrl, siteConfig } from './config'
-import { pickRankMathDescription, pickRankMathTitle, type BlogRankMathInput } from './rank-math'
+import { pickBlogMetaDescription, pickRankMathTitle, type BlogRankMathInput } from './rank-math'
 import { decodeHtmlEntities, stripHtml } from './utils'
 import { languageAlternates } from './translations'
 
@@ -141,11 +141,11 @@ export function buildBlogPostMetadata(
   featuredImage?: string,
 ): Metadata {
   const rankMathTitle = pickRankMathTitle(post)
-  const rankMathDescription = pickRankMathDescription(post)
+  const description = pickBlogMetaDescription(post, post.excerpt.rendered)
 
   return buildPageMetadata({
     title: rankMathTitle ?? post.title.rendered,
-    description: rankMathDescription ?? (stripHtml(post.excerpt.rendered) || undefined),
+    description,
     path: `/blog/${post.slug}`,
     image: featuredImage,
     type: 'article',

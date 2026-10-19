@@ -43,6 +43,8 @@ export function resolveRankMathSeoTitle(raw: string | undefined | null): string 
 export interface BlogRankMathInput {
   rank_math_title?: string | null
   rank_math_description?: string | null
+  /** Rank Math Facebook / Open Graph description (`rank_math_facebook_description`). */
+  rank_math_facebook_description?: string | null
   rank_math_seo?: {
     title?: string | null
     description?: string | null
@@ -59,6 +61,15 @@ export function pickRankMathTitle(input: BlogRankMathInput): string | undefined 
 export function pickRankMathDescription(input: BlogRankMathInput): string | undefined {
   return (
     resolveRankMathSeoValue(input.rank_math_description) ??
+    resolveRankMathSeoValue(input.rank_math_facebook_description) ??
     resolveRankMathSeoValue(input.rank_math_seo?.description)
   )
+}
+
+/** Rank Math chain plus WordPress excerpt (today's live fallback when Rank Math fields are empty). */
+export function pickBlogMetaDescription(
+  input: BlogRankMathInput,
+  excerptRendered: string,
+): string | undefined {
+  return pickRankMathDescription(input) ?? resolveRankMathSeoValue(stripHtml(excerptRendered))
 }
