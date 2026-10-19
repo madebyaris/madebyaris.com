@@ -26,8 +26,10 @@ export {
   pickRankMathTitle,
   pickRankMathDescription,
   pickBlogMetaDescription,
+  rankMathTitleFromHead,
   resolveRankMathSeoTitle,
   resolveRankMathSeoValue,
+  cleanRankMathValue,
   hasRankMathTemplateTokens,
   type BlogRankMathInput,
 } from './rank-math'

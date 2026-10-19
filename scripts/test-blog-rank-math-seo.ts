@@ -3,12 +3,16 @@ import {
   pickBlogMetaDescription,
   pickRankMathDescription,
   pickRankMathTitle,
+  rankMathTitleFromHead,
   resolveRankMathSeoTitle,
 } from '../lib/seo/rank-math'
 import { fitDescription, fitTitle } from '../lib/seo/metadata'
+import { extractMetaTagContent } from '../lib/wordpress/rank-math-head'
 
 const excerpt =
   'What it costs to hire a Next.js developer: scope, experience, location, and engagement model. How to read a quote without fake average rates.'
+
+const postTitle = 'Cursor AI pricing in 2026: what you actually pay'
 
 assert.equal(pickRankMathTitle({ rank_math_title: '' }), undefined)
 assert.equal(pickRankMathTitle({ rank_math_title: '   ' }), undefined)
@@ -34,6 +38,35 @@ assert.equal(
 )
 
 assert.equal(pickRankMathTitle({ rank_math_title: '%title% %sep% %sitename%' }), undefined)
+
+// Default Rank Math title template on WP head → treat as empty (post title fallback)
+const defaultHeadTitle = `${postTitle} &#8211; MADEBYARIS`
+assert.equal(rankMathTitleFromHead(defaultHeadTitle, postTitle), undefined)
+assert.equal(
+  rankMathTitleFromHead('Tom&#8217;s guide &#8211; MADEBYARIS', 'Tom&#8217;s guide'),
+  undefined,
+)
+assert.equal(
+  rankMathTitleFromHead('Custom SEO title &#8211; MADEBYARIS', postTitle),
+  'Custom SEO title &#8211; MADEBYARIS',
+)
+assert.equal(
+  pickRankMathTitle({
+    rank_math_title: rankMathTitleFromHead('Custom SEO title &#8211; MADEBYARIS', postTitle),
+  }),
+  'Custom SEO title',
+)
+
+// Meta parser: apostrophe inside double-quoted content, either attribute order
+const metaHtml = [
+  '<meta name="description" content="Aris&#039;s Next.js guide for teams" />',
+  '<meta content="Second &amp; third" property="og:description" />',
+].join('\n')
+assert.equal(
+  extractMetaTagContent(metaHtml, { name: 'description' }),
+  "Aris's Next.js guide for teams",
+)
+assert.equal(extractMetaTagContent(metaHtml, { property: 'og:description' }), 'Second & third')
 
 // Description fallback order: SEO description → OG / Facebook → excerpt
 assert.equal(

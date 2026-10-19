@@ -1,4 +1,5 @@
 import { Post, Project, Category, Tag } from './types'
+import { rankMathTitleFromHead } from './seo/rank-math'
 import { fetchWpRankMathHead } from './wordpress/rank-math-head'
 
 function normalizeWpApiUrl(input: string): string {
@@ -29,7 +30,7 @@ type WpEndpoint = keyof typeof WP_CACHE_TAGS
 // Safety-net only. Freshness comes from the WordPress webhook
 // (`/api/revalidate`), which invalidates these cache tags on publish.
 // A short interval rewrites every crawled URL and burns the ISR quota.
-const REVALIDATE_SECONDS = {
+export const REVALIDATE_SECONDS = {
   POSTS: 604800,
   CATEGORIES: 604800,
   TAGS: 604800,
@@ -260,11 +261,17 @@ export async function getPost(slug: string): Promise<ProcessedPost | null> {
 
     const [rankMathFields, rankMathHead] = await Promise.all([
       fetchRankMathRestFields(post.id),
-      fetchWpRankMathHead(post.slug),
+      fetchWpRankMathHead(post.slug, {
+        tags: [WP_CACHE_TAGS.posts],
+        revalidate: REVALIDATE_SECONDS.POSTS,
+      }),
     ])
+    const restTitle = post.rank_math_title?.trim() || rankMathFields.rank_math_title
+    const headTitle = rankMathTitleFromHead(rankMathHead.seoTitle, post.title.rendered)
+
     const mergedPost: Post = {
       ...post,
-      rank_math_title: post.rank_math_title?.trim() || rankMathFields.rank_math_title,
+      rank_math_title: restTitle || headTitle,
       rank_math_description:
         post.rank_math_description?.trim() ||
         rankMathFields.rank_math_description ||
