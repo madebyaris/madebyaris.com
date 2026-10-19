@@ -1,4 +1,5 @@
 import { Post, Project, Category, Tag } from './types'
+import { fetchWpRankMathHead } from './wordpress/rank-math-head'
 
 function normalizeWpApiUrl(input: string): string {
   const trimmed = input.trim().replace(/\/+$/, '')
@@ -28,7 +29,7 @@ type WpEndpoint = keyof typeof WP_CACHE_TAGS
 // Safety-net only. Freshness comes from the WordPress webhook
 // (`/api/revalidate`), which invalidates these cache tags on publish.
 // A short interval rewrites every crawled URL and burns the ISR quota.
-const REVALIDATE_SECONDS = {
+export const REVALIDATE_SECONDS = {
   POSTS: 604800,
   CATEGORIES: 604800,
   TAGS: 604800,
@@ -190,6 +191,42 @@ async function fetchTagsByIds(tagIds: number[]): Promise<Tag[]> {
   }))
 }
 
+async function fetchRankMathRestFields(
+  postId: number,
+): Promise<
+  Pick<Post, 'rank_math_title' | 'rank_math_description' | 'rank_math_facebook_description'>
+> {
+  try {
+    const query = new URLSearchParams({
+      _fields: 'rank_math_title,rank_math_description,rank_math_facebook_description',
+    })
+    const url = `${WP_API_URL}/wp/v2/posts/${postId}?${query}`
+    const response = await fetch(url, {
+      next: {
+        tags: [WP_CACHE_TAGS.posts],
+        revalidate: REVALIDATE_SECONDS.POSTS,
+      },
+      headers: { Accept: 'application/json' },
+    })
+    if (!response.ok) return {}
+
+    const data = (await response.json()) as {
+      rank_math_title?: string
+      rank_math_description?: string
+      rank_math_facebook_description?: string
+    }
+
+    return {
+      rank_math_title: data.rank_math_title,
+      rank_math_description: data.rank_math_description,
+      rank_math_facebook_description: data.rank_math_facebook_description,
+    }
+  } catch (error) {
+    console.error('Failed to fetch Rank Math REST fields:', error)
+    return {}
+  }
+}
+
 async function hydratePost(post: Post): Promise<ProcessedPost> {
   const processedPost: ProcessedPost = {
     ...post,
@@ -221,7 +258,27 @@ export async function getPost(slug: string): Promise<ProcessedPost | null> {
     const post = posts[0]
     if (!post) return null
 
-    return hydratePost(post)
+    const [rankMathFields, rankMathHead] = await Promise.all([
+      fetchRankMathRestFields(post.id),
+      fetchWpRankMathHead(post.slug, {
+        tags: [WP_CACHE_TAGS.posts],
+        revalidate: REVALIDATE_SECONDS.POSTS,
+      }),
+    ])
+    const mergedPost: Post = {
+      ...post,
+      rank_math_title: post.rank_math_title?.trim() || rankMathFields.rank_math_title,
+      rank_math_description:
+        post.rank_math_description?.trim() ||
+        rankMathFields.rank_math_description ||
+        rankMathHead.seoDescription,
+      rank_math_facebook_description:
+        post.rank_math_facebook_description?.trim() ||
+        rankMathFields.rank_math_facebook_description ||
+        rankMathHead.ogDescription,
+    }
+
+    return hydratePost(mergedPost)
   } catch (error) {
     console.error('Failed to fetch post:', error)
     return null

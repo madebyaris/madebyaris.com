@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { productionAbsoluteUrl, productionUrl, siteConfig } from './config'
+import { pickBlogMetaDescription, pickRankMathTitle, type BlogRankMathInput } from './rank-math'
 import { decodeHtmlEntities, stripHtml } from './utils'
 import { languageAlternates } from './translations'
 
@@ -136,16 +137,15 @@ export function buildBlogPostMetadata(
     excerpt: { rendered: string }
     date: string
     modified: string
-    rank_math_seo?: WordPressSeoFields
-  },
+  } & BlogRankMathInput,
   featuredImage?: string,
 ): Metadata {
-  const wpTitle = post.rank_math_seo?.title
-  const wpDescription = post.rank_math_seo?.description
+  const rankMathTitle = pickRankMathTitle(post)
+  const description = pickBlogMetaDescription(post, post.excerpt.rendered)
 
   return buildPageMetadata({
-    title: wpTitle || post.title.rendered,
-    description: wpDescription || stripHtml(post.excerpt.rendered) || undefined,
+    title: rankMathTitle ?? post.title.rendered,
+    description,
     path: `/blog/${post.slug}`,
     image: featuredImage,
     type: 'article',
