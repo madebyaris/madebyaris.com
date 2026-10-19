@@ -2,6 +2,13 @@ import { decodeHtmlEntities } from '@/lib/seo/utils'
 
 const WP_ORIGIN = 'https://wp.madebyaris.com'
 
+/** Query string nginx uses to bypass its full-page cache (Rank Math head must be fresh). */
+export const WP_RANK_MATH_HEAD_NOCACHE_QUERY = 'nocache=1'
+
+export function wpRankMathHeadRequestUrl(slug: string): string {
+  return `${WP_ORIGIN}/${encodeURIComponent(slug)}/?${WP_RANK_MATH_HEAD_NOCACHE_QUERY}`
+}
+
 export interface WpRankMathHeadFields {
   /** Rank Math SEO description as rendered in `<meta name="description">`. */
   seoDescription?: string
@@ -53,7 +60,7 @@ export async function fetchWpRankMathHead(
   cache: WpRankMathHeadCache,
 ): Promise<WpRankMathHeadFields> {
   try {
-    const response = await fetch(`${WP_ORIGIN}/${slug}/`, {
+    const response = await fetch(wpRankMathHeadRequestUrl(slug), {
       next: {
         tags: [...cache.tags],
         revalidate: cache.revalidate,

@@ -6,7 +6,10 @@ import {
   resolveRankMathSeoTitle,
 } from '../lib/seo/rank-math'
 import { fitDescription, fitTitle } from '../lib/seo/metadata'
-import { extractMetaTagContent } from '../lib/wordpress/rank-math-head'
+import {
+  extractMetaTagContent,
+  wpRankMathHeadRequestUrl,
+} from '../lib/wordpress/rank-math-head'
 
 const excerpt =
   'What it costs to hire a Next.js developer: scope, experience, location, and engagement model. How to read a quote without fake average rates.'
@@ -35,6 +38,11 @@ assert.equal(
 )
 
 assert.equal(pickRankMathTitle({ rank_math_title: '%title% %sep% %sitename%' }), undefined)
+
+assert.match(
+  wpRankMathHeadRequestUrl('cursor-ai-pricing'),
+  /^https:\/\/wp\.madebyaris\.com\/cursor-ai-pricing\/\?nocache=1$/,
+)
 
 // Meta parser: apostrophe inside double-quoted content, either attribute order
 const metaHtml = [
