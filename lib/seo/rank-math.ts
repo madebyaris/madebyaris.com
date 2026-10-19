@@ -58,23 +58,6 @@ export function pickRankMathTitle(input: BlogRankMathInput): string | undefined 
   )
 }
 
-/**
- * When Rank Math has no custom SEO title, WP renders the default template
- * (post title + separator + site name). After suffix stripping that must match
- * the post title so metadata keeps using `post.title.rendered` (today's behaviour).
- */
-export function rankMathTitleFromHead(
-  headTitle: string | undefined,
-  postTitleRendered: string,
-): string | undefined {
-  if (!headTitle?.trim()) return undefined
-  const stripped = resolveRankMathSeoTitle(headTitle)
-  if (!stripped) return undefined
-  const postPlain = cleanRankMathValue(postTitleRendered)
-  if (stripped === postPlain) return undefined
-  return headTitle
-}
-
 export function pickRankMathDescription(input: BlogRankMathInput): string | undefined {
   return (
     resolveRankMathSeoValue(input.rank_math_description) ??

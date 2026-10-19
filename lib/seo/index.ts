@@ -26,7 +26,6 @@ export {
   pickRankMathTitle,
   pickRankMathDescription,
   pickBlogMetaDescription,
-  rankMathTitleFromHead,
   resolveRankMathSeoTitle,
   resolveRankMathSeoValue,
   cleanRankMathValue,

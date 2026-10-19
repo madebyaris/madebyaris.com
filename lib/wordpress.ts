@@ -1,5 +1,4 @@
 import { Post, Project, Category, Tag } from './types'
-import { rankMathTitleFromHead } from './seo/rank-math'
 import { fetchWpRankMathHead } from './wordpress/rank-math-head'
 
 function normalizeWpApiUrl(input: string): string {
@@ -266,12 +265,9 @@ export async function getPost(slug: string): Promise<ProcessedPost | null> {
         revalidate: REVALIDATE_SECONDS.POSTS,
       }),
     ])
-    const restTitle = post.rank_math_title?.trim() || rankMathFields.rank_math_title
-    const headTitle = rankMathTitleFromHead(rankMathHead.seoTitle, post.title.rendered)
-
     const mergedPost: Post = {
       ...post,
-      rank_math_title: restTitle || headTitle,
+      rank_math_title: post.rank_math_title?.trim() || rankMathFields.rank_math_title,
       rank_math_description:
         post.rank_math_description?.trim() ||
         rankMathFields.rank_math_description ||

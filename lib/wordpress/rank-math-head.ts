@@ -3,8 +3,6 @@ import { decodeHtmlEntities } from '@/lib/seo/utils'
 const WP_ORIGIN = 'https://wp.madebyaris.com'
 
 export interface WpRankMathHeadFields {
-  /** Rank Math SEO title as rendered in `<title>` (fallback: `og:title`). */
-  seoTitle?: string
   /** Rank Math SEO description as rendered in `<meta name="description">`. */
   seoDescription?: string
   /** Rank Math Facebook / Open Graph description (`rank_math_facebook_description`). */
@@ -45,16 +43,10 @@ export function extractMetaTagContent(
   return undefined
 }
 
-export function extractDocumentTitle(html: string): string | undefined {
-  const match = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)
-  if (!match?.[1]) return undefined
-  const text = decodeHtmlEntities(match[1].replace(/\s+/g, ' ').trim())
-  return text || undefined
-}
-
 /**
- * Public Rank Math head tags from the WordPress front-end URL (not wp-json).
- * Reads title and descriptions only; ignores robots and canonical on purpose.
+ * Public Rank Math description tags from the WordPress front-end URL (not wp-json).
+ * Does not read `<title>` or `og:title` (Rank Math "Capitalize Titles" distorts them).
+ * Ignores robots and canonical on purpose.
  */
 export async function fetchWpRankMathHead(
   slug: string,
@@ -71,11 +63,7 @@ export async function fetchWpRankMathHead(
     if (!response.ok) return {}
 
     const html = (await response.text()).slice(0, 120_000)
-    const documentTitle = extractDocumentTitle(html)
-    const ogTitle = extractMetaTagContent(html, { property: 'og:title' })
-
     return {
-      seoTitle: documentTitle ?? ogTitle,
       seoDescription: extractMetaTagContent(html, { name: 'description' }),
       ogDescription: extractMetaTagContent(html, { property: 'og:description' }),
     }
