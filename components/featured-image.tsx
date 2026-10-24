@@ -1,6 +1,4 @@
-'use client'
-
-import { NextImage } from '@/components/ui/next-image'
+import Image from 'next/image'
 
 interface FeaturedImageProps {
   src: string
@@ -13,12 +11,12 @@ export function FeaturedImage({ src, alt, width, height }: FeaturedImageProps) {
   return (
     <div className="relative mb-12 overflow-hidden rounded-2xl shadow-sm w-full">
       <div className="aspect-video bg-zinc-100">
-        <NextImage
+        <Image
           src={src}
           alt={alt}
           width={width}
           height={height}
-          className="object-cover"
+          className="object-cover w-full h-full"
           priority
           fetchPriority="high"
           quality={90}
@@ -26,4 +24,4 @@ export function FeaturedImage({ src, alt, width, height }: FeaturedImageProps) {
       </div>
     </div>
   )
-} 
+}
