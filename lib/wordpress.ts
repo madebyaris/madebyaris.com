@@ -1,4 +1,5 @@
 import { Post, Project, Category, Tag } from './types'
+import { resolveRankMathSeoTitle } from './seo/rank-math'
 import { fetchWpRankMathHead } from './wordpress/rank-math-head'
 
 function normalizeWpApiUrl(input: string): string {
@@ -265,9 +266,13 @@ export async function getPost(slug: string): Promise<ProcessedPost | null> {
         revalidate: REVALIDATE_SECONDS.POSTS,
       }),
     ])
+    const rankMathTitleFromHead = resolveRankMathSeoTitle(rankMathHead.seoTitle)
     const mergedPost: Post = {
       ...post,
-      rank_math_title: post.rank_math_title?.trim() || rankMathFields.rank_math_title,
+      rank_math_title:
+        post.rank_math_title?.trim() ||
+        rankMathFields.rank_math_title?.trim() ||
+        rankMathTitleFromHead,
       rank_math_description:
         post.rank_math_description?.trim() ||
         rankMathFields.rank_math_description ||
@@ -404,11 +409,15 @@ export async function getPosts(params: PaginationParams = {}): Promise<Processed
   return result.data
 }
 
-export async function getPostsForSitemap(): Promise<Array<{ slug: string; date: string; modified: string }>> {
+export async function getPostsForSitemap(): Promise<
+  Array<{ slug: string; date: string; modified: string; modified_gmt: string }>
+> {
   try {
-    return await fetchAPI<Array<{ slug: string; date: string; modified: string }>>('posts', {
+    return await fetchAPI<
+      Array<{ slug: string; date: string; modified: string; modified_gmt: string }>
+    >('posts', {
       per_page: 100,
-      _fields: 'slug,date,modified',
+      _fields: 'slug,date,modified,modified_gmt',
     })
   } catch (error) {
     console.error('Failed to fetch posts for sitemap:', error)
