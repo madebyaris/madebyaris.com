@@ -71,6 +71,17 @@ export const metadata: Metadata = {
     images: [siteConfig.ogImage],
   },
   metadataBase: new URL(productionUrl),
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   verification: {
     ...(process.env.GOOGLE_VERIFICATION_CODE ? { google: process.env.GOOGLE_VERIFICATION_CODE } : {}),
     ...(Object.keys(verificationOther).length ? { other: verificationOther } : {}),
