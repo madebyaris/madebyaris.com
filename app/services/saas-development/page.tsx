@@ -286,7 +286,18 @@ export default function SaasDevelopmentPage() {
                 <item.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
               </div>
               <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{item.description}</p>
+              <p className="text-sm text-zinc-500 leading-relaxed">
+                {item.title === 'Database' ? (
+                  <>
+                    <Link href="/services/php-development/database-solutions" className={linkClass}>
+                      Slow queries
+                    </Link>{' '}
+                    keep functions running longer and push you onto a bigger database plan. I index the queries the app actually runs and stop fetching rows nobody reads.
+                  </>
+                ) : (
+                  item.description
+                )}
+              </p>
             </div>
           ))}
         </div>
