@@ -130,6 +130,16 @@ const nextConfig = {
       permanent: true,
     },
     {
+      source: '/blog/meet-my-new-ai-writer',
+      destination: '/blog/pr-review-checklist-for-ai-generated-code',
+      permanent: true,
+    },
+    {
+      source: '/blog/meet-my-new-ai-writer/',
+      destination: '/blog/pr-review-checklist-for-ai-generated-code',
+      permanent: true,
+    },
+    {
       source: '/services/next-js-development/agency-indonesia',
       destination: '/services/nextjs-development/agency-indonesia',
       permanent: true,
