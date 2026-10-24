@@ -222,7 +222,6 @@ const structuredData = buildPageGraph({
       { name: 'Monthly SEO retainer' },
     ],
   },
-  faqs,
 })
 
 export default function SeoServicesPage() {

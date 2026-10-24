@@ -311,7 +311,6 @@ const structuredData = buildPageGraph({
     areaServed: 'Indonesia',
     offers: offers.map((item) => ({ name: item.title, description: item.description })),
   },
-  faqs,
 })
 
 export default function JasaWordPressPage() {

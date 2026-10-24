@@ -48,7 +48,6 @@ const structuredData = buildPageGraph({
   name: pageTitle,
   description: pageDescription,
   breadcrumbs: [{ name: 'MiniMax Dev Community Expert', path }],
-  faqs,
 })
 
 const highlights = [

@@ -131,7 +131,6 @@ const structuredData = buildPageGraph({
       { name: 'SEO-safe migration to Next.js' },
     ],
   },
-  faqs,
 })
 
 const linkClass = 'underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors'

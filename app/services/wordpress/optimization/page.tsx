@@ -136,7 +136,6 @@ const structuredData = buildPageGraph({
       { name: 'WordPress security hardening' },
     ],
   },
-  faqs,
 })
 
 export default function WordPressOptimizationPage() {

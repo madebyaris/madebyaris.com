@@ -232,7 +232,6 @@ const structuredData = buildPageGraph({
       { name: 'Jasa SEO bulanan' },
     ],
   },
-  faqs,
 })
 
 export default function JasaSeoPage() {

@@ -145,7 +145,6 @@ const structuredData = buildPageGraph({
       ...formats.map(({ title, description }) => ({ name: title, description })),
     ],
   },
-  faqs,
 })
 
 export default function VibeCodeFriendPage() {

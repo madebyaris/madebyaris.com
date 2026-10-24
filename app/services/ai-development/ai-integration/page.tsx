@@ -261,7 +261,6 @@ const structuredData = buildPageGraph({
       { name: 'AI cost logging and spend caps' },
     ],
   },
-  faqs,
 })
 
 export default function AiIntegrationPage() {

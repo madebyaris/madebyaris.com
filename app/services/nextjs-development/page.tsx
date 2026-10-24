@@ -190,7 +190,6 @@ const structuredData = buildPageGraph({
       { name: 'Ongoing Next.js engineering', description: 'Features, refactors, and code review in an existing codebase.' },
     ],
   },
-  faqs,
 })
 
 const badgeStyle = {

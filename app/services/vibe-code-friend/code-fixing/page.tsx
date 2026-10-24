@@ -107,7 +107,6 @@ const structuredData = buildPageGraph({
       { name: 'Written explanation of each fix' },
     ],
   },
-  faqs,
 })
 
 export default function CodeFixingPage() {

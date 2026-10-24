@@ -266,7 +266,6 @@ const structuredData = buildPageGraph({
       { name: 'Post-launch iteration retainer' },
     ],
   },
-  faqs,
 })
 
 export default function AiMvpPage() {

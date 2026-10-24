@@ -200,7 +200,6 @@ const structuredData = buildPageGraph({
     serviceType: 'WordPress development',
     offers: services.map((service) => ({ name: service.title, description: service.description })),
   },
-  faqs,
 })
 
 export default function WordPressServicesPage() {

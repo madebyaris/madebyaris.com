@@ -127,7 +127,6 @@ const structuredData = buildPageGraph({
       { name: 'Spend alerts and handover doc' },
     ],
   },
-  faqs,
 })
 
 const linkClass = 'underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors'

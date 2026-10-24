@@ -123,7 +123,6 @@ const structuredData = buildPageGraph({
     serviceType: 'WordPress Theme Development',
     offers: deliverables.map((name) => ({ name })),
   },
-  faqs,
 })
 
 export default function ThemeDevelopmentPage() {

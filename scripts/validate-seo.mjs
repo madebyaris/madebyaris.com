@@ -19,7 +19,6 @@ const REQUIRED = {
   Article: ['headline', 'author', 'publisher', 'datePublished', 'image'],
   BreadcrumbList: ['itemListElement'],
   Service: ['name', 'provider', 'description'],
-  FAQPage: ['mainEntity'],
   ItemList: ['itemListElement'],
 }
 
@@ -129,13 +128,6 @@ for (const file of files) {
         node.itemListElement.forEach((item, i) => {
           if (item.position !== i + 1 || !item.name || !item.item) report(route, `breadcrumb item ${i + 1} incomplete`)
         })
-      }
-      if (type === 'FAQPage') {
-        const text = decode(html.replace(/<script[\s\S]*?<\/script>/g, ''))
-        for (const q of node.mainEntity) {
-          if (!q.acceptedAnswer?.text) report(route, `FAQ "${q.name}" has no answer`)
-          if (!text.includes(q.name)) report(route, `FAQ "${q.name}" is not visible on the page`)
-        }
       }
     }
     for (const [key, value] of Object.entries(node)) {
