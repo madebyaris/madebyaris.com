@@ -9,6 +9,7 @@ const WP_BLOG_TAGS = [
   WP_CACHE_TAGS.tags,
 ] as const
 
+// app/sitemap.xml/route.ts — not metadata sitemap.ts (vercel/next.js#99055)
 const SITEMAP_PATH = '/sitemap.xml'
 const FEED_PATHS = ['/llms.txt', '/llms-full.txt', '/feed.xml'] as const
 

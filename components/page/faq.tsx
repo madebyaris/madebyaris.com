@@ -1,7 +1,9 @@
+import type { ReactNode } from 'react'
+
 interface FaqProps {
   id: string
   title: string
-  faqs: ReadonlyArray<{ question: string; answer: string }>
+  faqs: ReadonlyArray<{ question: string; answer: ReactNode }>
 }
 
 export function Faq({ id, title, faqs }: FaqProps) {

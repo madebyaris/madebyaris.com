@@ -4,8 +4,6 @@ import { productionUrl } from '@/lib/seo/config'
 import { staticRouteLastModified, wpModifiedGmtToDate } from '@/lib/seo/sitemap-static-lastmod'
 import { blogCategories, blogCategoryPath, topicHubs } from '@/lib/topics'
 
-export const revalidate = 604800 // 7 days; webhook calls revalidatePath('/sitemap.xml')
-
 const mainRoutes = [
   { path: '', priority: 1.0, changeFreq: 'monthly' },
   { path: 'about', priority: 0.8, changeFreq: 'monthly' },
@@ -78,7 +76,7 @@ function createSitemapEntry(
   }
 }
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+export async function getSitemapEntries(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = productionUrl
 
   const staticRoutes = [

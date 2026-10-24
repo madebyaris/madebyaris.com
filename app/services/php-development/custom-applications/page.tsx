@@ -177,7 +177,11 @@ export default function CustomApplicationsPage() {
           What custom PHP application development gets you
         </h2>
         <p className="text-zinc-600 leading-relaxed mb-4">
-          Custom PHP application development means building a web app around your own process: the forms, rules, roles, and reports your team uses every day. I build it in Laravel, or in plain PHP when it has to sit next to an existing system, on a MySQL database you own. You get software that matches how you work, in code another developer can pick up later.
+          Custom PHP application development means building a web app around your own process: the forms, rules, roles, and reports your team uses every day. I build it in Laravel, or in plain PHP when it has to sit next to an existing system, on{' '}
+          <Link href="/services/php-development/database-solutions" className={linkClass}>
+            a MySQL database you own
+          </Link>
+          . You get software that matches how you work, in code another developer can pick up later.
         </p>
         <p className="text-zinc-600 leading-relaxed">
           If a Next.js front end is on your roadmap, the app can expose its own API from day one. I explain how the two fit in{' '}

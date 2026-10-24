@@ -551,7 +551,26 @@ export default function AiIntegrationPage() {
         </div>
       </section>
 
-      <Faq id="ai-integration-faq" title="AI integration services FAQ" faqs={faqs} />
+      <Faq
+        id="ai-integration-faq"
+        title="AI integration services FAQ"
+        faqs={faqs.map((faq) =>
+          faq.question === 'Can you add AI to WordPress?'
+            ? {
+                ...faq,
+                answer: (
+                  <>
+                    Yes. I build{' '}
+                    <Link href="/services/wordpress/plugin-development" className={linkClass}>
+                      WordPress plugins
+                    </Link>{' '}
+                    and headless WordPress sites, so the AI feature can live in a plugin or in a Next.js front end. Either way the model call runs on the server, and answers can come from your posts and pages.
+                  </>
+                ),
+              }
+            : faq,
+        )}
+      />
 
       <CtaBand
         title="Have one task you want AI to handle?"

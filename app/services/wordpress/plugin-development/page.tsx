@@ -329,7 +329,22 @@ export default function PluginDevelopmentPage() {
                 {faq.question}
                 <span className="text-orange-500 transition-transform group-open:rotate-45 text-xl leading-none">+</span>
               </summary>
-              <p className="mt-3 text-sm text-zinc-600 leading-relaxed">{faq.answer}</p>
+              <p className="mt-3 text-sm text-zinc-600 leading-relaxed">
+                {faq.question === 'Can the plugin work with Elementor or WooCommerce?' ? (
+                  <>
+                    Yes. A plugin can add Elementor widgets, blocks for the WordPress editor, or hook into{' '}
+                    <Link
+                      href="/services/wordpress/woocommerce"
+                      className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors"
+                    >
+                      WooCommerce orders and products
+                    </Link>
+                    . Tell me which tools your site depends on and I will build around them.
+                  </>
+                ) : (
+                  faq.answer
+                )}
+              </p>
             </details>
           ))}
         </div>
