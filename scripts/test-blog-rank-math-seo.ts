@@ -7,6 +7,7 @@ import {
 } from '../lib/seo/rank-math'
 import { fitDescription, fitTitle } from '../lib/seo/metadata'
 import {
+  extractDocumentTitle,
   extractMetaTagContent,
   wpRankMathHeadRequestUrl,
 } from '../lib/wordpress/rank-math-head'
@@ -54,6 +55,12 @@ assert.equal(
   "Aris's Next.js guide for teams",
 )
 assert.equal(extractMetaTagContent(metaHtml, { property: 'og:description' }), 'Second & third')
+
+const titleHtml = '<title>Cursor pricing 2026: Free, Plus, Premium, Super, Ultra</title>'
+assert.equal(
+  extractDocumentTitle(titleHtml),
+  'Cursor pricing 2026: Free, Plus, Premium, Super, Ultra',
+)
 
 // Description fallback order: SEO description → OG / Facebook → excerpt
 assert.equal(

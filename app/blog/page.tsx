@@ -37,6 +37,11 @@ function getBlogTitle(currentPage: number): string {
   return currentPage > 1 ? `${BLOG_TITLE} (Page ${currentPage})` : BLOG_TITLE
 }
 
+function getBlogMetaDescription(currentPage: number): string {
+  if (currentPage <= 1) return BLOG_DESCRIPTION
+  return `Next.js, Cursor and WordPress guides from 13+ years of client work. Page ${currentPage} of the blog lists older posts on costs, workflows, migrations and SEO.`
+}
+
 export async function generateMetadata({ searchParams }: BlogPageProps): Promise<Metadata> {
   const { page: pageParam } = await searchParams
   const currentPage = parseBlogPageParam(pageParam)
@@ -44,7 +49,7 @@ export async function generateMetadata({ searchParams }: BlogPageProps): Promise
 
   return buildPageMetadata({
     title: getBlogTitle(currentPage),
-    description: BLOG_DESCRIPTION,
+    description: getBlogMetaDescription(currentPage),
     path: canonicalPath,
     keywords: [
       'Next.js blog',

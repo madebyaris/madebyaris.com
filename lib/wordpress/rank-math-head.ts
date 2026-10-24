@@ -10,6 +10,11 @@ export function wpRankMathHeadRequestUrl(slug: string): string {
 }
 
 export interface WpRankMathHeadFields {
+  /**
+   * Rank Math SEO title as rendered in `<title>` (fallback when REST omits `rank_math_title`).
+   * Prefer REST: Rank Math "Capitalize Titles" can ucwords the head output.
+   */
+  seoTitle?: string
   /** Rank Math SEO description as rendered in `<meta name="description">`. */
   seoDescription?: string
   /** Rank Math Facebook / Open Graph description (`rank_math_facebook_description`). */
@@ -32,6 +37,13 @@ export function parseMetaTagAttributes(tag: string): Record<string, string> {
   return attrs
 }
 
+export function extractDocumentTitle(html: string): string | undefined {
+  const match = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)
+  const raw = match?.[1]?.replace(/\s+/g, ' ').trim()
+  if (!raw) return undefined
+  return decodeHtmlEntities(raw)
+}
+
 export function extractMetaTagContent(
   html: string,
   spec: { name?: string; property?: string },
@@ -52,8 +64,8 @@ export function extractMetaTagContent(
 
 /**
  * Public Rank Math description tags from the WordPress front-end URL (not wp-json).
- * Does not read `<title>` or `og:title` (Rank Math "Capitalize Titles" distorts them).
- * Ignores robots and canonical on purpose.
+ * Reads `<title>` only as a title fallback when REST has no `rank_math_title`.
+ * Ignores `og:title` (Rank Math "Capitalize Titles" distorts it). Ignores robots and canonical.
  */
 export async function fetchWpRankMathHead(
   slug: string,
@@ -71,6 +83,7 @@ export async function fetchWpRankMathHead(
 
     const html = (await response.text()).slice(0, 120_000)
     return {
+      seoTitle: extractDocumentTitle(html),
       seoDescription: extractMetaTagContent(html, { name: 'description' }),
       ogDescription: extractMetaTagContent(html, { property: 'og:description' }),
     }

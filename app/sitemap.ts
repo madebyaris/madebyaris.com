@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { getPostsForSitemap } from '@/lib/wordpress'
 import { productionUrl } from '@/lib/seo/config'
+import { staticRouteLastModified, wpModifiedGmtToDate } from '@/lib/seo/sitemap-static-lastmod'
 import { blogCategories, blogCategoryPath, topicHubs } from '@/lib/topics'
 
 export const revalidate = 604800 // 7 days; webhook calls revalidatePath('/sitemap.xml')
@@ -64,11 +65,14 @@ const legalRoutes = [
   { path: 'terms-of-service', priority: 0.5, changeFreq: 'yearly' },
 ]
 
-// Static pages have no per-page edit date, so they omit lastmod rather than
-// claim they changed on every sitemap fetch.
-function createSitemapEntry(baseUrl: string, route: { path: string; priority: number; changeFreq: string }) {
+function createSitemapEntry(
+  baseUrl: string,
+  route: { path: string; priority: number; changeFreq: string },
+): MetadataRoute.Sitemap[number] {
+  const lastModified = staticRouteLastModified(route.path)
   return {
     url: route.path ? `${baseUrl}/${route.path}` : baseUrl,
+    ...(lastModified ? { lastModified } : {}),
     changeFrequency: route.changeFreq as 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never',
     priority: route.priority,
   }
@@ -90,7 +94,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     const postRoutes = posts.map((post) => ({
       url: `${baseUrl}/blog/${post.slug}`,
-      lastModified: new Date(post.modified || post.date),
+      lastModified: wpModifiedGmtToDate(post.modified_gmt || post.modified || post.date),
       changeFrequency: 'weekly' as const,
       priority: 0.6,
     }))
