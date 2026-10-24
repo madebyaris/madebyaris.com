@@ -198,7 +198,6 @@ const structuredData = buildPageGraph({
       { name: 'Post-migration SEO monitoring' },
     ],
   },
-  faqs,
 })
 
 export default function WordPressMigrationPage() {

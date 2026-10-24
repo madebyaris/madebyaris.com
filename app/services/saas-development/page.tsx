@@ -203,7 +203,6 @@ const structuredData = buildPageGraph({
       { name: 'Handoff and ongoing support' },
     ],
   },
-  faqs,
 })
 
 export default function SaasDevelopmentPage() {

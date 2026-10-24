@@ -59,7 +59,6 @@ const structuredData = buildPageGraph({
   path: '/',
   name: `${pageTitle} | Aris Setiawan`,
   description: pageDescription,
-  faqs: faqs.map(({ question, answer }) => ({ question, answer })),
 })
 
 // Optimize Posts component with error handling and fallback

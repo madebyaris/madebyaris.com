@@ -75,7 +75,6 @@ const structuredData = buildPageGraph({
       { name: 'Vercel deployment and caching' },
     ],
   },
-  faqs,
 })
 
 const proof = [

@@ -61,7 +61,6 @@ const structuredData = buildPageGraph({
   name: pageTitle,
   description: pageDescription,
   breadcrumbs: [{ name: 'Cursor Ambassador', path }],
-  faqs,
 })
 
 const highlights = [

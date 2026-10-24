@@ -212,7 +212,6 @@ const structuredData = buildPageGraph({
     areaServed: 'Indonesia',
     offers: appTypes.map((item) => ({ name: item.title })),
   },
-  faqs,
 })
 
 export default function JasaPembuatanAplikasiWebPage() {

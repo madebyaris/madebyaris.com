@@ -105,7 +105,6 @@ const structuredData = buildPageGraph({
     serviceType: 'Developer Tutoring',
     offers: outcomes.map(({ title, description }) => ({ name: title, description })),
   },
-  faqs,
 })
 
 export default function AiIdeTutoringPage() {

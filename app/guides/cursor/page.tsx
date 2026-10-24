@@ -117,7 +117,6 @@ export default async function CursorGuidePage() {
     type: 'CollectionPage',
     breadcrumbs: [{ name: 'Cursor guide', path }],
     items: groups.flatMap((group) => group.posts).map((post) => ({ name: post.title.rendered, path: `/blog/${post.slug}` })),
-    faqs,
   })
 
   return (

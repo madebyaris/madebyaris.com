@@ -143,7 +143,6 @@ const structuredData = buildPageGraph({
     serviceType: 'PHP Development',
     offers: services.map((service) => ({ name: service.title, description: service.description })),
   },
-  faqs,
 })
 
 const linkClass = 'underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors'

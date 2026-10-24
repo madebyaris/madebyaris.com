@@ -204,7 +204,6 @@ const structuredData = buildPageGraph({
     serviceType: 'WooCommerce Development',
     offers: offers.map((offer) => ({ name: offer.title, description: offer.description })),
   },
-  faqs,
 })
 
 export default function WooCommerceDevelopmentPage() {

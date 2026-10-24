@@ -223,7 +223,6 @@ const structuredData = buildPageGraph({
       { name: 'Small fixes and a monthly report' },
     ],
   },
-  faqs,
 })
 
 export default function WordPressMaintenancePage() {

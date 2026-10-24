@@ -236,7 +236,6 @@ const structuredData = buildPageGraph({
       { name: 'Post-launch Search Console checks' },
     ],
   },
-  faqs,
 })
 
 export default function WordPressRedesignPage() {

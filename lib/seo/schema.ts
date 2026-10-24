@@ -139,7 +139,6 @@ export type PageType =
   | 'ContactPage'
   | 'CollectionPage'
   | 'ProfilePage'
-  | 'FAQPage'
 
 export interface PageGraphInput {
   path: string
@@ -150,8 +149,6 @@ export interface PageGraphInput {
   /** Trail after Home. Home is added automatically. */
   breadcrumbs?: BreadcrumbItem[]
   service?: ServiceInput
-  /** Only pass FAQs that are rendered visibly on the page. */
-  faqs?: FaqItem[]
   /** Items listed on a collection page, e.g. the posts on a blog index page. */
   items?: Array<{ name: string; path: string }>
 }
@@ -170,21 +167,9 @@ function buildBreadcrumbNode(url: string, trail: BreadcrumbItem[]): JsonLdNode {
   }
 }
 
-function buildFaqNode(url: string, faqs: FaqItem[]): JsonLdNode {
-  return {
-    '@type': 'FAQPage',
-    '@id': `${url}#faq`,
-    mainEntity: faqs.map((faq) => ({
-      '@type': 'Question',
-      name: cleanText(faq.question),
-      acceptedAnswer: { '@type': 'Answer', text: cleanText(faq.answer) },
-    })),
-  }
-}
-
 /**
- * Page-level graph: the WebPage plus optional Breadcrumb, Service, and FAQ
- * nodes, all linked to the site entities from `buildSiteGraph`.
+ * Page-level graph: the WebPage plus optional Breadcrumb and Service nodes,
+ * all linked to the site entities from `buildSiteGraph`.
  */
 export function buildPageGraph(input: PageGraphInput) {
   const url = productionAbsoluteUrl(input.path)
@@ -256,15 +241,6 @@ export function buildPageGraph(input: PageGraphInput) {
         url: productionAbsoluteUrl(item.path),
       })),
     })
-  }
-
-  if (input.faqs?.length) {
-    if (type === 'FAQPage') {
-      Object.assign(page, { mainEntity: buildFaqNode(url, input.faqs).mainEntity })
-    } else {
-      page.hasPart = ref(`${url}#faq`)
-      graph.push({ ...buildFaqNode(url, input.faqs), isPartOf: ref(`${url}#webpage`) })
-    }
   }
 
   return { '@context': 'https://schema.org', '@graph': [page, ...graph] }

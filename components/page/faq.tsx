@@ -4,7 +4,6 @@ interface FaqProps {
   faqs: ReadonlyArray<{ question: string; answer: string }>
 }
 
-// The same `faqs` array must feed the FAQPage schema, or seo:check fails.
 export function Faq({ id, title, faqs }: FaqProps) {
   return (
     <section className="mb-16 max-w-3xl mx-auto" aria-labelledby={id}>
