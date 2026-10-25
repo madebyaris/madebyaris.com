@@ -79,16 +79,6 @@ const nextConfig = {
   output: 'standalone',
   compress: true,
   generateEtags: true,
-  rewrites: async () => {
-    const indexNowKey = process.env.INDEXNOW_KEY?.trim()
-    if (!indexNowKey) return []
-    return [
-      {
-        source: `/${indexNowKey}.txt`,
-        destination: '/api/indexnow-key',
-      },
-    ]
-  },
   redirects: async () => [
     {
       source: '/about-me',
