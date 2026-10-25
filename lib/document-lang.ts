@@ -64,10 +64,19 @@ export function paginatedBlogPageFromInternalPath(pathname: string): string | nu
   return paginatedBlogMatch?.[1] ?? null
 }
 
+function mergeIncomingSearchParams(target: URL, incomingSearchParams?: URLSearchParams) {
+  if (!incomingSearchParams) return
+
+  incomingSearchParams.forEach((value, key) => {
+    target.searchParams.set(key, value)
+  })
+}
+
 /** Build the public redirect target for an internal /d/… URL (never encode ? inside pathname). */
 export function publicRedirectUrlFromInternalPath(
   pathname: string,
   baseUrl: string,
+  incomingSearchParams?: URLSearchParams,
 ): URL | null {
   const page = paginatedBlogPageFromInternalPath(pathname)
   if (page !== null) {
@@ -75,6 +84,12 @@ export function publicRedirectUrlFromInternalPath(
     url.pathname = '/blog'
     url.search = ''
     url.searchParams.set('page', page)
+    if (incomingSearchParams) {
+      incomingSearchParams.forEach((value, key) => {
+        if (key === 'page') return
+        url.searchParams.set(key, value)
+      })
+    }
     return url
   }
 
@@ -84,6 +99,7 @@ export function publicRedirectUrlFromInternalPath(
   const url = new URL(baseUrl)
   url.pathname = publicPath
   url.search = ''
+  mergeIncomingSearchParams(url, incomingSearchParams)
   return url
 }
 

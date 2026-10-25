@@ -54,7 +54,11 @@ export function proxy(request: NextRequest) {
     return applyStaticAssetCacheControl(pathname, paginatedBlog)
   }
 
-  const publicRedirect = publicRedirectUrlFromInternalPath(pathname, request.nextUrl.origin)
+  const publicRedirect = publicRedirectUrlFromInternalPath(
+    pathname,
+    request.nextUrl.origin,
+    request.nextUrl.searchParams,
+  )
   if (publicRedirect !== null) {
     const url = request.nextUrl.clone()
     url.pathname = publicRedirect.pathname
