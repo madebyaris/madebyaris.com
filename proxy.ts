@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import {
-  publicPathFromInternalDocumentPath,
+  publicRedirectUrlFromInternalPath,
   rewritePathnameWithDocumentLang,
   shouldSkipDocumentLangProxy,
 } from '@/lib/document-lang'
@@ -54,10 +54,15 @@ export function proxy(request: NextRequest) {
     return applyStaticAssetCacheControl(pathname, paginatedBlog)
   }
 
-  const publicPath = publicPathFromInternalDocumentPath(pathname)
-  if (publicPath !== null) {
+  const publicRedirect = publicRedirectUrlFromInternalPath(
+    pathname,
+    request.nextUrl.origin,
+    request.nextUrl.searchParams,
+  )
+  if (publicRedirect !== null) {
     const url = request.nextUrl.clone()
-    url.pathname = publicPath
+    url.pathname = publicRedirect.pathname
+    url.search = publicRedirect.search
     return NextResponse.redirect(url, 308)
   }
 
