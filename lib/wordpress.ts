@@ -52,6 +52,31 @@ export interface PaginationParams {
 
 export const BLOG_POSTS_PER_PAGE = 12
 
+const WP_REST_MAX_PER_PAGE = 100
+
+async function fetchAllPaginatedFromWp<T>(
+  endpoint: WpEndpoint,
+  params: Record<string, string | number> = {},
+  revalidateSeconds: number = REVALIDATE_SECONDS.POSTS,
+): Promise<T[]> {
+  const all: T[] = []
+  let page = 1
+  let totalPages = 1
+
+  while (page <= totalPages) {
+    const result = await fetchAPIPaginated<T>(
+      endpoint,
+      { ...params, page, per_page: WP_REST_MAX_PER_PAGE },
+      revalidateSeconds,
+    )
+    all.push(...result.data)
+    totalPages = Math.max(result.totalPages, 1)
+    page += 1
+  }
+
+  return all
+}
+
 export interface PaginatedResult<T> {
   data: T[]
   total: number
@@ -344,16 +369,29 @@ function buildPostsQueryParams(params: PaginationParams = {}): Record<string, st
 
 export async function getAllCategories(): Promise<Category[]> {
   try {
-    const categories = await fetchAPI<Array<{ id: number; name: string; slug: string; count: number; description?: string }>>(
+    const categories = await fetchAllPaginatedFromWp<
+      { id: number; name: string; slug: string; count: number; description?: string }
+    >(
       'categories',
-      { per_page: 100, hide_empty: 'true', _fields: 'id,name,slug,count,description' },
-      REVALIDATE_SECONDS.CATEGORIES
+      { hide_empty: 'true', _fields: 'id,name,slug,count,description' },
+      REVALIDATE_SECONDS.CATEGORIES,
     )
     return categories
       .filter((category) => category.slug !== 'uncategorized')
       .map((category) => ({ id: category.id, name: category.name, slug: category.slug, count: category.count }))
   } catch (error) {
     console.error('Failed to fetch categories:', error)
+    return []
+  }
+}
+
+export async function getAllPublishedPostSlugs(): Promise<Array<{ slug: string }>> {
+  try {
+    return await fetchAllPaginatedFromWp<{ slug: string }>('posts', {
+      _fields: 'slug',
+    })
+  } catch (error) {
+    console.error('Failed to fetch all post slugs:', error)
     return []
   }
 }
@@ -413,12 +451,10 @@ export async function getPostsForSitemap(): Promise<
   Array<{ slug: string; date: string; modified: string; modified_gmt: string }>
 > {
   try {
-    return await fetchAPI<
-      Array<{ slug: string; date: string; modified: string; modified_gmt: string }>
-    >('posts', {
-      per_page: 100,
-      _fields: 'slug,date,modified,modified_gmt',
-    })
+    return await fetchAllPaginatedFromWp<{ slug: string; date: string; modified: string; modified_gmt: string }>(
+      'posts',
+      { _fields: 'slug,date,modified,modified_gmt' },
+    )
   } catch (error) {
     console.error('Failed to fetch posts for sitemap:', error)
     return []

@@ -10,7 +10,7 @@ import { convertBlocks, enhanceRenderedHTML } from 'wp-block-to-html/core'
 import { FeaturedImage } from '@/components/featured-image'
 import { AuthorImage } from '@/components/author-image'
 import { RelatedPostCard } from '@/components/related-post-card'
-import { getPost, getPosts, type ProcessedPost } from '@/lib/wordpress'
+import { getAllPublishedPostSlugs, getPost, getPosts, type ProcessedPost } from '@/lib/wordpress'
 import { authorProfile, buildBlogPostGraph, buildBlogPostMetadata, isIndonesianSlug, siteConfig } from '@/lib/seo'
 import { blogCategoryCopy, blogCategoryPath, hubForCategory, primaryCategory, topicHubs } from '@/lib/topics'
 import { JsonLd } from '@/components/seo/json-ld'
@@ -18,6 +18,7 @@ import { contactHref } from '@/lib/contact-services'
 import { documentLangFromBlogSlug, isDocumentLang } from '@/lib/document-lang'
 
 export const revalidate = 604800 // 7 days; webhook refreshes a post on publish
+export const dynamicParams = true
 
 const RELATED_POSTS = 3
 
@@ -51,14 +52,14 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 
 export async function generateStaticParams() {
   try {
-    const posts = await getPosts({ per_page: 20 })
+    const posts = await getAllPublishedPostSlugs()
     return posts.map((post) => ({
       docLang: documentLangFromBlogSlug(post.slug),
       slug: post.slug,
-    }));
+    }))
   } catch (error) {
-    console.error('Error generating static params:', error);
-    return [];
+    console.error('Error generating static params:', error)
+    return []
   }
 }
 

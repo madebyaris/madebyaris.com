@@ -45,6 +45,13 @@ export function shouldSkipDocumentLangProxy(pathname: string): boolean {
 
 /** Map internal /d/{en|id}/… URLs to public paths for 308 redirects (never expose /d/ externally). */
 export function publicPathFromInternalDocumentPath(pathname: string): string | null {
+  const paginatedBlogMatch = pathname.match(
+    new RegExp(`^${INTERNAL_DOCUMENT_PREFIX}/en/blog/p/(\\d+)/?$`),
+  )
+  if (paginatedBlogMatch) {
+    return `/blog?page=${paginatedBlogMatch[1]}`
+  }
+
   const match = pathname.match(new RegExp(`^${INTERNAL_DOCUMENT_PREFIX}/(en|id)(?:/(.*))?$`))
   if (!match) return null
   const tail = match[2]

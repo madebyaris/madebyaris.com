@@ -8,8 +8,8 @@ import { CtaBand } from '@/components/page/cta-band'
 import { RelatedPostCard } from '@/components/related-post-card'
 import { buildPageGraph, buildPageMetadata } from '@/lib/seo'
 import { contactHref } from '@/lib/contact-services'
-import { blogCategories, blogCategoryCopy, blogCategoryPath } from '@/lib/topics'
-import { getPostsByCategory } from '@/lib/wordpress'
+import { blogCategoryCopy, blogCategoryPath } from '@/lib/topics'
+import { getAllCategories, getPostsByCategory } from '@/lib/wordpress'
 
 export const revalidate = 604800 // 7 days; webhook refreshes archives on publish
 export const dynamicParams = false
@@ -18,8 +18,11 @@ interface CategoryPageProps {
   params: Promise<{ docLang: string; slug: string }>
 }
 
-export function generateStaticParams() {
-  return blogCategories.map((category) => ({ docLang: 'en', slug: category.slug }))
+export async function generateStaticParams() {
+  const categories = await getAllCategories()
+  return categories
+    .filter((category) => blogCategoryCopy(category.slug))
+    .map((category) => ({ docLang: 'en', slug: category.slug }))
 }
 
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
