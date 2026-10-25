@@ -3,12 +3,18 @@ import type { NextRequest } from 'next/server'
 import {
   publicPathFromInternalDocumentPath,
   rewritePathnameWithDocumentLang,
+  shouldSkipDocumentLangProxy,
 } from '@/lib/document-lang'
+import { applyStaticAssetCacheControl } from '@/lib/proxy-cache-control'
 
 // Next.js 16: Renamed from middleware to proxy for better clarity
 // This function handles network boundary and routing at the edge
 export function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname
+  if (shouldSkipDocumentLangProxy(pathname)) {
+    return applyStaticAssetCacheControl(pathname, NextResponse.next())
+  }
+
   const publicPath = publicPathFromInternalDocumentPath(pathname)
   if (publicPath !== null) {
     const url = request.nextUrl.clone()
@@ -25,17 +31,7 @@ export function proxy(request: NextRequest) {
       ? NextResponse.next()
       : NextResponse.rewrite(url)
 
-  // Add cache control headers for static assets
-  if (
-    request.nextUrl.pathname.match(/\.(jpg|jpeg|gif|png|ico|css|js|woff|woff2|ttf|eot)$/)
-  ) {
-    response.headers.set(
-      'Cache-Control',
-      'public, max-age=31536000, immutable'
-    )
-  }
-
-  return response
+  return applyStaticAssetCacheControl(request.nextUrl.pathname, response)
 }
 
 export const config = {
@@ -47,6 +43,6 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      */
-    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+    '/((?!api|_next|favicon\\.ico|sitemap\\.xml|robots\\.txt|feed\\.xml|llms(?:-full)?\\.txt|.*\\..*).*)',
   ],
 }
