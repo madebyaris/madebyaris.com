@@ -11,6 +11,9 @@ import {
 } from '@/lib/document-lang'
 import { publishedBlogSlugs } from '@/lib/published-blog-slugs.generated'
 import { applyStaticAssetCacheControl } from '@/lib/proxy-cache-control'
+import { wpPublishedPostExists } from '@/lib/wp-published-post-exists'
+
+const PROXY_LOG_PREFIX = '[blog-proxy]'
 
 // Next.js 16: Renamed from middleware to proxy for better clarity
 // This function handles network boundary and routing at the edge
@@ -48,7 +51,21 @@ function rewriteBlogPagination(request: NextRequest): NextResponse | null {
   return NextResponse.rewrite(url)
 }
 
-export function proxy(request: NextRequest) {
+function continueDocumentLangRewrite(request: NextRequest) {
+  const pathname = request.nextUrl.pathname
+  const rewritten = rewritePathnameWithDocumentLang(pathname)
+  const url = request.nextUrl.clone()
+  url.pathname = rewritten
+
+  const response =
+    rewritten === request.nextUrl.pathname
+      ? NextResponse.next()
+      : NextResponse.rewrite(url)
+
+  return applyStaticAssetCacheControl(pathname, response)
+}
+
+export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname
   if (shouldSkipDocumentLangProxy(pathname)) {
     return applyStaticAssetCacheControl(pathname, NextResponse.next())
@@ -72,15 +89,31 @@ export function proxy(request: NextRequest) {
   }
 
   const blogSlug = blogPostSlugFromPublicPath(pathname)
-  if (
-    blogSlug &&
-    publishedBlogSlugs.size > 0 &&
-    !publishedBlogSlugs.has(blogSlug)
-  ) {
-    const url = request.nextUrl.clone()
-    url.pathname = internalBlogNotFoundPath(blogSlug)
-    const response = NextResponse.rewrite(url, { status: 404 })
-    return applyStaticAssetCacheControl(pathname, response)
+  if (blogSlug && publishedBlogSlugs.size > 0) {
+    if (publishedBlogSlugs.has(blogSlug)) {
+      console.info(`${PROXY_LOG_PREFIX} allowlist hit slug=${blogSlug} wp=skip`)
+    } else {
+      console.info(`${PROXY_LOG_PREFIX} allowlist miss slug=${blogSlug} wp=lookup`)
+      const exists = await wpPublishedPostExists(blogSlug)
+      if (exists === false) {
+        console.info(`${PROXY_LOG_PREFIX} wp=miss slug=${blogSlug} rewrite=404`)
+        const url = request.nextUrl.clone()
+        url.pathname = internalBlogNotFoundPath(blogSlug)
+        const response = NextResponse.rewrite(url, { status: 404 })
+        response.headers.set('x-blog-proxy-lookup', 'wp-miss')
+        return applyStaticAssetCacheControl(pathname, response)
+      }
+      if (exists === true) {
+        console.info(`${PROXY_LOG_PREFIX} wp=hit slug=${blogSlug} pass=200`)
+        const response = continueDocumentLangRewrite(request)
+        response.headers.set('x-blog-proxy-lookup', 'wp-hit')
+        return response
+      }
+      console.info(`${PROXY_LOG_PREFIX} wp=fail-open slug=${blogSlug}`)
+      const response = continueDocumentLangRewrite(request)
+      response.headers.set('x-blog-proxy-lookup', 'wp-fail-open')
+      return response
+    }
   }
 
   const rewritten = rewritePathnameWithDocumentLang(pathname)
@@ -91,6 +124,10 @@ export function proxy(request: NextRequest) {
     rewritten === request.nextUrl.pathname
       ? NextResponse.next()
       : NextResponse.rewrite(url)
+
+  if (blogSlug && publishedBlogSlugs.has(blogSlug)) {
+    response.headers.set('x-blog-proxy-lookup', 'allowlist')
+  }
 
   return applyStaticAssetCacheControl(request.nextUrl.pathname, response)
 }
