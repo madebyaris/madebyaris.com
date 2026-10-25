@@ -1,11 +1,17 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import {
+  blogPostSlugFromPublicPath,
+  internalBlogNotFoundPath,
+} from '@/lib/blog-post-path'
+import {
   publicRedirectUrlFromInternalPath,
   rewritePathnameWithDocumentLang,
   shouldSkipDocumentLangProxy,
 } from '@/lib/document-lang'
+import { publishedBlogSlugs } from '@/lib/published-blog-slugs.generated'
 import { applyStaticAssetCacheControl } from '@/lib/proxy-cache-control'
+import { wpPublishedPostExists } from '@/lib/wp-published-post-exists'
 
 // Next.js 16: Renamed from middleware to proxy for better clarity
 // This function handles network boundary and routing at the edge
@@ -43,7 +49,21 @@ function rewriteBlogPagination(request: NextRequest): NextResponse | null {
   return NextResponse.rewrite(url)
 }
 
-export function proxy(request: NextRequest) {
+function continueDocumentLangRewrite(request: NextRequest) {
+  const pathname = request.nextUrl.pathname
+  const rewritten = rewritePathnameWithDocumentLang(pathname)
+  const url = request.nextUrl.clone()
+  url.pathname = rewritten
+
+  const response =
+    rewritten === request.nextUrl.pathname
+      ? NextResponse.next()
+      : NextResponse.rewrite(url)
+
+  return applyStaticAssetCacheControl(pathname, response)
+}
+
+export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname
   if (shouldSkipDocumentLangProxy(pathname)) {
     return applyStaticAssetCacheControl(pathname, NextResponse.next())
@@ -66,6 +86,18 @@ export function proxy(request: NextRequest) {
     return NextResponse.redirect(url, 308)
   }
 
+  const blogSlug = blogPostSlugFromPublicPath(pathname)
+  if (blogSlug && publishedBlogSlugs.size > 0 && !publishedBlogSlugs.has(blogSlug)) {
+    const exists = await wpPublishedPostExists(blogSlug)
+    if (exists === false) {
+      const url = request.nextUrl.clone()
+      url.pathname = internalBlogNotFoundPath(blogSlug)
+      const response = NextResponse.rewrite(url, { status: 404 })
+      return applyStaticAssetCacheControl(pathname, response)
+    }
+    return continueDocumentLangRewrite(request)
+  }
+
   const rewritten = rewritePathnameWithDocumentLang(pathname)
   const url = request.nextUrl.clone()
   url.pathname = rewritten
@@ -80,13 +112,6 @@ export function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     */
     '/((?!api|_next|favicon\\.ico|sitemap\\.xml|robots\\.txt|feed\\.xml|llms(?:-full)?\\.txt|.*\\..*).*)',
   ],
 }

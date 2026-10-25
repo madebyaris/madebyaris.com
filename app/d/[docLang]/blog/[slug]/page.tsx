@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { Suspense } from 'react'
+import { cache } from 'react'
 import { notFound } from 'next/navigation'
 import { ArrowLeft, ArrowRight, BookOpen, Calendar, Clock, Compass, RefreshCw } from 'lucide-react'
 import { TableOfContents } from '@/components/table-of-contents'
@@ -11,14 +11,18 @@ import { FeaturedImage } from '@/components/featured-image'
 import { AuthorImage } from '@/components/author-image'
 import { RelatedPostCard } from '@/components/related-post-card'
 import { getAllPublishedPostSlugs, getPost, getPosts, type ProcessedPost } from '@/lib/wordpress'
+import { NotFoundPageContent } from '@/components/not-found-page'
 import { authorProfile, buildBlogPostGraph, buildBlogPostMetadata, isIndonesianSlug, siteConfig } from '@/lib/seo'
 import { blogCategoryCopy, blogCategoryPath, hubForCategory, primaryCategory, topicHubs } from '@/lib/topics'
 import { JsonLd } from '@/components/seo/json-ld'
 import { contactHref } from '@/lib/contact-services'
 import { documentLangFromBlogSlug, isDocumentLang } from '@/lib/document-lang'
+import { notFoundMetadata } from '@/app/not-found-metadata'
 
 export const revalidate = 604800 // 7 days; webhook refreshes a post on publish
 export const dynamicParams = true
+
+const getBlogPost = cache(async (slug: string) => getPost(slug))
 
 const RELATED_POSTS = 3
 
@@ -32,14 +36,13 @@ interface BlogPostPageProps {
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const { slug, docLang } = await params
   if (!isDocumentLang(docLang) || docLang !== documentLangFromBlogSlug(slug)) {
-    notFound()
+    return notFoundMetadata
   }
   try {
-    const post = await getPost(slug)
+    const post = await getBlogPost(slug)
     if (!post) {
-      notFound()
+      return notFoundMetadata
     }
-
     const featuredImage = post._embedded?.['wp:featuredmedia']?.[0]?.source_url
     return buildBlogPostMetadata(post, featuredImage)
   } catch {
@@ -187,21 +190,19 @@ const authorLinks = (
 
 export default async function BlogPost({ params }: BlogPostPageProps) {
   const { docLang, slug } = await params
-  return (
-    <Suspense fallback={<p className="text-sm text-zinc-500 py-8">Loading…</p>}>
-      <BlogPostResolved docLang={docLang} slug={slug} />
-    </Suspense>
-  )
-}
-
-async function BlogPostResolved({ docLang, slug }: { docLang: string; slug: string }) {
   if (!isDocumentLang(docLang) || docLang !== documentLangFromBlogSlug(slug)) {
     notFound()
   }
 
-  const post = await getPost(slug)
+  const post = await getBlogPost(slug)
   if (!post) {
-    notFound()
+    let recentPosts: ProcessedPost[] = []
+    try {
+      recentPosts = await getPosts({ per_page: 3 })
+    } catch {
+      recentPosts = []
+    }
+    return <NotFoundPageContent recentPosts={recentPosts} runner="interactive" />
   }
 
   const category = primaryCategory(post.categories)

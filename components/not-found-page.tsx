@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { ArrowRight, FileQuestion } from 'lucide-react'
 import { getPosts, type ProcessedPost } from '@/lib/wordpress'
-import { NotFoundRunner } from '@/components/not-found-runner'
+import { NotFoundRunnerMount } from '@/components/not-found-runner-mount'
 
 const MAIN_LINKS = [
   { href: '/', label: 'Home' },
@@ -11,14 +11,14 @@ const MAIN_LINKS = [
   { href: '/contact', label: 'Contact' },
 ] as const
 
-export async function NotFoundPage() {
-  let recentPosts: ProcessedPost[] = []
-  try {
-    recentPosts = await getPosts({ per_page: 3 })
-  } catch {
-    recentPosts = []
-  }
-
+export function NotFoundPageContent({
+  recentPosts,
+  runner = 'interactive',
+}: {
+  recentPosts: ProcessedPost[]
+  /** Segment not-found: sync placeholder only so the 404 response does not stream before notFound(). */
+  runner?: 'interactive' | 'placeholder'
+}) {
   return (
     <div className="py-10 md:py-16 max-w-3xl mx-auto">
       <div className="flex items-start gap-4 mb-8">
@@ -53,24 +53,15 @@ export async function NotFoundPage() {
         </ul>
       </nav>
 
-      <section aria-labelledby="not-found-runner-heading" className="mb-10">
-        <h2 id="not-found-runner-heading" className="text-sm font-medium text-zinc-900 mb-3">
-          While you are here
-        </h2>
-        <div className="min-h-[188px] w-full max-w-xl mx-auto">
-          <NotFoundRunner />
-        </div>
-      </section>
-
       {recentPosts.length > 0 && (
-        <section aria-labelledby="recent-posts-heading">
+        <section aria-labelledby="recent-posts-heading" className="mb-10">
           <h2 id="recent-posts-heading" className="text-lg font-medium text-zinc-900 mb-4">
             Recent from the blog
           </h2>
           <ul className="space-y-3">
             {recentPosts.map((post) => (
               <li key={post.id}>
-                <Link
+                <a
                   href={`/blog/${post.slug}`}
                   className="block rounded-xl border border-zinc-200 bg-white/80 px-4 py-3 shadow-sm hover:border-orange-200 transition-colors group"
                 >
@@ -85,7 +76,7 @@ export async function NotFoundPage() {
                       day: 'numeric',
                     })}
                   </span>
-                </Link>
+                </a>
               </li>
             ))}
           </ul>
@@ -98,6 +89,36 @@ export async function NotFoundPage() {
           </Link>
         </section>
       )}
+
+      <section aria-labelledby="not-found-runner-heading" className="mb-10">
+        <h2 id="not-found-runner-heading" className="text-sm font-medium text-zinc-900 mb-3">
+          While you are here
+        </h2>
+        <div className="min-h-[188px] w-full max-w-xl mx-auto">
+          {runner === 'interactive' ? <NotFoundRunnerMount /> : <NotFoundRunnerPlaceholder />}
+        </div>
+      </section>
     </div>
   )
+}
+
+export function NotFoundRunnerPlaceholder() {
+  return (
+    <div
+      className="w-full max-w-xl mx-auto rounded-xl border border-zinc-200 bg-zinc-50 shadow-sm"
+      style={{ height: 152 }}
+      aria-hidden
+    />
+  )
+}
+
+export async function NotFoundPage() {
+  let recentPosts: ProcessedPost[] = []
+  try {
+    recentPosts = await getPosts({ per_page: 3 })
+  } catch {
+    recentPosts = []
+  }
+
+  return <NotFoundPageContent recentPosts={recentPosts} runner="interactive" />
 }
