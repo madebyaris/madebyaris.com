@@ -14,6 +14,7 @@ import { authorProfile, buildBlogPostGraph, buildBlogPostMetadata, isIndonesianS
 import { blogCategoryCopy, blogCategoryPath, hubForCategory, primaryCategory, topicHubs } from '@/lib/topics'
 import { JsonLd } from '@/components/seo/json-ld'
 import { contactHref } from '@/lib/contact-services'
+import { documentLangFromBlogSlug, isDocumentLang } from '@/lib/document-lang'
 
 export const revalidate = 604800 // 7 days; webhook refreshes a post on publish
 
@@ -21,6 +22,7 @@ const RELATED_POSTS = 3
 
 interface BlogPostPageProps {
   params: Promise<{
+    docLang: string
     slug: string
   }>
 }
@@ -50,6 +52,7 @@ export async function generateStaticParams() {
   try {
     const posts = await getPosts({ per_page: 20 })
     return posts.map((post) => ({
+      docLang: documentLangFromBlogSlug(post.slug),
       slug: post.slug,
     }));
   } catch (error) {
@@ -181,7 +184,10 @@ const authorLinks = (
 })
 
 export default async function BlogPost({ params }: BlogPostPageProps) {
-  const { slug } = await params
+  const { docLang, slug } = await params
+  if (!isDocumentLang(docLang) || docLang !== documentLangFromBlogSlug(slug)) {
+    notFound()
+  }
 
   const post = await getPost(slug)
   if (!post) {

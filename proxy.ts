@@ -1,16 +1,18 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { DOCUMENT_LANG_HEADER, documentLangFromPathname } from '@/lib/document-lang'
+import { rewritePathnameWithDocumentLang } from '@/lib/document-lang'
 
 // Next.js 16: Renamed from middleware to proxy for better clarity
 // This function handles network boundary and routing at the edge
 export function proxy(request: NextRequest) {
-  const requestHeaders = new Headers(request.headers)
-  requestHeaders.set(DOCUMENT_LANG_HEADER, documentLangFromPathname(request.nextUrl.pathname))
+  const rewritten = rewritePathnameWithDocumentLang(request.nextUrl.pathname)
+  const url = request.nextUrl.clone()
+  url.pathname = rewritten
 
-  const response = NextResponse.next({
-    request: { headers: requestHeaders },
-  })
+  const response =
+    rewritten === request.nextUrl.pathname
+      ? NextResponse.next()
+      : NextResponse.rewrite(url)
 
   // Add cache control headers for static assets
   if (
@@ -37,4 +39,3 @@ export const config = {
     '/((?!api|_next/static|_next/image|favicon.ico).*)',
   ],
 }
-
