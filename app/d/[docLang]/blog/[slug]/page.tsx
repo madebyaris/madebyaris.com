@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { Suspense } from 'react'
 import { notFound } from 'next/navigation'
 import { ArrowLeft, ArrowRight, BookOpen, Calendar, Clock, Compass, RefreshCw } from 'lucide-react'
 import { TableOfContents } from '@/components/table-of-contents'
@@ -17,7 +18,6 @@ import { contactHref } from '@/lib/contact-services'
 import { documentLangFromBlogSlug, isDocumentLang } from '@/lib/document-lang'
 
 export const revalidate = 604800 // 7 days; webhook refreshes a post on publish
-export const dynamicParams = false
 
 const RELATED_POSTS = 3
 
@@ -29,14 +29,14 @@ interface BlogPostPageProps {
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
-  const { slug } = await params
+  const { slug, docLang } = await params
+  if (!isDocumentLang(docLang) || docLang !== documentLangFromBlogSlug(slug)) {
+    notFound()
+  }
   try {
     const post = await getPost(slug)
     if (!post) {
-      return {
-        title: 'Post Not Found',
-        description: 'The requested blog post could not be found.',
-      }
+      notFound()
     }
 
     const featuredImage = post._embedded?.['wp:featuredmedia']?.[0]?.source_url
@@ -186,6 +186,14 @@ const authorLinks = (
 
 export default async function BlogPost({ params }: BlogPostPageProps) {
   const { docLang, slug } = await params
+  return (
+    <Suspense fallback={<p className="text-sm text-zinc-500 py-8">Loading…</p>}>
+      <BlogPostResolved docLang={docLang} slug={slug} />
+    </Suspense>
+  )
+}
+
+async function BlogPostResolved({ docLang, slug }: { docLang: string; slug: string }) {
   if (!isDocumentLang(docLang) || docLang !== documentLangFromBlogSlug(slug)) {
     notFound()
   }
