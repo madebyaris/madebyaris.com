@@ -23,6 +23,26 @@ export function documentLangFromPathname(pathname: string): DocumentLang {
 
 export const INTERNAL_DOCUMENT_PREFIX = '/d'
 
+/** Paths that must not be rewritten to /d/{lang}/… (metadata routes, APIs, static assets). */
+export function shouldSkipDocumentLangProxy(pathname: string): boolean {
+  if (pathname.startsWith('/api/') || pathname.startsWith('/_next/')) return true
+  if (
+    pathname === '/favicon.ico' ||
+    pathname === '/sitemap.xml' ||
+    pathname === '/robots.txt' ||
+    pathname === '/feed.xml' ||
+    pathname === '/llms.txt' ||
+    pathname === '/llms-full.txt'
+  ) {
+    return true
+  }
+  if (/\.[a-zA-Z0-9]+$/.test(pathname)) return true
+  if (/(^|\/)(opengraph-image|twitter-image|icon|apple-icon|manifest)(\.|$)/.test(pathname)) {
+    return true
+  }
+  return false
+}
+
 /** Map internal /d/{en|id}/… URLs to public paths for 308 redirects (never expose /d/ externally). */
 export function publicPathFromInternalDocumentPath(pathname: string): string | null {
   const match = pathname.match(new RegExp(`^${INTERNAL_DOCUMENT_PREFIX}/(en|id)(?:/(.*))?$`))

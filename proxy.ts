@@ -3,12 +3,17 @@ import type { NextRequest } from 'next/server'
 import {
   publicPathFromInternalDocumentPath,
   rewritePathnameWithDocumentLang,
+  shouldSkipDocumentLangProxy,
 } from '@/lib/document-lang'
 
 // Next.js 16: Renamed from middleware to proxy for better clarity
 // This function handles network boundary and routing at the edge
 export function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname
+  if (shouldSkipDocumentLangProxy(pathname)) {
+    return NextResponse.next()
+  }
+
   const publicPath = publicPathFromInternalDocumentPath(pathname)
   if (publicPath !== null) {
     const url = request.nextUrl.clone()
@@ -47,6 +52,6 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      */
-    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+    '/((?!api|_next|favicon\\.ico|sitemap\\.xml|robots\\.txt|feed\\.xml|llms(?:-full)?\\.txt|.*\\..*).*)',
   ],
 }
