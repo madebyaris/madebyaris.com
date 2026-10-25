@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { ArrowRight, FileQuestion } from 'lucide-react'
 import { getPosts, type ProcessedPost } from '@/lib/wordpress'
+import { NotFoundRunner } from '@/components/not-found-runner'
 
 const MAIN_LINKS = [
   { href: '/', label: 'Home' },
@@ -51,6 +52,15 @@ export async function NotFoundPage() {
           ))}
         </ul>
       </nav>
+
+      <section aria-labelledby="not-found-runner-heading" className="mb-10">
+        <h2 id="not-found-runner-heading" className="text-sm font-medium text-zinc-900 mb-3">
+          While you are here
+        </h2>
+        <div className="min-h-[188px] w-full max-w-xl mx-auto">
+          <NotFoundRunner />
+        </div>
+      </section>
 
       {recentPosts.length > 0 && (
         <section aria-labelledby="recent-posts-heading">

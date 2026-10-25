@@ -23,29 +23,6 @@ export function documentLangFromPathname(pathname: string): DocumentLang {
 
 export const INTERNAL_DOCUMENT_PREFIX = '/d'
 
-/** Public URL first segments that map to app/d/[docLang]/(marketing) or blog routes. */
-const PUBLIC_DOCUMENT_ROOT_SEGMENTS = new Set([
-  'about',
-  'blog',
-  'contact',
-  'cursor-ambassador',
-  'guides',
-  'minimax-ambassador',
-  'privacy-policy',
-  'projects',
-  'services',
-  'spacexai-ambassador',
-  'terms-of-service',
-])
-
-/** Whether a public pathname should rewrite into /d/{lang}/… (unknown top-level URLs stay public for global-not-found). */
-export function shouldRewritePublicPathToDocumentLang(pathname: string): boolean {
-  if (pathname === '/') return true
-  const segment = pathname.split('/').filter(Boolean)[0]
-  if (!segment) return true
-  return PUBLIC_DOCUMENT_ROOT_SEGMENTS.has(segment)
-}
-
 /** Paths that must not be rewritten to /d/{lang}/… (metadata routes, APIs, static assets). */
 export function shouldSkipDocumentLangProxy(pathname: string): boolean {
   if (pathname.startsWith('/api/') || pathname.startsWith('/_next/')) return true
@@ -140,10 +117,6 @@ export function rewritePathnameWithDocumentLang(pathname: string): string {
 
   if (pathname === '/') {
     return `${INTERNAL_DOCUMENT_PREFIX}/en`
-  }
-
-  if (!shouldRewritePublicPathToDocumentLang(pathname)) {
-    return pathname
   }
 
   return `${INTERNAL_DOCUMENT_PREFIX}/en${pathname}`
