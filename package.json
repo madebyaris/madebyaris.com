@@ -14,6 +14,7 @@
     "seo:check": "node scripts/validate-seo.mjs",
     "test:blog-seo": "pnpm dlx tsx scripts/test-blog-rank-math-seo.ts",
     "test:sitemap": "if [ -f .env.local ]; then set -a && . ./.env.local && set +a; fi && pnpm dlx tsx scripts/test-sitemap-dynamic.ts",
+    "test:proxy-public-redirect": "pnpm dlx tsx scripts/test-proxy-public-redirect.ts",
     "copy:check": "node scripts/check-copy.mjs",
     "analyze": "ANALYZE=true next build"
   },

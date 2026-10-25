@@ -43,13 +43,10 @@ export function shouldSkipDocumentLangProxy(pathname: string): boolean {
   return false
 }
 
-/** Map internal /d/{en|id}/… URLs to public paths for 308 redirects (never expose /d/ externally). */
+/** Map internal /d/{en|id}/… URLs to public pathnames for 308 redirects (query handled separately). */
 export function publicPathFromInternalDocumentPath(pathname: string): string | null {
-  const paginatedBlogMatch = pathname.match(
-    new RegExp(`^${INTERNAL_DOCUMENT_PREFIX}/en/blog/p/(\\d+)/?$`),
-  )
-  if (paginatedBlogMatch) {
-    return `/blog?page=${paginatedBlogMatch[1]}`
+  if (paginatedBlogPageFromInternalPath(pathname) !== null) {
+    return null
   }
 
   const match = pathname.match(new RegExp(`^${INTERNAL_DOCUMENT_PREFIX}/(en|id)(?:/(.*))?$`))
@@ -57,6 +54,37 @@ export function publicPathFromInternalDocumentPath(pathname: string): string | n
   const tail = match[2]
   if (!tail) return '/'
   return `/${tail}`
+}
+
+/** Page number when pathname is internal paginated blog listing (/d/en/blog/p/N). */
+export function paginatedBlogPageFromInternalPath(pathname: string): string | null {
+  const paginatedBlogMatch = pathname.match(
+    new RegExp(`^${INTERNAL_DOCUMENT_PREFIX}/en/blog/p/(\\d+)/?$`),
+  )
+  return paginatedBlogMatch?.[1] ?? null
+}
+
+/** Build the public redirect target for an internal /d/… URL (never encode ? inside pathname). */
+export function publicRedirectUrlFromInternalPath(
+  pathname: string,
+  baseUrl: string,
+): URL | null {
+  const page = paginatedBlogPageFromInternalPath(pathname)
+  if (page !== null) {
+    const url = new URL(baseUrl)
+    url.pathname = '/blog'
+    url.search = ''
+    url.searchParams.set('page', page)
+    return url
+  }
+
+  const publicPath = publicPathFromInternalDocumentPath(pathname)
+  if (publicPath === null) return null
+
+  const url = new URL(baseUrl)
+  url.pathname = publicPath
+  url.search = ''
+  return url
 }
 
 /** Rewrite public paths to /d/en/... or /d/id/blog/... (internal only; avoids [keyFile] clash). */
