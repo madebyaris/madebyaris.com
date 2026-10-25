@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "dev:webpack": "next dev --webpack",
+    "prebuild": "node scripts/generate-published-blog-slugs.mjs",
     "build": "next build",
     "postbuild": "node scripts/inline-critical-css.mjs",
     "build:webpack": "next build --webpack",

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { cache } from 'react'
 import { notFound } from 'next/navigation'
 import { ArrowLeft, ArrowRight, BookOpen, Calendar, Clock, Compass, RefreshCw } from 'lucide-react'
 import { TableOfContents } from '@/components/table-of-contents'
@@ -10,6 +11,7 @@ import { FeaturedImage } from '@/components/featured-image'
 import { AuthorImage } from '@/components/author-image'
 import { RelatedPostCard } from '@/components/related-post-card'
 import { getAllPublishedPostSlugs, getPost, getPosts, type ProcessedPost } from '@/lib/wordpress'
+import { NotFoundPageContent } from '@/components/not-found-page'
 import { authorProfile, buildBlogPostGraph, buildBlogPostMetadata, isIndonesianSlug, siteConfig } from '@/lib/seo'
 import { blogCategoryCopy, blogCategoryPath, hubForCategory, primaryCategory, topicHubs } from '@/lib/topics'
 import { JsonLd } from '@/components/seo/json-ld'
@@ -19,6 +21,8 @@ import { notFoundMetadata } from '@/app/not-found-metadata'
 
 export const revalidate = 604800 // 7 days; webhook refreshes a post on publish
 export const dynamicParams = true
+
+const getBlogPost = cache(async (slug: string) => getPost(slug))
 
 const RELATED_POSTS = 3
 
@@ -35,11 +39,10 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     return notFoundMetadata
   }
   try {
-    const post = await getPost(slug)
+    const post = await getBlogPost(slug)
     if (!post) {
       return notFoundMetadata
     }
-
     const featuredImage = post._embedded?.['wp:featuredmedia']?.[0]?.source_url
     return buildBlogPostMetadata(post, featuredImage)
   } catch {
@@ -191,9 +194,15 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
     notFound()
   }
 
-  const post = await getPost(slug)
+  const post = await getBlogPost(slug)
   if (!post) {
-    notFound()
+    let recentPosts: ProcessedPost[] = []
+    try {
+      recentPosts = await getPosts({ per_page: 3 })
+    } catch {
+      recentPosts = []
+    }
+    return <NotFoundPageContent recentPosts={recentPosts} runner="interactive" />
   }
 
   const category = primaryCategory(post.categories)

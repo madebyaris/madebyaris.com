@@ -3,13 +3,13 @@ import type { NextRequest } from 'next/server'
 import {
   blogPostSlugFromPublicPath,
   internalBlogNotFoundPath,
-  wpPublishedPostExists,
-} from '@/lib/blog-post-exists'
+} from '@/lib/blog-post-path'
 import {
   publicRedirectUrlFromInternalPath,
   rewritePathnameWithDocumentLang,
   shouldSkipDocumentLangProxy,
 } from '@/lib/document-lang'
+import { publishedBlogSlugs } from '@/lib/published-blog-slugs.generated'
 import { applyStaticAssetCacheControl } from '@/lib/proxy-cache-control'
 
 // Next.js 16: Renamed from middleware to proxy for better clarity
@@ -48,7 +48,7 @@ function rewriteBlogPagination(request: NextRequest): NextResponse | null {
   return NextResponse.rewrite(url)
 }
 
-export async function proxy(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname
   if (shouldSkipDocumentLangProxy(pathname)) {
     return applyStaticAssetCacheControl(pathname, NextResponse.next())
@@ -72,14 +72,15 @@ export async function proxy(request: NextRequest) {
   }
 
   const blogSlug = blogPostSlugFromPublicPath(pathname)
-  if (blogSlug) {
-    const exists = await wpPublishedPostExists(blogSlug)
-    if (exists === false) {
-      const url = request.nextUrl.clone()
-      url.pathname = internalBlogNotFoundPath(blogSlug)
-      const response = NextResponse.rewrite(url, { status: 404 })
-      return applyStaticAssetCacheControl(pathname, response)
-    }
+  if (
+    blogSlug &&
+    publishedBlogSlugs.size > 0 &&
+    !publishedBlogSlugs.has(blogSlug)
+  ) {
+    const url = request.nextUrl.clone()
+    url.pathname = internalBlogNotFoundPath(blogSlug)
+    const response = NextResponse.rewrite(url, { status: 404 })
+    return applyStaticAssetCacheControl(pathname, response)
   }
 
   const rewritten = rewritePathnameWithDocumentLang(pathname)
@@ -96,13 +97,6 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     */
     '/((?!api|_next|favicon\\.ico|sitemap\\.xml|robots\\.txt|feed\\.xml|llms(?:-full)?\\.txt|.*\\..*).*)',
   ],
 }
