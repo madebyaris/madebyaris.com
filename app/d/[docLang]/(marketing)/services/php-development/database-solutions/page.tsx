@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowRight, ArrowUpRight, Database, Zap, Shield, BarChart, CheckCircle2, XCircle } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Database, Zap, BarChart, CheckCircle2, XCircle, Code2, ShoppingCart } from 'lucide-react'
 import { buildPageGraph, buildPageMetadata, type FaqItem } from '@/lib/seo'
 import { JsonLd } from '@/components/seo/json-ld'
 import { contactHref } from '@/lib/contact-services'
@@ -8,14 +8,15 @@ import { contactHref } from '@/lib/contact-services'
 export const revalidate = 86400 // Revalidate daily
 
 const pagePath = '/services/php-development/database-solutions'
-const pageTitle = 'MySQL Database Optimization for PHP Apps'
+const pageTitle = 'MySQL Database Optimization for PHP Apps | Aris Setiawan'
 const pageDescription =
-  'MySQL database optimization for PHP apps: find the slow queries, add the right indexes, and fix the schema so pages and reports stop timing out.'
+  'Slow PHP or Laravel app? I find the slow MySQL queries. I fix indexes, schema and code on a copy first. I tell you if the database is not the cause.'
 
-export const metadata: Metadata = buildPageMetadata({
+const pageMetadata = buildPageMetadata({
   title: pageTitle,
   description: pageDescription,
   path: pagePath,
+  brand: false,
   keywords: [
     'MySQL database optimization',
     'slow MySQL queries',
@@ -25,75 +26,100 @@ export const metadata: Metadata = buildPageMetadata({
   ],
 })
 
-const outcomes = [
+export const metadata: Metadata = {
+  ...pageMetadata,
+  title: { absolute: pageTitle },
+  openGraph: pageMetadata.openGraph
+    ? { ...pageMetadata.openGraph, title: pageTitle }
+    : undefined,
+  twitter: pageMetadata.twitter ? { ...pageMetadata.twitter, title: pageTitle } : undefined,
+}
+
+const fixItems = [
   {
-    title: 'Slow queries found and fixed',
-    description: 'Each fix targets a query from your own logs, so you can see which page got faster and why.',
+    title: 'Slow queries',
+    description: 'Each fix targets a query from your own logs. You can see which page got faster and why.',
     icon: Zap,
   },
   {
-    title: 'Indexes that match how you query',
-    description: 'Indexes built for your real WHERE and JOIN clauses, without extra ones that slow down every write.',
+    title: 'Indexes',
+    description:
+      'I build indexes for your real WHERE and JOIN clauses. I do not add extra indexes that slow down every write.',
     icon: Database,
   },
   {
-    title: 'A schema ready for what is next',
-    description: 'Schema changes and migrations that fit the features you plan, so new work stops needing workarounds.',
+    title: 'Table structure',
+    description: 'I change the schema and write migrations that fit the features you plan.',
     icon: BarChart,
   },
   {
-    title: 'Changes that are safe to apply',
-    description: 'A backup before every change and migrations tested on a copy of your data first.',
-    icon: Shield,
+    title: 'Code logic',
+    description:
+      'In Laravel, I fix Eloquent code that loads too much, such as missing eager loading. In plain PHP apps, I tune the raw SQL. A loop that sends one query per row is a common cause.',
+    icon: Code2,
+  },
+  {
+    title: 'WordPress and WooCommerce',
+    description: 'woocommerce-link',
+    icon: ShoppingCart,
   },
 ]
 
 const goodFit = [
-  'Pages that were fast at launch now take seconds to load',
-  'Reports or exports time out once the date range grows',
-  'The database server runs at high CPU during normal traffic',
-  'A planned feature is awkward because of how the tables are laid out',
+  'Pages that were fast at launch now take seconds to load.',
+  'Reports or exports time out when the date range grows.',
+  'The database server runs at high CPU during normal traffic.',
+  'A planned feature is difficult because of how the tables are laid out.',
 ]
 
 const poorFit = [
-  'The slow part is the front end, like large images or heavy scripts',
-  'You need a database administrator on call around the clock',
+  'The slow part is the front end, such as large images or heavy scripts.',
+  'You need a database administrator on call at all hours. I do not offer that service.',
 ]
 
-const technologies = ['MySQL', 'MariaDB', 'PostgreSQL', 'Redis', 'Slow query log', 'EXPLAIN', 'Eloquent', 'Doctrine']
-
 const processSteps = [
-  { step: 1, title: 'Measure', desc: 'Turn on the slow query log and collect a baseline from real traffic.' },
-  { step: 2, title: 'Diagnose', desc: 'Run EXPLAIN on the worst queries and trace them back to the PHP code.' },
-  { step: 3, title: 'Fix on a copy', desc: 'Test indexes, rewrites, and schema changes against a copy of your data.' },
-  { step: 4, title: 'Roll out', desc: 'Apply with a backup and a rollback path, then compare against the baseline.' },
+  {
+    step: 1,
+    title: 'Measure',
+    desc: 'I turn on the slow query log and collect a baseline from real traffic.',
+  },
+  {
+    step: 2,
+    title: 'Diagnose',
+    desc: 'I run EXPLAIN on the worst queries and trace them back to the PHP code.',
+  },
+  {
+    step: 3,
+    title: 'Fix on a copy',
+    desc: 'I test indexes, query rewrites and schema changes on a copy of your data. I do not change the live database first.',
+  },
+  {
+    step: 4,
+    title: 'Roll out',
+    desc: 'I apply the changes with a backup and a rollback path. Then I compare the result with the baseline.',
+  },
 ]
 
 const faqs: FaqItem[] = [
   {
     question: 'How much does MySQL database optimization cost?',
     answer:
-      'It depends on the size of the database and how many queries are slow, so I scope each job separately. Send me your slow query log or a list of the slow pages. You get a scope and a quote before I change anything.',
+      'The price depends on the size of the database and the number of slow queries. I scope each job separately. You get a scope and a quote before I change anything.',
   },
   {
     question: 'Do we need a new database, or can you fix the one we have?',
     answer:
-      'Almost always the one you have. Most slow MySQL setups need better indexes, rewritten queries, or a few schema changes. Moving to a different database is rarely the fix, and I will tell you plainly if yours is the exception.',
+      'You can keep the one you have in most cases. Most slow MySQL setups need better indexes, rewritten queries or some schema changes. If a move to a different database is necessary, I tell you plainly.',
   },
   {
     question: 'Will the site go down while you change the database?',
     answer:
-      'Most index and query fixes run while the site stays online. Large table changes can lock writes, so I test them on a copy first, schedule them for a quiet hour, and keep a backup ready.',
+      'Most index and query fixes run while the site stays online. Large table changes can lock writes. I test those on a copy of the data first. I schedule them for a quiet hour, with a backup ready.',
   },
   {
     question: 'Is the fix in Laravel Eloquent or in raw SQL?',
     answer:
-      'Either. In Laravel I fix Eloquent code that loads too much, like missing eager loading. In plain PHP apps I tune the raw SQL directly. The aim is the same: fewer queries, and faster ones.',
-  },
-  {
-    question: 'Who keeps the database fast after you finish?',
-    answer:
-      'You get a short report on what was slow, what changed, and which queries to watch. Keep the slow query log on, and new problems show up early. I can check in again later if you want.',
+      'It can be in either place. In my example above, the fix was in both the table structure and the code logic.',
   },
 ]
 
@@ -110,7 +136,13 @@ const structuredData = buildPageGraph({
     name: 'MySQL database optimization',
     description: pageDescription,
     serviceType: 'MySQL Database Optimization',
-    offers: outcomes.map((item) => ({ name: item.title, description: item.description })),
+    offers: fixItems.map((item) => ({
+      name: item.title,
+      description:
+        item.description === 'woocommerce-link'
+          ? 'I also tune WordPress and WooCommerce databases, such as WooCommerce stores with slow product queries.'
+          : item.description,
+    })),
   },
 })
 
@@ -144,12 +176,8 @@ export default function DatabaseSolutionsPage() {
           {' '}<span className="block gradient-text font-light">for PHP apps that got slow</span>
         </h1>
 
-        <p className="text-base md:text-lg text-zinc-600 max-w-2xl mx-auto mb-4 leading-relaxed font-medium">
-          For teams whose PHP app gets slower as the tables grow: pages that hang, reports that time out, a database server stuck at full CPU. I’ve designed MySQL databases since my first backend job in 2013.
-        </p>
-
-        <p className="text-sm text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed">
-          In 2014 I built PHP and MySQL web applications, and the databases behind them, at SEREWare.
+        <p className="text-base md:text-lg text-zinc-600 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
+          This page is for teams whose PHP app gets slower as the tables grow. I find the slow MySQL queries in your app. I fix each one at the source. I scope each job separately before I quote a price.
         </p>
 
         <div className="flex flex-wrap justify-center gap-3">
@@ -173,31 +201,19 @@ export default function DatabaseSolutionsPage() {
 
       <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
 
-      {/* Answer first */}
-      <section className="mb-16 max-w-3xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
-          What MySQL database optimization involves
-        </h2>
-        <p className="text-zinc-600 leading-relaxed mb-4">
-          MySQL database optimization means finding the queries that make your app slow and fixing them at the source. I read the slow query log, run EXPLAIN on the worst offenders, then add indexes, rewrite queries, or change the schema. In a PHP app the fix often sits in the code too, like a loop that runs one query per row.
-        </p>
-        <p className="text-zinc-600 leading-relaxed">
-          If the database feeds a Next.js front end through an API, caching at the API layer helps as well. See{' '}
-          <Link href="/services/php-development/api-development" className={linkClass}>PHP API development</Link>.
-        </p>
-      </section>
-
       {/* Fit */}
       <section className="mb-16">
         <div className="text-center mb-10">
           <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            Signs of <span className="gradient-text">slow MySQL queries</span>
+            Is it the database or <span className="gradient-text">something else?</span>
           </h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-4">Sounds like the database</h3>
+            <p className="text-sm text-zinc-600 mb-4 leading-relaxed">
+              The database is a likely cause when you see these signs:
+            </p>
             <ul className="space-y-3">
               {goodFit.map((item) => (
                 <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
@@ -208,7 +224,9 @@ export default function DatabaseSolutionsPage() {
             </ul>
           </div>
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-4">Probably something else</h3>
+            <p className="text-sm text-zinc-600 mb-4 leading-relaxed">
+              The cause is probably something else in these cases:
+            </p>
             <ul className="space-y-3">
               {poorFit.map((item) => (
                 <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
@@ -221,46 +239,75 @@ export default function DatabaseSolutionsPage() {
         </div>
       </section>
 
+      {/* What I need */}
+      <section className="mb-16 max-w-3xl mx-auto">
+        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+          What I need from you
+        </h2>
+        <p className="text-zinc-600 leading-relaxed mb-4">
+          Before I start, I need access to three things:
+        </p>
+        <ul className="list-disc pl-5 space-y-2 text-zinc-600 leading-relaxed mb-4">
+          <li>the server</li>
+          <li>the database</li>
+          <li>the source code</li>
+        </ul>
+        <p className="text-zinc-600 leading-relaxed">
+          Client work can stay private under an NDA. I do not share client names.
+        </p>
+      </section>
+
       <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
 
-      {/* Outcomes */}
+      {/* What I fix */}
       <section className="mb-16">
         <div className="text-center mb-10">
           <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            What you get from <span className="gradient-text">PHP database design work</span>
+            What I <span className="gradient-text">fix</span>
           </h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {outcomes.map((item) => (
+          {fixItems.map((item) => (
             <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm hover:shadow-lg transition-all group">
               <div className="p-3 bg-zinc-100 rounded-xl w-fit mb-4 group-hover:bg-orange-100 transition-colors">
                 <item.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
               </div>
               <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{item.description}</p>
+              {item.description === 'woocommerce-link' ? (
+                <p className="text-sm text-zinc-500 leading-relaxed">
+                  I also tune WordPress and WooCommerce databases, such as{' '}
+                  <Link href="/services/wordpress/woocommerce" className={linkClass}>
+                    WooCommerce stores with slow product queries
+                  </Link>
+                  .
+                </p>
+              ) : (
+                <p className="text-sm text-zinc-500 leading-relaxed">{item.description}</p>
+              )}
             </div>
           ))}
         </div>
       </section>
 
-      {/* Technologies */}
-      <section className="mb-16">
-        <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            Databases and <span className="gradient-text">tools I use</span>
-          </h2>
-        </div>
+      {/* One example */}
+      <section className="mb-16 max-w-3xl mx-auto">
+        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+          One example
+        </h2>
+        <p className="text-zinc-600 leading-relaxed">
+          One app had slow queries because the SQL used too many joins. I changed the table structure. I also changed the logic in the code that sent those queries. After these two changes, the app ran faster.
+        </p>
+      </section>
 
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {technologies.map((tech) => (
-              <div key={tech} className="p-3 bg-zinc-50 rounded-xl text-center text-sm font-medium text-zinc-600">
-                {tech}
-              </div>
-            ))}
-          </div>
-        </div>
+      {/* Databases and tools */}
+      <section className="mb-16 max-w-3xl mx-auto">
+        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+          Databases and tools I use
+        </h2>
+        <p className="text-zinc-600 leading-relaxed">
+          I work with MySQL, MariaDB, PostgreSQL and Redis. To find slow queries, I use the slow query log and EXPLAIN. In PHP code, I work with Eloquent and Doctrine. I have designed MySQL databases since 2013. At SEREWare, I built PHP and MySQL web applications and their databases.
+        </p>
       </section>
 
       {/* Process */}
@@ -282,6 +329,16 @@ export default function DatabaseSolutionsPage() {
             </div>
           ))}
         </div>
+      </section>
+
+      {/* What you get */}
+      <section className="mb-16 max-w-3xl mx-auto">
+        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+          What you get at the end
+        </h2>
+        <p className="text-zinc-600 leading-relaxed">
+          You get a short report. It tells you what was slow, what changed, and which queries to watch. Keep the slow query log on, so new problems show early. I can check again later if you want.
+        </p>
       </section>
 
       {/* FAQ */}
@@ -311,7 +368,7 @@ export default function DatabaseSolutionsPage() {
             Pages getting slower every month?
           </h2>
           <p className="text-zinc-400 mb-8 max-w-lg font-medium">
-            Send me the slow pages or your slow query log. I’ll tell you where the time goes and what I’d fix first, before you commit to anything.
+            Send me the slow pages or your slow query log. I will tell you where the time goes and what I would fix first. You decide before you commit to anything.
           </p>
 
           <div className="flex flex-wrap justify-center gap-3">
@@ -320,7 +377,11 @@ export default function DatabaseSolutionsPage() {
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link href="/services/php-development/modernization" className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3">
-              <span>Old PHP version too? See upgrades</span>
+              <span>Old PHP version too? See PHP version upgrades</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+            <Link href="/services/php-development/api-development" className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3">
+              <span>Data behind an API? See PHP API development</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
