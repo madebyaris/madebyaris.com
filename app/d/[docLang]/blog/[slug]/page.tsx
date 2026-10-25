@@ -187,14 +187,6 @@ const authorLinks = (
 
 export default async function BlogPost({ params }: BlogPostPageProps) {
   const { docLang, slug } = await params
-  return (
-    <Suspense fallback={<p className="text-sm text-zinc-500 py-8">Loading…</p>}>
-      <BlogPostResolved docLang={docLang} slug={slug} />
-    </Suspense>
-  )
-}
-
-async function BlogPostResolved({ docLang, slug }: { docLang: string; slug: string }) {
   if (!isDocumentLang(docLang) || docLang !== documentLangFromBlogSlug(slug)) {
     notFound()
   }
@@ -204,6 +196,14 @@ async function BlogPostResolved({ docLang, slug }: { docLang: string; slug: stri
     notFound()
   }
 
+  return (
+    <Suspense fallback={<p className="text-sm text-zinc-500 py-8">Loading…</p>}>
+      <BlogPostResolved post={post} />
+    </Suspense>
+  )
+}
+
+async function BlogPostResolved({ post }: { post: ProcessedPost }) {
   const category = primaryCategory(post.categories)
   const categoryCopy = category ? blogCategoryCopy(category.slug) : undefined
   const hub = hubForCategory(category?.slug)
