@@ -1,11 +1,23 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import {
+  PUBLIC_PATHNAME_HEADER,
   publicRedirectUrlFromInternalPath,
   rewritePathnameWithDocumentLang,
   shouldSkipDocumentLangProxy,
 } from '@/lib/document-lang'
 import { applyStaticAssetCacheControl } from '@/lib/proxy-cache-control'
+
+function publicPathRequestHeaders(request: NextRequest): Headers {
+  const requestHeaders = new Headers(request.headers)
+  requestHeaders.set(PUBLIC_PATHNAME_HEADER, request.nextUrl.pathname)
+  return requestHeaders
+}
+
+function withPublicPathname(request: NextRequest, response: NextResponse): NextResponse {
+  response.headers.set(PUBLIC_PATHNAME_HEADER, request.nextUrl.pathname)
+  return response
+}
 
 // Next.js 16: Renamed from middleware to proxy for better clarity
 // This function handles network boundary and routing at the edge
@@ -40,18 +52,26 @@ function rewriteBlogPagination(request: NextRequest): NextResponse | null {
   const url = request.nextUrl.clone()
   url.pathname = `/d/en/blog/p/${parsedPage}`
   url.searchParams.delete('page')
-  return NextResponse.rewrite(url)
+  return NextResponse.rewrite(url, {
+    request: { headers: publicPathRequestHeaders(request) },
+  })
 }
 
 export function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname
   if (shouldSkipDocumentLangProxy(pathname)) {
-    return applyStaticAssetCacheControl(pathname, NextResponse.next())
+    return withPublicPathname(
+      request,
+      applyStaticAssetCacheControl(
+        pathname,
+        NextResponse.next({ request: { headers: publicPathRequestHeaders(request) } }),
+      ),
+    )
   }
 
   const paginatedBlog = rewriteBlogPagination(request)
   if (paginatedBlog) {
-    return applyStaticAssetCacheControl(pathname, paginatedBlog)
+    return withPublicPathname(request, applyStaticAssetCacheControl(pathname, paginatedBlog))
   }
 
   const publicRedirect = publicRedirectUrlFromInternalPath(
@@ -63,7 +83,7 @@ export function proxy(request: NextRequest) {
     const url = request.nextUrl.clone()
     url.pathname = publicRedirect.pathname
     url.search = publicRedirect.search
-    return NextResponse.redirect(url, 308)
+    return withPublicPathname(request, NextResponse.redirect(url, 308))
   }
 
   const rewritten = rewritePathnameWithDocumentLang(pathname)
@@ -72,10 +92,10 @@ export function proxy(request: NextRequest) {
 
   const response =
     rewritten === request.nextUrl.pathname
-      ? NextResponse.next()
-      : NextResponse.rewrite(url)
+      ? NextResponse.next({ request: { headers: publicPathRequestHeaders(request) } })
+      : NextResponse.rewrite(url, { request: { headers: publicPathRequestHeaders(request) } })
 
-  return applyStaticAssetCacheControl(request.nextUrl.pathname, response)
+  return withPublicPathname(request, applyStaticAssetCacheControl(request.nextUrl.pathname, response))
 }
 
 export const config = {

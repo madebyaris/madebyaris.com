@@ -2,6 +2,9 @@ import { isIndonesianSlug } from '@/lib/seo/metadata'
 
 export type DocumentLang = 'en' | 'id'
 
+/** Set on responses in proxy.ts for global-not-found `<html lang>`. */
+export const PUBLIC_PATHNAME_HEADER = 'x-madebyaris-public-pathname'
+
 const DOCUMENT_LANGS: DocumentLang[] = ['en', 'id']
 
 export function isDocumentLang(value: string): value is DocumentLang {
@@ -14,6 +17,10 @@ export function documentLangFromBlogSlug(slug: string): DocumentLang {
 }
 
 export function documentLangFromPathname(pathname: string): DocumentLang {
+  const internalDocLang = pathname.match(/^\/d\/(en|id)(?:\/|$)/)
+  if (internalDocLang) {
+    return internalDocLang[1] as DocumentLang
+  }
   const blogMatch = pathname.match(/^\/blog\/([^/]+)\/?$/)
   if (blogMatch) {
     return documentLangFromBlogSlug(blogMatch[1])

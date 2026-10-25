@@ -16,9 +16,12 @@ import { blogCategoryCopy, blogCategoryPath, hubForCategory, primaryCategory, to
 import { JsonLd } from '@/components/seo/json-ld'
 import { contactHref } from '@/lib/contact-services'
 import { documentLangFromBlogSlug, isDocumentLang } from '@/lib/document-lang'
+import { notFoundMetadata } from '@/app/not-found-metadata'
 
 export const revalidate = 604800 // 7 days; webhook refreshes a post on publish
-export const dynamicParams = true
+// Unknown slugs skip this page and hit global-not-found (full 404 HTML). New slugs are
+// added via generateStaticParams on build and `/api/revalidate?slug=` after publish.
+export const dynamicParams = false
 
 const RELATED_POSTS = 3
 
@@ -32,12 +35,12 @@ interface BlogPostPageProps {
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const { slug, docLang } = await params
   if (!isDocumentLang(docLang) || docLang !== documentLangFromBlogSlug(slug)) {
-    notFound()
+    return notFoundMetadata
   }
   try {
     const post = await getPost(slug)
     if (!post) {
-      notFound()
+      return notFoundMetadata
     }
 
     const featuredImage = post._embedded?.['wp:featuredmedia']?.[0]?.source_url
@@ -187,6 +190,14 @@ const authorLinks = (
 
 export default async function BlogPost({ params }: BlogPostPageProps) {
   const { docLang, slug } = await params
+  return (
+    <Suspense fallback={<p className="text-sm text-zinc-500 py-8">Loading…</p>}>
+      <BlogPostResolved docLang={docLang} slug={slug} />
+    </Suspense>
+  )
+}
+
+async function BlogPostResolved({ docLang, slug }: { docLang: string; slug: string }) {
   if (!isDocumentLang(docLang) || docLang !== documentLangFromBlogSlug(slug)) {
     notFound()
   }
@@ -196,14 +207,6 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
     notFound()
   }
 
-  return (
-    <Suspense fallback={<p className="text-sm text-zinc-500 py-8">Loading…</p>}>
-      <BlogPostResolved post={post} />
-    </Suspense>
-  )
-}
-
-async function BlogPostResolved({ post }: { post: ProcessedPost }) {
   const category = primaryCategory(post.categories)
   const categoryCopy = category ? blogCategoryCopy(category.slug) : undefined
   const hub = hubForCategory(category?.slug)
