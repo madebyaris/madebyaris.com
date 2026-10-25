@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
+import { headers } from "next/headers";
 import { Inter } from "next/font/google";
+import { DOCUMENT_LANG_HEADER, parseDocumentLangHeader } from "@/lib/document-lang";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import AnalyticsWrapper from "@/components/providers/analytics-wrapper";
@@ -88,13 +90,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const lang = parseDocumentLangHeader((await headers()).get(DOCUMENT_LANG_HEADER));
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={lang} suppressHydrationWarning>
       <body 
         suppressHydrationWarning
         className={cn(

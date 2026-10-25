@@ -1,10 +1,16 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { DOCUMENT_LANG_HEADER, documentLangFromPathname } from '@/lib/document-lang'
 
 // Next.js 16: Renamed from middleware to proxy for better clarity
 // This function handles network boundary and routing at the edge
 export function proxy(request: NextRequest) {
-  const response = NextResponse.next()
+  const requestHeaders = new Headers(request.headers)
+  requestHeaders.set(DOCUMENT_LANG_HEADER, documentLangFromPathname(request.nextUrl.pathname))
+
+  const response = NextResponse.next({
+    request: { headers: requestHeaders },
+  })
 
   // Add cache control headers for static assets
   if (
