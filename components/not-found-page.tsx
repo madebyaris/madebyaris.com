@@ -53,24 +53,15 @@ export async function NotFoundPage() {
         </ul>
       </nav>
 
-      <section aria-labelledby="not-found-runner-heading" className="mb-10">
-        <h2 id="not-found-runner-heading" className="text-sm font-medium text-zinc-900 mb-3">
-          While you are here
-        </h2>
-        <div className="min-h-[188px] w-full max-w-xl mx-auto">
-          <NotFoundRunner />
-        </div>
-      </section>
-
       {recentPosts.length > 0 && (
-        <section aria-labelledby="recent-posts-heading">
+        <section aria-labelledby="recent-posts-heading" className="mb-10">
           <h2 id="recent-posts-heading" className="text-lg font-medium text-zinc-900 mb-4">
             Recent from the blog
           </h2>
           <ul className="space-y-3">
             {recentPosts.map((post) => (
               <li key={post.id}>
-                <Link
+                <a
                   href={`/blog/${post.slug}`}
                   className="block rounded-xl border border-zinc-200 bg-white/80 px-4 py-3 shadow-sm hover:border-orange-200 transition-colors group"
                 >
@@ -85,7 +76,7 @@ export async function NotFoundPage() {
                       day: 'numeric',
                     })}
                   </span>
-                </Link>
+                </a>
               </li>
             ))}
           </ul>
@@ -98,6 +89,15 @@ export async function NotFoundPage() {
           </Link>
         </section>
       )}
+
+      <section aria-labelledby="not-found-runner-heading" className="mb-10">
+        <h2 id="not-found-runner-heading" className="text-sm font-medium text-zinc-900 mb-3">
+          While you are here
+        </h2>
+        <div className="min-h-[188px] w-full max-w-xl mx-auto">
+          <NotFoundRunner />
+        </div>
+      </section>
     </div>
   )
 }

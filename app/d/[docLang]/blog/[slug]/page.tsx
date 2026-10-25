@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { Suspense } from 'react'
 import { notFound } from 'next/navigation'
 import { ArrowLeft, ArrowRight, BookOpen, Calendar, Clock, Compass, RefreshCw } from 'lucide-react'
 import { TableOfContents } from '@/components/table-of-contents'
@@ -19,9 +18,7 @@ import { documentLangFromBlogSlug, isDocumentLang } from '@/lib/document-lang'
 import { notFoundMetadata } from '@/app/not-found-metadata'
 
 export const revalidate = 604800 // 7 days; webhook refreshes a post on publish
-// Unknown slugs skip this page and hit global-not-found (full 404 HTML). New slugs are
-// added via generateStaticParams on build and `/api/revalidate?slug=` after publish.
-export const dynamicParams = false
+export const dynamicParams = true
 
 const RELATED_POSTS = 3
 
@@ -190,14 +187,6 @@ const authorLinks = (
 
 export default async function BlogPost({ params }: BlogPostPageProps) {
   const { docLang, slug } = await params
-  return (
-    <Suspense fallback={<p className="text-sm text-zinc-500 py-8">Loading…</p>}>
-      <BlogPostResolved docLang={docLang} slug={slug} />
-    </Suspense>
-  )
-}
-
-async function BlogPostResolved({ docLang, slug }: { docLang: string; slug: string }) {
   if (!isDocumentLang(docLang) || docLang !== documentLangFromBlogSlug(slug)) {
     notFound()
   }
