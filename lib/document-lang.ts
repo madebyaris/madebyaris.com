@@ -13,11 +13,33 @@ export function documentLangFromBlogSlug(slug: string): DocumentLang {
   return isIndonesianSlug(slug) ? 'id' : 'en'
 }
 
+/** Marketing routes whose primary copy is Bahasa Indonesia (public pathnames, no /d prefix). */
+const INDONESIAN_MARKETING_PATHS = new Set<string>([
+  '/minimax-ambassador/minimax-indonesia',
+  '/services/nextjs-development/agency-indonesia',
+  '/services/nextjs-development/nextjs-indonesia',
+  '/services/saas-development/jasa-pembuatan-aplikasi-web',
+  '/services/seo/jasa-seo',
+  '/services/wordpress/jasa-wordpress',
+])
+
+function normalizePublicPathname(pathname: string): string {
+  if (pathname === '/') return '/'
+  return pathname.replace(/\/+$/, '') || '/'
+}
+
 export function documentLangFromPathname(pathname: string): DocumentLang {
-  const blogMatch = pathname.match(/^\/blog\/([^/]+)\/?$/)
+  const normalized = normalizePublicPathname(pathname)
+
+  const blogMatch = normalized.match(/^\/blog\/([^/]+)$/)
   if (blogMatch) {
     return documentLangFromBlogSlug(blogMatch[1])
   }
+
+  if (INDONESIAN_MARKETING_PATHS.has(normalized)) {
+    return 'id'
+  }
+
   return 'en'
 }
 
@@ -109,15 +131,10 @@ export function rewritePathnameWithDocumentLang(pathname: string): string {
     return pathname
   }
 
-  const blogMatch = pathname.match(/^\/blog\/([^/]+)\/?$/)
-  if (blogMatch) {
-    const docLang = documentLangFromBlogSlug(blogMatch[1])
-    return `${INTERNAL_DOCUMENT_PREFIX}/${docLang}${pathname}`
-  }
-
   if (pathname === '/') {
     return `${INTERNAL_DOCUMENT_PREFIX}/en`
   }
 
-  return `${INTERNAL_DOCUMENT_PREFIX}/en${pathname}`
+  const docLang = documentLangFromPathname(pathname)
+  return `${INTERNAL_DOCUMENT_PREFIX}/${docLang}${pathname}`
 }

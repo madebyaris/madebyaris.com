@@ -1,4 +1,8 @@
-import { publicRedirectUrlFromInternalPath } from '../lib/document-lang'
+import {
+  documentLangFromPathname,
+  publicRedirectUrlFromInternalPath,
+  rewritePathnameWithDocumentLang,
+} from '../lib/document-lang'
 
 function fail(message: string): never {
   console.error(`test:proxy-public-redirect FAILED: ${message}`)
@@ -38,5 +42,33 @@ const notPaginated = publicRedirectUrlFromInternalPath('/blog', 'https://madebya
 if (notPaginated !== null) {
   fail('expected null for public /blog pathname')
 }
+
+function assertLang(pathname: string, expected: 'en' | 'id') {
+  const actual = documentLangFromPathname(pathname)
+  if (actual !== expected) {
+    fail(`documentLangFromPathname(${pathname}): expected ${expected}, got ${actual}`)
+  }
+}
+
+function assertRewrite(pathname: string, expected: string) {
+  const actual = rewritePathnameWithDocumentLang(pathname)
+  if (actual !== expected) {
+    fail(`rewritePathnameWithDocumentLang(${pathname}): expected ${expected}, got ${actual}`)
+  }
+}
+
+assertLang('/services/wordpress/jasa-wordpress', 'id')
+assertLang('/services/seo/jasa-seo', 'id')
+assertLang('/services/nextjs-development/nextjs-indonesia', 'id')
+assertLang('/minimax-ambassador/minimax-indonesia', 'id')
+assertLang('/blog/next-js-16-4-apa-yang-baru', 'id')
+assertLang('/blog/php-api-development-for-nextjs', 'en')
+assertLang('/services/wordpress', 'en')
+assertLang('/', 'en')
+
+assertRewrite('/services/wordpress/jasa-wordpress', '/d/id/services/wordpress/jasa-wordpress')
+assertRewrite('/blog/next-js-16-4-apa-yang-baru', '/d/id/blog/next-js-16-4-apa-yang-baru')
+assertRewrite('/about', '/d/en/about')
+assertRewrite('/', '/d/en')
 
 console.log('test:proxy-public-redirect OK')
