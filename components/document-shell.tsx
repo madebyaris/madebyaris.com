@@ -1,8 +1,7 @@
 import { Inter } from 'next/font/google'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
-import AnalyticsWrapper from '@/components/providers/analytics-wrapper'
-import { ServiceWorkerRegistration } from '@/components/service-worker-registration'
+import { DeferredSiteExtras } from '@/components/deferred-site-extras'
 import { buildSiteGraph } from '@/lib/seo'
 import { JsonLd } from '@/components/seo/json-ld'
 import { cn } from '@/lib/utils'
@@ -54,8 +53,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
         </main>
       </div>
 
-      <AnalyticsWrapper />
-      <ServiceWorkerRegistration />
+      <DeferredSiteExtras />
     </>
   )
 }

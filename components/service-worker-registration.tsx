@@ -9,7 +9,7 @@ export function ServiceWorkerRegistration() {
       'serviceWorker' in navigator &&
       process.env.NODE_ENV === 'production'
     ) {
-      // Register service worker
+      const register = () => {
       navigator.serviceWorker
         .register('/sw.js')
         .then((registration) => {
@@ -37,12 +37,20 @@ export function ServiceWorkerRegistration() {
         .catch((error) => {
           console.error('[SW] Service Worker registration failed:', error);
         });
+      };
 
       // Handle controller change (when new SW takes control)
       navigator.serviceWorker.addEventListener('controllerchange', () => {
         console.log('[SW] Service Worker controller changed, reloading page');
         window.location.reload();
       });
+
+      if (typeof window.requestIdleCallback === 'function') {
+        const id = window.requestIdleCallback(register, { timeout: 4000 });
+        return () => window.cancelIdleCallback(id);
+      }
+      const t = window.setTimeout(register, 1);
+      return () => window.clearTimeout(t);
     }
   }, []);
 

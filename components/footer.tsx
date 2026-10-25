@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { contactHref } from '@/lib/contact-services'
 import { ArrowUpRight } from 'lucide-react'
-import { LiveClock } from './live-clock'
+import { LiveClockLazy } from '@/components/live-clock-lazy'
 
 const navigationLinks = [
   { name: 'Home', href: '/' },
@@ -71,7 +71,7 @@ export function Footer() {
             </svg>
             <span className="text-sm font-medium">Indonesia Time (WIB)</span>
           </div>
-          <LiveClock />
+          <LiveClockLazy />
         </div>
       </div>
 
