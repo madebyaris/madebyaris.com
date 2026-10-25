@@ -103,7 +103,7 @@ export function publicRedirectUrlFromInternalPath(
   return url
 }
 
-/** Rewrite public paths to /d/en/... or /d/id/blog/... (internal only; avoids [keyFile] clash). */
+/** Rewrite public paths to /d/en/... or /d/id/blog/... (internal only). Unknown top-level segments stay public for global-not-found. */
 export function rewritePathnameWithDocumentLang(pathname: string): string {
   if (pathname.startsWith(`${INTERNAL_DOCUMENT_PREFIX}/`)) {
     return pathname

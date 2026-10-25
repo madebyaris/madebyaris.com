@@ -43,11 +43,6 @@ function injectStylesheets(html, links) {
   return html.replace(/<head([^>]*)>/i, `<head$1>\n${links}`)
 }
 
-function ensureHtmlLangEn(html) {
-  if (/<html[^>]*\blang=/i.test(html)) return html
-  return html.replace(/<html/i, '<html lang="en"')
-}
-
 const files = await htmlFiles(appDir)
 const notFoundPath = path.join(appDir, '_not-found.html')
 const homeReferencePath = path.join(appDir, 'd/en.html')
@@ -68,14 +63,10 @@ for (const file of files) {
         }
       }
       html = injectStylesheets(html, homeStylesheetLinks)
-      html = ensureHtmlLangEn(html)
     }
     if (!html.includes('rel="stylesheet"')) continue
   }
-  let processed = await critters.process(html)
-  if (file === notFoundPath) {
-    processed = ensureHtmlLangEn(processed)
-  }
+  const processed = await critters.process(html)
   if (processed !== html) {
     await writeFile(file, processed)
     inlined += 1
