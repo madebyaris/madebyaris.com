@@ -126,12 +126,8 @@ export interface WordPressSeoFields {
   description?: string
 }
 
-// Bahasa Indonesia posts: WP REST exposes no Polylang/WPML language field; categories and tags
-// are shared with English posts. Slug keyword segments (same rule as og:locale and RSS dc:language).
 export function isIndonesianSlug(slug: string): boolean {
-  return /(^|-)(apa-itu|apa-yang|apakah|cara|tentang|jasa|migrasi|mengenal|untuk|pada|dan|harga|skema|kantor|buatan|kekurangan|halaman|jadwal|kenapa|turnamen)(-|$)/.test(
-    slug,
-  )
+  return /(^|-)(apa-itu|apakah|cara|tentang|jasa|migrasi|mengenal|untuk|pada|dan|harga|skema|kantor|buatan)(-|$)/.test(slug)
 }
 
 export function buildBlogPostMetadata(

@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { notFound } from "next/navigation";
 import { Inter } from "next/font/google";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
@@ -9,10 +8,10 @@ import { productionUrl, siteConfig } from "@/lib/seo/config";
 import { buildSiteGraph } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/json-ld";
 import { cn } from "@/lib/utils";
-import { isDocumentLang, type DocumentLang } from "@/lib/document-lang";
-import "../../globals.css";
+import "./globals.css";
 
-const inter = Inter({
+// Inter font - matching reference design
+const inter = Inter({ 
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
@@ -89,25 +88,14 @@ export const metadata: Metadata = {
   },
 };
 
-export async function generateStaticParams() {
-  return [{ docLang: 'en' satisfies DocumentLang }]
-}
-
-export default async function DocumentLangLayout({
+export default function RootLayout({
   children,
-  params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ docLang: string }>;
 }) {
-  const { docLang } = await params;
-  if (!isDocumentLang(docLang)) {
-    notFound();
-  }
-
   return (
-    <html lang={docLang} suppressHydrationWarning>
-      <body
+    <html lang="en" suppressHydrationWarning>
+      <body 
         suppressHydrationWarning
         className={cn(
           "min-h-screen antialiased selection:bg-slate-900 selection:text-white",
@@ -120,7 +108,8 @@ export default async function DocumentLangLayout({
       >
         <JsonLd data={buildSiteGraph()} />
 
-        <div
+        {/* Background - matching reference design */}
+        <div 
           className="fixed inset-0 -z-10 bg-zinc-400"
           style={{
             backgroundImage:
@@ -129,8 +118,11 @@ export default async function DocumentLangLayout({
           aria-hidden="true"
         />
 
+        {/* Main Glass Panel Container */}
         <div className="flex justify-center items-start min-h-screen px-0 py-0 xl:p-8">
           <main className="glass-panel overflow-hidden flex flex-col xl:max-w-[1300px] z-10 xl:border-white/50 border-none xl:border xl:rounded-[2.5rem] min-h-screen xl:min-h-[700px] w-full rounded-none relative xl:shadow-2xl">
+            
+            {/* Vertical Grid Lines */}
             <div className="absolute inset-0 flex justify-between pointer-events-none z-0 px-6 md:px-10 xl:px-12 w-full h-full">
               <div className="h-full w-px bg-zinc-950/5"></div>
               <div className="h-full w-px bg-zinc-950/5 hidden md:block"></div>

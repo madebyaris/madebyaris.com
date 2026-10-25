@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { Suspense } from 'react'
 import { notFound } from 'next/navigation'
 import { ArrowLeft, ArrowRight, BookOpen, Calendar, Clock, Compass, RefreshCw } from 'lucide-react'
 import { TableOfContents } from '@/components/table-of-contents'
@@ -15,7 +14,6 @@ import { authorProfile, buildBlogPostGraph, buildBlogPostMetadata, isIndonesianS
 import { blogCategoryCopy, blogCategoryPath, hubForCategory, primaryCategory, topicHubs } from '@/lib/topics'
 import { JsonLd } from '@/components/seo/json-ld'
 import { contactHref } from '@/lib/contact-services'
-import { documentLangFromBlogSlug, isDocumentLang } from '@/lib/document-lang'
 
 export const revalidate = 604800 // 7 days; webhook refreshes a post on publish
 
@@ -23,20 +21,19 @@ const RELATED_POSTS = 3
 
 interface BlogPostPageProps {
   params: Promise<{
-    docLang: string
     slug: string
   }>
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
-  const { slug, docLang } = await params
-  if (!isDocumentLang(docLang) || docLang !== documentLangFromBlogSlug(slug)) {
-    notFound()
-  }
+  const { slug } = await params
   try {
     const post = await getPost(slug)
     if (!post) {
-      notFound()
+      return {
+        title: 'Post Not Found',
+        description: 'The requested blog post could not be found.',
+      }
     }
 
     const featuredImage = post._embedded?.['wp:featuredmedia']?.[0]?.source_url
@@ -53,7 +50,6 @@ export async function generateStaticParams() {
   try {
     const posts = await getPosts({ per_page: 20 })
     return posts.map((post) => ({
-      docLang: documentLangFromBlogSlug(post.slug),
       slug: post.slug,
     }));
   } catch (error) {
@@ -185,18 +181,7 @@ const authorLinks = (
 })
 
 export default async function BlogPost({ params }: BlogPostPageProps) {
-  const { docLang, slug } = await params
-  return (
-    <Suspense fallback={<p className="text-sm text-zinc-500 py-8">Loading…</p>}>
-      <BlogPostResolved docLang={docLang} slug={slug} />
-    </Suspense>
-  )
-}
-
-async function BlogPostResolved({ docLang, slug }: { docLang: string; slug: string }) {
-  if (!isDocumentLang(docLang) || docLang !== documentLangFromBlogSlug(slug)) {
-    notFound()
-  }
+  const { slug } = await params
 
   const post = await getPost(slug)
   if (!post) {

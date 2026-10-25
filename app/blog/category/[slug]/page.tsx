@@ -15,11 +15,11 @@ export const revalidate = 604800 // 7 days; webhook refreshes archives on publis
 export const dynamicParams = false
 
 interface CategoryPageProps {
-  params: Promise<{ docLang: string; slug: string }>
+  params: Promise<{ slug: string }>
 }
 
 export function generateStaticParams() {
-  return blogCategories.map((category) => ({ docLang: 'en', slug: category.slug }))
+  return blogCategories.map((category) => ({ slug: category.slug }))
 }
 
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {

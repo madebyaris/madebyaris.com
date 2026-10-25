@@ -32,50 +32,13 @@ async function htmlFiles(dir) {
   return files
 }
 
-function extractStylesheetLinks(html) {
-  const headMatch = html.match(/<head[^>]*>([\s\S]*?)<\/head>/i)
-  if (!headMatch) return ''
-  return headMatch[1].match(/<link[^>]+rel="stylesheet"[^>]*>/gi)?.join('\n') ?? ''
-}
-
-function injectStylesheets(html, links) {
-  if (!links || html.includes('rel="stylesheet"')) return html
-  return html.replace(/<head([^>]*)>/i, `<head$1>\n${links}`)
-}
-
-function ensureHtmlLangEn(html) {
-  if (/<html[^>]*\blang=/i.test(html)) return html
-  return html.replace(/<html/i, '<html lang="en"')
-}
-
 const files = await htmlFiles(appDir)
-const notFoundPath = path.join(appDir, '_not-found.html')
-const homeReferencePath = path.join(appDir, 'd/en.html')
-let homeStylesheetLinks = null
-
 let inlined = 0
 
 for (const file of files) {
-  let html = await readFile(file, 'utf8')
-  if (!html.includes('rel="stylesheet"')) {
-    if (file === notFoundPath) {
-      if (homeStylesheetLinks === null) {
-        try {
-          const homeHtml = await readFile(homeReferencePath, 'utf8')
-          homeStylesheetLinks = extractStylesheetLinks(homeHtml)
-        } catch {
-          homeStylesheetLinks = ''
-        }
-      }
-      html = injectStylesheets(html, homeStylesheetLinks)
-      html = ensureHtmlLangEn(html)
-    }
-    if (!html.includes('rel="stylesheet"')) continue
-  }
-  let processed = await critters.process(html)
-  if (file === notFoundPath) {
-    processed = ensureHtmlLangEn(processed)
-  }
+  const html = await readFile(file, 'utf8')
+  if (!html.includes('rel="stylesheet"')) continue
+  const processed = await critters.process(html)
   if (processed !== html) {
     await writeFile(file, processed)
     inlined += 1
