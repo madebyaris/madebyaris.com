@@ -17,6 +17,7 @@ import { contactHref } from '@/lib/contact-services'
 import { documentLangFromBlogSlug, isDocumentLang } from '@/lib/document-lang'
 
 export const revalidate = 604800 // 7 days; webhook refreshes a post on publish
+export const dynamicParams = false
 
 const RELATED_POSTS = 3
 
