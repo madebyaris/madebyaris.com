@@ -17,14 +17,6 @@ export type WpPublishedPostExistsResult = boolean | 'unknown'
  * `unknown` = timeout, network error, or missing API URL — callers should fail open.
  */
 export async function wpPublishedPostExists(slug: string): Promise<WpPublishedPostExistsResult> {
-  const testMode = process.env.BLOG_PROXY_WP_LOOKUP_TEST
-  if (testMode === 'timeout') {
-    return 'unknown'
-  }
-  if (testMode === 'fail') {
-    return 'unknown'
-  }
-
   const raw = process.env.NEXT_PUBLIC_WP_API_URL
   if (!raw) {
     return 'unknown'
