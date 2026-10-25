@@ -10,10 +10,6 @@ const MAIN_LINKS = [
   { href: '/contact', label: 'Contact' },
 ] as const
 
-function plainTitle(post: ProcessedPost): string {
-  return post.title.rendered.replace(/<[^>]*>/g, '')
-}
-
 export async function NotFoundPage() {
   let recentPosts: ProcessedPost[] = []
   try {
