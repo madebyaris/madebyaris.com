@@ -268,7 +268,7 @@ const faqs: FaqItem[] = [
       'Harga dihitung per proyek setelah saya lihat kebutuhannya. Yang membuat harga naik: banyaknya jenis halaman yang berbeda, desain yang perlu dibuat dari nol, fitur seperti toko online atau integrasi API, dan migrasi konten dari website lama. Harga turun kalau desain dan konten sudah siap, atau kalau tema jadi yang bagus ternyata sudah cukup. Kalau memang begitu, saya bilang.',
   },
   {
-    question: 'Website saya error atau kena hack. Bisa langsung diperbaiki?',
+    question: 'Apakah website yang error atau kena hack bisa langsung diperbaiki?',
     answer:
       'Kirim link dan gejalanya lewat form kontak. Saya cek dulu, lalu bilang perkiraan penyebab dan apa yang perlu dikerjakan sebelum mulai. Kondisi website saya backup dulu, jadi kalau ada yang salah saat perbaikan, kita bisa kembali ke titik awal.',
   },
@@ -278,17 +278,17 @@ const faqs: FaqItem[] = [
       'Update core, tema, dan plugin yang dicoba di staging dulu, backup off-site dengan uji restore, cek akun admin, dan perbaikan kecil kalau ada yang rusak. Isi persisnya kita sepakati di awal, supaya kamu tahu apa yang dikerjakan setiap bulan.',
   },
   {
-    question: 'Kalau pindah hosting, website saya mati dan SEO turun?',
+    question: 'Apakah website mati dan SEO turun kalau pindah hosting?',
     answer:
       'Website saya salin ke server baru dan cek di sana dulu. Domain baru diarahkan setelah semuanya jalan, jadi website lama tetap melayani pengunjung selama proses itu. URL tidak berubah, sehingga peringkat Google tidak perlu dibangun ulang.',
   },
   {
-    question: 'Website saya pakai Elementor. Bisa diperbaiki atau harus dibuat ulang?',
+    question: 'Website yang pakai Elementor bisa diperbaiki, atau harus dibuat ulang?',
     answer:
       'Bisa diperbaiki. Saya rapikan widget dan script yang tidak dipakai, perbaiki gambar dan cache, lalu cek lagi di HP. Kalau builder itu sendiri yang membuat website berat, saya bilang terus terang, dan kita bisa bahas pindah ke tema custom.',
   },
   {
-    question: 'Saya kerja langsung dengan kamu? Bisa pakai Bahasa Indonesia?',
+    question: 'Apakah pengerjaannya langsung dengan Aris, dan bisa pakai Bahasa Indonesia?',
     answer:
       'Langsung dengan saya. Saya yang menulis kodenya dan saya juga yang membalas pesan kamu. Saya tinggal di Sidoarjo, Jawa Timur, dan kerja remote dengan klien di Indonesia dan luar negeri, dalam Bahasa Indonesia atau Inggris.',
   },
@@ -331,7 +331,7 @@ export default function JasaWordPressPage() {
       <PageHero
         eyebrow={{ icon: <Layout className="w-4 h-4 text-orange-500" />, label: 'Jasa WordPress developer Indonesia' }}
         title="Jasa pembuatan website WordPress"
-        accent="yang ringan dan gampang diurus"
+        accent="yang ringan dan gampang diurus tim kamu"
         actions={
           <>
             <Link
@@ -354,7 +354,8 @@ export default function JasaWordPressPage() {
       >
         <p className="mb-4">
           Untuk pemilik bisnis dan agensi yang butuh website WordPress baru, atau punya website lama yang perlu dibereskan.
-          Saya Aris, developer web 13+ tahun dan independen sejak 2015.
+          Saya Aris, developer yang membuat website WordPress baru dengan tema custom dan memperbaiki website WordPress yang
+          error, lambat, atau kena malware. Semua perubahan saya kerjakan di staging dulu, jadi website live kamu tetap jalan.
         </p>
         <p className="text-sm text-zinc-500 font-normal">
           Saya membuat tema dan plugin WordPress custom, dan pernah mengerjakan performa WordPress di Hongkiat.com. Website
