@@ -1,11 +1,22 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { rewritePathnameWithDocumentLang } from '@/lib/document-lang'
+import {
+  publicPathFromInternalDocumentPath,
+  rewritePathnameWithDocumentLang,
+} from '@/lib/document-lang'
 
 // Next.js 16: Renamed from middleware to proxy for better clarity
 // This function handles network boundary and routing at the edge
 export function proxy(request: NextRequest) {
-  const rewritten = rewritePathnameWithDocumentLang(request.nextUrl.pathname)
+  const pathname = request.nextUrl.pathname
+  const publicPath = publicPathFromInternalDocumentPath(pathname)
+  if (publicPath !== null) {
+    const url = request.nextUrl.clone()
+    url.pathname = publicPath
+    return NextResponse.redirect(url, 308)
+  }
+
+  const rewritten = rewritePathnameWithDocumentLang(pathname)
   const url = request.nextUrl.clone()
   url.pathname = rewritten
 
