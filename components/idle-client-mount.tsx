@@ -14,13 +14,36 @@ export function IdleClientMount({ children, fallback = null, timeout = 2500 }: I
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
-    const run = () => setReady(true)
-    if (typeof window.requestIdleCallback === 'function') {
-      const id = window.requestIdleCallback(run, { timeout })
-      return () => window.cancelIdleCallback(id)
+    let cancelled = false
+    let idleId: ReturnType<typeof window.requestIdleCallback> | undefined
+    let timeoutId: number | undefined
+
+    const mount = () => {
+      if (!cancelled) setReady(true)
     }
-    const t = window.setTimeout(run, 1)
-    return () => window.clearTimeout(t)
+
+    const scheduleIdle = () => {
+      if (typeof window.requestIdleCallback === 'function') {
+        idleId = window.requestIdleCallback(mount, { timeout })
+      } else {
+        timeoutId = window.setTimeout(mount, 1) as unknown as number
+      }
+    }
+
+    if (document.readyState === 'complete') {
+      scheduleIdle()
+    } else {
+      window.addEventListener('load', scheduleIdle, { once: true })
+    }
+
+    return () => {
+      cancelled = true
+      window.removeEventListener('load', scheduleIdle)
+      if (idleId !== undefined && typeof window.cancelIdleCallback === 'function') {
+        window.cancelIdleCallback(idleId)
+      }
+      if (timeoutId !== undefined) window.clearTimeout(timeoutId)
+    }
   }, [timeout])
 
   return ready ? children : fallback

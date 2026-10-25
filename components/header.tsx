@@ -2,11 +2,12 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef, useCallback } from "react"
 import { cn } from "@/lib/utils"
 import { contactHref } from "@/lib/contact-services"
-import { Menu, ChevronDown, ArrowRight, Layers } from "lucide-react"
+import { Menu, ArrowRight, Layers } from "lucide-react"
 import dynamic from "next/dynamic"
+import { HeaderNavDropdown } from "@/components/header-nav-dropdown"
 
 const MobileMenu = dynamic(() => import("./mobile-menu"), { ssr: false })
 
@@ -42,6 +43,18 @@ export function Header() {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
   const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>({})
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const hoverTimeout = useRef<NodeJS.Timeout | null>(null)
+
+  const openDropdown = useCallback((href: string) => {
+    if (hoverTimeout.current) clearTimeout(hoverTimeout.current)
+    setActiveDropdown(href)
+  }, [])
+
+  const closeDropdown = useCallback(() => {
+    if (hoverTimeout.current) clearTimeout(hoverTimeout.current)
+    hoverTimeout.current = setTimeout(() => setActiveDropdown(null), 200)
+  }, [])
 
   const toggleSubmenu = (href: string) => {
     setExpandedItems(prev => ({
@@ -82,9 +95,21 @@ export function Header() {
       </Link>
 
       <nav className="hidden md:flex uppercase text-xs font-medium text-zinc-500 tracking-widest glass-nav rounded-full py-2 px-6 gap-x-8 items-center">
-        {navigationItems.map((item) => (
-          <div key={item.href} className="relative group">
+        {navigationItems.map((item) =>
+          item.children ? (
+            <HeaderNavDropdown
+              key={item.href}
+              href={item.href}
+              label={item.label}
+              items={item.children}
+              pathname={pathname}
+              isOpen={activeDropdown === item.href}
+              onOpen={() => openDropdown(item.href)}
+              onClose={closeDropdown}
+            />
+          ) : (
             <Link
+              key={item.href}
               href={item.href}
               className={cn(
                 "hover:text-zinc-900 transition-colors duration-300 flex items-center gap-1 py-2",
@@ -94,36 +119,9 @@ export function Header() {
               )}
             >
               {item.label}
-              {item.children && (
-                <ChevronDown className="w-3 h-3" />
-              )}
             </Link>
-
-            {item.children && (
-              <>
-                <div className="absolute left-0 right-0 top-full h-4" aria-hidden="true" />
-                <div className="absolute left-1/2 -translate-x-1/2 top-full mt-3 w-60 z-50 opacity-0 invisible pointer-events-none transition-opacity duration-200 group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:visible group-focus-within:pointer-events-auto">
-                  <div className="rounded-xl shadow-xl py-2 bg-white border border-zinc-200">
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.href}
-                        href={child.href}
-                        className={cn(
-                          "block px-5 py-3 text-sm font-medium tracking-wide transition-colors hover:bg-zinc-50 hover:text-orange-500 normal-case",
-                          pathname === child.href
-                            ? "text-orange-500 bg-zinc-50"
-                            : "text-zinc-600"
-                        )}
-                      >
-                        {child.label}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              </>
-            )}
-          </div>
-        ))}
+          ),
+        )}
       </nav>
 
       <Link 
@@ -138,6 +136,7 @@ export function Header() {
         className="md:hidden p-2 hover:bg-zinc-100 rounded-lg transition-colors"
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Toggle menu"
+        aria-expanded={isOpen}
       >
         <Menu className="h-6 w-6 text-zinc-900" />
       </button>
