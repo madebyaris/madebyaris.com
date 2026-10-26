@@ -90,6 +90,7 @@ const offers = [
     description:
       'Toko online WordPress dari katalog produk sampai checkout. Setiap ada perubahan, alur checkout saya uji di staging sebelum dipasang di website live.',
     icon: ShoppingCart,
+    href: '/services/wordpress/jasa-woocommerce',
   },
   {
     title: 'Plugin custom',
@@ -397,7 +398,15 @@ export default function JasaWordPressPage() {
               <div className="p-3 bg-zinc-100 rounded-xl w-fit mb-4 group-hover:bg-orange-100 transition-colors">
                 <item.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
+              <h3 className="font-semibold text-zinc-900 mb-2">
+                {'href' in item && item.href ? (
+                  <Link href={item.href} className="hover:text-orange-500 transition-colors">
+                    {item.title}
+                  </Link>
+                ) : (
+                  item.title
+                )}
+              </h3>
               <p className="text-sm text-zinc-500 leading-relaxed">{item.description}</p>
             </div>
           ))}
