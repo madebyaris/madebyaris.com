@@ -221,6 +221,13 @@ export default function WooCommerceDevelopmentPage() {
         </ol>
       </nav>
 
+      <p className="mb-8 text-sm text-zinc-600">
+        <Link href="/services/wordpress/jasa-woocommerce" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors">
+          Jasa WooCommerce
+        </Link>{' '}
+        (in Indonesian)
+      </p>
+
       <PageHero
         eyebrow={{ icon: <ShoppingCart className="w-4 h-4 text-orange-500" />, label: 'WooCommerce developer' }}
         title="Hire a WooCommerce developer"
