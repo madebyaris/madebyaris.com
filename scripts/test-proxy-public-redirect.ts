@@ -1,3 +1,4 @@
+import { internalBlogNotFoundPath } from '../lib/blog-post-path'
 import {
   documentLangFromPathname,
   publicRedirectUrlFromInternalPath,
@@ -70,5 +71,20 @@ assertRewrite('/services/wordpress/jasa-wordpress', '/d/id/services/wordpress/ja
 assertRewrite('/blog/next-js-16-4-apa-yang-baru', '/d/id/blog/next-js-16-4-apa-yang-baru')
 assertRewrite('/about', '/d/en/about')
 assertRewrite('/', '/d/en')
+
+function assertBlogNotFoundLang(slug: string, expected: 'en' | 'id') {
+  const path = internalBlogNotFoundPath(slug)
+  const lang = path.startsWith('/d/id/') ? 'id' : path.startsWith('/d/en/') ? 'en' : null
+  if (lang !== expected) {
+    fail(
+      `internalBlogNotFoundPath(${slug}): expected lang=${expected}, got path ${path}`,
+    )
+  }
+}
+
+assertBlogNotFoundLang('mengenal-fake-post-g16', 'id')
+assertBlogNotFoundLang('cara-fake-slug-xyz', 'id')
+assertBlogNotFoundLang('jasa-fake-slug-xyz', 'id')
+assertBlogNotFoundLang('no-such-post-xyz-en', 'en')
 
 console.log('test:proxy-public-redirect OK')
