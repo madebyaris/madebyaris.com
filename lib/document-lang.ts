@@ -21,6 +21,7 @@ const INDONESIAN_MARKETING_PATHS = new Set<string>([
   '/services/saas-development/jasa-pembuatan-aplikasi-web',
   '/services/seo/jasa-seo',
   '/services/wordpress/jasa-wordpress',
+  '/services/wordpress/jasa-woocommerce',
 ])
 
 function normalizePublicPathname(pathname: string): string {

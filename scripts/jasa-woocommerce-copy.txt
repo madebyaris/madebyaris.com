@@ -1,0 +1,103 @@
+Jasa pembuatan website ecommerce dengan WooCommerce, dites di staging dulu
+Untuk pemilik bisnis yang butuh toko online WooCommerce baru, atau punya toko yang perlu diperbaiki dan dipercepat.
+Saya Aris, developer yang mengerjakan toko WooCommerce sendiri dari nol sampai live: setup, tema dan desain, katalog produk, pembayaran, pengiriman, kecepatan, SEO dasar, dan bantuan saat launch.
+Setiap perubahan saya coba di staging dengan pesanan uji, jadi toko kamu tetap menerima pesanan selama saya bekerja.
+Ceritakan toko online yang kamu butuhkan
+Versi bahasa Inggris:
+WooCommerce developer
+(bahasa Inggris)
+Kapan toko online kamu butuh developer WooCommerce
+Kamu butuh developer saat plugin hampir cocok tapi belum pas, checkout harus bekerja dengan cara lain, atau toko makin lambat saat katalog bertambah.
+Saya baca kodenya, cari penyebabnya, lalu perbaiki di salinan staging.
+WooCommerce berjalan di atas WordPress.
+Untuk pekerjaan di luar toko, lihat
+jasa WordPress
+Yang saya kerjakan di WooCommerce
+Toko baru dari nol
+Setup WooCommerce, tema dan desain, katalog produk, pembayaran, pengiriman, SEO dasar, sampai toko live.
+Semua bagian ini saya kerjakan sendiri.
+Fitur dan plugin custom
+Plugin WooCommerce custom untuk aturan khusus toko kamu, misalnya harga khusus atau opsi produk.
+Lihat juga
+pembuatan plugin WordPress
+Checkout dan halaman produk
+Field checkout yang ditambah atau dihapus, tanggal pengiriman, dan aturan bersyarat.
+Integrasi pembayaran dan pengiriman
+Payment gateway dan kurir lokal untuk toko di Indonesia, dipasang dan dites dalam mode sandbox.
+Kecepatan dan database toko
+Perbaikan toko yang lambat, termasuk tuning database WooCommerce.
+Migrasi toko
+Pindah toko ke hosting baru dengan produk, pelanggan, dan pesanan ikut pindah.
+Lihat
+migrasi WordPress
+Dari nol sampai live: langkah pembuatan toko
+Konsultasi
+kamu ceritakan produk, cara jualan, dan kebutuhan toko.
+Scope tertulis
+apa yang saya kerjakan, cara saya mengujinya, dan harganya.
+Setup dan desain
+WooCommerce, tema, dan tampilan toko di staging.
+Katalog produk
+produk, kategori, dan halaman produk.
+Pembayaran dan pengiriman
+payment gateway dan kurir lokal, dites dengan pesanan uji.
+Kecepatan dan SEO dasar
+halaman toko, produk, dan checkout dicek sebelum live.
+Launch
+toko live, dengan bantuan saat launch.
+Toko WooCommerce lambat: yang saya cek dulu
+Halaman cart, checkout, dan akun berubah untuk setiap pembeli, jadi page cache tidak bisa membantu di sana.
+Halaman itu bergantung pada PHP dan database yang cepat.
+Berikut yang saya cek dulu:
+Database: autoloaded options, tabel sisa plugin lama, dan query produk yang lambat
+Cart fragments: request refresh cart di halaman yang tidak menampilkan cart
+Object cache: Redis atau Memcached, kalau hosting kamu menyediakannya
+Gambar: foto produk dibuat sesuai ukuran yang dipakai tema
+Plugin: script yang dimuat di semua halaman padahal hanya dibutuhkan di toko atau checkout
+Untuk kecepatan bagian lain website, lihat
+optimasi kecepatan WordPress
+Cara saya bekerja di toko yang sedang jalan
+Setiap perubahan masuk ke salinan staging dulu
+Email ke pelanggan asli dimatikan di staging
+Pembayaran berjalan di mode test atau sandbox, dan saya buat pesanan uji dari cart sampai konfirmasi
+Perubahan naik ke live di jam paling sepi, dengan backup tepat sebelumnya
+Contoh toko yang pernah saya kerjakan
+Sebagian besar proyek WooCommerce saya terikat NDA, jadi nama klien tidak saya tampilkan.
+Salah satunya adalah sebuah toko perlengkapan bayi.
+Cocok dan kurang cocok
+Cocok kalau:
+Kamu butuh toko online baru di WooCommerce, dari nol sampai live
+Plugin hampir sesuai kebutuhan toko, tapi pengaturannya terus bermasalah
+Toko makin lambat saat produk dan pesanan bertambah
+Toko dibuat orang lain, dan kamu butuh developer yang bisa membaca kodenya
+Kurang cocok kalau:
+Kamu butuh orang untuk upload produk atau memproses pesanan setiap hari
+Kamu ingin toko tanpa urusan hosting, update, dan keamanan
+Pertanyaan soal jasa WooCommerce
+Berapa biaya jasa pembuatan website ecommerce WooCommerce?
+Biayanya tergantung scope: jumlah produk, aturan checkout, dan integrasi yang dibutuhkan.
+Saya tidak punya paket harga tetap.
+Harga saya berikan setelah konsultasi, bersama scope tertulis.
+Apakah toko tetap bisa menerima pesanan selama dikerjakan?
+Bisa.
+Saya bekerja di salinan staging, dan toko live hanya saya baca sampai perubahan lolos tes.
+Perubahan naik ke live di jam sepi, setelah pesanan uji berhasil.
+Payment gateway apa saja yang bisa dipasang?
+Saya pasang payment gateway dan kurir lokal yang sesuai dengan toko kamu.
+Setiap status pembayaran saya tes di mode sandbox dulu.
+Apakah toko WooCommerce yang sudah lambat bisa dipercepat?
+Bisa.
+Saya ukur halaman toko, produk, dan checkout, lalu cari penyebabnya di database, plugin, cart fragments, gambar, atau hosting.
+Kalau hosting yang jadi batasnya, saya bilang sebelum kamu bayar untuk hal lain.
+Kapan sebaiknya pindah dari WooCommerce?
+WooCommerce masuk akal kalau kamu ingin memiliki kodenya, butuh aturan khusus, atau sudah memakai WordPress.
+Kamu juga jadi bertanggung jawab atas hosting, update, dan keamanan, atau membayar orang untuk mengurusnya.
+Kalau katalog kamu kecil dan sederhana, dan tidak ada orang di tim yang mau mengurus hosting, update, dan keamanan, platform toko online yang sudah jadi bisa lebih ringan.
+Saya akan bilang terus terang kalau itu kondisi kamu.
+Ceritakan toko online yang kamu butuhkan
+Kirim link toko atau ceritakan toko yang ingin kamu buat.
+Setelah konsultasi gratis, saya balas dengan scope, cara saya mengujinya, dan harganya.
+Kirim kebutuhan toko kamu
+Butuh perawatan rutin setelah toko live?
+Lihat
+maintenance WordPress

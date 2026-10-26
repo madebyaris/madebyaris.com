@@ -41,6 +41,7 @@ export const SITEMAP_STATIC_LASTMOD: Readonly<Record<string, string>> = {
   'services/wordpress': '2026-10-14T16:29:34+07:00',
   'services/wordpress/headless-development': '2026-10-14T16:29:34+07:00',
   'services/wordpress/jasa-wordpress': '2026-10-14T16:29:34+07:00',
+  'services/wordpress/jasa-woocommerce': '2026-10-26T03:00:00Z',
   'services/wordpress/maintenance': '2026-10-14T16:29:34+07:00',
   'services/wordpress/migration': '2026-10-14T16:29:34+07:00',
   'services/wordpress/optimization': '2026-10-14T16:29:34+07:00',

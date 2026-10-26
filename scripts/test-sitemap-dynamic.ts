@@ -46,6 +46,31 @@ async function main() {
   }
 
   const entries = await getSitemapEntries()
+  if (entries.length !== 113) {
+    fail(`Expected 113 sitemap URLs, got ${entries.length}`)
+  }
+
+  const jasaWooUrl = `${productionUrl}/services/wordpress/jasa-woocommerce`
+  const jasaWooEntry = entries.find((entry) => entry.url === jasaWooUrl)
+  if (!jasaWooEntry?.lastModified) {
+    fail('Missing sitemap entry or lastmod for jasa-woocommerce')
+  }
+  const jasaWooLastmod =
+    jasaWooEntry.lastModified instanceof Date
+      ? jasaWooEntry.lastModified.toISOString()
+      : new Date(jasaWooEntry.lastModified as string).toISOString()
+  if (jasaWooLastmod !== '2026-10-26T03:00:00.000Z') {
+    fail(`jasa-woocommerce lastmod: expected 2026-10-26T03:00:00.000Z, got ${jasaWooLastmod}`)
+  }
+  const jasaWooAlternates = jasaWooEntry.alternates?.languages
+  if (
+    jasaWooAlternates?.en !== `${productionUrl}/services/wordpress/woocommerce` ||
+    jasaWooAlternates?.id !== jasaWooUrl ||
+    jasaWooAlternates?.['x-default'] !== `${productionUrl}/services/wordpress/woocommerce`
+  ) {
+    fail('jasa-woocommerce sitemap hreflang alternates missing or incorrect')
+  }
+
   const entryByUrl = new Map(entries.map((entry) => [entry.url, entry]))
 
   for (const post of posts) {

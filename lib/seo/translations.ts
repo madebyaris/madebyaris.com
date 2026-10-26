@@ -4,7 +4,12 @@ import { productionAbsoluteUrl } from './config'
 // translations only: two posts on the same topic (cursor-ai-pricing and
 // tentang-skema-harga-cursor-ide, for example) are separate articles, and
 // hreflang between them tells Google they are interchangeable.
-export const translationPairs: ReadonlyArray<{ en: string; id: string }> = []
+export const translationPairs: ReadonlyArray<{ en: string; id: string }> = [
+  {
+    en: '/services/wordpress/woocommerce',
+    id: '/services/wordpress/jasa-woocommerce',
+  },
+]
 
 export function languageAlternates(path: string): Record<string, string> | undefined {
   const pair = translationPairs.find((p) => p.en === path || p.id === path)

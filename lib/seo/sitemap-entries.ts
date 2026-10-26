@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next'
 import { getPostsForSitemap } from '@/lib/wordpress'
 import { productionUrl } from '@/lib/seo/config'
 import { staticRouteLastModified, wpModifiedGmtToDate } from '@/lib/seo/sitemap-static-lastmod'
+import { languageAlternates } from '@/lib/seo/translations'
 import { blogCategories, blogCategoryPath, topicHubs } from '@/lib/topics'
 
 const mainRoutes = [
@@ -48,6 +49,7 @@ const wordpressRoutes = [
   { path: 'services/wordpress/migration', priority: 0.7, changeFreq: 'monthly' },
   { path: 'services/wordpress/woocommerce', priority: 0.7, changeFreq: 'monthly' },
   { path: 'services/wordpress/jasa-wordpress', priority: 0.7, changeFreq: 'monthly' },
+  { path: 'services/wordpress/jasa-woocommerce', priority: 0.7, changeFreq: 'monthly' },
 ]
 
 const phpRoutes = [
@@ -68,11 +70,14 @@ function createSitemapEntry(
   route: { path: string; priority: number; changeFreq: string },
 ): MetadataRoute.Sitemap[number] {
   const lastModified = staticRouteLastModified(route.path)
+  const publicPath = route.path ? `/${route.path}` : '/'
+  const languages = languageAlternates(publicPath)
   return {
     url: route.path ? `${baseUrl}/${route.path}` : baseUrl,
     ...(lastModified ? { lastModified } : {}),
     changeFrequency: route.changeFreq as 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never',
     priority: route.priority,
+    ...(languages ? { alternates: { languages } } : {}),
   }
 }
 
