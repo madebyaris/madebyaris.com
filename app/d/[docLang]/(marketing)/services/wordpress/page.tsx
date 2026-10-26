@@ -278,31 +278,66 @@ export default function WordPressServicesPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {services.map((service) => (
-            <Link key={service.title} href={service.href} className="group">
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all hover:-translate-y-0.5 h-full">
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="p-3 bg-zinc-100 rounded-xl group-hover:bg-orange-100 transition-colors">
-                    <service.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
+          {services.map((service) =>
+            service.href === '/services/wordpress/woocommerce' ? (
+              <div key={service.title} className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm hover:shadow-xl transition-all hover:-translate-y-0.5 h-full">
+                <Link href={service.href} className="group block p-6 pb-3">
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="p-3 bg-zinc-100 rounded-xl group-hover:bg-orange-100 transition-colors">
+                      <service.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-semibold text-zinc-900 mb-1 group-hover:text-orange-500 transition-colors">
+                        {service.title}
+                      </h3>
+                      <p className="text-sm text-zinc-500 leading-relaxed">{service.description}</p>
+                    </div>
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-zinc-900 mb-1 group-hover:text-orange-500 transition-colors">
-                      {service.title}
-                    </h3>
-                    <p className="text-sm text-zinc-500 leading-relaxed">{service.description}</p>
-                  </div>
-                </div>
 
-                <div className="flex flex-wrap gap-1.5">
-                  {service.features.map((feature) => (
-                    <span key={feature} className="px-2 py-0.5 bg-zinc-100 rounded text-[10px] text-zinc-600 font-medium">
-                      {feature}
-                    </span>
-                  ))}
-                </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {service.features.map((feature) => (
+                      <span key={feature} className="px-2 py-0.5 bg-zinc-100 rounded text-[10px] text-zinc-600 font-medium">
+                        {feature}
+                      </span>
+                    ))}
+                  </div>
+                </Link>
+                <p className="px-6 pb-6 text-sm text-zinc-600">
+                  <Link
+                    href="/services/wordpress/jasa-woocommerce"
+                    className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors"
+                  >
+                    Jasa WooCommerce
+                  </Link>{' '}
+                  (in Indonesian)
+                </p>
               </div>
-            </Link>
-          ))}
+            ) : (
+              <Link key={service.title} href={service.href} className="group">
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all hover:-translate-y-0.5 h-full">
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="p-3 bg-zinc-100 rounded-xl group-hover:bg-orange-100 transition-colors">
+                      <service.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-semibold text-zinc-900 mb-1 group-hover:text-orange-500 transition-colors">
+                        {service.title}
+                      </h3>
+                      <p className="text-sm text-zinc-500 leading-relaxed">{service.description}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap gap-1.5">
+                    {service.features.map((feature) => (
+                      <span key={feature} className="px-2 py-0.5 bg-zinc-100 rounded text-[10px] text-zinc-600 font-medium">
+                        {feature}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </Link>
+            ),
+          )}
         </div>
         <p className="text-sm text-zinc-500 mt-6 text-center" lang="id">
           Cari jasa pembuatan website WordPress dalam Bahasa Indonesia?{' '}
