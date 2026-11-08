@@ -32,6 +32,7 @@ const navigationItems: NavigationItem[] = [
       { href: '/services/wordpress', label: 'WordPress Development' },
       { href: '/services/vibe-code-friend', label: 'Cursor / AI Workflows' },
       { href: '/services/php-development', label: 'PHP Development' },
+      { href: '/jasa-pembuatan-website', label: 'Jasa Pembuatan Website' },
     ]
   },
   { href: '/guides/cursor', label: 'Guides' },

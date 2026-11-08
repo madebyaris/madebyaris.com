@@ -645,6 +645,14 @@ export default function JasaWordPressPage() {
         primary={{ href: contactHref('wordpress'), label: 'Kirim kebutuhan website kamu' }}
         secondary={{ href: '/services/wordpress', label: 'Layanan WordPress (English)' }}
       />
+
+      <p className="text-center text-sm text-zinc-600 mb-16 max-w-lg mx-auto">
+        Butuh jenis website lain, seperti toko online atau aplikasi? Lihat{' '}
+        <Link href="/jasa-pembuatan-website" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors">
+          jasa pembuatan website
+        </Link>
+        .
+      </p>
     </div>
   )
 }

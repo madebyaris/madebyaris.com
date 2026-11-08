@@ -91,6 +91,11 @@ const services: LlmsLink[] = [
     summary: 'Custom PHP applications, APIs, databases, and legacy modernization.',
   },
   {
+    title: 'Jasa pembuatan website (Bahasa Indonesia)',
+    path: '/jasa-pembuatan-website',
+    summary: 'Website company profile, toko online, dan aplikasi web dari developer 13+ tahun di Sidoarjo, dengan scope tertulis sebelum mulai.',
+  },
+  {
     title: 'Jasa Next.js Indonesia (Bahasa Indonesia)',
     path: '/services/nextjs-development/agency-indonesia',
     summary: 'Next.js specialist for Indonesian companies, working solo with trusted partners when needed.',

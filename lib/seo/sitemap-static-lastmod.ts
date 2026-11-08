@@ -13,6 +13,7 @@ export const SITEMAP_STATIC_LASTMOD: Readonly<Record<string, string>> = {
   contact: '2026-10-14T16:29:34+07:00',
   'cursor-ambassador': '2026-10-14T16:29:34+07:00',
   'guides/cursor': '2026-10-14T16:29:34+07:00',
+  'jasa-pembuatan-website': '2026-11-08T22:00:00+07:00',
   'minimax-ambassador': '2026-10-14T16:29:34+07:00',
   'minimax-ambassador/minimax-indonesia': '2026-10-14T16:29:34+07:00',
   'privacy-policy': '2026-10-14T16:29:34+07:00',
