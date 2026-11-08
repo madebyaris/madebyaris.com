@@ -6,14 +6,16 @@ interface OpenSourceProjectsProps {
   id?: string
   title?: string
   intro?: string
+  starsLabel?: string
 }
 
-export async function OpenSourceProjects({
+export function OpenSourceProjects({
   id = 'open-source',
   title = 'Open source you can read',
   intro = 'All my client work is under NDA, so the public proof is code. These are the projects I maintain.',
+  starsLabel = 'on GitHub',
 }: OpenSourceProjectsProps) {
-  const projects = await getOpenSourceProjects()
+  const projects = getOpenSourceProjects()
 
   return (
     <section className="mb-16" aria-labelledby={id}>
@@ -42,12 +44,10 @@ export async function OpenSourceProjects({
             <p className="text-sm text-zinc-500 leading-relaxed mb-4">{project.blurb}</p>
             <div className="flex items-center gap-4 text-xs font-medium text-zinc-500">
               <span>{project.stack}</span>
-              {project.stars !== null && (
-                <span className="inline-flex items-center gap-1">
-                  <Star className="w-3.5 h-3.5" />
-                  {project.stars} on GitHub
-                </span>
-              )}
+              <span className="inline-flex items-center gap-1">
+                <Star className="w-3.5 h-3.5" />
+                {project.stars} {starsLabel}
+              </span>
             </div>
           </Link>
         ))}

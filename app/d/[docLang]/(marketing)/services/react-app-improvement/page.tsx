@@ -124,6 +124,7 @@ export default function ReactAppImprovementPage() {
       ]}
       faqTitle="Questions about React performance work"
       faqs={faqs}
+      alternate={{ prefix: 'Dalam Bahasa Indonesia:', label: 'lihat halaman Bahasa Indonesia', href: '/services/jasa-optimasi-react' }}
       related={[
         { href: '/services/vite-development', label: 'Vite development' },
         { href: '/services/nextjs-development', label: 'Next.js development' },

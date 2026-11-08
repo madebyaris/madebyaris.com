@@ -22,6 +22,7 @@ export interface SpecialistRelated {
 }
 
 export interface SpecialistLandingProps {
+  locale?: 'en' | 'id'
   path: string
   name: string
   description: string
@@ -41,40 +42,62 @@ export interface SpecialistLandingProps {
   showOpenSource?: boolean
   faqs: FaqItem[]
   faqTitle: string
+  openSource?: { title: string; intro: string; starsLabel: string }
   related: SpecialistRelated[]
+  alternate?: { href: string; label: string; prefix: string }
   ctaTitle: string
   ctaBody: string
   ctaLabel: string
 }
 
+const labels = {
+  en: {
+    home: 'Services',
+    howItGoes: 'How it goes',
+    related: 'Related:',
+    seeAll: 'See all product engineering',
+    seeAllHref: '/product-engineering',
+  },
+  id: {
+    home: 'Layanan',
+    howItGoes: 'Alur kerjanya',
+    related: 'Terkait:',
+    seeAll: 'Lihat semua pengembangan produk',
+    seeAllHref: '/jasa-pengembangan-produk',
+  },
+} as const
+
 const linkClass = 'underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors'
 
 export function SpecialistLanding(props: SpecialistLandingProps) {
+  const locale = props.locale ?? 'en'
+  const t = labels[locale]
   const structuredData = buildPageGraph({
+    inLanguage: locale,
     path: props.path,
     name: props.name,
     description: props.description,
     breadcrumbs: [
-      { name: 'Services', path: '/services' },
+      { name: t.home, path: '/services' },
       { name: props.breadcrumbName, path: props.path },
     ],
     service: {
       name: props.name,
       description: props.description,
       serviceType: props.serviceType,
-      areaServed: 'Worldwide',
+      areaServed: locale === 'id' ? 'Indonesia' : 'Worldwide',
     },
   })
 
   const primaryHref = contactHref('engineering-specialist')
 
   return (
-    <>
+    <div lang={locale}>
       <JsonLd data={structuredData} />
 
       <nav className="mb-8" aria-label="Breadcrumb">
         <ol className="flex items-center space-x-2 text-sm text-zinc-500">
-          <li><Link href="/services" className="hover:text-orange-500 transition-colors">Services</Link></li>
+          <li><Link href="/services" className="hover:text-orange-500 transition-colors">{t.home}</Link></li>
           <li><span className="px-2">/</span></li>
           <li className="text-zinc-900">{props.breadcrumbName}</li>
         </ol>
@@ -149,7 +172,7 @@ export function SpecialistLanding(props: SpecialistLandingProps) {
       <section className="mb-16" aria-labelledby="how-it-goes">
         <div className="text-center mb-10">
           <h2 id="how-it-goes" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            How it goes
+            {t.howItGoes}
           </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -165,7 +188,13 @@ export function SpecialistLanding(props: SpecialistLandingProps) {
         </div>
       </section>
 
-      {props.showOpenSource && <OpenSourceProjects />}
+      {props.showOpenSource && (
+        <OpenSourceProjects
+          title={props.openSource?.title}
+          intro={props.openSource?.intro}
+          starsLabel={props.openSource?.starsLabel}
+        />
+      )}
 
       <Faq id={`${props.path.split('/').pop()}-faq`} title={props.faqTitle} faqs={props.faqs} />
 
@@ -173,11 +202,11 @@ export function SpecialistLanding(props: SpecialistLandingProps) {
         title={props.ctaTitle}
         body={props.ctaBody}
         primary={{ href: primaryHref, label: props.ctaLabel }}
-        secondary={{ href: '/product-engineering', label: 'See all product engineering' }}
+        secondary={{ href: t.seeAllHref, label: t.seeAll }}
       />
 
       <p className="text-center text-sm text-zinc-600 mb-16 max-w-xl mx-auto">
-        Related:{' '}
+        {t.related}{' '}
         {props.related.map((item, index) => (
           <span key={item.href}>
             {index > 0 && ', '}
@@ -188,6 +217,16 @@ export function SpecialistLanding(props: SpecialistLandingProps) {
         ))}
         .
       </p>
-    </>
+
+      {props.alternate && (
+        <p className="text-center text-sm text-zinc-600 mb-16 max-w-xl mx-auto">
+          {props.alternate.prefix}{' '}
+          <Link href={props.alternate.href} className={linkClass}>
+            {props.alternate.label}
+          </Link>
+          .
+        </p>
+      )}
+    </div>
   )
 }

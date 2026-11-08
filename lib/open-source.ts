@@ -1,8 +1,8 @@
 /**
- * Open-source projects shown on the home page and /ai-implementation.
- * Names, blurbs, and links are curated here; star counts are read live from
- * the GitHub API and cached for 24 hours. A count is left out when the request
- * fails, so a missing number never shows as zero.
+ * Open-source projects shown on the home page and the AI implementation pages.
+ * Everything here is hard-coded, including the star counts, so no page makes a
+ * network request for them. Star counts were copied from GitHub on 8 November
+ * 2026. Update them by hand when you want fresh numbers.
  */
 
 export interface OpenSourceProject {
@@ -10,10 +10,10 @@ export interface OpenSourceProject {
   repo: string
   blurb: string
   stack: string
+  stars: number
 }
 
 export interface OpenSourceProjectWithStats extends OpenSourceProject {
-  stars: number | null
   repoUrl: string
 }
 
@@ -26,6 +26,7 @@ export const openSourceProjects: readonly OpenSourceProject[] = [
     blurb:
       'A native Rust CLI that orchestrates AI agents across projects, with persistent sessions, git worktrees, and local-first control.',
     stack: 'Rust',
+    stars: 205,
   },
   {
     name: 'Spec Kit for Cursor',
@@ -33,6 +34,7 @@ export const openSourceProjects: readonly OpenSourceProject[] = [
     blurb:
       'A spec-driven toolkit for Cursor. The /specify, /plan, and /tasks commands turn an idea into specs, plans, and tasks.',
     stack: 'Shell',
+    stars: 199,
   },
   {
     name: 'Agent Orchestration',
@@ -40,6 +42,7 @@ export const openSourceProjects: readonly OpenSourceProject[] = [
     blurb:
       'An MCP server for multi-agent work, with shared memory, a task queue, and resource locks.',
     stack: 'TypeScript',
+    stars: 21,
   },
   {
     name: 'Chaca Scanner',
@@ -47,46 +50,20 @@ export const openSourceProjects: readonly OpenSourceProject[] = [
     blurb:
       'A desktop web security scanner for developers: OWASP Top 10 checks, API exposure, and CMS detection.',
     stack: 'Rust, Tauri',
+    stars: 41,
   },
   {
     name: 'RankMySEO',
     repo: 'rankmyseo',
     blurb: 'The open-source version of the rank tracker behind rankmyseo.com.',
     stack: 'TypeScript',
+    stars: 20,
   },
 ]
 
-async function fetchStars(repo: string): Promise<number | null> {
-  try {
-    const headers: HeadersInit = {
-      Accept: 'application/vnd.github+json',
-      'User-Agent': 'madebyaris.com',
-    }
-    if (process.env.GITHUB_TOKEN) {
-      headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`
-    }
-    const response = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${repo}`, {
-      headers,
-      signal: AbortSignal.timeout(5000),
-      next: { revalidate: 86400 },
-    })
-    if (!response.ok) {
-      console.error(`GitHub stars request failed for ${repo}: ${response.status}`)
-      return null
-    }
-    const data = (await response.json()) as { stargazers_count?: number }
-    return typeof data.stargazers_count === 'number' ? data.stargazers_count : null
-  } catch (error) {
-    console.error(`GitHub stars request error for ${repo}:`, error)
-    return null
-  }
-}
-
-export async function getOpenSourceProjects(): Promise<OpenSourceProjectWithStats[]> {
-  const stars = await Promise.all(openSourceProjects.map((project) => fetchStars(project.repo)))
-  return openSourceProjects.map((project, index) => ({
+export function getOpenSourceProjects(): OpenSourceProjectWithStats[] {
+  return openSourceProjects.map((project) => ({
     ...project,
-    stars: stars[index],
     repoUrl: `https://github.com/${GITHUB_OWNER}/${project.repo}`,
   }))
 }
