@@ -140,6 +140,37 @@ const nextConfig = {
       destination: '/blog/pr-review-checklist-for-ai-generated-code',
       permanent: true,
     },
+    // Former URLs that still return 404. Each lands on the closest live page.
+    {
+      source: '/blog/how-to-keep-your-privacy-safe-chapter-1',
+      destination: '/privacy-policy',
+      permanent: true,
+    },
+    {
+      source: '/blog/when-do-we-need-to-optimize-our-website-server',
+      destination: '/blog/how-to-pick-vps-for-wordpress',
+      permanent: true,
+    },
+    {
+      source: '/blog/when-we-need-to-optimize-website',
+      destination: '/services/wordpress/optimization',
+      permanent: true,
+    },
+    {
+      source: '/blog/how-to-optimize-your-website-using-ai',
+      destination: '/services/ai-development',
+      permanent: true,
+    },
+    {
+      source: '/services/nextjs-developer',
+      destination: '/services/nextjs-development',
+      permanent: true,
+    },
+    {
+      source: '/services/next-js-development',
+      destination: '/services/nextjs-development',
+      permanent: true,
+    },
     {
       source: '/services/next-js-development/agency-indonesia',
       destination: '/services/nextjs-development/agency-indonesia',
