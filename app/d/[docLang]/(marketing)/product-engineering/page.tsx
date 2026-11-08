@@ -117,7 +117,7 @@ const faqs: FaqItem[] = [
   {
     question: 'How much does a product build cost?',
     answer:
-      'It depends on scope. Most projects start from $5,000. After a short scoping call you get a written plan with milestones and a quote before any code is written.',
+      'It depends on scope. Projects start from $5,000. After a short scoping call you get a written plan with milestones and a quote before any code is written.',
   },
   {
     question: 'Who builds it?',
@@ -127,7 +127,7 @@ const faqs: FaqItem[] = [
   {
     question: 'Which stack do you use?',
     answer:
-      'The same stack as x.com right now: React, Vite, Fastify, and TypeScript, plus Rust where speed matters and Next.js for sites that need server rendering. If your project needs something else, tell me and I say whether I am the right fit.',
+      'React, Vite, Fastify, and TypeScript, which is also what x.com’s new web app is reported to use, plus Rust where speed matters and Next.js for sites that need server rendering. If your project needs something else, tell me and I say whether I am the right fit.',
   },
 
   {
@@ -234,11 +234,11 @@ export default function ProductEngineeringPage() {
 
       <section className="mb-16 max-w-3xl mx-auto" aria-labelledby="stack">
         <h2 id="stack" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-          The same stack as x.com
+          Built on the stack x.com reports
         </h2>
         <p className="text-sm text-zinc-500 leading-relaxed mb-6">
-          We use the same stack as x.com right now. Its new web app runs on React, Vite, Fastify, and TypeScript (X engineering
-          report, as reported by iTechPost, 5 November 2026). We also ship Rust and Next.js.
+          Our core stack matches what x.com&apos;s new web app is reported to use: React, Vite, Fastify, and TypeScript (X engineering report, as covered by{' '}
+          <a href="https://www.itechpost.com/articles/237732/20261105/x-updates-its-web-app-deliver-faster-website-performance-smoother-experience.htm" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors" target="_blank" rel="noopener noreferrer">iTechPost</a>, 5 November 2026). We also ship Rust and Next.js.
         </p>
         <ul className="flex flex-wrap gap-2">
           {stack.map((item) => (

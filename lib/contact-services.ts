@@ -7,7 +7,7 @@ export const contactServices = [
   { id: 'wordpress-care', label: 'WordPress maintenance, support, or malware cleanup' },
   { id: 'saas', label: 'Build a SaaS or web app that is cheap to run' },
   { id: 'engineering-specialist', label: 'Improve my React app, Vite build, Node API, database, or codebase' },
-  { id: 'product', label: 'Build a SaaS, mobile, Rust, commerce, or go-to-market product' },
+  { id: 'product', label: 'Product build: mobile app, Rust, commerce, or go-to-market tool' },
   { id: 'ai-implementation', label: 'Take an AI pilot to production or ship an AI feature in our repo' },
   { id: 'ai', label: 'Add an AI feature to my product or business' },
   { id: 'ai-mvp', label: 'Turn my AI product idea into a launch-ready MVP' },

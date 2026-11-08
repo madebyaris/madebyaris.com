@@ -238,7 +238,7 @@ export default function AiDevelopmentPage() {
           What you get when you hire an AI developer from me
         </h2>
         <p className="text-zinc-600 leading-relaxed mb-4">
-          I lead the scope, the build, and the launch of the AI feature in your existing product, with AI agents and trusted partners helping on the build. That covers the model API calls, the prompts, the connection to your data, auth, logging, and a cap on model spend. I work inside your codebase and hand over code your team can read and extend.
+          I lead the scope, the build, and the launch of the AI feature in your existing product, with AI agents and trusted partners helping on the build. That covers the model API calls, the prompts, the connection to your data, auth, logging, and a cap on model spend. I work inside your codebase and hand over code your team can read and extend. Who can access your code and data, including partners and AI tools, is agreed in writing before work starts.
         </p>
         <p className="text-zinc-600 leading-relaxed">
           I build product features on top of existing models. If you need a model trained from scratch, you need an ML research team.
@@ -246,7 +246,7 @@ export default function AiDevelopmentPage() {
       </section>
 
       <section className="mb-16" aria-label="AI services">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {aiSpokes.map((item) => (
             <Link
               key={item.href}

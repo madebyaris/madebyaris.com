@@ -31,7 +31,7 @@ const faqs: FaqItem[] = [
   {
     question: 'How much does a codebase cleanup cost?',
     answer:
-      'It depends on the size of the codebase and how much is in bad shape. Most projects start from $5,000. After a short scoping call you get a written plan and a quote before any code is changed.',
+      'It depends on the size of the codebase and how much is in bad shape. Projects start from $5,000. After a short scoping call you get a written plan and a quote before any code is changed.',
   },
   {
     question: 'How is this different from Cursor mentoring?',
@@ -45,7 +45,7 @@ const faqs: FaqItem[] = [
   },
   {
     question: 'We have a specific mess from AI-written code. Can you fix just that?',
-    answer: 'Yes. For a focused repair, see my page on fixing AI-generated code.',
+    answer: 'Yes. Ask about the focused repair service for AI-generated code, listed under the related links below.',
   },
 ]
 

@@ -21,7 +21,7 @@ const faqs: FaqItem[] = [
   {
     question: 'How much does a Fastify API cost?',
     answer:
-      'It depends on the number of endpoints and the systems it connects to. Most projects start from $5,000. After a short scoping call you get a written plan and a quote before any code is written.',
+      'It depends on the number of endpoints and the systems it connects to. Projects start from $5,000. After a short scoping call you get a written plan and a quote before any code is written.',
   },
   {
     question: 'Fastify or Express?',
@@ -96,7 +96,7 @@ export default function FastifyDevelopmentPage() {
           cta: 'See clean code work',
         },
       ]}
-      sourceNote="x.com's new web app server runs on Fastify (X engineering report, as reported by iTechPost, 5 November 2026)."
+      sourceNote="x.com's new web app server is reported to run on Fastify (X engineering report, as covered by iTechPost, 5 November 2026)."
       steps={[
         { title: 'Scope', desc: 'We agree the endpoints, the data, and what a fast response means for you.' },
         { title: 'Build or move', desc: 'I build the API, or migrate yours route by route, with tests.' },

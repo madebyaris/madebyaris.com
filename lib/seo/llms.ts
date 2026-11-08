@@ -133,7 +133,7 @@ const services: LlmsLink[] = [
   {
     title: 'Jasa Next.js Indonesia (Bahasa Indonesia)',
     path: '/services/nextjs-development/agency-indonesia',
-    summary: 'Next.js agency alternative for Indonesian companies: led directly by Aris, with AI agents and trusted partners on the build.',
+    summary: 'Agensi Next.js untuk perusahaan Indonesia: dipimpin langsung oleh Aris, dengan agen AI dan mitra tepercaya dalam pengerjaan.',
   },
 ]
 

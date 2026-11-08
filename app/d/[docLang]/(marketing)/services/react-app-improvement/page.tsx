@@ -30,7 +30,7 @@ const faqs: FaqItem[] = [
   {
     question: 'How much does React performance work cost?',
     answer:
-      'It depends on the size of the app and how many screens are slow. Most projects start from $5,000. After a short scoping call you get a written plan and a quote before any code is changed.',
+      'It depends on the size of the app and how many screens are slow. Projects start from $5,000. After a short scoping call you get a written plan and a quote before any code is changed.',
   },
   {
     question: 'Do you rewrite the app?',

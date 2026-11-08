@@ -21,7 +21,7 @@ const faqs: FaqItem[] = [
   {
     question: 'How much does a Vite migration cost?',
     answer:
-      'It depends on the size of the app and how custom the current build is. Most projects start from $5,000. After a short scoping call you get a written plan and a quote before any code is changed.',
+      'It depends on the size of the app and how custom the current build is. Projects start from $5,000. After a short scoping call you get a written plan and a quote before any code is changed.',
   },
   {
     question: 'Will anything break when we move to Vite?',
@@ -90,7 +90,7 @@ export default function ViteDevelopmentPage() {
           cta: 'See Fastify development',
         },
       ]}
-      sourceNote="x.com's new web app is built on React, Vite, Fastify, and TypeScript (X engineering report, as reported by iTechPost, 5 November 2026)."
+      sourceNote="x.com's new web app is reported to be built on React, Vite, Fastify, and TypeScript (X engineering report, as covered by iTechPost, 5 November 2026)."
       steps={[
         { title: 'Review', desc: 'I read your current build setup and list what will change.' },
         { title: 'Migrate', desc: 'I move the app to Vite in a branch and run your tests.' },

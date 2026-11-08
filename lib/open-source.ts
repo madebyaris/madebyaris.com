@@ -1,8 +1,8 @@
 /**
  * Open-source projects shown on the home page and /ai-implementation.
  * Names, blurbs, and links are curated here; star counts are read live from
- * the GitHub API and simply left out when the request fails, so the pages
- * never show a stale number.
+ * the GitHub API and cached for 24 hours. A count is left out when the request
+ * fails, so a missing number never shows as zero.
  */
 
 export interface OpenSourceProject {
@@ -10,7 +10,6 @@ export interface OpenSourceProject {
   repo: string
   blurb: string
   stack: string
-  homepage?: string
 }
 
 export interface OpenSourceProjectWithStats extends OpenSourceProject {
@@ -22,12 +21,11 @@ const GITHUB_OWNER = 'madebyaris'
 
 export const openSourceProjects: readonly OpenSourceProject[] = [
   {
-    name: 'nca',
+    name: 'nca (native-cli-ai)',
     repo: 'native-cli-ai',
     blurb:
       'A native Rust CLI that orchestrates AI agents across projects, with persistent sessions, git worktrees, and local-first control.',
     stack: 'Rust',
-    homepage: 'https://nca-cli.com',
   },
   {
     name: 'Spec Kit for Cursor',
@@ -55,7 +53,6 @@ export const openSourceProjects: readonly OpenSourceProject[] = [
     repo: 'rankmyseo',
     blurb: 'The open-source version of the rank tracker behind rankmyseo.com.',
     stack: 'TypeScript',
-    homepage: 'https://rankmyseo.com',
   },
 ]
 
@@ -70,12 +67,17 @@ async function fetchStars(repo: string): Promise<number | null> {
     }
     const response = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${repo}`, {
       headers,
+      signal: AbortSignal.timeout(5000),
       next: { revalidate: 86400 },
     })
-    if (!response.ok) return null
+    if (!response.ok) {
+      console.error(`GitHub stars request failed for ${repo}: ${response.status}`)
+      return null
+    }
     const data = (await response.json()) as { stargazers_count?: number }
     return typeof data.stargazers_count === 'number' ? data.stargazers_count : null
-  } catch {
+  } catch (error) {
+    console.error(`GitHub stars request error for ${repo}:`, error)
     return null
   }
 }

@@ -30,7 +30,7 @@ const faqs: FaqItem[] = [
   {
     question: 'How much does database optimization cost?',
     answer:
-      'It depends on the size of the database and how many queries are slow. Most projects start from $5,000. After a short scoping call you get a written plan and a quote before anything is changed.',
+      'It depends on the size of the database and how many queries are slow. Projects start from $5,000. After a short scoping call you get a written plan and a quote before anything is changed.',
   },
   {
     question: 'Which databases do you work with?',

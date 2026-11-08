@@ -169,7 +169,7 @@ const faqs: FaqItem[] = [
   {
     question: 'How much does AI implementation cost?',
     answer:
-      'It depends on the use case, the data, and how many systems it touches. Most projects start from $5,000. After a short scoping call you get a written plan with milestones and a quote before any code is written.',
+      'It depends on the use case, the data, and how many systems it touches. Projects start from $5,000. After a short scoping call you get a written plan with milestones and a quote before any code is written.',
   },
   {
     question: 'Can you work inside our existing codebase?',
@@ -189,7 +189,7 @@ const faqs: FaqItem[] = [
   {
     question: 'Who will I be working with?',
     answer:
-      'Me. I lead every project and answer your messages myself. When a project needs more hands, trusted partners join, and I tell you before we start. AI agents do much of the build.',
+      'Me. I lead every project and answer your messages myself. When a project needs more hands, trusted partners join, and I tell you before we start. AI agents do much of the build. Who can access your code and data, including partners and AI tools, is agreed in writing before work starts.',
   },
 ]
 
@@ -281,7 +281,8 @@ export default function AiImplementationPage() {
           Why AI pilots stall
         </h2>
         <p className="text-zinc-600 leading-relaxed mb-6">
-          In an RSM survey of middle-market companies (July 2026), data quality and integration were the top blockers among
+          In an RSM survey of middle-market companies (July 2026, as summarized by{' '}
+          <a href="https://dkstudio.ai/insights/ai-implementation-partner" className={linkClass} target="_blank" rel="noopener noreferrer">DK Studio</a>), data quality and integration were the top blockers among
           teams with limited pilot success. Both are implementation problems, and they are the work I do.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

@@ -250,7 +250,7 @@ export default function AgencyIndonesiaPage() {
             <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Yang kamu dapat</span>
           </div>
           <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            Kerja dengan <span className="gradient-text">Next.js agency</span> satu orang
+            Kerja dengan <span className="gradient-text">Next.js agency</span> yang dipimpin langsung
           </h2>
         </div>
 

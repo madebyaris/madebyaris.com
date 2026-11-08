@@ -58,7 +58,7 @@ const offers = [
   {
     title: 'Website baru dengan tema custom',
     description:
-      'Tema saya bangun dari desain kamu. Halaman tetap ringan di HP, dan tim kamu bisa update teks, foto, dan artikel sendiri lewat block editor.',
+      'Tema dibangun dari desain kamu. Halaman tetap ringan di HP, dan tim kamu bisa update teks, foto, dan artikel sendiri lewat block editor.',
     icon: Brush,
   },
   {
@@ -356,7 +356,7 @@ export default function JasaWordPressPage() {
         <p className="mb-4">
           Untuk pemilik bisnis dan agensi yang butuh website WordPress baru, atau punya website lama yang perlu dibereskan.
           Saya Aris, developer yang membuat website WordPress baru dengan tema custom dan memperbaiki website WordPress yang
-          error, lambat, atau kena malware. Semua perubahan saya kerjakan di staging dulu, jadi website live kamu tetap jalan.
+          error, lambat, atau kena malware. Semua perubahan dikerjakan di staging dulu, jadi website live kamu tetap jalan.
         </p>
         <p className="text-sm text-zinc-500 font-normal">
           Saya membuat tema dan plugin WordPress custom, dan pernah mengerjakan performa WordPress di Hongkiat.com. Website
@@ -371,9 +371,9 @@ export default function JasaWordPressPage() {
           Apa yang kamu dapat dari jasa pembuatan website WordPress ini
         </h2>
         <p className="text-zinc-600 leading-relaxed mb-4">
-          Jasa pembuatan website WordPress ini saya pimpin langsung, dari tema custom sampai website online. Tema saya bangun
+          Jasa pembuatan website WordPress ini saya pimpin langsung, dari tema custom sampai website online. Tema dibangun
           dari desain kamu supaya halaman tetap ringan di HP, dan tim kamu bisa update konten lewat wp-admin tanpa menunggu
-          developer. Kalau website kamu sudah ada tapi error, lambat, atau kena malware, saya juga yang memperbaikinya. Harga
+          developer. Kalau website kamu sudah ada tapi error, lambat, atau kena malware, saya juga yang memimpin perbaikannya. Harga
           dihitung per proyek setelah saya lihat kebutuhannya.
         </p>
         <p className="text-zinc-600 leading-relaxed">

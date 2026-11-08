@@ -24,7 +24,7 @@ const PostsFallback = () => (
 
 const pageTitle = 'Hire a Next.js & AI Developer'
 const pageDescription =
-  'Hire a Next.js and AI developer with 13+ years of shipping: Aris Setiawan takes AI pilots to production, builds Next.js products, and trains teams on Cursor. Remote worldwide.'
+  'Hire a Next.js and AI developer with 13+ years of shipping. Aris Setiawan takes AI pilots to production and builds SaaS, mobile, Rust, and Next.js products.'
 
 export const metadata: Metadata = buildPageMetadata({
   title: pageTitle,
@@ -98,8 +98,8 @@ const services = [
   },
   {
     icon: Globe,
-    title: "WordPress and PHP",
-    description: "Custom themes and plugins, a headless Next.js front end like the one this site runs on, and legacy PHP apps kept running or moved to Laravel.",
+    title: "WordPress and headless WordPress",
+    description: "Editors keep the wp-admin they know. I build custom themes and plugins, or a Next.js front end like the one this site runs on.",
     href: "/services/wordpress",
   },
 ]

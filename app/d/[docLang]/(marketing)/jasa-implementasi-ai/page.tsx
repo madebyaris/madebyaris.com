@@ -91,7 +91,7 @@ const projectNotes = [
 const procurementAnswers = [
   {
     question: 'Siapa yang mengerjakan?',
-    answer: 'Saya memimpin setiap proyek dan kamu berbicara langsung dengan saya. Partner tepercaya bergabung saat proyek butuh lebih banyak tangan, dan agen AI mengerjakan banyak bagian pembangunan, sehingga kami bisa bergerak cepat.',
+    answer: 'Saya memimpin setiap proyek dan kamu berbicara langsung dengan saya. Partner tepercaya bergabung saat proyek butuh lebih banyak tangan, dan agen AI mengerjakan banyak bagian pembangunan, sehingga kami bisa bergerak cepat. Saya memberi tahu kamu sebelum partner bergabung, dan siapa yang boleh mengakses kode dan data kamu, termasuk partner dan alat AI, kita sepakati tertulis sebelum pekerjaan dimulai.',
   },
   {
     question: 'Apakah bisa di bawah NDA?',
