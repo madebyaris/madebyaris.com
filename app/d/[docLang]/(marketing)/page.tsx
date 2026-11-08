@@ -2,11 +2,12 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Suspense } from 'react'
 import { getPosts } from '@/lib/wordpress'
-import { ArrowRight, ArrowUpRight, Code2, Globe, Server, Briefcase, Clock, Award, Home, Sparkles } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Code2, Globe, Briefcase, Clock, Award, Home, Rocket, Sparkles } from 'lucide-react'
 import type { Metadata } from 'next'
 import { buildPageGraph, buildPageMetadata, type FaqItem } from '@/lib/seo'
 import { JsonLd } from '@/components/seo/json-ld'
 import { HomeContent } from '@/components/home-content'
+import { OpenSourceProjects } from '@/components/page/open-source-projects'
 import { contactHref } from '@/lib/contact-services'
 
 // Segment Configuration
@@ -23,7 +24,7 @@ const PostsFallback = () => (
 
 const pageTitle = 'Hire a Next.js & AI Developer'
 const pageDescription =
-  'Hire a Next.js developer with 13+ years of shipping: Aris Setiawan builds Next.js, WordPress, and AI products and trains teams on Cursor. Remote worldwide.'
+  'Hire a Next.js and AI developer with 13+ years of shipping. Aris Setiawan takes AI pilots to production and builds SaaS, mobile, Rust, and Next.js products.'
 
 export const metadata: Metadata = buildPageMetadata({
   title: pageTitle,
@@ -78,28 +79,28 @@ async function Posts() {
 // Service card data
 const services = [
   {
+    icon: Sparkles,
+    title: "AI implementation",
+    description: "Take an AI pilot to production, or add an assistant, agent, or LLM feature inside your own repo, with test cases, logging, and spend caps.",
+    href: "/ai-implementation",
+  },
+  {
+    icon: Rocket,
+    title: "Product engineering",
+    description: "SaaS, mobile apps, Rust software, commerce, and go-to-market apps. I lead the build, with AI agents and trusted partners helping us ship fast.",
+    href: "/product-engineering",
+  },
+  {
     icon: Code2,
     title: "Next.js development",
     description: "New products and WordPress-to-Next.js migrations that load fast on phones and keep their search rankings after launch.",
     href: "/services/nextjs-development",
   },
   {
-    icon: Sparkles,
-    title: "AI product development",
-    description: "Chatbots, agents, and LLM features that run inside your Next.js product and reach real users.",
-    href: "/services/ai-development",
-  },
-  {
     icon: Globe,
     title: "WordPress and headless WordPress",
     description: "Editors keep the wp-admin they know. I build custom themes and plugins, or a Next.js front end like the one this site runs on.",
     href: "/services/wordpress",
-  },
-  {
-    icon: Server,
-    title: "PHP development",
-    description: "Keep a legacy PHP app running, add an API to it, or plan its move to Laravel one piece at a time.",
-    href: "/services/php-development",
   },
 ]
 
@@ -145,26 +146,26 @@ export default function HomePage() {
               <Award className="w-3.5 h-3.5" />
             </div>
             <span className="text-xs font-medium text-zinc-600 tracking-wide">
-              <span className="text-zinc-900">First Cursor Ambassador in Indonesia · Taking new projects</span>
+              <span className="text-zinc-900">Independent AI engineer · First Cursor Ambassador in Indonesia · Taking new projects</span>
             </span>
           </div>
 
           {/* Headline */}
           <h1 className="leading-[0.95] lg:text-[5rem] text-5xl font-medium text-zinc-900 tracking-tighter mb-8">
-            Next.js &amp; AI
-            {' '}<span className="block gradient-text font-light">Product</span>
-            {' '}<span className="block">Developer</span>
+            AI &amp; Product
+            {' '}<span className="block gradient-text font-light">Engineering</span>
+            {' '}<span className="block">Partner</span>
           </h1>
 
           {/* Subheadline */}
           <p className="text-sm text-zinc-500 font-medium max-w-md mb-10 leading-relaxed tracking-wide border-l-2 border-zinc-200 pl-6">
-            Hi, I&apos;m <span className="text-zinc-900 font-semibold">Aris Setiawan</span>. Hire me to build your Next.js, headless WordPress, or AI product, or bring me in to coach your developers on Cursor so AI-written code passes review. 13+ years shipping, working remotely from Indonesia.
+            Hi, I&apos;m <span className="text-zinc-900 font-semibold">Aris Setiawan</span>. Companies hire me to take AI pilots to production and to build SaaS, mobile, Rust, commerce, and go-to-market products. I lead every project, and AI agents plus trusted partners help us ship fast. 13+ years shipping, working remotely from Indonesia.
           </p>
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-3 mb-4">
             <Link 
-              href={contactHref('nextjs')}
+              href="/contact#contact-form"
               className="btn-primary hover:scale-[1.02] transition-all flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center justify-between"
             >
               <span className="text-sm font-medium tracking-tight">Send me your project</span>
@@ -350,6 +351,16 @@ export default function HomePage() {
       {/* Separator */}
       <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent my-12 lg:my-16 opacity-60" />
 
+      {/* Open source proof */}
+      <OpenSourceProjects
+        id="home-open-source"
+        title="Open source I maintain"
+        intro="All my client work is under NDA, so the public proof is code you can read before you write to me."
+      />
+
+      {/* Separator */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent my-12 lg:my-16 opacity-60" />
+
       {/* Level Up Section */}
       <section className="flex flex-col gap-8 w-full relative">
         <div className="bento-card group relative overflow-hidden p-8 md:p-10">
@@ -406,7 +417,7 @@ export default function HomePage() {
             <span className="gradient-text"> hire me</span>
           </h2>
           <p className="leading-relaxed text-base font-normal text-zinc-500">
-            You get one senior developer who scopes the work, writes the code, and answers your messages.
+            You work with the person who leads the build, from the first scoping call to launch.
           </p>
         </div>
 

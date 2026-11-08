@@ -42,7 +42,7 @@ const linkClass = 'underline decoration-zinc-300 underline-offset-4 hover:text-o
 const workItems = [
   {
     title: 'Toko baru dari nol',
-    body: 'Setup WooCommerce, tema dan desain, katalog produk, pembayaran, pengiriman, SEO dasar, sampai toko live. Semua bagian ini saya kerjakan sendiri.',
+    body: 'Setup WooCommerce, tema dan desain, katalog produk, pembayaran, pengiriman, SEO dasar, sampai toko live. Semua bagian ini saya pimpin langsung.',
   },
   {
     title: 'Fitur dan plugin custom',
@@ -196,7 +196,7 @@ export default function JasaWooCommercePage() {
       >
         <p className="mb-4">
           Untuk pemilik bisnis yang butuh toko online WooCommerce baru, atau punya toko yang perlu diperbaiki dan dipercepat.
-          Saya Aris, developer yang mengerjakan toko WooCommerce sendiri dari nol sampai live: setup, tema dan desain, katalog
+          Saya Aris, developer yang memimpin pembuatan toko WooCommerce dari nol sampai live: setup, tema dan desain, katalog
           produk, pembayaran, pengiriman, kecepatan, SEO dasar, dan bantuan saat launch. Setiap perubahan saya coba di staging
           dengan pesanan uji, jadi toko kamu tetap menerima pesanan selama saya bekerja.
         </p>

@@ -11,6 +11,41 @@ interface LlmsLink {
 
 const services: LlmsLink[] = [
   {
+    title: 'React app improvement',
+    path: '/services/react-app-improvement',
+    summary: 'Make a slow or messy React app faster and easier to change: bundle size, load time, rendering, and structure, measured before and after.',
+  },
+  {
+    title: 'Vite development and migration',
+    path: '/services/vite-development',
+    summary: 'Move a React app from Create React App or Webpack to Vite, or build a new one on it.',
+  },
+  {
+    title: 'Fastify development',
+    path: '/services/fastify-development',
+    summary: 'Build Node.js APIs on Fastify, or move an Express app to it, with validated routes, logging, and tests.',
+  },
+  {
+    title: 'Database optimization',
+    path: '/services/database-optimization',
+    summary: 'Find slow queries and fix them with indexes, query changes, and schema fixes on PostgreSQL and MySQL.',
+  },
+  {
+    title: 'Clean code for teams and AI agents',
+    path: '/services/clean-code-for-teams-and-ai',
+    summary: 'Codebase structure, written conventions, and checks that keep code readable for developers and AI agents.',
+  },
+  {
+    title: 'Product engineering',
+    path: '/product-engineering',
+    summary: 'SaaS, mobile apps, Rust software, commerce, go-to-market apps, and AI features. Aris leads each project, with AI agents and trusted partners on the build. Projects from $5,000.',
+  },
+  {
+    title: 'AI implementation for engineering teams',
+    path: '/ai-implementation',
+    summary: 'Take an AI pilot to production or ship an AI feature in your own repo, with test cases, logging, spend caps, and a handover. Independent engineer, 13+ years.',
+  },
+  {
     title: 'Next.js development',
     path: '/services/nextjs-development',
     summary: 'Hire Aris to build or migrate a Next.js App Router product: new builds, WordPress-to-Next.js migrations, performance work.',
@@ -91,9 +126,14 @@ const services: LlmsLink[] = [
     summary: 'Custom PHP applications, APIs, databases, and legacy modernization.',
   },
   {
+    title: 'Implementasi AI untuk perusahaan (Bahasa Indonesia)',
+    path: '/jasa-implementasi-ai',
+    summary: 'Pilot AI ke produksi, fitur AI di sistem yang sudah ada, dan arsitektur untuk perusahaan besar di Indonesia, dipimpin langsung oleh engineer senior.',
+  },
+  {
     title: 'Jasa Next.js Indonesia (Bahasa Indonesia)',
     path: '/services/nextjs-development/agency-indonesia',
-    summary: 'Next.js specialist for Indonesian companies, working solo with trusted partners when needed.',
+    summary: 'Agensi Next.js untuk perusahaan Indonesia: dipimpin langsung oleh Aris, dengan agen AI dan mitra tepercaya dalam pengerjaan.',
   },
 ]
 

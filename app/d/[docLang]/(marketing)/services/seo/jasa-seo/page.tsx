@@ -64,7 +64,7 @@ const offers = [
   {
     title: 'Perbaikan langsung di kode',
     description:
-      'Saya kerjakan sendiri: redirect, canonical, schema, sitemap, internal link, dan Core Web Vitals. Kalau kamu punya tim developer, mereka menerima pull request yang bisa direview, lengkap dengan catatan perubahan.',
+      'Saya pimpin dan kerjakan di kode: redirect, canonical, schema, sitemap, internal link, dan Core Web Vitals. Kalau kamu punya tim developer, mereka menerima pull request yang bisa direview, lengkap dengan catatan perubahan.',
     icon: Wrench,
   },
   {
@@ -275,7 +275,7 @@ export default function JasaSeoPage() {
       >
         <p className="mb-4">
           Untuk pemilik bisnis dan tim marketing yang trafik Google-nya jalan di tempat, atau malah turun setelah ganti
-          desain. Saya mengaudit website kamu, meriset keyword yang diketik calon pembeli, lalu memperbaiki kodenya sendiri.
+          desain. Saya mengaudit website kamu, meriset keyword yang diketik calon pembeli, lalu memimpin perbaikannya di kode.
         </p>
         <p className="text-sm text-zinc-500 font-normal">
           Developer web 13+ tahun, tinggal di Sidoarjo dekat Surabaya. Saya juga membuat RankMySEO, rank tracker yang
@@ -292,7 +292,7 @@ export default function JasaSeoPage() {
         <p className="text-zinc-600 leading-relaxed mb-4">
           Jasa SEO yang saya kerjakan berangkat dari satu pertanyaan: kenapa halaman yang penting untuk bisnis kamu belum
           muncul di Google? Saya cek websitenya, membaca data Search Console, lalu menulis daftar masalah yang diurutkan dari
-          yang paling banyak membuang trafik. Setelah itu saya perbaiki sendiri di kode. Riset keyword menentukan halaman mana
+          yang paling banyak membuang trafik. Setelah itu saya pimpin perbaikannya di kode. Riset keyword menentukan halaman mana
           menargetkan pencarian apa.
         </p>
         <p className="text-zinc-600 leading-relaxed">

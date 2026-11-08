@@ -58,6 +58,8 @@ function assertRewrite(pathname: string, expected: string) {
   }
 }
 
+assertLang('/jasa-implementasi-ai', 'id')
+assertLang('/ai-implementation', 'en')
 assertLang('/services/wordpress/jasa-wordpress', 'id')
 assertLang('/services/wordpress/jasa-woocommerce', 'id')
 assertLang('/services/seo/jasa-seo', 'id')
@@ -68,6 +70,7 @@ assertLang('/blog/php-api-development-for-nextjs', 'en')
 assertLang('/services/wordpress', 'en')
 assertLang('/', 'en')
 
+assertRewrite('/jasa-implementasi-ai', '/d/id/jasa-implementasi-ai')
 assertRewrite('/services/wordpress/jasa-wordpress', '/d/id/services/wordpress/jasa-wordpress')
 assertRewrite('/services/wordpress/jasa-woocommerce', '/d/id/services/wordpress/jasa-woocommerce')
 assertRewrite('/blog/next-js-16-4-apa-yang-baru', '/d/id/blog/next-js-16-4-apa-yang-baru')
