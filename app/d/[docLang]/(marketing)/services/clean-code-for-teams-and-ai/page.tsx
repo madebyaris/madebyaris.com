@@ -129,6 +129,7 @@ export default function CleanCodePage() {
       ]}
       faqTitle="Questions about clean code and AI"
       faqs={faqs}
+      alternate={{ prefix: 'Dalam Bahasa Indonesia:', label: 'lihat halaman Bahasa Indonesia', href: '/services/jasa-clean-code' }}
       related={[
         { href: '/services/vibe-code-friend', label: 'Cursor mentoring' },
         { href: '/services/vibe-code-friend/code-fixing', label: 'Fix AI-generated code' },

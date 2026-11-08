@@ -282,6 +282,14 @@ export default function ProductEngineeringPage() {
         primary={{ href: contactHref('product'), label: 'Send me your product idea' }}
         secondary={{ href: '/ai-implementation', label: 'See AI implementation' }}
       />
+
+      <p className="text-center text-sm text-zinc-600 mb-16 max-w-lg mx-auto">
+        Dalam Bahasa Indonesia:{' '}
+        <Link href="/jasa-pengembangan-produk" className={linkClass}>
+          jasa pengembangan produk
+        </Link>
+        .
+      </p>
     </>
   )
 }

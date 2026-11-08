@@ -126,6 +126,36 @@ const services: LlmsLink[] = [
     summary: 'Custom PHP applications, APIs, databases, and legacy modernization.',
   },
   {
+    title: 'Pengembangan produk (Bahasa Indonesia)',
+    path: '/jasa-pengembangan-produk',
+    summary: 'SaaS, aplikasi mobile, software Rust, commerce, aplikasi go-to-market, dan fitur AI, dipimpin langsung oleh Aris dengan agen AI dan partner tepercaya.',
+  },
+  {
+    title: 'Optimasi aplikasi React (Bahasa Indonesia)',
+    path: '/services/jasa-optimasi-react',
+    summary: 'Mengukur dan memperbaiki aplikasi React yang lambat atau susah diubah, dengan angka sebelum dan sesudah.',
+  },
+  {
+    title: 'Jasa Vite (Bahasa Indonesia)',
+    path: '/services/jasa-vite',
+    summary: 'Migrasi dari Create React App atau Webpack ke Vite, atau membangun aplikasi baru di atasnya.',
+  },
+  {
+    title: 'Jasa Fastify (Bahasa Indonesia)',
+    path: '/services/jasa-fastify',
+    summary: 'API Node.js di atas Fastify, baru atau dipindah dari Express, dengan validasi, logging, dan test.',
+  },
+  {
+    title: 'Optimasi database (Bahasa Indonesia)',
+    path: '/services/jasa-optimasi-database',
+    summary: 'Menemukan query lambat dan memperbaikinya lewat indeks, perubahan query, dan skema di PostgreSQL dan MySQL.',
+  },
+  {
+    title: 'Clean code untuk tim dan AI agent (Bahasa Indonesia)',
+    path: '/services/jasa-clean-code',
+    summary: 'Struktur codebase, konvensi tertulis, dan pengecekan yang menjaga kode terbaca oleh developer dan AI agent.',
+  },
+  {
     title: 'Implementasi AI untuk perusahaan (Bahasa Indonesia)',
     path: '/jasa-implementasi-ai',
     summary: 'Pilot AI ke produksi, fitur AI di sistem yang sudah ada, dan arsitektur untuk perusahaan besar di Indonesia, dipimpin langsung oleh engineer senior.',

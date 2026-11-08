@@ -99,6 +99,7 @@ export default function ViteDevelopmentPage() {
       ]}
       faqTitle="Questions about Vite"
       faqs={faqs}
+      alternate={{ prefix: 'Dalam Bahasa Indonesia:', label: 'lihat halaman Bahasa Indonesia', href: '/services/jasa-vite' }}
       related={[
         { href: '/services/react-app-improvement', label: 'React app improvement' },
         { href: '/services/fastify-development', label: 'Fastify development' },

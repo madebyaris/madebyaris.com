@@ -15,6 +15,12 @@ export function documentLangFromBlogSlug(slug: string): DocumentLang {
 
 /** Marketing routes whose primary copy is Bahasa Indonesia (public pathnames, no /d prefix). */
 const INDONESIAN_MARKETING_PATHS = new Set<string>([
+  '/jasa-pengembangan-produk',
+  '/services/jasa-optimasi-react',
+  '/services/jasa-vite',
+  '/services/jasa-fastify',
+  '/services/jasa-optimasi-database',
+  '/services/jasa-clean-code',
   '/jasa-implementasi-ai',
   '/minimax-ambassador/minimax-indonesia',
   '/services/nextjs-development/agency-indonesia',

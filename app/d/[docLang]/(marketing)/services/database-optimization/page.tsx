@@ -120,6 +120,7 @@ export default function DatabaseOptimizationPage() {
       }}
       faqTitle="Questions about database optimization"
       faqs={faqs}
+      alternate={{ prefix: 'Dalam Bahasa Indonesia:', label: 'lihat halaman Bahasa Indonesia', href: '/services/jasa-optimasi-database' }}
       related={[
         { href: '/services/fastify-development', label: 'Fastify development' },
         { href: '/services/php-development/database-solutions', label: 'MySQL for PHP apps' },

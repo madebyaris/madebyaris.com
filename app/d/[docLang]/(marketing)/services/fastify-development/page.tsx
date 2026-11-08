@@ -105,6 +105,7 @@ export default function FastifyDevelopmentPage() {
       ]}
       faqTitle="Questions about Fastify"
       faqs={faqs}
+      alternate={{ prefix: 'Dalam Bahasa Indonesia:', label: 'lihat halaman Bahasa Indonesia', href: '/services/jasa-fastify' }}
       related={[
         { href: '/blog/fastify-vs-express', label: 'Fastify vs Express' },
         { href: '/services/database-optimization', label: 'Database optimization' },
