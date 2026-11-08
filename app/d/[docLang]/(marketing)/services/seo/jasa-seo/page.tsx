@@ -507,6 +507,14 @@ export default function JasaSeoPage() {
         primary={{ href: contactHref('seo'), label: 'Kirim website kamu untuk diaudit' }}
         secondary={{ href: '/services/seo', label: 'Technical SEO services (English)' }}
       />
+
+      <p className="text-center text-sm text-zinc-600 mb-16 max-w-lg mx-auto">
+        Belum punya website atau mau membuat yang baru? Lihat{' '}
+        <Link href="/jasa-pembuatan-website" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors">
+          jasa pembuatan website
+        </Link>
+        .
+      </p>
     </div>
   )
 }

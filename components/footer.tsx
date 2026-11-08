@@ -19,6 +19,7 @@ const serviceLinks = [
   { name: 'SaaS Development', href: '/services/saas-development' },
   { name: 'Technical SEO', href: '/services/seo' },
   { name: 'Jasa SEO', href: '/services/seo/jasa-seo' },
+  { name: 'Jasa Pembuatan Website', href: '/jasa-pembuatan-website' },
   { name: 'WordPress Development', href: '/services/wordpress' },
   { name: 'Cursor / AI Workflows', href: '/services/vibe-code-friend' },
   { name: 'Headless WordPress', href: '/services/wordpress/headless-development' },

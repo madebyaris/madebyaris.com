@@ -524,6 +524,14 @@ export default function JasaPembuatanAplikasiWebPage() {
         primary={{ href: contactHref('saas'), label: 'Kirim ide aplikasi kamu' }}
         secondary={{ href: '/services/saas-development', label: 'SaaS development (English)' }}
       />
+
+      <p className="text-center text-sm text-zinc-600 mb-16 max-w-lg mx-auto">
+        Butuh website biasa, seperti company profile atau toko online? Lihat{' '}
+        <Link href="/jasa-pembuatan-website" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors">
+          jasa pembuatan website
+        </Link>
+        .
+      </p>
     </div>
   )
 }

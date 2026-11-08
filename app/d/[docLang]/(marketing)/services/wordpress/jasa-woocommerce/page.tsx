@@ -369,6 +369,14 @@ export default function JasaWooCommercePage() {
         </Link>
         .
       </p>
+
+      <p className="text-center text-sm text-zinc-600 mb-16 max-w-lg mx-auto">
+        Butuh jenis website lain? Lihat{' '}
+        <Link href="/jasa-pembuatan-website" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors">
+          jasa pembuatan website
+        </Link>
+        .
+      </p>
     </div>
   )
 }
