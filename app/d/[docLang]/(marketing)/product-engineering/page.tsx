@@ -103,19 +103,14 @@ const speedPoints = [
   },
 ]
 
-const stackGroups = [
-  {
-    title: 'Behind rankmyseo.com',
-    items: ['React', 'Vite', 'React Router', 'Cloudflare', 'Cloudflare Turnstile', 'An MCP server for AI agents'],
-  },
-  {
-    title: 'In the open-source RankMySEO packages',
-    items: ['TypeScript', 'Hono', 'Drizzle ORM', 'PostgreSQL', 'SQLite', 'Turborepo and pnpm', 'Vitest'],
-  },
-  {
-    title: 'In my other projects',
-    items: ['Next.js', 'Rust', 'Tauri', 'PHP and Laravel', 'Headless WordPress', 'Vercel'],
-  },
+const stack = ['React', 'Vite', 'Fastify', 'TypeScript', 'Rust', 'Next.js']
+
+const specialties = [
+  { href: '/services/react-app-improvement', title: 'React app improvement', body: 'Faster load, smoother screens, and code that is easier to change.' },
+  { href: '/services/vite-development', title: 'Vite development', body: 'Move to Vite for faster builds, or start a new app on it.' },
+  { href: '/services/fastify-development', title: 'Fastify development', body: 'Fast, validated Node.js APIs, new or moved from Express.' },
+  { href: '/services/database-optimization', title: 'Database optimization', body: 'Slow queries found and fixed, so the database keeps up as data grows.' },
+  { href: '/services/clean-code-for-teams-and-ai', title: 'Clean code for teams and AI', body: 'Structure, rules, and checks that developers and AI agents both follow.' },
 ]
 
 const faqs: FaqItem[] = [
@@ -132,8 +127,9 @@ const faqs: FaqItem[] = [
   {
     question: 'Which stack do you use?',
     answer:
-      'The stack behind RankMySEO: React with Vite on the front end, Cloudflare in front, and TypeScript, Hono, and Drizzle in its open-source packages. I also ship Next.js and Rust. If your project needs something else, tell me and I say whether I am the right fit.',
+      'The same stack as x.com right now: React, Vite, Fastify, and TypeScript, plus Rust where speed matters and Next.js for sites that need server rendering. If your project needs something else, tell me and I say whether I am the right fit.',
   },
+
   {
     question: 'Do you work with teams outside Indonesia?',
     answer:
@@ -236,26 +232,42 @@ export default function ProductEngineeringPage() {
         </div>
       </section>
 
-      <section className="mb-16 max-w-4xl mx-auto" aria-labelledby="stack">
+      <section className="mb-16 max-w-3xl mx-auto" aria-labelledby="stack">
         <h2 id="stack" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-          The stack behind RankMySEO
+          The same stack as x.com
         </h2>
-        <p className="text-sm text-zinc-500 leading-relaxed mb-8">
-          RankMySEO is a SaaS I built and run, with an open-source version. This list comes from its public site, its public
-          code, and my other repositories. Ask me what runs where, and whether it fits your product.
+        <p className="text-sm text-zinc-500 leading-relaxed mb-6">
+          We use the same stack as x.com right now. Its new web app runs on React, Vite, Fastify, and TypeScript (X engineering
+          report, as reported by iTechPost, 5 November 2026). We also ship Rust and Next.js.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {stackGroups.map((group) => (
-            <div key={group.title}>
-              <h3 className="text-xs font-semibold tracking-wider uppercase text-zinc-400 mb-3">{group.title}</h3>
-              <ul className="flex flex-wrap gap-2">
-                {group.items.map((item) => (
-                  <li key={item} className="bg-zinc-50 rounded-full px-4 py-2 text-sm font-medium text-zinc-700">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
+        <ul className="flex flex-wrap gap-2">
+          {stack.map((item) => (
+            <li key={item} className="bg-zinc-50 rounded-full px-4 py-2 text-sm font-medium text-zinc-700">
+              {item}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="mb-16" aria-labelledby="specialties">
+        <div className="max-w-2xl mb-8">
+          <h2 id="specialties" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+            Specialist work, booked on its own
+          </h2>
+          <p className="text-sm text-zinc-500 leading-relaxed">
+            You do not need a whole product build. Each of these is a standalone project.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {specialties.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="group bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all"
+            >
+              <h3 className="font-semibold text-zinc-900 mb-2 group-hover:text-orange-500 transition-colors">{item.title}</h3>
+              <p className="text-sm text-zinc-500 leading-relaxed">{item.body}</p>
+            </Link>
           ))}
         </div>
       </section>

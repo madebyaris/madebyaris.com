@@ -387,6 +387,14 @@ export default function DatabaseSolutionsPage() {
           </div>
         </div>
       </section>
+
+      <p className="text-center text-sm text-zinc-600 mb-16 max-w-xl mx-auto">
+        Running PostgreSQL, or tuning the API in front of the database? See{' '}
+        <Link href="/services/database-optimization" className={linkClass}>
+          database optimization
+        </Link>
+        .
+      </p>
     </>
   )
 }

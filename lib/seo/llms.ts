@@ -11,6 +11,31 @@ interface LlmsLink {
 
 const services: LlmsLink[] = [
   {
+    title: 'React app improvement',
+    path: '/services/react-app-improvement',
+    summary: 'Make a slow or messy React app faster and easier to change: bundle size, load time, rendering, and structure, measured before and after.',
+  },
+  {
+    title: 'Vite development and migration',
+    path: '/services/vite-development',
+    summary: 'Move a React app from Create React App or Webpack to Vite, or build a new one on it.',
+  },
+  {
+    title: 'Fastify development',
+    path: '/services/fastify-development',
+    summary: 'Build Node.js APIs on Fastify, or move an Express app to it, with validated routes, logging, and tests.',
+  },
+  {
+    title: 'Database optimization',
+    path: '/services/database-optimization',
+    summary: 'Find slow queries and fix them with indexes, query changes, and schema fixes on PostgreSQL and MySQL.',
+  },
+  {
+    title: 'Clean code for teams and AI agents',
+    path: '/services/clean-code-for-teams-and-ai',
+    summary: 'Codebase structure, written conventions, and checks that keep code readable for developers and AI agents.',
+  },
+  {
     title: 'Product engineering',
     path: '/product-engineering',
     summary: 'SaaS, mobile apps, Rust software, commerce, go-to-market apps, and AI features. Aris leads each project, with AI agents and trusted partners on the build. Projects from $5,000.',

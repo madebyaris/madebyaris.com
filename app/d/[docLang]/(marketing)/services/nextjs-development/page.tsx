@@ -521,6 +521,14 @@ export default function NextjsDevelopmentPage() {
           </div>
         </div>
       </section>
+
+      <p className="text-center text-sm text-zinc-600 mb-16 max-w-xl mx-auto">
+        Already have a React app that is slow or hard to change? See{' '}
+        <Link href="/services/react-app-improvement" className={linkClass}>
+          React app improvement
+        </Link>
+        .
+      </p>
     </>
   )
 }
