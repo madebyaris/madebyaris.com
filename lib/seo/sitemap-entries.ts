@@ -24,6 +24,7 @@ const serviceRoutes = [
   { path: 'services', priority: 0.9, changeFreq: 'weekly' },
   { path: 'services/nextjs-development', priority: 1.0, changeFreq: 'daily' },
   { path: 'ai-implementation', priority: 0.9, changeFreq: 'weekly' },
+  { path: 'product-engineering', priority: 0.9, changeFreq: 'weekly' },
   { path: 'services/ai-development', priority: 0.9, changeFreq: 'weekly' },
   { path: 'services/vibe-code-friend', priority: 0.8, changeFreq: 'weekly' },
   { path: 'services/vibe-code-friend/ai-ide-tutoring', priority: 0.7, changeFreq: 'monthly' },

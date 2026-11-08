@@ -15,6 +15,7 @@ const navigationLinks = [
 
 const serviceLinks = [
   { name: 'AI Implementation', href: '/ai-implementation' },
+  { name: 'Product Engineering', href: '/product-engineering' },
   { name: 'Next.js Development', href: '/services/nextjs-development' },
   { name: 'AI Development', href: '/services/ai-development' },
   { name: 'SaaS Development', href: '/services/saas-development' },

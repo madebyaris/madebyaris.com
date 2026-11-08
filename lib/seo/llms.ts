@@ -11,6 +11,11 @@ interface LlmsLink {
 
 const services: LlmsLink[] = [
   {
+    title: 'Product engineering',
+    path: '/product-engineering',
+    summary: 'SaaS, mobile apps, Rust software, commerce, go-to-market apps, and AI features. Aris leads each project, with AI agents and trusted partners on the build. Projects from $5,000.',
+  },
+  {
     title: 'AI implementation for engineering teams',
     path: '/ai-implementation',
     summary: 'Take an AI pilot to production or ship an AI feature in your own repo, with test cases, logging, spend caps, and a handover. Independent engineer, 13+ years.',
@@ -98,7 +103,7 @@ const services: LlmsLink[] = [
   {
     title: 'Implementasi AI untuk perusahaan (Bahasa Indonesia)',
     path: '/jasa-implementasi-ai',
-    summary: 'Pilot AI ke produksi, fitur AI di sistem yang sudah ada, dan arsitektur untuk perusahaan besar di Indonesia, dikerjakan langsung oleh engineer senior independen.',
+    summary: 'Pilot AI ke produksi, fitur AI di sistem yang sudah ada, dan arsitektur untuk perusahaan besar di Indonesia, dipimpin langsung oleh engineer senior.',
   },
   {
     title: 'Jasa Next.js Indonesia (Bahasa Indonesia)',

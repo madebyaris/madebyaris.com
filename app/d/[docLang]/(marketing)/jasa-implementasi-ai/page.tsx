@@ -21,7 +21,7 @@ export const revalidate = 86400 // Revalidate daily
 const pagePath = '/jasa-implementasi-ai'
 const pageTitle = 'Implementasi AI untuk perusahaan di Indonesia'
 const pageDescription =
-  'Bawa pilot AI perusahaan kamu ke produksi, atau tambah fitur AI di sistem yang sudah ada. Dikerjakan langsung oleh engineer senior independen, 13+ tahun.'
+  'Bawa pilot AI perusahaan kamu ke produksi, atau tambah fitur AI di sistem yang sudah ada. Dipimpin langsung oleh engineer senior, 13+ tahun.'
 
 export const metadata: Metadata = buildPageMetadata({
   title: pageTitle,
@@ -91,7 +91,7 @@ const projectNotes = [
 const procurementAnswers = [
   {
     question: 'Siapa yang mengerjakan?',
-    answer: 'Saya sendiri. Satu engineer senior yang membuat scope, menulis kode, dan membalas pesan kamu.',
+    answer: 'Saya memimpin setiap proyek dan kamu berbicara langsung dengan saya. Partner tepercaya bergabung saat proyek butuh lebih banyak tangan, dan agen AI mengerjakan banyak bagian pembangunan, sehingga kami bisa bergerak cepat.',
   },
   {
     question: 'Apakah bisa di bawah NDA?',
@@ -120,13 +120,13 @@ const goodFit = [
   'Kamu punya produk atau pilot AI dan ingin satu fitur AI yang benar-benar dipakai pengguna',
   'Asisten internal atau chatbot harus menjawab dari dokumen dan data perusahaan',
   'Pilot kamu jalan di demo, dan sekarang harus kuat dipakai banyak pengguna',
-  'Kamu ingin berbicara langsung dengan engineer senior yang menulis kodenya',
+  'Kamu ingin berbicara langsung dengan orang yang memimpin pengerjaannya',
 ]
 
 const poorFit = [
   'Kamu butuh model yang dilatih dari nol, atau riset machine learning',
   'Belum ada produk atau data, baru rencana untuk menambah AI',
-  'Kamu butuh lima engineer untuk satu tenggat',
+  'Kamu butuh tim yang bekerja di kantor kamu',
 ]
 
 const faqs: FaqItem[] = [
@@ -186,7 +186,7 @@ export default function JasaImplementasiAiPage() {
       <PageHero
         eyebrow={{ icon: <Rocket className="w-4 h-4 text-orange-500" />, label: 'Implementasi AI untuk perusahaan' }}
         title="Implementasi AI untuk perusahaan besar,"
-        accent="dikerjakan langsung oleh engineer senior"
+        accent="dipimpin langsung oleh engineer senior"
         actions={
           <Link
             href={contactHref('ai-implementation')}
@@ -199,7 +199,7 @@ export default function JasaImplementasiAiPage() {
       >
         <p className="mb-4">
           Untuk tim teknologi, kepala produk, dan CTO di perusahaan besar Indonesia yang pilot AI-nya jalan di demo tetapi belum
-          siap dipakai banyak pengguna. Saya Aris Setiawan, engineer independen dengan pengalaman 13+ tahun membangun produk web.
+          siap dipakai banyak pengguna. Saya Aris Setiawan, dengan pengalaman 13+ tahun membangun produk web.
           Saya bekerja di dalam sistem kamu, jadi hasilnya kode yang bisa dibaca dan dikembangkan tim kamu sendiri.
         </p>
         <p className="text-sm text-zinc-500 font-normal">

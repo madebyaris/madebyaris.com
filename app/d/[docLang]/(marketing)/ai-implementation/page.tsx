@@ -121,7 +121,8 @@ const projectNotes = [
 const howIWork = [
   {
     question: 'Who does the work?',
-    answer: 'Me. One senior engineer scopes the work, writes the code, and answers your messages.',
+    answer:
+      'I lead every project and you talk to me directly. Trusted partners join when a project needs more hands, and AI agents do much of the build, which is how we ship fast.',
   },
   {
     question: 'What can I check before I hire you?',
@@ -150,12 +151,6 @@ const howIWork = [
   },
 ]
 
-const engagements = [
-  { title: 'Fixed-scope feature', description: 'One assistant, one integration, or one AI flow with a clear deliverable.' },
-  { title: 'Product sprint', description: 'A focused block of work to take a pilot to production or add AI to an existing app.' },
-  { title: 'Retainer', description: 'Ongoing AI feature work, model updates, and fixes after launch.' },
-]
-
 const goodFit = [
   'You have a working product or a pilot and want one AI feature real users touch',
   'A support bot or internal assistant needs to answer from your own docs or data',
@@ -166,7 +161,7 @@ const goodFit = [
 const poorFit = [
   'You need a model trained from scratch, or ML research',
   'There is no product or data yet, only a plan to add AI',
-  'You need five engineers on one deadline',
+  'You need an on-site team in your office',
   'Your budget is under $5,000',
 ]
 
@@ -192,9 +187,9 @@ const faqs: FaqItem[] = [
       'Yes. I am based in Sidoarjo, Indonesia (UTC+7) and work with startups and teams in Europe, Asia, the US, and the Middle East. I work Monday to Saturday, 9:00 to 17:00 WIB, in English or Indonesian, and we set a weekly check-in time during scoping.',
   },
   {
-    question: 'Are you a consultancy?',
+    question: 'Who will I be working with?',
     answer:
-      'No. I am an independent engineer, working directly with you. When a project needs more hands, I say so before we start.',
+      'Me. I lead every project and answer your messages myself. When a project needs more hands, trusted partners join, and I tell you before we start. AI agents do much of the build.',
   },
 ]
 
@@ -251,20 +246,35 @@ export default function AiImplementationPage() {
       >
         <p className="mb-4">
           For founders, CTOs, and product leads at small and mid-sized companies in Europe, Asia, and beyond, whose AI pilot
-          works in a demo and stalls before real users. I am Aris Setiawan, an independent engineer with 13+ years shipping web
-          products. I work inside your codebase, so you end up with code your team can read and extend.
-        </p>
-        <p className="text-sm text-zinc-500 font-normal mb-2">
-          I reply within 24 hours and tell you plainly whether I am the right fit.
+          works in a demo and stalls before real users. I am Aris Setiawan, with 13+ years shipping web products. I work inside
+          your codebase, so you end up with code your team can read and extend.
         </p>
         <p className="text-sm text-zinc-500 font-normal">
-          Perusahaan besar di Indonesia:{' '}
-          <Link href="/jasa-implementasi-ai" className={linkClass}>
-            lihat implementasi AI untuk perusahaan
-          </Link>{' '}
-          (Bahasa Indonesia).
+          I reply within 24 hours and tell you plainly whether I am the right fit.
         </p>
       </PageHero>
+
+      <section className="mb-16" aria-labelledby="project-notes">
+        <div className="max-w-2xl mb-8">
+          <h2 id="project-notes" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+            Project notes
+          </h2>
+          <p className="text-sm text-zinc-500 leading-relaxed">
+            All my client work is under NDA. These notes are generalized: no client names, sectors, or figures.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {projectNotes.map((item) => (
+            <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
+              <h3 className="font-semibold text-zinc-900 mb-4">{item.title}</h3>
+              <p className="text-xs font-semibold tracking-wider uppercase text-zinc-400 mb-1">The problem</p>
+              <p className="text-sm text-zinc-600 leading-relaxed mb-4">{item.problem}</p>
+              <p className="text-xs font-semibold tracking-wider uppercase text-zinc-400 mb-1">What I built</p>
+              <p className="text-sm text-zinc-600 leading-relaxed">{item.built}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
       <section className="mb-16 max-w-3xl mx-auto" aria-labelledby="why-pilots-stall">
         <h2 id="why-pilots-stall" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
@@ -308,30 +318,6 @@ export default function AiImplementationPage() {
         </div>
       </section>
 
-      <section className="mb-16" aria-labelledby="project-notes">
-        <div className="max-w-2xl mb-8">
-          <h2 id="project-notes" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            Project notes
-          </h2>
-          <p className="text-sm text-zinc-500 leading-relaxed">
-            All my client work is under NDA. These notes are generalized: no client names, sectors, or figures.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {projectNotes.map((item) => (
-            <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-              <h3 className="font-semibold text-zinc-900 mb-4">{item.title}</h3>
-              <p className="text-xs font-semibold tracking-wider uppercase text-zinc-400 mb-1">The problem</p>
-              <p className="text-sm text-zinc-600 leading-relaxed mb-4">{item.problem}</p>
-              <p className="text-xs font-semibold tracking-wider uppercase text-zinc-400 mb-1">What I built</p>
-              <p className="text-sm text-zinc-600 leading-relaxed">{item.built}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
-
       <section className="mb-16 max-w-4xl mx-auto" aria-labelledby="how-i-work">
         <h2 id="how-i-work" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
           How I work, in plain answers
@@ -350,22 +336,6 @@ export default function AiImplementationPage() {
       </section>
 
       <OpenSourceProjects />
-
-      <section className="mb-16" aria-labelledby="engagements">
-        <div className="text-center mb-10">
-          <h2 id="engagements" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            Ways to work together
-          </h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {engagements.map((item) => (
-            <div key={item.title} className="bg-zinc-50 rounded-2xl p-6">
-              <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{item.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
 
       <section className="mb-16" aria-labelledby="fit">
         <div className="text-center mb-10">

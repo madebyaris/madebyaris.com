@@ -6,6 +6,7 @@ export const contactServices = [
   { id: 'wordpress', label: 'WordPress build, redesign, migration, or speed fix' },
   { id: 'wordpress-care', label: 'WordPress maintenance, support, or malware cleanup' },
   { id: 'saas', label: 'Build a SaaS or web app that is cheap to run' },
+  { id: 'product', label: 'Build a SaaS, mobile, Rust, commerce, or go-to-market product' },
   { id: 'ai-implementation', label: 'Take an AI pilot to production or ship an AI feature in our repo' },
   { id: 'ai', label: 'Add an AI feature to my product or business' },
   { id: 'ai-mvp', label: 'Turn my AI product idea into a launch-ready MVP' },

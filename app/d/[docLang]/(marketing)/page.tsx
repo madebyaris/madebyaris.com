@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Suspense } from 'react'
 import { getPosts } from '@/lib/wordpress'
-import { ArrowRight, ArrowUpRight, Code2, Globe, Server, Briefcase, Clock, Award, Home, Sparkles } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Code2, Globe, Briefcase, Clock, Award, Home, Rocket, Sparkles } from 'lucide-react'
 import type { Metadata } from 'next'
 import { buildPageGraph, buildPageMetadata, type FaqItem } from '@/lib/seo'
 import { JsonLd } from '@/components/seo/json-ld'
@@ -85,6 +85,12 @@ const services = [
     href: "/ai-implementation",
   },
   {
+    icon: Rocket,
+    title: "Product engineering",
+    description: "SaaS, mobile apps, Rust software, commerce, and go-to-market apps. I lead the build, with AI agents and trusted partners helping us ship fast.",
+    href: "/product-engineering",
+  },
+  {
     icon: Code2,
     title: "Next.js development",
     description: "New products and WordPress-to-Next.js migrations that load fast on phones and keep their search rankings after launch.",
@@ -92,15 +98,9 @@ const services = [
   },
   {
     icon: Globe,
-    title: "WordPress and headless WordPress",
-    description: "Editors keep the wp-admin they know. I build custom themes and plugins, or a Next.js front end like the one this site runs on.",
+    title: "WordPress and PHP",
+    description: "Custom themes and plugins, a headless Next.js front end like the one this site runs on, and legacy PHP apps kept running or moved to Laravel.",
     href: "/services/wordpress",
-  },
-  {
-    icon: Server,
-    title: "PHP development",
-    description: "Keep a legacy PHP app running, add an API to it, or plan its move to Laravel one piece at a time.",
-    href: "/services/php-development",
   },
 ]
 
@@ -152,23 +152,23 @@ export default function HomePage() {
 
           {/* Headline */}
           <h1 className="leading-[0.95] lg:text-[5rem] text-5xl font-medium text-zinc-900 tracking-tighter mb-8">
-            Next.js &amp; AI
-            {' '}<span className="block gradient-text font-light">Product</span>
-            {' '}<span className="block">Developer</span>
+            AI &amp; Product
+            {' '}<span className="block gradient-text font-light">Engineering</span>
+            {' '}<span className="block">Partner</span>
           </h1>
 
           {/* Subheadline */}
           <p className="text-sm text-zinc-500 font-medium max-w-md mb-10 leading-relaxed tracking-wide border-l-2 border-zinc-200 pl-6">
-            Hi, I&apos;m <span className="text-zinc-900 font-semibold">Aris Setiawan</span>. Engineering teams hire me to take AI features from pilot to production in their own repo, and to build Next.js products. I also coach developers on Cursor and maintain open-source agent tools. 13+ years shipping, working remotely from Indonesia.
+            Hi, I&apos;m <span className="text-zinc-900 font-semibold">Aris Setiawan</span>. Companies hire me to take AI pilots to production and to build SaaS, mobile, Rust, commerce, and go-to-market products. I lead every project, and AI agents plus trusted partners help us ship fast. 13+ years shipping, working remotely from Indonesia.
           </p>
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-3 mb-4">
             <Link 
-              href={contactHref('ai-implementation')}
+              href="/contact#contact-form"
               className="btn-primary hover:scale-[1.02] transition-all flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center justify-between"
             >
-              <span className="text-sm font-medium tracking-tight">Send me your AI or Next.js project</span>
+              <span className="text-sm font-medium tracking-tight">Send me your project</span>
               <span className="flex items-center justify-center rounded-full bg-black/10 px-3 py-1">
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </span>
@@ -417,7 +417,7 @@ export default function HomePage() {
             <span className="gradient-text"> hire me</span>
           </h2>
           <p className="leading-relaxed text-base font-normal text-zinc-500">
-            You get one senior developer who scopes the work, writes the code, and answers your messages.
+            You work with the person who leads the build, from the first scoping call to launch.
           </p>
         </div>
 

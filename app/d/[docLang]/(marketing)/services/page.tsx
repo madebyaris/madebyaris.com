@@ -12,6 +12,7 @@ import {
   Hammer,
   TrendingUp,
   Search,
+  Rocket,
 } from 'lucide-react'
 import Link from 'next/link'
 import { contactHref } from '@/lib/contact-services'
@@ -28,6 +29,14 @@ const buildServices = [
     icon: Sparkles,
     href: '/ai-implementation',
     features: ['Pilot to production', 'AI features in your product', 'Agents and MCP tools', 'Retainer'],
+  },
+  {
+    title: 'Product engineering',
+    description:
+      'SaaS, mobile apps, Rust software, commerce, and go-to-market apps, led by me with AI agents and trusted partners on the build.',
+    icon: Rocket,
+    href: '/product-engineering',
+    features: ['SaaS', 'Mobile apps', 'Rust', 'Commerce and GTM'],
   },
   {
     title: 'Next.js development',

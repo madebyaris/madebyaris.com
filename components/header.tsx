@@ -26,6 +26,7 @@ const navigationItems: NavigationItem[] = [
     label: 'Services',
     children: [
       { href: '/ai-implementation', label: 'AI Implementation' },
+      { href: '/product-engineering', label: 'Product Engineering' },
       { href: '/services/nextjs-development', label: 'Next.js Development' },
       { href: '/services/ai-development', label: 'AI Development' },
       { href: '/services/saas-development', label: 'SaaS Development' },
