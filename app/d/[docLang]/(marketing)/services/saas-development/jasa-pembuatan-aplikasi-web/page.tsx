@@ -266,11 +266,11 @@ export default function JasaPembuatanAplikasiWebPage() {
 
       <section className="mb-16 max-w-3xl mx-auto">
         <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
-          Jasa pembuatan aplikasi web, dikerjakan langsung oleh saya
+          Jasa pembuatan aplikasi web, dipimpin langsung oleh saya
         </h2>
         <p className="text-zinc-600 leading-relaxed mb-4">
-          Jasa pembuatan aplikasi web ini dikerjakan oleh satu developer senior, yaitu saya. Saya menyusun rencana, menulis
-          kodenya, dan meluncurkan aplikasinya sendiri. Sejak awal aplikasi dibuat supaya biaya server tetap kecil walau
+          Jasa pembuatan aplikasi web ini saya pimpin langsung, dari rencana, kode, sampai peluncuran. Agen AI mengerjakan
+          banyak bagian pembangunan, dan partner tepercaya bergabung kalau proyeknya butuh lebih banyak tangan. Sejak awal aplikasi dibuat supaya biaya server tetap kecil walau
           penggunanya masih sedikit. Perkiraan biaya bulanannya saya tulis di rencana sebelum coding dimulai.
         </p>
         <p className="text-zinc-600 leading-relaxed">

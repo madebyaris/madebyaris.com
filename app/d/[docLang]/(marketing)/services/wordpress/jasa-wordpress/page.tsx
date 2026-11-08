@@ -32,7 +32,7 @@ export const revalidate = 86400 // Revalidate daily
 const pagePath = '/services/wordpress/jasa-wordpress'
 const pageTitle = 'Jasa pembuatan website WordPress dan perbaikan'
 const pageDescription =
-  'Jasa pembuatan website WordPress dengan tema custom, plus perbaikan, maintenance, dan migrasi hosting. Dikerjakan langsung oleh saya, developer web 13+ tahun.'
+  'Jasa pembuatan website WordPress dengan tema custom, plus perbaikan, maintenance, dan migrasi hosting. Dipimpin langsung oleh saya, developer web 13+ tahun.'
 
 export const metadata: Metadata = buildPageMetadata({
   title: pageTitle,
@@ -371,7 +371,7 @@ export default function JasaWordPressPage() {
           Apa yang kamu dapat dari jasa pembuatan website WordPress ini
         </h2>
         <p className="text-zinc-600 leading-relaxed mb-4">
-          Jasa pembuatan website WordPress ini saya kerjakan sendiri, dari tema custom sampai website online. Tema saya bangun
+          Jasa pembuatan website WordPress ini saya pimpin langsung, dari tema custom sampai website online. Tema saya bangun
           dari desain kamu supaya halaman tetap ringan di HP, dan tim kamu bisa update konten lewat wp-admin tanpa menunggu
           developer. Kalau website kamu sudah ada tapi error, lambat, atau kena malware, saya juga yang memperbaikinya. Harga
           dihitung per proyek setelah saya lihat kebutuhannya.

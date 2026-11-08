@@ -254,7 +254,7 @@ export default function WordPressServicesPage() {
           What you get when you hire a WordPress developer like me
         </h2>
         <p className="text-zinc-600 leading-relaxed mb-4">
-          You get one senior developer who reads your site, tells you what is actually wrong, and fixes it. That can mean a custom theme, a custom plugin, a speed and security pass, or moving the front end to Next.js while your team keeps writing in wp-admin. You talk to the person writing the code, and every project starts with a written scope.
+          I read your site, tell you what is actually wrong, and lead the fix. That can mean a custom theme, a custom plugin, a speed and security pass, or moving the front end to Next.js while your team keeps writing in wp-admin. You talk to the person leading the work, and every project starts with a written scope.
         </p>
         <p className="text-zinc-600 leading-relaxed">
           Unsure whether to stay on WordPress at all? Start with{' '}

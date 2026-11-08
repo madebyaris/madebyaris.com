@@ -238,7 +238,7 @@ export default function AiDevelopmentPage() {
           What you get when you hire an AI developer from me
         </h2>
         <p className="text-zinc-600 leading-relaxed mb-4">
-          You get one senior full-stack developer who scopes, builds, and ships the AI feature into your existing product. That covers the model API calls, the prompts, the connection to your data, auth, logging, and a cap on model spend. I work inside your codebase and hand over code your team can read and extend.
+          I lead the scope, the build, and the launch of the AI feature in your existing product, with AI agents and trusted partners helping on the build. That covers the model API calls, the prompts, the connection to your data, auth, logging, and a cap on model spend. I work inside your codebase and hand over code your team can read and extend.
         </p>
         <p className="text-zinc-600 leading-relaxed">
           I build product features on top of existing models. If you need a model trained from scratch, you need an ML research team.

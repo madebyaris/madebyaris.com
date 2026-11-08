@@ -136,7 +136,7 @@ const relatedServices = [
   },
   {
     title: 'Next.js agency Indonesia',
-    description: 'For Indonesian companies comparing agencies with a solo specialist.',
+    description: 'For Indonesian companies comparing agencies with a senior engineer who leads the build.',
     icon: Building,
     href: '/services/nextjs-development/agency-indonesia',
   },
@@ -159,9 +159,9 @@ const faqs: FaqItem[] = [
       'It should not if the migration is planned. I keep every URL or redirect it, carry over titles, descriptions, and schema, rebuild the sitemap, and watch Search Console after launch.',
   },
   {
-    question: 'You work solo. What if you get sick or too busy?',
+    question: 'What if you get sick or too busy?',
     answer:
-      'The code lives in your repository and I write handoff docs as I go, so another developer can pick it up. I also say upfront when I am at capacity and turn down work I cannot finish.',
+      'The code lives in your repository and I write handoff docs as I go, so another developer can pick it up. Trusted partners can step in on a project, and I say upfront when I am at capacity and turn down work I cannot finish.',
   },
   {
     question: 'Do you work with teams outside Indonesia?',
@@ -270,9 +270,9 @@ export default function NextjsDevelopmentPage() {
           What happens when you hire a Next.js developer like me
         </h2>
         <p className="text-zinc-600 leading-relaxed">
-          You work with one senior engineer from scope to launch. I write the App Router code,
-          TypeScript, and APIs myself, deploy on Vercel, and carry your SEO over if you&apos;re
-          migrating. You get a written scope before the build starts and a codebase another developer
+          You work with the engineer who leads the build, from scope to launch. I direct the App
+          Router code, TypeScript, and APIs, with AI agents and trusted partners helping, deploy on
+          Vercel, and carry your SEO over if you&apos;re migrating. You get a written scope before the build starts and a codebase another developer
           can pick up later. Price is scoped per project once I know what you need.
         </p>
       </section>

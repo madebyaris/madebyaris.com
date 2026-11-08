@@ -8,9 +8,9 @@ import { contactHref } from '@/lib/contact-services'
 export const revalidate = 86400 // Revalidate daily
 
 const path = '/services/nextjs-development/agency-indonesia'
-const pageTitle = 'Next.js agency Indonesia: spesialis solo'
+const pageTitle = 'Next.js agency Indonesia: dipimpin langsung'
 const pageDescription =
-  'Cari Next.js agency di Indonesia? Saya spesialis Next.js solo, 13+ tahun pengalaman. Satu kontak dari scope sampai online. Kirim brief proyek kamu.'
+  'Cari Next.js agency di Indonesia? Proyek dipimpin langsung oleh saya, 13+ tahun pengalaman. Satu kontak dari scope sampai online. Kirim brief proyek kamu.'
 
 export const metadata: Metadata = buildPageMetadata({
   title: pageTitle,
@@ -88,9 +88,9 @@ const faqs: FaqItem[] = [
       'Harga dihitung per proyek setelah saya membaca brief. Kamu dapat scope tertulis dan harga untuk scope itu sebelum pekerjaan dimulai, jadi angka yang kamu setujui tidak berubah diam-diam.',
   },
   {
-    question: 'Kamu kerja sendiri. Bagaimana kalau proyeknya besar?',
+    question: 'Bagaimana kalau proyeknya besar?',
     answer:
-      'Saya tetap jadi lead developer. Untuk desain atau QA tambahan, saya kolaborasi dengan partner tepercaya. Kalau proyeknya butuh tim besar sejak awal, saya bilang terus terang supaya kamu bisa cari agensi yang pas.',
+      'Saya tetap jadi lead developer. Agen AI mengerjakan banyak bagian pembangunan, dan untuk desain atau QA tambahan saya kolaborasi dengan partner tepercaya. Kalau proyeknya butuh tim besar sejak awal, saya bilang terus terang supaya kamu bisa cari agensi yang pas.',
   },
   {
     question: 'Berapa lama proyek Next.js biasanya selesai?',
@@ -120,7 +120,7 @@ const structuredData = buildPageGraph({
     { name: 'Agensi Indonesia', path },
   ],
   service: {
-    name: 'Next.js agency Indonesia: spesialis solo',
+    name: 'Next.js agency Indonesia: dipimpin langsung',
     description: pageDescription,
     serviceType: 'Next.js Web Development',
     areaServed: 'Indonesia',
@@ -150,7 +150,7 @@ export default function AgencyIndonesiaPage() {
       <section className="text-center pt-4 pb-16">
         <div className="inline-flex bg-white/60 rounded-full mb-8 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
           <Building className="w-4 h-4 text-orange-500" />
-          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Spesialis Next.js solo</span>
+          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Dipimpin langsung oleh Aris</span>
         </div>
 
         <h1 className="leading-[0.95] lg:text-[3.5rem] text-3xl font-medium text-zinc-900 tracking-tighter mb-6">
@@ -190,13 +190,14 @@ export default function AgencyIndonesiaPage() {
       {/* Answer first */}
       <section className="mb-16 max-w-3xl mx-auto">
         <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
-          Agensi Next.js atau spesialis solo?
+          Agensi Next.js atau engineer yang memimpin langsung?
         </h2>
         <p className="text-zinc-600 leading-relaxed">
-          Kalau kamu mencari Next.js agency di Indonesia, di sini kamu bekerja dengan satu spesialis.
+          Kalau kamu mencari Next.js agency di Indonesia, di sini kamu bekerja langsung dengan orang yang memimpin proyeknya.
           Saya Aris, developer Next.js di Sidoarjo yang independen sejak 2015. Saya memegang proyek dari
-          scope, kode, sampai online di Vercel. Untuk kebutuhan desain atau QA tambahan, saya
-          kolaborasi dengan partner tepercaya dan tetap jadi lead developer.
+          scope, kode, sampai online di Vercel. Agen AI mengerjakan banyak bagian pembangunan, dan
+          untuk kebutuhan desain atau QA tambahan saya kolaborasi dengan partner tepercaya. Saya tetap
+          jadi lead developer.
         </p>
       </section>
 

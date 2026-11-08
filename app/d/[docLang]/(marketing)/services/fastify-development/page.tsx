@@ -106,6 +106,7 @@ export default function FastifyDevelopmentPage() {
       faqTitle="Questions about Fastify"
       faqs={faqs}
       related={[
+        { href: '/blog/fastify-vs-express', label: 'Fastify vs Express' },
         { href: '/services/database-optimization', label: 'Database optimization' },
         { href: '/services/vite-development', label: 'Vite development' },
         { href: '/product-engineering', label: 'Product engineering' },
