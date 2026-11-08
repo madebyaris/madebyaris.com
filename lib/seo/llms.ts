@@ -96,6 +96,11 @@ const services: LlmsLink[] = [
     summary: 'Custom PHP applications, APIs, databases, and legacy modernization.',
   },
   {
+    title: 'Implementasi AI untuk perusahaan (Bahasa Indonesia)',
+    path: '/jasa-implementasi-ai',
+    summary: 'Pilot AI ke produksi, fitur AI di sistem yang sudah ada, dan arsitektur untuk perusahaan besar di Indonesia, dikerjakan langsung oleh engineer senior independen.',
+  },
+  {
     title: 'Jasa Next.js Indonesia (Bahasa Indonesia)',
     path: '/services/nextjs-development/agency-indonesia',
     summary: 'Next.js specialist for Indonesian companies, working solo with trusted partners when needed.',

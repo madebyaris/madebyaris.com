@@ -11,7 +11,7 @@ interface OpenSourceProjectsProps {
 export async function OpenSourceProjects({
   id = 'open-source',
   title = 'Open source you can read',
-  intro = 'Most client work is under NDA, so the public proof is code. These are the projects I maintain.',
+  intro = 'All my client work is under NDA, so the public proof is code. These are the projects I maintain.',
 }: OpenSourceProjectsProps) {
   const projects = await getOpenSourceProjects()
 

@@ -355,7 +355,7 @@ export default function HomePage() {
       <OpenSourceProjects
         id="home-open-source"
         title="Open source I maintain"
-        intro="Most client work is under NDA, so the public proof is code you can read before you write to me."
+        intro="All my client work is under NDA, so the public proof is code you can read before you write to me."
       />
 
       {/* Separator */}

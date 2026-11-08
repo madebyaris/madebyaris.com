@@ -94,6 +94,30 @@ const offers = [
   },
 ]
 
+const projectNotes = [
+  {
+    title: 'AI SEO that researches, writes, and tests itself',
+    problem:
+      'Content teams guess which topics and headlines will work, and they learn slowly because every test takes manual effort.',
+    built:
+      'An AI system that researches a topic on its own, writes the content, runs A/B tests on the versions, and uses each result to choose better next time.',
+  },
+  {
+    title: 'Indonesian legal AI grounded in expert knowledge',
+    problem:
+      'A general model answers Indonesian legal questions from whatever it remembers. That is not good enough for legal work.',
+    built:
+      'An AI application trained with input from Indonesian law lecturers and professors, so its answers draw on expert knowledge in addition to the base model’s own.',
+  },
+  {
+    title: 'Full architecture for a high-volume AI product',
+    problem:
+      'An AI product that works on a handful of items falls over when it has to process a thousand at once.',
+    built:
+      'The whole architecture: software, stack, network, and VPS, tuned to take a thousand records in one go. I also improved the harness around the LLM, which is the code that handles prompts, tools, and retries.',
+  },
+]
+
 const howIWork = [
   {
     question: 'Who does the work?',
@@ -102,7 +126,7 @@ const howIWork = [
   {
     question: 'What can I check before I hire you?',
     answer:
-      'Most client work is under NDA, so I point you to code you can read: the open-source projects below, and this site, which runs on headless WordPress and Next.js.',
+      'All my client work is under NDA, so I show it as the project notes above, with details generalized. For code you can read, see the open-source projects below and this site, which runs on headless WordPress and Next.js.',
   },
   {
     question: 'How do we know it works?',
@@ -143,13 +167,14 @@ const poorFit = [
   'You need a model trained from scratch, or ML research',
   'There is no product or data yet, only a plan to add AI',
   'You need five engineers on one deadline',
+  'Your budget is under $5,000',
 ]
 
 const faqs: FaqItem[] = [
   {
     question: 'How much does AI implementation cost?',
     answer:
-      'It depends on the use case, the data, and how many systems it touches. I do not publish fixed prices. After a short scoping call you get a written plan with milestones and a quote before any code is written.',
+      'It depends on the use case, the data, and how many systems it touches. Most projects start from $5,000. After a short scoping call you get a written plan with milestones and a quote before any code is written.',
   },
   {
     question: 'Can you work inside our existing codebase?',
@@ -164,7 +189,7 @@ const faqs: FaqItem[] = [
   {
     question: 'Do you work with teams outside Indonesia?',
     answer:
-      'Yes. I am based in Sidoarjo, Indonesia (UTC+7) and work with startups and teams in the US, EU, Asia, and the Middle East. I work Monday to Saturday, 9:00 to 17:00 WIB, in English or Indonesian, and we set a weekly check-in time during scoping.',
+      'Yes. I am based in Sidoarjo, Indonesia (UTC+7) and work with startups and teams in Europe, Asia, the US, and the Middle East. I work Monday to Saturday, 9:00 to 17:00 WIB, in English or Indonesian, and we set a weekly check-in time during scoping.',
   },
   {
     question: 'Are you a consultancy?',
@@ -225,12 +250,19 @@ export default function AiImplementationPage() {
         }
       >
         <p className="mb-4">
-          For engineering leads and CTOs whose AI pilot works in a demo and stalls before real users. I am Aris Setiawan, an
-          independent engineer with 13+ years shipping web products. I work inside your codebase, so you end up with code your
-          team can read and extend.
+          For founders, CTOs, and product leads at small and mid-sized companies in Europe, Asia, and beyond, whose AI pilot
+          works in a demo and stalls before real users. I am Aris Setiawan, an independent engineer with 13+ years shipping web
+          products. I work inside your codebase, so you end up with code your team can read and extend.
+        </p>
+        <p className="text-sm text-zinc-500 font-normal mb-2">
+          I reply within 24 hours and tell you plainly whether I am the right fit.
         </p>
         <p className="text-sm text-zinc-500 font-normal">
-          I reply within 24 hours and tell you plainly whether I am the right fit.
+          Perusahaan besar di Indonesia:{' '}
+          <Link href="/jasa-implementasi-ai" className={linkClass}>
+            lihat implementasi AI untuk perusahaan
+          </Link>{' '}
+          (Bahasa Indonesia).
         </p>
       </PageHero>
 
@@ -271,6 +303,28 @@ export default function AiImplementationPage() {
                   {item.cta}
                 </Link>
               )}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mb-16" aria-labelledby="project-notes">
+        <div className="max-w-2xl mb-8">
+          <h2 id="project-notes" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+            Project notes
+          </h2>
+          <p className="text-sm text-zinc-500 leading-relaxed">
+            All my client work is under NDA. These notes are generalized: no client names, sectors, or figures.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {projectNotes.map((item) => (
+            <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
+              <h3 className="font-semibold text-zinc-900 mb-4">{item.title}</h3>
+              <p className="text-xs font-semibold tracking-wider uppercase text-zinc-400 mb-1">The problem</p>
+              <p className="text-sm text-zinc-600 leading-relaxed mb-4">{item.problem}</p>
+              <p className="text-xs font-semibold tracking-wider uppercase text-zinc-400 mb-1">What I built</p>
+              <p className="text-sm text-zinc-600 leading-relaxed">{item.built}</p>
             </div>
           ))}
         </div>
@@ -353,6 +407,14 @@ export default function AiImplementationPage() {
         primary={{ href: contactHref('ai-implementation'), label: 'Send me your AI project' }}
         secondary={{ href: '/services/ai-development', label: 'See AI development' }}
       />
+
+      <p className="text-center text-sm text-zinc-600 mb-16 max-w-lg mx-auto">
+        Perusahaan besar di Indonesia? Lihat{' '}
+        <Link href="/jasa-implementasi-ai" className={linkClass}>
+          implementasi AI untuk perusahaan
+        </Link>
+        .
+      </p>
     </>
   )
 }
