@@ -22,6 +22,14 @@ export const revalidate = 86400
 
 const buildServices = [
   {
+    title: 'AI implementation',
+    description:
+      'Take an AI pilot to production, or ship an AI feature in your own repo, with test cases, logging, and spend caps.',
+    icon: Sparkles,
+    href: '/ai-implementation',
+    features: ['Pilot to production', 'AI features in your product', 'Agents and MCP tools', 'Retainer'],
+  },
+  {
     title: 'Next.js development',
     description:
       'New products and WordPress-to-Next.js migrations that stay fast and keep their rankings after launch.',

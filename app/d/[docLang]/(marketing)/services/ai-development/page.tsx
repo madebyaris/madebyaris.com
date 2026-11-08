@@ -95,6 +95,11 @@ const processSteps = [
 
 const aiSpokes = [
   {
+    title: 'AI implementation for engineering teams',
+    description: 'Your AI pilot works in a demo. I take it to production in your repo with test cases, logging, and spend caps.',
+    href: '/ai-implementation',
+  },
+  {
     title: 'AI MVP development',
     description: 'You have an AI product idea. I build the version you can launch: sign-up, payments, and the one AI workflow that has to work.',
     href: '/services/ai-development/ai-mvp',

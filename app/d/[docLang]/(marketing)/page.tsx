@@ -7,6 +7,7 @@ import type { Metadata } from 'next'
 import { buildPageGraph, buildPageMetadata, type FaqItem } from '@/lib/seo'
 import { JsonLd } from '@/components/seo/json-ld'
 import { HomeContent } from '@/components/home-content'
+import { OpenSourceProjects } from '@/components/page/open-source-projects'
 import { contactHref } from '@/lib/contact-services'
 
 // Segment Configuration
@@ -23,7 +24,7 @@ const PostsFallback = () => (
 
 const pageTitle = 'Hire a Next.js & AI Developer'
 const pageDescription =
-  'Hire a Next.js developer with 13+ years of shipping: Aris Setiawan builds Next.js, WordPress, and AI products and trains teams on Cursor. Remote worldwide.'
+  'Hire a Next.js and AI developer with 13+ years of shipping: Aris Setiawan takes AI pilots to production, builds Next.js products, and trains teams on Cursor. Remote worldwide.'
 
 export const metadata: Metadata = buildPageMetadata({
   title: pageTitle,
@@ -78,16 +79,16 @@ async function Posts() {
 // Service card data
 const services = [
   {
+    icon: Sparkles,
+    title: "AI implementation",
+    description: "Take an AI pilot to production, or add an assistant, agent, or LLM feature inside your own repo, with test cases, logging, and spend caps.",
+    href: "/ai-implementation",
+  },
+  {
     icon: Code2,
     title: "Next.js development",
     description: "New products and WordPress-to-Next.js migrations that load fast on phones and keep their search rankings after launch.",
     href: "/services/nextjs-development",
-  },
-  {
-    icon: Sparkles,
-    title: "AI product development",
-    description: "Chatbots, agents, and LLM features that run inside your Next.js product and reach real users.",
-    href: "/services/ai-development",
   },
   {
     icon: Globe,
@@ -145,7 +146,7 @@ export default function HomePage() {
               <Award className="w-3.5 h-3.5" />
             </div>
             <span className="text-xs font-medium text-zinc-600 tracking-wide">
-              <span className="text-zinc-900">First Cursor Ambassador in Indonesia · Taking new projects</span>
+              <span className="text-zinc-900">Independent AI engineer · First Cursor Ambassador in Indonesia · Taking new projects</span>
             </span>
           </div>
 
@@ -158,16 +159,16 @@ export default function HomePage() {
 
           {/* Subheadline */}
           <p className="text-sm text-zinc-500 font-medium max-w-md mb-10 leading-relaxed tracking-wide border-l-2 border-zinc-200 pl-6">
-            Hi, I&apos;m <span className="text-zinc-900 font-semibold">Aris Setiawan</span>. Hire me to build your Next.js, headless WordPress, or AI product, or bring me in to coach your developers on Cursor so AI-written code passes review. 13+ years shipping, working remotely from Indonesia.
+            Hi, I&apos;m <span className="text-zinc-900 font-semibold">Aris Setiawan</span>. Engineering teams hire me to take AI features from pilot to production in their own repo, and to build Next.js products. I also coach developers on Cursor and maintain open-source agent tools. 13+ years shipping, working remotely from Indonesia.
           </p>
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-3 mb-4">
             <Link 
-              href={contactHref('nextjs')}
+              href={contactHref('ai-implementation')}
               className="btn-primary hover:scale-[1.02] transition-all flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center justify-between"
             >
-              <span className="text-sm font-medium tracking-tight">Send me your project</span>
+              <span className="text-sm font-medium tracking-tight">Send me your AI or Next.js project</span>
               <span className="flex items-center justify-center rounded-full bg-black/10 px-3 py-1">
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </span>
@@ -346,6 +347,16 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+
+      {/* Separator */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent my-12 lg:my-16 opacity-60" />
+
+      {/* Open source proof */}
+      <OpenSourceProjects
+        id="home-open-source"
+        title="Open source I maintain"
+        intro="Most client work is under NDA, so the public proof is code you can read before you write to me."
+      />
 
       {/* Separator */}
       <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent my-12 lg:my-16 opacity-60" />

@@ -5,6 +5,7 @@
 export const SITEMAP_STATIC_LASTMOD: Readonly<Record<string, string>> = {
   '': '2026-10-14T16:29:34+07:00',
   about: '2026-10-14T16:29:34+07:00',
+  'ai-implementation': '2026-11-08T22:00:00+07:00',
   blog: '2026-10-14T16:29:34+07:00',
   'blog/category/ai': '2026-10-14T16:29:34+07:00',
   'blog/category/cursor': '2026-10-14T16:29:34+07:00',

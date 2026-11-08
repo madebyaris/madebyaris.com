@@ -11,6 +11,11 @@ interface LlmsLink {
 
 const services: LlmsLink[] = [
   {
+    title: 'AI implementation for engineering teams',
+    path: '/ai-implementation',
+    summary: 'Take an AI pilot to production or ship an AI feature in your own repo, with test cases, logging, spend caps, and a handover. Independent engineer, 13+ years.',
+  },
+  {
     title: 'Next.js development',
     path: '/services/nextjs-development',
     summary: 'Hire Aris to build or migrate a Next.js App Router product: new builds, WordPress-to-Next.js migrations, performance work.',
