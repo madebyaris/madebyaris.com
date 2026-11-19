@@ -71,6 +71,11 @@ const services: LlmsLink[] = [
     summary: 'Custom SaaS built to stay cheap to run: little work per request, scale from zero hosting, and the expected monthly cost in the plan.',
   },
   {
+    title: 'AI search optimization (GEO & AEO)',
+    path: '/services/ai-search-geo-aeo',
+    summary: 'Generative Engine Optimization (GEO), Answer Engine Optimization (AEO), and technical SEO built in code and tracked in RankMySEO, with a free AI visibility snapshot for qualifying Singapore, Indonesia, and EU teams.',
+  },
+  {
     title: 'Technical SEO services',
     path: '/services/seo',
     summary: 'Technical SEO audits, keyword and competitor research, fixes made in the code, and monthly SEO with rank tracking in RankMySEO.',

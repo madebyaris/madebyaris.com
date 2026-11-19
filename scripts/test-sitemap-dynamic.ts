@@ -46,7 +46,7 @@ async function main() {
   }
 
   const entries = await getSitemapEntries()
-  const expectedStaticRoutes = 61
+  const expectedStaticRoutes = 62
   const expectedTotal = expectedStaticRoutes + posts.length
   if (entries.length !== expectedTotal) {
     fail(`Expected ${expectedTotal} sitemap URLs (${expectedStaticRoutes} static + ${posts.length} posts), got ${entries.length}`)

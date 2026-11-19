@@ -24,7 +24,7 @@ export const revalidate = 86400
 const path = '/services/vibe-code-friend'
 const pageTitle = 'Cursor Mentoring and Training for Teams'
 const pageDescription =
-  'Cursor mentoring for teams whose PRs got messier after buying seats: shared project rules, a review habit for AI code, rolled out over about 30 days.'
+  'Cursor mentoring for EU and Indonesian engineering teams: shared project rules, AI PR review habits, and a 30-day rollout led by a senior AI software engineer.'
 
 export const metadata: Metadata = buildPageMetadata({
   title: pageTitle,
@@ -115,14 +115,14 @@ const faqs: FaqItem[] = [
       'A team rollout runs over about 30 days. It starts with two or three developers on one repo, then expands to the rest of the team once the rules and review habit work. Solo developers can book tutoring sessions at their own pace.',
   },
   {
-    question: 'Do you mentor in English and Indonesian?',
+    question: 'Do you mentor European and Indonesian teams in English and Indonesian?',
     answer:
-      'Both. I’m based in Sidoarjo, Indonesia, and mentor teams in Indonesia and remotely worldwide.',
+      'Yes. I am based in Sidoarjo, Indonesia (UTC+7) and coach engineering teams across Europe (EU and UK) and Indonesia in English or Indonesian. My working hours overlap with European mornings in CET and GMT for live pairing and PR reviews.',
   },
   {
-    question: 'Can you build the feature for us instead?',
+    question: 'Can you join our team or build the AI feature for us instead?',
     answer:
-      'Yes. If you want the work shipped more than you want the team trained, hire me to build it. I take Next.js, headless WordPress, and AI feature projects.',
+      'Yes. If you want a senior AI software engineer to build the system or join your team directly, hire me through AI engineering and product builds across AI agents, Next.js, React, Fastify, Rust, and WordPress.',
   },
 ]
 
@@ -138,6 +138,7 @@ const structuredData = buildPageGraph({
     name: 'Cursor mentoring for developers and teams (Vibe Code Friend)',
     description: pageDescription,
     serviceType: 'Developer Mentoring',
+    areaServed: ['Europe', 'Indonesia', 'Worldwide'],
     offers: [
       { name: 'Team Cursor rollout over about 30 days' },
       { name: 'Shared Cursor project rules' },
@@ -182,11 +183,11 @@ export default function VibeCodeFriendPage() {
         </div>
 
         <p className="text-base md:text-lg text-zinc-600 max-w-2xl mx-auto mb-4 leading-relaxed font-medium">
-          For engineering leads and developers whose team bought Cursor seats and got messier PRs. I’m the first Cursor Ambassador in Indonesia, and I ship client work in Cursor every week.
+          For European (EU and UK) and Indonesian engineering teams whose PRs got messier after adopting Cursor. I am a senior AI software engineer, Indonesia&apos;s first Cursor Ambassador, and maintainer of open-source Cursor and agent tooling.
         </p>
 
         <p className="text-sm text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed">
-          13+ years shipping web products. Sessions in English or Indonesian.
+          13+ years shipping production software · English or Indonesian · Direct overlap with European mornings (CET/GMT).
         </p>
 
         <div className="flex flex-wrap justify-center gap-3">

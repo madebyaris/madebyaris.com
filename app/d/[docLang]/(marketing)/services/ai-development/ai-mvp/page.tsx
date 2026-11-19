@@ -27,9 +27,9 @@ import { contactHref } from '@/lib/contact-services'
 export const revalidate = 86400 // Revalidate daily
 
 const pagePath = '/services/ai-development/ai-mvp'
-const pageTitle = 'AI MVP development services for founders'
+const pageTitle = 'AI MVP Development Services for Founders'
 const pageDescription =
-  'AI MVP development from idea to launch: real sign-up, payments, the core AI workflow on real inputs, spend caps per user, and the code in your repo.'
+  'AI MVP development from a senior AI software engineer for EU and Indonesian founders: real auth, billing, tested AI workflows, and per-user spend caps.'
 
 export const metadata: Metadata = buildPageMetadata({
   title: pageTitle,
@@ -258,6 +258,7 @@ const structuredData = buildPageGraph({
     name: 'AI MVP development services',
     description: pageDescription,
     serviceType: 'AI MVP Development',
+    areaServed: ['Europe', 'Indonesia', 'Worldwide'],
     offers: [
       { name: 'AI MVP scoping' },
       { name: 'AI prototype on real data' },
@@ -308,11 +309,11 @@ export default function AiMvpPage() {
         }
       >
         <p className="mb-4">
-          For founders, domain experts, and small teams with an AI product idea. I build the MVP with sign-up, payments, and
-          the core AI workflow working, then launch it on your domain.
+          For founders, domain experts, and European or Indonesian teams turning an AI product idea into a launch-ready
+          app. I architect and ship sign-up, billing, evals, and the core AI workflow live on your domain.
         </p>
         <p className="text-sm text-zinc-500 font-normal">
-          13+ years shipping web products, independent since 2015. I took my own SaaS, RankMySEO, from idea to a hosted MVP.
+          Senior AI software engineer · 13+ years shipping software · UTC+7 with European morning overlap · Creator of RankMySEO.
         </p>
       </PageHero>
 
@@ -328,7 +329,7 @@ export default function AiMvpPage() {
           usage limits, and analytics, and launch it on your domain.
         </p>
         <p className="text-zinc-600 leading-relaxed">
-          I build on existing models, mostly with Next.js and TypeScript. If your idea needs a model trained from scratch, you
+          I build on existing models across Next.js, React, Vite, Fastify, TypeScript, and Rust where speed matters. If your idea needs a model trained from scratch, you
           need an ML research team first. If you already have a product and want one AI feature in it, see{' '}
           <Link href="/services/ai-development/ai-integration" className={linkClass}>
             AI integration services

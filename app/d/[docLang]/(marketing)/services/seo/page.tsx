@@ -22,9 +22,9 @@ import { contactHref } from '@/lib/contact-services'
 export const revalidate = 86400 // Revalidate daily
 
 const pagePath = '/services/seo'
-const pageTitle = 'Technical SEO services: audits, research, fixes'
+const pageTitle = 'Technical SEO Services: Audits & Code Fixes'
 const pageDescription =
-  'Technical SEO services from a developer: SEO audits, keyword and competitor research, fixes in your code, and monthly SEO with rank tracking in RankMySEO.'
+  'Technical SEO services for EU and Indonesian teams from a senior AI software engineer: audits, AI search readiness, code fixes, and RankMySEO tracking.'
 
 export const metadata: Metadata = buildPageMetadata({
   title: pageTitle,
@@ -118,6 +118,11 @@ const topics = [
     title: 'Technical SEO audit checklist',
     description: 'The checks I run before I touch a client site, in the order I run them.',
     href: '/blog/technical-seo-audit-checklist',
+  },
+  {
+    title: 'AI search optimization (GEO & AEO)',
+    description: 'Get cited in ChatGPT, Gemini, Perplexity, and Google AI Overviews, starting with a free RankMySEO AI visibility snapshot.',
+    href: '/services/ai-search-geo-aeo',
   },
   {
     title: 'SEO for AI search vs GEO',
@@ -215,6 +220,7 @@ const structuredData = buildPageGraph({
     name: 'Technical SEO services',
     description: pageDescription,
     serviceType: 'Search Engine Optimization',
+    areaServed: ['Europe', 'Indonesia', 'Worldwide'],
     offers: [
       { name: 'Technical SEO audit' },
       { name: 'Keyword and competitor research' },
@@ -262,11 +268,10 @@ export default function SeoServicesPage() {
         }
       >
         <p className="mb-4">
-          For site owners and marketing teams whose traffic stalled or dropped after a redesign. I audit the site, research
-          the keywords your buyers use, and fix the code myself.
+          For European and Indonesian product and marketing teams whose Google or AI search visibility stalled after a redesign. I audit the codebase, research buyer queries, and open pull requests to fix the issues directly.
         </p>
         <p className="text-sm text-zinc-500 font-normal">
-          I grew one client site from 700K to 1.8M Google impressions per 28 days. I also built RankMySEO, a rank tracker that keeps daily Google ranking history.
+          Senior AI software engineer · Creator of RankMySEO · Grew one client site from 700K to 1.8M Google impressions per 28 days.
         </p>
       </PageHero>
 

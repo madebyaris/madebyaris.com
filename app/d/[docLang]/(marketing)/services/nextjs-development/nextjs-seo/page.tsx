@@ -122,6 +122,7 @@ const structuredData = buildPageGraph({
     name: 'Next.js SEO services',
     description: pageDescription,
     serviceType: 'Technical SEO',
+    areaServed: ['Europe', 'Indonesia', 'Worldwide'],
     offers: [
       { name: 'Technical SEO audit for Next.js' },
       { name: 'App Router metadata setup' },
@@ -164,8 +165,9 @@ export default function NextjsSeoPage() {
         </h1>
 
         <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-4 leading-relaxed font-medium">
-          For teams whose Next.js site looks fine but doesn&apos;t rank, or who lost traffic after a
-          migration. I fix what search engines see in your code, from rendering to schema markup.
+          For European and Indonesian teams whose Next.js site looks sharp for users yet misses
+          Google and AI search rankings. I fix rendering, App Router metadata, JSON-LD schema,
+          llms.txt, and Core Web Vitals directly in your repository.
         </p>
 
         <p className="text-sm text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed">

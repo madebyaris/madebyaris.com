@@ -21,6 +21,7 @@ const serviceLinks = [
   { name: 'Cursor & AI Workflows', href: '/services/vibe-code-friend' },
   { name: 'Next.js Development', href: '/services/nextjs-development' },
   { name: 'SaaS Development', href: '/services/saas-development' },
+  { name: 'AI Search (GEO & AEO)', href: '/services/ai-search-geo-aeo' },
   { name: 'Technical SEO', href: '/services/seo' },
   { name: 'WordPress & Headless', href: '/services/wordpress' },
   { name: 'Jasa Implementasi AI', href: '/jasa-implementasi-ai' },

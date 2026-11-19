@@ -22,9 +22,9 @@ import { contactHref } from '@/lib/contact-services'
 export const revalidate = 86400 // Revalidate daily
 
 const path = '/services/nextjs-development'
-const pageTitle = 'Hire a Next.js developer (13+ years)'
+const pageTitle = 'Hire a Next.js Developer & AI Engineer'
 const pageDescription =
-  'Hire a Next.js developer with 13+ years of shipping: new builds, WordPress migrations, and App Router work. Send your project and get a written scope.'
+  'Hire a Next.js developer and senior AI software engineer for EU and Indonesian teams: App Router builds, AI features, WordPress migrations, and clean SEO.'
 
 export const metadata: Metadata = buildPageMetadata({
   title: pageTitle,
@@ -164,9 +164,9 @@ const faqs: FaqItem[] = [
       'The code lives in your repository and I write handoff docs as I go, so another developer can pick it up. Trusted partners can step in on a project, and I say upfront when I am at capacity and turn down work I cannot finish.',
   },
   {
-    question: 'Do you work with teams outside Indonesia?',
+    question: 'Do you join European and Indonesian engineering teams remotely?',
     answer:
-      'Yes. I am based in Sidoarjo, Indonesia, and work remotely with clients worldwide in English or Indonesian. Communication is async-first in writing, with call overlap hours agreed at the start.',
+      'Yes. I am based in Sidoarjo, Indonesia (UTC+7) and join European (EU and UK) and Indonesian teams in English or Indonesian. My working hours (Monday to Saturday, 9:00 to 17:00 WIB) overlap European mornings in CET and GMT for standups and PR reviews.',
   },
 ]
 
@@ -182,6 +182,7 @@ const structuredData = buildPageGraph({
     name: 'Next.js development',
     description: pageDescription,
     serviceType: 'Next.js Development',
+    areaServed: ['Europe', 'Indonesia', 'Worldwide'],
     offers: [
       { name: 'Custom Next.js development', description: 'New App Router apps and marketing sites in TypeScript.' },
       { name: 'Next.js migration', description: 'WordPress or legacy React moved to Next.js with SEO carried over.' },
@@ -223,9 +224,9 @@ export default function NextjsDevelopmentPage() {
         </h1>
 
         <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
-          For founders, agencies, and marketing teams that need a Next.js site or app built, migrated,
-          or fixed. I&apos;m Aris Setiawan. I&apos;ve shipped web products for 13+ years and worked
-          independently since 2015.
+          For European (EU and UK) and Indonesian product teams that need a Next.js App Router app,
+          AI feature integration, or WordPress migration shipped cleanly. I&apos;m Aris Setiawan, a senior
+          AI software engineer with 13+ years shipping production web apps.
         </p>
 
         <div className="flex flex-wrap justify-center gap-3 mb-8">
@@ -257,8 +258,7 @@ export default function NextjsDevelopmentPage() {
         </div>
 
         <p className="text-xs md:text-sm text-zinc-500 font-medium max-w-3xl mx-auto leading-relaxed">
-          13+ years · First Cursor Ambassador in Indonesia · MiniMax Dev Community Expert · English
-          and Indonesian
+          13+ years · Senior AI software engineer · First Cursor Ambassador in Indonesia · UTC+7 with European morning overlap
         </p>
       </section>
 

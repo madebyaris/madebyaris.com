@@ -72,6 +72,14 @@ const buildServices = [
     features: ['Custom SaaS', 'MVPs', 'Low running cost', 'AI features'],
   },
   {
+    title: 'AI search (GEO & AEO)',
+    description:
+      'Get cited in ChatGPT, Gemini, Perplexity, and Google AI Overviews with schema, llms.txt, and code fixes tracked in RankMySEO.',
+    icon: Sparkles,
+    href: '/services/ai-search-geo-aeo',
+    features: ['GEO & AEO', 'Free AI snapshot', 'Schema & llms.txt', 'RankMySEO'],
+  },
+  {
     title: 'Technical SEO',
     description:
       'An SEO audit, keyword and competitor research, and the fixes made directly in your code. Monthly SEO comes with rank tracking.',

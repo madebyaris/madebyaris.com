@@ -103,6 +103,7 @@ const structuredData = buildPageGraph({
     name: 'Cursor AI tutoring',
     description: pageDescription,
     serviceType: 'Developer Tutoring',
+    areaServed: ['Europe', 'Indonesia', 'Worldwide'],
     offers: outcomes.map(({ title, description }) => ({ name: title, description })),
   },
 })
@@ -144,11 +145,11 @@ export default function AiIdeTutoringPage() {
         </h1>
 
         <p className="text-base md:text-lg text-zinc-600 max-w-2xl mx-auto mb-4 leading-relaxed font-medium">
-          For developers who installed Cursor and want it to work on real projects. I’m the first Cursor Ambassador in Indonesia, and I ship client work in Cursor every week.
+          For engineers who installed Cursor and want reliable results on production repositories. I am a senior AI software engineer, the first Cursor Ambassador in Indonesia, and author of Spec Kit for Cursor.
         </p>
 
         <p className="text-sm text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed">
-          Remote, screen-shared sessions in English or Indonesian.
+          Remote, screen-shared sessions in English or Indonesian · Overlap with European mornings (CET/GMT).
         </p>
 
         <div className="flex flex-wrap justify-center gap-3">

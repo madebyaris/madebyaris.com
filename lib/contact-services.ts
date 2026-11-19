@@ -9,6 +9,7 @@ export const contactServices = [
   { id: 'saas', label: 'Build a SaaS or web app that is cheap to run' },
   { id: 'engineering-specialist', label: 'Improve my React app, Vite build, Node API, database, or codebase' },
   { id: 'nextjs', label: 'Build or migrate a Next.js site or app' },
+  { id: 'geo-aeo', label: 'AI search optimization (GEO, AEO, technical SEO) or free AI visibility snapshot' },
   { id: 'seo', label: 'SEO audit, keyword research, or monthly SEO' },
   { id: 'headless-wordpress', label: 'Headless WordPress with Next.js' },
   { id: 'wordpress', label: 'WordPress build, redesign, migration, or speed fix' },
