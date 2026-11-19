@@ -49,6 +49,7 @@ const nextConfig = {
   
   // Next.js 16: Experimental features
   experimental: {
+    agentUpgrade: 'security',
     globalNotFound: true,
     optimizeCss: true,
     optimizePackageImports: ['lucide-react', '@radix-ui/react-icons', 'framer-motion'],
