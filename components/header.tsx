@@ -25,15 +25,14 @@ const navigationItems: NavigationItem[] = [
     href: '/services', 
     label: 'Services',
     children: [
-      { href: '/ai-implementation', label: 'AI Implementation' },
+      { href: '/ai-implementation', label: 'AI Engineering' },
+      { href: '/services/ai-development/ai-integration', label: 'AI Integration' },
+      { href: '/services/ai-development/ai-mvp', label: 'AI MVP' },
       { href: '/product-engineering', label: 'Product Engineering' },
+      { href: '/services/vibe-code-friend', label: 'Cursor & AI Workflows' },
       { href: '/services/nextjs-development', label: 'Next.js Development' },
-      { href: '/services/ai-development', label: 'AI Development' },
-      { href: '/services/saas-development', label: 'SaaS Development' },
       { href: '/services/seo', label: 'Technical SEO' },
-      { href: '/services/wordpress', label: 'WordPress Development' },
-      { href: '/services/vibe-code-friend', label: 'Cursor / AI Workflows' },
-      { href: '/services/php-development', label: 'PHP Development' },
+      { href: '/services/wordpress', label: 'WordPress & Headless' },
     ]
   },
   { href: '/guides/cursor', label: 'Guides' },
@@ -152,7 +151,7 @@ export function Header() {
       </nav>
 
       <Link 
-        href={contactHref('nextjs')}
+        href={contactHref('ai-implementation')}
         className="hidden md:flex btn-primary items-center gap-2 group text-sm font-medium text-zinc-900 tracking-tight rounded-full py-3 px-6 transition-all hover:-translate-y-0.5"
       >
         <span className="text-sm font-medium tracking-tight">Hire me</span>

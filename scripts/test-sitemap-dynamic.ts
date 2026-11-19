@@ -46,8 +46,14 @@ async function main() {
   }
 
   const entries = await getSitemapEntries()
-  if (entries.length !== 113) {
-    fail(`Expected 113 sitemap URLs, got ${entries.length}`)
+  const expectedStaticRoutes = 61
+  const expectedTotal = expectedStaticRoutes + posts.length
+  if (entries.length !== expectedTotal) {
+    fail(`Expected ${expectedTotal} sitemap URLs (${expectedStaticRoutes} static + ${posts.length} posts), got ${entries.length}`)
+  }
+
+  if (entries.some((entry) => entry.url === `${productionUrl}/services/ai-development`)) {
+    fail('Redirected route /services/ai-development should not be present in sitemap')
   }
 
   const jasaWooUrl = `${productionUrl}/services/wordpress/jasa-woocommerce`

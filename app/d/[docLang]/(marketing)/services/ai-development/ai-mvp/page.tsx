@@ -169,9 +169,9 @@ const processSteps = [
 
 const topics = [
   {
-    title: 'AI development services',
-    description: 'Agents, chatbots, and LLM features for products that already exist.',
-    href: '/services/ai-development',
+    title: 'AI engineering and implementation',
+    description: 'Take an AI pilot to production with evals, logging, and spend caps.',
+    href: '/ai-implementation',
   },
   {
     title: 'AI integration services',
@@ -251,7 +251,7 @@ const structuredData = buildPageGraph({
   description: pageDescription,
   breadcrumbs: [
     { name: 'Services', path: '/services' },
-    { name: 'AI development', path: '/services/ai-development' },
+    { name: 'AI engineering', path: '/ai-implementation' },
     { name: 'AI MVP', path: pagePath },
   ],
   service: {
@@ -277,7 +277,7 @@ export default function AiMvpPage() {
         <ol className="flex items-center space-x-2 text-sm text-zinc-500">
           <li><Link href="/services" className="hover:text-orange-500 transition-colors">Services</Link></li>
           <li><span className="px-2">/</span></li>
-          <li><Link href="/services/ai-development" className="hover:text-orange-500 transition-colors">AI development</Link></li>
+          <li><Link href="/ai-implementation" className="hover:text-orange-500 transition-colors">AI engineering</Link></li>
           <li><span className="px-2">/</span></li>
           <li className="text-zinc-900">AI MVP</li>
         </ol>

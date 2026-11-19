@@ -359,7 +359,7 @@ export default function VibeCodeFriendPage() {
         title="Start with one repo and two developers"
         body="Tell me your team size, your stack, and what’s going wrong with Cursor today. I’ll reply with how I’d run the first sessions. If your team doesn’t need mentoring yet, I’ll say so."
         primary={{ href: contactHref('cursor-mentoring'), label: 'Get Cursor mentoring for your team' }}
-        secondary={{ href: '/services/ai-development', label: 'Or hire me to build it' }}
+        secondary={{ href: '/ai-implementation', label: 'Or hire me to build it' }}
       />
     </>
   )

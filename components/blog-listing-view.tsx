@@ -50,14 +50,14 @@ export function BlogListingView({ posts, currentPage, totalPages }: BlogListingV
         </div>
 
         <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
-          Next.js, Cursor
-          {' '}<span className="block gradient-text font-light">and WordPress guides</span>
+          AI engineering, Cursor
+          {' '}<span className="block gradient-text font-light">and full-stack guides</span>
         </h1>
 
         <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
-          What I learn shipping client projects, written up so you can use it. Read how to set up
-          Cursor so AI-written code passes review, when a WordPress site should move to Next.js,
-          what a Next.js developer costs, and how to keep your SEO through a migration.
+          Field notes from 13+ years of shipping production software. Read how I wire AI agents and
+          LLM features into existing apps, set up Cursor rules so AI-written code passes review,
+          and ship fast Next.js, WordPress, and API stacks with clean SEO.
         </p>
 
         <nav aria-label="Blog topics" className="flex flex-wrap justify-center gap-2">
@@ -116,7 +116,7 @@ export function BlogListingView({ posts, currentPage, totalPages }: BlogListingV
 
           <div className="flex flex-wrap justify-center gap-3">
             <Link
-              href={contactHref('nextjs')}
+              href={contactHref('ai-implementation')}
               className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
             >
               <span>Send me your project</span>

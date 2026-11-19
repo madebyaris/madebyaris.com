@@ -141,7 +141,7 @@ export default function MobileMenu({
                 ))}
 
                 <Link
-                  href={contactHref('nextjs')}
+                  href={contactHref('ai-implementation')}
                   onClick={onClose}
                   className="mt-8 btn-primary rounded-full py-4 px-10 text-base font-semibold flex items-center gap-3 text-zinc-900"
                 >

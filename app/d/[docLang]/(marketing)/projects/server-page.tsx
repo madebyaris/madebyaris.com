@@ -152,9 +152,9 @@ export const projects = [
   }
 ]
 
-const pageTitle = 'Next.js & WordPress Case Studies'
+const pageTitle = 'AI Systems, Open Source & Client Projects'
 const pageDescription =
-  'Next.js case studies and WordPress projects by Aris Setiawan for schools, shops, music publishers, and restaurants. Open each live site and judge the work.'
+  'Public AI and Rust open-source tools, anonymized AI architectures, and 16 live client web apps shipped by Aris Setiawan over 13+ years.'
 
 const pageGraph = buildPageGraph({
   path: '/projects',
@@ -190,11 +190,12 @@ export const metadata: Metadata = buildPageMetadata({
   description: pageDescription,
   path: '/projects',
   keywords: [
+    'AI engineering portfolio',
+    'open-source AI tools',
+    'Rust AI CLI',
+    'MCP server projects',
     'Next.js case studies',
     'WordPress projects',
-    'Next.js projects',
-    'headless WordPress projects',
-    'Next.js developer portfolio',
     'client projects',
   ],
 })

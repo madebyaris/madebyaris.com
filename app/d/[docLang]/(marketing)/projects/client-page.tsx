@@ -5,23 +5,48 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, ArrowUpRight, Briefcase, ExternalLink, Trophy } from 'lucide-react'
 import { projects } from './server-page'
+import { OpenSourceProjects } from '@/components/page/open-source-projects'
 import { contactHref } from '@/lib/contact-services'
 
+const aiProjectNotes = [
+  {
+    title: 'AI SEO that researches, writes, and tests itself',
+    problem:
+      'Content teams guess which topics and headlines will work, and learn slowly because every test takes manual work.',
+    built:
+      'An AI system that researches a topic on its own, writes the content, runs A/B tests across versions, and uses each result to pick better next time.',
+  },
+  {
+    title: 'Indonesian legal AI grounded in expert knowledge',
+    problem:
+      'A general model answers Indonesian legal questions from memory alone, which is too unreliable for legal work.',
+    built:
+      'An AI application built with input from Indonesian law lecturers and professors, so answers draw on structured expert knowledge alongside the base model.',
+  },
+  {
+    title: 'Full architecture for a high-volume AI product',
+    problem:
+      'An AI workflow that handles a handful of records smoothly falls over when it has to process a thousand at once.',
+    built:
+      'The full stack, network, VPS, and LLM harness (prompts, tools, and retries) tuned to process a thousand records in a single run.',
+  },
+]
+
 const whatToCheck = [
-  { title: 'Speed on a phone', desc: 'Open a site on mobile data. That is how most of your visitors will see yours.' },
-  { title: 'The stack', desc: 'Each card lists what the site runs on, so you can find one built like yours.' },
-  { title: 'Your industry', desc: 'Filter by category to see work for businesses close to yours.' },
+  { title: 'Public AI and Rust code', desc: 'Inspect my open-source repos on GitHub to see how I structure agents, MCP servers, and Rust tools.' },
+  { title: 'Speed on a phone', desc: 'Open any client web build on mobile data. That is how most users experience production apps.' },
+  { title: 'Breadth of stacks', desc: 'From Rust CLIs and AI systems to Next.js, Laravel, PostgreSQL, and WordPress, across 13+ years.' },
 ]
 
 export default function ClientProjectsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
 
   // Get unique categories
-  const categories = [...new Set(projects.map(p => p.category))]
+  const categories = [...new Set(projects.map((p) => p.category))]
 
   // Filter projects based on selected category
-  const filteredProjects = selectedCategory 
-    ? projects.filter(p => p.category === selectedCategory)
+  const filteredProjects = selectedCategory
+    ? projects.filter((p) => p.category === selectedCategory)
     : projects
 
   return (
@@ -29,30 +54,31 @@ export default function ClientProjectsPage() {
       {/* Hero Section */}
       <section className="text-center pt-8 pb-16">
         {/* Badge */}
-        <div 
+        <div
           className="inline-flex bg-white/60 rounded-full mb-8 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2"
           style={{
             position: 'relative',
             // @ts-expect-error CSS custom properties
             '--border-gradient': 'linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0))',
-            '--border-radius-before': '9999px'
+            '--border-radius-before': '9999px',
           }}
         >
           <Trophy className="w-4 h-4 text-orange-500" />
-          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Client work</span>
+          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Proof of work</span>
         </div>
 
         {/* Title */}
         <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
-          Next.js case studies
-          {' '}<span className="block gradient-text font-light">and WordPress projects</span>
+          AI tools, open source
+          {' '}
+          <span className="block gradient-text font-light">and live client work</span>
         </h1>
 
         {/* Description */}
         <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-8 leading-relaxed font-medium">
-          {projects.length} client sites I&apos;ve worked on, from schools and shops to music publishers
-          and restaurant chains. Every card links to the live site, so you can judge the work yourself
-          before you write to me.
+          My recent client AI work is under NDA, so this page starts with public open-source AI and
+          Rust code you can read today, followed by generalized AI architecture notes and {projects.length} live
+          web apps shipped over 13+ years.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto mb-10 text-left">
@@ -65,8 +91,8 @@ export default function ClientProjectsPage() {
         </div>
 
         {/* CTA */}
-        <Link 
-          href={contactHref('nextjs')}
+        <Link
+          href={contactHref('ai-implementation')}
           className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
         >
           <span className="text-sm font-medium tracking-tight">Send me your project</span>
@@ -76,6 +102,49 @@ export default function ClientProjectsPage() {
 
       {/* Separator */}
       <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mb-12 opacity-60" />
+
+      {/* Public Open-Source AI & Systems Work */}
+      <OpenSourceProjects
+        id="projects-open-source"
+        title="Open-source AI and developer tools"
+        intro="Public repositories I build and maintain in Rust and TypeScript. Inspect the architecture, tests, and commit history directly."
+      />
+
+      {/* Generalized NDA AI Engineering Notes */}
+      <section className="mb-16" aria-labelledby="projects-ai-notes">
+        <div className="max-w-2xl mb-8">
+          <h2 id="projects-ai-notes" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+            Selected AI systems (under NDA)
+          </h2>
+          <p className="text-sm text-zinc-500 leading-relaxed">
+            Client details stay private. These generalized notes show the types of production AI problems I solve.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {aiProjectNotes.map((item) => (
+            <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
+              <h3 className="font-semibold text-zinc-900 mb-4">{item.title}</h3>
+              <p className="text-xs font-semibold tracking-wider uppercase text-zinc-400 mb-1">The problem</p>
+              <p className="text-sm text-zinc-600 leading-relaxed mb-4">{item.problem}</p>
+              <p className="text-xs font-semibold tracking-wider uppercase text-zinc-400 mb-1">What I built</p>
+              <p className="text-sm text-zinc-600 leading-relaxed">{item.built}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Separator */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent mb-12 opacity-60" />
+
+      {/* Live Web Client Projects Header */}
+      <div className="text-center max-w-2xl mx-auto mb-8">
+        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          Live client <span className="gradient-text">web products</span>
+        </h2>
+        <p className="text-sm text-zinc-500 leading-relaxed">
+          {projects.length} public web apps, marketplaces, portals, and commerce sites shipped across Next.js, React, Node.js, Laravel, and WordPress.
+        </p>
+      </div>
 
       {/* Category Filter */}
       <div className="flex flex-wrap justify-center gap-2 mb-10">
@@ -104,10 +173,10 @@ export default function ClientProjectsPage() {
         ))}
       </div>
 
-      {/* Projects Grid - matching homepage card style */}
+      {/* Projects Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-16">
         {filteredProjects.map((project) => (
-          <article 
+          <article
             key={project.id}
             className="bg-white h-full flex flex-col hover:bg-zinc-50 transition-colors rounded-2xl overflow-hidden shadow-sm hover:shadow-lg group border-0"
           >
@@ -128,7 +197,7 @@ export default function ClientProjectsPage() {
               )}
 
               {/* External Link */}
-              <a 
+              <a
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -154,7 +223,7 @@ export default function ClientProjectsPage() {
               <h3 className="text-lg font-semibold mb-2 line-clamp-2 text-zinc-900 group-hover:text-orange-500 transition-colors tracking-tight">
                 {project.title}
               </h3>
-              
+
               {/* Description */}
               <p className="text-sm text-zinc-500 mb-4 line-clamp-2 leading-relaxed flex-grow">
                 {project.description}
@@ -163,7 +232,7 @@ export default function ClientProjectsPage() {
               {/* Tags */}
               <div className="flex flex-wrap gap-1.5 mb-4">
                 {project.tags.map((tag) => (
-                  <span 
+                  <span
                     key={tag}
                     className="px-2 py-0.5 bg-zinc-50 rounded text-[10px] text-zinc-500 font-medium"
                   >
@@ -174,7 +243,7 @@ export default function ClientProjectsPage() {
 
               {/* View Project */}
               <div className="mt-auto pt-4 border-t border-zinc-100">
-                <a 
+                <a
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -195,32 +264,32 @@ export default function ClientProjectsPage() {
       {/* CTA Section */}
       <section className="overflow-hidden shadow-zinc-900/30 bg-zinc-900 rounded-[2rem] relative shadow-2xl mb-8">
         {/* Grid Pattern */}
-        <div 
-          className="absolute inset-0 opacity-10" 
+        <div
+          className="absolute inset-0 opacity-10"
           style={{
             backgroundImage: 'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)',
-            backgroundSize: '40px 40px'
+            backgroundSize: '40px 40px',
           }}
         />
 
         <div className="flex flex-col items-center justify-center text-center px-6 py-12 md:px-12 md:py-14 relative">
           <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
-            Want a site like one of these?
+            Want to ship something together?
           </h2>
           <p className="text-zinc-400 mb-8 max-w-lg font-medium">
-            Tell me which project is closest to what you need, and send your URL or idea. I reply within
+            Send a link to your product, a stalled AI pilot, or a short summary of what you want built. I reply within
             24 hours with questions or a plain answer on whether I&apos;m the right fit.
           </p>
 
           <div className="flex flex-wrap justify-center gap-3">
-            <Link 
-              href={contactHref('nextjs')}
+            <Link
+              href={contactHref('ai-implementation')}
               className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
             >
               <span>Send me your project</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
-            <Link 
+            <Link
               href="/services"
               className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3"
             >

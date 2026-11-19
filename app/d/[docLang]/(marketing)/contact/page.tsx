@@ -9,25 +9,23 @@ import { UpworkIcon } from '@/components/icons/upwork'
 import { JsonLd } from '@/components/seo/json-ld'
 import { buildPageGraph, buildPageMetadata } from '@/lib/seo'
 
-const pageTitle = 'Start a Next.js, AI or WordPress Project'
+const pageTitle = 'Start an AI or Full-Stack Project'
 const pageDescription =
-  'Send your project to Aris Setiawan: Next.js, headless WordPress, AI features, or Cursor mentoring. Reply within 24 hours. English or Indonesian, remote worldwide.'
+  'Send your AI engineering, full-stack product, or Cursor mentoring request to Aris Setiawan. Reply within 24 hours. English or Indonesian, remote worldwide.'
 
 export const metadata: Metadata = buildPageMetadata({
   title: pageTitle,
   description: pageDescription,
   path: '/contact',
   keywords: [
-    'Contact Developer',
-    'Hire Next.js Developer',
-    'Hire WordPress Developer',
+    'Hire AI Engineer',
     'Hire AI Developer',
+    'AI Implementation Partner',
     'Cursor Mentoring',
-    'Remote Developer',
-    'Full Stack Developer',
-    'Next.js Development',
-    'WordPress Development',
-    'AI Product Development',
+    'Hire Next.js Developer',
+    'Remote AI Engineer',
+    'Full Stack Software Architect',
+    'Contact Aris Setiawan',
   ],
 })
 
@@ -216,19 +214,19 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {[
             {
-              title: "Build a Next.js or AI product",
-              description: "New apps, WordPress-to-Next.js migrations, AI features, and APIs, built on the App Router with TypeScript.",
+              title: "Take an AI pilot or feature to production",
+              description: "AI agents, chatbots, MCP servers, and LLM harnesses wired into your real stack with evals, logging, and spend caps.",
+              icon: "🤖",
+              href: "/ai-implementation"
+            },
+            {
+              title: "Build a full-stack product or web app",
+              description: "SaaS, Next.js, React, Vite, Fastify, Rust tooling, database tuning, or headless WordPress built for speed and clean SEO.",
               icon: "🚀",
-              href: "/services/nextjs-development"
+              href: "/product-engineering"
             },
             {
-              title: "Fix or rebuild a WordPress site",
-              description: "Custom themes, plugins, speed fixes, or a headless Next.js front end that keeps your editors in wp-admin.",
-              icon: "🛠️",
-              href: "/services/wordpress"
-            },
-            {
-              title: "Train your team on Cursor",
+              title: "Train your engineering team on Cursor",
               description: "Project rules and a review habit on one real repo, so AI-written code stops breaking your PRs.",
               icon: "⚡",
               href: "/services/vibe-code-friend"
