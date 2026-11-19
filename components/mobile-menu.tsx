@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { contactHref } from "@/lib/contact-services"
-import { X, ChevronDown, ArrowRight } from "lucide-react"
+import { X, ChevronDown, ArrowUpRight } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 
 interface NavigationItem {
@@ -38,59 +38,60 @@ export default function MobileMenu({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="absolute inset-0 bg-white/30 backdrop-blur-[20px]"
+            transition={{ duration: 0.18 }}
+            className="absolute inset-0 bg-[#0B0C0E]/30 backdrop-blur-sm"
             onClick={onClose}
           />
 
           <motion.div
-            initial={{ x: '-100%' }}
+            initial={{ x: '100%' }}
             animate={{ x: 0 }}
-            exit={{ x: '-100%' }}
-            transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-            className="absolute inset-0 glass-panel"
+            exit={{ x: '100%' }}
+            transition={{ type: 'spring', bounce: 0, duration: 0.35 }}
+            className="absolute inset-y-0 right-0 w-full max-w-sm bg-[#FAF9F6] border-l border-[#E6E4DD] flex flex-col justify-between p-6 overflow-y-auto"
           >
-            <div className="absolute top-6 right-6 z-50">
-              <button
-                onClick={onClose}
-                aria-label="Close menu"
-                className="p-2 hover:bg-zinc-100 rounded-lg transition-colors"
-              >
-                <X className="h-6 w-6 text-zinc-900" />
-              </button>
-            </div>
+            <div>
+              <div className="flex items-center justify-between pb-6 mb-6 border-b border-[#E6E4DD]">
+                <span className="font-mono text-xs uppercase tracking-[0.14em] text-[#70747D]">
+                  Navigation
+                </span>
+                <button
+                  onClick={onClose}
+                  aria-label="Close menu"
+                  className="p-2 rounded-lg border border-[#E6E4DD] bg-white hover:bg-[#F3F1EB] transition-colors"
+                >
+                  <X className="h-5 w-5 text-[#0B0C0E]" />
+                </button>
+              </div>
 
-            <div className="flex min-h-screen items-center justify-center pt-16 px-6">
-              <nav className="flex flex-col items-center justify-center space-y-6 w-full">
+              <nav className="flex flex-col space-y-2">
                 <Link
                   href="/"
                   onClick={onClose}
                   className={cn(
-                    "text-3xl font-light tracking-tight transition-colors hover:text-orange-500",
-                    pathname === '/' ? "text-orange-500" : "text-zinc-900"
+                    'font-display text-2xl font-medium tracking-tight py-2 transition-colors hover:text-[#D9481E]',
+                    pathname === '/' ? 'text-[#D9481E]' : 'text-[#0B0C0E]',
                   )}
                 >
                   Home
                 </Link>
 
                 {navigationItems.map((item) => (
-                  <div key={item.href} className="text-center">
+                  <div key={item.href}>
                     {item.children ? (
                       <>
                         <button
                           onClick={() => toggleSubmenu(item.href)}
                           className={cn(
-                            "text-3xl font-light tracking-tight transition-colors hover:text-orange-500 inline-flex items-center gap-2",
-                            pathname?.startsWith(item.href)
-                              ? "text-orange-500"
-                              : "text-zinc-900"
+                            'font-display text-2xl font-medium tracking-tight py-2 transition-colors hover:text-[#D9481E] flex items-center justify-between w-full text-left',
+                            pathname?.startsWith(item.href) ? 'text-[#D9481E]' : 'text-[#0B0C0E]',
                           )}
                         >
-                          {item.label}
+                          <span>{item.label}</span>
                           <ChevronDown
                             className={cn(
-                              "w-6 h-6 transition-transform",
-                              expandedItems[item.href] && "rotate-180"
+                              'w-5 h-5 transition-transform text-[#70747D]',
+                              expandedItems[item.href] && 'rotate-180',
                             )}
                           />
                         </button>
@@ -101,8 +102,8 @@ export default function MobileMenu({
                               initial={{ height: 0, opacity: 0 }}
                               animate={{ height: 'auto', opacity: 1 }}
                               exit={{ height: 0, opacity: 0 }}
-                              transition={{ duration: 0.3 }}
-                              className="mt-4 space-y-3 overflow-hidden"
+                              transition={{ duration: 0.25 }}
+                              className="pl-4 border-l border-[#E6E4DD] ml-1 my-1 space-y-2 overflow-hidden"
                             >
                               {item.children.map((child) => (
                                 <Link
@@ -110,10 +111,8 @@ export default function MobileMenu({
                                   href={child.href}
                                   onClick={onClose}
                                   className={cn(
-                                    "block text-xl font-light transition-colors hover:text-orange-500",
-                                    pathname === child.href
-                                      ? "text-orange-500"
-                                      : "text-zinc-500"
+                                    'block py-1.5 text-base font-medium transition-colors hover:text-[#D9481E]',
+                                    pathname === child.href ? 'text-[#D9481E]' : 'text-[#525660]',
                                   )}
                                 >
                                   {child.label}
@@ -128,10 +127,8 @@ export default function MobileMenu({
                         href={item.href}
                         onClick={onClose}
                         className={cn(
-                          "text-3xl font-light tracking-tight transition-colors hover:text-orange-500",
-                          pathname === item.href
-                            ? "text-orange-500"
-                            : "text-zinc-900"
+                          'font-display text-2xl font-medium tracking-tight py-2 block transition-colors hover:text-[#D9481E]',
+                          pathname === item.href ? 'text-[#D9481E]' : 'text-[#0B0C0E]',
                         )}
                       >
                         {item.label}
@@ -139,25 +136,21 @@ export default function MobileMenu({
                     )}
                   </div>
                 ))}
-
-                <Link
-                  href={contactHref('ai-implementation')}
-                  onClick={onClose}
-                  className="mt-8 btn-primary rounded-full py-4 px-10 text-base font-semibold flex items-center gap-3 text-zinc-900"
-                >
-                  Hire me
-                  <ArrowRight className="w-5 h-5" />
-                </Link>
-                <a
-                  href="https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={onClose}
-                  className="mt-4 text-sm text-zinc-500 hover:text-zinc-900 transition-colors"
-                >
-                  Or hire me on Upwork
-                </a>
               </nav>
+            </div>
+
+            <div className="pt-8 mt-8 border-t border-[#E6E4DD] space-y-3">
+              <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-[#70747D]">
+                UTC+7 · EU / SG / ID overlap
+              </p>
+              <Link
+                href={contactHref('ai-implementation')}
+                onClick={onClose}
+                className="btn-primary rounded-full py-3.5 px-6 text-sm font-medium flex items-center justify-center gap-2 w-full"
+              >
+                <span>Start a project</span>
+                <ArrowUpRight className="w-4 h-4" />
+              </Link>
             </div>
           </motion.div>
         </div>

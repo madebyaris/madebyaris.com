@@ -1,16 +1,16 @@
-import type { Metadata, Viewport } from "next";
-import { notFound } from "next/navigation";
-import { productionUrl, siteConfig } from "@/lib/seo/config";
-import { isDocumentLang, type DocumentLang } from "@/lib/document-lang";
-import { SiteChrome, documentBodyClassName } from "@/components/document-shell";
-import "../../globals.css";
+import type { Metadata, Viewport } from 'next'
+import { notFound } from 'next/navigation'
+import { productionUrl, siteConfig } from '@/lib/seo/config'
+import { isDocumentLang, type DocumentLang } from '@/lib/document-lang'
+import { SiteChrome, documentBodyClassName } from '@/components/document-shell'
+import '../../globals.css'
 
 export const viewport: Viewport = {
-  width: "device-width",
+  width: 'device-width',
   initialScale: 1,
-  viewportFit: "cover",
-  themeColor: "#ffffff",
-};
+  viewportFit: 'cover',
+  themeColor: '#FAF9F6',
+}
 
 const verificationOther: Record<string, string> = {}
 if (process.env.BING_VERIFICATION_CODE) verificationOther['msvalidate.01'] = process.env.BING_VERIFICATION_CODE
@@ -18,8 +18,8 @@ if (process.env.YANDEX_VERIFICATION_CODE) verificationOther['yandex-verification
 
 export const metadata: Metadata = {
   title: {
-    default: "Hire a Next.js & AI Developer | Aris Setiawan",
-    template: `%s${siteConfig.titleSuffix}`
+    default: 'AI Engineer & Consultant: Indonesia & EU | Aris Setiawan',
+    template: `%s${siteConfig.titleSuffix}`,
   },
   description: siteConfig.description,
   authors: [{ name: siteConfig.author, url: `${productionUrl}/about` }],
@@ -35,10 +35,10 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    type: "website",
+    type: 'website',
     locale: siteConfig.locale,
     url: productionUrl,
-    title: "Hire a Next.js & AI Developer | Aris Setiawan",
+    title: 'AI Engineer & Consultant: Indonesia & EU | Aris Setiawan',
     description: siteConfig.description,
     siteName: siteConfig.name,
     images: [
@@ -46,13 +46,13 @@ export const metadata: Metadata = {
         url: siteConfig.ogImage,
         width: 1200,
         height: 630,
-        alt: "Aris Setiawan - Next.js, AI & WordPress Developer",
+        alt: 'Aris Setiawan, Senior AI Software Engineer and AI Consultant',
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Hire a Next.js & AI Developer | Aris Setiawan",
+    card: 'summary_large_image',
+    title: 'AI Engineer & Consultant: Indonesia & EU | Aris Setiawan',
     description: siteConfig.description,
     creator: siteConfig.twitterHandle,
     images: [siteConfig.ogImage],
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     ...(process.env.GOOGLE_VERIFICATION_CODE ? { google: process.env.GOOGLE_VERIFICATION_CODE } : {}),
     ...(Object.keys(verificationOther).length ? { other: verificationOther } : {}),
   },
-};
+}
 
 export async function generateStaticParams() {
   return [{ docLang: 'en' satisfies DocumentLang }]
@@ -72,25 +72,19 @@ export default async function DocumentLangLayout({
   children,
   params,
 }: {
-  children: React.ReactNode;
-  params: Promise<{ docLang: string }>;
+  children: React.ReactNode
+  params: Promise<{ docLang: string }>
 }) {
-  const { docLang } = await params;
+  const { docLang } = await params
   if (!isDocumentLang(docLang)) {
-    notFound();
+    notFound()
   }
 
   return (
     <html lang={docLang} suppressHydrationWarning>
-      <body
-        suppressHydrationWarning
-        className={documentBodyClassName()}
-        style={{
-          fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
-        }}
-      >
+      <body suppressHydrationWarning className={documentBodyClassName()}>
         <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
-  );
+  )
 }
