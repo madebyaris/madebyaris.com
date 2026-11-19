@@ -1,18 +1,19 @@
 import type { Metadata } from 'next'
 import {
-  Code2,
-  Layout,
-  Server,
   ArrowRight,
   ArrowUpRight,
-  Sparkles,
-  Briefcase,
   Bot,
+  Briefcase,
+  Code2,
   GraduationCap,
   Hammer,
-  TrendingUp,
-  Search,
+  Layout,
+  Plug,
   Rocket,
+  Search,
+  Server,
+  Sparkles,
+  TrendingUp,
 } from 'lucide-react'
 import Link from 'next/link'
 import { contactHref } from '@/lib/contact-services'
@@ -23,55 +24,63 @@ export const revalidate = 86400
 
 const buildServices = [
   {
-    title: 'AI implementation',
+    title: 'AI engineering and implementation',
     description:
-      'Take an AI pilot to production, or ship an AI feature in your own repo, with test cases, logging, and spend caps.',
+      'Take an AI pilot to production, or ship agents, chatbots, and MCP tools in your repo, with evals, logging, and spend caps.',
     icon: Sparkles,
     href: '/ai-implementation',
-    features: ['Pilot to production', 'AI features in your product', 'Agents and MCP tools', 'Retainer'],
+    features: ['Pilot to production', 'Agents and MCP tools', 'Evals and spend caps', 'Retainer'],
+  },
+  {
+    title: 'AI integration services',
+    description:
+      'Add search over your own docs, reply drafts, document extraction, or an in-app assistant to the product you already run.',
+    icon: Plug,
+    href: '/services/ai-development/ai-integration',
+    features: ['Docs Q&A', 'Support drafting', 'Data extraction', 'Existing codebase'],
+  },
+  {
+    title: 'AI MVP development',
+    description:
+      'Turn an AI product idea into a launch-ready product with sign-up, payments, the core AI workflow tested on real inputs, and usage caps.',
+    icon: Rocket,
+    href: '/services/ai-development/ai-mvp',
+    features: ['Idea to launch', 'Auth and billing', 'Eval cases', 'Per-user caps'],
   },
   {
     title: 'Product engineering',
     description:
       'SaaS, mobile apps, Rust software, commerce, and go-to-market apps, led by me with AI agents and trusted partners on the build.',
-    icon: Rocket,
+    icon: Briefcase,
     href: '/product-engineering',
-    features: ['SaaS', 'Mobile apps', 'Rust', 'Commerce and GTM'],
+    features: ['SaaS', 'Mobile apps', 'Rust and Tauri', 'Commerce and GTM'],
   },
   {
     title: 'Next.js development',
     description:
-      'New products and WordPress-to-Next.js migrations that stay fast and keep their rankings after launch.',
+      'New Next.js App Router products and WordPress-to-Next.js migrations that stay fast on mobile and keep their search rankings.',
     icon: Code2,
     href: '/services/nextjs-development',
     features: ['Product builds', 'Migrations', 'Performance and SEO', 'Headless CMS'],
   },
   {
-    title: 'AI product development',
-    description:
-      'Agents, chatbots, and LLM features that run inside your Next.js product and reach real users.',
-    icon: Sparkles,
-    href: '/services/ai-development',
-    features: ['Chatbots and assistants', 'Agent workflows', 'API integrations', 'AI MVPs'],
-  },
-  {
     title: 'SaaS development',
     description:
       'A SaaS or web app built to cost little to run, starting on scale-from-zero hosting, with the expected monthly bill in the plan.',
-    icon: Briefcase,
+    icon: Server,
     href: '/services/saas-development',
     features: ['Custom SaaS', 'MVPs', 'Low running cost', 'AI features'],
   },
   {
     title: 'Technical SEO',
     description:
-      'An SEO audit, keyword and competitor research, and the fixes made in your code. Monthly SEO comes with rank tracking.',
+      'An SEO audit, keyword and competitor research, and the fixes made directly in your code. Monthly SEO comes with rank tracking.',
     icon: Search,
     href: '/services/seo',
     features: ['SEO audits', 'Keyword research', 'Fixes in code', 'Monthly SEO'],
   },
   {
-    title: 'WordPress / headless',
+    title: 'WordPress and headless WordPress',
     description:
       'Keep the WordPress editor your team knows, with custom themes, plugins, maintenance, or a headless Next.js front end.',
     icon: Layout,
@@ -79,11 +88,11 @@ const buildServices = [
     features: ['Custom themes', 'Maintenance', 'Migrations', 'WooCommerce'],
   },
   {
-    title: 'PHP development',
-    description: 'Keep a legacy PHP app running, add an API to it, or plan its move to a modern stack.',
+    title: 'PHP and legacy modernization',
+    description: 'Keep a legacy PHP app running, add a clean API or AI layer to it, or plan its migration to a newer stack.',
     icon: Server,
     href: '/services/php-development',
-    features: ['Custom apps', 'APIs', 'Maintenance', 'Migrations'],
+    features: ['Custom apps', 'APIs', 'Database tuning', 'Migrations'],
     secondary: true,
   },
 ]
@@ -150,23 +159,23 @@ const wordPressServices = [
   },
 ]
 
-const pageTitle = 'Next.js, AI & Cursor Services'
+const pageTitle = 'AI Engineering, Product & Cursor Services'
 const pageDescription =
-  'Hire me to build Next.js, WordPress, and AI products, or get Cursor mentoring so your team ships AI-written code you can trust. 13+ years. Remote worldwide.'
+  'Work with Aris Setiawan: production AI engineering, AI integrations, AI MVPs, full-stack product builds, technical SEO, and Cursor mentoring for teams.'
 
 export const metadata: Metadata = buildPageMetadata({
   title: pageTitle,
   description: pageDescription,
   path: '/services',
   keywords: [
-    'Next.js Developer',
-    'AI Product Development',
-    'Cursor Mentoring',
-    'WordPress Development',
-    'Remote Full-Stack Developer',
-    'Hire Next.js Developer',
-    'AI Integration Developer',
-    'Cursor Ambassador Indonesia',
+    'AI engineering services',
+    'AI implementation partner',
+    'AI integration services',
+    'AI MVP development',
+    'Product engineering',
+    'Cursor mentoring',
+    'Next.js developer',
+    'Technical SEO services',
   ],
 })
 
@@ -200,14 +209,15 @@ export default function ServicesPage() {
         </div>
 
         <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
-          Two ways to
-          {' '}<span className="block gradient-text font-light">work with me</span>
+          AI engineering and
+          {' '}
+          <span className="block gradient-text font-light">full-stack services</span>
         </h1>
 
         <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
-          Hire me to build your Next.js, WordPress, or AI product. Or bring me in to train your team
-          on Cursor so AI-written code passes review. I’m the first Cursor Ambassador in Indonesia,
-          with 13+ years of shipping.
+          Hire me to ship production AI systems, agents, MCP tools, and full-stack software across
+          TypeScript, Next.js, Rust, databases, and WordPress. Or bring me in to train your engineers
+          on Cursor so AI-written code passes review.
         </p>
 
         <div className="flex flex-wrap justify-center gap-3">
@@ -261,16 +271,16 @@ export default function ServicesPage() {
               </span>
             </div>
             <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-2">
-              Hire me to <span className="gradient-text">ship products</span>
+              Hire me to <span className="gradient-text">ship AI and software</span>
             </h2>
             <p className="text-sm text-zinc-500 font-medium max-w-xl">
               You work with me directly, from the first call to launch. I work with startups and
-              teams in the US, EU, Asia, and the Middle East, and with Indonesian companies in
-              Bahasa Indonesia.
+              engineering teams in Europe, Asia, the US, and the Middle East, and with Indonesian
+              companies in Bahasa Indonesia.
             </p>
           </div>
           <Link
-            href={contactHref('nextjs')}
+            href={contactHref('ai-implementation')}
             className="group flex items-center gap-2 hover:text-orange-500 transition-colors text-sm font-medium text-zinc-900"
           >
             Tell me what you need built
@@ -278,7 +288,7 @@ export default function ServicesPage() {
           </Link>
         </div>
 
-        <div className="bento-grid grid-cols-1 md:grid-cols-2">
+        <div className="bento-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {buildServices.map((service) => (
             <Link
               key={service.href}
@@ -521,7 +531,7 @@ export default function ServicesPage() {
 
           <div className="flex flex-wrap justify-center gap-3">
             <Link
-              href={contactHref('other')}
+              href={contactHref('ai-implementation')}
               className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
             >
               <span>Send me your project</span>
@@ -531,7 +541,7 @@ export default function ServicesPage() {
               href="/projects"
               className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3"
             >
-              <span>See my work</span>
+              <span>See open source and client work</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>

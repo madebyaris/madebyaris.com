@@ -11,6 +11,36 @@ interface LlmsLink {
 
 const services: LlmsLink[] = [
   {
+    title: 'AI engineering and implementation',
+    path: '/ai-implementation',
+    summary: 'Flagship AI development service: hire an AI developer to take an AI pilot to production or ship agents, chatbots, MCP tools, and LLM features in your repo with evals, logging, and spend caps. Senior AI software engineer, 13+ years.',
+  },
+  {
+    title: 'AI integration services',
+    path: '/services/ai-development/ai-integration',
+    summary: 'Add AI features to an existing product or business: answers from your docs, reply drafts, document extraction, and agents with approval steps.',
+  },
+  {
+    title: 'AI MVP development',
+    path: '/services/ai-development/ai-mvp',
+    summary: 'Turn an AI product idea into a launch-ready MVP: sign-up, payments, the core AI workflow on real inputs, and spend caps per user.',
+  },
+  {
+    title: 'Product engineering',
+    path: '/product-engineering',
+    summary: 'SaaS, mobile apps, Rust software, commerce, go-to-market apps, and AI features. Aris leads each project, with AI agents and trusted partners on the build. Projects from $5,000.',
+  },
+  {
+    title: 'Cursor mentoring (Level up)',
+    path: '/services/vibe-code-friend',
+    summary: 'Team training on Cursor: project rules, review habits for AI-generated code, and a 30-day rollout.',
+  },
+  {
+    title: 'Next.js development',
+    path: '/services/nextjs-development',
+    summary: 'Hire Aris to build or migrate a Next.js App Router product: new builds, WordPress-to-Next.js migrations, performance work.',
+  },
+  {
     title: 'React app improvement',
     path: '/services/react-app-improvement',
     summary: 'Make a slow or messy React app faster and easier to change: bundle size, load time, rendering, and structure, measured before and after.',
@@ -36,36 +66,6 @@ const services: LlmsLink[] = [
     summary: 'Codebase structure, written conventions, and checks that keep code readable for developers and AI agents.',
   },
   {
-    title: 'Product engineering',
-    path: '/product-engineering',
-    summary: 'SaaS, mobile apps, Rust software, commerce, go-to-market apps, and AI features. Aris leads each project, with AI agents and trusted partners on the build. Projects from $5,000.',
-  },
-  {
-    title: 'AI implementation for engineering teams',
-    path: '/ai-implementation',
-    summary: 'Take an AI pilot to production or ship an AI feature in your own repo, with test cases, logging, spend caps, and a handover. Independent engineer, 13+ years.',
-  },
-  {
-    title: 'Next.js development',
-    path: '/services/nextjs-development',
-    summary: 'Hire Aris to build or migrate a Next.js App Router product: new builds, WordPress-to-Next.js migrations, performance work.',
-  },
-  {
-    title: 'AI development',
-    path: '/services/ai-development',
-    summary: 'AI features, agents, chatbots, and model integrations inside real Next.js products.',
-  },
-  {
-    title: 'AI MVP development',
-    path: '/services/ai-development/ai-mvp',
-    summary: 'Turn an AI product idea into a launch-ready MVP: sign-up, payments, the core AI workflow on real inputs, and spend caps per user.',
-  },
-  {
-    title: 'AI integration services',
-    path: '/services/ai-development/ai-integration',
-    summary: 'Add AI features to an existing product or business: answers from your docs, reply drafts, document extraction, and agents with approval steps.',
-  },
-  {
     title: 'SaaS development',
     path: '/services/saas-development',
     summary: 'Custom SaaS built to stay cheap to run: little work per request, scale from zero hosting, and the expected monthly cost in the plan.',
@@ -79,11 +79,6 @@ const services: LlmsLink[] = [
     title: 'Jasa SEO (Bahasa Indonesia)',
     path: '/services/seo/jasa-seo',
     summary: 'Audit SEO, riset keyword, perbaikan langsung di kode, dan SEO bulanan untuk bisnis di Indonesia.',
-  },
-  {
-    title: 'Cursor mentoring (Level up)',
-    path: '/services/vibe-code-friend',
-    summary: 'Team training on Cursor: project rules, review habits for AI-generated code, and a 30-day rollout.',
   },
   {
     title: 'Headless WordPress with Next.js',
@@ -206,18 +201,19 @@ export function buildLlmsTxt(posts: LlmsPost[] = []): string {
   const facts = [
     `Name: ${authorProfile.name}. Brand and website: ${siteConfig.name} (${productionUrl}).`,
     `Role: ${authorProfile.jobTitle}, working independently since 2015.`,
-    `Experience: ${authorProfile.yearsExperience}+ years shipping web products.`,
+    `Experience: ${authorProfile.yearsExperience}+ years shipping production software across AI systems, Rust, TypeScript, Next.js, React, Vite, Fastify, PostgreSQL/MySQL, WordPress, PHP, and technical SEO.`,
     ...authorProfile.roles.map((role) => `Community role: ${role}.`),
-    `Location: ${authorProfile.city}, ${authorProfile.region}, ${authorProfile.country}. Works remotely with teams worldwide.`,
+    `Open-source maintainer: nca (Rust AI agent CLI), Spec Kit for Cursor, Agent Orchestration (MCP server), Chaca Scanner (Rust/Tauri), and RankMySEO.`,
+    `Location: ${authorProfile.city}, ${authorProfile.region}, ${authorProfile.country} (UTC+7). Joins European (EU and UK) and Indonesian engineering teams with direct morning overlap in CET and GMT.`,
     `Languages: ${authorProfile.languages.join(' and ')}.`,
-    `Two ways to work together: Build (hire Aris to ship Next.js, WordPress, or AI products) and Level up (Cursor mentoring for developers and teams).`,
+    `Two ways to work together: Build (hire Aris to ship production AI systems, agents, MCP tools, and full-stack software) and Level up (Cursor mentoring for engineering teams).`,
     `Contact: ${productionUrl}/contact or ${siteConfig.email}.`,
   ]
 
   const sections = [
     `# ${siteConfig.name}`,
     `> ${siteConfig.description}`,
-    `This site is built with Next.js on Vercel. Blog posts are written in WordPress (headless) and cover Next.js, Cursor, AI-assisted development, WordPress, and SEO. English posts and Indonesian (Bahasa Indonesia) posts are both published.`,
+    `This site is built with Next.js on Vercel and headless WordPress. Blog posts cover AI engineering, AI agents, Cursor workflows, Next.js, Rust/TypeScript product architecture, WordPress, and technical SEO in English and Indonesian (Bahasa Indonesia).`,
     `## Key facts\n\n${facts.map((fact) => `- ${fact}`).join('\n')}`,
     `## Services\n\n${services.map(link).join('\n')}`,
     `## Guides\n\n${guides.map(link).join('\n')}`,

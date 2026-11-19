@@ -9,6 +9,10 @@ export const translationPairs: ReadonlyArray<{ en: string; id: string }> = [
     en: '/services/wordpress/woocommerce',
     id: '/services/wordpress/jasa-woocommerce',
   },
+  {
+    en: '/product-engineering',
+    id: '/jasa-pengembangan-produk',
+  },
 ]
 
 export function languageAlternates(path: string): Record<string, string> | undefined {

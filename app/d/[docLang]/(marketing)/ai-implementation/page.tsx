@@ -4,10 +4,13 @@ import {
   ArrowUpRight,
   Bot,
   CheckCircle2,
+  Cpu,
   GraduationCap,
+  Layers,
   Plug,
   Repeat,
   Rocket,
+  Sparkles,
   XCircle,
 } from 'lucide-react'
 import { PageHero } from '@/components/page/hero'
@@ -21,9 +24,9 @@ import { contactHref } from '@/lib/contact-services'
 export const revalidate = 86400 // Revalidate daily
 
 const pagePath = '/ai-implementation'
-const pageTitle = 'AI implementation for engineering teams'
+const pageTitle = 'Hire an AI Developer & AI Consultant'
 const pageDescription =
-  'Take your AI pilot to production, or ship an AI feature in your own repo, with test cases, logging, and spend caps. Independent senior engineer, 13+ years.'
+  'Hire an AI developer and AI consultant for EU and Indonesian teams. 13+ years shipping AI agents, LLM systems, MCP tools, evals, and full-stack apps.'
 
 export const metadata: Metadata = buildPageMetadata({
   title: pageTitle,
@@ -31,13 +34,16 @@ export const metadata: Metadata = buildPageMetadata({
   path: pagePath,
   image: '/images/services/ai-integration.jpg',
   keywords: [
+    'hire AI developer',
+    'AI consultant',
+    'AI engineer',
+    'AI engineer Indonesia',
+    'AI developer',
+    'AI development services',
     'AI implementation services',
-    'AI implementation partner',
-    'AI pilot to production',
-    'AI integration services',
     'AI agent development',
-    'hire an AI engineer',
-    'independent AI engineer',
+    'MCP server development',
+    'remote AI engineer Europe',
   ],
 })
 
@@ -62,35 +68,60 @@ const offers = [
   {
     icon: Rocket,
     title: 'Pilot to production',
-    body: 'You have a pilot that works in a demo. I add test cases built from your own inputs, logging, error handling, and spend caps, then hand it over.',
-    href: '/services/ai-development/ai-integration',
-    cta: 'See AI integration',
+    body: 'You have an AI pilot that works in a demo. I add eval test cases built from your real inputs, logging, error handling, and spend caps, then hand it over.',
+    href: '#project-notes',
+    cta: 'Read past AI architectures',
   },
   {
     icon: Plug,
-    title: 'An AI feature inside your product',
-    body: 'Search, summaries, an assistant that answers from your data, or smart forms, added next to your current code. No rewrite.',
-    href: '/services/ai-development',
-    cta: 'See AI development',
+    title: 'AI integration in your existing app',
+    body: 'Search, Q&A over your docs, chatbots, reply drafts, or document extraction added directly inside your current repo without a rewrite.',
+    href: '/services/ai-development/ai-integration',
+    cta: 'See AI integration services',
+  },
+  {
+    icon: Sparkles,
+    title: 'AI MVP from idea to launch',
+    body: 'Turn a new AI product idea into a launch-ready product with sign-up, payments, the core AI workflow tested on real inputs, and per-user spend caps.',
+    href: '/services/ai-development/ai-mvp',
+    cta: 'See AI MVP development',
   },
   {
     icon: Bot,
-    title: 'Agents and MCP tools',
-    body: 'Agents that call your tools and APIs, where a person approves anything that sends, deletes, or charges.',
+    title: 'AI agents and MCP tools',
+    body: 'Multi-step agents and MCP servers that call your internal APIs and tools, where a person approves any step that sends, deletes, or charges.',
     href: '/blog/ai-agent-development',
     cta: 'Read how I scope agents',
   },
   {
     icon: Repeat,
-    title: 'Engineering retainer',
-    body: 'A fixed monthly block for AI feature work, model updates, and fixes after launch.',
+    title: 'Embedded AI engineer for EU & ID teams',
+    body: 'Join your European or Indonesian engineering team on a fixed monthly retainer for AI features, app architecture, PR reviews, and production fixes.',
   },
   {
     icon: GraduationCap,
     title: 'Cursor rollout for your engineers',
-    body: 'Your team bought seats and the PRs got messier. I set up project rules and a review habit on one real repo.',
+    body: 'Your team bought Cursor seats and PR quality slipped. I set up project rules and a review habit on one real repo, then coach your team.',
     href: '/services/vibe-code-friend',
     cta: 'See Cursor mentoring',
+  },
+]
+
+const stackCapabilities = [
+  {
+    icon: Layers,
+    title: 'Web apps and APIs',
+    body: 'Next.js App Router, React, Vite, Fastify, Node.js, TypeScript, and Vercel AI SDK. Streaming responses, server-side keys, and clean UI wired straight into your product.',
+  },
+  {
+    icon: Cpu,
+    title: 'Systems, databases, and infra',
+    body: 'Rust and Tauri for fast CLIs and local agent tooling, PostgreSQL and MySQL query tuning, plus VPS and network architecture built to handle high-volume AI workloads.',
+  },
+  {
+    icon: Plug,
+    title: 'Existing CMS and legacy stacks',
+    body: 'WordPress, headless WordPress, WooCommerce, and PHP/Laravel apps. I add AI capabilities through clean service layers so you keep the stack that already runs your business.',
   },
 ]
 
@@ -167,24 +198,24 @@ const poorFit = [
 
 const faqs: FaqItem[] = [
   {
-    question: 'How much does AI implementation cost?',
+    question: 'How much does it cost to hire an AI engineer for implementation?',
     answer:
       'It depends on the use case, the data, and how many systems it touches. Projects start from $5,000. After a short scoping call you get a written plan with milestones and a quote before any code is written.',
   },
   {
     question: 'Can you work inside our existing codebase?',
     answer:
-      'Yes, that is the usual case. I work in your repo, most often Next.js and TypeScript, and add the AI feature next to your current code. You do not need a rewrite.',
+      'Yes, that is the usual case. I work inside your repo, most often Next.js, React, TypeScript, Node.js, WordPress, or PHP/Laravel, and add the AI feature next to your current code without a rewrite.',
   },
   {
-    question: 'Which models do you use?',
+    question: 'Which AI models and providers do you work with?',
     answer:
-      'OpenAI, Anthropic, or a compatible API, behind one server layer. That way you can switch models later without touching every feature.',
+      'OpenAI, Anthropic, MiniMax, or any compatible API, behind one clean server layer. I am a MiniMax Dev Community Expert and pick the model for your task and budget so switching later stays cheap.',
   },
   {
-    question: 'Do you work with teams outside Indonesia?',
+    question: 'Do you join European engineering teams remotely?',
     answer:
-      'Yes. I am based in Sidoarjo, Indonesia (UTC+7) and work with startups and teams in Europe, Asia, the US, and the Middle East. I work Monday to Saturday, 9:00 to 17:00 WIB, in English or Indonesian, and we set a weekly check-in time during scoping.',
+      'Yes. I am based in Sidoarjo, Indonesia (UTC+7) and partner directly with engineering teams across Europe (EU and UK) as well as Indonesia and Asia. I work Monday to Saturday, 9:00 to 17:00 WIB, in English or Indonesian, which overlaps with European mornings in CET and GMT for standups and reviews.',
   },
   {
     question: 'Who will I be working with?',
@@ -199,13 +230,21 @@ const structuredData = buildPageGraph({
   description: pageDescription,
   breadcrumbs: [
     { name: 'Services', path: '/services' },
-    { name: 'AI implementation', path: pagePath },
+    { name: 'AI engineering', path: pagePath },
   ],
   service: {
-    name: pageTitle,
+    name: 'AI engineering, consulting, and production implementation',
     description: pageDescription,
-    serviceType: 'AI implementation',
-    areaServed: 'Worldwide',
+    serviceType: 'AI Engineering and Implementation',
+    areaServed: ['Europe', 'Indonesia', 'Worldwide'],
+    offers: [
+      { name: 'AI pilot to production' },
+      { name: 'AI integration in existing products' },
+      { name: 'AI agent and MCP server development' },
+      { name: 'AI chatbot development' },
+      { name: 'AI MVP development' },
+      { name: 'AI engineering retainer' },
+    ],
   },
 })
 
@@ -218,14 +257,14 @@ export default function AiImplementationPage() {
         <ol className="flex items-center space-x-2 text-sm text-zinc-500">
           <li><Link href="/services" className="hover:text-orange-500 transition-colors">Services</Link></li>
           <li><span className="px-2">/</span></li>
-          <li className="text-zinc-900">AI implementation</li>
+          <li className="text-zinc-900">AI engineering</li>
         </ol>
       </nav>
 
       <PageHero
-        eyebrow={{ icon: <Rocket className="w-4 h-4 text-orange-500" />, label: 'AI implementation' }}
-        title="Take your AI pilot to production,"
-        accent="inside your own repo"
+        eyebrow={{ icon: <Rocket className="w-4 h-4 text-orange-500" />, label: 'AI development services · Build · Remote' }}
+        title="Hire an AI developer"
+        accent="who ships production AI"
         actions={
           <>
             <Link
@@ -245,12 +284,10 @@ export default function AiImplementationPage() {
         }
       >
         <p className="mb-4">
-          For founders, CTOs, and product leads at small and mid-sized companies in Europe, Asia, and beyond, whose AI pilot
-          works in a demo and stalls before real users. I am Aris Setiawan, with 13+ years shipping web products. I work inside
-          your codebase, so you end up with code your team can read and extend.
+          For European (EU and UK) and Indonesian engineering teams looking to hire an AI developer or AI consultant to join their AI and app builds, take a pilot to production, or ship agents, chatbots, and MCP tools inside an existing repo. I am Aris Setiawan, with 13+ years shipping TypeScript, Next.js, Rust, databases, and infrastructure.
         </p>
         <p className="text-sm text-zinc-500 font-normal">
-          I reply within 24 hours and tell you plainly whether I am the right fit.
+          Independent since 2015 · First Cursor Ambassador in Indonesia · MiniMax Dev Community Expert · I reply within 24 hours.
         </p>
       </PageHero>
 
@@ -278,12 +315,12 @@ export default function AiImplementationPage() {
 
       <section className="mb-16 max-w-3xl mx-auto" aria-labelledby="why-pilots-stall">
         <h2 id="why-pilots-stall" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
-          Why AI pilots stall
+          Why AI pilots stall before production
         </h2>
         <p className="text-zinc-600 leading-relaxed mb-6">
           In an RSM survey of middle-market companies (July 2026, as summarized by{' '}
           <a href="https://dkstudio.ai/insights/ai-implementation-partner" className={linkClass} target="_blank" rel="noopener noreferrer">DK Studio</a>), data quality and integration were the top blockers among
-          teams with limited pilot success. Both are implementation problems, and they are the work I do.
+          teams with limited pilot success. Both are software engineering problems, and they are the work I do.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {stallReasons.map((item) => (
@@ -298,22 +335,47 @@ export default function AiImplementationPage() {
       <section className="mb-16" aria-labelledby="what-i-do">
         <div className="text-center mb-10">
           <h2 id="what-i-do" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            What I do
+            What I build
           </h2>
+          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
+            Pick the shape that fits your stage, or send me your repo and I will tell you which one saves you the most time.
+          </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {offers.map((item) => (
+            <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm flex flex-col">
+              <div className="p-2 bg-zinc-100 rounded-lg inline-flex w-fit mb-3">
+                <item.icon className="w-4 h-4 text-zinc-600" />
+              </div>
+              <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
+              <p className="text-sm text-zinc-500 leading-relaxed mb-3 flex-grow">{item.body}</p>
+              {item.href && item.cta && (
+                <Link href={item.href} className={`${linkClass} text-sm mt-auto`}>
+                  {item.cta}
+                </Link>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mb-16" aria-labelledby="stack-behind-ai">
+        <div className="max-w-2xl mb-8">
+          <h2 id="stack-behind-ai" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+            Full-stack skills behind every AI build
+          </h2>
+          <p className="text-sm text-zinc-500 leading-relaxed">
+            An LLM wrapper is easy. Shipping AI inside real auth, billing, databases, and legacy apps takes years of production engineering.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {stackCapabilities.map((item) => (
             <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
               <div className="p-2 bg-zinc-100 rounded-lg inline-flex mb-3">
                 <item.icon className="w-4 h-4 text-zinc-600" />
               </div>
               <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
-              <p className="text-sm text-zinc-500 leading-relaxed mb-3">{item.body}</p>
-              {item.href && item.cta && (
-                <Link href={item.href} className={`${linkClass} text-sm`}>
-                  {item.cta}
-                </Link>
-              )}
+              <p className="text-sm text-zinc-500 leading-relaxed">{item.body}</p>
             </div>
           ))}
         </div>
@@ -324,7 +386,7 @@ export default function AiImplementationPage() {
           How I work, in plain answers
         </h2>
         <p className="text-sm text-zinc-500 leading-relaxed mb-8">
-          These are the questions a careful buyer asks before choosing an AI partner.
+          These are the questions a careful buyer asks before choosing an AI engineering partner.
         </p>
         <dl className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {howIWork.map((item) => (
@@ -370,13 +432,13 @@ export default function AiImplementationPage() {
         </div>
       </section>
 
-      <Faq id="ai-implementation-faq" title="Questions about AI implementation" faqs={faqs} />
+      <Faq id="ai-implementation-faq" title="Questions about hiring an AI engineer" faqs={faqs} />
 
       <CtaBand
         title="Send me your AI project"
-        body="Tell me what the pilot does today, where it stalls, and who will use it. I reply with questions or a plain answer on whether I am the right fit."
+        body="Tell me what the pilot or feature needs to do, where your data lives, and who will use it. I reply within 24 hours with questions or a plain answer on whether I am the right fit."
         primary={{ href: contactHref('ai-implementation'), label: 'Send me your AI project' }}
-        secondary={{ href: '/services/ai-development', label: 'See AI development' }}
+        secondary={{ href: '/services/ai-development/ai-mvp', label: 'Build a new AI MVP instead' }}
       />
 
       <p className="text-center text-sm text-zinc-600 mb-16 max-w-lg mx-auto">

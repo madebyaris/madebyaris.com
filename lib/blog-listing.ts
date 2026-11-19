@@ -3,9 +3,9 @@ import { redirect } from 'next/navigation'
 import { buildPageMetadata } from '@/lib/seo'
 import { BLOG_POSTS_PER_PAGE, getAllTags, getPostsPaginated } from '@/lib/wordpress'
 
-const BLOG_TITLE = 'Next.js, Cursor & WordPress Blog'
+const BLOG_TITLE = 'AI Engineering, Cursor & Next.js Blog'
 const BLOG_DESCRIPTION =
-  'Guides on Next.js, Cursor, headless WordPress, and AI features from 13+ years of client work: costs, workflows, migrations, and SEO that holds up.'
+  'Field notes on AI agents, LLM systems, Cursor workflows, Next.js, headless WordPress, and technical SEO from 13+ years of shipping software.'
 
 export function parseBlogPageNumber(pageParam?: string): number {
   if (!pageParam) return 1

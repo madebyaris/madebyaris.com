@@ -21,9 +21,9 @@ import { contactHref } from '@/lib/contact-services'
 export const revalidate = 86400 // Revalidate daily
 
 const pagePath = '/product-engineering'
-const pageTitle = 'Product engineering for SaaS, mobile, Rust and AI'
+const pageTitle = 'Product & App Engineering: AI, SaaS & Rust'
 const pageDescription =
-  'I lead SaaS, mobile, Rust, commerce, go-to-market and AI builds, with trusted partners and AI agents so we ship fast. 13+ years. Projects from $5,000.'
+  'Senior AI software engineer building SaaS, web and mobile apps, Rust tools, and AI features for European and Indonesian teams. 13+ years. Projects from $5,000.'
 
 export const metadata: Metadata = buildPageMetadata({
   title: pageTitle,
@@ -32,12 +32,12 @@ export const metadata: Metadata = buildPageMetadata({
   image: '/images/services/saas.jpg',
   keywords: [
     'product engineering services',
+    'AI app development',
     'SaaS development services',
     'Rust development',
     'mobile app development',
-    'GTM engineering',
-    'ecommerce development services',
-    'AI development',
+    'remote AI engineer Europe',
+    'AI developer Indonesia',
   ],
 })
 
@@ -131,9 +131,9 @@ const faqs: FaqItem[] = [
   },
 
   {
-    question: 'Do you work with teams outside Indonesia?',
+    question: 'Do you work with European and Indonesian teams?',
     answer:
-      'Yes. I am based in Sidoarjo, Indonesia (UTC+7) and work with teams in Europe, Asia, the US, and the Middle East. I work Monday to Saturday, 9:00 to 17:00 WIB, in English or Indonesian, and we set a weekly check-in time during scoping.',
+      'Yes. I am based in Sidoarjo, Indonesia (UTC+7) and join European (EU and UK) and Indonesian engineering teams for AI and app builds. I work Monday to Saturday, 9:00 to 17:00 WIB, in English or Indonesian, which gives direct overlap with European mornings in CET and GMT.',
   },
 ]
 
@@ -149,7 +149,7 @@ const structuredData = buildPageGraph({
     name: pageTitle,
     description: pageDescription,
     serviceType: 'Product engineering',
-    areaServed: 'Worldwide',
+    areaServed: ['Europe', 'Indonesia', 'Worldwide'],
   },
 })
 

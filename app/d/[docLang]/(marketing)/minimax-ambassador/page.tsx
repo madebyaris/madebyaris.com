@@ -324,10 +324,10 @@ export default function MiniMaxAmbassadorPage() {
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
-              href="/services/ai-development"
+              href="/ai-implementation"
               className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3"
             >
-              <span>See AI development services</span>
+              <span>See AI engineering services</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>

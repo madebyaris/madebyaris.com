@@ -38,6 +38,7 @@ const RULES = [
   'Disallow: /api/',
   'Disallow: /_next/data/',
   'Disallow: /*?_rsc=',
+  'Disallow: /contact?*',
 ]
 
 export function GET() {

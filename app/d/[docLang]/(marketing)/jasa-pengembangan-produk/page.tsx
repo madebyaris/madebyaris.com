@@ -21,9 +21,9 @@ import { contactHref } from '@/lib/contact-services'
 export const revalidate = 86400 // Revalidate daily
 
 const pagePath = '/jasa-pengembangan-produk'
-const pageTitle = 'Jasa pengembangan produk: SaaS, mobile, Rust, AI'
+const pageTitle = 'Jasa Pembuatan Aplikasi Web, Mobile & AI'
 const pageDescription =
-  'Saya memimpin pembuatan SaaS, aplikasi mobile, software Rust, commerce, aplikasi go-to-market, dan fitur AI, dibantu agen AI dan partner. Mulai USD 5.000.'
+  'Jasa pembuatan aplikasi web, mobile, SaaS, software Rust, dan fitur AI untuk bisnis Indonesia. Dipimpin langsung AI software engineer senior 13+ tahun.'
 
 export const metadata: Metadata = buildPageMetadata({
   title: pageTitle,
@@ -32,11 +32,14 @@ export const metadata: Metadata = buildPageMetadata({
   image: '/images/services/saas.jpg',
   locale: 'id_ID',
   keywords: [
-    'jasa pengembangan produk digital',
+    'jasa pembuatan aplikasi',
+    'jasa pembuatan aplikasi web',
     'jasa pembuatan aplikasi mobile',
+    'jasa pembuatan aplikasi AI',
+    'jasa pengembangan produk digital',
     'jasa pengembangan aplikasi SaaS',
     'jasa pengembangan software Rust',
-    'jasa pembuatan aplikasi untuk perusahaan',
+    'AI engineer Indonesia',
   ],
 })
 
@@ -169,31 +172,29 @@ export default function JasaPengembanganProdukPage() {
       </nav>
 
       <PageHero
-        eyebrow={{ icon: <Rocket className="w-4 h-4 text-orange-500" />, label: 'Pengembangan produk' }}
-        title="Bangun produk kamu dengan cepat,"
-        accent="bersama tim yang dibantu AI"
+        eyebrow={{ icon: <Rocket className="w-4 h-4 text-orange-500" />, label: 'Jasa pembuatan aplikasi' }}
+        title="Jasa pembuatan aplikasi"
+        accent="web, mobile, SaaS dan AI"
         actions={
           <>
             <Link
               href={contactHref('product')}
               className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
             >
-              <span className="text-sm font-medium tracking-tight">Kirim ide produk kamu</span>
+              <span className="text-sm font-medium tracking-tight">Kirim ide aplikasi kamu</span>
               <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </Link>
             <Link
               href="/jasa-implementasi-ai"
               className="btn-secondary hover:bg-zinc-50 transition-all inline-flex text-sm font-medium text-black/60 rounded-full py-3 px-6 items-center"
             >
-              Lihat implementasi AI
+              Lihat jasa pembuatan AI
             </Link>
           </>
         }
       >
         <p>
-          SaaS, aplikasi mobile, software Rust, commerce, dan aplikasi go-to-market. Saya memimpin setiap proyek dan kamu
-          berbicara langsung dengan saya. Agen AI mengerjakan banyak bagian pembangunan dan partner tepercaya bergabung saat
-          proyek butuh lebih banyak tangan, sehingga kami bisa bergerak cepat.
+          Jasa pembuatan aplikasi SaaS, mobile, software Rust, commerce, dan fitur AI yang siap dipakai di produksi. Saya Aris Setiawan, AI software engineer di Indonesia dengan pengalaman 13+ tahun. Saya memimpin arsitektur setiap proyek, dibantu agen AI dan partner tepercaya agar hasil cepat tanpa mengorbankan kualitas kode.
         </p>
       </PageHero>
 

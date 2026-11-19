@@ -158,7 +158,17 @@ const nextConfig = {
     },
     {
       source: '/blog/how-to-optimize-your-website-using-ai',
-      destination: '/services/ai-development',
+      destination: '/ai-implementation',
+      permanent: true,
+    },
+    {
+      source: '/services/ai-development',
+      destination: '/ai-implementation',
+      permanent: true,
+    },
+    {
+      source: '/services/ai-development/',
+      destination: '/ai-implementation',
       permanent: true,
     },
     {

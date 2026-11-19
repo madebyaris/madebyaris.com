@@ -14,19 +14,17 @@ const navigationLinks = [
 ]
 
 const serviceLinks = [
-  { name: 'AI Implementation', href: '/ai-implementation' },
+  { name: 'AI Engineering', href: '/ai-implementation' },
+  { name: 'AI Integration', href: '/services/ai-development/ai-integration' },
+  { name: 'AI MVP Development', href: '/services/ai-development/ai-mvp' },
   { name: 'Product Engineering', href: '/product-engineering' },
-  { name: 'Jasa Implementasi AI', href: '/jasa-implementasi-ai' },
-  { name: 'Jasa Pengembangan Produk', href: '/jasa-pengembangan-produk' },
+  { name: 'Cursor & AI Workflows', href: '/services/vibe-code-friend' },
   { name: 'Next.js Development', href: '/services/nextjs-development' },
-  { name: 'AI Development', href: '/services/ai-development' },
   { name: 'SaaS Development', href: '/services/saas-development' },
   { name: 'Technical SEO', href: '/services/seo' },
-  { name: 'Jasa SEO', href: '/services/seo/jasa-seo' },
-  { name: 'WordPress Development', href: '/services/wordpress' },
-  { name: 'Cursor / AI Workflows', href: '/services/vibe-code-friend' },
-  { name: 'Headless WordPress', href: '/services/wordpress/headless-development' },
-  { name: 'PHP Development', href: '/services/php-development' },
+  { name: 'WordPress & Headless', href: '/services/wordpress' },
+  { name: 'Jasa Implementasi AI', href: '/jasa-implementasi-ai' },
+  { name: 'Jasa Pengembangan Produk', href: '/jasa-pengembangan-produk' },
 ]
 
 const socialLinks = [
@@ -56,7 +54,7 @@ export function Footer() {
             </h2>
           </div>
           <p className="md:text-2xl text-xl font-light italic text-zinc-500">
-            Next.js, AI &amp; WordPress developer
+            Senior AI software engineer and AI consultant
           </p>
         </div>
 
@@ -65,7 +63,7 @@ export function Footer() {
           <div className="flex items-start gap-2 lg:flex-row-reverse lg:text-right">
             <div className="w-2 h-2 bg-orange-500 rounded-full mt-2 animate-pulse" />
             <p className="leading-snug md:text-xl text-zinc-700 text-base font-light tracking-tight max-w-md">
-              Taking on new builds and Cursor mentoring for teams. Based in Indonesia, working with teams worldwide.
+              Joining European (EU and UK) and Indonesian engineering teams for AI systems, apps, and Cursor mentoring. UTC+7 with European morning overlap.
             </p>
           </div>
           <div className="flex items-center gap-2 text-zinc-500 lg:flex-row-reverse">
@@ -133,7 +131,7 @@ export function Footer() {
             Tell me what you need. I reply within 24 hours.
           </p>
           <Link
-            href={contactHref('other')}
+            href={contactHref('ai-implementation')}
             className="btn-primary rounded-full py-3 px-6 text-sm font-medium text-center inline-flex items-center justify-center gap-2 w-fit"
           >
             Send me your project

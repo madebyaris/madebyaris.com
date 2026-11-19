@@ -19,9 +19,9 @@ import { contactHref } from '@/lib/contact-services'
 export const revalidate = 86400 // Revalidate daily
 
 const pagePath = '/jasa-implementasi-ai'
-const pageTitle = 'Implementasi AI untuk perusahaan di Indonesia'
+const pageTitle = 'Jasa Pembuatan AI & Konsultan AI Indonesia'
 const pageDescription =
-  'Bawa pilot AI perusahaan kamu ke produksi, atau tambah fitur AI di sistem yang sudah ada. Dipimpin langsung oleh engineer senior, 13+ tahun.'
+  'Jasa pembuatan AI, implementasi AI, dan konsultan AI di Indonesia. Dipimpin AI engineer senior 13+ tahun: AI agent, chatbot data internal, dan sistem LLM.'
 
 export const metadata: Metadata = buildPageMetadata({
   title: pageTitle,
@@ -30,10 +30,13 @@ export const metadata: Metadata = buildPageMetadata({
   image: '/images/services/ai-integration.jpg',
   locale: 'id_ID',
   keywords: [
+    'jasa pembuatan AI',
+    'jasa AI',
+    'konsultan AI',
+    'konsultan AI Indonesia',
+    'AI engineer Indonesia',
     'jasa implementasi AI',
     'implementasi AI perusahaan',
-    'konsultan AI Indonesia',
-    'jasa pembuatan AI',
     'jasa AI agent',
     'AI hukum Indonesia',
   ],
@@ -184,9 +187,9 @@ export default function JasaImplementasiAiPage() {
       </nav>
 
       <PageHero
-        eyebrow={{ icon: <Rocket className="w-4 h-4 text-orange-500" />, label: 'Implementasi AI untuk perusahaan' }}
-        title="Implementasi AI untuk perusahaan besar,"
-        accent="dipimpin langsung oleh engineer senior"
+        eyebrow={{ icon: <Rocket className="w-4 h-4 text-orange-500" />, label: 'Jasa AI & konsultan AI Indonesia' }}
+        title="Jasa pembuatan AI dan"
+        accent="konsultan AI Indonesia"
         actions={
           <Link
             href={contactHref('ai-implementation')}
@@ -198,9 +201,7 @@ export default function JasaImplementasiAiPage() {
         }
       >
         <p className="mb-4">
-          Untuk tim teknologi, kepala produk, dan CTO di perusahaan besar Indonesia yang pilot AI-nya jalan di demo tetapi belum
-          siap dipakai banyak pengguna. Saya Aris Setiawan, dengan pengalaman 13+ tahun membangun produk web.
-          Saya bekerja di dalam sistem kamu, jadi hasilnya kode yang bisa dibaca dan dikembangkan tim kamu sendiri.
+          Untuk CTO, kepala produk, dan tim teknologi di perusahaan Indonesia yang membutuhkan jasa pembuatan AI atau konsultan AI berpengalaman untuk membawa pilot ke produksi. Saya Aris Setiawan, AI engineer Indonesia dengan pengalaman 13+ tahun membangun sistem web, AI agent, dan infrastruktur produksi.
         </p>
         <p className="text-sm text-zinc-500 font-normal">
           English version:{' '}
