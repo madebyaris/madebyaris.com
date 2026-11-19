@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Mail, MapPin, Clock, ArrowRight, Send, MessageSquare, ArrowUpRight } from 'lucide-react'
+import { Mail, MapPin, Clock, ArrowRight, Send, MessageSquare, ArrowUpRight, Bot, Rocket, Sparkles } from 'lucide-react'
 import Link from 'next/link'
 import { Suspense } from 'react'
 import { ContactForm } from '@/components/contact-form'
@@ -214,34 +214,36 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {[
             {
-              title: "Take an AI pilot or feature to production",
-              description: "AI agents, chatbots, MCP servers, and LLM harnesses wired into your real stack with evals, logging, and spend caps.",
-              icon: "🤖",
-              href: "/ai-implementation"
+              title: 'Take an AI pilot or feature to production',
+              description: 'AI agents, chatbots, MCP servers, and LLM harnesses wired into your real stack with evals, logging, and spend caps.',
+              icon: Bot,
+              href: '/ai-implementation',
             },
             {
-              title: "Build a full-stack product or web app",
-              description: "SaaS, Next.js, React, Vite, Fastify, Rust tooling, database tuning, or headless WordPress built for speed and clean SEO.",
-              icon: "🚀",
-              href: "/product-engineering"
+              title: 'Build a full-stack product or web app',
+              description: 'SaaS, Next.js, React, Vite, Fastify, Rust tooling, database tuning, or headless WordPress built for speed and clean SEO.',
+              icon: Rocket,
+              href: '/product-engineering',
             },
             {
-              title: "Train your engineering team on Cursor",
-              description: "Project rules and a review habit on one real repo, so AI-written code stops breaking your PRs.",
-              icon: "⚡",
-              href: "/services/vibe-code-friend"
-            }
+              title: 'Train your engineering team on Cursor',
+              description: 'Project rules and a review habit on one real repo, so AI-written code stops breaking your PRs.',
+              icon: Sparkles,
+              href: '/services/vibe-code-friend',
+            },
           ].map((service, index) => (
             <Link
               key={index}
               href={service.href}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow group block"
+              className="bg-white border border-[#E6E4DD] hover:border-[#0B0C0E] rounded-xl p-6 transition-colors group block"
             >
-              <div className="text-3xl mb-4">{service.icon}</div>
-              <h3 className="text-lg font-semibold text-zinc-900 mb-2 group-hover:text-orange-500 transition-colors">
+              <div className="p-2.5 bg-[#FAF9F6] border border-[#E6E4DD] rounded-lg w-fit mb-4 text-[#0B0C0E] group-hover:border-[#D9481E] group-hover:text-[#D9481E] transition-colors">
+                <service.icon className="w-5 h-5" />
+              </div>
+              <h3 className="font-display text-lg font-semibold text-[#0B0C0E] mb-2 group-hover:text-[#D9481E] transition-colors">
                 {service.title}
               </h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">
+              <p className="text-sm text-[#525660] leading-relaxed">
                 {service.description}
               </p>
             </Link>

@@ -230,25 +230,24 @@ export default function AiSearchGeoAeoPage() {
       </nav>
 
       <PageHero
-        eyebrow={{ icon: <Sparkles className="w-4 h-4 text-orange-500" />, label: 'GEO · AEO · Technical SEO · SG, ID & EU' }}
+        eyebrow={{ icon: <Sparkles className="w-4 h-4 text-[#D9481E]" />, label: 'GEO · AEO · Technical SEO · SG, ID & EU' }}
         title="AI search optimization"
         accent="engineered in your codebase"
         actions={
           <>
             <Link
               href={contactHref('geo-aeo')}
-              className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
+              className="btn-primary hover:scale-[1.02] transition-all inline-flex group text-sm font-medium rounded-full py-3 px-6 gap-3 items-center"
             >
               <span className="text-sm font-medium tracking-tight">Request a free AI visibility snapshot</span>
               <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </Link>
             <a
               href="#comparison"
-              className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
-              style={{ boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)' }}
+              className="btn-secondary inline-flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
             >
-              <span className="text-sm font-medium text-black/60 tracking-tight">Compare with GEO agencies</span>
-              <ArrowRight className="w-4 h-4 text-zinc-500" />
+              <span className="text-sm font-medium tracking-tight">Compare with GEO agencies</span>
+              <ArrowRight className="w-4 h-4 text-[#525660]" />
             </a>
           </>
         }
@@ -259,10 +258,68 @@ export default function AiSearchGeoAeoPage() {
           creator of RankMySEO. I audit your AI visibility, ship the schema and code fixes directly in your repo, and
           track every prompt and keyword.
         </p>
-        <p className="text-sm text-zinc-500 font-normal">
+        <p className="font-mono text-xs text-[#70747D]">
           13+ years shipping software · Built RankMySEO · English or Indonesian · Direct overlap with SG, ID, and EU mornings.
         </p>
       </PageHero>
+
+      {/* Architectural AI Visibility & Technical Diagnostic Preview */}
+      <section className="mb-16" aria-label="AI search diagnostic preview">
+        <div className="blueprint-surface rounded-2xl border border-[#232732] p-6 md:p-8 text-white">
+          <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-6 border-b border-white/10 font-mono text-xs">
+            <span className="inline-flex items-center gap-2 text-zinc-200">
+              <span className="h-2 w-2 rounded-full bg-emerald-400" />
+              rankmyseo · ai-visibility &amp; crawl inspection
+            </span>
+            <span className="text-zinc-400">ChatGPT · Gemini · Perplexity · Google AI Overviews</span>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            <div className="lg:col-span-7 bg-white/5 border border-white/10 rounded-xl p-5">
+              <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-[#E8714A] mb-2">
+                Sample buyer prompt check
+              </p>
+              <p className="font-mono text-sm text-white mb-4">
+                &ldquo;Who are the top technical SEO and AI engineering partners for Singapore &amp; EU SaaS teams?&rdquo;
+              </p>
+              <div className="grid grid-cols-3 gap-3 pt-4 border-t border-white/10 font-mono text-xs">
+                <div>
+                  <p className="text-zinc-400 text-[10px] uppercase">Tracked</p>
+                  <p className="text-white font-semibold mt-0.5">Brand mention</p>
+                </div>
+                <div>
+                  <p className="text-zinc-400 text-[10px] uppercase">Tracked</p>
+                  <p className="text-white font-semibold mt-0.5">Cited URL</p>
+                </div>
+                <div>
+                  <p className="text-zinc-400 text-[10px] uppercase">Tracked</p>
+                  <p className="text-white font-semibold mt-0.5">Rival share</p>
+                </div>
+              </div>
+            </div>
+            <div className="lg:col-span-5 bg-white/5 border border-white/10 rounded-xl p-5 font-mono text-xs space-y-2.5">
+              <p className="text-[11px] uppercase tracking-[0.14em] text-zinc-400 mb-3">
+                Codebase signals inspected
+              </p>
+              <div className="flex items-center justify-between text-zinc-200">
+                <span>/robots.txt AI crawlers</span>
+                <span className="text-emerald-400">CHECKED</span>
+              </div>
+              <div className="flex items-center justify-between text-zinc-200">
+                <span>/llms.txt &amp; /llms-full.txt</span>
+                <span className="text-emerald-400">CHECKED</span>
+              </div>
+              <div className="flex items-center justify-between text-zinc-200">
+                <span>Unified @id JSON-LD graph</span>
+                <span className="text-emerald-400">CHECKED</span>
+              </div>
+              <div className="flex items-center justify-between text-zinc-200">
+                <span>SSR HTML &amp; Core Web Vitals</span>
+                <span className="text-emerald-400">CHECKED</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section className="mb-16" aria-labelledby="geo-aeo-seo">
         <div className="max-w-2xl mb-8">

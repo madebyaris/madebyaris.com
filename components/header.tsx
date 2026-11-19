@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation"
 import { useState, useEffect, useRef, useCallback } from "react"
 import { cn } from "@/lib/utils"
 import { contactHref } from "@/lib/contact-services"
-import { Menu, ArrowRight, Layers } from "lucide-react"
+import { Menu, ArrowUpRight } from "lucide-react"
 import dynamic from "next/dynamic"
 import { HeaderNavDropdown } from "@/components/header-nav-dropdown"
 
@@ -21,8 +21,8 @@ interface NavigationItem {
 const navigationItems: NavigationItem[] = [
   { href: '/about', label: 'About' },
   { href: '/projects', label: 'Projects' },
-  { 
-    href: '/services', 
+  {
+    href: '/services',
     label: 'Services',
     children: [
       { href: '/ai-implementation', label: 'AI Engineering' },
@@ -34,7 +34,7 @@ const navigationItems: NavigationItem[] = [
       { href: '/services/ai-search-geo-aeo', label: 'AI Search (GEO & AEO)' },
       { href: '/services/seo', label: 'Technical SEO' },
       { href: '/services/wordpress', label: 'WordPress & Headless' },
-    ]
+    ],
   },
   { href: '/guides/cursor', label: 'Guides' },
   { href: '/blog', label: 'Blog' },
@@ -56,7 +56,7 @@ export function Header() {
 
   const closeDropdown = useCallback(() => {
     if (hoverTimeout.current) clearTimeout(hoverTimeout.current)
-    hoverTimeout.current = setTimeout(() => setActiveDropdown(null), 200)
+    hoverTimeout.current = setTimeout(() => setActiveDropdown(null), 180)
   }, [])
 
   useEffect(() => {
@@ -64,15 +64,13 @@ export function Header() {
     return () => cancelAnimationFrame(id)
   }, [])
 
-  // Toggle submenu expansion
   const toggleSubmenu = (href: string) => {
-    setExpandedItems(prev => ({
+    setExpandedItems((prev) => ({
       ...prev,
-      [href]: !prev[href]
+      [href]: !prev[href],
     }))
   }
 
-  // Prevent scrolling when menu is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden'
@@ -84,100 +82,109 @@ export function Header() {
     }
   }, [isOpen])
 
+  const brandMark = (
+    <div className="flex items-center gap-3">
+      <div className="flex h-8 w-8 items-center justify-center rounded-md bg-[#0B0C0E] text-[#FAF9F6] font-mono text-xs font-semibold tracking-tight">
+        MA
+      </div>
+      <div className="flex flex-col leading-none">
+        <span className="font-display text-sm font-semibold tracking-tight text-[#0B0C0E]">
+          MADEBYARIS
+        </span>
+        <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#70747D] mt-0.5">
+          AI · GEO · Systems
+        </span>
+      </div>
+    </div>
+  )
+
   if (!mounted) {
-    const headerClass =
-      "flex md:mb-16 md:gap-0 z-50 mb-10 relative gap-x-6 gap-y-6 items-center justify-between pt-6 md:pt-10 xl:pt-12 px-6 md:px-10 xl:px-12"
     return (
-      <header className={headerClass}>
-        <div className="flex items-center gap-2 text-zinc-900">
-          <div className="flex text-white bg-linear-to-b from-black/60 to-black/20 w-8 h-8 rounded-full items-center justify-center">
-            <Layers className="w-4 h-4" />
-          </div>
-          <span className="text-lg font-medium tracking-tight">MADE<span className="text-zinc-400">BYARIS</span></span>
+      <header className="sticky top-0 z-50 w-full border-b border-[#E6E4DD] bg-[#FAF9F6]/90 backdrop-blur-md">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-10 xl:px-14 h-16 flex items-center justify-between">
+          {brandMark}
         </div>
       </header>
     )
   }
 
-  const headerClass =
-    "flex md:mb-16 md:gap-0 z-50 mb-10 relative gap-x-6 gap-y-6 items-center justify-between pt-6 md:pt-10 xl:pt-12 px-6 md:px-10 xl:px-12"
-
   return (
-    <header className={headerClass}>
-      {/* Logo */}
-      <Link href="/" className="flex items-center gap-2 text-zinc-900 hover:opacity-80 transition-opacity">
-        <div 
-          className="flex text-white bg-linear-to-b from-black/60 to-black/20 w-8 h-8 rounded-full items-center justify-center relative"
-          style={{
-            position: 'relative',
-            // @ts-expect-error CSS custom properties
-            '--border-gradient': 'linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1))',
-            '--border-radius-before': '9999px'
-          }}
+    <header className="sticky top-0 z-50 w-full border-b border-[#E6E4DD] bg-[#FAF9F6]/92 backdrop-blur-md">
+      <div className="max-w-[1280px] mx-auto px-6 md:px-10 xl:px-14 h-16 flex items-center justify-between gap-6">
+        {/* Brand */}
+        <Link href="/" className="hover:opacity-85 transition-opacity shrink-0">
+          {brandMark}
+        </Link>
+
+        {/* Desktop Navigation */}
+        <nav
+          aria-label="Primary navigation"
+          className="hidden md:flex items-center gap-x-7 text-[13px] font-medium text-[#525660]"
         >
-          <Layers className="w-4 h-4" />
+          {navigationItems.map((item) =>
+            item.children ? (
+              <HeaderNavDropdown
+                key={item.href}
+                href={item.href}
+                label={item.label}
+                items={item.children}
+                pathname={pathname}
+                isOpen={activeDropdown === item.href}
+                onOpen={() => openDropdown(item.href)}
+                onClose={closeDropdown}
+              />
+            ) : (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  'py-2 transition-colors hover:text-[#0B0C0E]',
+                  pathname === item.href || pathname?.startsWith(item.href + '/')
+                    ? 'text-[#0B0C0E] font-semibold'
+                    : '',
+                )}
+              >
+                {item.label}
+              </Link>
+            ),
+          )}
+        </nav>
+
+        {/* Right Status + Primary CTA */}
+        <div className="hidden md:flex items-center gap-4 shrink-0">
+          <span className="hidden lg:inline-flex items-center gap-2 font-mono text-[11px] text-[#525660]">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+            UTC+7 · EU/SG/ID
+          </span>
+          <Link
+            href={contactHref('ai-implementation')}
+            className="btn-primary inline-flex items-center gap-2 rounded-full py-2 px-4 text-xs font-medium tracking-tight group"
+          >
+            <span>Start a project</span>
+            <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </Link>
         </div>
-        <span className="text-lg font-medium tracking-tight">MADE<span className="text-zinc-400">BYARIS</span></span>
-      </Link>
 
-      {/* Desktop Navigation */}
-      <nav className="hidden md:flex uppercase text-xs font-medium text-zinc-500 tracking-widest glass-nav rounded-full py-2 px-6 gap-x-8 items-center">
-        {navigationItems.map((item) =>
-          item.children ? (
-            <HeaderNavDropdown
-              key={item.href}
-              href={item.href}
-              label={item.label}
-              items={item.children}
-              pathname={pathname}
-              isOpen={activeDropdown === item.href}
-              onOpen={() => openDropdown(item.href)}
-              onClose={closeDropdown}
-            />
-          ) : (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "hover:text-zinc-900 transition-colors duration-300 flex items-center gap-1 py-2",
-                pathname === item.href || pathname?.startsWith(item.href + '/')
-                  ? "text-zinc-900"
-                  : ""
-              )}
-            >
-              {item.label}
-            </Link>
-          ),
-        )}
-      </nav>
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden p-2 rounded-lg border border-[#E6E4DD] bg-white hover:bg-[#F3F1EB] transition-colors"
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle menu"
+          aria-expanded={isOpen}
+        >
+          <Menu className="h-5 w-5 text-[#0B0C0E]" />
+        </button>
 
-      <Link 
-        href={contactHref('ai-implementation')}
-        className="hidden md:flex btn-primary items-center gap-2 group text-sm font-medium text-zinc-900 tracking-tight rounded-full py-3 px-6 transition-all hover:-translate-y-0.5"
-      >
-        <span className="text-sm font-medium tracking-tight">Hire me</span>
-        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-      </Link>
-
-      {/* Mobile Menu Button */}
-      <button
-        className="md:hidden p-2 hover:bg-zinc-100 rounded-lg transition-colors"
-        onClick={() => setIsOpen(!isOpen)}
-        aria-label="Toggle menu"
-        aria-expanded={isOpen}
-      >
-        <Menu className="h-6 w-6 text-zinc-900" />
-      </button>
-
-      {/* Mobile Navigation Overlay (lazy-loaded with framer-motion) */}
-      <MobileMenu
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        pathname={pathname}
-        navigationItems={navigationItems}
-        expandedItems={expandedItems}
-        toggleSubmenu={toggleSubmenu}
-      />
+        {/* Mobile Navigation Overlay */}
+        <MobileMenu
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          pathname={pathname}
+          navigationItems={navigationItems}
+          expandedItems={expandedItems}
+          toggleSubmenu={toggleSubmenu}
+        />
+      </div>
     </header>
   )
 }

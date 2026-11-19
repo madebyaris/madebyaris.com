@@ -22,16 +22,15 @@ import { buildPageGraph, buildPageMetadata, type FaqItem } from '@/lib/seo'
 import { JsonLd } from '@/components/seo/json-ld'
 import { HomeContent } from '@/components/home-content'
 import { OpenSourceProjects } from '@/components/page/open-source-projects'
+import { CtaBand } from '@/components/page/cta-band'
 import { contactHref } from '@/lib/contact-services'
 
-// Segment Configuration
 export const revalidate = 86400 // 24 hours
 
-// Loading fallbacks
 const PostsFallback = () => (
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     {[1, 2, 3].map((i) => (
-      <div key={i} className="animate-pulse bg-zinc-100 h-80 rounded-2xl" />
+      <div key={i} className="animate-pulse bg-[#F3F1EB] border border-[#E6E4DD] h-80 rounded-xl" />
     ))}
   </div>
 )
@@ -56,6 +55,13 @@ export const metadata: Metadata = buildPageMetadata({
   ],
 })
 
+const proofMetrics = [
+  { value: '13+ yrs', label: 'Shipping production software', note: 'Independent since 2015' },
+  { value: '480+ ★', label: 'Open-source AI & Rust code', note: 'nca, Spec Kit, Chaca, MCP' },
+  { value: '700K → 1.8M', label: 'Client Google impressions / 28d', note: 'Plus RankMySEO built in-house' },
+  { value: 'UTC+7', label: 'Direct EU & SG morning overlap', note: 'English & Bahasa Indonesia' },
+]
+
 const faqs: (FaqItem & { link?: { href: string; label: string } })[] = [
   {
     question: 'Why hire an AI engineer who also builds across the full stack?',
@@ -77,7 +83,7 @@ const faqs: (FaqItem & { link?: { href: string; label: string } })[] = [
   {
     question: 'What is the difference between Build and Level up?',
     answer:
-      'Build means you hire me to join your team or lead a scoped build: production AI features, agents, MCP tools, SaaS products, apps, or migrations. Level up means your own engineers keep writing the code and I coach them to ship clean, reviewable work with Cursor on one real repository.',
+      'Build means you hire me to join your team or lead a scoped build: production AI features, agents, MCP tools, SaaS products, apps, or GEO/SEO engineering. Level up means your own engineers keep writing the code and I coach them to ship clean, reviewable work with Cursor on one real repository.',
   },
 ]
 
@@ -87,7 +93,6 @@ const structuredData = buildPageGraph({
   description: pageDescription,
 })
 
-// Optimize Posts component with error handling and fallback
 async function Posts() {
   let posts: Awaited<ReturnType<typeof getPosts>> = []
   try {
@@ -101,35 +106,42 @@ async function Posts() {
   return <HomeContent type="posts" initialData={posts} />
 }
 
-// Flagship service cards
 const services = [
   {
+    code: '01',
     icon: Sparkles,
     title: 'AI engineering and implementation',
     description:
       'Take an AI pilot to production, or ship agents, chatbots, MCP tools, and LLM workflows inside your own repo, with evals, logging, and spend caps.',
     href: '/ai-implementation',
+    tag: 'Pilot to production · Retainer',
   },
   {
+    code: '02',
+    icon: Search,
+    title: 'AI search (GEO & AEO) and technical SEO',
+    description:
+      'Get cited in ChatGPT, Gemini, Perplexity, and Google AI Overviews with schema, llms.txt, and codebase fixes tracked in RankMySEO.',
+    href: '/services/ai-search-geo-aeo',
+    tag: 'Free RankMySEO AI snapshot',
+  },
+  {
+    code: '03',
     icon: Rocket,
-    title: 'Product engineering',
+    title: 'Product and app engineering',
     description:
       'SaaS, mobile apps, Rust CLI and desktop tools, commerce, and go-to-market software. I own the architecture and lead every build from scope to launch.',
     href: '/product-engineering',
+    tag: 'SaaS · Mobile · Rust',
   },
   {
+    code: '04',
     icon: Code2,
     title: 'Full-stack web and APIs',
     description:
       'Next.js, React, Vite, Fastify, PostgreSQL, MySQL, and headless WordPress engineered for fast mobile loads, clean structure, and reliable handoff.',
     href: '/services/nextjs-development',
-  },
-  {
-    icon: Search,
-    title: 'Technical SEO and performance',
-    description:
-      'Technical audits, structured data, Core Web Vitals fixes written directly in your codebase, and ongoing rank tracking powered by RankMySEO.',
-    href: '/services/seo',
+    tag: 'Next.js · Fastify · Headless WP',
   },
 ]
 
@@ -143,13 +155,13 @@ const skillDomains = [
   {
     icon: Layers,
     title: 'Frontend and web architecture',
-    summary: 'Fast interfaces and server-rendered apps that hold their search rankings.',
-    items: ['TypeScript', 'Next.js App Router', 'React & Vite', 'Tailwind CSS', 'Technical SEO'],
+    summary: 'Fast interfaces and server-rendered apps that hold Google and AI search visibility.',
+    items: ['TypeScript', 'Next.js App Router', 'React & Vite', 'Tailwind CSS', 'Technical SEO & GEO'],
   },
   {
     icon: Cpu,
     title: 'Backend, systems and data',
-    summary: 'High-throughput services, native tooling, and databases tuned for real load.',
+    summary: 'High-throughput services, native binaries, and databases tuned for real load.',
     items: ['Rust & Tauri', 'Node.js & Fastify', 'PHP & Laravel', 'PostgreSQL & MySQL', 'VPS & Vercel'],
   },
   {
@@ -162,18 +174,22 @@ const skillDomains = [
 
 const features = [
   {
+    code: '01',
     icon: Clock,
     text: '13+ years shipping production software, independent since 2015. You work directly with the engineer leading the architecture from scoping to launch.',
   },
   {
+    code: '02',
     icon: Award,
     text: 'First Cursor Ambassador in Indonesia, SpaceXAI Ambassador, and MiniMax Dev Community Expert. I build and ship with frontier AI models every week.',
   },
   {
+    code: '03',
     icon: Briefcase,
-    text: 'Before going full-time independent I worked at Hongkiat.com, co-founded Raja Kreatif Asia, and served as senior full-stack developer at SAB Digital Marketing Agency.',
+    text: 'Before running my practice full time I worked at Hongkiat.com, co-founded Raja Kreatif Asia, and served as senior full-stack developer at SAB Digital Marketing Agency.',
   },
   {
+    code: '04',
     icon: Home,
     text: 'Public proof you can inspect today: open-source Rust and MCP agent tools on GitHub, RankMySEO in production, and this headless WordPress and Next.js site.',
   },
@@ -184,169 +200,93 @@ export default function HomePage() {
     <>
       <JsonLd data={structuredData} />
 
-      {/* Hero Section */}
-      <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 pb-8 lg:pb-0 pt-4">
-        {/* Left Column: Text Content */}
-        <div className="lg:col-span-7 flex flex-col pt-4 relative justify-center">
-          {/* Social Proof Pill */}
-          <div
-            className="inline-flex bg-white/60 max-w-full rounded-2xl sm:rounded-full mb-8 py-1.5 pr-5 pl-1.5 shadow-sm backdrop-blur-sm items-center"
-            style={{
-              position: 'relative',
-              // @ts-expect-error CSS custom properties
-              '--border-gradient': 'linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0))',
-              '--border-radius-before': '9999px',
-            }}
-          >
-            <div className="w-6 h-6 shrink-0 rounded-full bg-zinc-900 text-white flex items-center justify-center mr-3">
-              <Award className="w-3.5 h-3.5" />
-            </div>
-            <span className="text-xs font-medium text-zinc-600 tracking-wide">
-              <span className="text-zinc-900">
-                AI engineer &amp; consultant · First Cursor Ambassador in Indonesia · Open for EU &amp; ID teams
+      {/* Editorial Architectural Hero */}
+      <section className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 pb-12 pt-2 items-stretch">
+        {/* Left Column */}
+        <div className="lg:col-span-7 flex flex-col justify-between">
+          <div>
+            <div className="inline-flex items-center gap-2.5 rounded-full border border-[#E6E4DD] bg-white px-3.5 py-1.5 mb-7">
+              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-[#525660]">
+                AI engineer &amp; consultant · Indonesia (UTC+7) · EU &amp; SG overlap
               </span>
-            </span>
-          </div>
+            </div>
 
-          {/* Headline */}
-          <h1 className="leading-[0.95] lg:text-[5rem] text-5xl font-medium text-zinc-900 tracking-tighter mb-8">
-            Senior AI
-            {' '}
-            <span className="block gradient-text font-light">Software Engineer</span>
-            {' '}
-            <span className="block">&amp; Consultant</span>
-          </h1>
+            <h1 className="font-display leading-[0.98] lg:text-[4.5rem] sm:text-6xl text-[2.75rem] font-semibold text-[#0B0C0E] tracking-[-0.035em] mb-7">
+              Senior AI
+              {' '}
+              <span className="block gradient-text font-normal">Software Engineer</span>
+              {' '}
+              <span className="block">&amp; Consultant</span>
+            </h1>
 
-          {/* Subheadline */}
-          <p className="text-sm text-zinc-500 font-medium max-w-lg mb-10 leading-relaxed tracking-wide border-l-2 border-zinc-200 pl-6">
-            Hi, I&apos;m <span className="text-zinc-900 font-semibold">Aris Setiawan</span>, an AI engineer and AI developer in Indonesia with 13+ years shipping software. I join European (EU and UK) and Indonesian engineering teams for AI and app projects, owning everything from LLM agents and MCP servers to Next.js, React, Fastify, Rust, and databases.
-          </p>
+            <p className="text-base text-[#4A4E57] max-w-xl mb-9 leading-relaxed border-l-2 border-[#D9481E] pl-5">
+              Hi, I&apos;m <strong className="text-[#0B0C0E] font-semibold">Aris Setiawan</strong>, an AI engineer and AI developer in Indonesia with 13+ years shipping software. I join European (EU and UK), Singaporean, and Indonesian engineering teams for AI systems, apps, and GEO/SEO work, owning everything from LLM agents and MCP servers to Next.js, React, Fastify, Rust, and databases.
+            </p>
 
-          {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 mb-4">
-            <Link
-              href={contactHref('ai-implementation')}
-              className="btn-primary hover:scale-[1.02] transition-all flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center justify-between"
-            >
-              <span className="text-sm font-medium tracking-tight">Send me your AI project</span>
-              <span className="flex items-center justify-center rounded-full bg-black/10 px-3 py-1">
+            <div className="flex flex-col sm:flex-row gap-3 mb-4">
+              <Link
+                href={contactHref('ai-implementation')}
+                className="btn-primary inline-flex items-center justify-between sm:justify-center gap-3 text-sm font-medium rounded-full py-3.5 px-6 group"
+              >
+                <span>Send me your AI project</span>
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </span>
-            </Link>
-            <Link
-              href="/services/vibe-code-friend"
-              className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
-              style={{
-                boxShadow: '0 18px 35px rgba(31, 41, 55, 0.25), 0 0 0 1px rgba(209, 213, 219, 0.3)',
-                position: 'relative',
-                // @ts-expect-error CSS custom properties
-                '--border-gradient': 'linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.4), rgba(255, 255, 255, 0.8))',
-                '--border-radius-before': '9999px',
-              }}
-            >
-              <span className="text-sm font-medium text-black/60 tracking-tight">Get Cursor mentoring for your team</span>
-              <ArrowRight className="w-4 h-4 text-zinc-500" />
-            </Link>
-          </div>
-          <p className="text-xs text-zinc-500 font-medium lg:mb-14 mb-10">
-            I reply within 24 hours and tell you plainly whether I&apos;m the right fit.
-          </p>
-
-          {/* Footer Stats with Curved Lines */}
-          <div className="flex flex-wrap gap-2 md:gap-6 mt-auto items-center">
-            {/* Stat 1 */}
-            <div className="flex items-center group cursor-default">
-              <div className="px-1 text-center">
-                <p className="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mb-1 group-hover:text-zinc-600 transition-colors">
-                  Experience
-                </p>
-                <p className="text-sm text-zinc-900 font-medium">13+ years</p>
-              </div>
-              <div className="curve-separator opacity-60 ml-4 md:ml-8" />
+              </Link>
+              <Link
+                href="/services/ai-search-geo-aeo"
+                className="btn-secondary inline-flex items-center justify-between sm:justify-center gap-2 text-sm font-medium rounded-full py-3.5 px-6 group"
+              >
+                <span>Request a free AI visibility snapshot</span>
+                <ArrowRight className="w-4 h-4 text-[#525660] group-hover:translate-x-0.5 transition-transform" />
+              </Link>
             </div>
 
-            {/* Stat 2 */}
-            <div className="flex items-center group cursor-default">
-              <div className="px-1 text-center">
-                <p className="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mb-1 group-hover:text-zinc-600 transition-colors">
-                  Independent
-                </p>
-                <p className="text-sm text-zinc-900 font-medium">Since 2015</p>
-              </div>
-              <div className="curve-separator md:ml-8 opacity-60 ml-4" />
-            </div>
-
-            {/* Stat 3 */}
-            <div className="flex items-center group cursor-default">
-              <div className="px-1 text-center">
-                <p className="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mb-1 group-hover:text-zinc-600 transition-colors">
-                  Time zone
-                </p>
-                <p className="text-sm text-zinc-900 font-medium">Indonesia (UTC+7) · EU morning overlap</p>
-              </div>
-            </div>
+            <p className="font-mono text-xs text-[#70747D]">
+              Direct reply within 24 hours · First Cursor Ambassador in Indonesia
+            </p>
           </div>
         </div>
 
-        {/* Right Column: Visual Card */}
-        <div className="lg:col-span-5 h-full min-h-[400px] lg:min-h-0 relative group perspective-midrange">
-          <div className="absolute inset-0 rounded-[2rem] overflow-hidden shadow-2xl shadow-zinc-900/20 transition-all duration-700 ease-out border border-white/20">
-            {/* Background Image */}
+        {/* Right Column: Architectural Portrait + Live Telemetry Strip */}
+        <div className="lg:col-span-5 flex flex-col">
+          <div className="relative flex-1 min-h-[420px] rounded-2xl overflow-hidden border border-[#E6E4DD] bg-[#0D0F14] group">
             <Image
               src="/aris.png"
               alt="Aris Setiawan, senior AI software engineer and the first Cursor Ambassador in Indonesia"
               fill
-              className="transition-transform duration-[2s] ease-in-out group-hover:scale-110 object-cover"
+              className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
               priority
               sizes="(max-width: 768px) 100vw, 40vw"
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0D0F14] via-[#0D0F14]/25 to-transparent" />
 
-            {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/90 via-zinc-900/20 to-zinc-900/10" />
-
-            {/* Overlay Content Container */}
-            <div className="flex flex-col p-8 absolute inset-0 justify-between">
-              {/* Top Row: Status Badge */}
-              <div className="flex items-start justify-between">
-                <div
-                  className="flex gap-2 bg-gradient-to-b from-white/10 to-white/0 rounded-full py-1.5 px-3 items-center"
-                  style={{
-                    position: 'relative',
-                    // @ts-expect-error CSS custom properties
-                    '--border-gradient': 'linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0))',
-                    '--border-radius-before': '9999px',
-                  }}
-                >
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-                  </span>
-                  <span className="text-[10px] uppercase font-semibold text-white tracking-wide">Taking new projects</span>
-                </div>
+            <div className="absolute inset-0 p-6 flex flex-col justify-between">
+              <div className="flex items-center justify-between">
+                <span className="inline-flex items-center gap-2 rounded-full bg-[#0D0F14]/80 border border-white/15 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-zinc-100 backdrop-blur-sm">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                  Taking new projects
+                </span>
+                <span className="rounded-full bg-[#0D0F14]/80 border border-white/15 px-2.5 py-1 font-mono text-[10px] text-zinc-300 backdrop-blur-sm">
+                  UTC+7
+                </span>
               </div>
 
-              {/* Bottom: Info Card */}
-              <div
-                className="self-end transform group-hover:translate-y-0 transition-transform duration-700 ease-out bg-gradient-to-b from-white/10 to-white/0 w-full max-w-[260px] rounded-xl p-4 backdrop-blur translate-y-4"
-                style={{
-                  position: 'relative',
-                  // @ts-expect-error CSS custom properties
-                  '--border-gradient': 'linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0))',
-                  '--border-radius-before': '12px',
-                }}
-              >
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-full bg-orange-500 flex items-center justify-center text-white text-[10px] font-bold">
-                      A
-                    </div>
-                    <span className="text-xs text-white font-medium">Aris Setiawan</span>
+              <div className="rounded-xl bg-[#0D0F14]/90 border border-white/15 p-4 backdrop-blur-md">
+                <div className="flex items-center justify-between pb-3 mb-3 border-b border-white/10">
+                  <div>
+                    <p className="font-display text-sm font-semibold text-white">Aris Setiawan</p>
+                    <p className="font-mono text-[11px] text-zinc-400">AI Software Engineer · Creator of RankMySEO</p>
                   </div>
-                  <span className="text-[10px] text-emerald-400 font-mono">Remote</span>
+                  <span className="font-mono text-[10px] uppercase tracking-wider text-emerald-400">
+                    EU · SG · ID
+                  </span>
                 </div>
-                <div className="flex flex-col gap-1">
-                  <span className="text-[9px] text-white/60 uppercase">Ships with</span>
-                  <span className="text-sm text-white font-medium">AI Agents · Rust · Next.js · Cursor</span>
+                <div className="flex flex-wrap gap-1.5 font-mono text-[10px] text-zinc-300">
+                  <span className="px-2 py-0.5 rounded bg-white/10">AI Agents</span>
+                  <span className="px-2 py-0.5 rounded bg-white/10">MCP</span>
+                  <span className="px-2 py-0.5 rounded bg-white/10">Rust</span>
+                  <span className="px-2 py-0.5 rounded bg-white/10">Next.js</span>
+                  <span className="px-2 py-0.5 rounded bg-white/10">GEO / SEO</span>
                 </div>
               </div>
             </div>
@@ -354,32 +294,43 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Separator */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent my-12 lg:my-16 opacity-60" />
+      {/* Architectural Proof Strip */}
+      <section aria-label="Key metrics" className="mb-16">
+        <div className="grid grid-cols-2 lg:grid-cols-4 border border-[#E6E4DD] rounded-xl bg-white divide-y lg:divide-y-0 divide-x divide-[#E6E4DD] overflow-hidden">
+          {proofMetrics.map((item) => (
+            <div key={item.label} className="p-5 md:p-6">
+              <p className="font-display text-2xl md:text-3xl font-semibold tracking-tight text-[#0B0C0E] mb-1">
+                {item.value}
+              </p>
+              <p className="text-xs font-medium text-[#0B0C0E] mb-1">{item.label}</p>
+              <p className="font-mono text-[11px] text-[#70747D]">{item.note}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
-      {/* Services Bento Grid Section */}
-      <section className="flex flex-col gap-10 w-full relative">
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 px-1">
+      {/* 01 / Services Bento Grid */}
+      <section className="flex flex-col gap-8 w-full mb-20">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="max-w-2xl">
-            <h2 className="md:text-5xl text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
-              AI engineering and
+            <span className="section-index block mb-2">01 / Capabilities</span>
+            <h2 className="font-display md:text-4xl text-3xl font-medium text-[#0B0C0E] tracking-tight mb-3">
+              AI engineering, GEO/SEO and
               <span className="gradient-text"> full-stack builds</span>
             </h2>
-            <p className="leading-relaxed text-base font-normal text-zinc-500">
+            <p className="leading-relaxed text-base text-[#525660]">
               Start where your team is stuck. Each page spells out what you get, how I work, and what it takes to begin.
             </p>
           </div>
           <Link
             href="/services"
-            className="group flex items-center gap-2 hover:text-orange-500 transition-colors text-sm font-normal text-zinc-900 pb-1"
+            className="group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.12em] text-[#0B0C0E] hover:text-[#D9481E] transition-colors pb-1"
           >
             Compare all services
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
 
-        {/* Bento Grid */}
         <div className="bento-grid grid-cols-1 md:grid-cols-2">
           {services.map((service) => (
             <Link
@@ -387,48 +338,49 @@ export default function HomePage() {
               href={service.href}
               className="bento-card group relative overflow-hidden"
             >
-              <div className="relative z-10">
-                <div className="flex items-center gap-2 mb-3 text-zinc-400">
-                  <service.icon className="w-6 h-6" />
+              <div>
+                <div className="flex items-center justify-between mb-5">
+                  <div className="p-2.5 rounded-lg bg-[#FAF9F6] border border-[#E6E4DD] text-[#0B0C0E] group-hover:border-[#D9481E] group-hover:text-[#D9481E] transition-colors">
+                    <service.icon className="w-5 h-5" />
+                  </div>
+                  <span className="font-mono text-xs text-[#70747D]">{service.code}</span>
                 </div>
-                <h3 className="text-lg font-semibold text-zinc-900 mb-2 tracking-tight group-hover:text-orange-500 transition-colors">
+                <h3 className="font-display text-xl font-semibold text-[#0B0C0E] mb-2.5 tracking-tight group-hover:text-[#D9481E] transition-colors">
                   {service.title}
                 </h3>
-                <p className="text-sm text-zinc-500 font-medium leading-relaxed">
+                <p className="text-sm text-[#525660] leading-relaxed mb-6">
                   {service.description}
                 </p>
               </div>
 
-              {/* Hover Arrow */}
-              <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
-                <ArrowUpRight className="w-5 h-5 text-orange-500" />
+              <div className="flex items-center justify-between pt-4 border-t border-[#E6E4DD]/80">
+                <span className="font-mono text-[11px] text-[#70747D]">{service.tag}</span>
+                <ArrowUpRight className="w-4 h-4 text-[#70747D] group-hover:text-[#D9481E] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
               </div>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* Separator */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent my-12 lg:my-16 opacity-60" />
-
-      {/* Full-stack skills behind the AI */}
-      <section className="flex flex-col gap-10 w-full relative" aria-labelledby="home-skills">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 px-1">
+      {/* 02 / Full-stack skills behind the AI */}
+      <section className="flex flex-col gap-8 w-full mb-20" aria-labelledby="home-skills">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="max-w-2xl">
-            <h2 id="home-skills" className="md:text-5xl text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+            <span className="section-index block mb-2">02 / Technical Depth</span>
+            <h2 id="home-skills" className="font-display md:text-4xl text-3xl font-medium text-[#0B0C0E] tracking-tight mb-3">
               Skills across
               <span className="gradient-text"> the production stack</span>
             </h2>
-            <p className="leading-relaxed text-base font-normal text-zinc-500">
+            <p className="leading-relaxed text-base text-[#525660]">
               AI models only become useful once they are wired into auth, databases, APIs, UI, and infrastructure. Here is the toolkit I ship with every week.
             </p>
           </div>
           <Link
             href="/about"
-            className="group flex items-center gap-2 hover:text-orange-500 transition-colors text-sm font-normal text-zinc-900 pb-1"
+            className="group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.12em] text-[#0B0C0E] hover:text-[#D9481E] transition-colors pb-1"
           >
             Read my full background
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
 
@@ -436,22 +388,22 @@ export default function HomePage() {
           {skillDomains.map((domain) => (
             <div
               key={domain.title}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm flex flex-col"
+              className="bg-white border border-[#E6E4DD] rounded-xl p-6 flex flex-col"
             >
-              <div className="p-2.5 bg-zinc-100 rounded-xl w-fit mb-4 text-zinc-700">
-                <domain.icon className="w-5 h-5" />
+              <div className="p-2.5 bg-[#FAF9F6] border border-[#E6E4DD] rounded-lg w-fit mb-4 text-[#0B0C0E]">
+                <domain.icon className="w-4 h-4" />
               </div>
-              <h3 className="text-base font-semibold text-zinc-900 mb-2 tracking-tight">
+              <h3 className="font-display text-base font-semibold text-[#0B0C0E] mb-2 tracking-tight">
                 {domain.title}
               </h3>
-              <p className="text-sm text-zinc-500 leading-relaxed mb-4">
+              <p className="text-sm text-[#525660] leading-relaxed mb-5">
                 {domain.summary}
               </p>
               <ul className="flex flex-wrap gap-1.5 mt-auto">
                 {domain.items.map((item) => (
                   <li
                     key={item}
-                    className="px-2.5 py-1 bg-zinc-100 rounded-full text-xs text-zinc-700 font-medium"
+                    className="px-2.5 py-1 bg-[#FAF9F6] border border-[#E6E4DD] rounded-md font-mono text-[11px] text-[#3F434D]"
                   >
                     {item}
                   </li>
@@ -462,87 +414,68 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Separator */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent my-12 lg:my-16 opacity-60" />
-
-      {/* Open source proof */}
+      {/* 03 / Open source proof */}
       <OpenSourceProjects
         id="home-open-source"
         title="Open-source AI and developer tools"
         intro="All my client work is under NDA, so my public proof is production code you can inspect on GitHub before you write to me."
       />
 
-      {/* Separator */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent my-12 lg:my-16 opacity-60" />
-
-      {/* Level Up Section */}
-      <section className="flex flex-col gap-8 w-full relative">
-        <div className="bento-card group relative overflow-hidden p-8 md:p-10">
-          <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
-            <div className="max-w-2xl">
-              <div className="flex items-center gap-2 mb-3 text-zinc-400">
-                <Sparkles className="w-6 h-6" />
-              </div>
-              <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-                Level up: Cursor mentoring
-                <span className="gradient-text"> for your engineering team</span>
-              </h2>
-              <p className="leading-relaxed text-base font-normal text-zinc-500">
-                Your team bought Cursor seats and the PRs got messier. I set up project rules and a review habit on one real repo, then help the rest of the team adopt it. English or Indonesian.
-              </p>
-            </div>
-            <div className="flex flex-col gap-3 items-start lg:items-end">
-              <Link
-                href="/services/vibe-code-friend"
-                className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
-                style={{
-                  boxShadow: '0 18px 35px rgba(31, 41, 55, 0.25), 0 0 0 1px rgba(209, 213, 219, 0.3)',
-                  position: 'relative',
-                  // @ts-expect-error CSS custom properties
-                  '--border-gradient': 'linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.4), rgba(255, 255, 255, 0.8))',
-                  '--border-radius-before': '9999px',
-                }}
-              >
-                See how Cursor mentoring works
-                <ArrowRight className="w-4 h-4 text-zinc-500" />
-              </Link>
-              <Link
-                href="https://bootcamp.madebyaris.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center gap-1 text-xs font-medium text-zinc-500 hover:text-orange-500 transition-colors"
-              >
-                Prefer a structured course? Try the bootcamp
-                <ArrowUpRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
+      {/* 04 / Level Up Section */}
+      <section className="mb-20">
+        <div className="rounded-2xl border border-[#E6E4DD] bg-white p-8 md:p-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+          <div className="max-w-2xl">
+            <span className="section-index block mb-2">04 / Team Training</span>
+            <h2 className="font-display text-2xl md:text-3xl font-medium text-[#0B0C0E] tracking-tight mb-3">
+              Level up: Cursor mentoring
+              <span className="gradient-text"> for your engineering team</span>
+            </h2>
+            <p className="leading-relaxed text-base text-[#525660]">
+              Your team bought Cursor seats and the PRs got messier. I set up project rules and a review habit on one real repo, then help the rest of the team adopt it. English or Indonesian.
+            </p>
+          </div>
+          <div className="flex flex-col gap-3 items-start lg:items-end shrink-0">
+            <Link
+              href="/services/vibe-code-friend"
+              className="btn-secondary inline-flex items-center gap-2 text-sm font-medium rounded-full py-3 px-6"
+            >
+              <span>See how Cursor mentoring works</span>
+              <ArrowRight className="w-4 h-4 text-[#525660]" />
+            </Link>
+            <Link
+              href="https://bootcamp.madebyaris.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-1 font-mono text-xs text-[#70747D] hover:text-[#D9481E] transition-colors"
+            >
+              Prefer a structured course? Try the bootcamp
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Separator */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent my-12 lg:my-16 opacity-60" />
-
-      {/* Features Row */}
-      <section className="flex flex-col gap-16 w-full relative">
-        <div className="max-w-2xl px-1 -mb-6">
-          <h2 className="md:text-5xl text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+      {/* 05 / Track Record + FAQ */}
+      <section className="flex flex-col gap-12 w-full mb-20">
+        <div className="max-w-2xl">
+          <span className="section-index block mb-2">05 / Track Record</span>
+          <h2 className="font-display md:text-4xl text-3xl font-medium text-[#0B0C0E] tracking-tight mb-3">
             Why teams
             <span className="gradient-text"> hire me</span>
           </h2>
-          <p className="leading-relaxed text-base font-normal text-zinc-500">
+          <p className="leading-relaxed text-base text-[#525660]">
             You work directly with the engineer who designs the architecture and ships the code, from the first scoping call to launch.
           </p>
         </div>
 
-        {/* Top Feature Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-          {features.map((feature, index) => (
-            <div key={index} className="flex flex-col gap-4">
-              <div className="text-zinc-900">
-                <feature.icon className="w-7 h-7" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {features.map((feature) => (
+            <div key={feature.code} className="bg-white border border-[#E6E4DD] rounded-xl p-6 flex flex-col gap-4">
+              <div className="flex items-center justify-between">
+                <feature.icon className="w-5 h-5 text-[#0B0C0E]" />
+                <span className="font-mono text-xs text-[#70747D]">{feature.code}</span>
               </div>
-              <p className="leading-relaxed text-base font-medium text-zinc-900">
+              <p className="leading-relaxed text-sm text-[#3F434D]">
                 {feature.text}
               </p>
             </div>
@@ -551,21 +484,26 @@ export default function HomePage() {
 
         {/* FAQ */}
         <div className="max-w-3xl w-full" aria-labelledby="home-faq">
-          <h2 id="home-faq" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-6">
+          <h2 id="home-faq" className="font-display text-2xl md:text-3xl font-medium text-[#0B0C0E] tracking-tight mb-6">
             Questions before you hire
           </h2>
-          <div className="space-y-3">
-            {faqs.map((faq) => (
-              <details key={faq.question} className="group bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm open:shadow-md">
-                <summary className="cursor-pointer list-none font-semibold text-zinc-900 flex items-center justify-between gap-4">
-                  {faq.question}
-                  <span className="text-orange-500 transition-transform group-open:rotate-45 text-xl leading-none">+</span>
+          <div className="border border-[#E6E4DD] rounded-2xl bg-white divide-y divide-[#E6E4DD] overflow-hidden">
+            {faqs.map((faq, index) => (
+              <details key={faq.question} className="group p-5 md:p-6 open:bg-[#FAF9F6]/60 transition-colors">
+                <summary className="cursor-pointer list-none font-medium text-[#0B0C0E] flex items-center justify-between gap-4">
+                  <span className="flex items-baseline gap-3">
+                    <span className="font-mono text-xs text-[#70747D]">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span>{faq.question}</span>
+                  </span>
+                  <span className="text-[#D9481E] transition-transform group-open:rotate-45 text-xl leading-none shrink-0">+</span>
                 </summary>
-                <p className="mt-3 text-sm text-zinc-600 leading-relaxed">{faq.answer}</p>
+                <p className="mt-3 pl-7 text-sm text-[#525660] leading-relaxed">{faq.answer}</p>
                 {faq.link && (
                   <Link
                     href={faq.link.href}
-                    className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-orange-500 hover:text-orange-600"
+                    className="mt-3 pl-7 inline-flex items-center gap-1 text-sm font-medium text-[#D9481E] hover:text-[#B93815]"
                   >
                     {faq.link.label}
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -576,67 +514,33 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Main CTA Card */}
-        <div className="overflow-hidden min-h-[500px] lg:min-h-[600px] shadow-zinc-900/30 bg-zinc-900 rounded-[2rem] relative shadow-2xl">
-          {/* Grid Pattern Overlay */}
-          <div
-            className="absolute inset-0 opacity-10"
-            style={{
-              backgroundImage: 'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)',
-              backgroundSize: '40px 40px',
-            }}
-          />
-
-          {/* Content Container */}
-          <div className="flex flex-col p-8 md:p-12 lg:p-16 justify-center min-h-[500px] lg:min-h-[600px] relative">
-            <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-3xl">
-              Tell me what you&apos;re building
-            </h2>
-            <p className="text-zinc-400 mb-8 max-w-xl font-medium">
-              A URL, a stalled AI pilot, or two sentences about your stack is enough. I read every request myself, reply within 24 hours, and send a written plan before any code if we go ahead.
-            </p>
-
-            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-              <Link
-                href={contactHref('ai-implementation')}
-                className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 w-fit shadow-lg hover:shadow-xl hover:-translate-y-0.5"
-              >
-                <span>Send me your project</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link
-                href="/services/vibe-code-friend"
-                className="group flex items-center gap-1 text-sm font-medium text-white/70 hover:text-white transition-colors"
-              >
-                Or get Cursor mentoring for your team
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
-          </div>
-        </div>
+        <CtaBand
+          title="Tell me what you’re building"
+          body="A URL, a stalled AI pilot, or two sentences about your stack is enough. I read every request myself, reply within 24 hours, and send a written plan before any code if we go ahead."
+          primary={{ href: contactHref('ai-implementation'), label: 'Send me your project' }}
+          secondary={{ href: '/services/vibe-code-friend', label: 'Or get Cursor mentoring for your team' }}
+        />
       </section>
 
-      {/* Separator */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent my-12 lg:my-16 opacity-60" />
-
-      {/* Recent Blog Posts */}
-      <section className="flex flex-col gap-10 w-full relative cv-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 px-1">
+      {/* 06 / Recent Blog Posts */}
+      <section className="flex flex-col gap-8 w-full cv-auto">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="max-w-2xl">
-            <h2 className="md:text-5xl text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+            <span className="section-index block mb-2">06 / Writing</span>
+            <h2 className="font-display md:text-4xl text-3xl font-medium text-[#0B0C0E] tracking-tight mb-3">
               Latest
               <span className="gradient-text"> engineering notes</span>
             </h2>
-            <p className="leading-relaxed text-base font-normal text-zinc-500">
+            <p className="leading-relaxed text-base text-[#525660]">
               AI agents, Cursor workflows, Next.js, headless WordPress, and technical SEO, written from production work I ship.
             </p>
           </div>
           <Link
             href="/blog"
-            className="group flex items-center gap-2 hover:text-orange-500 transition-colors text-sm font-normal text-zinc-900 pb-1"
+            className="group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.12em] text-[#0B0C0E] hover:text-[#D9481E] transition-colors pb-1"
           >
             Read all guides
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
 

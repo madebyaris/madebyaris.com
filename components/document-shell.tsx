@@ -1,4 +1,4 @@
-import { Inter } from 'next/font/google'
+import { JetBrains_Mono, Plus_Jakarta_Sans, Space_Grotesk } from 'next/font/google'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import AnalyticsWrapper from '@/components/providers/analytics-wrapper'
@@ -8,50 +8,81 @@ import { JsonLd } from '@/components/seo/json-ld'
 import { cn } from '@/lib/utils'
 import type { DocumentLang } from '@/lib/document-lang'
 
-export const inter = Inter({
+export const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-jakarta',
   display: 'swap',
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['400', '500', '600', '700'],
+})
+
+export const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-space',
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+})
+
+export const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-jetbrains',
+  display: 'swap',
+  weight: ['400', '500', '600'],
 })
 
 export function documentBodyClassName() {
   return cn(
-    'min-h-screen antialiased selection:bg-slate-900 selection:text-white',
-    inter.variable,
+    'min-h-screen bg-[#FAF9F6] text-[#0B0C0E] antialiased selection:bg-[#0B0C0E] selection:text-[#FAF9F6]',
+    plusJakarta.variable,
+    spaceGrotesk.variable,
+    jetbrainsMono.variable,
     'font-sans',
   )
 }
 
-/** Site chrome inside the document body (header, footer, main panel). */
+/** Full-bleed architectural site shell (sticky header, framed 1px hairline rail container, footer). */
 export function SiteChrome({ children }: { children: React.ReactNode }) {
   return (
     <>
       <JsonLd data={buildSiteGraph()} />
 
-      <div
-        className="fixed inset-0 -z-10 bg-zinc-400"
-        style={{
-          backgroundImage:
-            'radial-gradient(circle at 20% 10%, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 55%), radial-gradient(circle at 80% 30%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 60%), linear-gradient(180deg, rgba(161,161,170,1) 0%, rgba(212,212,216,1) 100%)',
-        }}
-        aria-hidden="true"
-      />
+      <a href="#main-content" className="skip-to-content">
+        Skip to content
+      </a>
 
-      <div className="flex justify-center items-start min-h-screen px-0 py-0 xl:p-8">
-        <main className="glass-panel overflow-hidden flex flex-col xl:max-w-[1300px] z-10 xl:border-white/50 border-none xl:border xl:rounded-[2.5rem] min-h-screen xl:min-h-[700px] w-full rounded-none relative xl:shadow-2xl">
-          <div className="absolute inset-0 flex justify-between pointer-events-none z-0 px-6 md:px-10 xl:px-12 w-full h-full">
-            <div className="h-full w-px bg-zinc-950/5" />
-            <div className="h-full w-px bg-zinc-950/5 hidden md:block" />
-            <div className="h-full w-px bg-zinc-950/5 hidden lg:block" />
-            <div className="h-full w-px bg-zinc-950/5 hidden xl:block" />
-            <div className="h-full w-px bg-zinc-950/5" />
+      <div className="min-h-screen flex flex-col bg-[#FAF9F6] text-[#0B0C0E] relative">
+        {/* Subtle top ambient architectural wash */}
+        <div
+          className="pointer-events-none fixed inset-x-0 top-0 h-[420px] -z-10"
+          style={{
+            backgroundImage:
+              'radial-gradient(60% 60% at 50% 0%, rgba(217, 72, 30, 0.045) 0%, rgba(250, 249, 246, 0) 100%)',
+          }}
+          aria-hidden="true"
+        />
+
+        <Header />
+
+        <main
+          id="main-content"
+          className="flex-1 w-full max-w-[1280px] mx-auto border-x border-[#E6E4DD]/80 bg-[#FAF9F6] relative"
+        >
+          {/* Architectural vertical guide rails */}
+          <div
+            className="absolute inset-0 flex justify-between pointer-events-none z-0 px-6 md:px-10 xl:px-14"
+            aria-hidden="true"
+          >
+            <div className="h-full w-px bg-[#0B0C0E]/[0.035]" />
+            <div className="h-full w-px bg-[#0B0C0E]/[0.035] hidden md:block" />
+            <div className="h-full w-px bg-[#0B0C0E]/[0.035] hidden lg:block" />
+            <div className="h-full w-px bg-[#0B0C0E]/[0.035]" />
           </div>
 
-          <Header />
-          <div className="flex-1 relative z-10 px-6 md:px-10 xl:px-12 pb-8">{children}</div>
-          <Footer />
+          <div className="relative z-10 px-6 md:px-10 xl:px-14 pt-8 md:pt-12 pb-16">
+            {children}
+          </div>
         </main>
+
+        <Footer />
       </div>
 
       <AnalyticsWrapper />
@@ -70,13 +101,7 @@ export function DocumentShell({
 }) {
   return (
     <html lang={docLang} suppressHydrationWarning>
-      <body
-        suppressHydrationWarning
-        className={documentBodyClassName()}
-        style={{
-          fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
-        }}
-      >
+      <body suppressHydrationWarning className={documentBodyClassName()}>
         <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
