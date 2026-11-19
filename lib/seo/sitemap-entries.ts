@@ -36,6 +36,7 @@ const serviceRoutes = [
   { path: 'services/ai-development/ai-mvp', priority: 0.8, changeFreq: 'monthly' },
   { path: 'services/ai-development/ai-integration', priority: 0.8, changeFreq: 'monthly' },
   { path: 'services/seo', priority: 0.9, changeFreq: 'weekly' },
+  { path: 'services/ai-search-geo-aeo', priority: 0.9, changeFreq: 'weekly' },
   { path: 'services/jasa-optimasi-react', priority: 0.6, changeFreq: 'monthly' },
   { path: 'services/jasa-vite', priority: 0.6, changeFreq: 'monthly' },
   { path: 'services/jasa-fastify', priority: 0.6, changeFreq: 'monthly' },

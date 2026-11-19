@@ -22,9 +22,9 @@ import { contactHref } from '@/lib/contact-services'
 export const revalidate = 86400 // Revalidate daily
 
 const pagePath = '/services/seo/jasa-seo'
-const pageTitle = 'Jasa SEO website: audit, riset keyword, SEO bulanan'
+const pageTitle = 'Jasa SEO Website: Audit, Riset & SEO Bulanan'
 const pageDescription =
-  'Jasa SEO dari developer: audit SEO, riset keyword dan kompetitor, perbaikan langsung di kode, dan SEO bulanan dengan pantauan peringkat di RankMySEO.'
+  'Jasa SEO oleh AI software engineer senior dan pembuat RankMySEO: audit teknis, riset keyword, perbaikan langsung di kode, dan SEO bulanan untuk bisnis.'
 
 export const metadata: Metadata = buildPageMetadata({
   title: pageTitle,
@@ -278,8 +278,7 @@ export default function JasaSeoPage() {
           desain. Saya mengaudit website kamu, meriset keyword yang diketik calon pembeli, lalu memimpin perbaikannya di kode.
         </p>
         <p className="text-sm text-zinc-500 font-normal">
-          Developer web 13+ tahun, tinggal di Sidoarjo dekat Surabaya. Saya juga membuat RankMySEO, rank tracker yang
-          menyimpan riwayat peringkat Google setiap hari.
+          AI software engineer senior 13+ tahun di Sidoarjo dekat Surabaya, dan pembuat RankMySEO, rank tracker yang menyimpan riwayat peringkat Google setiap hari.
         </p>
       </PageHero>
 

@@ -22,9 +22,9 @@ import { contactHref } from '@/lib/contact-services'
 export const revalidate = 86400 // Revalidate daily
 
 const pagePath = '/services/saas-development'
-const pageTitle = 'SaaS development company: low running cost'
+const pageTitle = 'SaaS Development Services: Low Running Cost'
 const pageDescription =
-  'SaaS development services from one senior developer. Custom SaaS and MVPs built to cost little to run, with the expected monthly cost in the written plan.'
+  'SaaS development by a senior AI software engineer for EU and Indonesian teams. Custom SaaS and AI MVPs engineered for low hosting and token bills.'
 
 export const metadata: Metadata = buildPageMetadata({
   title: pageTitle,
@@ -157,9 +157,9 @@ const faqs: FaqItem[] = [
       'I scope each build after a call, because a billing dashboard and a multi-tenant product with AI are different work. The written plan has the build price and the expected monthly running cost. You see both numbers before I write any code.',
   },
   {
-    question: 'Are you a SaaS development company or a freelancer?',
+    question: 'Are you a SaaS development company or an individual engineer?',
     answer:
-      'I am one independent developer, and I have worked this way since 2015. The person on every call is the person writing the code. If your project needs more people than one developer can be, I will say so on the scoping call.',
+      'I am a senior AI software engineer who has led client builds since 2015. You work directly with me on architecture and weekly demos, and when a build needs extra hands, trusted partners join alongside AI agents so we ship quickly. I tell you before we start.',
   },
   {
     question: 'Do you offer SaaS MVP development?',
@@ -195,6 +195,7 @@ const structuredData = buildPageGraph({
     name: 'SaaS development services',
     description: pageDescription,
     serviceType: 'SaaS Development',
+    areaServed: ['Europe', 'Indonesia', 'Worldwide'],
     offers: [
       { name: 'Custom SaaS development' },
       { name: 'SaaS MVP development' },
@@ -243,11 +244,10 @@ export default function SaasDevelopmentPage() {
         }
       >
         <p className="mb-4">
-          For founders who want a SaaS that costs little while users are few and keeps working as they grow. I plan it,
-          build it, and hand you the code.
+          For European (EU and UK) and Indonesian founders who want a SaaS or AI web app that stays cheap to run while users are few and scales cleanly as revenue grows. I own the architecture, ship the build, and hand over clean code in your repo.
         </p>
         <p className="text-sm text-zinc-500 font-normal">
-          13+ years shipping web products. First Cursor Ambassador in Indonesia. I built and run RankMySEO, a rank tracking SaaS.
+          Senior AI software engineer · 13+ years shipping software · UTC+7 with European morning overlap · Creator of RankMySEO.
         </p>
       </PageHero>
 

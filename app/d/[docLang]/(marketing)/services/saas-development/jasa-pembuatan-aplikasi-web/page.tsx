@@ -28,9 +28,9 @@ import { contactHref } from '@/lib/contact-services'
 export const revalidate = 86400 // Revalidate daily
 
 const pagePath = '/services/saas-development/jasa-pembuatan-aplikasi-web'
-const pageTitle = 'Jasa pembuatan aplikasi web hemat biaya'
+const pageTitle = 'Jasa Pembuatan Aplikasi Web & SaaS Hemat Biaya'
 const pageDescription =
-  'Jasa pembuatan aplikasi web dan SaaS oleh developer 13+ tahun. Biaya server dirancang kecil sejak awal, perkiraan biaya bulanan ditulis di rencana kerja.'
+  'Jasa pembuatan aplikasi web, dashboard, dan SaaS AI oleh AI software engineer senior 13+ tahun. Biaya server dan token AI dirancang kecil sejak awal.'
 
 export const metadata: Metadata = buildPageMetadata({
   title: pageTitle,
@@ -254,11 +254,10 @@ export default function JasaPembuatanAplikasiWebPage() {
         }
       >
         <p className="mb-4">
-          Untuk pemilik bisnis dan founder yang butuh aplikasi web dengan tagihan server kecil selama penggunanya masih
-          sedikit. Saya rancang, saya bangun, lalu kodenya saya serahkan ke kamu.
+          Untuk pemilik bisnis dan founder di Indonesia yang butuh aplikasi web, dashboard, atau SaaS dengan tagihan server kecil dan siap dipasangi fitur AI. Saya rancang arsitekturnya, saya pimpin pengerjaannya, lalu kodenya saya serahkan ke repo kamu.
         </p>
         <p className="text-sm text-zinc-500 font-normal">
-          Developer web 13+ tahun dan Cursor Ambassador pertama di Indonesia. Saya membangun dan menjalankan RankMySEO, sebuah SaaS rank tracker.
+          AI software engineer senior 13+ tahun · First Cursor Ambassador in Indonesia · Pembuat RankMySEO.
         </p>
       </PageHero>
 

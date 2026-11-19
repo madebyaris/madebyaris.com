@@ -118,6 +118,7 @@ const structuredData = buildPageGraph({
     name: 'Vercel cost optimization and deployment for Next.js',
     description: pageDescription,
     serviceType: 'Vercel Deployment',
+    areaServed: ['Europe', 'Indonesia', 'Worldwide'],
     offers: [
       { name: 'Vercel usage and cost review' },
       { name: 'Caching and ISR revalidation setup' },
@@ -160,9 +161,9 @@ export default function VercelDeploymentPage() {
         </h1>
 
         <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-4 leading-relaxed font-medium">
-          For teams whose Vercel bill grew faster than their traffic, or who want to deploy Next.js to
-          Vercel without surprises later. I find which routes drive the cost and change the code
-          behind them.
+          For European and Indonesian engineering teams whose Vercel bill grew faster than traffic,
+          or who want to deploy Next.js and AI routes to Vercel without surprise compute costs. I
+          trace the usage back to the exact routes and fix it in code.
         </p>
 
         <p className="text-sm text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed">

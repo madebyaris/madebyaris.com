@@ -73,7 +73,7 @@ const faqs: FaqItem[] = [
   {
     question: 'Which stacks do you fix?',
     answer:
-      'Mostly JavaScript and TypeScript apps (React, Next.js, Node.js), plus PHP and WordPress. If your stack is outside what I know well, I’ll tell you after I look, before I quote.',
+      'TypeScript and JavaScript apps (Next.js, React, Vite, Fastify, Node.js), Rust and Tauri tools, PostgreSQL and MySQL backends, plus PHP and WordPress. If your stack is outside what I ship daily, I tell you before quoting.',
   },
   {
     question: 'Will I understand the fix afterward?',
@@ -100,6 +100,7 @@ const structuredData = buildPageGraph({
     name: 'Fix AI-generated code and vibe coding cleanup',
     description: pageDescription,
     serviceType: 'Code Debugging',
+    areaServed: ['Europe', 'Indonesia', 'Worldwide'],
     offers: [
       { name: 'Bug diagnosis in AI-generated code' },
       { name: 'Build and deploy failure fixes' },
@@ -146,11 +147,11 @@ export default function CodeFixingPage() {
         </h1>
 
         <p className="text-base md:text-lg text-zinc-600 max-w-2xl mx-auto mb-4 leading-relaxed font-medium">
-          For founders and developers whose app was built with Cursor, Claude, or ChatGPT and now breaks in ways nobody can explain. I’ve shipped web products for 13+ years and I write client code in Cursor every week.
+          For founders and European or Indonesian teams whose app was generated with Cursor, Claude, or ChatGPT and now breaks in ways nobody can explain. I am a senior AI software engineer with 13+ years shipping production codebases.
         </p>
 
         <p className="text-sm text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed">
-          Fixed price, quoted after I read your code.
+          Fixed price, quoted after I read your repo · English or Indonesian · CET/GMT morning overlap.
         </p>
 
         <div className="flex flex-wrap justify-center gap-3">

@@ -28,9 +28,9 @@ import { contactHref } from '@/lib/contact-services'
 export const revalidate = 86400 // Revalidate daily
 
 const pagePath = '/services/ai-development/ai-integration'
-const pageTitle = 'AI integration services for existing apps'
+const pageTitle = 'AI Integration Services for Existing Apps'
 const pageDescription =
-  'AI integration services for your app or business: answers from your docs, support reply drafts, document extraction, and agents, with spend caps and testing.'
+  'AI integration services for EU and Indonesian teams: docs Q&A, support drafts, data extraction, and AI agents inside your existing codebase with spend caps.'
 
 export const metadata: Metadata = buildPageMetadata({
   title: pageTitle,
@@ -45,6 +45,7 @@ export const metadata: Metadata = buildPageMetadata({
     'integrate ChatGPT into a website',
     'AI chatbot for business',
     'AI agents',
+    'AI developer Europe',
   ],
 })
 
@@ -252,6 +253,7 @@ const structuredData = buildPageGraph({
     name: 'AI integration services',
     description: pageDescription,
     serviceType: 'AI Integration',
+    areaServed: ['Europe', 'Indonesia', 'Worldwide'],
     offers: [
       { name: 'Search and Q&A over your own docs' },
       { name: 'AI support reply drafting' },
@@ -303,12 +305,13 @@ export default function AiIntegrationPage() {
         }
       >
         <p className="mb-4">
-          For businesses and product teams who want one AI feature working inside the app, site, or tools they already have.
-          I add it next to your current code, with spend caps and tested answers before launch.
+          For European (EU and UK) and Indonesian product teams who want production AI features wired directly into the
+          app, API, or tools they already run. I work inside your existing repo with evals, spend caps, and morning
+          overlap in CET and GMT.
         </p>
         <p className="text-sm text-zinc-500 font-normal">
-          13+ years shipping web products on Next.js, PHP, and WordPress. First Cursor Ambassador in Indonesia, SpaceXAI
-          Ambassador, and MiniMax Dev Community Expert.
+          Senior AI software engineer · 13+ years shipping TypeScript, Next.js, React, Fastify, Rust, PHP, and WordPress ·
+          First Cursor Ambassador in Indonesia · MiniMax Dev Community Expert.
         </p>
       </PageHero>
 

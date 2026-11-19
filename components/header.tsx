@@ -31,6 +31,7 @@ const navigationItems: NavigationItem[] = [
       { href: '/product-engineering', label: 'Product Engineering' },
       { href: '/services/vibe-code-friend', label: 'Cursor & AI Workflows' },
       { href: '/services/nextjs-development', label: 'Next.js Development' },
+      { href: '/services/ai-search-geo-aeo', label: 'AI Search (GEO & AEO)' },
       { href: '/services/seo', label: 'Technical SEO' },
       { href: '/services/wordpress', label: 'WordPress & Headless' },
     ]
