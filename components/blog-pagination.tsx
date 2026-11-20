@@ -48,9 +48,9 @@ export function BlogPagination({ currentPage, totalPages }: BlogPaginationProps)
   return (
     <nav
       aria-label="Blog pagination"
-      className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-between"
+      className="mt-12 flex flex-col items-center gap-4 border-t border-[#E5E7EB] pt-8 sm:flex-row sm:justify-between"
     >
-      <p className="text-sm font-medium text-zinc-500">
+      <p className="font-mono text-xs font-medium uppercase tracking-[0.12em] text-[#525660]">
         Page {currentPage} of {totalPages}
       </p>
 
@@ -58,24 +58,24 @@ export function BlogPagination({ currentPage, totalPages }: BlogPaginationProps)
         {hasPreviousPage ? (
           <Link
             href={buildBlogPageHref(currentPage - 1)}
-            className="inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm font-medium text-zinc-700 transition-colors hover:border-orange-200 hover:bg-orange-50 hover:text-orange-600"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-sm font-semibold text-[#0B0C0E] transition-colors hover:border-[#3A57FC] hover:bg-[#F3F5FF] hover:text-[#3A57FC]"
           >
             <ChevronLeft className="h-4 w-4" />
             Previous
           </Link>
         ) : (
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-zinc-100 bg-zinc-50 px-4 py-2 text-sm font-medium text-zinc-300">
+          <span className="inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-4 py-2 text-sm font-medium text-[#9CA3AF]">
             <ChevronLeft className="h-4 w-4" />
             Previous
           </span>
         )}
 
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1.5">
           {visiblePages.map((page, index) =>
             page === 'ellipsis' ? (
               <span
                 key={`ellipsis-${index}`}
-                className="px-2 text-sm font-medium text-zinc-400"
+                className="px-2 font-mono text-sm font-medium text-[#6B7280]"
                 aria-hidden="true"
               >
                 ...
@@ -84,7 +84,7 @@ export function BlogPagination({ currentPage, totalPages }: BlogPaginationProps)
               <span
                 key={page}
                 aria-current="page"
-                className="inline-flex min-w-10 items-center justify-center rounded-full bg-orange-500 px-3 py-2 text-sm font-semibold text-white shadow-sm"
+                className="inline-flex min-w-10 items-center justify-center rounded-lg border border-[#3A57FC] bg-[#3A57FC] px-3 py-2 text-sm font-semibold text-white shadow-[0_8px_20px_-8px_rgba(58,87,252,0.55)]"
               >
                 {page}
               </span>
@@ -92,7 +92,7 @@ export function BlogPagination({ currentPage, totalPages }: BlogPaginationProps)
               <Link
                 key={page}
                 href={buildBlogPageHref(page)}
-                className="inline-flex min-w-10 items-center justify-center rounded-full border border-zinc-200 bg-white px-3 py-2 text-sm font-medium text-zinc-700 transition-colors hover:border-orange-200 hover:bg-orange-50 hover:text-orange-600"
+                className="inline-flex min-w-10 items-center justify-center rounded-lg border border-[#E5E7EB] bg-white px-3 py-2 text-sm font-semibold text-[#0B0C0E] transition-colors hover:border-[#3A57FC] hover:bg-[#F3F5FF] hover:text-[#3A57FC]"
               >
                 {page}
               </Link>
@@ -103,13 +103,13 @@ export function BlogPagination({ currentPage, totalPages }: BlogPaginationProps)
         {hasNextPage ? (
           <Link
             href={buildBlogPageHref(currentPage + 1)}
-            className="inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm font-medium text-zinc-700 transition-colors hover:border-orange-200 hover:bg-orange-50 hover:text-orange-600"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-sm font-semibold text-[#0B0C0E] transition-colors hover:border-[#3A57FC] hover:bg-[#F3F5FF] hover:text-[#3A57FC]"
           >
             Next
             <ChevronRight className="h-4 w-4" />
           </Link>
         ) : (
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-zinc-100 bg-zinc-50 px-4 py-2 text-sm font-medium text-zinc-300">
+          <span className="inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-4 py-2 text-sm font-medium text-[#9CA3AF]">
             Next
             <ChevronRight className="h-4 w-4" />
           </span>

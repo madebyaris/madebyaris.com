@@ -19,14 +19,14 @@ const buttonVariants = cva(
         ghost: 
           "hover:bg-zinc-100 hover:text-zinc-900 text-zinc-600",
         link: 
-          "text-orange-500 underline-offset-4 hover:underline",
+          "text-[#3A57FC] underline-offset-4 hover:underline",
         primary:
-          "bg-gradient-to-b from-orange-400 to-orange-500 text-zinc-900 font-medium shadow-[0_15px_25px_-10px_rgba(248,113,22,0.7),inset_0_4px_8px_rgba(253,230,138,0.9),inset_0_-4px_8px_rgba(249,115,22,0.9)] hover:-translate-y-0.5 hover:shadow-[0_20px_30px_-10px_rgba(248,113,22,0.8),inset_0_4px_8px_rgba(253,230,138,0.9),inset_0_-4px_8px_rgba(249,115,22,0.9)]",
+          "bg-[#FF8800] text-white font-semibold hover:bg-[#E67600] shadow-[0_8px_20px_-6px_rgba(255,136,0,0.45)] hover:-translate-y-0.5 transition-all",
         "glass":
           "bg-white/50 backdrop-blur-sm border border-white/60 text-zinc-700 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] hover:bg-white/70",
         // Legacy WordPress VIP variants (kept for compatibility)
         "wp-primary": 
-          "bg-orange-500 text-white shadow-lg shadow-orange-500/30 hover:bg-orange-600 hover:-translate-y-0.5 hover:shadow-xl transition-all duration-200",
+          "bg-[#FF8800] text-white shadow-sm hover:bg-[#E67600] hover:-translate-y-0.5 transition-all duration-200",
         "wp-secondary":
           "bg-transparent text-zinc-900 border-2 border-zinc-900 hover:bg-zinc-900 hover:text-white hover:-translate-y-0.5 transition-all duration-200",
         "wp-outline":

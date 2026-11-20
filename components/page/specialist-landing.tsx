@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import Link from 'next/link'
-import { ArrowUpRight, CheckCircle2 } from 'lucide-react'
+import { ArrowUpRight, Check } from 'lucide-react'
 import { PageHero } from '@/components/page/hero'
 import { Faq } from '@/components/page/faq'
 import { CtaBand } from '@/components/page/cta-band'
@@ -57,17 +57,30 @@ const labels = {
     related: 'Related:',
     seeAll: 'See all product engineering',
     seeAllHref: '/product-engineering',
+    diagnosisIndex: '01 / Diagnosis',
+    scopeIndex: '02 / Scope & Deliverables',
+    proofEyebrow: 'Production Proof',
+    processIndex: '03 / Delivery Process',
+    stepPrefix: 'STEP',
+    ctaBadge: 'Direct founder inquiry · 24h reply',
   },
   id: {
     home: 'Layanan',
     howItGoes: 'Alur kerjanya',
-    related: 'Terkait:',
+    related: 'Layanan terkait:',
     seeAll: 'Lihat semua pengembangan produk',
     seeAllHref: '/jasa-pengembangan-produk',
+    diagnosisIndex: '01 / Tanda Masalah',
+    scopeIndex: '02 / Ruang Lingkup',
+    proofEyebrow: 'Bukti Produksi',
+    processIndex: '03 / Alur Kerja',
+    stepPrefix: 'TAHAP',
+    ctaBadge: 'Diskusi langsung · Balas dalam 24 jam',
   },
 } as const
 
-const linkClass = 'underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors'
+const linkClass =
+  'font-medium text-[#3A57FC] underline decoration-[#DDE4FF] underline-offset-4 hover:text-[#FF8800] transition-colors'
 
 export function SpecialistLanding(props: SpecialistLandingProps) {
   const locale = props.locale ?? 'en'
@@ -95,11 +108,17 @@ export function SpecialistLanding(props: SpecialistLandingProps) {
     <div lang={locale}>
       <JsonLd data={structuredData} />
 
-      <nav className="mb-8" aria-label="Breadcrumb">
-        <ol className="flex items-center space-x-2 text-sm text-zinc-500">
-          <li><Link href="/services" className="hover:text-orange-500 transition-colors">{t.home}</Link></li>
-          <li><span className="px-2">/</span></li>
-          <li className="text-zinc-900">{props.breadcrumbName}</li>
+      <nav className="mb-6" aria-label="Breadcrumb">
+        <ol className="flex items-center space-x-2 font-mono text-xs text-[#6B7280]">
+          <li>
+            <Link href="/services" className="hover:text-[#3A57FC] transition-colors">
+              {t.home}
+            </Link>
+          </li>
+          <li>
+            <span className="px-1">/</span>
+          </li>
+          <li className="text-[#0B0C0E] font-medium">{props.breadcrumbName}</li>
         </ol>
       </nav>
 
@@ -110,9 +129,9 @@ export function SpecialistLanding(props: SpecialistLandingProps) {
         actions={
           <Link
             href={primaryHref}
-            className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
+            className="btn-primary inline-flex items-center gap-2.5 text-sm font-bold rounded-md py-3.5 px-6 group"
           >
-            <span className="text-sm font-medium tracking-tight">{props.ctaLabel}</span>
+            <span>{props.ctaLabel}</span>
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </Link>
         }
@@ -120,69 +139,120 @@ export function SpecialistLanding(props: SpecialistLandingProps) {
         {props.intro}
       </PageHero>
 
-      <section className="mb-16 max-w-3xl mx-auto" aria-labelledby="signs">
-        <h2 id="signs" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-6">
-          {props.signsTitle}
-        </h2>
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-          <ul className="space-y-3">
-            {props.signs.map((item) => (
-              <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                <CheckCircle2 className="w-5 h-5 text-orange-500 shrink-0" />
-                {item}
-              </li>
-            ))}
-          </ul>
+      {/* Signs / When teams call */}
+      <section className="mb-16" aria-labelledby="signs">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <div className="lg:col-span-4">
+            <span className="section-index block mb-2">{t.diagnosisIndex}</span>
+            <h2
+              id="signs"
+              className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight"
+            >
+              {props.signsTitle}
+            </h2>
+          </div>
+          <div className="lg:col-span-8 rounded-2xl border border-[#E5E7EB] bg-[#F8FAFC] p-6 md:p-8">
+            <ul className="space-y-3.5">
+              {props.signs.map((item) => (
+                <li
+                  key={item}
+                  className="flex items-start gap-3 text-sm sm:text-base text-[#1F2937] leading-relaxed"
+                >
+                  <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-[#EEF2FF] text-[#3A57FC]">
+                    <Check strokeWidth={2.5} className="w-3.5 h-3.5" />
+                  </span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 
+      {/* Deliverables Grid */}
       <section className="mb-16" aria-labelledby="what-i-do">
-        <div className="text-center mb-10">
-          <h2 id="what-i-do" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+        <div className="mb-10 max-w-2xl">
+          <span className="section-index block mb-2">{t.scopeIndex}</span>
+          <h2
+            id="what-i-do"
+            className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-[#0B0C0E] tracking-tight"
+          >
             {props.offersTitle}
           </h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
-          {props.offers.map((item) => (
-            <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-              <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{item.body}</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {props.offers.map((item, idx) => (
+            <div
+              key={item.title}
+              className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.25)] transition-all p-6 md:p-7 flex flex-col justify-between"
+            >
+              <div>
+                <span className="font-mono text-xs font-bold text-[#3A57FC] bg-[#EEF2FF] border border-[#DDE4FF] rounded-md px-2 py-0.5 inline-block mb-3">
+                  {String(idx + 1).padStart(2, '0')}
+                </span>
+                <h3 className="font-display text-lg sm:text-xl font-bold text-[#0B0C0E] mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-[#4B5563] leading-relaxed">{item.body}</p>
+              </div>
               {item.href && item.cta && (
-                <Link href={item.href} className={`${linkClass} text-sm inline-block mt-3`}>
+                <Link
+                  href={item.href}
+                  className="mt-5 pt-4 border-t border-[#E5E7EB] inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-[#3A57FC] hover:text-[#FF8800] transition-colors"
+                >
                   {item.cta}
+                  <ArrowUpRight className="w-3.5 h-3.5" />
                 </Link>
               )}
             </div>
           ))}
         </div>
         {props.sourceNote && (
-          <p className="text-xs text-zinc-400 max-w-4xl mx-auto mt-4">{props.sourceNote}</p>
+          <p className="font-mono text-xs text-[#6B7280] mt-4">{props.sourceNote}</p>
         )}
       </section>
 
       {props.proof && (
-        <section className="mb-16 max-w-3xl mx-auto" aria-labelledby="proof">
-          <h2 id="proof" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+        <section
+          className="mb-16 rounded-2xl border border-[#E5E7EB] bg-[#0B0C0E] text-white p-6 sm:p-8 md:p-10"
+          aria-labelledby="proof"
+        >
+          <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-[#FFB866] block mb-2">
+            {t.proofEyebrow}
+          </span>
+          <h2
+            id="proof"
+            className="font-display text-2xl md:text-3xl font-bold text-white tracking-tight mb-4"
+          >
             {props.proof.title}
           </h2>
-          <div className="text-zinc-600 leading-relaxed">{props.proof.body}</div>
+          <div className="text-zinc-300 leading-relaxed max-w-3xl [&_a]:text-[#93A8FF] [&_a]:underline [&_strong]:text-white">
+            {props.proof.body}
+          </div>
         </section>
       )}
 
+      {/* Process */}
       <section className="mb-16" aria-labelledby="how-it-goes">
-        <div className="text-center mb-10">
-          <h2 id="how-it-goes" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+        <div className="mb-10 max-w-2xl">
+          <span className="section-index block mb-2">{t.processIndex}</span>
+          <h2
+            id="how-it-goes"
+            className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-[#0B0C0E] tracking-tight"
+          >
             {t.howItGoes}
           </h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border border-[#E5E7EB] rounded-2xl bg-white divide-y lg:divide-y-0 lg:divide-x divide-[#E5E7EB] overflow-hidden">
           {props.steps.map((item, index) => (
-            <div key={item.title} className="bg-zinc-50 rounded-2xl p-5 text-center">
-              <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-500 font-bold text-lg flex items-center justify-center mx-auto mb-3">
-                {index + 1}
-              </div>
-              <h3 className="font-semibold text-zinc-900 mb-1">{item.title}</h3>
-              <p className="text-sm text-zinc-500">{item.desc}</p>
+            <div key={item.title} className="p-6 hover:bg-[#F8FAFC] transition-colors">
+              <span className="font-mono text-xs font-bold text-[#3A57FC] block mb-3">
+                {t.stepPrefix} {String(index + 1).padStart(2, '0')}
+              </span>
+              <h3 className="font-display text-base font-bold text-[#0B0C0E] mb-2">
+                {item.title}
+              </h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
@@ -201,11 +271,12 @@ export function SpecialistLanding(props: SpecialistLandingProps) {
       <CtaBand
         title={props.ctaTitle}
         body={props.ctaBody}
+        badge={t.ctaBadge}
         primary={{ href: primaryHref, label: props.ctaLabel }}
         secondary={{ href: t.seeAllHref, label: t.seeAll }}
       />
 
-      <p className="text-center text-sm text-zinc-600 mb-16 max-w-xl mx-auto">
+      <p className="text-center text-sm text-[#4B5563] mb-6 max-w-xl mx-auto">
         {t.related}{' '}
         {props.related.map((item, index) => (
           <span key={item.href}>
@@ -219,7 +290,7 @@ export function SpecialistLanding(props: SpecialistLandingProps) {
       </p>
 
       {props.alternate && (
-        <p className="text-center text-sm text-zinc-600 mb-16 max-w-xl mx-auto">
+        <p className="text-center text-sm text-[#4B5563] max-w-xl mx-auto">
           {props.alternate.prefix}{' '}
           <Link href={props.alternate.href} className={linkClass}>
             {props.alternate.label}

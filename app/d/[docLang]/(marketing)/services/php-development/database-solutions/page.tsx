@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, ArrowUpRight, Database, Zap, BarChart, CheckCircle2, XCircle, Code2, ShoppingCart } from 'lucide-react'
+import { PageHero } from '@/components/page/hero'
+import { Faq } from '@/components/page/faq'
+import { CtaBand } from '@/components/page/cta-band'
 import { buildPageGraph, buildPageMetadata, type FaqItem } from '@/lib/seo'
 import { JsonLd } from '@/components/seo/json-ld'
 import { contactHref } from '@/lib/contact-services'
@@ -146,7 +149,7 @@ const structuredData = buildPageGraph({
   },
 })
 
-const linkClass = 'underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors'
+const linkClass = 'text-[#3A57FC] underline decoration-[#3A57FC]/35 underline-offset-4 hover:text-[#2944E0] hover:decoration-[#3A57FC] transition-colors'
 
 export default function DatabaseSolutionsPage() {
   return (
@@ -154,83 +157,74 @@ export default function DatabaseSolutionsPage() {
       <JsonLd data={structuredData} />
 
       {/* Breadcrumb */}
-      <nav className="mb-8" aria-label="Breadcrumb">
-        <ol className="flex items-center space-x-2 text-sm text-zinc-500">
-          <li><Link href="/services" className="hover:text-orange-500 transition-colors">Services</Link></li>
-          <li><span className="px-2">/</span></li>
-          <li><Link href="/services/php-development" className="hover:text-orange-500 transition-colors">PHP Development</Link></li>
-          <li><span className="px-2">/</span></li>
-          <li className="text-zinc-900">MySQL Optimization</li>
+      <nav className="mb-6" aria-label="Breadcrumb">
+        <ol className="flex flex-wrap items-center gap-1.5 text-sm text-[#4B5563]">
+          <li><Link href="/services" className="hover:text-[#3A57FC] transition-colors">Services</Link></li>
+          <li aria-hidden="true" className="text-[#9CA3AF]">/</li>
+          <li><Link href="/services/php-development" className="hover:text-[#3A57FC] transition-colors">PHP Development</Link></li>
+          <li aria-hidden="true" className="text-[#9CA3AF]">/</li>
+          <li className="font-medium text-[#0B0C0E]" aria-current="page">MySQL Optimization</li>
         </ol>
       </nav>
 
-      {/* Hero Section */}
-      <section className="text-center pt-4 pb-16">
-        <div className="inline-flex bg-white/60 rounded-full mb-8 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
-          <Database className="w-4 h-4 text-orange-500" />
-          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">MySQL for PHP apps</span>
-        </div>
-
-        <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
-          MySQL database optimization
-          {' '}<span className="block gradient-text font-light">for PHP apps that got slow</span>
-        </h1>
-
-        <p className="text-base md:text-lg text-zinc-600 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
+      <PageHero
+        eyebrow={{ icon: <Database className="w-3.5 h-3.5" />, label: 'MySQL for PHP apps' }}
+        title="MySQL database optimization"
+        accent="for PHP apps that got slow"
+        actions={
+          <>
+            <Link
+              href={contactHref('php')}
+              className="btn-primary inline-flex items-center gap-2.5 rounded-md py-3.5 px-6 text-sm font-bold group"
+            >
+              <span>Ask about your slow queries</span>
+              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </Link>
+            <Link
+              href="/services/php-development"
+              className="btn-secondary inline-flex items-center gap-2 rounded-md py-3.5 px-6 text-sm font-semibold group"
+            >
+              <span>See all PHP services</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            </Link>
+          </>
+        }
+      >
+        <p>
           This page is for teams whose PHP app gets slower as the tables grow. I find the slow MySQL queries in your app. I fix each one at the source. I scope each job separately before I quote a price.
         </p>
-
-        <div className="flex flex-wrap justify-center gap-3">
-          <Link
-            href={contactHref('php')}
-            className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
-          >
-            <span className="text-sm font-medium tracking-tight">Ask about your slow queries</span>
-            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </Link>
-          <Link
-            href="/services/php-development"
-            className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
-            style={{ boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)' }}
-          >
-            <span className="text-sm font-medium text-black/60 tracking-tight">See all PHP services</span>
-            <ArrowRight className="w-4 h-4 text-zinc-500" />
-          </Link>
-        </div>
-      </section>
-
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      </PageHero>
 
       {/* Fit */}
       <section className="mb-16">
         <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Is it the database or <span className="gradient-text">something else?</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <p className="text-sm text-zinc-600 mb-4 leading-relaxed">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-7">
+            <p className="text-sm font-medium text-[#0B0C0E] mb-4 leading-relaxed">
               The database is a likely cause when you see these signs:
             </p>
             <ul className="space-y-3">
               {goodFit.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
+                <li key={item} className="flex items-start gap-3 text-sm text-[#4B5563]">
+                  <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
                   {item}
                 </li>
               ))}
             </ul>
           </div>
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <p className="text-sm text-zinc-600 mb-4 leading-relaxed">
+          <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-7">
+            <p className="text-sm font-medium text-[#0B0C0E] mb-4 leading-relaxed">
               The cause is probably something else in these cases:
             </p>
             <ul className="space-y-3">
               {poorFit.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                  <XCircle className="w-5 h-5 text-zinc-400 shrink-0" />
+                <li key={item} className="flex items-start gap-3 text-sm text-[#4B5563]">
+                  <XCircle className="w-5 h-5 text-[#9CA3AF] shrink-0" />
                   {item}
                 </li>
               ))}
@@ -241,41 +235,44 @@ export default function DatabaseSolutionsPage() {
 
       {/* What I need */}
       <section className="mb-16 max-w-3xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-4">
           What I need from you
         </h2>
-        <p className="text-zinc-600 leading-relaxed mb-4">
+        <p className="text-[#4B5563] leading-relaxed mb-4">
           Before I start, I need access to three things:
         </p>
-        <ul className="list-disc pl-5 space-y-2 text-zinc-600 leading-relaxed mb-4">
+        <ul className="list-disc pl-5 space-y-2 text-[#4B5563] leading-relaxed mb-4">
           <li>the server</li>
           <li>the database</li>
           <li>the source code</li>
         </ul>
-        <p className="text-zinc-600 leading-relaxed">
+        <p className="text-[#4B5563] leading-relaxed">
           Client work can stay private under an NDA. I do not share client names.
         </p>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
       {/* What I fix */}
       <section className="mb-16">
         <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             What I <span className="gradient-text">fix</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {fixItems.map((item) => (
-            <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm hover:shadow-lg transition-all group">
-              <div className="p-3 bg-zinc-100 rounded-xl w-fit mb-4 group-hover:bg-orange-100 transition-colors">
-                <item.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
+            <div
+              key={item.title}
+              className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6 md:p-7 group"
+            >
+              <div className="p-3 bg-[#EEF2FF] text-[#3A57FC] rounded-xl w-fit mb-4 group-hover:bg-[#3A57FC] group-hover:text-white transition-colors">
+                <item.icon className="w-5 h-5" />
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
+              <h3 className="font-display font-semibold text-[#0B0C0E] mb-2">{item.title}</h3>
               {item.description === 'woocommerce-link' ? (
-                <p className="text-sm text-zinc-500 leading-relaxed">
+                <p className="text-sm text-[#4B5563] leading-relaxed">
                   I also tune WordPress and WooCommerce databases, such as{' '}
                   <Link href="/services/wordpress/woocommerce" className={linkClass}>
                     WooCommerce stores with slow product queries
@@ -283,7 +280,7 @@ export default function DatabaseSolutionsPage() {
                   .
                 </p>
               ) : (
-                <p className="text-sm text-zinc-500 leading-relaxed">{item.description}</p>
+                <p className="text-sm text-[#4B5563] leading-relaxed">{item.description}</p>
               )}
             </div>
           ))}
@@ -292,20 +289,20 @@ export default function DatabaseSolutionsPage() {
 
       {/* One example */}
       <section className="mb-16 max-w-3xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-4">
           One example
         </h2>
-        <p className="text-zinc-600 leading-relaxed">
+        <p className="text-[#4B5563] leading-relaxed">
           One app had slow queries because the SQL used too many joins. I changed the table structure. I also changed the logic in the code that sent those queries. After these two changes, the app ran faster.
         </p>
       </section>
 
       {/* Databases and tools */}
       <section className="mb-16 max-w-3xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-4">
           Databases and tools I use
         </h2>
-        <p className="text-zinc-600 leading-relaxed">
+        <p className="text-[#4B5563] leading-relaxed">
           I work with MySQL, MariaDB, PostgreSQL and Redis. To find slow queries, I use the slow query log and EXPLAIN. In PHP code, I work with Eloquent and Doctrine. I have designed MySQL databases since 2013. At SEREWare, I built PHP and MySQL web applications and their databases.
         </p>
       </section>
@@ -313,19 +310,22 @@ export default function DatabaseSolutionsPage() {
       {/* Process */}
       <section className="mb-16">
         <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             How the tuning <span className="gradient-text">runs</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {processSteps.map((item) => (
-            <div key={item.step} className="bg-zinc-50 rounded-2xl p-5 text-center">
-              <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-500 font-bold text-lg flex items-center justify-center mx-auto mb-3">
-                {item.step}
+            <div
+              key={item.step}
+              className="rounded-2xl border border-[#E5E7EB] bg-[#F8FAFC] hover:border-[#3A57FC] transition-colors p-6 text-center"
+            >
+              <div className="w-10 h-10 rounded-xl bg-[#EEF2FF] border border-[#DDE4FF] text-[#3A57FC] font-mono font-bold text-sm flex items-center justify-center mx-auto mb-4">
+                {String(item.step).padStart(2, '0')}
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-1">{item.title}</h3>
-              <p className="text-sm text-zinc-500">{item.desc}</p>
+              <h3 className="font-display font-semibold text-[#0B0C0E] mb-1.5">{item.title}</h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
@@ -333,63 +333,29 @@ export default function DatabaseSolutionsPage() {
 
       {/* What you get */}
       <section className="mb-16 max-w-3xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-4">
           What you get at the end
         </h2>
-        <p className="text-zinc-600 leading-relaxed">
+        <p className="text-[#4B5563] leading-relaxed">
           You get a short report. It tells you what was slow, what changed, and which queries to watch. Keep the slow query log on, so new problems show early. I can check again later if you want.
         </p>
       </section>
 
-      {/* FAQ */}
-      <section className="mb-16 max-w-3xl mx-auto" aria-labelledby="mysql-faq">
-        <h2 id="mysql-faq" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-6">
-          MySQL optimization FAQ
-        </h2>
-        <div className="space-y-3">
-          {faqs.map((faq) => (
-            <details key={faq.question} className="group bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm open:shadow-md">
-              <summary className="cursor-pointer list-none font-semibold text-zinc-900 flex items-center justify-between gap-4">
-                {faq.question}
-                <span className="text-orange-500 transition-transform group-open:rotate-45 text-xl leading-none">+</span>
-              </summary>
-              <p className="mt-3 text-sm text-zinc-600 leading-relaxed">{faq.answer}</p>
-            </details>
-          ))}
-        </div>
-      </section>
+      <Faq id="mysql-faq" title="MySQL optimization FAQ" faqs={faqs} />
 
-      {/* CTA Section */}
-      <section className="overflow-hidden shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
-        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+      <CtaBand
+        title="Pages getting slower every month?"
+        body="Send me the slow pages or your slow query log. I will tell you where the time goes and what I would fix first. You decide before you commit to anything."
+        primary={{ href: contactHref('php'), label: 'Ask about your slow queries' }}
+        secondary={{ href: '/services/php-development/modernization', label: 'Old PHP version too? See PHP version upgrades' }}
+      />
 
-        <div className="flex flex-col items-center justify-center text-center px-6 py-12 md:px-12 md:py-14 relative">
-          <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
-            Pages getting slower every month?
-          </h2>
-          <p className="text-zinc-400 mb-8 max-w-lg font-medium">
-            Send me the slow pages or your slow query log. I will tell you where the time goes and what I would fix first. You decide before you commit to anything.
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link href={contactHref('php')} className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5">
-              <span>Ask about your slow queries</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link href="/services/php-development/modernization" className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3">
-              <span>Old PHP version too? See PHP version upgrades</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link href="/services/php-development/api-development" className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3">
-              <span>Data behind an API? See PHP API development</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <p className="text-center text-sm text-zinc-600 mb-16 max-w-xl mx-auto">
-        Running PostgreSQL, or tuning the API in front of the database? See{' '}
+      <p className="text-center text-sm text-[#4B5563] mb-16 max-w-xl mx-auto leading-relaxed">
+        Data behind an API? See{' '}
+        <Link href="/services/php-development/api-development" className={linkClass}>
+          PHP API development
+        </Link>
+        . Running PostgreSQL, or tuning the API in front of the database? See{' '}
         <Link href="/services/database-optimization" className={linkClass}>
           database optimization
         </Link>

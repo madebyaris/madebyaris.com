@@ -26,7 +26,7 @@ export const metadata: Metadata = buildPageMetadata({
   ],
 })
 
-const linkClass = 'underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors'
+const linkClass = 'underline decoration-[#CBD5E1] underline-offset-4 hover:text-[#3A57FC] transition-colors'
 
 const faqs: FaqItem[] = [
   {
@@ -58,63 +58,63 @@ export default function JasaOptimasiDatabasePage() {
       description={pageDescription}
       serviceType="Database optimization"
       breadcrumbName="Optimasi database"
-      eyebrow={{ icon: <Database className="w-4 h-4 text-orange-500" />, label: 'Optimasi database' }}
+      eyebrow={{ icon: <Database className="w-4 h-4 text-[#FFB866]" />, label: 'Optimasi database' }}
       title="Database yang tetap cepat"
       accent="saat datanya bertambah"
       intro={
         <p>
-          Aplikasi kamu melambat saat data bertambah, atau satu laporan menahan semuanya. Saya cari query yang lambat dengan
-          pengukuran nyata, memperbaikinya lewat indeks, perubahan query, dan perbaikan skema, lalu memeriksa hasilnya pada beban
-          kerja yang sama.
+          Aplikasi kamu makin lambat seiring data bertambah, atau satu halaman laporan membuat seluruh sistem tersendat? Saya
+          telusuri query yang lambat lewat pengukuran nyata, memperbaikinya dengan indeks, penulisan ulang query, dan pembenahan
+          skema, lalu memverifikasi hasilnya pada beban kerja yang sama.
         </p>
       }
-      signsTitle="Tanda database kamu perlu disetel"
+      signsTitle="Tanda database kamu perlu dioptimasi"
       signs={[
         'Halaman dan laporan makin lambat seiring tabel membesar',
-        'Satu query berat memperlambat seluruh aplikasi',
+        'Satu query berat ikut memperlambat seluruh aplikasi',
         'Server database sibuk walau trafik sedang sepi',
-        'Job batch yang memproses seribu data sekali jalan terlalu lama atau gagal',
+        'Batch job untuk memproses ribuan data sekaligus berjalan terlalu lama atau sering timeout',
       ]}
       offersTitle="Yang saya kerjakan"
       offers={[
         {
           title: 'Temukan query yang lambat',
-          body: 'Saya baca query plan dan slow-query log untuk melihat query mana yang paling mahal, supaya itu yang diperbaiki lebih dulu.',
+          body: 'Saya analisis query plan dan slow-query log untuk melihat query mana yang paling membebani server, supaya itu yang dibereskan lebih dulu.',
         },
         {
           title: 'Indeks dan penulisan ulang query',
-          body: 'Indeks yang tepat, dan query yang ditulis ulang di bagian yang planning-nya memperlihatkan kerja sia-sia.',
+          body: 'Memasang indeks yang tepat dan menulis ulang query yang eksekusinya tidak efisien berdasarkan hasil query plan.',
         },
         {
           title: 'Skema dan tipe data',
-          body: 'Memperbaiki desain tabel dan tipe kolom yang membuat query lebih lambat dari seharusnya.',
+          body: 'Memperbaiki desain tabel dan tipe kolom yang membuat query bekerja lebih lambat dari seharusnya.',
         },
         {
           title: 'Koneksi dan caching',
-          body: 'Connection pooling dan caching di tempat yang tepat, supaya database mengerjakan lebih sedikit pekerjaan berulang.',
+          body: 'Connection pooling dan caching di titik yang tepat agar database tidak terus-menerus memproses beban berulang.',
         },
         {
-          title: 'Pekerjaan batch dan massal',
-          body: 'Menyetel job yang memproses banyak data sekaligus, misalnya seribu data per jalan.',
+          title: 'Optimasi batch job dan proses massal',
+          body: 'Menyetel job yang memproses ribuan data sekaligus agar selesai lebih cepat dan stabil.',
         },
         {
-          title: 'API di depannya',
-          body: 'Database yang cepat butuh API yang cepat. Saya membangun dan menyetel API Node.js di atas Fastify.',
+          title: 'API di lapisannya',
+          body: 'Database yang cepat butuh API yang cepat pula. Saya membangun dan mengoptimasi API Node.js di atas Fastify.',
           href: '/services/jasa-fastify',
           cta: 'Lihat jasa Fastify',
         },
       ]}
       steps={[
-        { title: 'Ukur', desc: 'Saya tangkap query lambat dan beban pada kerja nyata kamu.' },
-        { title: 'Urutkan', desc: 'Kamu menerima daftar perbaikan berurutan menurut waktu yang dihemat.' },
-        { title: 'Perbaiki', desc: 'Saya uji tiap perubahan di salinan, lalu menerapkannya dengan backup siap.' },
-        { title: 'Verifikasi', desc: 'Kita jalankan ulang beban kerja yang sama dan membandingkan angkanya.' },
+        { title: 'Ukur', desc: 'Saya catat query lambat dan beban kerja langsung dari penggunaan nyata aplikasi kamu.' },
+        { title: 'Urutkan', desc: 'Kamu menerima daftar perbaikan yang diurutkan berdasarkan dampak tercepat.' },
+        { title: 'Perbaiki', desc: 'Setiap perubahan diuji dulu di database staging, lalu diterapkan dengan backup lengkap.' },
+        { title: 'Verifikasi', desc: 'Kita jalankan ulang beban kerja yang sama dan membandingkan angka sebelum dan sesudahnya.' },
       ]}
       proof={{
         title: 'Menjalankan aplikasi PHP di MySQL?',
         body: (
           <p>
-            Saya juga punya halaman untuk penyetelan MySQL di aplikasi PHP, termasuk WordPress dan Laravel:{' '}
+            Saya juga punya halaman khusus untuk optimasi MySQL di aplikasi PHP, termasuk WordPress dan Laravel:{' '}
             <Link href="/services/php-development/database-solutions" className={linkClass}>
               optimasi database MySQL untuk aplikasi PHP (bahasa Inggris)
             </Link>
@@ -130,9 +130,9 @@ export default function JasaOptimasiDatabasePage() {
         { href: '/services/php-development/database-solutions', label: 'MySQL untuk aplikasi PHP' },
         { href: '/jasa-pengembangan-produk', label: 'Pengembangan produk' },
       ]}
-      ctaTitle="Kirim query lambat kamu"
-      ctaBody="Ceritakan apa yang lambat dan database apa yang kamu pakai. Saya balas dalam 24 jam dengan pertanyaan atau jawaban jujur tentang apa yang akan saya ukur lebih dulu."
-      ctaLabel="Kirim query lambat kamu"
+      ctaTitle="Diskusikan masalah database kamu"
+      ctaBody="Ceritakan query atau halaman yang lambat serta database yang kamu pakai. Saya balas dalam 24 jam dengan beberapa pertanyaan lanjutan dan hal pertama yang akan saya ukur."
+      ctaLabel="Konsultasi optimasi database"
     />
   )
 }

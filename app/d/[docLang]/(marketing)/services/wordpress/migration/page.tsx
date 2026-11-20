@@ -141,7 +141,7 @@ const topics = [
   },
 ]
 
-const linkClass = 'underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors'
+const linkClass = 'text-[#3A57FC] underline decoration-[#3A57FC]/35 underline-offset-4 hover:text-[#2944E0] hover:decoration-[#3A57FC] transition-colors'
 
 const faqs: FaqItem[] = [
   {
@@ -205,36 +205,35 @@ export default function WordPressMigrationPage() {
     <>
       <JsonLd data={structuredData} />
 
-      <nav className="mb-8" aria-label="Breadcrumb">
-        <ol className="flex items-center space-x-2 text-sm text-zinc-500">
-          <li><Link href="/services" className="hover:text-orange-500 transition-colors">Services</Link></li>
-          <li><span className="px-2">/</span></li>
-          <li><Link href="/services/wordpress" className="hover:text-orange-500 transition-colors">WordPress</Link></li>
-          <li><span className="px-2">/</span></li>
-          <li className="text-zinc-900">Migration</li>
+      <nav className="mb-6" aria-label="Breadcrumb">
+        <ol className="flex flex-wrap items-center gap-1.5 text-sm text-[#4B5563]">
+          <li><Link href="/services" className="hover:text-[#3A57FC] transition-colors">Services</Link></li>
+          <li aria-hidden="true" className="text-[#9CA3AF]">/</li>
+          <li><Link href="/services/wordpress" className="hover:text-[#3A57FC] transition-colors">WordPress</Link></li>
+          <li aria-hidden="true" className="text-[#9CA3AF]">/</li>
+          <li className="font-medium text-[#0B0C0E]" aria-current="page">Migration</li>
         </ol>
       </nav>
 
       <PageHero
-        eyebrow={{ icon: <Truck className="w-4 h-4 text-orange-500" />, label: 'Moving a WordPress site' }}
+        eyebrow={{ icon: <Truck className="w-3.5 h-3.5" />, label: 'Moving a WordPress site' }}
         title="WordPress migration service"
         accent="planned around your SEO"
         actions={
           <>
             <Link
               href={contactHref('wordpress')}
-              className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
+              className="btn-primary inline-flex items-center gap-2.5 rounded-md py-3.5 px-6 text-sm font-bold group"
             >
-              <span className="text-sm font-medium tracking-tight">Send me the site you want to move</span>
+              <span>Send me the site you want to move</span>
               <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </Link>
             <a
               href="#checklist"
-              className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
-              style={{ boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)' }}
+              className="btn-secondary inline-flex items-center gap-2 rounded-md py-3.5 px-6 text-sm font-semibold group"
             >
-              <span className="text-sm font-medium text-black/60 tracking-tight">See the migration checklist</span>
-              <ArrowRight className="w-4 h-4 text-zinc-500" />
+              <span>See the migration checklist</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </a>
           </>
         }
@@ -243,23 +242,23 @@ export default function WordPressMigrationPage() {
           For site owners moving to a new host, a new domain, or into WordPress from another CMS. I copy the site to
           staging, map every URL, and switch over only after the new site checks out.
         </p>
-        <p className="text-sm text-zinc-500 font-normal">
+        <p className="text-sm text-white/80">
           13+ years building WordPress sites, themes, and plugins. I also do technical SEO and built RankMySEO, a rank tracker with daily Google ranking history.
         </p>
       </PageHero>
 
-      <HeroImage src="/images/services/wordpress.jpg" alt="Illustration of a WordPress site layout being updated, with a security shield, maintenance tools, and a migration box" />
+      <HeroImage src="/images/services/wordpress.jpg" alt="Illustration of a WordPress hosting and domain migration with zero downtime and verified 301 redirects" />
 
       <section className="mb-16 max-w-3xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-4">
           What my WordPress migration service covers
         </h2>
-        <p className="text-zinc-600 leading-relaxed mb-4">
+        <p className="text-[#4B5563] leading-relaxed mb-4">
           A WordPress migration service moves your files, database, and media to a new home and keeps every URL Google
           knows working. I copy the site to staging first and build a redirect map for anything that changes. Forms,
           email, and checkout get tested before the switch, and the old site stays up until the new one is checked.
         </p>
-        <p className="text-zinc-600 leading-relaxed">
+        <p className="text-[#4B5563] leading-relaxed">
           I check hardest for two mistakes: URLs that change without a redirect, and a staging setting that hides the
           site from search engines. Both are easy to prevent and slow to recover from. After the switch I watch Search
           Console and your rankings, so a problem shows up while it is still small.
@@ -268,26 +267,29 @@ export default function WordPressMigrationPage() {
 
       <section className="mb-16" aria-labelledby="types">
         <div className="text-center mb-10">
-          <h2 id="types" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <h2 id="types" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Migrate WordPress to a new host, <span className="gradient-text">domain, or stack</span>
           </h2>
-          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
+          <p className="text-sm text-[#4B5563] max-w-xl mx-auto">
             Each kind of move breaks in a different place. Tell me which one you have and I will tell you where the risk is.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {migrationTypes.map((item) => (
-            <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all group">
-              <div className="p-3 bg-zinc-100 rounded-xl w-fit mb-4 group-hover:bg-orange-100 transition-colors">
-                <item.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
+            <div
+              key={item.title}
+              className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6 md:p-7 group"
+            >
+              <div className="p-3 bg-[#EEF2FF] text-[#3A57FC] rounded-xl w-fit mb-4 group-hover:bg-[#3A57FC] group-hover:text-white transition-colors">
+                <item.icon className="w-5 h-5" />
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{item.description}</p>
+              <h3 className="font-display font-semibold text-[#0B0C0E] mb-2">{item.title}</h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.description}</p>
             </div>
           ))}
         </div>
-        <p className="text-sm text-zinc-500 text-center mt-6 max-w-2xl mx-auto">
+        <p className="text-sm text-[#4B5563] text-center mt-6 max-w-2xl mx-auto">
           Still choosing the new host? Read{' '}
           <Link href="/blog/how-to-pick-vps-for-wordpress" className={linkClass}>
             how to pick a VPS for WordPress
@@ -296,13 +298,13 @@ export default function WordPressMigrationPage() {
         </p>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
       <section id="checklist" className="mb-16 max-w-3xl mx-auto scroll-mt-32">
-        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-4">
           How I move a WordPress site without losing SEO
         </h2>
-        <p className="text-zinc-600 leading-relaxed mb-6">
+        <p className="text-[#4B5563] leading-relaxed mb-6">
           Every move follows this checklist, whatever the size of the site. The crawl comes first, because I cannot
           redirect a URL I do not know exists. The audit side of it is in my{' '}
           <Link href="/blog/technical-seo-audit-checklist" className={linkClass}>
@@ -310,11 +312,11 @@ export default function WordPressMigrationPage() {
           </Link>
           .
         </p>
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
+        <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-7">
           <ul className="space-y-3">
             {checklist.map((item) => (
-              <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                <CheckCircle2 className="w-5 h-5 text-orange-500 shrink-0" />
+              <li key={item} className="flex items-start gap-3 text-sm text-[#4B5563]">
+                <CheckCircle2 className="w-5 h-5 text-[#3A57FC] shrink-0" />
                 {item}
               </li>
             ))}
@@ -323,10 +325,10 @@ export default function WordPressMigrationPage() {
       </section>
 
       <section className="mb-16 max-w-3xl mx-auto" aria-labelledby="nextjs">
-        <h2 id="nextjs" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+        <h2 id="nextjs" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-4">
           WordPress to Next.js migration
         </h2>
-        <p className="text-zinc-600 leading-relaxed mb-4">
+        <p className="text-[#4B5563] leading-relaxed mb-4">
           Some moves change the front end. With{' '}
           <Link href="/services/wordpress/headless-development" className={linkClass}>
             headless WordPress
@@ -334,7 +336,7 @@ export default function WordPressMigrationPage() {
           , your editors keep wp-admin and the pages are served from Next.js. This site runs that way, on Vercel. The
           redirect map and SEO checks above still apply, with a new front end built on top.
         </p>
-        <p className="text-zinc-600 leading-relaxed">
+        <p className="text-[#4B5563] leading-relaxed">
           It is a bigger job than a host move, so read{' '}
           <Link href="/blog/wordpress-vs-nextjs-when-worth-it" className={linkClass}>
             WordPress vs Next.js: when it’s worth it
@@ -347,36 +349,36 @@ export default function WordPressMigrationPage() {
         </p>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
       <section className="mb-16" aria-labelledby="fit">
         <div className="text-center mb-10">
-          <h2 id="fit" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <h2 id="fit" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Do you need a <span className="gradient-text">migration service?</span>
           </h2>
-          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
+          <p className="text-sm text-[#4B5563] max-w-xl mx-auto">
             If a free plugin can move your site safely, I will say so.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-4">Good fit</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-7">
+            <h3 className="font-display font-semibold text-[#0B0C0E] mb-4">Good fit</h3>
             <ul className="space-y-3">
               {goodFit.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
+                <li key={item} className="flex items-start gap-3 text-sm text-[#4B5563]">
+                  <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
                   {item}
                 </li>
               ))}
             </ul>
           </div>
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-4">Look elsewhere</h3>
+          <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-7">
+            <h3 className="font-display font-semibold text-[#0B0C0E] mb-4">Look elsewhere</h3>
             <ul className="space-y-3">
               {poorFit.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                  <XCircle className="w-5 h-5 text-zinc-400 shrink-0" />
+                <li key={item} className="flex items-start gap-3 text-sm text-[#4B5563]">
+                  <XCircle className="w-5 h-5 text-[#9CA3AF] shrink-0" />
                   {item}
                 </li>
               ))}
@@ -387,45 +389,48 @@ export default function WordPressMigrationPage() {
 
       <section className="mb-16" aria-labelledby="process">
         <div className="text-center mb-10">
-          <h2 id="process" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <h2 id="process" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             How a WordPress migration <span className="gradient-text">runs</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {processSteps.map((item) => (
-            <div key={item.step} className="bg-zinc-50 rounded-2xl p-5 text-center">
-              <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-500 font-bold text-lg flex items-center justify-center mx-auto mb-3">
-                {item.step}
+            <div
+              key={item.step}
+              className="rounded-2xl border border-[#E5E7EB] bg-[#F8FAFC] hover:border-[#3A57FC] transition-colors p-6 text-center"
+            >
+              <div className="w-10 h-10 rounded-xl bg-[#EEF2FF] border border-[#DDE4FF] text-[#3A57FC] font-mono font-bold text-sm flex items-center justify-center mx-auto mb-4">
+                {String(item.step).padStart(2, '0')}
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-1">{item.title}</h3>
-              <p className="text-sm text-zinc-500">{item.desc}</p>
+              <h3 className="font-display font-semibold text-[#0B0C0E] mb-1.5">{item.title}</h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
       <section className="mb-16" aria-labelledby="topics">
         <div className="text-center mb-10">
-          <h2 id="topics" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <h2 id="topics" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Migration guides <span className="gradient-text">and related services</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {topics.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="block bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm hover:shadow-lg transition-all group"
+              className="block rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6 md:p-7 group"
             >
-              <h3 className="font-semibold text-zinc-900 mb-1 flex items-center justify-between gap-3">
+              <h3 className="font-display font-semibold text-[#0B0C0E] group-hover:text-[#3A57FC] transition-colors mb-1.5 flex items-center justify-between gap-3">
                 {item.title}
-                <ArrowRight className="w-4 h-4 text-zinc-400 group-hover:text-orange-500 group-hover:translate-x-0.5 transition-all shrink-0" />
+                <ArrowRight className="w-4 h-4 text-[#9CA3AF] group-hover:text-[#3A57FC] group-hover:translate-x-0.5 transition-all shrink-0" />
               </h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{item.description}</p>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.description}</p>
             </Link>
           ))}
         </div>

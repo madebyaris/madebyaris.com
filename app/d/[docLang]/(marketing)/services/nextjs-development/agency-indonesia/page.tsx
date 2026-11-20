@@ -1,6 +1,18 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowRight, ArrowUpRight, Building, Users, Briefcase, Clock, Code2, CheckCircle2, XCircle } from 'lucide-react'
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Building,
+  CheckCircle2,
+  Clock,
+  Code2,
+  Users,
+  XCircle,
+} from 'lucide-react'
+import { PageHero } from '@/components/page/hero'
+import { Faq } from '@/components/page/faq'
+import { CtaBand } from '@/components/page/cta-band'
 import { buildPageGraph, buildPageMetadata, type FaqItem } from '@/lib/seo'
 import { JsonLd } from '@/components/seo/json-ld'
 import { contactHref } from '@/lib/contact-services'
@@ -27,10 +39,10 @@ export const metadata: Metadata = buildPageMetadata({
 })
 
 const goodFit = [
-  'Kamu capek brief dioper dari sales ke project manager lalu ke developer junior',
-  'Perusahaan kamu butuh website atau dashboard yang dikerjakan orang berpengalaman',
+  'Kamu lelah brief proyek terus dioper dari sales ke project manager lalu ke developer junior',
+  'Perusahaan kamu butuh website atau dashboard yang dikerjakan langsung oleh engineer berpengalaman',
   'Tim internal butuh developer senior untuk proyek Next.js yang sudah berjalan',
-  'Agensi kamu butuh developer Next.js untuk proyek klien',
+  'Agensi kamu butuh partner developer Next.js untuk proyek klien',
 ]
 
 const poorFit = [
@@ -90,12 +102,12 @@ const faqs: FaqItem[] = [
   {
     question: 'Bagaimana kalau proyeknya besar?',
     answer:
-      'Saya tetap jadi lead developer. Agen AI mengerjakan banyak bagian pembangunan, dan untuk desain atau QA tambahan saya kolaborasi dengan partner tepercaya. Kalau proyeknya butuh tim besar sejak awal, saya bilang terus terang supaya kamu bisa cari agensi yang pas.',
+      'Saya tetap jadi lead developer. AI agent membantu mempercepat pengerjaan kode, dan untuk kebutuhan desain atau QA tambahan saya berkolaborasi dengan partner tepercaya. Kalau proyeknya butuh tim besar sejak awal, saya bilang terus terang supaya kamu bisa memilih agensi yang pas.',
   },
   {
     question: 'Berapa lama proyek Next.js biasanya selesai?',
     answer:
-      'Tergantung scope. Perkiraan waktu dan milestone saya tulis di scope sebelum kamu setuju. Website perusahaan beberapa halaman selesai lebih cepat daripada dashboard dengan banyak peran pengguna.',
+      'Tergantung scope. Perkiraan waktu dan milestone saya tulis di scope sebelum kamu setuju. Website perusahaan beberapa halaman selesai lebih cepat daripada dashboard dengan banyak role pengguna.',
   },
   {
     question: 'Apakah SEO website lama aman saat migrasi ke Next.js?',
@@ -128,111 +140,108 @@ const structuredData = buildPageGraph({
   },
 })
 
-const linkClass = 'underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors'
+const linkClass =
+  'text-[#3A57FC] underline decoration-[#DDE4FF] underline-offset-4 hover:text-[#FF8800] hover:decoration-[#FF8800] transition-colors font-medium'
 
 export default function AgencyIndonesiaPage() {
   return (
     <div lang="id">
       <JsonLd data={structuredData} />
 
-      {/* Breadcrumb */}
       <nav className="mb-8" aria-label="Breadcrumb">
-        <ol className="flex items-center space-x-2 text-sm text-zinc-500">
-          <li><Link href="/services" className="hover:text-orange-500 transition-colors">Layanan</Link></li>
-          <li><span className="px-2">/</span></li>
-          <li><Link href="/services/nextjs-development" className="hover:text-orange-500 transition-colors">Next.js Development</Link></li>
-          <li><span className="px-2">/</span></li>
-          <li className="text-zinc-900">Agensi Indonesia</li>
+        <ol className="flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-[0.08em] text-[#525660]">
+          <li>
+            <Link href="/services" className="hover:text-[#3A57FC] transition-colors">
+              Layanan
+            </Link>
+          </li>
+          <li className="text-[#CBD5E1]">/</li>
+          <li>
+            <Link href="/services/nextjs-development" className="hover:text-[#3A57FC] transition-colors">
+              Next.js Development
+            </Link>
+          </li>
+          <li className="text-[#CBD5E1]">/</li>
+          <li className="text-[#0B0C0E] font-semibold">Agensi Indonesia</li>
         </ol>
       </nav>
 
-      {/* Hero Section */}
-      <section className="text-center pt-4 pb-16">
-        <div className="inline-flex bg-white/60 rounded-full mb-8 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
-          <Building className="w-4 h-4 text-orange-500" />
-          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Dipimpin langsung oleh Aris</span>
-        </div>
-
-        <h1 className="leading-[0.95] lg:text-[3.5rem] text-3xl font-medium text-zinc-900 tracking-tighter mb-6">
-          Next.js agency
-          {' '}<span className="block gradient-text font-light">Indonesia</span>
-        </h1>
-
-        <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
+      <PageHero
+        eyebrow={{ icon: <Building className="w-3.5 h-3.5" />, label: 'Dipimpin langsung oleh Aris' }}
+        title="Next.js agency"
+        accent="Indonesia"
+        actions={
+          <>
+            <Link
+              href={contactHref('nextjs')}
+              className="btn-primary rounded-md py-3.5 px-6 text-sm font-bold inline-flex items-center gap-2.5 group"
+            >
+              <span>Kirim brief proyek kamu</span>
+              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </Link>
+            <Link
+              href="/about"
+              className="btn-secondary rounded-md py-3.5 px-6 text-sm font-semibold inline-flex items-center gap-2 group"
+            >
+              <span>Kenalan dulu dengan saya</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            </Link>
+          </>
+        }
+      >
+        <p className="mb-4">
           Untuk perusahaan dan agensi yang butuh website atau aplikasi Next.js tanpa lapisan account
           manager. Kamu bicara langsung dengan orang yang menulis kodenya: saya, 13+ tahun di web
           development dan co-founder Raja Kreatif Asia.
         </p>
+      </PageHero>
 
-        <div className="flex flex-wrap justify-center gap-3">
-          <Link
-            href={contactHref('nextjs')}
-            className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
-          >
-            <span className="text-sm font-medium tracking-tight">Kirim brief proyek kamu</span>
-            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </Link>
-          <Link
-            href="/about"
-            className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
-            style={{
-              boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)',
-            }}
-          >
-            <span className="text-sm font-medium text-black/60 tracking-tight">Kenalan dulu dengan saya</span>
-            <ArrowRight className="w-4 h-4 text-zinc-500" />
-          </Link>
-        </div>
-      </section>
-
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
-
-      {/* Answer first */}
       <section className="mb-16 max-w-3xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+        <span className="section-index block mb-2">Model kerja</span>
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-4">
           Agensi Next.js atau engineer yang memimpin langsung?
         </h2>
-        <p className="text-zinc-600 leading-relaxed">
+        <p className="text-[#374151] leading-relaxed">
           Kalau kamu mencari Next.js agency di Indonesia, di sini kamu bekerja langsung dengan orang yang memimpin proyeknya.
           Saya Aris, developer Next.js di Sidoarjo yang independen sejak 2015. Saya memegang proyek dari
-          scope, kode, sampai online di Vercel. Agen AI mengerjakan banyak bagian pembangunan, dan
-          untuk kebutuhan desain atau QA tambahan saya kolaborasi dengan partner tepercaya. Saya tetap
+          scope, kode, sampai online di Vercel. AI agent membantu mempercepat pengerjaan teknis, dan
+          untuk kebutuhan desain atau QA tambahan saya berkolaborasi dengan partner tepercaya. Saya tetap
           jadi lead developer.
         </p>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
-      {/* Fit */}
-      <section className="mb-16">
+      <section className="mb-16" aria-labelledby="fit-title">
         <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <span className="section-index block mb-2">Kesesuaian</span>
+          <h2 id="fit-title" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Cocok atau <span className="gradient-text">kurang cocok?</span>
           </h2>
-          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
-            Saya lebih suka jujur di awal daripada menyesal di tengah proyek.
+          <p className="text-sm md:text-base text-[#4B5563] max-w-xl mx-auto">
+            Saya lebih memilih jujur sejak awal daripada proyek tersendat di tengah jalan.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-4">Cocok kalau</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="rounded-2xl border border-[#DDE4FF] bg-[#F3F5FF]/70 p-6 md:p-7">
+            <h3 className="font-display font-bold text-[#0B0C0E] mb-4">Cocok kalau</h3>
             <ul className="space-y-3">
               {goodFit.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
-                  {item}
+                <li key={item} className="flex items-start gap-3 text-sm text-[#1F2937]">
+                  <CheckCircle2 className="w-5 h-5 text-[#3A57FC] shrink-0 mt-0.5" />
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
           </div>
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-4">Kurang cocok kalau</h3>
+          <div className="rounded-2xl border border-[#E5E7EB] bg-[#F8FAFC] p-6 md:p-7">
+            <h3 className="font-display font-bold text-[#0B0C0E] mb-4">Kurang cocok kalau</h3>
             <ul className="space-y-3">
               {poorFit.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                  <XCircle className="w-5 h-5 text-zinc-400 shrink-0" />
-                  {item}
+                <li key={item} className="flex items-start gap-3 text-sm text-[#374151]">
+                  <XCircle className="w-5 h-5 text-[#64748B] shrink-0 mt-0.5" />
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
@@ -240,43 +249,39 @@ export default function AgencyIndonesiaPage() {
         </div>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
-      {/* Outcomes */}
-      <section className="mb-16">
+      <section className="mb-16" aria-labelledby="outcomes-title">
         <div className="text-center mb-10">
-          <div className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
-            <Briefcase className="w-4 h-4 text-orange-500" />
-            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Yang kamu dapat</span>
-          </div>
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <span className="section-index block mb-2">Yang kamu dapat</span>
+          <h2 id="outcomes-title" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Kerja dengan <span className="gradient-text">Next.js agency</span> yang dipimpin langsung
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {outcomes.map((item) => (
             <div
               key={item.title}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm hover:shadow-lg transition-all group"
+              className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6 md:p-7 group"
             >
-              <div className="p-3 bg-zinc-100 rounded-xl w-fit mb-4 group-hover:bg-orange-100 transition-colors">
-                <item.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
+              <div className="p-3 bg-[#EEF2FF] text-[#3A57FC] rounded-xl w-fit mb-4 group-hover:bg-[#3A57FC] group-hover:text-white transition-colors">
+                <item.icon className="w-5 h-5" />
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{item.description}</p>
+              <h3 className="font-display font-bold text-[#0B0C0E] mb-2">{item.title}</h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.description}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Services list */}
-      <section className="mb-16">
+      <section className="mb-16" aria-labelledby="services-title">
         <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <span className="section-index block mb-2">Cakupan proyek</span>
+          <h2 id="services-title" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Pekerjaan yang <span className="gradient-text">saya pegang</span>
           </h2>
-          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
+          <p className="text-sm md:text-base text-[#4B5563] max-w-xl mx-auto">
             Untuk website bisnis kecil, lihat{' '}
             <Link href="/services/nextjs-development/nextjs-indonesia" className={linkClass}>
               jasa pembuatan website Next.js
@@ -289,97 +294,53 @@ export default function AgencyIndonesiaPage() {
           </p>
         </div>
 
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-7">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {services.map((item) => (
-              <div key={item} className="flex items-center gap-3 p-3 bg-zinc-50 rounded-xl">
-                <CheckCircle2 className="w-5 h-5 text-orange-500 shrink-0" />
-                <span className="text-sm text-zinc-700 font-medium">{item}</span>
+              <div key={item} className="flex items-center gap-3 p-4 bg-[#F8FAFC] border border-[#E5E7EB] rounded-xl">
+                <CheckCircle2 className="w-5 h-5 text-[#3A57FC] shrink-0" />
+                <span className="text-sm text-[#1F2937] font-medium">{item}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
-      {/* Process */}
-      <section className="mb-16">
+      <section className="mb-16" aria-labelledby="process-title">
         <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <span className="section-index block mb-2">Alur proyek</span>
+          <h2 id="process-title" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Cara <span className="gradient-text">kerja saya</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
           {processSteps.map((item) => (
-            <div key={item.step} className="bg-zinc-50 rounded-2xl p-5 text-center">
-              <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-500 font-bold text-lg flex items-center justify-center mx-auto mb-3">
-                {item.step}
+            <div
+              key={item.step}
+              className="rounded-2xl border border-[#E5E7EB] bg-[#F8FAFC] hover:bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6"
+            >
+              <div className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#0B0C0E] text-[#FFB866] font-mono text-xs font-bold mb-4">
+                {String(item.step).padStart(2, '0')}
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-1 text-sm">{item.title}</h3>
-              <p className="text-xs text-zinc-500">{item.desc}</p>
+              <h3 className="font-display font-bold text-[#0B0C0E] mb-1.5 text-sm">{item.title}</h3>
+              <p className="text-xs text-[#4B5563] leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="mb-16 max-w-3xl mx-auto" aria-labelledby="agency-id-faq">
-        <h2 id="agency-id-faq" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-6">
-          Pertanyaan sebelum memilih agensi Next.js
-        </h2>
-        <div className="space-y-3">
-          {faqs.map((faq) => (
-            <details key={faq.question} className="group bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm open:shadow-md">
-              <summary className="cursor-pointer list-none font-semibold text-zinc-900 flex items-center justify-between gap-4">
-                {faq.question}
-                <span className="text-orange-500 transition-transform group-open:rotate-45 text-xl leading-none">+</span>
-              </summary>
-              <p className="mt-3 text-sm text-zinc-600 leading-relaxed">{faq.answer}</p>
-            </details>
-          ))}
-        </div>
-      </section>
+      <Faq id="agency-id-faq" title="Pertanyaan sebelum memilih agensi Next.js" faqs={faqs} />
 
-      {/* CTA Section */}
-      <section className="overflow-hidden shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
-        <div
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage: 'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)',
-            backgroundSize: '40px 40px'
-          }}
-        />
-
-        <div className="flex flex-col items-center justify-center text-center px-6 py-12 md:px-12 md:py-14 relative">
-          <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
-            Kirim brief, saya balas dengan scope
-          </h2>
-          <p className="text-zinc-400 mb-8 max-w-lg font-medium">
-            Ceritakan tujuan proyek, sistem yang sudah ada, dan target waktunya. Saya balas dengan
-            pertanyaan atau gambaran scope. Kalau proyek ini lebih cocok untuk agensi besar, saya akan
-            bilang.
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link
-              href={contactHref('nextjs')}
-              className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
-            >
-              <span>Kirim brief proyek kamu</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              href="/services/nextjs-development"
-              className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3"
-            >
-              <span>Versi bahasa Inggris</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      <CtaBand
+        badge="Diskusi langsung · Balas dalam 24 jam"
+        title="Kirim brief, saya balas dengan scope"
+        body="Ceritakan tujuan proyek, sistem yang sudah ada, dan target waktunya. Saya balas dengan pertanyaan lanjutan atau gambaran scope. Kalau proyek ini lebih cocok untuk agensi besar, saya akan bilang terus terang."
+        primary={{ href: contactHref('nextjs'), label: 'Kirim brief proyek kamu' }}
+        secondary={{ href: '/services/nextjs-development', label: 'Versi bahasa Inggris' }}
+      />
     </div>
   )
 }

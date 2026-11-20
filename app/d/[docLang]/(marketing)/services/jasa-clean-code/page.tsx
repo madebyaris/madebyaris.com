@@ -26,7 +26,7 @@ export const metadata: Metadata = buildPageMetadata({
   ],
 })
 
-const linkClass = 'underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors'
+const linkClass = 'underline decoration-[#CBD5E1] underline-offset-4 hover:text-[#3A57FC] transition-colors'
 
 const faqs: FaqItem[] = [
   {
@@ -45,8 +45,8 @@ const faqs: FaqItem[] = [
       'Tidak. Saya rapikan bagian yang paling bermasalah, menambah aturan dan pengecekan, dan membiarkan sisanya. Seberapa jauh kita melangkah, kamu yang putuskan.',
   },
   {
-    question: 'Kami punya kekacauan tertentu dari kode hasil AI. Bisa diperbaiki saja yang itu?',
-    answer: 'Bisa. Tanyakan layanan perbaikan terfokus untuk kode hasil AI, yang ada di tautan terkait di bawah.',
+    question: 'Kami punya bug atau bagian berantakan tertentu dari kode hasil AI. Bisa perbaiki bagian itu saja?',
+    answer: 'Bisa. Tanyakan layanan perbaikan terfokus untuk kode hasil AI yang ada di tautan terkait di bawah.',
   },
 ]
 
@@ -59,36 +59,36 @@ export default function JasaCleanCodePage() {
       description={pageDescription}
       serviceType="Codebase cleanup and AI coding standards"
       breadcrumbName="Clean code"
-      eyebrow={{ icon: <Sparkles className="w-4 h-4 text-orange-500" />, label: 'Clean code untuk tim dan AI' }}
+      eyebrow={{ icon: <Sparkles className="w-4 h-4 text-[#FFB866]" />, label: 'Clean code untuk tim dan AI' }}
       title="Clean code yang bisa diikuti tim"
       accent="dan AI agent kamu"
       intro={
         <p>
-          Alat coding AI menulis lebih banyak kode, dan kode yang berantakan membuatnya makin buruk. Saya rapikan strukturnya,
-          menyusun konvensi yang diikuti developer dan agent kamu, dan memasang aturan serta pengecekan yang menjaga codebase
-          tetap rapi selagi kamu merilis lebih cepat.
+          Tool coding AI membuat volume kode bertambah jauh lebih cepat, dan codebase yang berantakan memperparah masalahnya.
+          Saya rapikan strukturnya, menyusun konvensi yang dipatuhi developer maupun AI agent, dan memasang aturan serta
+          pengecekan otomatis agar codebase tetap bersih saat tim kamu merilis lebih cepat.
         </p>
       }
-      signsTitle="Tanda codebase kamu butuh ini"
+      signsTitle="Tanda codebase kamu butuh clean code"
       signs={[
-        'Pull request yang ditulis dengan AI susah di-review',
-        'Agent mengulang kesalahan yang sama atau mengarang kode yang tidak ada',
-        'Tidak ada yang sepakat di mana sesuatu harus diletakkan',
-        'Developer takut mengubah kode lama',
+        'Pull request yang ditulis dengan bantuan AI susah di-review',
+        'AI agent terus mengulang kesalahan yang sama atau mengarang fungsi yang sebenarnya tidak ada',
+        'Belum ada kesepakatan jelas di tim soal di mana file atau logika baru harus diletakkan',
+        'Developer ragu mengubah kode lama karena takut merusak bagian lain',
       ]}
       offersTitle="Yang saya kerjakan"
       offers={[
         {
           title: 'Petakan dan sederhanakan struktur',
-          body: 'Susunan folder dan batas yang jelas, supaya orang atau agent bisa menemukan di mana sebuah perubahan seharusnya masuk.',
+          body: 'Susunan folder dan batas modul yang jelas agar developer maupun AI agent langsung tahu di mana perubahan kode seharusnya masuk.',
         },
         {
           title: 'Konvensi tertulis',
-          body: 'AGENTS.md dan aturan proyek yang memberi tahu tim dan agent kamu bagaimana kode ditulis di sini.',
+          body: 'Menyusun AGENTS.md dan project rules yang menjelaskan standar penulisan kode di repo kamu untuk tim maupun AI agent.',
         },
         {
-          title: 'Pagar pengaman',
-          body: 'Linting, tipe, dan test yang menangkap kesalahan sebelum review, baik kodenya ditulis orang maupun agent.',
+          title: 'Pagar pengaman otomatis',
+          body: 'Linting, type checking, dan automated test yang menangkap kesalahan sebelum tahap review, baik untuk kode tulisan manusia maupun AI.',
         },
         {
           title: 'Checklist review untuk kode AI',
@@ -97,12 +97,12 @@ export default function JasaCleanCodePage() {
           cta: 'Baca checklist (bahasa Inggris)',
         },
         {
-          title: 'Rapikan bagian terburuk',
-          body: 'Merapikan beberapa file yang menyebabkan kebanyakan masalah dan membiarkan sisanya.',
+          title: 'Rapikan titik paling bermasalah',
+          body: 'Membenahi file-file yang paling sering menimbulkan bug tanpa membongkar bagian yang sudah stabil.',
         },
         {
           title: 'Latih tim',
-          body: 'Sesi di mana developer kamu mempelajari aturan baru di repo kamu sendiri.',
+          body: 'Sesi praktis di mana developer kamu mempelajari aturan baru langsung di repo kamu sendiri.',
           href: '/services/vibe-code-friend',
           cta: 'Lihat mentoring Cursor',
         },
@@ -124,10 +124,10 @@ export default function JasaCleanCodePage() {
         ),
       }}
       steps={[
-        { title: 'Tinjau', desc: 'Saya baca codebase dan mendaftar apa yang memperlambat orang dan agent.' },
-        { title: 'Sepakati', desc: 'Kamu memilih perbaikan mana yang layak dikerjakan, dan kita menulis konvensinya.' },
-        { title: 'Terapkan', desc: 'Saya rapikan bagian terburuk dan memasang aturan serta pengecekan.' },
-        { title: 'Serah terima', desc: 'Tim kamu memegang aturannya, dan saya tunjukkan cara kerjanya.' },
+        { title: 'Tinjau', desc: 'Saya baca codebase kamu dan mencatat apa saja yang memperlambat developer serta AI agent.' },
+        { title: 'Sepakati', desc: 'Kamu memilih perbaikan mana yang paling prioritas, lalu kita susun konvensinya bersama.' },
+        { title: 'Terapkan', desc: 'Saya rapikan bagian yang paling bermasalah lalu memasang aturan serta pengecekan otomatis.' },
+        { title: 'Serah terima', desc: 'Tim kamu memegang aturannya secara penuh, dan saya jelaskan cara memakainya.' },
       ]}
       faqTitle="Pertanyaan soal clean code dan AI"
       faqs={faqs}
@@ -137,9 +137,9 @@ export default function JasaCleanCodePage() {
         { href: '/services/vibe-code-friend/code-fixing', label: 'Perbaiki kode hasil AI' },
         { href: '/services/jasa-optimasi-react', label: 'Optimasi React' },
       ]}
-      ctaTitle="Kirim repo kamu"
-      ctaBody="Ceritakan codebase-nya dan bagian yang bermasalah. Saya balas dalam 24 jam dengan pertanyaan atau jawaban jujur tentang apa yang akan saya rapikan lebih dulu."
-      ctaLabel="Kirim repo kamu"
+      ctaTitle="Diskusikan kondisi repo kamu"
+      ctaBody="Ceritakan stack codebase kamu dan bagian yang paling sering bermasalah. Saya balas dalam 24 jam dengan beberapa pertanyaan lanjutan dan prioritas perbaikan yang saya sarankan."
+      ctaLabel="Konsultasi clean code"
     />
   )
 }

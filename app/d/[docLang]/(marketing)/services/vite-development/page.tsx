@@ -43,7 +43,7 @@ export default function ViteDevelopmentPage() {
       description={pageDescription}
       serviceType="Vite development"
       breadcrumbName="Vite development"
-      eyebrow={{ icon: <Zap className="w-4 h-4 text-orange-500" />, label: 'Vite development' }}
+      eyebrow={{ icon: <Zap className="w-4 h-4 text-[#FFB866]" />, label: 'Vite development' }}
       title="Move to Vite,"
       accent="and get your builds back"
       intro={

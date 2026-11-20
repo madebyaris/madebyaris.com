@@ -153,8 +153,8 @@ export interface PageGraphInput {
   items?: Array<{ name: string; path: string }>
 }
 
-function buildBreadcrumbNode(url: string, trail: BreadcrumbItem[]): JsonLdNode {
-  const items = [{ name: 'Home', path: '/' }, ...trail]
+function buildBreadcrumbNode(url: string, trail: BreadcrumbItem[], inLanguage: 'en' | 'id' = 'en'): JsonLdNode {
+  const items = [{ name: inLanguage === 'id' ? 'Beranda' : 'Home', path: '/' }, ...trail]
   return {
     '@type': 'BreadcrumbList',
     '@id': `${url}#breadcrumb`,
@@ -194,7 +194,13 @@ export function buildPageGraph(input: PageGraphInput) {
 
   if (input.path !== '/') {
     page.breadcrumb = ref(`${url}#breadcrumb`)
-    graph.push(buildBreadcrumbNode(url, input.breadcrumbs ?? [{ name: input.name, path: input.path }]))
+    graph.push(
+      buildBreadcrumbNode(
+        url,
+        input.breadcrumbs ?? [{ name: input.name, path: input.path }],
+        input.inLanguage ?? 'en',
+      ),
+    )
   }
 
   if (input.service) {
@@ -304,11 +310,15 @@ export function buildBlogPostGraph(input: {
         publisher: ref(schemaIds.organization),
         inLanguage: input.inLanguage ?? 'en',
       },
-      buildBreadcrumbNode(url, [
-        { name: 'Blog', path: '/blog' },
-        ...(input.category ? [{ name: cleanText(input.category.name), path: input.category.path }] : []),
-        { name: headline, path },
-      ]),
+      buildBreadcrumbNode(
+        url,
+        [
+          { name: 'Blog', path: '/blog' },
+          ...(input.category ? [{ name: cleanText(input.category.name), path: input.category.path }] : []),
+          { name: headline, path },
+        ],
+        input.inLanguage ?? 'en',
+      ),
     ],
   }
 }

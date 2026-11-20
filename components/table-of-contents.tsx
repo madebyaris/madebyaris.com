@@ -63,23 +63,23 @@ export function TableOfContents({ headings }: TableOfContentsProps) {
     <div id="blog-toc" className="mb-8 w-full">
       <details
         ref={detailsRef}
-        className="w-full rounded-xl border bg-muted/50 shadow-sm"
+        className="w-full rounded-xl border border-[#E5E7EB] bg-[#F8FAFC]"
       >
         <summary
-          className="flex cursor-pointer list-none items-center gap-2 px-4 py-3 text-sm font-semibold text-zinc-900 outline-none marker:content-none focus-visible:ring-2 focus-visible:ring-orange-500/60 focus-visible:ring-offset-2 [&::-webkit-details-marker]:hidden"
+          className="flex cursor-pointer list-none items-center gap-2 px-4 py-3 text-sm font-semibold text-[#0B0C0E] outline-none marker:content-none focus-visible:ring-2 focus-visible:ring-[#3A57FC]/40 focus-visible:ring-offset-2 [&::-webkit-details-marker]:hidden"
           aria-expanded={open}
           aria-controls={panelId}
         >
-          <BookOpen className="h-4 w-4 shrink-0 text-orange-500" aria-hidden />
+          <BookOpen className="h-4 w-4 shrink-0 text-[#3A57FC]" aria-hidden />
           <span className="flex-1">Table of Contents</span>
           <ChevronDown
-            className={`h-4 w-4 shrink-0 text-zinc-500 transition-transform ${open ? "rotate-180" : ""}`}
+            className={`h-4 w-4 shrink-0 text-[#6B7280] transition-transform ${open ? "rotate-180" : ""}`}
             aria-hidden
           />
         </summary>
         <nav
           id={panelId}
-          className="max-h-[min(60vh,20rem)] overflow-y-auto border-t border-zinc-200/70 px-4 py-3"
+          className="max-h-[min(60vh,20rem)] overflow-y-auto border-t border-[#E5E7EB] px-4 py-3"
         >
           <ul className="space-y-3 text-sm">
             {headings.map((heading) => (
@@ -89,7 +89,7 @@ export function TableOfContents({ headings }: TableOfContentsProps) {
               >
                 <a
                   href={`#${heading.id}`}
-                  className="line-clamp-2 font-medium text-zinc-600 transition-colors hover:text-orange-500"
+                  className="line-clamp-2 font-medium text-[#4B5563] transition-colors hover:text-[#3A57FC]"
                 >
                   {heading.text}
                 </a>

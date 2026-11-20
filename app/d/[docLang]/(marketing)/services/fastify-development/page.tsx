@@ -47,7 +47,7 @@ export default function FastifyDevelopmentPage() {
       description={pageDescription}
       serviceType="Fastify development"
       breadcrumbName="Fastify development"
-      eyebrow={{ icon: <Server className="w-4 h-4 text-orange-500" />, label: 'Fastify development' }}
+      eyebrow={{ icon: <Server className="w-4 h-4 text-[#FFB866]" />, label: 'Fastify development' }}
       title="A fast Node.js API"
       accent="your team can extend"
       intro={

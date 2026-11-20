@@ -48,17 +48,17 @@ export default function MobileMenu({
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', bounce: 0, duration: 0.35 }}
-            className="absolute inset-y-0 right-0 w-full max-w-sm bg-[#FAF9F6] border-l border-[#E6E4DD] flex flex-col justify-between p-6 overflow-y-auto"
+            className="absolute inset-y-0 right-0 w-full max-w-sm bg-white border-l border-[#E5E7EB] flex flex-col justify-between p-6 overflow-y-auto"
           >
             <div>
-              <div className="flex items-center justify-between pb-6 mb-6 border-b border-[#E6E4DD]">
-                <span className="font-mono text-xs uppercase tracking-[0.14em] text-[#70747D]">
+              <div className="flex items-center justify-between pb-6 mb-6 border-b border-[#E5E7EB]">
+                <span className="font-mono text-xs uppercase tracking-[0.14em] text-[#6B7280]">
                   Navigation
                 </span>
                 <button
                   onClick={onClose}
                   aria-label="Close menu"
-                  className="p-2 rounded-lg border border-[#E6E4DD] bg-white hover:bg-[#F3F1EB] transition-colors"
+                  className="p-2 rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] hover:bg-[#EEF2FF] hover:border-[#3A57FC] transition-colors"
                 >
                   <X className="h-5 w-5 text-[#0B0C0E]" />
                 </button>
@@ -69,8 +69,8 @@ export default function MobileMenu({
                   href="/"
                   onClick={onClose}
                   className={cn(
-                    'font-display text-2xl font-medium tracking-tight py-2 transition-colors hover:text-[#D9481E]',
-                    pathname === '/' ? 'text-[#D9481E]' : 'text-[#0B0C0E]',
+                    'font-display text-2xl font-bold tracking-tight py-2 transition-colors hover:text-[#3A57FC]',
+                    pathname === '/' ? 'text-[#3A57FC]' : 'text-[#0B0C0E]',
                   )}
                 >
                   Home
@@ -83,14 +83,14 @@ export default function MobileMenu({
                         <button
                           onClick={() => toggleSubmenu(item.href)}
                           className={cn(
-                            'font-display text-2xl font-medium tracking-tight py-2 transition-colors hover:text-[#D9481E] flex items-center justify-between w-full text-left',
-                            pathname?.startsWith(item.href) ? 'text-[#D9481E]' : 'text-[#0B0C0E]',
+                            'font-display text-2xl font-bold tracking-tight py-2 transition-colors hover:text-[#3A57FC] flex items-center justify-between w-full text-left',
+                            pathname?.startsWith(item.href) ? 'text-[#3A57FC]' : 'text-[#0B0C0E]',
                           )}
                         >
                           <span>{item.label}</span>
                           <ChevronDown
                             className={cn(
-                              'w-5 h-5 transition-transform text-[#70747D]',
+                              'w-5 h-5 transition-transform text-[#6B7280]',
                               expandedItems[item.href] && 'rotate-180',
                             )}
                           />
@@ -103,7 +103,7 @@ export default function MobileMenu({
                               animate={{ height: 'auto', opacity: 1 }}
                               exit={{ height: 0, opacity: 0 }}
                               transition={{ duration: 0.25 }}
-                              className="pl-4 border-l border-[#E6E4DD] ml-1 my-1 space-y-2 overflow-hidden"
+                              className="pl-4 border-l border-[#DDE4FF] ml-1 my-1 space-y-2 overflow-hidden"
                             >
                               {item.children.map((child) => (
                                 <Link
@@ -111,8 +111,8 @@ export default function MobileMenu({
                                   href={child.href}
                                   onClick={onClose}
                                   className={cn(
-                                    'block py-1.5 text-base font-medium transition-colors hover:text-[#D9481E]',
-                                    pathname === child.href ? 'text-[#D9481E]' : 'text-[#525660]',
+                                    'block py-1.5 text-base font-medium transition-colors hover:text-[#3A57FC]',
+                                    pathname === child.href ? 'text-[#3A57FC]' : 'text-[#4B5563]',
                                   )}
                                 >
                                   {child.label}
@@ -127,8 +127,8 @@ export default function MobileMenu({
                         href={item.href}
                         onClick={onClose}
                         className={cn(
-                          'font-display text-2xl font-medium tracking-tight py-2 block transition-colors hover:text-[#D9481E]',
-                          pathname === item.href ? 'text-[#D9481E]' : 'text-[#0B0C0E]',
+                          'font-display text-2xl font-bold tracking-tight py-2 block transition-colors hover:text-[#3A57FC]',
+                          pathname === item.href ? 'text-[#3A57FC]' : 'text-[#0B0C0E]',
                         )}
                       >
                         {item.label}
@@ -139,14 +139,14 @@ export default function MobileMenu({
               </nav>
             </div>
 
-            <div className="pt-8 mt-8 border-t border-[#E6E4DD] space-y-3">
-              <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-[#70747D]">
-                UTC+7 · EU / SG / ID overlap
+            <div className="pt-8 mt-8 border-t border-[#E5E7EB] space-y-3">
+              <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-[#6B7280]">
+                UTC+7 · EU / SG / ID
               </p>
               <Link
                 href={contactHref('ai-implementation')}
                 onClick={onClose}
-                className="btn-primary rounded-full py-3.5 px-6 text-sm font-medium flex items-center justify-center gap-2 w-full"
+                className="btn-primary rounded-md py-3.5 px-6 text-sm font-bold flex items-center justify-center gap-2 w-full"
               >
                 <span>Start a project</span>
                 <ArrowUpRight className="w-4 h-4" />

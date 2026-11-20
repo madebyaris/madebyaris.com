@@ -168,7 +168,10 @@ const processSteps = [
   { step: 4, title: 'Track', desc: 'Keywords tracked in RankMySEO so you see what moved' },
 ]
 
-const linkClass = 'underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors'
+const linkClass =
+  'text-[#3A57FC] underline decoration-[#DDE4FF] underline-offset-4 hover:text-[#FF8800] hover:decoration-[#FF8800] transition-colors font-medium'
+const darkLinkClass =
+  'text-[#93A8FF] underline decoration-[#93A8FF]/40 underline-offset-4 hover:text-[#FFB866] hover:decoration-[#FFB866] transition-colors font-medium'
 
 const faqs: FaqItem[] = [
   {
@@ -236,33 +239,36 @@ export default function SeoServicesPage() {
       <JsonLd data={structuredData} />
 
       <nav className="mb-8" aria-label="Breadcrumb">
-        <ol className="flex items-center space-x-2 text-sm text-zinc-500">
-          <li><Link href="/services" className="hover:text-orange-500 transition-colors">Services</Link></li>
-          <li><span className="px-2">/</span></li>
-          <li className="text-zinc-900">SEO</li>
+        <ol className="flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-[0.08em] text-[#525660]">
+          <li>
+            <Link href="/services" className="hover:text-[#3A57FC] transition-colors">
+              Services
+            </Link>
+          </li>
+          <li className="text-[#CBD5E1]">/</li>
+          <li className="text-[#0B0C0E] font-semibold">SEO</li>
         </ol>
       </nav>
 
       <PageHero
-        eyebrow={{ icon: <LineChart className="w-4 h-4 text-orange-500" />, label: 'SEO audits, research, and fixes' }}
+        eyebrow={{ icon: <LineChart className="w-3.5 h-3.5" />, label: 'SEO audits, research, and fixes' }}
         title="Technical SEO services"
         accent="from the developer who fixes them"
         actions={
           <>
             <Link
               href={contactHref('seo')}
-              className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
+              className="btn-primary rounded-md py-3.5 px-6 text-sm font-bold inline-flex items-center gap-2.5 group"
             >
-              <span className="text-sm font-medium tracking-tight">Send me your site for an SEO audit</span>
+              <span>Send me your site for an SEO audit</span>
               <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </Link>
             <a
               href="#audit"
-              className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
-              style={{ boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)' }}
+              className="btn-secondary rounded-md py-3.5 px-6 text-sm font-semibold inline-flex items-center gap-2 group"
             >
-              <span className="text-sm font-medium text-black/60 tracking-tight">See what the audit checks</span>
-              <ArrowRight className="w-4 h-4 text-zinc-500" />
+              <span>See what the audit checks</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </a>
           </>
         }
@@ -270,7 +276,7 @@ export default function SeoServicesPage() {
         <p className="mb-4">
           For European and Indonesian product and marketing teams whose Google or AI search visibility stalled after a redesign. I audit the codebase, research buyer queries, and open pull requests to fix the issues directly.
         </p>
-        <p className="text-sm text-zinc-500 font-normal">
+        <p className="font-mono text-xs text-white/80 tracking-wide">
           Senior AI software engineer · Creator of RankMySEO · Grew one client site from 700K to 1.8M Google impressions per 28 days.
         </p>
       </PageHero>
@@ -278,16 +284,17 @@ export default function SeoServicesPage() {
       <HeroImage src="/images/services/seo.jpg" alt="Illustration of a search results page with the top result highlighted, a magnifying glass, and a rising ranking chart" />
 
       <section className="mb-16 max-w-3xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+        <span className="section-index block mb-2">Overview</span>
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-4">
           What my technical SEO services include
         </h2>
-        <p className="text-zinc-600 leading-relaxed mb-4">
+        <p className="text-[#374151] leading-relaxed mb-4">
           Technical SEO services make sure Google can crawl, render, and understand every page you want found. I start with an
           SEO audit of the site and your Search Console data, rank each problem by the traffic it puts at risk, and then fix
           it in the code. Keyword research decides what each page should target. Monthly SEO keeps the list moving and
           tracks every keyword so you can see what changed.
         </p>
-        <p className="text-zinc-600 leading-relaxed">
+        <p className="text-[#374151] leading-relaxed">
           Most SEO consultants hand you a report and leave the fixes to a developer. I am the developer, so the redirect map,
           the schema, and the slow template get fixed in the same job.
         </p>
@@ -295,34 +302,39 @@ export default function SeoServicesPage() {
 
       <section className="mb-16" aria-labelledby="offers">
         <div className="text-center mb-10">
-          <h2 id="offers" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <span className="section-index block mb-2">Engagement options</span>
+          <h2 id="offers" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Four ways <span className="gradient-text">to work with me</span>
           </h2>
-          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
+          <p className="text-sm md:text-base text-[#4B5563] max-w-xl mx-auto">
             Start with one. An audit is the cheapest way to find out whether the rest is worth paying for.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {offers.map((item) => (
-            <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all group">
-              <div className="p-3 bg-zinc-100 rounded-xl w-fit mb-4 group-hover:bg-orange-100 transition-colors">
-                <item.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
+            <div
+              key={item.title}
+              className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6 md:p-7 group"
+            >
+              <div className="p-3 bg-[#EEF2FF] text-[#3A57FC] rounded-xl w-fit mb-4 group-hover:bg-[#3A57FC] group-hover:text-white transition-colors">
+                <item.icon className="w-5 h-5" />
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{item.description}</p>
+              <h3 className="font-display font-bold text-[#0B0C0E] mb-2">{item.title}</h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.description}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
       <section id="audit" className="mb-16 max-w-3xl mx-auto scroll-mt-32">
-        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+        <span className="section-index block mb-2">Audit scope</span>
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-4">
           What a technical SEO audit checks
         </h2>
-        <p className="text-zinc-600 leading-relaxed mb-6">
+        <p className="text-[#374151] leading-relaxed mb-6">
           Every SEO audit covers these, in this order, because a page Google cannot crawl gains nothing from a better title.
           The full list with the tools I use is in my{' '}
           <Link href="/blog/technical-seo-audit-checklist" className={linkClass}>
@@ -330,95 +342,115 @@ export default function SeoServicesPage() {
           </Link>
           .
         </p>
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-          <ul className="space-y-3">
+        <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-7">
+          <ul className="space-y-3.5">
             {auditChecks.map((item) => (
-              <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                <CheckCircle2 className="w-5 h-5 text-orange-500 shrink-0" />
-                {item}
+              <li key={item} className="flex items-start gap-3 text-sm text-[#1F2937]">
+                <CheckCircle2 className="w-5 h-5 text-[#3A57FC] shrink-0 mt-0.5" />
+                <span>{item}</span>
               </li>
             ))}
           </ul>
         </div>
       </section>
 
-      <section className="mb-16 max-w-3xl mx-auto" aria-labelledby="proof">
-        <h2 id="proof" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
-          Proof you can check before you hire me
-        </h2>
-        <div className="space-y-4">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-1">Client results</h3>
-            <p className="text-sm text-zinc-500 mb-4">I keep client names private to protect their data.</p>
-            <ul className="space-y-4">
-              {clientResults.map((item) => (
-                <li key={item.title} className="flex items-start gap-3">
-                  <LineChart className="w-5 h-5 text-orange-500 shrink-0 mt-0.5" />
-                  <div>
-                    <p className="text-sm font-semibold text-zinc-900">{item.title}</p>
-                    <p className="text-sm text-zinc-600 leading-relaxed">{item.description}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-2">I built RankMySEO</h3>
-            <p className="text-sm text-zinc-600 leading-relaxed">
-              RankMySEO stores daily Google rankings for each keyword, so you can see where a page stood last week and last
-              month. There is a{' '}
-              <a href="https://github.com/madebyaris/rankmyseo" className={linkClass} target="_blank" rel="noopener noreferrer">
-                public open-source toolkit
-              </a>{' '}
-              and a{' '}
-              <a href="https://rankmyseo.com" className={linkClass} target="_blank" rel="noopener noreferrer">
-                hosted version
-              </a>
-              . On monthly SEO, your keywords are tracked there.
-            </p>
-          </div>
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-2">This site is the demo</h3>
-            <p className="text-sm text-zinc-600 leading-relaxed">
-              View the source of any page here. Each one has a single structured data graph, a canonical URL, and a title cut to
-              fit Google. The site also publishes an XML sitemap, an RSS feed, and an{' '}
-              <a href="/llms.txt" className={linkClass}>
-                llms.txt
-              </a>{' '}
-              for AI search. Posts refresh in the cache within seconds of publishing.
-            </p>
+      <section className="mb-16" aria-labelledby="proof">
+        <div className="rounded-2xl bg-[#0B0C0E] text-white border border-white/10 p-6 md:p-10 shadow-[0_24px_60px_-24px_rgba(11,12,14,0.45)]">
+          <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#FFB866] block mb-2">
+            Verified track record
+          </span>
+          <h2 id="proof" className="font-display text-2xl md:text-3xl font-bold text-white tracking-tight mb-6">
+            Proof you can check before you hire me
+          </h2>
+          <div className="space-y-6">
+            <div className="rounded-xl border border-white/10 bg-white/[0.04] p-6">
+              <h3 className="font-display font-bold text-white mb-1">Client results</h3>
+              <p className="text-xs font-mono uppercase tracking-wider text-white/60 mb-4">
+                I keep client names private to protect their data.
+              </p>
+              <ul className="space-y-4">
+                {clientResults.map((item) => (
+                  <li key={item.title} className="flex items-start gap-3">
+                    <LineChart className="w-5 h-5 text-[#FFB866] shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-sm font-semibold text-white">{item.title}</p>
+                      <p className="text-sm text-white/80 leading-relaxed">{item.description}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="rounded-xl border border-white/10 bg-white/[0.04] p-6">
+                <h3 className="font-display font-bold text-white mb-2">I built RankMySEO</h3>
+                <p className="text-sm text-white/80 leading-relaxed">
+                  RankMySEO stores daily Google rankings for each keyword, so you can see where a page stood last week and last
+                  month. There is a{' '}
+                  <a href="https://github.com/madebyaris/rankmyseo" className={darkLinkClass} target="_blank" rel="noopener noreferrer">
+                    public open-source toolkit
+                  </a>{' '}
+                  and a{' '}
+                  <a href="https://rankmyseo.com" className={darkLinkClass} target="_blank" rel="noopener noreferrer">
+                    hosted version
+                  </a>
+                  . On monthly SEO, your keywords are tracked there.
+                </p>
+              </div>
+              <div className="rounded-xl border border-white/10 bg-white/[0.04] p-6">
+                <h3 className="font-display font-bold text-white mb-2">Open-source SEO &amp; GEO agent skills</h3>
+                <p className="text-sm text-white/80 leading-relaxed">
+                  We publish 24 agent skills for SEO, GEO, and AEO in{' '}
+                  <a href="https://github.com/rankmyseo/skills" className={darkLinkClass} target="_blank" rel="noopener noreferrer">
+                    github.com/rankmyseo/skills
+                  </a>
+                  , covering AI visibility, agent readiness, Search Console, and GA4 workflows you can inspect before hiring us.
+                </p>
+              </div>
+              <div className="rounded-xl border border-white/10 bg-white/[0.04] p-6">
+                <h3 className="font-display font-bold text-white mb-2">This site is the demo</h3>
+                <p className="text-sm text-white/80 leading-relaxed">
+                  View the source of any page here. Each one has a single structured data graph, a canonical URL, and a title cut to
+                  fit Google. The site also publishes an XML sitemap, an RSS feed, and an{' '}
+                  <a href="/llms.txt" className={darkLinkClass}>
+                    llms.txt
+                  </a>{' '}
+                  for AI search. Posts refresh in the cache within seconds of publishing.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
       <section className="mb-16" aria-labelledby="fit">
         <div className="text-center mb-10">
-          <h2 id="fit" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <span className="section-index block mb-2">Qualification</span>
+          <h2 id="fit" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Is a technical SEO consultant <span className="gradient-text">what you need?</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-4">Good fit</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="rounded-2xl border border-[#DDE4FF] bg-[#F3F5FF]/70 p-6 md:p-7">
+            <h3 className="font-display font-bold text-[#0B0C0E] mb-4">Good fit</h3>
             <ul className="space-y-3">
               {goodFit.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
-                  {item}
+                <li key={item} className="flex items-start gap-3 text-sm text-[#1F2937]">
+                  <CheckCircle2 className="w-5 h-5 text-[#3A57FC] shrink-0 mt-0.5" />
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
           </div>
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-4">Look elsewhere</h3>
+          <div className="rounded-2xl border border-[#E5E7EB] bg-[#F8FAFC] p-6 md:p-7">
+            <h3 className="font-display font-bold text-[#0B0C0E] mb-4">Look elsewhere</h3>
             <ul className="space-y-3">
               {poorFit.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                  <XCircle className="w-5 h-5 text-zinc-400 shrink-0" />
-                  {item}
+                <li key={item} className="flex items-start gap-3 text-sm text-[#374151]">
+                  <XCircle className="w-5 h-5 text-[#64748B] shrink-0 mt-0.5" />
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
@@ -428,48 +460,53 @@ export default function SeoServicesPage() {
 
       <section className="mb-16" aria-labelledby="process">
         <div className="text-center mb-10">
-          <h2 id="process" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <span className="section-index block mb-2">Workflow</span>
+          <h2 id="process" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             How an SEO audit <span className="gradient-text">turns into fixes</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {processSteps.map((item) => (
-            <div key={item.step} className="bg-zinc-50 rounded-2xl p-5 text-center">
-              <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-500 font-bold text-lg flex items-center justify-center mx-auto mb-3">
-                {item.step}
+            <div
+              key={item.step}
+              className="rounded-2xl border border-[#E5E7EB] bg-[#F8FAFC] hover:bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6"
+            >
+              <div className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#0B0C0E] text-[#FFB866] font-mono text-xs font-bold mb-4">
+                {String(item.step).padStart(2, '0')}
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-1">{item.title}</h3>
-              <p className="text-sm text-zinc-500">{item.desc}</p>
+              <h3 className="font-display font-bold text-[#0B0C0E] mb-1.5">{item.title}</h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
       <section className="mb-16" aria-labelledby="topics">
         <div className="text-center mb-10">
-          <h2 id="topics" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <span className="section-index block mb-2">Further reading</span>
+          <h2 id="topics" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             SEO guides <span className="gradient-text">and related services</span>
           </h2>
-          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
+          <p className="text-sm md:text-base text-[#4B5563] max-w-xl mx-auto">
             What I have written about SEO, grouped with the services that put it into practice.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {topics.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="block bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm hover:shadow-lg transition-all group"
+              className="block rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6 group"
             >
-              <h3 className="font-semibold text-zinc-900 mb-1 flex items-center justify-between gap-3">
-                {item.title}
-                <ArrowRight className="w-4 h-4 text-zinc-400 group-hover:text-orange-500 group-hover:translate-x-0.5 transition-all shrink-0" />
+              <h3 className="font-display font-bold text-[#0B0C0E] group-hover:text-[#3A57FC] transition-colors mb-1.5 flex items-center justify-between gap-3">
+                <span>{item.title}</span>
+                <ArrowRight className="w-4 h-4 text-[#64748B] group-hover:text-[#3A57FC] group-hover:translate-x-1 transition-all shrink-0" />
               </h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{item.description}</p>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.description}</p>
             </Link>
           ))}
         </div>

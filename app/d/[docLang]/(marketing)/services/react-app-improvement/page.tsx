@@ -24,7 +24,7 @@ export const metadata: Metadata = buildPageMetadata({
   ],
 })
 
-const linkClass = 'underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors'
+const linkClass = 'underline decoration-[#CBD5E1] underline-offset-4 hover:text-[#3A57FC] transition-colors'
 
 const faqs: FaqItem[] = [
   {
@@ -56,7 +56,7 @@ export default function ReactAppImprovementPage() {
       description={pageDescription}
       serviceType="React performance optimization"
       breadcrumbName="React app improvement"
-      eyebrow={{ icon: <Gauge className="w-4 h-4 text-orange-500" />, label: 'React app improvement' }}
+      eyebrow={{ icon: <Gauge className="w-4 h-4 text-[#FFB866]" />, label: 'React app improvement' }}
       title="Make your React app faster,"
       accent="and easier to change"
       intro={

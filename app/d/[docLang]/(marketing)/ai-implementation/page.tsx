@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import {
+  ArrowRight,
   ArrowUpRight,
   Bot,
   CheckCircle2,
@@ -47,7 +48,8 @@ export const metadata: Metadata = buildPageMetadata({
   ],
 })
 
-const linkClass = 'underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors'
+const linkClass =
+  'text-[#3A57FC] font-medium underline decoration-[#3A57FC]/35 underline-offset-4 hover:text-[#2944E0] hover:decoration-[#2944E0] transition-colors'
 
 const stallReasons = [
   {
@@ -253,201 +255,329 @@ export default function AiImplementationPage() {
     <>
       <JsonLd data={structuredData} />
 
-      <nav className="mb-8" aria-label="Breadcrumb">
-        <ol className="flex items-center space-x-2 text-sm text-zinc-500">
-          <li><Link href="/services" className="hover:text-orange-500 transition-colors">Services</Link></li>
-          <li><span className="px-2">/</span></li>
-          <li className="text-zinc-900">AI engineering</li>
-        </ol>
-      </nav>
-
       <PageHero
-        eyebrow={{ icon: <Rocket className="w-4 h-4 text-orange-500" />, label: 'AI development services · Build · Remote' }}
+        variant="obsidian"
+        breadcrumb={
+          <nav aria-label="Breadcrumb">
+            <ol className="flex items-center gap-2 font-mono text-xs text-white/65">
+              <li>
+                <Link href="/services" className="hover:text-white transition-colors">
+                  Services
+                </Link>
+              </li>
+              <li aria-hidden="true" className="text-white/35">/</li>
+              <li className="text-white">AI engineering</li>
+            </ol>
+          </nav>
+        }
+        eyebrow={{ icon: <Rocket className="w-3.5 h-3.5" />, label: 'AI development services · Build · Remote' }}
         title="Hire an AI developer"
         accent="who ships production AI"
         actions={
           <>
             <Link
               href={contactHref('ai-implementation')}
-              className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
+              className="inline-flex items-center justify-center gap-2 rounded-md bg-[#FF8800] hover:bg-[#E67600] text-white font-bold text-sm px-6 py-3.5 shadow-[0_12px_28px_-10px_rgba(0,0,0,0.4)] transition-all hover:-translate-y-0.5 group"
             >
-              <span className="text-sm font-medium tracking-tight">Send me your AI project</span>
+              <span>Send me your AI project</span>
               <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </Link>
             <Link
               href="#open-source"
-              className="btn-secondary hover:bg-zinc-50 transition-all inline-flex text-sm font-medium text-black/60 rounded-full py-3 px-6 items-center"
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-white/45 hover:border-white bg-white/10 hover:bg-white/18 text-white font-semibold text-sm px-6 py-3.5 transition-all"
             >
-              Read the code I maintain
+              <span>Read the code I maintain</span>
             </Link>
           </>
         }
+        bottomStrip={
+          <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 font-mono text-xs text-white/75">
+            <span>
+              Independent since 2015 · First Cursor Ambassador in Indonesia · MiniMax Dev Community Expert · Reply within 24 hours
+            </span>
+            <Link
+              href="/jasa-implementasi-ai"
+              className="text-[#FFB866] hover:text-white underline decoration-[#FFB866]/40 underline-offset-4 transition-colors"
+            >
+              Bahasa Indonesia
+            </Link>
+          </div>
+        }
       >
-        <p className="mb-4">
+        <p>
           For European (EU and UK) and Indonesian engineering teams looking to hire an AI developer or AI consultant to join their AI and app builds, take a pilot to production, or ship agents, chatbots, and MCP tools inside an existing repo. I am Aris Setiawan, with 13+ years shipping TypeScript, Next.js, Rust, databases, and infrastructure.
-        </p>
-        <p className="text-sm text-zinc-500 font-normal">
-          Independent since 2015 · First Cursor Ambassador in Indonesia · MiniMax Dev Community Expert · I reply within 24 hours.
         </p>
       </PageHero>
 
-      <section className="mb-16" aria-labelledby="project-notes">
-        <div className="max-w-2xl mb-8">
-          <h2 id="project-notes" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            Project notes
-          </h2>
-          <p className="text-sm text-zinc-500 leading-relaxed">
-            All my client work is under NDA. These notes are generalized: no client names, sectors, or figures.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {projectNotes.map((item) => (
-            <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-              <h3 className="font-semibold text-zinc-900 mb-4">{item.title}</h3>
-              <p className="text-xs font-semibold tracking-wider uppercase text-zinc-400 mb-1">The problem</p>
-              <p className="text-sm text-zinc-600 leading-relaxed mb-4">{item.problem}</p>
-              <p className="text-xs font-semibold tracking-wider uppercase text-zinc-400 mb-1">What I built</p>
-              <p className="text-sm text-zinc-600 leading-relaxed">{item.built}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="mb-16 max-w-3xl mx-auto" aria-labelledby="why-pilots-stall">
-        <h2 id="why-pilots-stall" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
-          Why AI pilots stall before production
-        </h2>
-        <p className="text-zinc-600 leading-relaxed mb-6">
-          In an RSM survey of middle-market companies (July 2026, as summarized by{' '}
-          <a href="https://dkstudio.ai/insights/ai-implementation-partner" className={linkClass} target="_blank" rel="noopener noreferrer">DK Studio</a>), data quality and integration were the top blockers among
-          teams with limited pilot success. Both are software engineering problems, and they are the work I do.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {stallReasons.map((item) => (
-            <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm">
-              <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{item.body}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="mb-16" aria-labelledby="what-i-do">
-        <div className="text-center mb-10">
-          <h2 id="what-i-do" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            What I build
-          </h2>
-          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
-            Pick the shape that fits your stage, or send me your repo and I will tell you which one saves you the most time.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {offers.map((item) => (
-            <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm flex flex-col">
-              <div className="p-2 bg-zinc-100 rounded-lg inline-flex w-fit mb-3">
-                <item.icon className="w-4 h-4 text-zinc-600" />
-              </div>
-              <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
-              <p className="text-sm text-zinc-500 leading-relaxed mb-3 flex-grow">{item.body}</p>
-              {item.href && item.cta && (
-                <Link href={item.href} className={`${linkClass} text-sm mt-auto`}>
-                  {item.cta}
-                </Link>
-              )}
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="mb-16" aria-labelledby="stack-behind-ai">
-        <div className="max-w-2xl mb-8">
-          <h2 id="stack-behind-ai" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            Full-stack skills behind every AI build
-          </h2>
-          <p className="text-sm text-zinc-500 leading-relaxed">
-            An LLM wrapper is easy. Shipping AI inside real auth, billing, databases, and legacy apps takes years of production engineering.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {stackCapabilities.map((item) => (
-            <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-              <div className="p-2 bg-zinc-100 rounded-lg inline-flex mb-3">
-                <item.icon className="w-4 h-4 text-zinc-600" />
-              </div>
-              <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{item.body}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="mb-16 max-w-4xl mx-auto" aria-labelledby="how-i-work">
-        <h2 id="how-i-work" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-          How I work, in plain answers
-        </h2>
-        <p className="text-sm text-zinc-500 leading-relaxed mb-8">
-          These are the questions a careful buyer asks before choosing an AI engineering partner.
-        </p>
-        <dl className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {howIWork.map((item) => (
-            <div key={item.question} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-              <dt className="font-semibold text-zinc-900 mb-2">{item.question}</dt>
-              <dd className="text-sm text-zinc-600 leading-relaxed">{item.answer}</dd>
-            </div>
-          ))}
-        </dl>
-      </section>
-
-      <OpenSourceProjects />
-
-      <section className="mb-16" aria-labelledby="fit">
-        <div className="text-center mb-10">
-          <h2 id="fit" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            Good fit and poor fit
-          </h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-4">Good fit if:</h3>
-            <ul className="space-y-3">
-              {goodFit.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
-                  {item}
-                </li>
-              ))}
-            </ul>
+      {/* Band 1: Dark Proof Band: Project notes */}
+      <section className="w-full ahrefs-dark-band text-white py-16 md:py-24" aria-labelledby="project-notes">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-10">
+          <div className="max-w-2xl mb-10 md:mb-12">
+            <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-[#FFB866] block mb-2">
+              01 / Production notes
+            </span>
+            <h2 id="project-notes" className="font-display text-3xl sm:text-4xl font-bold text-white tracking-tight mb-3">
+              Project notes
+            </h2>
+            <p className="text-sm sm:text-base text-zinc-300 leading-relaxed">
+              All my client work is under NDA. These notes are generalized: no client names, sectors, or figures.
+            </p>
           </div>
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-4">Poor fit if:</h3>
-            <ul className="space-y-3">
-              {poorFit.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                  <XCircle className="w-5 h-5 text-zinc-400 shrink-0" />
-                  {item}
-                </li>
-              ))}
-            </ul>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {projectNotes.map((item, idx) => (
+              <article
+                key={item.title}
+                className="rounded-2xl border border-white/12 bg-white/[0.04] hover:bg-white/[0.07] hover:border-[#3A57FC]/70 p-6 md:p-7 transition-all flex flex-col"
+              >
+                <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#FFB866] mb-3">
+                  Note {String(idx + 1).padStart(2, '0')}
+                </span>
+                <h3 className="font-display text-lg font-bold text-white tracking-tight mb-5">
+                  {item.title}
+                </h3>
+                <div className="space-y-4 mt-auto">
+                  <div>
+                    <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-[#93A8FF] mb-1.5">
+                      The problem
+                    </p>
+                    <p className="text-sm text-zinc-300 leading-relaxed">{item.problem}</p>
+                  </div>
+                  <div className="pt-4 border-t border-white/10">
+                    <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-emerald-400 mb-1.5">
+                      What I built
+                    </p>
+                    <p className="text-sm text-zinc-200 leading-relaxed">{item.built}</p>
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
 
-      <Faq id="ai-implementation-faq" title="Questions about hiring an AI engineer" faqs={faqs} />
+      {/* Band 2: White: Why AI pilots stall */}
+      <section className="w-full bg-white py-16 md:py-24" aria-labelledby="why-pilots-stall">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-10">
+          <div className="max-w-3xl mb-10 md:mb-12">
+            <span className="section-index block mb-2">02 / The failure modes</span>
+            <h2 id="why-pilots-stall" className="font-display text-3xl sm:text-4xl font-bold text-[#0B0C0E] tracking-tight mb-4">
+              Why AI pilots stall before production
+            </h2>
+            <p className="text-base text-[#4B5563] leading-relaxed">
+              In an RSM survey of middle-market companies (July 2026, as summarized by{' '}
+              <a
+                href="https://dkstudio.ai/insights/ai-implementation-partner"
+                className={linkClass}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                DK Studio
+              </a>
+              ), data quality and integration were the top blockers among teams with limited pilot success. Both are software engineering problems, and they are the work I do.
+            </p>
+          </div>
 
-      <CtaBand
-        title="Send me your AI project"
-        body="Tell me what the pilot or feature needs to do, where your data lives, and who will use it. I reply within 24 hours with questions or a plain answer on whether I am the right fit."
-        primary={{ href: contactHref('ai-implementation'), label: 'Send me your AI project' }}
-        secondary={{ href: '/services/ai-development/ai-mvp', label: 'Build a new AI MVP instead' }}
-      />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {stallReasons.map((item, idx) => (
+              <div
+                key={item.title}
+                className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] p-6 md:p-7 transition-all"
+              >
+                <span className="inline-flex items-center justify-center rounded-md bg-[#EEF2FF] border border-[#DDE4FF] px-2.5 py-1 font-mono text-xs font-bold text-[#3A57FC] mb-4">
+                  {String(idx + 1).padStart(2, '0')}
+                </span>
+                <h3 className="font-display text-lg font-bold text-[#0B0C0E] tracking-tight mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-[#4B5563] leading-relaxed">{item.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      <p className="text-center text-sm text-zinc-600 mb-16 max-w-lg mx-auto">
-        Perusahaan besar di Indonesia? Lihat{' '}
-        <Link href="/jasa-implementasi-ai" className={linkClass}>
-          implementasi AI untuk perusahaan
-        </Link>
-        .
-      </p>
+      {/* Band 3: Subtle Gray: What I build */}
+      <section className="w-full bg-[#F8FAFC] border-y border-[#E5E7EB] py-16 md:py-24" aria-labelledby="what-i-do">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-10">
+          <div className="max-w-2xl mb-10 md:mb-12">
+            <span className="section-index block mb-2">03 / Scope options</span>
+            <h2 id="what-i-do" className="font-display text-3xl sm:text-4xl font-bold text-[#0B0C0E] tracking-tight mb-3">
+              What I build
+            </h2>
+            <p className="text-base text-[#4B5563] leading-relaxed">
+              Pick the shape that fits your stage, or send me your repo and I will tell you which one saves you the most time.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {offers.map((item) => (
+              <div
+                key={item.title}
+                className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] p-6 md:p-7 transition-all flex flex-col"
+              >
+                <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#EEF2FF] border border-[#DDE4FF] text-[#3A57FC] mb-4">
+                  <item.icon className="w-5 h-5" />
+                </div>
+                <h3 className="font-display text-lg font-bold text-[#0B0C0E] tracking-tight mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-[#4B5563] leading-relaxed mb-5 flex-grow">{item.body}</p>
+                {item.href && item.cta && (
+                  <Link
+                    href={item.href}
+                    className="group inline-flex items-center gap-1.5 text-sm font-semibold text-[#3A57FC] hover:text-[#2944E0] transition-colors mt-auto pt-4 border-t border-[#E5E7EB]"
+                  >
+                    <span>{item.cta}</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                  </Link>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Band 4: White: Full-stack skills */}
+      <section className="w-full bg-white py-16 md:py-24" aria-labelledby="stack-behind-ai">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-10">
+          <div className="max-w-2xl mb-10 md:mb-12">
+            <span className="section-index block mb-2">04 / Engineering stack</span>
+            <h2 id="stack-behind-ai" className="font-display text-3xl sm:text-4xl font-bold text-[#0B0C0E] tracking-tight mb-3">
+              Full-stack skills behind every AI build
+            </h2>
+            <p className="text-base text-[#4B5563] leading-relaxed">
+              An LLM wrapper is easy. Shipping AI inside real auth, billing, databases, and legacy apps takes years of production engineering.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {stackCapabilities.map((item) => (
+              <div
+                key={item.title}
+                className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] p-6 md:p-7 transition-all"
+              >
+                <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#EEF2FF] border border-[#DDE4FF] text-[#3A57FC] mb-4">
+                  <item.icon className="w-5 h-5" />
+                </div>
+                <h3 className="font-display text-lg font-bold text-[#0B0C0E] tracking-tight mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-[#4B5563] leading-relaxed">{item.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Band 5: Subtle Gray: How I work */}
+      <section className="w-full bg-[#F8FAFC] border-y border-[#E5E7EB] py-16 md:py-24" aria-labelledby="how-i-work">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-10">
+          <div className="max-w-2xl mb-10 md:mb-12">
+            <span className="section-index block mb-2">05 / Buyer answers</span>
+            <h2 id="how-i-work" className="font-display text-3xl sm:text-4xl font-bold text-[#0B0C0E] tracking-tight mb-3">
+              How I work, in plain answers
+            </h2>
+            <p className="text-base text-[#4B5563] leading-relaxed">
+              These are the questions a careful buyer asks before choosing an AI engineering partner.
+            </p>
+          </div>
+
+          <dl className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {howIWork.map((item, idx) => (
+              <div
+                key={item.question}
+                className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] p-6 md:p-7 transition-all"
+              >
+                <span className="font-mono text-xs font-bold text-[#3A57FC] block mb-2">
+                  {String(idx + 1).padStart(2, '0')}
+                </span>
+                <dt className="font-display text-lg font-bold text-[#0B0C0E] tracking-tight mb-2">
+                  {item.question}
+                </dt>
+                <dd className="text-sm text-[#4B5563] leading-relaxed">{item.answer}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+
+      {/* Band 6: White: Open source projects */}
+      <section className="w-full bg-white py-16 md:py-24">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-10">
+          <OpenSourceProjects className="mb-0" />
+        </div>
+      </section>
+
+      {/* Band 7: Subtle Gray: Good fit & poor fit */}
+      <section className="w-full bg-[#F8FAFC] border-y border-[#E5E7EB] py-16 md:py-24" aria-labelledby="fit">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-10">
+          <div className="max-w-2xl mb-10 md:mb-12">
+            <span className="section-index block mb-2">06 / Qualification</span>
+            <h2 id="fit" className="font-display text-3xl sm:text-4xl font-bold text-[#0B0C0E] tracking-tight mb-3">
+              Good fit and poor fit
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="rounded-2xl border border-[#DDE4FF] bg-white p-6 md:p-7 shadow-xs">
+              <h3 className="font-display text-lg font-bold text-[#0B0C0E] mb-4">Good fit if:</h3>
+              <ul className="space-y-3.5">
+                {goodFit.map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-sm text-[#4B5563] leading-relaxed">
+                    <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-7">
+              <h3 className="font-display text-lg font-bold text-[#0B0C0E] mb-4">Poor fit if:</h3>
+              <ul className="space-y-3.5">
+                {poorFit.map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-sm text-[#4B5563] leading-relaxed">
+                    <XCircle className="w-5 h-5 text-[#6B7280] shrink-0 mt-0.5" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Band 8: White: FAQ */}
+      <section className="w-full bg-white py-16 md:py-24">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-10">
+          <Faq
+            id="ai-implementation-faq"
+            title="Questions about hiring an AI engineer"
+            faqs={faqs}
+            className="mb-0"
+          />
+        </div>
+      </section>
+
+      {/* Band 9: Subtle Gray: CTA Band */}
+      <section className="w-full bg-[#F8FAFC] border-t border-[#E5E7EB] py-16 md:py-24">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-10">
+          <CtaBand
+            className="mb-0"
+            title="Send me your AI project"
+            body="Tell me what the pilot or feature needs to do, where your data lives, and who will use it. I reply within 24 hours with questions or a plain answer on whether I am the right fit."
+            primary={{ href: contactHref('ai-implementation'), label: 'Send me your AI project' }}
+            secondary={{ href: '/services/ai-development/ai-mvp', label: 'Build a new AI MVP instead' }}
+          />
+
+          <p className="text-center text-sm text-[#4B5563] mt-8 max-w-lg mx-auto">
+            Perusahaan besar di Indonesia? Lihat{' '}
+            <Link href="/jasa-implementasi-ai" className={linkClass}>
+              implementasi AI untuk perusahaan
+            </Link>
+            .
+          </p>
+        </div>
+      </section>
     </>
   )
 }

@@ -32,11 +32,11 @@ const faqs: FaqItem[] = [
   {
     question: 'Bisakah aplikasi Express dipindahkan tanpa menulis ulang?',
     answer:
-      'Biasanya bisa. Saya pindahkan route demi route dan menjaga test tetap lulus, jadi API tetap berjalan sementara isinya berubah.',
+      'Biasanya bisa. Saya pindahkan route demi route sambil menjaga seluruh test tetap lulus, sehingga API tetap berjalan normal selama proses migrasi berlangsung.',
   },
   {
     question: 'Bisakah database-nya sekalian dibenahi?',
-    answer: 'Bisa. API yang cepat butuh query yang cepat, dan optimasi database saya tawarkan sebagai layanan terpisah.',
+    answer: 'Bisa. API yang cepat butuh query yang cepat pula, dan optimasi database saya tawarkan sebagai layanan terpisah.',
   },
 ]
 
@@ -49,22 +49,22 @@ export default function JasaFastifyPage() {
       description={pageDescription}
       serviceType="Fastify development"
       breadcrumbName="Jasa Fastify"
-      eyebrow={{ icon: <Server className="w-4 h-4 text-orange-500" />, label: 'Jasa Fastify' }}
+      eyebrow={{ icon: <Server className="w-4 h-4 text-[#FFB866]" />, label: 'Jasa Fastify' }}
       title="API Node.js yang cepat"
       accent="dan mudah dikembangkan tim"
       intro={
         <p>
-          Fastify adalah framework Node.js dengan validasi input bawaan, logging terstruktur, dan sistem plugin. Saya membangun
-          API baru di atasnya dan memindahkan aplikasi Express ke sana, lengkap dengan test dan struktur yang menjaga kode tetap
-          terbaca seiring API tumbuh.
+          Fastify adalah framework Node.js dengan validasi input bawaan, logging terstruktur, dan sistem plugin yang rapi. Saya
+          membangun API baru di atas Fastify maupun memigrasikan aplikasi Express, lengkap dengan test dan struktur kode yang
+          tetap mudah dirawat seiring API berkembang.
         </p>
       }
-      signsTitle="Tanda kamu butuh ini"
+      signsTitle="Tanda kamu butuh jasa Fastify"
       signs={[
-        'API Node kamu lambat saat beban naik, atau waktu responsnya naik turun',
-        'Data request tidak divalidasi, dan input buruk sampai ke database',
-        'Route dan middleware sudah jadi sesuatu yang tidak ada yang mau sentuh',
-        'Kamu memulai back end baru dan ingin fondasi yang kokoh',
+        'API Node.js kamu melambat saat beban naik, atau waktu responsnya tidak stabil',
+        'Data request tidak tervalidasi dengan ketat sehingga input rusak sampai ke database',
+        'Struktur route dan middleware sudah terlalu rumit sampai tim ragu menyentuhnya',
+        'Kamu sedang memulai backend baru dan butuh fondasi yang solid sejak awal',
       ]}
       offersTitle="Yang saya kerjakan"
       offers={[
@@ -73,38 +73,38 @@ export default function JasaFastifyPage() {
           body: 'Route dengan validasi schema, plugin untuk logika bersama, logging terstruktur, dan test sejak endpoint pertama.',
         },
         {
-          title: 'Pindah dari Express',
-          body: 'Migrasi route demi route selagi test tetap lulus, jadi API tetap live.',
+          title: 'Migrasi dari Express',
+          body: 'Memindahkan route demi route sambil menjaga test tetap lulus, sehingga API tetap live tanpa gangguan.',
         },
         {
           title: 'Performa dan load test',
-          body: 'Cari endpoint yang lambat di bawah beban realistis dan perbaiki, termasuk query di belakangnya.',
+          body: 'Mencari endpoint yang melambat di bawah beban realistis lalu memperbaikinya, termasuk query database di belakangnya.',
           href: '/services/jasa-optimasi-database',
           cta: 'Lihat optimasi database',
         },
         {
-          title: 'TypeScript dan struktur',
-          body: 'Route bertipe, susunan folder yang jelas, dan konvensi yang ditulis untuk tim kamu.',
+          title: 'TypeScript dan struktur kode',
+          body: 'Route dengan tipe TypeScript yang ketat, susunan folder rapi, dan konvensi kode yang jelas untuk tim kamu.',
         },
         {
-          title: 'Front end React yang serasi',
-          body: 'Aplikasi Vite dan React yang terhubung ke API, dibangun dan di-deploy bersama.',
+          title: 'Frontend React yang terintegrasi',
+          body: 'Aplikasi Vite dan React yang tersambung rapi ke API, dibangun dan di-deploy bersama.',
           href: '/services/jasa-vite',
           cta: 'Lihat jasa Vite',
         },
         {
           title: 'Clean code untuk tim dan AI',
-          body: 'Aturan dan pengecekan yang menjaga API tetap rapi saat developer dan AI agent menambah route.',
+          body: 'Aturan dan pengecekan otomatis yang menjaga API tetap rapi saat developer dan AI agent menambah route baru.',
           href: '/services/jasa-clean-code',
           cta: 'Lihat jasa clean code',
         },
       ]}
       sourceNote="Server web app baru x.com dilaporkan berjalan di atas Fastify (laporan teknik X, diberitakan iTechPost, 5 November 2026)."
       steps={[
-        { title: 'Scope', desc: 'Kita sepakati endpoint, datanya, dan arti respons cepat bagi kamu.' },
-        { title: 'Bangun atau pindah', desc: 'Saya bangun API-nya, atau memindahkan milik kamu route demi route, dengan test.' },
-        { title: 'Load test', desc: 'Saya uji di bawah trafik realistis dan memperbaiki yang lambat.' },
-        { title: 'Serah terima', desc: 'Kamu menerima kode di repo kamu dan catatan yang bisa diikuti tim.' },
+        { title: 'Scope', desc: 'Kita sepakati daftar endpoint, struktur data, dan target kecepatan respons yang kamu butuhkan.' },
+        { title: 'Bangun atau migrasi', desc: 'Saya bangun API-nya, atau memindahkan sistem lama route demi route dengan test.' },
+        { title: 'Load test', desc: 'Saya uji di bawah simulasi trafik realistis dan memperbaiki bagian yang lambat.' },
+        { title: 'Serah terima', desc: 'Kamu menerima kode langsung di repo kamu lengkap dengan catatan teknis untuk tim.' },
       ]}
       faqTitle="Pertanyaan soal Fastify"
       faqs={faqs}
@@ -114,9 +114,9 @@ export default function JasaFastifyPage() {
         { href: '/services/jasa-vite', label: 'Jasa Vite' },
         { href: '/jasa-pengembangan-produk', label: 'Pengembangan produk' },
       ]}
-      ctaTitle="Kirim API kamu"
-      ctaBody="Ceritakan apa yang dikerjakan API itu dan di mana masalahnya. Saya balas dalam 24 jam dengan pertanyaan atau jawaban jujur tentang apa yang akan saya ubah lebih dulu."
-      ctaLabel="Kirim API kamu"
+      ctaTitle="Diskusikan API Node.js kamu"
+      ctaBody="Ceritakan fungsi API kamu dan kendala utamanya. Saya balas dalam 24 jam dengan beberapa pertanyaan lanjutan dan langkah pertama yang akan saya benahi."
+      ctaLabel="Konsultasi jasa Fastify"
     />
   )
 }

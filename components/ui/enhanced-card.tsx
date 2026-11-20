@@ -46,12 +46,12 @@ export function EnhancedCard({
         {(Icon || title) && (
           <div className="mb-4">
             {Icon && (
-              <div className="mb-4 p-3 bg-zinc-100 rounded-xl w-fit group-hover:bg-orange-100 transition-colors">
-                <Icon className="w-6 h-6 text-zinc-600 group-hover:text-orange-500 transition-colors" />
+              <div className="mb-4 p-3 bg-[#F8FAFC] border border-[#E5E7EB] rounded-xl w-fit group-hover:bg-[#EEF2FF] group-hover:border-[#DDE4FF] transition-colors">
+                <Icon className="w-6 h-6 text-[#3A57FC] transition-colors" />
               </div>
             )}
             {title && (
-              <h3 className="text-lg md:text-xl font-semibold text-zinc-900 mb-2 tracking-tight group-hover:text-orange-500 transition-colors">
+              <h3 className="text-lg md:text-xl font-semibold text-[#0B0C0E] mb-2 tracking-tight group-hover:text-[#3A57FC] transition-colors">
                 {title}
               </h3>
             )}
