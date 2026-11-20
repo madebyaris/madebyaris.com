@@ -210,7 +210,10 @@ const topics = [
   },
 ]
 
-const linkClass = 'underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors'
+const linkClass =
+  'text-[#3A57FC] underline decoration-[#DDE4FF] underline-offset-4 hover:text-[#FF8800] hover:decoration-[#FF8800] transition-colors font-medium'
+const darkLinkClass =
+  'text-[#93A8FF] underline decoration-[#93A8FF]/40 underline-offset-4 hover:text-[#FFB866] hover:decoration-[#FFB866] transition-colors font-medium'
 
 const faqs: FaqItem[] = [
   {
@@ -275,35 +278,42 @@ export default function AiMvpPage() {
       <JsonLd data={structuredData} />
 
       <nav className="mb-8" aria-label="Breadcrumb">
-        <ol className="flex items-center space-x-2 text-sm text-zinc-500">
-          <li><Link href="/services" className="hover:text-orange-500 transition-colors">Services</Link></li>
-          <li><span className="px-2">/</span></li>
-          <li><Link href="/ai-implementation" className="hover:text-orange-500 transition-colors">AI engineering</Link></li>
-          <li><span className="px-2">/</span></li>
-          <li className="text-zinc-900">AI MVP</li>
+        <ol className="flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-[0.08em] text-[#525660]">
+          <li>
+            <Link href="/services" className="hover:text-[#3A57FC] transition-colors">
+              Services
+            </Link>
+          </li>
+          <li className="text-[#CBD5E1]">/</li>
+          <li>
+            <Link href="/ai-implementation" className="hover:text-[#3A57FC] transition-colors">
+              AI engineering
+            </Link>
+          </li>
+          <li className="text-[#CBD5E1]">/</li>
+          <li className="text-[#0B0C0E] font-semibold">AI MVP</li>
         </ol>
       </nav>
 
       <PageHero
-        eyebrow={{ icon: <Rocket className="w-4 h-4 text-orange-500" />, label: 'AI product, idea to launch' }}
+        eyebrow={{ icon: <Rocket className="w-3.5 h-3.5" />, label: 'AI product, idea to launch' }}
         title="AI MVP development"
         accent="from your idea to a launch-ready product"
         actions={
           <>
             <Link
               href={contactHref('ai-mvp')}
-              className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
+              className="btn-primary rounded-md py-3.5 px-6 text-sm font-bold inline-flex items-center gap-2.5 group"
             >
-              <span className="text-sm font-medium tracking-tight">Scope my AI MVP</span>
+              <span>Scope my AI MVP</span>
               <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </Link>
             <a
               href="#launch-ready"
-              className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
-              style={{ boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)' }}
+              className="btn-secondary rounded-md py-3.5 px-6 text-sm font-semibold inline-flex items-center gap-2 group"
             >
-              <span className="text-sm font-medium text-black/60 tracking-tight">See what launch-ready includes</span>
-              <ArrowRight className="w-4 h-4 text-zinc-500" />
+              <span>See what launch-ready includes</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </a>
           </>
         }
@@ -312,7 +322,7 @@ export default function AiMvpPage() {
           For founders, domain experts, and European or Indonesian teams turning an AI product idea into a launch-ready
           app. I architect and ship sign-up, billing, evals, and the core AI workflow live on your domain.
         </p>
-        <p className="text-sm text-zinc-500 font-normal">
+        <p className="font-mono text-xs text-white/80 tracking-wide">
           Senior AI software engineer · 13+ years shipping software · UTC+7 with European morning overlap · Creator of RankMySEO.
         </p>
       </PageHero>
@@ -320,15 +330,16 @@ export default function AiMvpPage() {
       <HeroImage src="/images/services/ai-mvp.jpg" alt="Illustration of an idea turning into a stack of app screens: sign-in, an AI chat, and a dashboard" />
 
       <section className="mb-16 max-w-3xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+        <span className="section-index block mb-2">Overview</span>
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-4">
           What AI MVP development with me looks like
         </h2>
-        <p className="text-zinc-600 leading-relaxed mb-4">
+        <p className="text-[#374151] leading-relaxed mb-4">
           AI MVP development means building the smallest version of your AI product that real users can sign up for. I build
           the one AI workflow your idea depends on and test its output on sample cases. Then I wrap it in login, payments,
           usage limits, and analytics, and launch it on your domain.
         </p>
-        <p className="text-zinc-600 leading-relaxed">
+        <p className="text-[#374151] leading-relaxed">
           I build on existing models across Next.js, React, Vite, Fastify, TypeScript, and Rust where speed matters. If your idea needs a model trained from scratch, you
           need an ML research team first. If you already have a product and want one AI feature in it, see{' '}
           <Link href="/services/ai-development/ai-integration" className={linkClass}>
@@ -340,43 +351,48 @@ export default function AiMvpPage() {
 
       <section className="mb-16" aria-labelledby="audiences">
         <div className="text-center mb-10">
-          <h2 id="audiences" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <span className="section-index block mb-2">Who it is for</span>
+          <h2 id="audiences" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Who I build <span className="gradient-text">AI MVPs for</span>
           </h2>
-          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
+          <p className="text-sm md:text-base text-[#4B5563] max-w-xl mx-auto">
             You bring the problem and access to the people who have it, and I handle the build.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {audiences.map((item) => (
-            <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all group">
-              <div className="p-3 bg-zinc-100 rounded-xl w-fit mb-4 group-hover:bg-orange-100 transition-colors">
-                <item.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
+            <div
+              key={item.title}
+              className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6 md:p-7 group"
+            >
+              <div className="p-3 bg-[#EEF2FF] text-[#3A57FC] rounded-xl w-fit mb-4 group-hover:bg-[#3A57FC] group-hover:text-white transition-colors">
+                <item.icon className="w-5 h-5" />
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{item.description}</p>
+              <h3 className="font-display font-bold text-[#0B0C0E] mb-2">{item.title}</h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.description}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
       <section id="launch-ready" className="mb-16 max-w-3xl mx-auto scroll-mt-32">
-        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+        <span className="section-index block mb-2">Launch checklist</span>
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-4">
           What a launch-ready MVP includes
         </h2>
-        <p className="text-zinc-600 leading-relaxed mb-6">
+        <p className="text-[#374151] leading-relaxed mb-6">
           A demo that works on my laptop is a prototype. Launch-ready means a stranger can find it, sign up, use the AI
           workflow, and pay, and you can see what they did. This is the list I check before launch day.
         </p>
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-          <ul className="space-y-3">
+        <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-7">
+          <ul className="space-y-3.5">
             {launchReady.map((item) => (
-              <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                <CheckCircle2 className="w-5 h-5 text-orange-500 shrink-0" />
-                {item}
+              <li key={item} className="flex items-start gap-3 text-sm text-[#1F2937]">
+                <CheckCircle2 className="w-5 h-5 text-[#3A57FC] shrink-0 mt-0.5" />
+                <span>{item}</span>
               </li>
             ))}
           </ul>
@@ -385,33 +401,38 @@ export default function AiMvpPage() {
 
       <section className="mb-16" aria-labelledby="cut">
         <div className="text-center mb-10">
-          <h2 id="cut" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <span className="section-index block mb-2">Scope discipline</span>
+          <h2 id="cut" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             What I cut from v1, <span className="gradient-text">and why</span>
           </h2>
-          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
+          <p className="text-sm md:text-base text-[#4B5563] max-w-xl mx-auto">
             Every extra feature delays the day you learn whether people want the product. Cut items go on a written list, so
             nothing gets lost.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {cutFromV1.map((item) => (
-            <div key={item.title} className="bg-zinc-50 rounded-2xl p-5">
-              <h3 className="font-semibold text-zinc-900 mb-1">{item.title}</h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{item.description}</p>
+            <div
+              key={item.title}
+              className="rounded-2xl border border-[#E5E7EB] bg-[#F8FAFC] hover:bg-white hover:border-[#3A57FC] transition-all p-6"
+            >
+              <h3 className="font-display font-bold text-[#0B0C0E] mb-2">{item.title}</h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.description}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
       <section className="mb-16" aria-labelledby="cost">
         <div className="text-center mb-10">
-          <h2 id="cost" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <span className="section-index block mb-2">Unit economics</span>
+          <h2 id="cost" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             How I keep AI cost <span className="gradient-text">per user small</span>
           </h2>
-          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
+          <p className="text-sm md:text-base text-[#4B5563] max-w-xl mx-auto">
             An AI product can lose money on every user if nobody watches the model calls. I build it the same way I build{' '}
             <Link href="/services/saas-development" className={linkClass}>
               SaaS that is cheap to run
@@ -420,100 +441,109 @@ export default function AiMvpPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {costLevers.map((item) => (
-            <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all group">
-              <div className="p-3 bg-zinc-100 rounded-xl w-fit mb-4 group-hover:bg-orange-100 transition-colors">
-                <item.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
+            <div
+              key={item.title}
+              className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6 md:p-7 group"
+            >
+              <div className="p-3 bg-[#EEF2FF] text-[#3A57FC] rounded-xl w-fit mb-4 group-hover:bg-[#3A57FC] group-hover:text-white transition-colors">
+                <item.icon className="w-5 h-5" />
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{item.description}</p>
+              <h3 className="font-display font-bold text-[#0B0C0E] mb-2">{item.title}</h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.description}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="mb-16 max-w-3xl mx-auto" aria-labelledby="proof">
-        <h2 id="proof" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
-          Proof you can check before you hire me
-        </h2>
-        <div className="space-y-4">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-2">I took RankMySEO from idea to a hosted MVP</h3>
-            <p className="text-sm text-zinc-600 leading-relaxed">
-              <a href="https://rankmyseo.com" className={linkClass} target="_blank" rel="noopener noreferrer">
-                RankMySEO
-              </a>{' '}
-              is a SaaS I built myself. It keeps daily Google rank history, runs rank checks in the background, and has
-              Overview, Keywords, Competitors, and Insights views. I proved it on the diurusin.id demo, then opened the
-              public beta on 31 Aug 2026. The story is in{' '}
-              <Link href="/blog/introducing-rankmyseo-saas" className={linkClass}>
-                introducing RankMySEO
-              </Link>{' '}
-              and{' '}
-              <Link href="/blog/rankmyseo-is-live-open-beta" className={linkClass}>
-                the open beta post
-              </Link>
-              .
-            </p>
-          </div>
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-2">It gives AI assistants tools, with approval gates</h3>
-            <p className="text-sm text-zinc-600 leading-relaxed">
-              RankMySEO exposes tools that AI assistants can call. In the{' '}
-              <a href="https://github.com/madebyaris/rankmyseo" className={linkClass} target="_blank" rel="noopener noreferrer">
-                open-source toolkit
-              </a>
-              , the agent tools sit behind approval gates. I use the same pattern in an AI MVP: the agent asks a person before
-              a risky step.
-            </p>
-          </div>
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-2">I pick the model per task</h3>
-            <p className="text-sm text-zinc-600 leading-relaxed">
-              I am the first Cursor Ambassador in Indonesia, a SpaceXAI Ambassador, and a MiniMax Dev Community Expert, so I
-              work with several model providers. Each step in your MVP gets the model that fits it. The provider sits behind
-              one layer, so you can switch later.
-            </p>
+      <section className="mb-16" aria-labelledby="proof">
+        <div className="rounded-2xl bg-[#0B0C0E] text-white border border-white/10 p-6 md:p-10 shadow-[0_24px_60px_-24px_rgba(11,12,14,0.45)]">
+          <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#FFB866] block mb-2">
+            Verified track record
+          </span>
+          <h2 id="proof" className="font-display text-2xl md:text-3xl font-bold text-white tracking-tight mb-6">
+            Proof you can check before you hire me
+          </h2>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="rounded-xl border border-white/10 bg-white/[0.04] p-6">
+              <h3 className="font-display font-bold text-white mb-2">I took RankMySEO from idea to a hosted MVP</h3>
+              <p className="text-sm text-white/80 leading-relaxed">
+                <a href="https://rankmyseo.com" className={darkLinkClass} target="_blank" rel="noopener noreferrer">
+                  RankMySEO
+                </a>{' '}
+                is a SaaS I built myself. It keeps daily Google rank history, runs rank checks in the background, and has
+                Overview, Keywords, Competitors, and Insights views. I proved it on the diurusin.id demo, then opened the
+                public beta on 31 Aug 2026. The story is in{' '}
+                <Link href="/blog/introducing-rankmyseo-saas" className={darkLinkClass}>
+                  introducing RankMySEO
+                </Link>{' '}
+                and{' '}
+                <Link href="/blog/rankmyseo-is-live-open-beta" className={darkLinkClass}>
+                  the open beta post
+                </Link>
+                .
+              </p>
+            </div>
+            <div className="rounded-xl border border-white/10 bg-white/[0.04] p-6">
+              <h3 className="font-display font-bold text-white mb-2">It gives AI assistants tools, with approval gates</h3>
+              <p className="text-sm text-white/80 leading-relaxed">
+                RankMySEO exposes tools that AI assistants can call. In the{' '}
+                <a href="https://github.com/madebyaris/rankmyseo" className={darkLinkClass} target="_blank" rel="noopener noreferrer">
+                  open-source toolkit
+                </a>
+                , the agent tools sit behind approval gates. I use the same pattern in an AI MVP: the agent asks a person before
+                a risky step.
+              </p>
+            </div>
+            <div className="rounded-xl border border-white/10 bg-white/[0.04] p-6">
+              <h3 className="font-display font-bold text-white mb-2">I pick the model per task</h3>
+              <p className="text-sm text-white/80 leading-relaxed">
+                I am the first Cursor Ambassador in Indonesia, a SpaceXAI Ambassador, and a MiniMax Dev Community Expert, so I
+                work with several model providers. Each step in your MVP gets the model that fits it. The provider sits behind
+                one layer, so you can switch later.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
       <section className="mb-16" aria-labelledby="fit">
         <div className="text-center mb-10">
-          <h2 id="fit" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <span className="section-index block mb-2">Qualification</span>
+          <h2 id="fit" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Is an AI startup MVP <span className="gradient-text">the right next step?</span>
           </h2>
-          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
+          <p className="text-sm md:text-base text-[#4B5563] max-w-xl mx-auto">
             If your idea works better without AI, I will tell you on the first call.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-4">Good fit</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="rounded-2xl border border-[#DDE4FF] bg-[#F3F5FF]/70 p-6 md:p-7">
+            <h3 className="font-display font-bold text-[#0B0C0E] mb-4">Good fit</h3>
             <ul className="space-y-3">
               {goodFit.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
-                  {item}
+                <li key={item} className="flex items-start gap-3 text-sm text-[#1F2937]">
+                  <CheckCircle2 className="w-5 h-5 text-[#3A57FC] shrink-0 mt-0.5" />
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
           </div>
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-4">Look elsewhere</h3>
+          <div className="rounded-2xl border border-[#E5E7EB] bg-[#F8FAFC] p-6 md:p-7">
+            <h3 className="font-display font-bold text-[#0B0C0E] mb-4">Look elsewhere</h3>
             <ul className="space-y-3">
               {poorFit.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                  <XCircle className="w-5 h-5 text-zinc-400 shrink-0" />
-                  {item}
+                <li key={item} className="flex items-start gap-3 text-sm text-[#374151]">
+                  <XCircle className="w-5 h-5 text-[#64748B] shrink-0 mt-0.5" />
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
-            <p className="text-sm text-zinc-500 mt-4">
+            <p className="text-sm text-[#4B5563] mt-5 pt-4 border-t border-[#E5E7EB]">
               Want your team to build it themselves?{' '}
               <Link href="/services/vibe-code-friend" className={linkClass}>
                 See Cursor mentoring
@@ -526,51 +556,56 @@ export default function AiMvpPage() {
 
       <section className="mb-16" aria-labelledby="process">
         <div className="text-center mb-10">
-          <h2 id="process" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <span className="section-index block mb-2">Delivery process</span>
+          <h2 id="process" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             How we build <span className="gradient-text">an AI MVP together</span>
           </h2>
-          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
+          <p className="text-sm md:text-base text-[#4B5563] max-w-xl mx-auto">
             You see working software every week, so you can change course before the budget is spent.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {processSteps.map((item) => (
-            <div key={item.step} className="bg-zinc-50 rounded-2xl p-5 text-center">
-              <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-500 font-bold text-lg flex items-center justify-center mx-auto mb-3">
-                {item.step}
+            <div
+              key={item.step}
+              className="rounded-2xl border border-[#E5E7EB] bg-[#F8FAFC] hover:bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6"
+            >
+              <div className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#0B0C0E] text-[#FFB866] font-mono text-xs font-bold mb-4">
+                {String(item.step).padStart(2, '0')}
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-1">{item.title}</h3>
-              <p className="text-sm text-zinc-500">{item.desc}</p>
+              <h3 className="font-display font-bold text-[#0B0C0E] mb-1.5">{item.title}</h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
       <section className="mb-16" aria-labelledby="topics">
         <div className="text-center mb-10">
-          <h2 id="topics" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <span className="section-index block mb-2">Further reading</span>
+          <h2 id="topics" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             AI product development <span className="gradient-text">guides and related services</span>
           </h2>
-          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
+          <p className="text-sm md:text-base text-[#4B5563] max-w-xl mx-auto">
             What I have written about building with AI, next to the services that put it into practice.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {topics.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="block bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm hover:shadow-lg transition-all group"
+              className="block rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6 group"
             >
-              <h3 className="font-semibold text-zinc-900 mb-1 flex items-center justify-between gap-3">
-                {item.title}
-                <ArrowRight className="w-4 h-4 text-zinc-400 group-hover:text-orange-500 group-hover:translate-x-0.5 transition-all shrink-0" />
+              <h3 className="font-display font-bold text-[#0B0C0E] group-hover:text-[#3A57FC] transition-colors mb-1.5 flex items-center justify-between gap-3">
+                <span>{item.title}</span>
+                <ArrowRight className="w-4 h-4 text-[#64748B] group-hover:text-[#3A57FC] group-hover:translate-x-1 transition-all shrink-0" />
               </h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{item.description}</p>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.description}</p>
             </Link>
           ))}
         </div>

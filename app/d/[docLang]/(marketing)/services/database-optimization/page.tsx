@@ -24,7 +24,7 @@ export const metadata: Metadata = buildPageMetadata({
   ],
 })
 
-const linkClass = 'underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors'
+const linkClass = 'underline decoration-[#CBD5E1] underline-offset-4 hover:text-[#3A57FC] transition-colors'
 
 const faqs: FaqItem[] = [
   {
@@ -55,7 +55,7 @@ export default function DatabaseOptimizationPage() {
       description={pageDescription}
       serviceType="Database optimization"
       breadcrumbName="Database optimization"
-      eyebrow={{ icon: <Database className="w-4 h-4 text-orange-500" />, label: 'Database optimization' }}
+      eyebrow={{ icon: <Database className="w-4 h-4 text-[#FFB866]" />, label: 'Database optimization' }}
       title="A database that stays fast"
       accent="as your data grows"
       intro={

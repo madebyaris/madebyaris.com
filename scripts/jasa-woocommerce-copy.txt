@@ -1,13 +1,12 @@
 Jasa pembuatan website ecommerce dengan WooCommerce, dites di staging dulu
 Untuk pemilik bisnis yang butuh toko online WooCommerce baru, atau punya toko yang perlu diperbaiki dan dipercepat.
-Saya Aris, developer yang mengerjakan toko WooCommerce sendiri dari nol sampai live: setup, tema dan desain, katalog produk, pembayaran, pengiriman, kecepatan, SEO dasar, dan bantuan saat launch.
+Saya Aris, developer yang memimpin pembuatan toko WooCommerce dari nol sampai live: setup, tema dan desain, katalog produk, pembayaran, pengiriman, kecepatan, SEO dasar, dan bantuan saat launch.
 Setiap perubahan saya coba di staging dengan pesanan uji, jadi toko kamu tetap menerima pesanan selama saya bekerja.
 Ceritakan toko online yang kamu butuhkan
 Versi bahasa Inggris:
 WooCommerce developer
-(bahasa Inggris)
 Kapan toko online kamu butuh developer WooCommerce
-Kamu butuh developer saat plugin hampir cocok tapi belum pas, checkout harus bekerja dengan cara lain, atau toko makin lambat saat katalog bertambah.
+Kamu butuh developer saat plugin bawaan belum sepenuhnya sesuai kebutuhan, alur checkout perlu disesuaikan, atau toko makin lambat saat katalog bertambah.
 Saya baca kodenya, cari penyebabnya, lalu perbaiki di salinan staging.
 WooCommerce berjalan di atas WordPress.
 Untuk pekerjaan di luar toko, lihat
@@ -15,13 +14,13 @@ jasa WordPress
 Yang saya kerjakan di WooCommerce
 Toko baru dari nol
 Setup WooCommerce, tema dan desain, katalog produk, pembayaran, pengiriman, SEO dasar, sampai toko live.
-Semua bagian ini saya kerjakan sendiri.
+Semua bagian ini saya pimpin langsung.
 Fitur dan plugin custom
 Plugin WooCommerce custom untuk aturan khusus toko kamu, misalnya harga khusus atau opsi produk.
 Lihat juga
 pembuatan plugin WordPress
 Checkout dan halaman produk
-Field checkout yang ditambah atau dihapus, tanggal pengiriman, dan aturan bersyarat.
+Kustomisasi field checkout, pilihan tanggal pengiriman, serta aturan bersyarat (conditional logic).
 Integrasi pembayaran dan pengiriman
 Payment gateway dan kurir lokal untuk toko di Indonesia, dipasang dan dites dalam mode sandbox.
 Kecepatan dan database toko
@@ -32,19 +31,19 @@ Lihat
 migrasi WordPress
 Dari nol sampai live: langkah pembuatan toko
 Konsultasi
-kamu ceritakan produk, cara jualan, dan kebutuhan toko.
+Kamu ceritakan produk, cara jualan, dan kebutuhan toko.
 Scope tertulis
-apa yang saya kerjakan, cara saya mengujinya, dan harganya.
+Apa yang saya kerjakan, cara saya mengujinya, dan harganya.
 Setup dan desain
 WooCommerce, tema, dan tampilan toko di staging.
 Katalog produk
-produk, kategori, dan halaman produk.
+Produk, kategori, dan halaman produk.
 Pembayaran dan pengiriman
-payment gateway dan kurir lokal, dites dengan pesanan uji.
+Payment gateway dan kurir lokal, dites dengan pesanan uji.
 Kecepatan dan SEO dasar
-halaman toko, produk, dan checkout dicek sebelum live.
+Halaman toko, produk, dan checkout dicek sebelum live.
 Launch
-toko live, dengan bantuan saat launch.
+Toko live, dengan pendampingan saat peluncuran.
 Toko WooCommerce lambat: yang saya cek dulu
 Halaman cart, checkout, dan akun berubah untuk setiap pembeli, jadi page cache tidak bisa membantu di sana.
 Halaman itu bergantung pada PHP dan database yang cepat.
@@ -52,7 +51,7 @@ Berikut yang saya cek dulu:
 Database: autoloaded options, tabel sisa plugin lama, dan query produk yang lambat
 Cart fragments: request refresh cart di halaman yang tidak menampilkan cart
 Object cache: Redis atau Memcached, kalau hosting kamu menyediakannya
-Gambar: foto produk dibuat sesuai ukuran yang dipakai tema
+Gambar: foto produk disesuaikan ukurannya dengan layout tema
 Plugin: script yang dimuat di semua halaman padahal hanya dibutuhkan di toko atau checkout
 Untuk kecepatan bagian lain website, lihat
 optimasi kecepatan WordPress
@@ -60,14 +59,14 @@ Cara saya bekerja di toko yang sedang jalan
 Setiap perubahan masuk ke salinan staging dulu
 Email ke pelanggan asli dimatikan di staging
 Pembayaran berjalan di mode test atau sandbox, dan saya buat pesanan uji dari cart sampai konfirmasi
-Perubahan naik ke live di jam paling sepi, dengan backup tepat sebelumnya
+Perubahan dirilis ke live pada jam paling sepi, dengan backup penuh sesaat sebelumnya
 Contoh toko yang pernah saya kerjakan
 Sebagian besar proyek WooCommerce saya terikat NDA, jadi nama klien tidak saya tampilkan.
 Salah satunya adalah sebuah toko perlengkapan bayi.
 Cocok dan kurang cocok
 Cocok kalau:
 Kamu butuh toko online baru di WooCommerce, dari nol sampai live
-Plugin hampir sesuai kebutuhan toko, tapi pengaturannya terus bermasalah
+Plugin yang ada hampir memenuhi kebutuhan, tetapi konfigurasinya sering bermasalah
 Toko makin lambat saat produk dan pesanan bertambah
 Toko dibuat orang lain, dan kamu butuh developer yang bisa membaca kodenya
 Kurang cocok kalau:
@@ -80,7 +79,7 @@ Saya tidak punya paket harga tetap.
 Harga saya berikan setelah konsultasi, bersama scope tertulis.
 Apakah toko tetap bisa menerima pesanan selama dikerjakan?
 Bisa.
-Saya bekerja di salinan staging, dan toko live hanya saya baca sampai perubahan lolos tes.
+Saya bekerja di salinan staging, dan toko live tidak disentuh sama sekali sampai seluruh perubahan lolos uji.
 Perubahan naik ke live di jam sepi, setelah pesanan uji berhasil.
 Payment gateway apa saja yang bisa dipasang?
 Saya pasang payment gateway dan kurir lokal yang sesuai dengan toko kamu.

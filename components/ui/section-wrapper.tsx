@@ -67,7 +67,7 @@ export function SectionWrapper({
                   '--border-radius-before': '9999px'
                 }}
               >
-                {IconComponent && <IconComponent className="w-4 h-4 text-orange-500" />}
+                {IconComponent && <IconComponent className="w-4 h-4 text-[#3A57FC]" />}
                 <span className="text-xs font-semibold tracking-wider uppercase text-zinc-500">{badge.text}</span>
               </div>
             )}

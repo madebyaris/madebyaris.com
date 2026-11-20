@@ -11,6 +11,11 @@ interface LlmsLink {
 
 const services: LlmsLink[] = [
   {
+    title: 'All services overview',
+    path: '/services',
+    summary: 'Complete directory of AI engineering, product engineering, Cursor mentoring, Next.js, SaaS, GEO/SEO, WordPress, and PHP services.',
+  },
+  {
     title: 'AI engineering and implementation',
     path: '/ai-implementation',
     summary: 'Flagship AI development service: hire an AI developer to take an AI pilot to production or ship agents, chatbots, MCP tools, and LLM features in your repo with evals, logging, and spend caps. Senior AI software engineer, 13+ years.',
@@ -34,6 +39,16 @@ const services: LlmsLink[] = [
     title: 'Cursor mentoring (Level up)',
     path: '/services/vibe-code-friend',
     summary: 'Team training on Cursor: project rules, review habits for AI-generated code, and a 30-day rollout.',
+  },
+  {
+    title: 'AI IDE tutoring',
+    path: '/services/vibe-code-friend/ai-ide-tutoring',
+    summary: '1-on-1 and team tutoring for Cursor and AI coding workflows directly inside your real codebase.',
+  },
+  {
+    title: 'AI code fixing and audits',
+    path: '/services/vibe-code-friend/code-fixing',
+    summary: 'Targeted bug fixing, architectural cleanup, and stabilization for broken or AI-generated codebases.',
   },
   {
     title: 'Next.js development',
@@ -73,7 +88,7 @@ const services: LlmsLink[] = [
   {
     title: 'AI search optimization (GEO & AEO)',
     path: '/services/ai-search-geo-aeo',
-    summary: 'Generative Engine Optimization (GEO), Answer Engine Optimization (AEO), and technical SEO built in code and tracked in RankMySEO, with a free AI visibility snapshot for qualifying Singapore, Indonesia, and EU teams.',
+    summary: 'Generative Engine Optimization (GEO), Answer Engine Optimization (AEO), and technical SEO built in code and tracked in RankMySEO, backed by 24 open-source agent skills at github.com/rankmyseo/skills.',
   },
   {
     title: 'Technical SEO services',
@@ -83,7 +98,7 @@ const services: LlmsLink[] = [
   {
     title: 'Jasa SEO (Bahasa Indonesia)',
     path: '/services/seo/jasa-seo',
-    summary: 'Audit SEO, riset keyword, perbaikan langsung di kode, dan SEO bulanan untuk bisnis di Indonesia.',
+    summary: 'Audit SEO teknis, riset keyword, perbaikan langsung di kode, dan SEO bulanan untuk bisnis di Indonesia.',
   },
   {
     title: 'Headless WordPress with Next.js',
@@ -94,6 +109,31 @@ const services: LlmsLink[] = [
     title: 'WordPress development',
     path: '/services/wordpress',
     summary: 'Custom themes, plugins, optimization, maintenance, redesigns, migrations, WooCommerce, and headless WordPress.',
+  },
+  {
+    title: 'WordPress custom theme development',
+    path: '/services/wordpress/theme-development',
+    summary: 'Lightweight custom WordPress themes built from your design without bloated page builders.',
+  },
+  {
+    title: 'WordPress custom plugin development',
+    path: '/services/wordpress/plugin-development',
+    summary: 'Bespoke WordPress plugins for API integrations, custom admin screens, and REST endpoints.',
+  },
+  {
+    title: 'WordPress speed optimization',
+    path: '/services/wordpress/optimization',
+    summary: 'Core Web Vitals, caching, database, and asset optimization for slow WordPress sites.',
+  },
+  {
+    title: 'WordPress redesign',
+    path: '/services/wordpress/redesign',
+    summary: 'Redesign an existing WordPress site while preserving URLs, redirects, and Google rankings.',
+  },
+  {
+    title: 'WooCommerce development',
+    path: '/services/wordpress/woocommerce',
+    summary: 'Custom WooCommerce stores, checkout customization, payment/shipping integrations, and staging-tested performance work.',
   },
   {
     title: 'WordPress maintenance services',
@@ -111,6 +151,11 @@ const services: LlmsLink[] = [
     summary: 'Website WordPress dengan tema custom, perbaikan website, maintenance, dan migrasi hosting.',
   },
   {
+    title: 'Jasa WooCommerce Indonesia (Bahasa Indonesia)',
+    path: '/services/wordpress/jasa-woocommerce',
+    summary: 'Pembuatan dan optimasi toko online WooCommerce dengan payment gateway, kurir lokal, dan pengujian staging.',
+  },
+  {
     title: 'Vercel deployment for Next.js',
     path: '/services/nextjs-development/vercel',
     summary: 'Deploying and tuning Next.js on Vercel.',
@@ -126,14 +171,39 @@ const services: LlmsLink[] = [
     summary: 'Custom PHP applications, APIs, databases, and legacy modernization.',
   },
   {
+    title: 'PHP API development',
+    path: '/services/php-development/api-development',
+    summary: 'REST and integration APIs built on PHP and Laravel with validation and automated tests.',
+  },
+  {
+    title: 'PHP custom applications',
+    path: '/services/php-development/custom-applications',
+    summary: 'Custom business web applications and internal systems built with PHP and Laravel.',
+  },
+  {
+    title: 'PHP & MySQL database solutions',
+    path: '/services/php-development/database-solutions',
+    summary: 'MySQL query tuning, schema optimization, and indexing for PHP, Laravel, and WordPress applications.',
+  },
+  {
+    title: 'Legacy PHP modernization',
+    path: '/services/php-development/modernization',
+    summary: 'Upgrade and stabilize legacy PHP applications incrementally without risky full rewrites.',
+  },
+  {
     title: 'Pengembangan produk (Bahasa Indonesia)',
     path: '/jasa-pengembangan-produk',
-    summary: 'SaaS, aplikasi mobile, software Rust, commerce, aplikasi go-to-market, dan fitur AI, dipimpin langsung oleh Aris dengan agen AI dan partner tepercaya.',
+    summary: 'SaaS, aplikasi mobile, software Rust, commerce, aplikasi go-to-market, dan fitur AI, dipimpin langsung oleh Aris dengan AI agent dan partner tepercaya.',
+  },
+  {
+    title: 'Jasa pembuatan aplikasi web & SaaS (Bahasa Indonesia)',
+    path: '/services/saas-development/jasa-pembuatan-aplikasi-web',
+    summary: 'Pembuatan aplikasi web, dashboard, dan SaaS hemat biaya server dan token AI untuk bisnis Indonesia.',
   },
   {
     title: 'Optimasi aplikasi React (Bahasa Indonesia)',
     path: '/services/jasa-optimasi-react',
-    summary: 'Mengukur dan memperbaiki aplikasi React yang lambat atau susah diubah, dengan angka sebelum dan sesudah.',
+    summary: 'Mengukur dan memperbaiki aplikasi React yang lambat atau sulit dirawat, dengan perbandingan angka sebelum dan sesudah.',
   },
   {
     title: 'Jasa Vite (Bahasa Indonesia)',
@@ -143,27 +213,32 @@ const services: LlmsLink[] = [
   {
     title: 'Jasa Fastify (Bahasa Indonesia)',
     path: '/services/jasa-fastify',
-    summary: 'API Node.js di atas Fastify, baru atau dipindah dari Express, dengan validasi, logging, dan test.',
+    summary: 'API Node.js di atas Fastify, bangun dari nol atau migrasi dari Express, lengkap dengan validasi, logging, dan test.',
   },
   {
     title: 'Optimasi database (Bahasa Indonesia)',
     path: '/services/jasa-optimasi-database',
-    summary: 'Menemukan query lambat dan memperbaikinya lewat indeks, perubahan query, dan skema di PostgreSQL dan MySQL.',
+    summary: 'Menemukan query lambat dan memperbaikinya lewat indeks, penulisan ulang query, dan skema di PostgreSQL dan MySQL.',
   },
   {
     title: 'Clean code untuk tim dan AI agent (Bahasa Indonesia)',
     path: '/services/jasa-clean-code',
-    summary: 'Struktur codebase, konvensi tertulis, dan pengecekan yang menjaga kode terbaca oleh developer dan AI agent.',
+    summary: 'Struktur codebase, konvensi tertulis, dan pengecekan otomatis yang menjaga kode rapi untuk developer dan AI agent.',
   },
   {
     title: 'Implementasi AI untuk perusahaan (Bahasa Indonesia)',
     path: '/jasa-implementasi-ai',
-    summary: 'Pilot AI ke produksi, fitur AI di sistem yang sudah ada, dan arsitektur untuk perusahaan besar di Indonesia, dipimpin langsung oleh engineer senior.',
+    summary: 'Pilot AI ke produksi, fitur AI di sistem yang sudah ada, dan arsitektur untuk perusahaan di Indonesia, dipimpin langsung oleh AI engineer senior.',
   },
   {
-    title: 'Jasa Next.js Indonesia (Bahasa Indonesia)',
+    title: 'Jasa pembuatan website Next.js Indonesia (Bahasa Indonesia)',
+    path: '/services/nextjs-development/nextjs-indonesia',
+    summary: 'Jasa pembuatan website Next.js cepat dan SEO-ready untuk bisnis, company profile, dan migrasi WordPress.',
+  },
+  {
+    title: 'Agensi Next.js Indonesia (Bahasa Indonesia)',
     path: '/services/nextjs-development/agency-indonesia',
-    summary: 'Agensi Next.js untuk perusahaan Indonesia: dipimpin langsung oleh Aris, dengan agen AI dan mitra tepercaya dalam pengerjaan.',
+    summary: 'Agensi Next.js untuk perusahaan Indonesia: dipimpin langsung oleh Aris, dengan AI agent dan partner tepercaya.',
   },
 ]
 
@@ -182,6 +257,7 @@ const profilePages: LlmsLink[] = [
   { title: 'Cursor Ambassador Indonesia', path: '/cursor-ambassador', summary: 'What the role involves, Cursor FAQs, and free Cursor guides.' },
   { title: 'SpaceXAI Ambassador', path: '/spacexai-ambassador', summary: 'The SpaceXAI ambassador role after Cursor became part of SpaceX.' },
   { title: 'MiniMax Dev Community Expert', path: '/minimax-ambassador', summary: 'Community work with MiniMax models for coding.' },
+  { title: 'MiniMax Indonesia (Bahasa Indonesia)', path: '/minimax-ambassador/minimax-indonesia', summary: 'Panduan praktis MiniMax AI, M-2.1, Coding Plan, dan MiniMax API untuk developer Indonesia.' },
   { title: 'Projects', path: '/projects', summary: 'Selected client and open-source projects.' },
   { title: 'Contact', path: '/contact', summary: 'Hire Aris or book Cursor mentoring. English and Indonesian.' },
 ]
@@ -208,7 +284,7 @@ export function buildLlmsTxt(posts: LlmsPost[] = []): string {
     `Role: ${authorProfile.jobTitle}, working independently since 2015.`,
     `Experience: ${authorProfile.yearsExperience}+ years shipping production software across AI systems, Rust, TypeScript, Next.js, React, Vite, Fastify, PostgreSQL/MySQL, WordPress, PHP, and technical SEO.`,
     ...authorProfile.roles.map((role) => `Community role: ${role}.`),
-    `Open-source maintainer: nca (Rust AI agent CLI), Spec Kit for Cursor, Agent Orchestration (MCP server), Chaca Scanner (Rust/Tauri), and RankMySEO.`,
+    `Open-source maintainer: nca (Rust AI agent CLI), Spec Kit for Cursor, Agent Orchestration (MCP server), Chaca Scanner (Rust/Tauri), RankMySEO, and RankMySEO Agent Skills (24 SEO/GEO/AEO skills at https://github.com/rankmyseo/skills).`,
     `Location: ${authorProfile.city}, ${authorProfile.region}, ${authorProfile.country} (UTC+7). Joins European (EU and UK) and Indonesian engineering teams with direct morning overlap in CET and GMT.`,
     `Languages: ${authorProfile.languages.join(' and ')}.`,
     `Two ways to work together: Build (hire Aris to ship production AI systems, agents, MCP tools, and full-stack software) and Level up (Cursor mentoring for engineering teams).`,

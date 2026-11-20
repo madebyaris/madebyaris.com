@@ -38,6 +38,9 @@ export const metadata: Metadata = buildPageMetadata({
   ],
 })
 
+const linkClass =
+  'text-[#3A57FC] font-medium underline decoration-[#3A57FC]/35 underline-offset-4 hover:text-[#2944E0] hover:decoration-[#2944E0] transition-colors'
+
 const usd = (n: number) => `$${n}`
 
 function formatDate(date: string) {
@@ -85,6 +88,15 @@ const loop = [
   { step: 'Review', text: 'Read the diff like you own the on-call. Then test and commit.', href: '/blog/pr-review-checklist-for-ai-generated-code' },
 ]
 
+const jumpLinks = [
+  { href: '#loop', label: 'The loop' },
+  { href: '#reading-order', label: 'Reading order' },
+  { href: '#rules', label: 'Project rules' },
+  { href: '#comparison', label: 'Cursor vs Copilot' },
+  { href: '#cost', label: 'Cost estimator' },
+  { href: '#changelog', label: 'Changelog' },
+]
+
 function excerpt(post: ProcessedPost): string {
   const text = decodeHtmlEntities(stripHtml(post.excerpt.rendered)).trim()
   return text.length > 150 ? `${text.slice(0, text.lastIndexOf(' ', 147))}…` : text
@@ -123,18 +135,22 @@ export default async function CursorGuidePage() {
     <>
       <JsonLd data={structuredData} />
 
-      <nav className="mb-8" aria-label="Breadcrumb">
-        <ol className="flex items-center space-x-2 text-sm text-zinc-500">
-          <li>
-            <Link href="/" className="hover:text-orange-500 transition-colors">Home</Link>
-          </li>
-          <li aria-hidden="true" className="px-2">/</li>
-          <li className="text-zinc-900">Cursor guide</li>
-        </ol>
-      </nav>
-
       <PageHero
-        eyebrow={{ icon: <CursorIcon className="h-4 w-auto text-zinc-900" />, label: 'From the first Cursor Ambassador in Indonesia' }}
+        variant="cobalt"
+        breadcrumb={
+          <nav aria-label="Breadcrumb">
+            <ol className="flex items-center gap-2 font-mono text-xs text-white/75">
+              <li>
+                <Link href="/" className="hover:text-white transition-colors">
+                  Home
+                </Link>
+              </li>
+              <li aria-hidden="true" className="text-white/40">/</li>
+              <li className="text-white">Cursor guide</li>
+            </ol>
+          </nav>
+        }
+        eyebrow={{ icon: <CursorIcon className="h-3.5 w-auto" />, label: 'From the first Cursor Ambassador in Indonesia' }}
         title="Cursor guide"
         accent="for teams that ship"
         actions={
@@ -142,7 +158,7 @@ export default async function CursorGuidePage() {
             {startHere && (
               <Link
                 href={`/blog/${startHere.slug}`}
-                className="btn-primary hover:-translate-y-0.5 transition-all inline-flex group text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
+                className="inline-flex items-center justify-center gap-2 rounded-md bg-[#FF8800] hover:bg-[#E67600] text-white font-bold text-sm px-6 py-3.5 shadow-[0_12px_28px_-10px_rgba(0,0,0,0.35)] transition-all hover:-translate-y-0.5 group"
               >
                 <span>Start with the beginner tutorial</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -150,12 +166,26 @@ export default async function CursorGuidePage() {
             )}
             <a
               href="#rules"
-              className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center text-zinc-700"
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-white/45 hover:border-white bg-white/10 hover:bg-white/18 text-white font-semibold text-sm px-6 py-3.5 transition-all"
             >
               <span>Copy my project rules</span>
-              <FileCode2 className="w-4 h-4 text-zinc-500" />
+              <FileCode2 className="w-4 h-4" />
             </a>
           </>
+        }
+        bottomStrip={
+          <nav aria-label="On this page" className="flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-xs">
+            <span className="text-white/60 uppercase tracking-[0.12em]">Jump to</span>
+            {jumpLinks.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="text-white/90 hover:text-[#FFB866] transition-colors"
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
         }
       >
         <p>
@@ -165,226 +195,359 @@ export default async function CursorGuidePage() {
         </p>
       </PageHero>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
-
-      <section className="mb-16" aria-labelledby="loop">
-        <h2 id="loop" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-6 text-center">
-          The loop I run on client work
-        </h2>
-        <ol className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          {loop.map((item, index) => (
-            <li key={item.step}>
-              <Link href={item.href} className="block h-full bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all group">
-                <span className="text-xs font-semibold text-orange-500 tracking-wider uppercase">Step {index + 1}</span>
-                <h3 className="font-semibold text-zinc-900 mt-1 mb-2 group-hover:text-orange-500 transition-colors">{item.step}</h3>
-                <p className="text-sm text-zinc-500 leading-relaxed">{item.text}</p>
-              </Link>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      <section className="mb-16 space-y-10" aria-labelledby="reading-order">
-        <div className="text-center">
-          <h2 id="reading-order" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-2">
-            Reading order
-          </h2>
-          <p className="text-zinc-500">
-            {posts.length} posts, grouped by where you are.{' '}
-            <Link href={blogCategoryPath(cursorHub.categorySlug)} className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500">
-              See them newest first
-            </Link>
-            .
-          </p>
-        </div>
-
-        {groups.map((group) => (
-          <div key={group.title} lang={group.title === 'Bahasa Indonesia' ? 'id' : undefined}>
-            <h3 className="text-lg font-semibold text-zinc-900 mb-1">{group.title}</h3>
-            <p className="text-sm text-zinc-500 mb-4">{group.summary}</p>
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              {group.posts.map((post) => (
-                <li key={post.id}>
-                  <Link
-                    href={`/blog/${post.slug}`}
-                    className="flex h-full items-start gap-3 p-4 bg-white/80 rounded-2xl shadow-sm hover:shadow-md hover:bg-orange-50/60 transition-all group"
-                  >
-                    <ArrowRight className="w-4 h-4 text-orange-500 mt-1 shrink-0 group-hover:translate-x-0.5 transition-transform" />
-                    <span>
-                      <span className="block font-medium text-zinc-900 group-hover:text-zinc-950">
-                        {decodeHtmlEntities(stripHtml(post.title.rendered))}
-                      </span>
-                      <span className="block text-sm text-zinc-500 mt-1 leading-relaxed">{excerpt(post)}</span>
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+      {/* Band 1: White: The loop */}
+      <section className="w-full bg-white py-16 md:py-24 scroll-mt-24" id="loop" aria-labelledby="loop-heading">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-10">
+          <div className="max-w-2xl mb-10 md:mb-12">
+            <span className="section-index block mb-2">01 / Daily workflow</span>
+            <h2
+              id="loop-heading"
+              className="font-display text-3xl sm:text-4xl font-bold text-[#0B0C0E] tracking-tight mb-3"
+            >
+              The loop I run on client work
+            </h2>
           </div>
-        ))}
-      </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
-
-      <section id="rules" className="mb-16 scroll-mt-24" aria-labelledby="rules-heading">
-        <h2 id="rules-heading" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-2">
-          Rules you can copy
-        </h2>
-        <p className="text-zinc-500 mb-6 max-w-2xl">
-          Drop these into <code className="text-sm bg-zinc-100 rounded px-1.5 py-0.5">.cursor/rules/</code> and edit the paths to
-          match your repo. Each one comes from a post that explains why every line is there.
-        </p>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          {cursorRules.map((rule) => (
-            <article key={rule.file} className="flex flex-col bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-              <h3 className="font-semibold text-zinc-900 mb-1">{rule.title}</h3>
-              <p className="text-sm text-zinc-500 mb-4">{rule.summary}</p>
-              <pre className="flex-1 overflow-x-auto rounded-xl bg-zinc-900 p-4 text-xs leading-relaxed text-zinc-100 max-h-80">
-                <code>{rule.body}</code>
-              </pre>
-              <div className="mt-4 flex flex-wrap items-center gap-3">
-                <CopyButton text={rule.body} label={`Copy ${rule.file}`} />
-                <a
-                  href={cursorRulePath(rule.file)}
-                  download={rule.file}
-                  className="inline-flex items-center gap-2 rounded-full bg-zinc-100 px-4 py-2 text-xs font-medium text-zinc-700 hover:bg-zinc-200 transition-colors"
+          <ol className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {loop.map((item, index) => (
+              <li key={item.step}>
+                <Link
+                  href={item.href}
+                  className="group flex flex-col justify-between h-full rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] p-6 md:p-7 transition-all"
                 >
-                  <Download className="h-3.5 w-3.5" />
-                  Download
-                </a>
-                <Link href={rule.sourcePath} className="text-xs font-medium text-zinc-500 hover:text-orange-500 transition-colors">
-                  Why each line is there
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="rounded-md bg-[#EEF2FF] border border-[#DDE4FF] px-2.5 py-1 font-mono text-xs font-bold text-[#3A57FC]">
+                        Step 0{index + 1}
+                      </span>
+                      <ArrowRight className="w-4 h-4 text-[#6B7280] group-hover:text-[#3A57FC] group-hover:translate-x-0.5 transition-all" />
+                    </div>
+                    <h3 className="font-display text-lg font-bold text-[#0B0C0E] tracking-tight mb-2 group-hover:text-[#3A57FC] transition-colors">
+                      {item.step}
+                    </h3>
+                    <p className="text-sm text-[#4B5563] leading-relaxed">{item.text}</p>
+                  </div>
                 </Link>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* Band 2: Subtle Gray: Reading order */}
+      <section
+        id="reading-order"
+        className="w-full bg-[#F8FAFC] border-y border-[#E5E7EB] py-16 md:py-24 scroll-mt-24"
+        aria-labelledby="reading-order-heading"
+      >
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-10">
+          <div className="max-w-2xl mb-10 md:mb-12">
+            <span className="section-index block mb-2">02 / Curated index</span>
+            <h2
+              id="reading-order-heading"
+              className="font-display text-3xl sm:text-4xl font-bold text-[#0B0C0E] tracking-tight mb-3"
+            >
+              Reading order
+            </h2>
+            <p className="text-base text-[#4B5563]">
+              {posts.length} posts, grouped by where you are.{' '}
+              <Link href={blogCategoryPath(cursorHub.categorySlug)} className={linkClass}>
+                See them newest first
+              </Link>
+              .
+            </p>
+          </div>
+
+          <div className="space-y-12">
+            {groups.map((group) => (
+              <div key={group.title} lang={group.title === 'Bahasa Indonesia' ? 'id' : undefined}>
+                <div className="mb-5">
+                  <h3 className="font-display text-xl font-bold text-[#0B0C0E] tracking-tight mb-1">
+                    {group.title}
+                  </h3>
+                  <p className="text-sm text-[#4B5563]">{group.summary}</p>
+                </div>
+                <ul className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {group.posts.map((post) => (
+                    <li key={post.id}>
+                      <Link
+                        href={`/blog/${post.slug}`}
+                        className="group flex h-full items-start gap-3.5 rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] p-6 transition-all"
+                      >
+                        <ArrowRight className="w-4 h-4 text-[#3A57FC] mt-1 shrink-0 group-hover:translate-x-0.5 transition-transform" />
+                        <span>
+                          <span className="block font-display text-base font-bold text-[#0B0C0E] group-hover:text-[#3A57FC] transition-colors">
+                            {decodeHtmlEntities(stripHtml(post.title.rendered))}
+                          </span>
+                          <span className="block text-sm text-[#4B5563] mt-1.5 leading-relaxed">{excerpt(post)}</span>
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </article>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="mb-16" aria-labelledby="comparison">
-        <div className="flex items-center gap-2 mb-2">
-          <Scale className="w-5 h-5 text-orange-500" />
-          <h2 id="comparison" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter">
-            Cursor or Copilot: which job goes where
-          </h2>
-        </div>
-        <p className="text-zinc-500 mb-6 max-w-2xl">
-          I pick the tool for the job in front of me. This is the split I use on client work.
-        </p>
-        <div className="overflow-x-auto bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm">
-          <table className="w-full text-sm text-left">
-            <thead className="text-xs uppercase tracking-wider text-zinc-500 border-b border-zinc-200">
-              <tr>
-                <th scope="col" className="px-5 py-3 font-semibold">The job</th>
-                <th scope="col" className="px-5 py-3 font-semibold">I use</th>
-                <th scope="col" className="px-5 py-3 font-semibold">Why</th>
-              </tr>
-            </thead>
-            <tbody>
-              {cursorComparison.picks.map((row) => (
-                <tr key={row.job} className="border-b border-zinc-100 last:border-0">
-                  <th scope="row" className="px-5 py-4 font-medium text-zinc-900">{row.job}</th>
-                  <td className="px-5 py-4">
-                    <span className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium ${row.pick === 'Cursor' ? 'bg-zinc-900 text-white' : 'bg-zinc-100 text-zinc-700'}`}>
-                      {row.pick}
-                    </span>
-                  </td>
-                  <td className="px-5 py-4 text-zinc-600">{row.why}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <p className="mt-4 flex items-start gap-2 text-xs text-zinc-500 max-w-3xl">
-          <Info className="h-4 w-4 shrink-0 text-zinc-400" />
-          <span>
-            Disclosure: I am the Cursor Ambassador for Indonesia and a SpaceXAI Ambassador, and SpaceX owns Cursor. Weigh my
-            picks with that in mind. Based on client work, written up on{' '}
-            <time dateTime={cursorComparison.testedOn}>{formatDate(cursorComparison.testedOn)}</time>.{' '}
-            <Link href={cursorComparison.sourcePath} className="underline underline-offset-4 hover:text-orange-500">
-              Read the full comparison
-            </Link>
-            .
-          </span>
-        </p>
-      </section>
+      {/* Band 3: White: Rules you can copy */}
+      <section id="rules" className="w-full bg-white py-16 md:py-24 scroll-mt-24" aria-labelledby="rules-heading">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-10">
+          <div className="max-w-2xl mb-10 md:mb-12">
+            <span className="section-index block mb-2">03 / Copy-paste rules</span>
+            <h2 id="rules-heading" className="font-display text-3xl sm:text-4xl font-bold text-[#0B0C0E] tracking-tight mb-3">
+              Rules you can copy
+            </h2>
+            <p className="text-base text-[#4B5563] leading-relaxed">
+              Drop these into{' '}
+              <code className="font-mono text-sm bg-[#EEF2FF] text-[#2944E0] border border-[#DDE4FF] rounded px-1.5 py-0.5">
+                .cursor/rules/
+              </code>{' '}
+              and edit the paths to match your repo. Each one comes from a post that explains why every line is there.
+            </p>
+          </div>
 
-      <section id="cost" className="mb-16 scroll-mt-24" aria-labelledby="cost-heading">
-        <h2 id="cost-heading" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-2">
-          What Cursor will cost your team
-        </h2>
-        <p className="text-zinc-500 mb-6 max-w-2xl">
-          Pick a team size and how hard people lean on agents. The estimate uses Cursor’s current plans and tells you the date I
-          last checked them. For what each plan includes and why third-party models cost extra,{' '}
-          <Link href="/blog/cursor-ai-pricing" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500">
-            read my Cursor pricing breakdown
-          </Link>
-          .
-        </p>
-        <CursorCostEstimator />
-      </section>
-
-      <section className="mb-16" aria-labelledby="changelog">
-        <div className="flex items-center gap-2 mb-2">
-          <History className="w-5 h-5 text-orange-500" />
-          <h2 id="changelog" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter">
-            What changed in Cursor lately
-          </h2>
-        </div>
-        <p className="text-zinc-500 mb-6 max-w-2xl">The releases that matter for shipping teams, with a link to each source.</p>
-        <ol className="relative border-l border-zinc-200 ml-2 space-y-6">
-          {cursorChangelog.map((entry) => (
-            <li key={`${entry.date}-${entry.cursorChange}`} className="pl-6 relative">
-              <span className="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full bg-orange-500" aria-hidden="true" />
-              <time dateTime={entry.date} className="text-xs font-semibold text-zinc-500 tracking-wider uppercase">
-                {formatDate(entry.date)}
-              </time>
-              <p className="text-zinc-900 mt-1">{entry.cursorChange}</p>
-              {entry.myWorkflowChange && (
-                <p className="text-sm text-zinc-600 mt-1">
-                  <span className="font-medium text-zinc-900">What I changed: </span>
-                  {entry.myWorkflowChange}
-                </p>
-              )}
-              <a
-                href={entry.sourceUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-xs text-zinc-500 hover:text-orange-500 mt-1"
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {cursorRules.map((rule) => (
+              <article
+                key={rule.file}
+                className="flex flex-col rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] p-6 md:p-7 transition-all"
               >
-                Source
-                <ArrowUpRight className="h-3 w-3" />
-              </a>
-            </li>
-          ))}
-        </ol>
+                <div className="flex items-center justify-between gap-3 mb-2">
+                  <h3 className="font-display text-lg font-bold text-[#0B0C0E] tracking-tight">
+                    {rule.title}
+                  </h3>
+                  <span className="font-mono text-[11px] text-[#6B7280] bg-[#F8FAFC] border border-[#E5E7EB] rounded px-2 py-0.5 shrink-0">
+                    {rule.file}
+                  </span>
+                </div>
+                <p className="text-sm text-[#4B5563] mb-4 leading-relaxed">{rule.summary}</p>
+                <pre className="flex-1 overflow-x-auto rounded-xl bg-[#0B0C0E] border border-[#232732] p-4 font-mono text-xs leading-relaxed text-zinc-100 max-h-80">
+                  <code>{rule.body}</code>
+                </pre>
+                <div className="mt-5 flex flex-wrap items-center gap-3">
+                  <CopyButton text={rule.body} label={`Copy ${rule.file}`} />
+                  <a
+                    href={cursorRulePath(rule.file)}
+                    download={rule.file}
+                    className="inline-flex items-center gap-2 rounded-full border border-[#E5E7EB] bg-[#F8FAFC] px-4 py-2 text-xs font-semibold text-[#0B0C0E] hover:border-[#3A57FC] hover:text-[#3A57FC] transition-colors"
+                  >
+                    <Download className="h-3.5 w-3.5" />
+                    Download
+                  </a>
+                  <Link href={rule.sourcePath} className={`${linkClass} text-xs`}>
+                    Why each line is there
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
       </section>
 
-      <Faq id="cursor-guide-faq" title="Cursor questions I get most" faqs={faqs} />
+      {/* Band 4: Subtle Gray: Cursor vs Copilot */}
+      <section
+        id="comparison"
+        className="w-full bg-[#F8FAFC] border-y border-[#E5E7EB] py-16 md:py-24 scroll-mt-24"
+        aria-labelledby="comparison-heading"
+      >
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-10">
+          <div className="max-w-2xl mb-10 md:mb-12">
+            <span className="section-index block mb-2">04 / Tool split</span>
+            <div className="flex items-center gap-2.5 mb-3">
+              <Scale className="w-6 h-6 text-[#3A57FC] shrink-0" />
+              <h2
+                id="comparison-heading"
+                className="font-display text-3xl sm:text-4xl font-bold text-[#0B0C0E] tracking-tight"
+              >
+                Cursor or Copilot: which job goes where
+              </h2>
+            </div>
+            <p className="text-base text-[#4B5563] leading-relaxed">
+              I pick the tool for the job in front of me. This is the split I use on client work.
+            </p>
+          </div>
 
-      <section className="mb-16 max-w-3xl mx-auto bg-white/80 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-sm flex flex-col sm:flex-row gap-6 items-start">
-        <div className="p-3 bg-zinc-100 rounded-xl">
-          <CursorIcon className="h-6 w-auto text-zinc-900" />
-        </div>
-        <div>
-          <h2 className="font-semibold text-lg text-zinc-900 mb-2">Who wrote this</h2>
-          <p className="text-sm text-zinc-600 leading-relaxed mb-3">
-            I’m Aris Setiawan, the first Cursor Ambassador in Indonesia, with 13+ years of client work. The loop, the rules, and
-            the tool picks on this page come from client repos I ship. Prices and release notes link to Cursor’s own pages.
+          <div className="overflow-x-auto rounded-2xl border border-[#E5E7EB] bg-white shadow-xs">
+            <table className="w-full text-sm text-left">
+              <thead className="font-mono text-xs uppercase tracking-[0.08em] text-[#6B7280] bg-[#F8FAFC] border-b border-[#E5E7EB]">
+                <tr>
+                  <th scope="col" className="px-5 py-4 font-semibold">The job</th>
+                  <th scope="col" className="px-5 py-4 font-semibold">I use</th>
+                  <th scope="col" className="px-5 py-4 font-semibold">Why</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[#E5E7EB]">
+                {cursorComparison.picks.map((row) => (
+                  <tr key={row.job}>
+                    <th scope="row" className="px-5 py-4 font-semibold text-[#0B0C0E] align-top">
+                      {row.job}
+                    </th>
+                    <td className="px-5 py-4 align-top">
+                      <span
+                        className={`inline-flex rounded-md px-2.5 py-0.5 font-mono text-xs font-semibold ${
+                          row.pick === 'Cursor'
+                            ? 'bg-[#3A57FC] text-white'
+                            : 'bg-[#F8FAFC] border border-[#E5E7EB] text-[#4B5563]'
+                        }`}
+                      >
+                        {row.pick}
+                      </span>
+                    </td>
+                    <td className="px-5 py-4 text-[#4B5563] leading-relaxed align-top">{row.why}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <p className="mt-5 flex items-start gap-2.5 text-xs text-[#6B7280] max-w-3xl leading-relaxed">
+            <Info className="h-4 w-4 shrink-0 text-[#3A57FC] mt-0.5" />
+            <span>
+              Disclosure: I am the Cursor Ambassador for Indonesia and a SpaceXAI Ambassador, and SpaceX owns Cursor. Weigh my
+              picks with that in mind. Based on client work, written up on{' '}
+              <time dateTime={cursorComparison.testedOn}>{formatDate(cursorComparison.testedOn)}</time>.{' '}
+              <Link href={cursorComparison.sourcePath} className={linkClass}>
+                Read the full comparison
+              </Link>
+              .
+            </span>
           </p>
-          <Link href="/cursor-ambassador" className="inline-flex items-center gap-2 text-sm font-medium text-zinc-900 hover:text-orange-500 transition-colors">
-            What a Cursor Ambassador does
-            <ArrowRight className="h-4 w-4" />
-          </Link>
         </div>
       </section>
 
-      <CtaBand
-        title="Want this loop running on your team’s repo?"
-        body="I set up project rules and a review habit on one of your real repos, then help the rest of the team adopt it. English or Indonesian."
-        primary={{ href: '/services/vibe-code-friend', label: 'Get Cursor mentoring for your team' }}
-        secondary={{ href: contactHref('cursor-mentoring'), label: 'Send me your repo' }}
-      />
+      {/* Band 5: White: Cost Estimator */}
+      <section id="cost" className="w-full bg-white py-16 md:py-24 scroll-mt-24" aria-labelledby="cost-heading">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-10">
+          <div className="max-w-2xl mb-10 md:mb-12">
+            <span className="section-index block mb-2">05 / Pricing calculator</span>
+            <h2 id="cost-heading" className="font-display text-3xl sm:text-4xl font-bold text-[#0B0C0E] tracking-tight mb-3">
+              What Cursor will cost your team
+            </h2>
+            <p className="text-base text-[#4B5563] leading-relaxed">
+              Pick a team size and how hard people lean on agents. The estimate uses Cursor’s current plans and tells you the date I
+              last checked them. For what each plan includes and why third-party models cost extra,{' '}
+              <Link href="/blog/cursor-ai-pricing" className={linkClass}>
+                read my Cursor pricing breakdown
+              </Link>
+              .
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-[#E5E7EB] bg-white overflow-hidden">
+            <CursorCostEstimator />
+          </div>
+        </div>
+      </section>
+
+      {/* Band 6: Dark Proof Band: Changelog */}
+      <section
+        id="changelog"
+        className="w-full ahrefs-dark-band text-white py-16 md:py-24 scroll-mt-24"
+        aria-labelledby="changelog-heading"
+      >
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-10">
+          <div className="max-w-2xl mb-10 md:mb-12">
+            <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-[#FFB866] block mb-2">
+              06 / Release log
+            </span>
+            <div className="flex items-center gap-2.5 mb-3">
+              <History className="w-6 h-6 text-[#93A8FF] shrink-0" />
+              <h2
+                id="changelog-heading"
+                className="font-display text-3xl sm:text-4xl font-bold text-white tracking-tight"
+              >
+                What changed in Cursor lately
+              </h2>
+            </div>
+            <p className="text-base text-zinc-300 leading-relaxed">
+              The releases that matter for shipping teams, with a link to each source.
+            </p>
+          </div>
+
+          <ol className="relative border-l border-white/15 ml-2 space-y-6">
+            {cursorChangelog.map((entry) => (
+              <li
+                key={`${entry.date}-${entry.cursorChange}`}
+                className="pl-7 relative"
+              >
+                <span
+                  className="absolute -left-[5px] top-6 h-2.5 w-2.5 rounded-full bg-[#FF8800] ring-4 ring-[#0B0C0E]"
+                  aria-hidden="true"
+                />
+                <div className="rounded-2xl border border-white/12 bg-white/[0.04] p-6">
+                  <time
+                    dateTime={entry.date}
+                    className="font-mono text-xs font-semibold text-[#FFB866] tracking-[0.1em] uppercase"
+                  >
+                    {formatDate(entry.date)}
+                  </time>
+                  <p className="text-white font-medium mt-2 leading-relaxed">{entry.cursorChange}</p>
+                  {entry.myWorkflowChange && (
+                    <p className="text-sm text-zinc-300 mt-2 leading-relaxed">
+                      <span className="font-semibold text-[#93A8FF]">What I changed: </span>
+                      {entry.myWorkflowChange}
+                    </p>
+                  )}
+                  <a
+                    href={entry.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 font-mono text-xs text-zinc-400 hover:text-[#FFB866] transition-colors mt-3"
+                  >
+                    Source
+                    <ArrowUpRight className="h-3.5 w-3.5" />
+                  </a>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* Band 7: White: FAQ */}
+      <section className="w-full bg-white py-16 md:py-24">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-10">
+          <Faq id="cursor-guide-faq" title="Cursor questions I get most" faqs={faqs} className="mb-0" />
+        </div>
+      </section>
+
+      {/* Band 8: Subtle Gray: Who wrote this + CTA Band */}
+      <section className="w-full bg-[#F8FAFC] border-t border-[#E5E7EB] py-16 md:py-24">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-10">
+          <div className="mb-10 rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-8 flex flex-col sm:flex-row gap-6 items-start">
+            <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#EEF2FF] border border-[#DDE4FF] text-[#3A57FC] shrink-0">
+              <CursorIcon className="h-6 w-auto" />
+            </div>
+            <div>
+              <span className="section-index block mb-1">Author</span>
+              <h2 className="font-display font-bold text-xl text-[#0B0C0E] tracking-tight mb-2">
+                Who wrote this
+              </h2>
+              <p className="text-sm sm:text-base text-[#4B5563] leading-relaxed mb-4 max-w-3xl">
+                I’m Aris Setiawan, the first Cursor Ambassador in Indonesia, with 13+ years of client work. The loop, the rules, and
+                the tool picks on this page come from client repos I ship. Prices and release notes link to Cursor’s own pages.
+              </p>
+              <Link
+                href="/cursor-ambassador"
+                className="group inline-flex items-center gap-2 text-sm font-semibold text-[#3A57FC] hover:text-[#2944E0] transition-colors"
+              >
+                <span>What a Cursor Ambassador does</span>
+                <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+            </div>
+          </div>
+
+          <CtaBand
+            className="mb-0"
+            title="Want this loop running on your team’s repo?"
+            body="I set up project rules and a review habit on one of your real repos, then help the rest of the team adopt it. English or Indonesian."
+            primary={{ href: '/services/vibe-code-friend', label: 'Get Cursor mentoring for your team' }}
+            secondary={{ href: contactHref('cursor-mentoring'), label: 'Send me your repo' }}
+          />
+        </div>
+      </section>
     </>
   )
 }

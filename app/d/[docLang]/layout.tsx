@@ -9,7 +9,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
-  themeColor: '#FAF9F6',
+  themeColor: '#3A57FC',
 }
 
 const verificationOther: Record<string, string> = {}

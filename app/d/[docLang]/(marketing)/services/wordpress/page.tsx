@@ -20,7 +20,10 @@ import {
 } from 'lucide-react'
 import { buildPageGraph, buildPageMetadata, type FaqItem } from '@/lib/seo'
 import { JsonLd } from '@/components/seo/json-ld'
+import { PageHero } from '@/components/page/hero'
 import { HeroImage } from '@/components/page/hero-image'
+import { Faq } from '@/components/page/faq'
+import { CtaBand } from '@/components/page/cta-band'
 import { contactHref } from '@/lib/contact-services'
 
 export const revalidate = 86400
@@ -202,63 +205,57 @@ const structuredData = buildPageGraph({
   },
 })
 
+const linkClass = 'text-[#3A57FC] underline decoration-[#3A57FC]/35 underline-offset-4 hover:text-[#2944E0] hover:decoration-[#3A57FC] transition-colors'
+
 export default function WordPressServicesPage() {
   return (
     <>
       <JsonLd data={structuredData} />
 
-      {/* Hero Section */}
-      <section className="text-center pt-8 pb-16">
-        <div className="inline-flex bg-white/60 rounded-full mb-8 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
-          <Layout className="w-4 h-4 text-orange-500" />
-          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">WordPress developer</span>
-        </div>
-
-        <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
-          Hire a WordPress developer
-          {' '}<span className="block gradient-text font-light">who ships</span>
-        </h1>
-
-        <p className="text-base md:text-lg text-zinc-600 max-w-2xl mx-auto mb-4 leading-relaxed font-medium">
+      <PageHero
+        eyebrow={{ icon: <Layout className="w-3.5 h-3.5" />, label: 'WordPress developer' }}
+        title="Hire a WordPress developer"
+        accent="who ships"
+        actions={
+          <>
+            <Link
+              href={contactHref('wordpress')}
+              className="btn-primary inline-flex items-center gap-2.5 rounded-md py-3.5 px-6 text-sm font-bold group"
+            >
+              <span>Send me your WordPress site</span>
+              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </Link>
+            <Link
+              href={contactHref('headless-wordpress')}
+              className="btn-secondary inline-flex items-center gap-2 rounded-md py-3.5 px-6 text-sm font-semibold group"
+            >
+              <span>Ask about headless WordPress</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            </Link>
+          </>
+        }
+      >
+        <p className="mb-4">
           For businesses and agencies whose WordPress site needs a custom theme, a plugin, a speed fix, or a headless front end.
         </p>
-
-        <p className="text-sm text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed">
+        <p className="text-sm text-white/80">
           13+ years shipping web products, including WordPress work at Hongkiat.com. This site runs on headless WordPress and Next.js.
         </p>
-
-        <div className="flex flex-wrap justify-center gap-3">
-          <Link
-            href={contactHref('wordpress')}
-            className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
-          >
-            <span className="text-sm font-medium tracking-tight">Send me your WordPress site</span>
-            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </Link>
-          <Link
-            href={contactHref('headless-wordpress')}
-            className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
-            style={{ boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)' }}
-          >
-            <span className="text-sm font-medium text-black/60 tracking-tight">Ask about headless WordPress</span>
-            <ArrowRight className="w-4 h-4 text-zinc-500" />
-          </Link>
-        </div>
-      </section>
+      </PageHero>
 
       <HeroImage src="/images/services/wordpress.jpg" alt="Illustration of a WordPress site layout being updated, with a security shield, maintenance tools, and a migration box" />
 
       {/* Answer first */}
       <section className="mb-16 max-w-3xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-4">
           What you get when you hire a WordPress developer like me
         </h2>
-        <p className="text-zinc-600 leading-relaxed mb-4">
+        <p className="text-[#4B5563] leading-relaxed mb-4">
           I read your site, tell you what is actually wrong, and lead the fix. That can mean a custom theme, a custom plugin, a speed and security pass, or moving the front end to Next.js while your team keeps writing in wp-admin. You talk to the person leading the work, and every project starts with a written scope.
         </p>
-        <p className="text-zinc-600 leading-relaxed">
+        <p className="text-[#4B5563] leading-relaxed">
           Unsure whether to stay on WordPress at all? Start with{' '}
-          <Link href="/blog/wordpress-vs-nextjs-when-worth-it" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors">
+          <Link href="/blog/wordpress-vs-nextjs-when-worth-it" className={linkClass}>
             WordPress vs Next.js: when it’s worth it
           </Link>
           .
@@ -268,45 +265,48 @@ export default function WordPressServicesPage() {
       {/* Services Section */}
       <section className="mb-16">
         <div className="text-center mb-10">
-          <div className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
-            <Code2 className="w-4 h-4 text-orange-500" />
-            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">What I build</span>
+          <div className="inline-flex items-center gap-2 rounded-md border border-[#DDE4FF] bg-[#EEF2FF] px-3 py-1 mb-4">
+            <Code2 className="w-3.5 h-3.5 text-[#3A57FC]" />
+            <span className="font-mono text-[11px] font-semibold tracking-[0.12em] uppercase text-[#3A57FC]">What I build</span>
           </div>
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             WordPress developer for hire: <span className="gradient-text">pick the job</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {services.map((service) =>
             service.href === '/services/wordpress/woocommerce' ? (
-              <div key={service.title} className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm hover:shadow-xl transition-all hover:-translate-y-0.5 h-full">
-                <Link href={service.href} className="group block p-6 pb-3">
+              <div
+                key={service.title}
+                className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all h-full flex flex-col justify-between"
+              >
+                <Link href={service.href} className="group block p-6 md:p-7 pb-3">
                   <div className="flex items-start gap-4 mb-4">
-                    <div className="p-3 bg-zinc-100 rounded-xl group-hover:bg-orange-100 transition-colors">
-                      <service.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
+                    <div className="p-3 bg-[#EEF2FF] text-[#3A57FC] rounded-xl group-hover:bg-[#3A57FC] group-hover:text-white transition-colors shrink-0">
+                      <service.icon className="w-5 h-5" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-zinc-900 mb-1 group-hover:text-orange-500 transition-colors">
+                      <h3 className="font-display text-lg font-semibold text-[#0B0C0E] mb-1 group-hover:text-[#3A57FC] transition-colors">
                         {service.title}
                       </h3>
-                      <p className="text-sm text-zinc-500 leading-relaxed">{service.description}</p>
+                      <p className="text-sm text-[#4B5563] leading-relaxed">{service.description}</p>
                     </div>
                   </div>
 
-                  <div className="flex flex-wrap gap-1.5">
+                  <div className="flex flex-wrap gap-2">
                     {service.features.map((feature) => (
-                      <span key={feature} className="px-2 py-0.5 bg-zinc-100 rounded text-[10px] text-zinc-600 font-medium">
+                      <span
+                        key={feature}
+                        className="px-2.5 py-1 bg-[#F8FAFC] border border-[#E5E7EB] rounded-md text-[11px] text-[#4B5563] font-medium"
+                      >
                         {feature}
                       </span>
                     ))}
                   </div>
                 </Link>
-                <p className="px-6 pb-6 text-sm text-zinc-600">
-                  <Link
-                    href="/services/wordpress/jasa-woocommerce"
-                    className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors"
-                  >
+                <p className="px-6 md:px-7 pb-6 md:pb-7 text-sm text-[#4B5563]">
+                  <Link href="/services/wordpress/jasa-woocommerce" className={linkClass}>
                     Jasa WooCommerce
                   </Link>{' '}
                   (in Indonesian)
@@ -314,22 +314,25 @@ export default function WordPressServicesPage() {
               </div>
             ) : (
               <Link key={service.title} href={service.href} className="group">
-                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all hover:-translate-y-0.5 h-full">
+                <div className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6 md:p-7 h-full">
                   <div className="flex items-start gap-4 mb-4">
-                    <div className="p-3 bg-zinc-100 rounded-xl group-hover:bg-orange-100 transition-colors">
-                      <service.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
+                    <div className="p-3 bg-[#EEF2FF] text-[#3A57FC] rounded-xl group-hover:bg-[#3A57FC] group-hover:text-white transition-colors shrink-0">
+                      <service.icon className="w-5 h-5" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-zinc-900 mb-1 group-hover:text-orange-500 transition-colors">
+                      <h3 className="font-display text-lg font-semibold text-[#0B0C0E] mb-1 group-hover:text-[#3A57FC] transition-colors">
                         {service.title}
                       </h3>
-                      <p className="text-sm text-zinc-500 leading-relaxed">{service.description}</p>
+                      <p className="text-sm text-[#4B5563] leading-relaxed">{service.description}</p>
                     </div>
                   </div>
 
-                  <div className="flex flex-wrap gap-1.5">
+                  <div className="flex flex-wrap gap-2">
                     {service.features.map((feature) => (
-                      <span key={feature} className="px-2 py-0.5 bg-zinc-100 rounded text-[10px] text-zinc-600 font-medium">
+                      <span
+                        key={feature}
+                        className="px-2.5 py-1 bg-[#F8FAFC] border border-[#E5E7EB] rounded-md text-[11px] text-[#4B5563] font-medium"
+                      >
                         {feature}
                       </span>
                     ))}
@@ -339,41 +342,47 @@ export default function WordPressServicesPage() {
             ),
           )}
         </div>
-        <p className="text-sm text-zinc-500 mt-6 text-center" lang="id">
+        <p className="text-sm text-[#4B5563] mt-6 text-center" lang="id">
           Cari jasa pembuatan website WordPress dalam Bahasa Indonesia?{' '}
-          <Link href="/services/wordpress/jasa-wordpress" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors">
+          <Link href="/services/wordpress/jasa-wordpress" className={linkClass}>
             Baca halaman jasa WordPress
           </Link>
           .
         </p>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
       {/* Proof Section */}
       <section className="mb-16">
         <div className="text-center mb-10">
-          <div className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-orange-500" />
-            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Proof you can check</span>
+          <div className="inline-flex items-center gap-2 rounded-md border border-[#DDE4FF] bg-[#EEF2FF] px-3 py-1 mb-4">
+            <ShieldCheck className="w-3.5 h-3.5 text-[#3A57FC]" />
+            <span className="font-mono text-[11px] font-semibold tracking-[0.12em] uppercase text-[#3A57FC]">Proof you can check</span>
           </div>
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Why trust me with <span className="gradient-text">your WordPress site</span>
           </h2>
-          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
+          <p className="text-sm text-[#4B5563] max-w-xl mx-auto">
             Each one links to where you can check it.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {proof.map((item) => (
-            <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all group">
-              <div className="p-3 bg-zinc-100 rounded-xl w-fit mb-4 group-hover:bg-orange-100 transition-colors">
-                <item.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
+            <div
+              key={item.title}
+              className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6 md:p-7 group"
+            >
+              <div className="p-3 bg-[#EEF2FF] text-[#3A57FC] rounded-xl w-fit mb-4 group-hover:bg-[#3A57FC] group-hover:text-white transition-colors">
+                <item.icon className="w-5 h-5" />
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
-              <p className="text-sm text-zinc-500 leading-relaxed mb-3">{item.description}</p>
-              <Link href={item.href} className="inline-flex items-center gap-1.5 text-sm font-medium text-zinc-900 hover:text-orange-500 transition-colors">
+              <h3 className="font-display font-semibold text-[#0B0C0E] mb-2">{item.title}</h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed mb-4">{item.description}</p>
+              <Link
+                href={item.href}
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#3A57FC] hover:text-[#2944E0] transition-colors"
+              >
                 {item.linkLabel}
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
@@ -382,37 +391,37 @@ export default function WordPressServicesPage() {
         </div>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
       {/* Fit */}
       <section className="mb-16">
         <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Should you <span className="gradient-text">hire me?</span>
           </h2>
-          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
+          <p className="text-sm text-[#4B5563] max-w-xl mx-auto">
             I would rather say no early than take a job I am the wrong person for.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-4">Good fit</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-7">
+            <h3 className="font-display font-semibold text-[#0B0C0E] mb-4">Good fit</h3>
             <ul className="space-y-3">
               {goodFit.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
+                <li key={item} className="flex items-start gap-3 text-sm text-[#4B5563]">
+                  <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
                   {item}
                 </li>
               ))}
             </ul>
           </div>
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-4">Probably not worth it</h3>
+          <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-7">
+            <h3 className="font-display font-semibold text-[#0B0C0E] mb-4">Probably not worth it</h3>
             <ul className="space-y-3">
               {poorFit.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                  <XCircle className="w-5 h-5 text-zinc-400 shrink-0" />
+                <li key={item} className="flex items-start gap-3 text-sm text-[#4B5563]">
+                  <XCircle className="w-5 h-5 text-[#9CA3AF] shrink-0" />
                   {item}
                 </li>
               ))}
@@ -424,67 +433,35 @@ export default function WordPressServicesPage() {
       {/* Process Section */}
       <section className="mb-16">
         <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             How a project <span className="gradient-text">runs</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {processSteps.map((item) => (
-            <div key={item.step} className="bg-zinc-50 rounded-2xl p-5 text-center">
-              <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-500 font-bold text-lg flex items-center justify-center mx-auto mb-3">
-                {item.step}
+            <div
+              key={item.step}
+              className="rounded-2xl border border-[#E5E7EB] bg-[#F8FAFC] hover:border-[#3A57FC] transition-colors p-6 text-center"
+            >
+              <div className="w-10 h-10 rounded-xl bg-[#EEF2FF] border border-[#DDE4FF] text-[#3A57FC] font-mono font-bold text-sm flex items-center justify-center mx-auto mb-4">
+                {String(item.step).padStart(2, '0')}
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-1">{item.title}</h3>
-              <p className="text-sm text-zinc-500">{item.desc}</p>
+              <h3 className="font-display font-semibold text-[#0B0C0E] mb-1.5">{item.title}</h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="mb-16 max-w-3xl mx-auto" aria-labelledby="wordpress-faq">
-        <h2 id="wordpress-faq" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-6">
-          Hiring a WordPress developer: FAQ
-        </h2>
-        <div className="space-y-3">
-          {faqs.map((faq) => (
-            <details key={faq.question} className="group bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm open:shadow-md">
-              <summary className="cursor-pointer list-none font-semibold text-zinc-900 flex items-center justify-between gap-4">
-                {faq.question}
-                <span className="text-orange-500 transition-transform group-open:rotate-45 text-xl leading-none">+</span>
-              </summary>
-              <p className="mt-3 text-sm text-zinc-600 leading-relaxed">{faq.answer}</p>
-            </details>
-          ))}
-        </div>
-      </section>
+      <Faq id="wordpress-faq" title="Hiring a WordPress developer: FAQ" faqs={faqs} />
 
-      {/* CTA Section */}
-      <section className="overflow-hidden shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
-        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
-
-        <div className="flex flex-col items-center justify-center text-center px-6 py-12 md:px-12 md:py-14 relative">
-          <Globe className="w-8 h-8 text-orange-400 mb-6" />
-          <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
-            Tell me what your WordPress site needs
-          </h2>
-          <p className="text-zinc-400 mb-8 max-w-lg font-medium">
-            Send the URL and what is bothering you. I will reply with what I would do and what it would take, and I will tell you if you do not need me.
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link href={contactHref('wordpress')} className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5">
-              <span>Send me your WordPress site</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link href="/blog/headless-wordpress-with-nextjs" className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3">
-              <span>Read how this site runs headless</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      <CtaBand
+        title="Tell me what your WordPress site needs"
+        body="Send the URL and what is bothering you. I will reply with what I would do and what it would take, and I will tell you if you do not need me."
+        primary={{ href: contactHref('wordpress'), label: 'Send me your WordPress site' }}
+        secondary={{ href: '/blog/headless-wordpress-with-nextjs', label: 'Read how this site runs headless' }}
+      />
     </>
   )
 }

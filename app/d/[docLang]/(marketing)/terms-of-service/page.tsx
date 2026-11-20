@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowRight, FileText, Shield, Scale, Users, Mail } from 'lucide-react'
+import { FileText, Shield, Scale, Users } from 'lucide-react'
+import { PageHero } from '@/components/page/hero'
+import { CtaBand } from '@/components/page/cta-band'
 import { JsonLd } from '@/components/seo/json-ld'
 import { buildPageGraph, buildPageMetadata } from '@/lib/seo'
 
@@ -36,60 +38,51 @@ const sections = [
 ]
 
 export default function TermsOfServicePage() {
-  const lastUpdated = new Date().toLocaleDateString('en-US', { 
-    year: 'numeric', 
-    month: 'long', 
-    day: 'numeric' 
+  const lastUpdated = new Date().toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
   })
 
   return (
     <>
       <JsonLd data={termsStructuredData} />
+
       {/* Breadcrumb */}
-      <nav className="mb-8">
-        <ol className="flex items-center space-x-2 text-sm text-zinc-500">
-          <li><Link href="/" className="hover:text-orange-500 transition-colors">Home</Link></li>
-          <li><span className="px-2">/</span></li>
-          <li className="text-zinc-900">Terms of Service</li>
+      <nav className="mb-6" aria-label="Breadcrumb">
+        <ol className="flex flex-wrap items-center gap-1.5 text-sm text-[#4B5563]">
+          <li><Link href="/" className="hover:text-[#3A57FC] transition-colors">Home</Link></li>
+          <li aria-hidden="true" className="text-[#9CA3AF]">/</li>
+          <li className="font-medium text-[#0B0C0E]" aria-current="page">Terms of Service</li>
         </ol>
       </nav>
-      
-      {/* Hero Section */}
-      <section className="text-center pt-4 pb-16">
-        <div className="inline-flex bg-white/60 rounded-full mb-8 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
-          <FileText className="w-4 h-4 text-orange-500" />
-          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Legal</span>
-        </div>
 
-        <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
-          Terms of
-          {' '}<span className="block gradient-text font-light">Service</span>
-        </h1>
-
-        <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-6 leading-relaxed font-medium">
+      <PageHero
+        eyebrow={{ icon: <FileText className="w-3.5 h-3.5" />, label: 'Legal' }}
+        title="Terms of"
+        accent="Service"
+      >
+        <p className="mb-2">
           Terms and conditions for using our website and services.
         </p>
-
-        <p className="text-sm text-zinc-400">
+        <p className="text-sm text-white/80">
           Last updated: {lastUpdated}
         </p>
-      </section>
-
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      </PageHero>
 
       {/* Quick Navigation */}
       <section className="mb-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {sections.map((section) => (
-            <a 
+            <a
               key={section.id}
               href={`#${section.id}`}
-              className="bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-sm hover:shadow-lg transition-all group text-center"
+              className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6 group text-center"
             >
-              <div className="p-2 bg-zinc-100 rounded-lg w-fit mx-auto mb-2 group-hover:bg-orange-100 transition-colors">
-                <section.icon className="w-4 h-4 text-zinc-600 group-hover:text-orange-500 transition-colors" />
+              <div className="p-2.5 bg-[#EEF2FF] text-[#3A57FC] rounded-xl w-fit mx-auto mb-3 group-hover:bg-[#3A57FC] group-hover:text-white transition-colors">
+                <section.icon className="w-4 h-4" />
               </div>
-              <span className="text-xs font-medium text-zinc-700 group-hover:text-orange-600 transition-colors">
+              <span className="text-xs font-semibold text-[#0B0C0E] group-hover:text-[#3A57FC] transition-colors">
                 {section.title}
               </span>
             </a>
@@ -97,26 +90,25 @@ export default function TermsOfServicePage() {
         </div>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
       {/* Main Content */}
       <section className="mb-16">
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 md:p-12 shadow-sm">
-          <div className="prose prose-zinc max-w-none prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-zinc-900 prose-p:text-zinc-600 prose-p:leading-relaxed prose-a:text-orange-500 hover:prose-a:text-orange-600 prose-strong:text-zinc-900 prose-li:text-zinc-600">
-            
+        <div className="rounded-2xl border border-[#E5E7EB] bg-white p-8 md:p-12">
+          <div className="prose max-w-none [&_a]:text-[#3A57FC] [&_a:hover]:text-[#2944E0]">
             <p className="text-lg leading-relaxed mb-8">
-              Welcome to Made by Aris. These Terms of Service (&quot;Terms&quot;) govern your use of the Made by Aris website 
+              Welcome to Made by Aris. These Terms of Service (&quot;Terms&quot;) govern your use of the Made by Aris website
               (the &quot;Website&quot;) and the services offered by Aris Setiawan (&quot;I&quot;, &quot;me&quot;, or &quot;my&quot;).
             </p>
-            
+
             <p className="mb-8">
-              By accessing or using the Website, you agree to be bound by these Terms. If you disagree with any part of the Terms, 
+              By accessing or using the Website, you agree to be bound by these Terms. If you disagree with any part of the Terms,
               you may not access the Website or use my services.
             </p>
 
             <h2 id="services" className="scroll-mt-24">1. Services</h2>
             <p>
-              I provide web development, design, and related services as described on the Website. The specific details, 
+              I provide web development, design, and related services as described on the Website. The specific details,
               deliverables, timelines, and costs for services will be outlined in a separate agreement or proposal for each project.
             </p>
 
@@ -133,11 +125,11 @@ export default function TermsOfServicePage() {
 
             <h2 id="ip" className="scroll-mt-24">3. Intellectual property</h2>
             <p>
-              The Website and its original content, features, and functionality are owned by Aris Setiawan and are protected by 
+              The Website and its original content, features, and functionality are owned by Aris Setiawan and are protected by
               international copyright, trademark, patent, trade secret, and other intellectual property laws.
             </p>
             <p>
-              You may not reproduce, distribute, modify, create derivative works of, publicly display, publicly perform, republish, 
+              You may not reproduce, distribute, modify, create derivative works of, publicly display, publicly perform, republish,
               download, store, or transmit any of the material on the Website without my prior written consent.
             </p>
 
@@ -153,12 +145,12 @@ export default function TermsOfServicePage() {
 
             <h2 className="scroll-mt-24">5. User content</h2>
             <p>
-              If you submit content to the Website (such as comments, testimonials, or project information), you grant me a 
-              non-exclusive, royalty-free, perpetual, irrevocable right to use, reproduce, modify, adapt, publish, translate, 
+              If you submit content to the Website (such as comments, testimonials, or project information), you grant me a
+              non-exclusive, royalty-free, perpetual, irrevocable right to use, reproduce, modify, adapt, publish, translate,
               create derivative works from, distribute, and display such content throughout the world in any media.
             </p>
             <p>
-              You represent and warrant that you own or control all rights to the content you submit and that the content does not 
+              You represent and warrant that you own or control all rights to the content you submit and that the content does not
               violate these Terms or any applicable laws.
             </p>
 
@@ -175,28 +167,28 @@ export default function TermsOfServicePage() {
 
             <h2 className="scroll-mt-24">7. Disclaimers</h2>
             <p>
-              The information on this Website is provided on an &quot;as is&quot; basis. I make no representations or warranties of any kind, 
-              express or implied, about the completeness, accuracy, reliability, suitability, or availability of the Website or the 
+              The information on this Website is provided on an &quot;as is&quot; basis. I make no representations or warranties of any kind,
+              express or implied, about the completeness, accuracy, reliability, suitability, or availability of the Website or the
               information, products, services, or related graphics contained on the Website for any purpose.
             </p>
 
             <h2 className="scroll-mt-24">8. Limitation of liability</h2>
             <p>
-              In no event will I be liable for any loss or damage including without limitation, indirect or consequential loss or 
-              damage, or any loss or damage whatsoever arising from loss of data or profits arising out of, or in connection with, 
+              In no event will I be liable for any loss or damage including without limitation, indirect or consequential loss or
+              damage, or any loss or damage whatsoever arising from loss of data or profits arising out of, or in connection with,
               the use of this Website.
             </p>
 
             <h2 className="scroll-mt-24">9. Indemnification</h2>
             <p>
-              You agree to defend, indemnify, and hold harmless Aris Setiawan from and against any and all claims, damages, 
-              obligations, losses, liabilities, costs, and expenses (including attorney&apos;s fees) arising from your use of the Website 
+              You agree to defend, indemnify, and hold harmless Aris Setiawan from and against any and all claims, damages,
+              obligations, losses, liabilities, costs, and expenses (including attorney&apos;s fees) arising from your use of the Website
               or your violation of these Terms.
             </p>
 
             <h2 className="scroll-mt-24">10. Termination</h2>
             <p>
-              I may terminate or suspend your access to the Website immediately, without prior notice or liability, for any reason 
+              I may terminate or suspend your access to the Website immediately, without prior notice or liability, for any reason
               whatsoever, including without limitation if you breach the Terms.
             </p>
 
@@ -207,7 +199,7 @@ export default function TermsOfServicePage() {
 
             <h2 className="scroll-mt-24">12. Changes to terms</h2>
             <p>
-              I reserve the right to modify or replace these Terms at any time. If a revision is material, I will try to provide at 
+              I reserve the right to modify or replace these Terms at any time. If a revision is material, I will try to provide at
               least 30 days notice prior to any new terms taking effect.
             </p>
 
@@ -219,8 +211,8 @@ export default function TermsOfServicePage() {
               Email: <a href="mailto:arissetia.m@gmail.com">arissetia.m@gmail.com</a>
             </p>
 
-            <div className="mt-12 pt-8 border-t border-zinc-200">
-              <p className="text-sm text-zinc-500">
+            <div className="mt-12 pt-8 border-t border-[#E5E7EB]">
+              <p className="text-sm text-[#4B5563]">
                 By using my website and services, you acknowledge that you have read and agree to these Terms of Service.
               </p>
             </div>
@@ -228,44 +220,12 @@ export default function TermsOfServicePage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="overflow-hidden shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
-        <div 
-          className="absolute inset-0 opacity-10" 
-          style={{
-            backgroundImage: 'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)',
-            backgroundSize: '40px 40px'
-          }}
-        />
-
-        <div className="flex flex-col items-center justify-center text-center px-6 py-12 md:px-12 md:py-14 relative">
-          <h2 className="md:text-3xl lg:text-4xl leading-tight text-2xl font-normal text-white tracking-tight mb-6 max-w-2xl">
-            Questions about these terms?
-          </h2>
-          <p className="text-zinc-400 mb-8 max-w-lg font-medium">
-            Email me or use the contact form. I reply within 24 hours and answer questions about these terms in plain language.
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link 
-              href="/contact"
-              className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
-            >
-              <Mail className="w-4 h-4" />
-              <span>Ask me about these terms</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link 
-              href="/privacy-policy"
-              className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3"
-            >
-              <Shield className="w-4 h-4" />
-              <span>Privacy Policy</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      <CtaBand
+        title="Questions about these terms?"
+        body="Email me or use the contact form. I reply within 24 hours and answer questions about these terms in plain language."
+        primary={{ href: '/contact', label: 'Ask me about these terms' }}
+        secondary={{ href: '/privacy-policy', label: 'Privacy Policy' }}
+      />
     </>
   )
 }

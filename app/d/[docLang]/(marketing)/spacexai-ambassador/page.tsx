@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, ArrowUpRight, Users, Sparkles, Code2, Shield } from 'lucide-react'
+import { PageHero } from '@/components/page/hero'
+import { CtaBand } from '@/components/page/cta-band'
 import { JsonLd } from '@/components/seo/json-ld'
 import { buildPageGraph, buildPageMetadata } from '@/lib/seo'
 import { contactHref } from '@/lib/contact-services'
@@ -56,153 +58,119 @@ export default function SpaceXAIAmbassadorPage() {
       <JsonLd data={structuredData} />
 
       {/* Breadcrumb */}
-      <nav className="mb-8">
-        <ol className="flex items-center space-x-2 text-sm text-zinc-500">
+      <nav className="mb-6" aria-label="Breadcrumb">
+        <ol className="flex flex-wrap items-center gap-1.5 text-sm text-[#4B5563]">
           <li>
-            <Link href="/" className="hover:text-orange-500 transition-colors">
+            <Link href="/" className="hover:text-[#3A57FC] transition-colors">
               Home
             </Link>
           </li>
-          <li>
-            <span className="px-2">/</span>
-          </li>
-          <li className="text-zinc-900">SpaceXAI Ambassador</li>
+          <li aria-hidden="true" className="text-[#9CA3AF]">/</li>
+          <li className="font-medium text-[#0B0C0E]" aria-current="page">SpaceXAI Ambassador</li>
         </ol>
       </nav>
 
-      {/* Hero */}
-      <section className="text-center pt-4 pb-16">
-        <div className="inline-flex bg-white/60 rounded-full mb-8 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
-          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">SpaceXAI Ambassador</span>
-        </div>
-
-        <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
-          SpaceXAI
-          {' '}<span className="block gradient-text font-light">Ambassador</span>
-        </h1>
-
-        <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-4 leading-relaxed font-medium">
+      <PageHero
+        eyebrow={{ icon: <Sparkles className="w-3.5 h-3.5" />, label: 'SpaceXAI Ambassador' }}
+        title="SpaceXAI"
+        accent="Ambassador"
+        actions={
+          <>
+            <Link
+              href={contactHref('cursor-mentoring')}
+              className="btn-primary inline-flex items-center gap-2.5 rounded-md py-3.5 px-6 text-sm font-bold group"
+            >
+              <span>Get Cursor mentoring for your team</span>
+              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </Link>
+            <Link
+              href="/cursor-ambassador"
+              className="btn-secondary inline-flex items-center gap-2 rounded-md py-3.5 px-6 text-sm font-semibold group"
+            >
+              <span>See Cursor Ambassador</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            </Link>
+          </>
+        }
+      >
+        <p className="mb-4">
           I am a SpaceXAI Ambassador. Cursor is now part of SpaceX, and SpaceXAI is the AI side of that story. This page is that role. My Cursor Ambassador page stays at{' '}
-          <Link href="/cursor-ambassador" className="hover:text-orange-500 transition-colors">/cursor-ambassador</Link>.
+          <Link
+            href="/cursor-ambassador"
+            className="text-white underline decoration-white/60 underline-offset-4 hover:decoration-white transition-colors"
+          >
+            /cursor-ambassador
+          </Link>
+          .
         </p>
-
-        <p className="text-sm text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed">
+        <p className="text-sm text-white/80">
           On August 14, 2026{' '}
           <a
             href="https://cursor.com/blog/joining-spacex"
             target="_blank"
             rel="noopener noreferrer"
-            className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors"
+            className="text-white underline decoration-white/60 underline-offset-4 hover:decoration-white transition-colors"
           >
             Cursor announced it is part of SpaceX
           </a>
           , continuing the SpaceXAI partnership. I keep teaching practical shipping with Cursor and the wider AI coding stack, based on client work I ship every week.
         </p>
-
-        <div className="flex flex-wrap justify-center gap-3">
-          <Link
-            href={contactHref('cursor-mentoring')}
-            className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
-          >
-            <span className="text-sm font-medium tracking-tight">Get Cursor mentoring for your team</span>
-            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </Link>
-
-          <Link
-            href="/cursor-ambassador"
-            className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
-            style={{ boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)' }}
-          >
-            <span className="text-sm font-medium text-black/60 tracking-tight">See Cursor Ambassador</span>
-            <ArrowRight className="w-4 h-4 text-zinc-500" />
-          </Link>
-        </div>
-      </section>
-
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      </PageHero>
 
       {/* Highlights */}
       <section className="mb-16">
         <div className="text-center mb-10">
-          <div className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
-            <Sparkles className="w-4 h-4 text-orange-500" />
-            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">What I focus on</span>
+          <div className="inline-flex items-center gap-2 rounded-md border border-[#DDE4FF] bg-[#EEF2FF] px-3 py-1 mb-4">
+            <Sparkles className="w-3.5 h-3.5 text-[#3A57FC]" />
+            <span className="font-mono text-[11px] font-semibold tracking-[0.12em] uppercase text-[#3A57FC]">What I focus on</span>
           </div>
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Ambassador <span className="gradient-text">highlights</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {highlights.map((item) => (
-            <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all group">
-              <div className="p-3 bg-zinc-100 rounded-xl w-fit mb-4 group-hover:bg-orange-100 transition-colors">
-                <item.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
+            <div
+              key={item.title}
+              className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6 md:p-7 group"
+            >
+              <div className="p-3 bg-[#EEF2FF] text-[#3A57FC] rounded-xl w-fit mb-4 group-hover:bg-[#3A57FC] group-hover:text-white transition-colors">
+                <item.icon className="w-5 h-5" />
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{item.description}</p>
+              <h3 className="font-display font-semibold text-[#0B0C0E] mb-2">{item.title}</h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.description}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
       {/* What I do */}
       <section className="mb-16">
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-sm">
-          <h2 className="text-xl md:text-2xl font-semibold text-zinc-900 tracking-tight mb-6">
+        <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-8">
+          <h2 className="font-display text-xl md:text-2xl font-bold text-[#0B0C0E] tracking-tight mb-6">
             What I do as a SpaceXAI Ambassador
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {whatIDo.map((item) => (
-              <div key={item} className="flex items-start gap-3 p-3 bg-zinc-50 rounded-xl">
-                <ArrowRight className="w-4 h-4 text-orange-500 mt-0.5 shrink-0" />
-                <span className="text-sm text-zinc-700 font-medium">{item}</span>
+              <div key={item} className="flex items-start gap-3 p-4 bg-[#F8FAFC] border border-[#E5E7EB] rounded-xl">
+                <ArrowRight className="w-4 h-4 text-[#3A57FC] mt-0.5 shrink-0" />
+                <span className="text-sm text-[#0B0C0E] font-medium">{item}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="overflow-hidden shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
-        <div
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)',
-            backgroundSize: '40px 40px',
-          }}
-        />
-
-        <div className="flex flex-col items-center justify-center text-center px-6 py-12 md:px-12 md:py-14 relative">
-          <h2 className="md:text-3xl lg:text-4xl leading-tight text-2xl font-normal text-white tracking-tight mb-6 max-w-2xl">
-            Need help shipping faster with Cursor?
-          </h2>
-          <p className="text-zinc-400 mb-8 max-w-lg font-medium">
-            Tell me how your team uses Cursor today. I’ll reply with where mentoring would help first, and I’ll tell you if it isn’t worth it.
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link
-              href={contactHref('cursor-mentoring')}
-              className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
-            >
-              <span>Get Cursor mentoring for your team</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              href="/services/vibe-code-friend"
-              className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3"
-            >
-              <span>See how mentoring works</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      <CtaBand
+        title="Need help shipping faster with Cursor?"
+        body="Tell me how your team uses Cursor today. I’ll reply with where mentoring would help first, and I’ll tell you if it isn’t worth it."
+        primary={{ href: contactHref('cursor-mentoring'), label: 'Get Cursor mentoring for your team' }}
+        secondary={{ href: '/services/vibe-code-friend', label: 'See how mentoring works' }}
+      />
     </>
   )
 }

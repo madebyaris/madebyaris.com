@@ -2,6 +2,9 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, ArrowUpRight, Sparkles, Users, Lightbulb, ExternalLink, BookOpen } from 'lucide-react'
+import { PageHero } from '@/components/page/hero'
+import { Faq } from '@/components/page/faq'
+import { CtaBand } from '@/components/page/cta-band'
 import { JsonLd } from '@/components/seo/json-ld'
 import { buildPageGraph, buildPageMetadata, type FaqItem } from '@/lib/seo'
 import { contactHref } from '@/lib/contact-services'
@@ -82,7 +85,7 @@ const guides = [
   { title: 'AI chatbot development', href: '/blog/ai-chatbot-development' },
 ]
 
-const linkClass = 'underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors'
+const linkClass = 'text-[#3A57FC] underline decoration-[#3A57FC]/35 underline-offset-4 hover:text-[#2944E0] hover:decoration-[#3A57FC] transition-colors'
 
 export default function MiniMaxAmbassadorPage() {
   return (
@@ -90,82 +93,86 @@ export default function MiniMaxAmbassadorPage() {
       <JsonLd data={structuredData} />
 
       {/* Breadcrumb */}
-      <nav className="mb-8" aria-label="Breadcrumb">
-        <ol className="flex items-center space-x-2 text-sm text-zinc-500">
+      <nav className="mb-6" aria-label="Breadcrumb">
+        <ol className="flex flex-wrap items-center gap-1.5 text-sm text-[#4B5563]">
           <li>
-            <Link href="/" className="hover:text-orange-500 transition-colors">
+            <Link href="/" className="hover:text-[#3A57FC] transition-colors">
               Home
             </Link>
           </li>
-          <li>
-            <span className="px-2">/</span>
-          </li>
-          <li className="text-zinc-900">MiniMax Dev Community Expert</li>
+          <li aria-hidden="true" className="text-[#9CA3AF]">/</li>
+          <li className="font-medium text-[#0B0C0E]" aria-current="page">MiniMax Dev Community Expert</li>
         </ol>
       </nav>
 
-      {/* Hero */}
-      <section className="text-center pt-4 pb-16">
-        <div className="inline-flex bg-white/60 rounded-full mb-8 py-2 pr-5 pl-3.5 shadow-sm backdrop-blur-sm items-center gap-3">
-          <Image
-            src="/minimax.png"
-            alt="MiniMax"
-            width={100}
-            height={25}
-            className="h-[25px] w-[100px]"
-            priority
-          />
-          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">MiniMax Dev Community Expert</span>
-        </div>
-
-        <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
-          <span className="gradient-text-minimax">MiniMax</span>
-          {' '}<span className="block font-light">Dev Community Expert</span>
-        </h1>
-
-        <p className="text-base md:text-lg text-zinc-600 max-w-2xl mx-auto mb-4 leading-relaxed font-medium">
+      <PageHero
+        eyebrow={{
+          icon: (
+            <span className="inline-flex items-center rounded bg-white px-2 py-0.5">
+              <Image
+                src="/minimax.png"
+                alt="MiniMax"
+                width={72}
+                height={18}
+                className="h-[18px] w-auto"
+                priority
+              />
+            </span>
+          ),
+          label: 'MiniMax Dev Community Expert',
+        }}
+        title="MiniMax"
+        accent="Dev Community Expert"
+        actions={
+          <>
+            <Link
+              href={contactHref('ai')}
+              className="btn-primary inline-flex items-center gap-2.5 rounded-md py-3.5 px-6 text-sm font-bold group"
+            >
+              <span>Plan an AI feature with me</span>
+              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </Link>
+            <Link
+              href="/minimax-ambassador/minimax-indonesia"
+              className="btn-secondary inline-flex items-center gap-2 rounded-md py-3.5 px-6 text-sm font-semibold group"
+            >
+              <span>Read the MiniMax Indonesia guide</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            </Link>
+          </>
+        }
+      >
+        <p className="mb-4">
           I’m Aris Setiawan, a MiniMax Dev Community Expert based in Indonesia. I help builders and teams get MiniMax models into real products, with an honest view of cost, output quality, and where a model falls short.
         </p>
-
-        <p className="text-sm text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed">
+        <p className="text-sm text-white/80">
           13+ years shipping web products. I’m also the first{' '}
-          <Link href="/cursor-ambassador" className={linkClass}>Cursor Ambassador in Indonesia</Link>
+          <Link
+            href="/cursor-ambassador"
+            className="text-white underline decoration-white/60 underline-offset-4 hover:decoration-white transition-colors"
+          >
+            Cursor Ambassador in Indonesia
+          </Link>
           {' '}and a SpaceXAI Ambassador. More on{' '}
-          <a href="https://www.linkedin.com/in/arissetia/" target="_blank" rel="noreferrer" className={linkClass}>
+          <a
+            href="https://www.linkedin.com/in/arissetia/"
+            target="_blank"
+            rel="noreferrer"
+            className="text-white underline decoration-white/60 underline-offset-4 hover:decoration-white transition-colors"
+          >
             LinkedIn
           </a>
           .
         </p>
-
-        <div className="flex flex-wrap justify-center gap-3">
-          <Link
-            href={contactHref('ai')}
-            className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
-          >
-            <span className="text-sm font-medium tracking-tight">Plan an AI feature with me</span>
-            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </Link>
-
-          <Link
-            href="/minimax-ambassador/minimax-indonesia"
-            className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
-            style={{ boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)' }}
-          >
-            <span className="text-sm font-medium text-black/60 tracking-tight">Read the MiniMax Indonesia guide</span>
-            <ArrowRight className="w-4 h-4 text-zinc-500" />
-          </Link>
-        </div>
-      </section>
-
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      </PageHero>
 
       {/* Answer first */}
       <section className="mb-16 max-w-3xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
-          What a MiniMax ambassador does
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-4">
+          What a <span className="gradient-text-minimax">MiniMax</span> ambassador does
         </h2>
-        <p className="text-zinc-600 leading-relaxed mb-4">{faqs[0].answer}</p>
-        <p className="text-zinc-600 leading-relaxed">
+        <p className="text-[#4B5563] leading-relaxed mb-4">{faqs[0].answer}</p>
+        <p className="text-[#4B5563] leading-relaxed">
           When a team wants a feature built on MiniMax models, I can also plan and ship it with them, from the first prompt to the production API call.
         </p>
       </section>
@@ -173,47 +180,50 @@ export default function MiniMaxAmbassadorPage() {
       {/* Highlights */}
       <section className="mb-16">
         <div className="text-center mb-10">
-          <div className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
-            <Sparkles className="w-4 h-4 text-orange-500" />
-            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">What I focus on</span>
+          <div className="inline-flex items-center gap-2 rounded-md border border-[#FE604A]/25 bg-[#FEF2F2] px-3 py-1 mb-4">
+            <Sparkles className="w-3.5 h-3.5 text-[#F6433D]" />
+            <span className="font-mono text-[11px] font-semibold tracking-[0.12em] uppercase text-[#DC0F12]">What I focus on</span>
           </div>
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            How I approach <span className="gradient-text">the role</span>
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
+            How I approach <span className="gradient-text-minimax">the role</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {highlights.map((item) => (
-            <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all group">
-              <div className="p-3 bg-zinc-100 rounded-xl w-fit mb-4 group-hover:bg-orange-100 transition-colors">
-                <item.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
+            <div
+              key={item.title}
+              className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6 md:p-7 group"
+            >
+              <div className="p-3 bg-[#EEF2FF] text-[#3A57FC] rounded-xl w-fit mb-4 group-hover:bg-[#3A57FC] group-hover:text-white transition-colors">
+                <item.icon className="w-5 h-5" />
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{item.description}</p>
+              <h3 className="font-display font-semibold text-[#0B0C0E] mb-2">{item.title}</h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.description}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
       {/* What I do */}
       <section className="mb-16">
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-sm">
-          <h2 className="text-xl md:text-2xl font-semibold text-zinc-900 tracking-tight mb-6">
+        <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-8">
+          <h2 className="font-display text-xl md:text-2xl font-bold text-[#0B0C0E] tracking-tight mb-6">
             What I do as a MiniMax Dev Community Expert
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {whatIDo.map((item) => (
-              <div key={item} className="flex items-start gap-3 p-3 bg-zinc-50 rounded-xl">
-                <ArrowRight className="w-4 h-4 text-orange-500 mt-0.5 shrink-0" />
-                <span className="text-sm text-zinc-700 font-medium">{item}</span>
+              <div key={item} className="flex items-start gap-3 p-4 bg-[#F8FAFC] border border-[#E5E7EB] rounded-xl">
+                <ArrowRight className="w-4 h-4 text-[#3A57FC] mt-0.5 shrink-0" />
+                <span className="text-sm text-[#0B0C0E] font-medium">{item}</span>
               </div>
             ))}
           </div>
 
-          <p className="mt-6 text-sm text-zinc-500">
+          <p className="mt-6 text-sm text-[#4B5563]">
             The rules are free on GitHub:{' '}
             <a
               href="https://github.com/madebyaris/advance-minimax-m2-cursor-rules"
@@ -230,18 +240,21 @@ export default function MiniMaxAmbassadorPage() {
 
       {/* MiniMax Indonesia callout */}
       <section className="mb-16">
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="rounded-2xl border border-[#E5E7EB] bg-[#F8FAFC] hover:border-[#3A57FC] transition-colors p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div>
-            <h2 className="text-xl md:text-2xl font-semibold text-zinc-900 tracking-tight mb-2">
+            <span className="inline-flex items-center gap-1.5 rounded-md border border-[#FE604A]/25 bg-white px-2.5 py-0.5 font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-[#DC0F12] mb-3">
+              Bahasa Indonesia
+            </span>
+            <h2 className="font-display text-xl md:text-2xl font-bold text-[#0B0C0E] tracking-tight mb-2">
               MiniMax Indonesia: panduan coding
             </h2>
-            <p className="text-sm text-zinc-500 leading-relaxed max-w-2xl">
+            <p className="text-sm text-[#4B5563] leading-relaxed max-w-2xl">
               Panduan singkat dalam Bahasa Indonesia: apa itu MiniMax M-2.1, cara pakai MiniMax Coding Plan di IDE, dan langkah awal dengan MiniMax API.
             </p>
           </div>
           <Link
             href="/minimax-ambassador/minimax-indonesia"
-            className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5 shrink-0"
+            className="btn-primary inline-flex items-center gap-2.5 rounded-md py-3.5 px-6 text-sm font-bold shrink-0 group"
           >
             <span>Baca panduannya</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -251,26 +264,28 @@ export default function MiniMaxAmbassadorPage() {
 
       {/* Guides */}
       <section className="mb-16">
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-sm">
-          <div className="flex items-center gap-2 mb-2">
-            <BookOpen className="w-5 h-5 text-orange-500" />
-            <h2 className="text-xl md:text-2xl font-semibold text-zinc-900 tracking-tight">
+        <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-8">
+          <div className="flex items-center gap-2.5 mb-2">
+            <BookOpen className="w-5 h-5 text-[#3A57FC]" />
+            <h2 className="font-display text-xl md:text-2xl font-bold text-[#0B0C0E] tracking-tight">
               Where to start with AI features
             </h2>
           </div>
-          <p className="text-sm text-zinc-500 mb-6">
+          <p className="text-sm text-[#4B5563] mb-6">
             Guides I wrote on shipping AI features. They apply whether you pick MiniMax or another model.
           </p>
 
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {guides.map((guide) => (
               <li key={guide.href}>
                 <Link
                   href={guide.href}
-                  className="flex items-start gap-3 p-3 bg-zinc-50 rounded-xl hover:bg-orange-50 transition-colors group"
+                  className="flex items-start gap-3 p-4 bg-[#F8FAFC] border border-[#E5E7EB] rounded-xl hover:border-[#3A57FC] hover:bg-[#EEF2FF] transition-colors group"
                 >
-                  <ArrowRight className="w-4 h-4 text-orange-500 mt-0.5 shrink-0 group-hover:translate-x-0.5 transition-transform" />
-                  <span className="text-sm text-zinc-700 font-medium group-hover:text-zinc-900">{guide.title}</span>
+                  <ArrowRight className="w-4 h-4 text-[#3A57FC] mt-0.5 shrink-0 group-hover:translate-x-0.5 transition-transform" />
+                  <span className="text-sm text-[#0B0C0E] font-medium group-hover:text-[#3A57FC] transition-colors">
+                    {guide.title}
+                  </span>
                 </Link>
               </li>
             ))}
@@ -278,61 +293,14 @@ export default function MiniMaxAmbassadorPage() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="mb-16 max-w-3xl mx-auto" aria-labelledby="minimax-faq">
-        <h2 id="minimax-faq" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-6">
-          MiniMax Dev Community Expert FAQ
-        </h2>
-        <div className="space-y-3">
-          {faqs.map((faq) => (
-            <details key={faq.question} className="group bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm open:shadow-md">
-              <summary className="cursor-pointer list-none font-semibold text-zinc-900 flex items-center justify-between gap-4">
-                {faq.question}
-                <span className="text-orange-500 transition-transform group-open:rotate-45 text-xl leading-none">+</span>
-              </summary>
-              <p className="mt-3 text-sm text-zinc-600 leading-relaxed">{faq.answer}</p>
-            </details>
-          ))}
-        </div>
-      </section>
+      <Faq id="minimax-faq" title="MiniMax Dev Community Expert FAQ" faqs={faqs} />
 
-      {/* CTA */}
-      <section className="overflow-hidden shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
-        <div
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)',
-            backgroundSize: '40px 40px',
-          }}
-        />
-
-        <div className="flex flex-col items-center justify-center text-center px-6 py-12 md:px-12 md:py-14 relative">
-          <h2 className="md:text-3xl lg:text-4xl leading-tight text-2xl font-normal text-white tracking-tight mb-6 max-w-2xl">
-            Want an AI feature in your product?
-          </h2>
-          <p className="text-zinc-400 mb-8 max-w-lg font-medium">
-            Tell me what users should be able to do. I’ll suggest a model and an approach, and I’ll tell you if AI is the wrong tool for it.
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link
-              href={contactHref('ai')}
-              className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
-            >
-              <span>Plan an AI feature with me</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              href="/ai-implementation"
-              className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3"
-            >
-              <span>See AI engineering services</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      <CtaBand
+        title="Want an AI feature in your product?"
+        body="Tell me what users should be able to do. I’ll suggest a model and an approach, and I’ll tell you if AI is the wrong tool for it."
+        primary={{ href: contactHref('ai'), label: 'Plan an AI feature with me' }}
+        secondary={{ href: '/ai-implementation', label: 'See AI engineering services' }}
+      />
     </>
   )
 }

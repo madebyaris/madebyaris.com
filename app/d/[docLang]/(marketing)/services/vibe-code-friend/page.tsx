@@ -1,18 +1,17 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import {
-  Bot,
+  AlertCircle,
   ArrowRight,
   ArrowUpRight,
-  Zap,
   Code2,
-  MessageSquare,
-  Shield,
-  Users,
   FileCode,
+  Shield,
   TrendingUp,
-  AlertCircle,
+  Users,
+  Zap,
 } from 'lucide-react'
-import Link from 'next/link'
+import { PageHero } from '@/components/page/hero'
 import { Faq } from '@/components/page/faq'
 import { CtaBand } from '@/components/page/cta-band'
 import { buildPageGraph, buildPageMetadata, type FaqItem } from '@/lib/seo'
@@ -39,6 +38,9 @@ export const metadata: Metadata = buildPageMetadata({
     'Vibe Code Friend',
   ],
 })
+
+const linkClass =
+  'text-[#3A57FC] font-medium underline decoration-[#3A57FC]/35 underline-offset-4 hover:text-[#2944E0] hover:decoration-[#2944E0] transition-colors'
 
 const painPoints = [
   'Everyone prompts Cursor differently, so the same feature comes back in five styles',
@@ -153,215 +155,250 @@ export default function VibeCodeFriendPage() {
     <>
       <JsonLd data={structuredData} />
 
-      {/* Hero Section */}
-      <section className="text-center pt-8 pb-16">
-        <div
-          className="inline-flex bg-white/60 rounded-full mb-8 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2"
-          style={{
-            position: 'relative',
-            // @ts-expect-error CSS custom properties
-            '--border-gradient': 'linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0))',
-            '--border-radius-before': '9999px',
-          }}
-        >
-          <TrendingUp className="w-4 h-4 text-orange-500" />
-          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">
-            Level up · Cursor · Remote
-          </span>
-        </div>
-
-        <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-4">
-          Cursor mentoring
-          {' '}<span className="block gradient-text font-light">for developers and teams</span>
-        </h1>
-
-        <div className="inline-flex bg-orange-50 rounded-full mb-6 py-1.5 px-4 items-center gap-2">
-          <Bot className="w-4 h-4 text-orange-500" />
-          <span className="text-xs font-semibold tracking-wide text-orange-700">
-            Also known as Vibe Code Friend
-          </span>
-        </div>
-
-        <p className="text-base md:text-lg text-zinc-600 max-w-2xl mx-auto mb-4 leading-relaxed font-medium">
+      <PageHero
+        variant="cobalt"
+        breadcrumb={
+          <nav aria-label="Breadcrumb">
+            <ol className="flex items-center gap-2 font-mono text-xs text-white/75">
+              <li>
+                <Link href="/services" className="hover:text-white transition-colors">
+                  Services
+                </Link>
+              </li>
+              <li aria-hidden="true" className="text-white/40">/</li>
+              <li className="text-white">Cursor mentoring</li>
+            </ol>
+          </nav>
+        }
+        eyebrow={{ icon: <TrendingUp className="w-3.5 h-3.5" />, label: 'Level up · Cursor · Also known as Vibe Code Friend' }}
+        title="Cursor mentoring"
+        accent="for developers and teams"
+        actions={
+          <>
+            <Link
+              href={contactHref('cursor-mentoring')}
+              className="inline-flex items-center justify-center gap-2 rounded-md bg-[#FF8800] hover:bg-[#E67600] text-white font-bold text-sm px-6 py-3.5 shadow-[0_12px_28px_-10px_rgba(0,0,0,0.35)] transition-all hover:-translate-y-0.5 group"
+            >
+              <span>Get Cursor mentoring for your team</span>
+              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </Link>
+            <Link
+              href="/blog/how-teams-should-roll-out-cursor-in-the-first-30-days"
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-white/45 hover:border-white bg-white/10 hover:bg-white/18 text-white font-semibold text-sm px-6 py-3.5 transition-all group"
+            >
+              <span>Read the 30-day rollout plan</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            </Link>
+          </>
+        }
+        bottomStrip={
+          <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 font-mono text-xs text-white/85">
+            <span>
+              13+ years shipping production software · First Cursor Ambassador in Indonesia · English or Indonesian · Direct overlap with European mornings (CET/GMT)
+            </span>
+            <Link
+              href="/guides/cursor"
+              className="text-[#FFB866] hover:text-white underline decoration-[#FFB866]/45 underline-offset-4 transition-colors"
+            >
+              Open the free Cursor guide
+            </Link>
+          </div>
+        }
+      >
+        <p>
           For European (EU and UK) and Indonesian engineering teams whose PRs got messier after adopting Cursor. I am a senior AI software engineer, Indonesia&apos;s first Cursor Ambassador, and maintainer of open-source Cursor and agent tooling.
         </p>
+      </PageHero>
 
-        <p className="text-sm text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed">
-          13+ years shipping production software · English or Indonesian · Direct overlap with European mornings (CET/GMT).
-        </p>
+      {/* Band 1: White: Answer first */}
+      <section className="w-full bg-white py-16 md:py-24" aria-labelledby="what-mentoring-looks-like">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+            <div className="lg:col-span-7">
+              <span className="section-index block mb-2">01 / Overview</span>
+              <h2
+                id="what-mentoring-looks-like"
+                className="font-display text-3xl sm:text-4xl font-bold text-[#0B0C0E] tracking-tight mb-5"
+              >
+                What Cursor mentoring looks like
+              </h2>
+              <p className="text-base text-[#4B5563] leading-relaxed mb-4">
+                Cursor mentoring is hands-on coaching on your team’s real code. I start with two or three developers on one repo, write shared project rules with them, and set up a review habit for AI-generated code. Once that loop works, we expand it to the rest of the team over about 30 days. Sessions run remotely, in English or Indonesian.
+              </p>
+              <p className="text-base text-[#4B5563] leading-relaxed">
+                Project rules are the first thing we set up. Here’s{' '}
+                <Link href="/blog/cursor-project-rules" className={linkClass}>
+                  how I write Cursor project rules
+                </Link>
+                , and the{' '}
+                <Link href="/guides/cursor" className={linkClass}>
+                  free Cursor guide
+                </Link>{' '}
+                has the rules file I commit, a review checklist, and a cost estimate for your team.
+              </p>
+            </div>
 
-        <div className="flex flex-wrap justify-center gap-3">
-          <Link
-            href={contactHref('cursor-mentoring')}
-            className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
-          >
-            <span className="text-sm font-medium tracking-tight">Get Cursor mentoring for your team</span>
-            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </Link>
-          <Link
-            href="/blog/how-teams-should-roll-out-cursor-in-the-first-30-days"
-            className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
-            style={{ boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)' }}
-          >
-            <span className="text-sm font-medium text-black/60 tracking-tight">Read the 30-day rollout plan</span>
-            <ArrowRight className="w-4 h-4 text-zinc-500" />
-          </Link>
-        </div>
-      </section>
-
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
-
-      {/* Answer first */}
-      <section className="mb-16 max-w-3xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
-          What Cursor mentoring looks like
-        </h2>
-        <p className="text-zinc-600 leading-relaxed mb-4">
-          Cursor mentoring is hands-on coaching on your team’s real code. I start with two or three developers on one repo, write shared project rules with them, and set up a review habit for AI-generated code. Once that loop works, we expand it to the rest of the team over about 30 days. Sessions run remotely, in English or Indonesian.
-        </p>
-        <p className="text-zinc-600 leading-relaxed">
-          Project rules are the first thing we set up. Here’s{' '}
-          <Link href="/blog/cursor-project-rules" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors">
-            how I write Cursor project rules
-          </Link>
-          , and the{' '}
-          <Link href="/guides/cursor" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors">
-            free Cursor guide
-          </Link>{' '}
-          has the rules file I commit, a review checklist, and a cost estimate for your team.
-        </p>
-      </section>
-
-      {/* Pain */}
-      <section className="mb-16">
-        <div className="text-center mb-10">
-          <div className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
-            <AlertCircle className="w-4 h-4 text-orange-500" />
-            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Sound familiar?</span>
+            <div className="lg:col-span-5 rounded-2xl border border-[#DDE4FF] bg-[#F3F5FF] p-6 md:p-7">
+              <span className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-[#2944E0] block mb-3">
+                Sound familiar?
+              </span>
+              <h3 className="font-display text-xl font-bold text-[#0B0C0E] tracking-tight mb-4">
+                Cursor AI for teams: where it goes wrong
+              </h3>
+              <ul className="space-y-3.5">
+                {painPoints.map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-sm text-[#4B5563] leading-relaxed">
+                    <AlertCircle className="w-5 h-5 text-[#3A57FC] shrink-0 mt-0.5" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            Cursor AI for teams: <span className="gradient-text">where it goes wrong</span>
-          </h2>
-        </div>
-
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm max-w-3xl mx-auto">
-          <ul className="space-y-3">
-            {painPoints.map((item) => (
-              <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                <AlertCircle className="w-5 h-5 text-orange-500 shrink-0" />
-                {item}
-              </li>
-            ))}
-          </ul>
         </div>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
-
-      {/* Outcomes */}
-      <section className="mb-16">
-        <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            What your team <span className="gradient-text">walks away with</span>
-          </h2>
-          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
-            The review habit starts from my{' '}
-            <Link href="/blog/pr-review-checklist-for-ai-generated-code" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors">
-              PR review checklist for AI-generated code
-            </Link>
-            .
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {outcomes.map((item) => (
-            <div
-              key={item.title}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm hover:shadow-lg transition-all group"
+      {/* Band 2: Subtle Gray: Outcomes */}
+      <section className="w-full bg-[#F8FAFC] border-y border-[#E5E7EB] py-16 md:py-24" aria-labelledby="outcomes-heading">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-10">
+          <div className="max-w-2xl mb-10 md:mb-12">
+            <span className="section-index block mb-2">02 / Outcomes</span>
+            <h2
+              id="outcomes-heading"
+              className="font-display text-3xl sm:text-4xl font-bold text-[#0B0C0E] tracking-tight mb-3"
             >
-              <div className="p-3 bg-zinc-100 rounded-xl w-fit mb-4 group-hover:bg-orange-100 transition-colors">
-                <item.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
-              </div>
-              <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{item.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="mb-16">
-        <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            How the <span className="gradient-text">30-day rollout works</span>
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          {steps.map((item) => (
-            <div key={item.step} className="bg-zinc-50 rounded-2xl p-5 text-center">
-              <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-500 font-bold text-lg flex items-center justify-center mx-auto mb-3">
-                {item.step}
-              </div>
-              <h3 className="font-semibold text-zinc-900 mb-1">{item.title}</h3>
-              <p className="text-sm text-zinc-500">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
-
-      {/* Formats */}
-      <section className="mb-16">
-        <div className="text-center mb-10">
-          <div className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
-            <MessageSquare className="w-4 h-4 text-orange-500" />
-            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Smaller formats</span>
+              What your team <span className="gradient-text">walks away with</span>
+            </h2>
+            <p className="text-base text-[#4B5563] leading-relaxed">
+              The review habit starts from my{' '}
+              <Link href="/blog/pr-review-checklist-for-ai-generated-code" className={linkClass}>
+                PR review checklist for AI-generated code
+              </Link>
+              .
+            </p>
           </div>
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            Just you, or <span className="gradient-text">one broken repo?</span>
-          </h2>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {formats.map((format) => (
-            <Link key={format.title} href={format.href} className="group">
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all hover:-translate-y-0.5 h-full">
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="p-3 bg-zinc-100 rounded-xl group-hover:bg-orange-100 transition-colors">
-                    <format.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {outcomes.map((item) => (
+              <div
+                key={item.title}
+                className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] p-6 md:p-7 transition-all"
+              >
+                <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#EEF2FF] border border-[#DDE4FF] text-[#3A57FC] mb-4">
+                  <item.icon className="w-5 h-5" />
+                </div>
+                <h3 className="font-display text-lg font-bold text-[#0B0C0E] tracking-tight mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-[#4B5563] leading-relaxed">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Band 3: Dark Proof Band: 30-day rollout */}
+      <section className="w-full ahrefs-dark-band text-white py-16 md:py-24" aria-labelledby="rollout-heading">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-10">
+          <div className="max-w-2xl mb-10 md:mb-12">
+            <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-[#FFB866] block mb-2">
+              03 / Rollout cadence
+            </span>
+            <h2
+              id="rollout-heading"
+              className="font-display text-3xl sm:text-4xl font-bold text-white tracking-tight mb-3"
+            >
+              How the 30-day rollout works
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {steps.map((item) => (
+              <div
+                key={item.step}
+                className="rounded-2xl border border-white/12 bg-white/[0.04] hover:border-[#3A57FC]/70 p-6 md:p-7 transition-all"
+              >
+                <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#FF8800] text-white font-mono text-sm font-bold mb-4">
+                  0{item.step}
+                </span>
+                <h3 className="font-display text-lg font-bold text-white tracking-tight mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-zinc-300 leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Band 4: Subtle Gray: Smaller formats */}
+      <section className="w-full bg-[#F8FAFC] border-y border-[#E5E7EB] py-16 md:py-24" aria-labelledby="formats-heading">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-10">
+          <div className="max-w-2xl mb-10 md:mb-12">
+            <span className="section-index block mb-2">04 / Smaller formats</span>
+            <h2
+              id="formats-heading"
+              className="font-display text-3xl sm:text-4xl font-bold text-[#0B0C0E] tracking-tight mb-3"
+            >
+              Just you, or <span className="gradient-text">one broken repo?</span>
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {formats.map((format) => (
+              <Link
+                key={format.title}
+                href={format.href}
+                className="group rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] p-6 md:p-7 transition-all flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-start justify-between gap-4 mb-4">
+                    <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#EEF2FF] border border-[#DDE4FF] text-[#3A57FC] shrink-0">
+                      <format.icon className="w-5 h-5" />
+                    </div>
+                    <ArrowUpRight className="w-5 h-5 text-[#6B7280] group-hover:text-[#3A57FC] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0" />
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-zinc-900 mb-1 group-hover:text-orange-500 transition-colors">
-                      {format.title}
-                    </h3>
-                    <p className="text-sm text-zinc-500 leading-relaxed">{format.description}</p>
-                  </div>
-                  <ArrowUpRight className="w-5 h-5 text-zinc-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <h3 className="font-display text-xl font-bold text-[#0B0C0E] tracking-tight mb-2 group-hover:text-[#3A57FC] transition-colors">
+                    {format.title}
+                  </h3>
+                  <p className="text-sm text-[#4B5563] leading-relaxed mb-5">{format.description}</p>
                 </div>
 
-                <div className="flex flex-wrap gap-1.5">
+                <div className="flex flex-wrap gap-2 pt-4 border-t border-[#E5E7EB]">
                   {format.chips.map((chip) => (
-                    <span key={chip} className="px-2 py-0.5 bg-zinc-100 rounded text-[10px] text-zinc-600 font-medium">
+                    <span
+                      key={chip}
+                      className="rounded-md bg-[#F3F5FF] border border-[#DDE4FF] px-2.5 py-1 font-mono text-[11px] font-medium text-[#2944E0]"
+                    >
                       {chip}
                     </span>
                   ))}
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
-      <Faq id="mentoring-faq" title="Cursor mentoring FAQ" faqs={faqs} />
+      {/* Band 5: White: FAQ */}
+      <section className="w-full bg-white py-16 md:py-24">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-10">
+          <Faq id="mentoring-faq" title="Cursor mentoring FAQ" faqs={faqs} className="mb-0" />
+        </div>
+      </section>
 
-      <CtaBand
-        title="Start with one repo and two developers"
-        body="Tell me your team size, your stack, and what’s going wrong with Cursor today. I’ll reply with how I’d run the first sessions. If your team doesn’t need mentoring yet, I’ll say so."
-        primary={{ href: contactHref('cursor-mentoring'), label: 'Get Cursor mentoring for your team' }}
-        secondary={{ href: '/ai-implementation', label: 'Or hire me to build it' }}
-      />
+      {/* Band 6: Subtle Gray: CTA Band */}
+      <section className="w-full bg-[#F8FAFC] border-t border-[#E5E7EB] py-16 md:py-24">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-10">
+          <CtaBand
+            className="mb-0"
+            title="Start with one repo and two developers"
+            body="Tell me your team size, your stack, and what’s going wrong with Cursor today. I’ll reply with how I’d run the first sessions. If your team doesn’t need mentoring yet, I’ll say so."
+            primary={{ href: contactHref('cursor-mentoring'), label: 'Get Cursor mentoring for your team' }}
+            secondary={{ href: '/ai-implementation', label: 'Or hire me to build it' }}
+          />
+        </div>
+      </section>
     </>
   )
 }

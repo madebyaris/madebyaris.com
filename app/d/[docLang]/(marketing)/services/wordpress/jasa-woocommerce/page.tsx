@@ -37,7 +37,7 @@ export const metadata: Metadata = buildPageMetadata({
   ],
 })
 
-const linkClass = 'underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors'
+const linkClass = 'text-[#3A57FC] underline decoration-[#3A57FC]/35 underline-offset-4 hover:text-[#2944E0] hover:decoration-[#3A57FC] transition-colors'
 
 const workItems = [
   {
@@ -58,7 +58,7 @@ const workItems = [
   },
   {
     title: 'Checkout dan halaman produk',
-    body: 'Field checkout yang ditambah atau dihapus, tanggal pengiriman, dan aturan bersyarat.',
+    body: 'Kustomisasi field checkout, pilihan tanggal pengiriman, serta aturan bersyarat (conditional logic).',
   },
   {
     title: 'Integrasi pembayaran dan pengiriman',
@@ -83,20 +83,20 @@ const workItems = [
 ]
 
 const processSteps = [
-  { step: 1, title: 'Konsultasi', desc: 'kamu ceritakan produk, cara jualan, dan kebutuhan toko.' },
-  { step: 2, title: 'Scope tertulis', desc: 'apa yang saya kerjakan, cara saya mengujinya, dan harganya.' },
+  { step: 1, title: 'Konsultasi', desc: 'Kamu ceritakan produk, cara jualan, dan kebutuhan toko.' },
+  { step: 2, title: 'Scope tertulis', desc: 'Apa yang saya kerjakan, cara saya mengujinya, dan harganya.' },
   { step: 3, title: 'Setup dan desain', desc: 'WooCommerce, tema, dan tampilan toko di staging.' },
-  { step: 4, title: 'Katalog produk', desc: 'produk, kategori, dan halaman produk.' },
-  { step: 5, title: 'Pembayaran dan pengiriman', desc: 'payment gateway dan kurir lokal, dites dengan pesanan uji.' },
-  { step: 6, title: 'Kecepatan dan SEO dasar', desc: 'halaman toko, produk, dan checkout dicek sebelum live.' },
-  { step: 7, title: 'Launch', desc: 'toko live, dengan bantuan saat launch.' },
+  { step: 4, title: 'Katalog produk', desc: 'Produk, kategori, dan halaman produk.' },
+  { step: 5, title: 'Pembayaran dan pengiriman', desc: 'Payment gateway dan kurir lokal, dites dengan pesanan uji.' },
+  { step: 6, title: 'Kecepatan dan SEO dasar', desc: 'Halaman toko, produk, dan checkout dicek sebelum live.' },
+  { step: 7, title: 'Launch', desc: 'Toko live, dengan pendampingan saat peluncuran.' },
 ]
 
 const speedChecks = [
   'Database: autoloaded options, tabel sisa plugin lama, dan query produk yang lambat',
   'Cart fragments: request refresh cart di halaman yang tidak menampilkan cart',
   'Object cache: Redis atau Memcached, kalau hosting kamu menyediakannya',
-  'Gambar: foto produk dibuat sesuai ukuran yang dipakai tema',
+  'Gambar: foto produk disesuaikan ukurannya dengan layout tema',
   'Plugin: script yang dimuat di semua halaman padahal hanya dibutuhkan di toko atau checkout',
 ]
 
@@ -104,12 +104,12 @@ const liveStoreSteps = [
   'Setiap perubahan masuk ke salinan staging dulu',
   'Email ke pelanggan asli dimatikan di staging',
   'Pembayaran berjalan di mode test atau sandbox, dan saya buat pesanan uji dari cart sampai konfirmasi',
-  'Perubahan naik ke live di jam paling sepi, dengan backup tepat sebelumnya',
+  'Perubahan dirilis ke live pada jam paling sepi, dengan backup penuh sesaat sebelumnya',
 ]
 
 const goodFit = [
   'Kamu butuh toko online baru di WooCommerce, dari nol sampai live',
-  'Plugin hampir sesuai kebutuhan toko, tapi pengaturannya terus bermasalah',
+  'Plugin yang ada hampir memenuhi kebutuhan, tetapi konfigurasinya sering bermasalah',
   'Toko makin lambat saat produk dan pesanan bertambah',
   'Toko dibuat orang lain, dan kamu butuh developer yang bisa membaca kodenya',
 ]
@@ -128,7 +128,7 @@ const faqs: FaqItem[] = [
   {
     question: 'Apakah toko tetap bisa menerima pesanan selama dikerjakan?',
     answer:
-      'Bisa. Saya bekerja di salinan staging, dan toko live hanya saya baca sampai perubahan lolos tes. Perubahan naik ke live di jam sepi, setelah pesanan uji berhasil.',
+      'Bisa. Saya bekerja di salinan staging, dan toko live tidak disentuh sama sekali sampai seluruh perubahan lolos uji. Perubahan naik ke live di jam sepi, setelah pesanan uji berhasil.',
   },
   {
     question: 'Payment gateway apa saja yang bisa dipasang?',
@@ -170,26 +170,26 @@ export default function JasaWooCommercePage() {
     <div lang="id">
       <JsonLd data={structuredData} />
 
-      <nav className="mb-8" aria-label="Breadcrumb">
-        <ol className="flex items-center space-x-2 text-sm text-zinc-500">
-          <li><Link href="/services" className="hover:text-orange-500 transition-colors">Layanan</Link></li>
-          <li><span className="px-2">/</span></li>
-          <li><Link href="/services/wordpress" className="hover:text-orange-500 transition-colors">WordPress</Link></li>
-          <li><span className="px-2">/</span></li>
-          <li className="text-zinc-900">Jasa WooCommerce</li>
+      <nav className="mb-6" aria-label="Breadcrumb">
+        <ol className="flex flex-wrap items-center gap-1.5 text-sm text-[#4B5563]">
+          <li><Link href="/services" className="hover:text-[#3A57FC] transition-colors">Layanan</Link></li>
+          <li aria-hidden="true" className="text-[#9CA3AF]">/</li>
+          <li><Link href="/services/wordpress" className="hover:text-[#3A57FC] transition-colors">WordPress</Link></li>
+          <li aria-hidden="true" className="text-[#9CA3AF]">/</li>
+          <li className="font-medium text-[#0B0C0E]" aria-current="page">Jasa WooCommerce</li>
         </ol>
       </nav>
 
       <PageHero
-        eyebrow={{ icon: <ShoppingCart className="w-4 h-4 text-orange-500" />, label: 'Jasa WooCommerce developer Indonesia' }}
+        eyebrow={{ icon: <ShoppingCart className="w-3.5 h-3.5" />, label: 'Jasa WooCommerce developer Indonesia' }}
         title="Jasa pembuatan website ecommerce dengan WooCommerce,"
         accent="dites di staging dulu"
         actions={
           <Link
             href={contactHref('wordpress')}
-            className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
+            className="btn-primary inline-flex items-center gap-2.5 rounded-md py-3.5 px-6 text-sm font-bold group"
           >
-            <span className="text-sm font-medium tracking-tight">Ceritakan toko online yang kamu butuhkan</span>
+            <span>Ceritakan toko online yang kamu butuhkan</span>
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </Link>
         }
@@ -200,12 +200,14 @@ export default function JasaWooCommercePage() {
           produk, pembayaran, pengiriman, kecepatan, SEO dasar, dan bantuan saat launch. Setiap perubahan saya coba di staging
           dengan pesanan uji, jadi toko kamu tetap menerima pesanan selama saya bekerja.
         </p>
-        <p className="text-sm text-zinc-500 font-normal">
+        <p className="text-sm text-white/80">
           Versi bahasa Inggris:{' '}
-          <Link href="/services/wordpress/woocommerce" className={linkClass}>
+          <Link
+            href="/services/wordpress/woocommerce"
+            className="text-white underline decoration-white/60 underline-offset-4 hover:decoration-white transition-colors"
+          >
             WooCommerce developer
-          </Link>{' '}
-          (bahasa Inggris)
+          </Link>
         </p>
       </PageHero>
 
@@ -215,11 +217,11 @@ export default function JasaWooCommercePage() {
       />
 
       <section className="mb-16 max-w-3xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-4">
           Kapan toko online kamu butuh developer WooCommerce
         </h2>
-        <p className="text-zinc-600 leading-relaxed">
-          Kamu butuh developer saat plugin hampir cocok tapi belum pas, checkout harus bekerja dengan cara lain, atau toko makin
+        <p className="text-[#4B5563] leading-relaxed">
+          Kamu butuh developer saat plugin bawaan belum sepenuhnya sesuai kebutuhan, alur checkout perlu disesuaikan, atau toko makin
           lambat saat katalog bertambah. Saya baca kodenya, cari penyebabnya, lalu perbaiki di salinan staging. WooCommerce
           berjalan di atas WordPress. Untuk pekerjaan di luar toko, lihat{' '}
           <Link href="/services/wordpress/jasa-wordpress" className={linkClass}>
@@ -231,62 +233,68 @@ export default function JasaWooCommercePage() {
 
       <section className="mb-16" aria-labelledby="yang-saya-kerjakan">
         <div className="text-center mb-10">
-          <h2 id="yang-saya-kerjakan" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <h2 id="yang-saya-kerjakan" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Yang saya kerjakan di WooCommerce
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {workItems.map((item) => (
-            <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-              <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
-              <div className="text-sm text-zinc-500 leading-relaxed">{item.body}</div>
+            <div
+              key={item.title}
+              className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6 md:p-7"
+            >
+              <h3 className="font-display font-semibold text-[#0B0C0E] mb-2">{item.title}</h3>
+              <div className="text-sm text-[#4B5563] leading-relaxed">{item.body}</div>
             </div>
           ))}
         </div>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
       <section className="mb-16" aria-labelledby="langkah-pembuatan">
         <div className="text-center mb-10">
-          <h2 id="langkah-pembuatan" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <h2 id="langkah-pembuatan" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Dari nol sampai live: langkah pembuatan toko
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {processSteps.map((item) => (
-            <div key={item.step} className="bg-zinc-50 rounded-2xl p-5 text-center">
-              <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-500 font-bold text-lg flex items-center justify-center mx-auto mb-3">
-                {item.step}
+            <div
+              key={item.step}
+              className="rounded-2xl border border-[#E5E7EB] bg-[#F8FAFC] hover:border-[#3A57FC] transition-colors p-6 text-center"
+            >
+              <div className="w-10 h-10 rounded-xl bg-[#EEF2FF] border border-[#DDE4FF] text-[#3A57FC] font-mono font-bold text-sm flex items-center justify-center mx-auto mb-4">
+                {String(item.step).padStart(2, '0')}
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-1">{item.title}</h3>
-              <p className="text-sm text-zinc-500">{item.desc}</p>
+              <h3 className="font-display font-semibold text-[#0B0C0E] mb-1.5">{item.title}</h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
       <section className="mb-16 max-w-3xl mx-auto" aria-labelledby="toko-lambat">
-        <h2 id="toko-lambat" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+        <h2 id="toko-lambat" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-4">
           Toko WooCommerce lambat: yang saya cek dulu
         </h2>
-        <p className="text-zinc-600 leading-relaxed mb-6">
+        <p className="text-[#4B5563] leading-relaxed mb-6">
           Halaman cart, checkout, dan akun berubah untuk setiap pembeli, jadi page cache tidak bisa membantu di sana. Halaman itu
           bergantung pada PHP dan database yang cepat. Berikut yang saya cek dulu:
         </p>
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm mb-6">
+        <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-7 mb-6">
           <ul className="space-y-3">
             {speedChecks.map((item) => (
-              <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                <CheckCircle2 className="w-5 h-5 text-orange-500 shrink-0" />
+              <li key={item} className="flex items-start gap-3 text-sm text-[#4B5563]">
+                <CheckCircle2 className="w-5 h-5 text-[#3A57FC] shrink-0" />
                 {item}
               </li>
             ))}
           </ul>
         </div>
-        <p className="text-zinc-600 leading-relaxed">
+        <p className="text-[#4B5563] leading-relaxed">
           Untuk kecepatan bagian lain website, lihat{' '}
           <Link href="/services/wordpress/optimization" className={linkClass}>
             optimasi kecepatan WordPress
@@ -296,14 +304,14 @@ export default function JasaWooCommercePage() {
       </section>
 
       <section className="mb-16 max-w-3xl mx-auto" aria-labelledby="cara-bekerja">
-        <h2 id="cara-bekerja" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+        <h2 id="cara-bekerja" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-4">
           Cara saya bekerja di toko yang sedang jalan
         </h2>
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
+        <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-7">
           <ul className="space-y-3">
             {liveStoreSteps.map((item) => (
-              <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                <CheckCircle2 className="w-5 h-5 text-orange-500 shrink-0" />
+              <li key={item} className="flex items-start gap-3 text-sm text-[#4B5563]">
+                <CheckCircle2 className="w-5 h-5 text-[#3A57FC] shrink-0" />
                 {item}
               </li>
             ))}
@@ -312,10 +320,10 @@ export default function JasaWooCommercePage() {
       </section>
 
       <section className="mb-16 max-w-3xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-4">
           Contoh toko yang pernah saya kerjakan
         </h2>
-        <p className="text-zinc-600 leading-relaxed">
+        <p className="text-[#4B5563] leading-relaxed">
           Sebagian besar proyek WooCommerce saya terikat NDA, jadi nama klien tidak saya tampilkan. Salah satunya adalah sebuah
           toko perlengkapan bayi.
         </p>
@@ -323,29 +331,29 @@ export default function JasaWooCommercePage() {
 
       <section className="mb-16" aria-labelledby="cocok">
         <div className="text-center mb-10">
-          <h2 id="cocok" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <h2 id="cocok" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Cocok dan kurang cocok
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-4">Cocok kalau:</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-7">
+            <h3 className="font-display font-semibold text-[#0B0C0E] mb-4">Cocok kalau:</h3>
             <ul className="space-y-3">
               {goodFit.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
+                <li key={item} className="flex items-start gap-3 text-sm text-[#4B5563]">
+                  <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
                   {item}
                 </li>
               ))}
             </ul>
           </div>
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-4">Kurang cocok kalau:</h3>
+          <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-7">
+            <h3 className="font-display font-semibold text-[#0B0C0E] mb-4">Kurang cocok kalau:</h3>
             <ul className="space-y-3">
               {poorFit.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                  <XCircle className="w-5 h-5 text-zinc-400 shrink-0" />
+                <li key={item} className="flex items-start gap-3 text-sm text-[#4B5563]">
+                  <XCircle className="w-5 h-5 text-[#9CA3AF] shrink-0" />
                   {item}
                 </li>
               ))}
@@ -357,12 +365,13 @@ export default function JasaWooCommercePage() {
       <Faq id="jasa-woocommerce-faq" title="Pertanyaan soal jasa WooCommerce" faqs={faqs} />
 
       <CtaBand
+        badge="Diskusi langsung · Balas dalam 24 jam"
         title="Ceritakan toko online yang kamu butuhkan"
         body="Kirim link toko atau ceritakan toko yang ingin kamu buat. Setelah konsultasi gratis, saya balas dengan scope, cara saya mengujinya, dan harganya."
         primary={{ href: contactHref('wordpress'), label: 'Kirim kebutuhan toko kamu' }}
       />
 
-      <p className="text-center text-sm text-zinc-600 mb-16 max-w-lg mx-auto">
+      <p className="text-center text-sm text-[#4B5563] mb-16 max-w-lg mx-auto">
         Butuh perawatan rutin setelah toko live? Lihat{' '}
         <Link href="/services/wordpress/maintenance" className={linkClass}>
           maintenance WordPress

@@ -1,12 +1,12 @@
 /**
- * Open-source projects shown on the home page and the AI implementation pages.
+ * Open-source projects shown on the home page, projects page, and AI / SEO service pages.
  * Everything here is hard-coded, including the star counts, so no page makes a
- * network request for them. Star counts were copied from GitHub on 8 November
- * 2026. Update them by hand when you want fresh numbers.
+ * network request for them. Update them by hand when you want fresh numbers.
  */
 
 export interface OpenSourceProject {
   name: string
+  owner?: string
   repo: string
   blurb: string
   stack: string
@@ -14,10 +14,11 @@ export interface OpenSourceProject {
 }
 
 export interface OpenSourceProjectWithStats extends OpenSourceProject {
+  ownerLabel: string
   repoUrl: string
 }
 
-const GITHUB_OWNER = 'madebyaris'
+const DEFAULT_GITHUB_OWNER = 'madebyaris'
 
 export const openSourceProjects: readonly OpenSourceProject[] = [
   {
@@ -37,12 +38,13 @@ export const openSourceProjects: readonly OpenSourceProject[] = [
     stars: 199,
   },
   {
-    name: 'Agent Orchestration',
-    repo: 'agent-orchestration',
+    name: 'RankMySEO Agent Skills',
+    owner: 'rankmyseo',
+    repo: 'skills',
     blurb:
-      'An MCP server for multi-agent work, with shared memory, a task queue, and resource locks.',
-    stack: 'TypeScript',
-    stars: 21,
+      '24 open-source agent skills for SEO, GEO, and AEO: audit AI visibility, agent readiness, Search Console, and GA4 directly from coding agents.',
+    stack: 'Agent Skills',
+    stars: 29,
   },
   {
     name: 'Chaca Scanner',
@@ -51,6 +53,14 @@ export const openSourceProjects: readonly OpenSourceProject[] = [
       'A desktop web security scanner for developers: OWASP Top 10 checks, API exposure, and CMS detection.',
     stack: 'Rust, Tauri',
     stars: 41,
+  },
+  {
+    name: 'Agent Orchestration',
+    repo: 'agent-orchestration',
+    blurb:
+      'An MCP server for multi-agent work, with shared memory, a task queue, and resource locks.',
+    stack: 'TypeScript',
+    stars: 21,
   },
   {
     name: 'RankMySEO',
@@ -62,8 +72,12 @@ export const openSourceProjects: readonly OpenSourceProject[] = [
 ]
 
 export function getOpenSourceProjects(): OpenSourceProjectWithStats[] {
-  return openSourceProjects.map((project) => ({
-    ...project,
-    repoUrl: `https://github.com/${GITHUB_OWNER}/${project.repo}`,
-  }))
+  return openSourceProjects.map((project) => {
+    const ownerLabel = project.owner ?? DEFAULT_GITHUB_OWNER
+    return {
+      ...project,
+      ownerLabel,
+      repoUrl: `https://github.com/${ownerLabel}/${project.repo}`,
+    }
+  })
 }

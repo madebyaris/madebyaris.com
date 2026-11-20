@@ -4,6 +4,7 @@ import { contactHref } from '@/lib/contact-services'
 import { ArrowRight, ArrowUpRight, BookOpen, Users, Sparkles, Code2 } from 'lucide-react'
 import { CursorIcon } from '@/components/icons/cursor'
 import { JsonLd } from '@/components/seo/json-ld'
+import { PageHero } from '@/components/page/hero'
 import { Faq } from '@/components/page/faq'
 import { CtaBand } from '@/components/page/cta-band'
 import { buildPageGraph, buildPageMetadata, type FaqItem } from '@/lib/seo'
@@ -95,137 +96,137 @@ const guides = [
   { title: 'Apakah Cursor AI gratis? (Bahasa Indonesia)', href: '/blog/apakah-cursor-ai-gratis' },
 ]
 
+const linkClass = 'text-[#3A57FC] underline decoration-[#3A57FC]/35 underline-offset-4 hover:text-[#2944E0] hover:decoration-[#3A57FC] transition-colors'
+
 export default function CursorAmbassadorPage() {
   return (
     <>
       <JsonLd data={structuredData} />
 
       {/* Breadcrumb */}
-      <nav className="mb-8" aria-label="Breadcrumb">
-        <ol className="flex items-center space-x-2 text-sm text-zinc-500">
+      <nav className="mb-6" aria-label="Breadcrumb">
+        <ol className="flex flex-wrap items-center gap-1.5 text-sm text-[#4B5563]">
           <li>
-            <Link href="/" className="hover:text-orange-500 transition-colors">
+            <Link href="/" className="hover:text-[#3A57FC] transition-colors">
               Home
             </Link>
           </li>
-          <li>
-            <span className="px-2">/</span>
-          </li>
-          <li className="text-zinc-900">Cursor Ambassador</li>
+          <li aria-hidden="true" className="text-[#9CA3AF]">/</li>
+          <li className="font-medium text-[#0B0C0E]" aria-current="page">Cursor Ambassador</li>
         </ol>
       </nav>
 
-      {/* Hero */}
-      <section className="text-center pt-4 pb-16">
-        <div className="inline-flex bg-white/60 rounded-full mb-8 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
-          <CursorIcon className="h-4 w-auto text-zinc-900" />
-          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">First Cursor Ambassador in Indonesia</span>
-        </div>
-
-        <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
-          Cursor Ambassador
-          {' '}<span className="block gradient-text font-light">Indonesia</span>
-        </h1>
-
-        <p className="text-base md:text-lg text-zinc-600 max-w-2xl mx-auto mb-4 leading-relaxed font-medium">
+      <PageHero
+        eyebrow={{
+          icon: <CursorIcon className="h-3.5 w-auto" />,
+          label: 'First Cursor Ambassador in Indonesia',
+        }}
+        title="Cursor Ambassador"
+        accent="Indonesia"
+        actions={
+          <>
+            <Link
+              href="/services/vibe-code-friend"
+              className="btn-primary inline-flex items-center gap-2.5 rounded-md py-3.5 px-6 text-sm font-bold group"
+            >
+              <span>Get Cursor mentoring for your team</span>
+              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </Link>
+            <Link
+              href="/guides/cursor"
+              className="btn-secondary inline-flex items-center gap-2 rounded-md py-3.5 px-6 text-sm font-semibold group"
+            >
+              <span>Read the free Cursor guides</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            </Link>
+          </>
+        }
+      >
+        <p className="mb-4">
           I’m Aris Setiawan, the first Cursor Ambassador in Indonesia. I help developers and teams ship real work with Cursor: clear project rules, a repeatable review habit, and code that still looks like your codebase a month later.
         </p>
-
-        <p className="text-sm text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed">
+        <p className="text-sm text-white/80">
           13+ years shipping web products. I use Cursor on client work every week.{' '}
           <a
             href={spacexAnnouncementUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors"
+            className="text-white underline decoration-white/60 underline-offset-4 hover:decoration-white transition-colors"
           >
             Cursor is now part of SpaceX
           </a>
           , and I’m also a{' '}
-          <Link href="/spacexai-ambassador" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors">
+          <Link
+            href="/spacexai-ambassador"
+            className="text-white underline decoration-white/60 underline-offset-4 hover:decoration-white transition-colors"
+          >
             SpaceXAI Ambassador
           </Link>
           .
         </p>
-
-        <div className="flex flex-wrap justify-center gap-3">
-          <Link
-            href="/services/vibe-code-friend"
-            className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
-          >
-            <span className="text-sm font-medium tracking-tight">Get Cursor mentoring for your team</span>
-            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </Link>
-
-          <Link
-            href="/guides/cursor"
-            className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
-            style={{ boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)' }}
-          >
-            <span className="text-sm font-medium text-black/60 tracking-tight">Read the free Cursor guides</span>
-            <ArrowRight className="w-4 h-4 text-zinc-500" />
-          </Link>
-        </div>
-      </section>
-
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      </PageHero>
 
       {/* Answer first */}
       <section className="mb-16 max-w-3xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-4">
           What a Cursor Ambassador does
         </h2>
-        <p className="text-zinc-600 leading-relaxed mb-4">
+        <p className="text-[#4B5563] leading-relaxed mb-4">
           {faqs[0].answer}
         </p>
-        <p className="text-zinc-600 leading-relaxed">
+        <p className="text-[#4B5563] leading-relaxed">
           In practice that means three things: I teach teams a shipping loop they can repeat, I write guides from real client repos, and I’m blunt about when AI-generated code needs a harder review.
         </p>
       </section>
 
       {/* Highlights */}
       <section className="mb-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {highlights.map((item) => (
-            <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all group">
-              <div className="p-3 bg-zinc-100 rounded-xl w-fit mb-4 group-hover:bg-orange-100 transition-colors">
-                <item.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
+            <div
+              key={item.title}
+              className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6 md:p-7 group"
+            >
+              <div className="p-3 bg-[#EEF2FF] text-[#3A57FC] rounded-xl w-fit mb-4 group-hover:bg-[#3A57FC] group-hover:text-white transition-colors">
+                <item.icon className="w-5 h-5" />
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{item.description}</p>
+              <h3 className="font-display font-semibold text-[#0B0C0E] mb-2">{item.title}</h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.description}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
       {/* Guides */}
       <section id="cursor-guides" className="mb-16 scroll-mt-24">
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-sm">
-          <div className="flex items-center gap-2 mb-2">
-            <Code2 className="w-5 h-5 text-orange-500" />
-            <h2 className="text-xl md:text-2xl font-semibold text-zinc-900 tracking-tight">
+        <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-8">
+          <div className="flex items-center gap-2.5 mb-2">
+            <Code2 className="w-5 h-5 text-[#3A57FC]" />
+            <h2 className="font-display text-xl md:text-2xl font-bold text-[#0B0C0E] tracking-tight">
               Free Cursor guides
             </h2>
           </div>
-          <p className="text-sm text-zinc-500 mb-6">
+          <p className="text-sm text-[#4B5563] mb-6">
             The questions developers ask me most, answered from real projects. For the full map with rules you can copy, see the{' '}
-            <Link href="/guides/cursor" className="font-medium text-zinc-900 underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors">
+            <Link href="/guides/cursor" className={`font-medium ${linkClass}`}>
               Cursor guide for shipping teams
             </Link>
             .
           </p>
 
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {guides.map((guide) => (
               <li key={guide.href}>
                 <Link
                   href={guide.href}
-                  className="flex items-start gap-3 p-3 bg-zinc-50 rounded-xl hover:bg-orange-50 transition-colors group"
+                  className="flex items-start gap-3 p-4 bg-[#F8FAFC] border border-[#E5E7EB] rounded-xl hover:border-[#3A57FC] hover:bg-[#EEF2FF] transition-colors group"
                 >
-                  <ArrowRight className="w-4 h-4 text-orange-500 mt-0.5 shrink-0 group-hover:translate-x-0.5 transition-transform" />
-                  <span className="text-sm text-zinc-700 font-medium group-hover:text-zinc-900">{guide.title}</span>
+                  <ArrowRight className="w-4 h-4 text-[#3A57FC] mt-0.5 shrink-0 group-hover:translate-x-0.5 transition-transform" />
+                  <span className="text-sm text-[#0B0C0E] font-medium group-hover:text-[#3A57FC] transition-colors">
+                    {guide.title}
+                  </span>
                 </Link>
               </li>
             ))}

@@ -1,20 +1,21 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import {
-  Code2,
   ArrowRight,
   ArrowUpRight,
-  Rocket,
-  Globe,
-  Zap,
-  Search,
-  Building,
-  Users,
   Briefcase,
-  Calendar,
+  Building,
   CheckCircle2,
+  Code2,
+  Globe,
+  Rocket,
+  Search,
   XCircle,
+  Zap,
 } from 'lucide-react'
-import Link from 'next/link'
+import { PageHero } from '@/components/page/hero'
+import { Faq } from '@/components/page/faq'
+import { CtaBand } from '@/components/page/cta-band'
 import { buildPageGraph, buildPageMetadata, type FaqItem } from '@/lib/seo'
 import { JsonLd } from '@/components/seo/json-ld'
 import { contactHref } from '@/lib/contact-services'
@@ -193,83 +194,65 @@ const structuredData = buildPageGraph({
   },
 })
 
-const badgeStyle = {
-  position: 'relative',
-  '--border-gradient': 'linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0))',
-  '--border-radius-before': '9999px',
-} as React.CSSProperties
-
-const linkClass = 'underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors'
+const linkClass =
+  'text-[#3A57FC] underline decoration-[#DDE4FF] underline-offset-4 hover:text-[#FF8800] hover:decoration-[#FF8800] transition-colors font-medium'
 
 export default function NextjsDevelopmentPage() {
   return (
     <>
       <JsonLd data={structuredData} />
 
-      {/* Hero Section */}
-      <section className="text-center pt-8 pb-16">
-        <div
-          className="inline-flex bg-white/60 rounded-full mb-8 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2"
-          style={badgeStyle}
-        >
-          <Code2 className="w-4 h-4 text-orange-500" />
-          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">
-            Next.js developer, remote, taking projects
-          </span>
-        </div>
+      <nav className="mb-8" aria-label="Breadcrumb">
+        <ol className="flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-[0.08em] text-[#525660]">
+          <li>
+            <Link href="/services" className="hover:text-[#3A57FC] transition-colors">
+              Services
+            </Link>
+          </li>
+          <li className="text-[#CBD5E1]">/</li>
+          <li className="text-[#0B0C0E] font-semibold">Next.js Development</li>
+        </ol>
+      </nav>
 
-        <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
-          Hire a Next.js developer
-          {' '}<span className="block gradient-text font-light">for your next build</span>
-        </h1>
-
-        <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
+      <PageHero
+        eyebrow={{ icon: <Code2 className="w-3.5 h-3.5" />, label: 'Next.js developer, remote, taking projects' }}
+        title="Hire a Next.js developer"
+        accent="for your next build"
+        actions={
+          <>
+            <Link
+              href={contactHref('nextjs')}
+              className="btn-primary rounded-md py-3.5 px-6 text-sm font-bold inline-flex items-center gap-2.5 group"
+            >
+              <span>Send me your project</span>
+              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </Link>
+            <Link
+              href="/blog/hire-a-next-js-developer-what-good-looks-like-in-2026"
+              className="btn-secondary rounded-md py-3.5 px-6 text-sm font-semibold inline-flex items-center gap-2 group"
+            >
+              <span>What a good hire looks like</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            </Link>
+          </>
+        }
+      >
+        <p className="mb-4">
           For European (EU and UK) and Indonesian product teams that need a Next.js App Router app,
           AI feature integration, or WordPress migration shipped cleanly. I&apos;m Aris Setiawan, a senior
           AI software engineer with 13+ years shipping production web apps.
         </p>
-
-        <div className="flex flex-wrap justify-center gap-3 mb-8">
-          <Link
-            href={contactHref('nextjs')}
-            className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
-          >
-            <span className="text-sm font-medium tracking-tight">Send me your project</span>
-            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </Link>
-          <Link
-            href="/blog/hire-a-next-js-developer-what-good-looks-like-in-2026"
-            className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
-            style={{
-              boxShadow:
-                '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)',
-              position: 'relative',
-              // @ts-expect-error CSS custom properties
-              '--border-gradient':
-                'linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.8))',
-              '--border-radius-before': '9999px',
-            }}
-          >
-            <span className="text-sm font-medium text-black/60 tracking-tight">
-              What a good hire looks like
-            </span>
-            <ArrowRight className="w-4 h-4 text-zinc-500" />
-          </Link>
-        </div>
-
-        <p className="text-xs md:text-sm text-zinc-500 font-medium max-w-3xl mx-auto leading-relaxed">
+        <p className="font-mono text-xs text-white/80 tracking-wide">
           13+ years · Senior AI software engineer · First Cursor Ambassador in Indonesia · UTC+7 with European morning overlap
         </p>
-      </section>
+      </PageHero>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
-
-      {/* Answer first */}
       <section className="mb-16 max-w-3xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+        <span className="section-index block mb-2">Direct engineering</span>
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-4">
           What happens when you hire a Next.js developer like me
         </h2>
-        <p className="text-zinc-600 leading-relaxed">
+        <p className="text-[#374151] leading-relaxed">
           You work with the engineer who leads the build, from scope to launch. I direct the App
           Router code, TypeScript, and APIs, with AI agents and trusted partners helping, deploy on
           Vercel, and carry your SEO over if you&apos;re migrating. You get a written scope before the build starts and a codebase another developer
@@ -277,39 +260,39 @@ export default function NextjsDevelopmentPage() {
         </p>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
-      {/* Pain and fit */}
-      <section className="mb-16">
+      <section className="mb-16" aria-labelledby="fit-title">
         <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <span className="section-index block mb-2">Qualification</span>
+          <h2 id="fit-title" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Why teams look for a <span className="gradient-text">Next.js developer for hire</span>
           </h2>
-          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
+          <p className="text-sm md:text-base text-[#4B5563] max-w-xl mx-auto">
             If one of these sounds like your week, we should talk. If the right column fits better, I&apos;ll
             say so.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-4">Sounds familiar</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="rounded-2xl border border-[#DDE4FF] bg-[#F3F5FF]/70 p-6 md:p-7">
+            <h3 className="font-display font-bold text-[#0B0C0E] mb-4">Sounds familiar</h3>
             <ul className="space-y-3">
               {pains.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
-                  {item}
+                <li key={item} className="flex items-start gap-3 text-sm text-[#1F2937]">
+                  <CheckCircle2 className="w-5 h-5 text-[#3A57FC] shrink-0 mt-0.5" />
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
           </div>
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-4">Probably a poor fit</h3>
+          <div className="rounded-2xl border border-[#E5E7EB] bg-[#F8FAFC] p-6 md:p-7">
+            <h3 className="font-display font-bold text-[#0B0C0E] mb-4">Probably a poor fit</h3>
             <ul className="space-y-3">
               {poorFit.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                  <XCircle className="w-5 h-5 text-zinc-400 shrink-0" />
-                  {item}
+                <li key={item} className="flex items-start gap-3 text-sm text-[#374151]">
+                  <XCircle className="w-5 h-5 text-[#64748B] shrink-0 mt-0.5" />
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
@@ -317,80 +300,65 @@ export default function NextjsDevelopmentPage() {
         </div>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
-      {/* Outcomes */}
-      <section className="mb-16">
+      <section className="mb-16" aria-labelledby="outcomes-title">
         <div className="text-center mb-10">
-          <div
-            className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2"
-            style={badgeStyle}
-          >
-            <Briefcase className="w-4 h-4 text-orange-500" />
-            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">
-              What you get
-            </span>
-          </div>
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <span className="section-index block mb-2">What you get</span>
+          <h2 id="outcomes-title" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Custom Next.js development, <span className="gradient-text">measured by what ships</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {outcomes.map((item) => (
             <div
               key={item.title}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm hover:shadow-lg transition-all group"
+              className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6 md:p-7 group"
             >
-              <div className="p-3 bg-zinc-100 rounded-xl w-fit mb-4 group-hover:bg-orange-100 transition-colors">
-                <item.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
+              <div className="p-3 bg-[#EEF2FF] text-[#3A57FC] rounded-xl w-fit mb-4 group-hover:bg-[#3A57FC] group-hover:text-white transition-colors">
+                <item.icon className="w-5 h-5" />
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{item.description}</p>
+              <h3 className="font-display font-bold text-[#0B0C0E] mb-2">{item.title}</h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.description}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
-      {/* Process */}
-      <section className="mb-16">
+      <section className="mb-16" aria-labelledby="process-title">
         <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <span className="section-index block mb-2">Workflow</span>
+          <h2 id="process-title" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             How a project <span className="gradient-text">runs</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {processSteps.map((step, index) => (
-            <div key={step.title} className="bg-zinc-50 rounded-2xl p-5 text-center">
-              <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-500 font-bold text-lg flex items-center justify-center mx-auto mb-3">
-                {index + 1}
+            <div
+              key={step.title}
+              className="rounded-2xl border border-[#E5E7EB] bg-[#F8FAFC] hover:bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6"
+            >
+              <div className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#0B0C0E] text-[#FFB866] font-mono text-xs font-bold mb-4">
+                {String(index + 1).padStart(2, '0')}
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-1">{step.title}</h3>
-              <p className="text-sm text-zinc-500">{step.description}</p>
+              <h3 className="font-display font-bold text-[#0B0C0E] mb-1.5">{step.title}</h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{step.description}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Engagement options */}
-      <section className="mb-16">
+      <section className="mb-16" aria-labelledby="engagement-title">
         <div className="text-center mb-10">
-          <div
-            className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2"
-            style={badgeStyle}
-          >
-            <Calendar className="w-4 h-4 text-orange-500" />
-            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">
-              Ways to work
-            </span>
-          </div>
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <span className="section-index block mb-2">Ways to work</span>
+          <h2 id="engagement-title" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Pick the shape that <span className="gradient-text">fits the work</span>
           </h2>
-          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
+          <p className="text-sm md:text-base text-[#4B5563] max-w-xl mx-auto">
             Not sure which one? Read{' '}
             <Link href="/blog/cost-to-hire-nextjs-developer" className={linkClass}>
               what it costs to hire a Next.js developer
@@ -399,22 +367,27 @@ export default function NextjsDevelopmentPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {engagementOptions.map((option) => (
-            <div key={option.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm">
-              <h3 className="font-semibold text-zinc-900 mb-1">{option.title}</h3>
-              <p className="text-sm text-zinc-500">{option.description}</p>
+            <div
+              key={option.title}
+              className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6 md:p-7"
+            >
+              <h3 className="font-display font-bold text-[#0B0C0E] mb-2">{option.title}</h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{option.description}</p>
             </div>
           ))}
         </div>
 
-        <div className="mt-6 bg-white/80 backdrop-blur-sm rounded-2xl p-6">
-          <p className="text-sm text-zinc-500 text-center mb-4 font-medium">Stack I use most</p>
+        <div className="mt-6 rounded-2xl bg-[#0B0C0E] text-white border border-white/10 p-6 md:p-8 shadow-[0_24px_60px_-24px_rgba(11,12,14,0.45)]">
+          <p className="font-mono text-xs uppercase tracking-[0.14em] text-[#93A8FF] text-center mb-5">
+            Stack I use most
+          </p>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
             {stackItems.map((tech) => (
               <div
                 key={tech}
-                className="p-3 bg-zinc-50 rounded-xl text-center text-xs font-medium text-zinc-600 hover:bg-orange-50 hover:text-orange-600 transition-colors"
+                className="p-3 rounded-xl border border-white/10 bg-white/[0.04] hover:border-[#FFB866]/60 hover:text-[#FFB866] text-center font-mono text-xs font-medium text-white/90 transition-colors"
               >
                 {tech}
               </div>
@@ -423,106 +396,50 @@ export default function NextjsDevelopmentPage() {
         </div>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
-      {/* FAQ */}
-      <section className="mb-16 max-w-3xl mx-auto" aria-labelledby="nextjs-faq">
-        <div className="text-center mb-8">
-          <div
-            className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2"
-            style={badgeStyle}
-          >
-            <Users className="w-4 h-4 text-orange-500" />
-            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">FAQ</span>
-          </div>
-          <h2 id="nextjs-faq" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter">
-            Before you hire a <span className="gradient-text">Next.js developer</span>
-          </h2>
-        </div>
+      <Faq id="nextjs-faq" title="Before you hire a Next.js developer" faqs={faqs} />
 
-        <div className="space-y-3">
-          {faqs.map((faq) => (
-            <details key={faq.question} className="group bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm open:shadow-md">
-              <summary className="cursor-pointer list-none font-semibold text-zinc-900 flex items-center justify-between gap-4">
-                {faq.question}
-                <span className="text-orange-500 transition-transform group-open:rotate-45 text-xl leading-none">+</span>
-              </summary>
-              <p className="mt-3 text-sm text-zinc-600 leading-relaxed">{faq.answer}</p>
-            </details>
-          ))}
-        </div>
-      </section>
-
-      {/* Related services */}
-      <section className="mb-16">
+      <section className="mb-16" aria-labelledby="related-services">
         <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter">
+          <span className="section-index block mb-2">Specialized tracks</span>
+          <h2 id="related-services" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight">
             Related Next.js <span className="gradient-text">services</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {relatedServices.map((service) => (
-            <Link key={service.title} href={service.href} className="group">
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all hover:-translate-y-0.5 h-full">
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-zinc-100 rounded-xl group-hover:bg-orange-100 transition-colors">
-                    <service.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-zinc-900 mb-1 group-hover:text-orange-500 transition-colors">
-                      {service.title}
-                    </h3>
-                    <p className="text-sm text-zinc-500 leading-relaxed">{service.description}</p>
-                  </div>
-                  <ArrowUpRight className="w-5 h-5 text-zinc-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <Link
+              key={service.title}
+              href={service.href}
+              className="block rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6 md:p-7 group h-full"
+            >
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-[#EEF2FF] text-[#3A57FC] rounded-xl group-hover:bg-[#3A57FC] group-hover:text-white transition-colors shrink-0">
+                  <service.icon className="w-5 h-5" />
                 </div>
+                <div className="flex-1">
+                  <h3 className="font-display text-lg font-bold text-[#0B0C0E] mb-1 group-hover:text-[#3A57FC] transition-colors">
+                    {service.title}
+                  </h3>
+                  <p className="text-sm text-[#4B5563] leading-relaxed">{service.description}</p>
+                </div>
+                <ArrowUpRight className="w-5 h-5 text-[#64748B] group-hover:text-[#3A57FC] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0" />
               </div>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* Closing CTA */}
-      <section className="overflow-hidden shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
-        <div
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)',
-            backgroundSize: '40px 40px',
-          }}
-        />
+      <CtaBand
+        title="Tell me what you need built"
+        body="Send the goal, the current site or repo, and any deadline. I'll reply with questions or a rough scope. If Next.js is the wrong tool for the job, I'll tell you."
+        primary={{ href: contactHref('nextjs'), label: 'Send me your project' }}
+        secondary={{ href: '/services/nextjs-development/nextjs-indonesia', label: 'Baca dalam Bahasa Indonesia' }}
+      />
 
-        <div className="flex flex-col items-center justify-center text-center px-6 py-12 md:px-12 md:py-14 relative">
-          <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
-            Tell me what you need built
-          </h2>
-          <p className="text-zinc-400 mb-8 max-w-lg font-medium">
-            Send the goal, the current site or repo, and any deadline. I&apos;ll reply with questions or
-            a rough scope. If Next.js is the wrong tool for the job, I&apos;ll tell you.
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link
-              href={contactHref('nextjs')}
-              className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
-            >
-              <span>Send me your project</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              href="/services/nextjs-development/nextjs-indonesia"
-              className="group flex items-center gap-3 bg-zinc-800 hover:bg-zinc-700 transition-all text-white text-sm font-medium rounded-full px-6 py-3 border border-zinc-700 hover:-translate-y-0.5"
-            >
-              <span>Baca dalam Bahasa Indonesia</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <p className="text-center text-sm text-zinc-600 mb-16 max-w-xl mx-auto">
+      <p className="text-center text-sm text-[#4B5563] mb-16 max-w-xl mx-auto">
         Already have a React app that is slow or hard to change? See{' '}
         <Link href="/services/react-app-improvement" className={linkClass}>
           React app improvement

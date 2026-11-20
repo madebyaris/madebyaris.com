@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Code2, Database, Server, ArrowRight, ArrowUpRight, Rocket, History, CheckCircle2, XCircle } from 'lucide-react'
+import { PageHero } from '@/components/page/hero'
+import { Faq } from '@/components/page/faq'
+import { CtaBand } from '@/components/page/cta-band'
 import { buildPageGraph, buildPageMetadata, type FaqItem } from '@/lib/seo'
 import { JsonLd } from '@/components/seo/json-ld'
 import { contactHref } from '@/lib/contact-services'
@@ -145,7 +148,7 @@ const structuredData = buildPageGraph({
   },
 })
 
-const linkClass = 'underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors'
+const linkClass = 'text-[#3A57FC] underline decoration-[#3A57FC]/35 underline-offset-4 hover:text-[#2944E0] hover:decoration-[#3A57FC] transition-colors'
 
 export default function PhpDevelopmentPage() {
   return (
@@ -153,64 +156,54 @@ export default function PhpDevelopmentPage() {
       <JsonLd data={structuredData} />
 
       {/* Breadcrumb */}
-      <nav className="mb-8" aria-label="Breadcrumb">
-        <ol className="flex items-center space-x-2 text-sm text-zinc-500">
-          <li><Link href="/services" className="hover:text-orange-500 transition-colors">Services</Link></li>
-          <li><span className="px-2">/</span></li>
-          <li className="text-zinc-900">PHP Development</li>
+      <nav className="mb-6" aria-label="Breadcrumb">
+        <ol className="flex flex-wrap items-center gap-1.5 text-sm text-[#4B5563]">
+          <li><Link href="/services" className="hover:text-[#3A57FC] transition-colors">Services</Link></li>
+          <li aria-hidden="true" className="text-[#9CA3AF]">/</li>
+          <li className="font-medium text-[#0B0C0E]" aria-current="page">PHP Development</li>
         </ol>
       </nav>
 
-      {/* Hero Section */}
-      <section className="text-center pt-4 pb-16">
-        <div className="inline-flex bg-white/60 rounded-full mb-8 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
-          <Server className="w-4 h-4 text-orange-500" />
-          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">PHP and MySQL since 2013</span>
-        </div>
-
-        <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
-          PHP development services
-          {' '}<span className="block gradient-text font-light">for apps your business runs on</span>
-        </h1>
-
-        <p className="text-base md:text-lg text-zinc-600 max-w-2xl mx-auto mb-4 leading-relaxed font-medium">
+      <PageHero
+        eyebrow={{ icon: <Server className="w-3.5 h-3.5" />, label: 'PHP and MySQL since 2013' }}
+        title="PHP development services"
+        accent="for apps your business runs on"
+        actions={
+          <>
+            <Link
+              href={contactHref('php')}
+              className="btn-primary inline-flex items-center gap-2.5 rounded-md py-3.5 px-6 text-sm font-bold group"
+            >
+              <span>Send me your PHP app</span>
+              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </Link>
+            <Link
+              href="/blog/php-api-development-for-nextjs"
+              className="btn-secondary inline-flex items-center gap-2 rounded-md py-3.5 px-6 text-sm font-semibold group"
+            >
+              <span>Read how I build PHP APIs</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            </Link>
+          </>
+        }
+      >
+        <p className="mb-4">
           For founders and teams with a PHP app, API, or MySQL database that needs new features, a fix, or an upgrade. I started as a backend PHP and MySQL developer in 2013 and have shipped web products for 13+ years since.
         </p>
-
-        <p className="text-sm text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed">
+        <p className="text-sm text-white/80">
           The blog on this site runs on WordPress, a PHP backend, with a Next.js front end on top. I build the same pairing for clients.
         </p>
-
-        <div className="flex flex-wrap justify-center gap-3">
-          <Link
-            href={contactHref('php')}
-            className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
-          >
-            <span className="text-sm font-medium tracking-tight">Send me your PHP app</span>
-            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </Link>
-          <Link
-            href="/blog/php-api-development-for-nextjs"
-            className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
-            style={{ boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)' }}
-          >
-            <span className="text-sm font-medium text-black/60 tracking-tight">Read how I build PHP APIs</span>
-            <ArrowRight className="w-4 h-4 text-zinc-500" />
-          </Link>
-        </div>
-      </section>
-
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      </PageHero>
 
       {/* Answer first */}
       <section className="mb-16 max-w-3xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-4">
           What my PHP development services cover
         </h2>
-        <p className="text-zinc-600 leading-relaxed mb-4">
+        <p className="text-[#4B5563] leading-relaxed mb-4">
           I build and fix PHP applications, REST APIs, and MySQL databases. That covers new custom apps, APIs that feed a Next.js or mobile front end, slow queries, and old codebases that need a supported PHP version or a move to Laravel. You work with me directly, from reading the code to deploying the change.
         </p>
-        <p className="text-zinc-600 leading-relaxed">
+        <p className="text-[#4B5563] leading-relaxed">
           When a rewrite isn’t worth it, I say so and fix what you have. If you’re weighing PHP against a JavaScript backend, I wrote about{' '}
           <Link href="/blog/tentang-next-js-dan-php" className={linkClass}>how Next.js and PHP work together</Link>{' '}
           (in Indonesian).
@@ -220,34 +213,37 @@ export default function PhpDevelopmentPage() {
       {/* Services Section */}
       <section className="mb-16">
         <div className="text-center mb-10">
-          <div className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
-            <Code2 className="w-4 h-4 text-orange-500" />
-            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Four kinds of PHP work</span>
+          <div className="inline-flex items-center gap-2 rounded-md border border-[#DDE4FF] bg-[#EEF2FF] px-3 py-1 mb-4">
+            <Code2 className="w-3.5 h-3.5 text-[#3A57FC]" />
+            <span className="font-mono text-[11px] font-semibold tracking-[0.12em] uppercase text-[#3A57FC]">Four kinds of PHP work</span>
           </div>
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Pick the job that <span className="gradient-text">matches yours</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {services.map((service) => (
             <Link key={service.title} href={service.href} className="group">
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all hover:-translate-y-0.5 h-full">
+              <div className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6 md:p-7 h-full">
                 <div className="flex items-start gap-4 mb-4">
-                  <div className="p-3 bg-zinc-100 rounded-xl group-hover:bg-orange-100 transition-colors">
-                    <service.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
+                  <div className="p-3 bg-[#EEF2FF] text-[#3A57FC] rounded-xl group-hover:bg-[#3A57FC] group-hover:text-white transition-colors shrink-0">
+                    <service.icon className="w-5 h-5" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-zinc-900 mb-1 group-hover:text-orange-500 transition-colors">
+                    <h3 className="font-display text-lg font-semibold text-[#0B0C0E] mb-1 group-hover:text-[#3A57FC] transition-colors">
                       {service.title}
                     </h3>
-                    <p className="text-sm text-zinc-500 leading-relaxed">{service.description}</p>
+                    <p className="text-sm text-[#4B5563] leading-relaxed">{service.description}</p>
                   </div>
                 </div>
 
-                <div className="flex flex-wrap gap-1.5">
+                <div className="flex flex-wrap gap-2">
                   {service.features.map((feature) => (
-                    <span key={feature} className="px-2 py-0.5 bg-zinc-100 rounded text-[10px] text-zinc-600 font-medium">
+                    <span
+                      key={feature}
+                      className="px-2.5 py-1 bg-[#F8FAFC] border border-[#E5E7EB] rounded-md text-[11px] text-[#4B5563] font-medium"
+                    >
                       {feature}
                     </span>
                   ))}
@@ -258,34 +254,37 @@ export default function PhpDevelopmentPage() {
         </div>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
       {/* Track record */}
       <section className="mb-16">
         <div className="text-center mb-10">
-          <div className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
-            <History className="w-4 h-4 text-orange-500" />
-            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Track record</span>
+          <div className="inline-flex items-center gap-2 rounded-md border border-[#DDE4FF] bg-[#EEF2FF] px-3 py-1 mb-4">
+            <History className="w-3.5 h-3.5 text-[#3A57FC]" />
+            <span className="font-mono text-[11px] font-semibold tracking-[0.12em] uppercase text-[#3A57FC]">Track record</span>
           </div>
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             13+ years of PHP work <span className="gradient-text">you can check</span>
           </h2>
-          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
+          <p className="text-sm text-[#4B5563] max-w-xl mx-auto">
             The full timeline is on my <Link href="/about" className={linkClass}>about page</Link>.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
           {history.map((item) => (
-            <div key={item.year} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-              <p className="text-sm font-semibold text-orange-500 mb-2">{item.year}</p>
-              <p className="text-sm text-zinc-600 leading-relaxed">{item.text}</p>
+            <div
+              key={item.year}
+              className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6 md:p-7"
+            >
+              <p className="font-mono text-xs font-bold uppercase tracking-[0.08em] text-[#3A57FC] mb-2">{item.year}</p>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.text}</p>
             </div>
           ))}
         </div>
 
-        <div className="bg-zinc-50 rounded-2xl p-6">
-          <p className="text-sm text-zinc-600 leading-relaxed">
+        <div className="rounded-2xl border border-[#E5E7EB] bg-[#F8FAFC] p-6">
+          <p className="text-sm text-[#4B5563] leading-relaxed">
             I also write up how I work. For PHP, start with{' '}
             <Link href="/blog/php-api-development-for-nextjs" className={linkClass}>PHP API development for Next.js products</Link>
             , which walks through the API layer I put between a PHP backend and a Next.js front end.
@@ -293,35 +292,35 @@ export default function PhpDevelopmentPage() {
         </div>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
       {/* Fit */}
       <section className="mb-16">
         <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Hire a PHP developer <span className="gradient-text">who reads the code first</span>
           </h2>
-          <p className="text-sm text-zinc-500 max-w-xl mx-auto">I’m one developer, so here’s who I’m a good match for.</p>
+          <p className="text-sm text-[#4B5563] max-w-xl mx-auto">I’m one developer, so here’s who I’m a good match for.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-4">Good fit</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-7">
+            <h3 className="font-display font-semibold text-[#0B0C0E] mb-4">Good fit</h3>
             <ul className="space-y-3">
               {goodFit.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
+                <li key={item} className="flex items-start gap-3 text-sm text-[#4B5563]">
+                  <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
                   {item}
                 </li>
               ))}
             </ul>
           </div>
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-4">Probably someone else</h3>
+          <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-7">
+            <h3 className="font-display font-semibold text-[#0B0C0E] mb-4">Probably someone else</h3>
             <ul className="space-y-3">
               {poorFit.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                  <XCircle className="w-5 h-5 text-zinc-400 shrink-0" />
+                <li key={item} className="flex items-start gap-3 text-sm text-[#4B5563]">
+                  <XCircle className="w-5 h-5 text-[#9CA3AF] shrink-0" />
                   {item}
                 </li>
               ))}
@@ -333,78 +332,35 @@ export default function PhpDevelopmentPage() {
       {/* Process Section */}
       <section className="mb-16">
         <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             How a PHP project <span className="gradient-text">runs with me</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {processSteps.map((item) => (
-            <div key={item.step} className="bg-zinc-50 rounded-2xl p-5 text-center">
-              <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-500 font-bold text-lg flex items-center justify-center mx-auto mb-3">
-                {item.step}
+            <div
+              key={item.step}
+              className="rounded-2xl border border-[#E5E7EB] bg-[#F8FAFC] hover:border-[#3A57FC] transition-colors p-6 text-center"
+            >
+              <div className="w-10 h-10 rounded-xl bg-[#EEF2FF] border border-[#DDE4FF] text-[#3A57FC] font-mono font-bold text-sm flex items-center justify-center mx-auto mb-4">
+                {String(item.step).padStart(2, '0')}
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-1">{item.title}</h3>
-              <p className="text-sm text-zinc-500">{item.desc}</p>
+              <h3 className="font-display font-semibold text-[#0B0C0E] mb-1.5">{item.title}</h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="mb-16 max-w-3xl mx-auto" aria-labelledby="php-faq">
-        <h2 id="php-faq" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-6">
-          PHP development FAQ
-        </h2>
-        <div className="space-y-3">
-          {faqs.map((faq) => (
-            <details key={faq.question} className="group bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm open:shadow-md">
-              <summary className="cursor-pointer list-none font-semibold text-zinc-900 flex items-center justify-between gap-4">
-                {faq.question}
-                <span className="text-orange-500 transition-transform group-open:rotate-45 text-xl leading-none">+</span>
-              </summary>
-              <p className="mt-3 text-sm text-zinc-600 leading-relaxed">{faq.answer}</p>
-            </details>
-          ))}
-        </div>
-      </section>
+      <Faq id="php-faq" title="PHP development FAQ" faqs={faqs} />
 
-      {/* CTA Section */}
-      <section className="overflow-hidden shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
-        <div
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage: 'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)',
-            backgroundSize: '40px 40px',
-          }}
-        />
-
-        <div className="flex flex-col items-center justify-center text-center px-6 py-12 md:px-12 md:py-14 relative">
-          <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
-            Have a PHP app nobody wants to touch?
-          </h2>
-          <p className="text-zinc-400 mb-8 max-w-lg font-medium">
-            Send me the repo or a short description. I’ll read it and reply with what I’d fix first and a quote, before you commit to anything.
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link
-              href={contactHref('php')}
-              className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
-            >
-              <span>Send me your PHP app</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              href="/services/php-development/modernization"
-              className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3"
-            >
-              <span>See how I upgrade old PHP</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      <CtaBand
+        title="Have a PHP app nobody wants to touch?"
+        body="Send me the repo or a short description. I’ll read it and reply with what I’d fix first and a quote, before you commit to anything."
+        primary={{ href: contactHref('php'), label: 'Send me your PHP app' }}
+        secondary={{ href: '/services/php-development/modernization', label: 'See how I upgrade old PHP' }}
+      />
     </>
   )
 }

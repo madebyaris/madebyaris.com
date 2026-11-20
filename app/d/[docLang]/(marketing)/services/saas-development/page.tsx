@@ -148,7 +148,10 @@ const topics = [
   },
 ]
 
-const linkClass = 'underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors'
+const linkClass =
+  'text-[#3A57FC] underline decoration-[#DDE4FF] underline-offset-4 hover:text-[#FF8800] hover:decoration-[#FF8800] transition-colors font-medium'
+const darkLinkClass =
+  'text-[#93A8FF] underline decoration-[#93A8FF]/40 underline-offset-4 hover:text-[#FFB866] hover:decoration-[#FFB866] transition-colors font-medium'
 
 const faqs: FaqItem[] = [
   {
@@ -212,33 +215,36 @@ export default function SaasDevelopmentPage() {
       <JsonLd data={structuredData} />
 
       <nav className="mb-8" aria-label="Breadcrumb">
-        <ol className="flex items-center space-x-2 text-sm text-zinc-500">
-          <li><Link href="/services" className="hover:text-orange-500 transition-colors">Services</Link></li>
-          <li><span className="px-2">/</span></li>
-          <li className="text-zinc-900">SaaS development</li>
+        <ol className="flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-[0.08em] text-[#525660]">
+          <li>
+            <Link href="/services" className="hover:text-[#3A57FC] transition-colors">
+              Services
+            </Link>
+          </li>
+          <li className="text-[#CBD5E1]">/</li>
+          <li className="text-[#0B0C0E] font-semibold">SaaS development</li>
         </ol>
       </nav>
 
       <PageHero
-        eyebrow={{ icon: <Layers className="w-4 h-4 text-orange-500" />, label: 'SaaS development services' }}
+        eyebrow={{ icon: <Layers className="w-3.5 h-3.5" />, label: 'SaaS development services' }}
         title="SaaS development"
         accent="that stays cheap to run"
         actions={
           <>
             <Link
               href={contactHref('saas')}
-              className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
+              className="btn-primary rounded-md py-3.5 px-6 text-sm font-bold inline-flex items-center gap-2.5 group"
             >
-              <span className="text-sm font-medium tracking-tight">Send me your SaaS idea</span>
+              <span>Send me your SaaS idea</span>
               <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </Link>
             <a
               href="#running-cost"
-              className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
-              style={{ boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)' }}
+              className="btn-secondary rounded-md py-3.5 px-6 text-sm font-semibold inline-flex items-center gap-2 group"
             >
-              <span className="text-sm font-medium text-black/60 tracking-tight">See where the running cost goes</span>
-              <ArrowRight className="w-4 h-4 text-zinc-500" />
+              <span>See where the running cost goes</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </a>
           </>
         }
@@ -246,7 +252,7 @@ export default function SaasDevelopmentPage() {
         <p className="mb-4">
           For European (EU and UK) and Indonesian founders who want a SaaS or AI web app that stays cheap to run while users are few and scales cleanly as revenue grows. I own the architecture, ship the build, and hand over clean code in your repo.
         </p>
-        <p className="text-sm text-zinc-500 font-normal">
+        <p className="font-mono text-xs text-white/80 tracking-wide">
           Senior AI software engineer · 13+ years shipping software · UTC+7 with European morning overlap · Creator of RankMySEO.
         </p>
       </PageHero>
@@ -254,16 +260,17 @@ export default function SaasDevelopmentPage() {
       <HeroImage src="/images/services/saas.jpg" alt="Illustration of a SaaS dashboard on a small server stack, with a gauge reading low CPU use" />
 
       <section className="mb-16 max-w-3xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+        <span className="section-index block mb-2">Direct engineering</span>
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-4">
           Looking for a SaaS development company?
         </h2>
-        <p className="text-zinc-600 leading-relaxed mb-4">
+        <p className="text-[#374151] leading-relaxed mb-4">
           If you searched for a SaaS development company, you found one senior developer instead of an agency. I plan,
           build, and launch your SaaS myself, and I design it to cost little to run from the first user. That means
           caching, background jobs, and lean database queries on hosting that scales from zero. The expected monthly
           running cost goes into the written plan before I write any code.
         </p>
-        <p className="text-zinc-600 leading-relaxed">
+        <p className="text-[#374151] leading-relaxed">
           With me, the person on the call is the person writing the code, so nothing gets lost in between. The trade-off is
           capacity. One developer can only run a few builds at once, so I tell you my start date up front.
         </p>
@@ -271,22 +278,26 @@ export default function SaasDevelopmentPage() {
 
       <section id="running-cost" className="mb-16 scroll-mt-32" aria-labelledby="cost-areas">
         <div className="text-center mb-10">
-          <h2 id="cost-areas" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <span className="section-index block mb-2">Infrastructure efficiency</span>
+          <h2 id="cost-areas" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Where the running cost <span className="gradient-text">of a SaaS goes</span>
           </h2>
-          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
+          <p className="text-sm md:text-base text-[#4B5563] max-w-xl mx-auto">
             Four lines make up most monthly bills. Here is how I keep each one small.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {costAreas.map((item) => (
-            <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all group">
-              <div className="p-3 bg-zinc-100 rounded-xl w-fit mb-4 group-hover:bg-orange-100 transition-colors">
-                <item.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
+            <div
+              key={item.title}
+              className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6 md:p-7 group"
+            >
+              <div className="p-3 bg-[#EEF2FF] text-[#3A57FC] rounded-xl w-fit mb-4 group-hover:bg-[#3A57FC] group-hover:text-white transition-colors">
+                <item.icon className="w-5 h-5" />
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">
+              <h3 className="font-display font-bold text-[#0B0C0E] mb-2">{item.title}</h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed">
                 {item.title === 'Database' ? (
                   <>
                     <Link href="/services/php-development/database-solutions" className={linkClass}>
@@ -301,7 +312,7 @@ export default function SaasDevelopmentPage() {
             </div>
           ))}
         </div>
-        <p className="text-sm text-zinc-500 mt-4 text-center">
+        <p className="text-sm text-[#4B5563] mt-6 text-center">
           Caching does most of the work. I explain how it behaves in{' '}
           <Link href="/blog/nextjs-cache-on-vercel" className={linkClass}>
             Next.js caching on Vercel
@@ -310,33 +321,34 @@ export default function SaasDevelopmentPage() {
         </p>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
       <section className="mb-16 max-w-3xl mx-auto" aria-labelledby="scale">
-        <h2 id="scale" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+        <span className="section-index block mb-2">Architecture</span>
+        <h2 id="scale" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-4">
           Scale from zero without a rewrite
         </h2>
-        <p className="text-zinc-600 leading-relaxed mb-4">
+        <p className="text-[#374151] leading-relaxed mb-4">
           On day one, the web app runs on infrastructure that scales to zero. While you have few users, the bill follows the
           requests you get, and no server sits idle all month. When traffic grows, more capacity starts on its own and the
           code stays the same.
         </p>
-        <p className="text-zinc-600 leading-relaxed mb-6">
+        <p className="text-[#374151] leading-relaxed mb-6">
           Steady background work is different. A worker that runs all day is often cheaper on a small VPS, so I split the
           two when the numbers say so. I compare the options for your app and write the expected monthly cost into the plan.
         </p>
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-          <h3 className="font-semibold text-zinc-900 mb-4">A typical low-cost setup</h3>
+        <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-7">
+          <h3 className="font-display font-bold text-[#0B0C0E] mb-4">A typical low-cost setup</h3>
           <ul className="space-y-3">
             {stack.map((item) => (
-              <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                <CheckCircle2 className="w-5 h-5 text-orange-500 shrink-0" />
-                {item}
+              <li key={item} className="flex items-start gap-3 text-sm text-[#1F2937]">
+                <CheckCircle2 className="w-5 h-5 text-[#3A57FC] shrink-0 mt-0.5" />
+                <span>{item}</span>
               </li>
             ))}
           </ul>
         </div>
-        <p className="text-sm text-zinc-500 mt-4">
+        <p className="text-sm text-[#4B5563] mt-4">
           More on each option: how I keep a{' '}
           <Link href="/services/nextjs-development/vercel" className={linkClass}>
             Next.js bill on Vercel in check
@@ -350,24 +362,25 @@ export default function SaasDevelopmentPage() {
       </section>
 
       <section className="mb-16 max-w-3xl mx-auto" aria-labelledby="ai-cost">
-        <h2 id="ai-cost" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+        <span className="section-index block mb-2">AI unit economics</span>
+        <h2 id="ai-cost" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-4">
           AI features that do not eat your margin
         </h2>
-        <p className="text-zinc-600 leading-relaxed mb-6">
+        <p className="text-[#374151] leading-relaxed mb-6">
           AI can turn into the biggest line on a SaaS bill, because every model call is paid per token. I add AI where it
           saves your users time and keep these rules in the code.
         </p>
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
+        <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-7">
           <ul className="space-y-3">
             {aiRules.map((item) => (
-              <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                <CheckCircle2 className="w-5 h-5 text-orange-500 shrink-0" />
-                {item}
+              <li key={item} className="flex items-start gap-3 text-sm text-[#1F2937]">
+                <CheckCircle2 className="w-5 h-5 text-[#FF8800] shrink-0 mt-0.5" />
+                <span>{item}</span>
               </li>
             ))}
           </ul>
         </div>
-        <p className="text-sm text-zinc-500 mt-4">
+        <p className="text-sm text-[#4B5563] mt-4">
           How I wire models into existing products is on my{' '}
           <Link href="/services/ai-development/ai-integration" className={linkClass}>
             AI integration page
@@ -376,48 +389,50 @@ export default function SaasDevelopmentPage() {
         </p>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
       <section className="mb-16" aria-labelledby="deliverables">
         <div className="text-center mb-10">
-          <h2 id="deliverables" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <span className="section-index block mb-2">Deliverables</span>
+          <h2 id="deliverables" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             SaaS development services: <span className="gradient-text">what you get</span>
           </h2>
-          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
+          <p className="text-sm md:text-base text-[#4B5563] max-w-xl mx-auto">
             The parts every SaaS needs before the first customer pays. The plan lists which ones your version one includes.
           </p>
         </div>
 
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-7">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {deliverables.map((item) => (
-              <div key={item} className="flex items-center gap-3 p-3 bg-zinc-50 rounded-xl">
-                <CheckCircle2 className="w-5 h-5 text-orange-500 shrink-0" />
-                <span className="text-sm text-zinc-700 font-medium">{item}</span>
+              <div key={item} className="flex items-center gap-3 p-4 bg-[#F8FAFC] border border-[#E5E7EB] rounded-xl">
+                <CheckCircle2 className="w-5 h-5 text-[#3A57FC] shrink-0" />
+                <span className="text-sm text-[#1F2937] font-medium">{item}</span>
               </div>
             ))}
           </div>
         </div>
-        <p className="text-sm text-zinc-500 mt-4 text-center max-w-2xl mx-auto">
+        <p className="text-sm text-[#4B5563] mt-5 text-center max-w-2xl mx-auto">
           I build with Cursor and AI-assisted development, which shortens the time spent on routine code. I review every
           change myself, so the codebase stays readable for the next developer.
         </p>
       </section>
 
       <section className="mb-16 max-w-3xl mx-auto" aria-labelledby="saas-cost">
-        <h2 id="saas-cost" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+        <span className="section-index block mb-2">Pricing model</span>
+        <h2 id="saas-cost" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-4">
           SaaS development cost: build cost and running cost
         </h2>
-        <p className="text-zinc-600 leading-relaxed mb-4">
+        <p className="text-[#374151] leading-relaxed mb-4">
           A SaaS has two bills. The build cost is what you pay me to plan and write the product. It depends on how many
           features ship in version one, which integrations you need, and whether data moves over from an old system.
         </p>
-        <p className="text-zinc-600 leading-relaxed mb-4">
+        <p className="text-[#374151] leading-relaxed mb-4">
           The running cost is what you pay every month after launch: hosting, database, AI tokens, and third-party
           services. It depends on how much work each request does and how much traffic you get. That part is set by how the
           code is written, which is why I plan it before the build.
         </p>
-        <p className="text-zinc-600 leading-relaxed">
+        <p className="text-[#374151] leading-relaxed">
           I scope the build after a call and estimate the running cost in the written plan. For a wider view of what
           drives developer rates, read{' '}
           <Link href="/blog/cost-to-hire-nextjs-developer" className={linkClass}>
@@ -427,77 +442,83 @@ export default function SaasDevelopmentPage() {
         </p>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
-      <section className="mb-16 max-w-3xl mx-auto" aria-labelledby="proof">
-        <h2 id="proof" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
-          Proof: a SaaS I built and run
-        </h2>
-        <div className="space-y-4">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-2">RankMySEO</h3>
-            <p className="text-sm text-zinc-600 leading-relaxed mb-3">
-              <a href="https://rankmyseo.com" className={linkClass} target="_blank" rel="noopener noreferrer">
-                RankMySEO
-              </a>{' '}
-              is a hosted rank tracker that stores daily Google ranking history for each keyword. It has Overview, Keywords,
-              Competitors, and Insights views. Rank checks run as background jobs, so the dashboard stays responsive while
-              they work.
-            </p>
-            <p className="text-sm text-zinc-600 leading-relaxed">
-              I proved it on the diurusin.id demo, and the public beta opened on 31 August 2026. There is also a{' '}
-              <a href="https://github.com/madebyaris/rankmyseo" className={linkClass} target="_blank" rel="noopener noreferrer">
-                public open-source toolkit
-              </a>
-              . The story is in{' '}
-              <Link href="/blog/introducing-rankmyseo-saas" className={linkClass}>
-                Introducing RankMySEO
-              </Link>
-              .
-            </p>
-          </div>
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-2">This site</h3>
-            <p className="text-sm text-zinc-600 leading-relaxed">
-              This site runs on Vercel with ISR caching. When I publish a post, a webhook refreshes the pages that changed,
-              so the cache only rebuilds when content changes.
-            </p>
+      <section className="mb-16" aria-labelledby="proof">
+        <div className="rounded-2xl bg-[#0B0C0E] text-white border border-white/10 p-6 md:p-10 shadow-[0_24px_60px_-24px_rgba(11,12,14,0.45)]">
+          <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#FFB866] block mb-2">
+            Production proof
+          </span>
+          <h2 id="proof" className="font-display text-2xl md:text-3xl font-bold text-white tracking-tight mb-6">
+            Proof: a SaaS I built and run
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="rounded-xl border border-white/10 bg-white/[0.04] p-6">
+              <h3 className="font-display font-bold text-white mb-2">RankMySEO</h3>
+              <p className="text-sm text-white/80 leading-relaxed mb-3">
+                <a href="https://rankmyseo.com" className={darkLinkClass} target="_blank" rel="noopener noreferrer">
+                  RankMySEO
+                </a>{' '}
+                is a hosted rank tracker that stores daily Google ranking history for each keyword. It has Overview, Keywords,
+                Competitors, and Insights views. Rank checks run as background jobs, so the dashboard stays responsive while
+                they work.
+              </p>
+              <p className="text-sm text-white/80 leading-relaxed">
+                I proved it on the diurusin.id demo, and the public beta opened on 31 August 2026. There is also a{' '}
+                <a href="https://github.com/madebyaris/rankmyseo" className={darkLinkClass} target="_blank" rel="noopener noreferrer">
+                  public open-source toolkit
+                </a>
+                . The story is in{' '}
+                <Link href="/blog/introducing-rankmyseo-saas" className={darkLinkClass}>
+                  Introducing RankMySEO
+                </Link>
+                .
+              </p>
+            </div>
+            <div className="rounded-xl border border-white/10 bg-white/[0.04] p-6">
+              <h3 className="font-display font-bold text-white mb-2">This site</h3>
+              <p className="text-sm text-white/80 leading-relaxed">
+                This site runs on Vercel with ISR caching. When I publish a post, a webhook refreshes the pages that changed,
+                so the cache only rebuilds when content changes.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
       <section className="mb-16" aria-labelledby="fit">
         <div className="text-center mb-10">
-          <h2 id="fit" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <span className="section-index block mb-2">Qualification</span>
+          <h2 id="fit" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Is custom SaaS development <span className="gradient-text">right for you?</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-4">Good fit</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="rounded-2xl border border-[#DDE4FF] bg-[#F3F5FF]/70 p-6 md:p-7">
+            <h3 className="font-display font-bold text-[#0B0C0E] mb-4">Good fit</h3>
             <ul className="space-y-3">
               {goodFit.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
-                  {item}
+                <li key={item} className="flex items-start gap-3 text-sm text-[#1F2937]">
+                  <CheckCircle2 className="w-5 h-5 text-[#3A57FC] shrink-0 mt-0.5" />
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
           </div>
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-4">Look elsewhere</h3>
+          <div className="rounded-2xl border border-[#E5E7EB] bg-[#F8FAFC] p-6 md:p-7">
+            <h3 className="font-display font-bold text-[#0B0C0E] mb-4">Look elsewhere</h3>
             <ul className="space-y-3">
               {poorFit.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                  <XCircle className="w-5 h-5 text-zinc-400 shrink-0" />
-                  {item}
+                <li key={item} className="flex items-start gap-3 text-sm text-[#374151]">
+                  <XCircle className="w-5 h-5 text-[#64748B] shrink-0 mt-0.5" />
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
           </div>
         </div>
-        <p className="text-sm text-zinc-500 mt-4 text-center">
+        <p className="text-sm text-[#4B5563] mt-5 text-center">
           Building a product where the AI feature is the whole point? Start with{' '}
           <Link href="/services/ai-development/ai-mvp" className={linkClass}>
             AI MVP development
@@ -506,23 +527,27 @@ export default function SaasDevelopmentPage() {
         </p>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
       <section className="mb-16" aria-labelledby="process">
         <div className="text-center mb-10">
-          <h2 id="process" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <span className="section-index block mb-2">Delivery process</span>
+          <h2 id="process" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             From scoping call <span className="gradient-text">to launch</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
           {processSteps.map((item) => (
-            <div key={item.step} className="bg-zinc-50 rounded-2xl p-5 text-center">
-              <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-500 font-bold text-lg flex items-center justify-center mx-auto mb-3">
-                {item.step}
+            <div
+              key={item.step}
+              className="rounded-2xl border border-[#E5E7EB] bg-[#F8FAFC] hover:bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6"
+            >
+              <div className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#0B0C0E] text-[#FFB866] font-mono text-xs font-bold mb-4">
+                {String(item.step).padStart(2, '0')}
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-1 text-sm">{item.title}</h3>
-              <p className="text-xs text-zinc-500">{item.desc}</p>
+              <h3 className="font-display font-bold text-[#0B0C0E] mb-1.5 text-sm">{item.title}</h3>
+              <p className="text-xs text-[#4B5563] leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
@@ -530,23 +555,24 @@ export default function SaasDevelopmentPage() {
 
       <section className="mb-16" aria-labelledby="topics">
         <div className="text-center mb-10">
-          <h2 id="topics" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <span className="section-index block mb-2">Further reading</span>
+          <h2 id="topics" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             SaaS guides <span className="gradient-text">and related services</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {topics.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="block bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm hover:shadow-lg transition-all group"
+              className="block rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6 group"
             >
-              <h3 className="font-semibold text-zinc-900 mb-1 flex items-center justify-between gap-3">
-                {item.title}
-                <ArrowRight className="w-4 h-4 text-zinc-400 group-hover:text-orange-500 group-hover:translate-x-0.5 transition-all shrink-0" />
+              <h3 className="font-display font-bold text-[#0B0C0E] group-hover:text-[#3A57FC] transition-colors mb-1.5 flex items-center justify-between gap-3">
+                <span>{item.title}</span>
+                <ArrowRight className="w-4 h-4 text-[#64748B] group-hover:text-[#3A57FC] group-hover:translate-x-1 transition-all shrink-0" />
               </h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{item.description}</p>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.description}</p>
             </Link>
           ))}
         </div>

@@ -4,7 +4,6 @@ import {
   Activity,
   ArrowRight,
   ArrowUpRight,
-  CheckCircle2,
   FileText,
   HardDrive,
   LifeBuoy,
@@ -12,6 +11,7 @@ import {
   ShieldAlert,
   ShieldCheck,
   Wrench,
+  CheckCircle2,
   XCircle,
 } from 'lucide-react'
 import { PageHero } from '@/components/page/hero'
@@ -166,7 +166,7 @@ const topics = [
   },
 ]
 
-const linkClass = 'underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors'
+const linkClass = 'text-[#3A57FC] underline decoration-[#3A57FC]/35 underline-offset-4 hover:text-[#2944E0] hover:decoration-[#3A57FC] transition-colors'
 
 const faqs: FaqItem[] = [
   {
@@ -230,36 +230,35 @@ export default function WordPressMaintenancePage() {
     <>
       <JsonLd data={structuredData} />
 
-      <nav className="mb-8" aria-label="Breadcrumb">
-        <ol className="flex items-center space-x-2 text-sm text-zinc-500">
-          <li><Link href="/services" className="hover:text-orange-500 transition-colors">Services</Link></li>
-          <li><span className="px-2">/</span></li>
-          <li><Link href="/services/wordpress" className="hover:text-orange-500 transition-colors">WordPress</Link></li>
-          <li><span className="px-2">/</span></li>
-          <li className="text-zinc-900">Maintenance</li>
+      <nav className="mb-6" aria-label="Breadcrumb">
+        <ol className="flex flex-wrap items-center gap-1.5 text-sm text-[#4B5563]">
+          <li><Link href="/services" className="hover:text-[#3A57FC] transition-colors">Services</Link></li>
+          <li aria-hidden="true" className="text-[#9CA3AF]">/</li>
+          <li><Link href="/services/wordpress" className="hover:text-[#3A57FC] transition-colors">WordPress</Link></li>
+          <li aria-hidden="true" className="text-[#9CA3AF]">/</li>
+          <li className="font-medium text-[#0B0C0E]" aria-current="page">Maintenance</li>
         </ol>
       </nav>
 
       <PageHero
-        eyebrow={{ icon: <LifeBuoy className="w-4 h-4 text-orange-500" />, label: 'WordPress care and support' }}
+        eyebrow={{ icon: <LifeBuoy className="w-3.5 h-3.5" />, label: 'WordPress care and support' }}
         title="WordPress maintenance services"
         accent="with every update tested first"
         actions={
           <>
             <Link
               href={contactHref('wordpress-care')}
-              className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
+              className="btn-primary inline-flex items-center gap-2.5 rounded-md py-3.5 px-6 text-sm font-bold group"
             >
-              <span className="text-sm font-medium tracking-tight">Send me your site</span>
+              <span>Send me your site</span>
               <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </Link>
             <a
               href="#hacked"
-              className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
-              style={{ boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)' }}
+              className="btn-secondary inline-flex items-center gap-2 rounded-md py-3.5 px-6 text-sm font-semibold group"
             >
-              <span className="text-sm font-medium text-black/60 tracking-tight">See how I clean a hacked site</span>
-              <ArrowRight className="w-4 h-4 text-zinc-500" />
+              <span>See how I clean a hacked site</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </a>
           </>
         }
@@ -268,23 +267,23 @@ export default function WordPressMaintenancePage() {
           For site owners who want WordPress kept updated, backed up, and secure without thinking about it every month. I
           test updates on staging, keep backups off-site, and fix what breaks.
         </p>
-        <p className="text-sm text-zinc-500 font-normal">
+        <p className="text-sm text-white/80">
           13+ years shipping web products, including WordPress performance work at Hongkiat.com. I build themes and plugins, so I can fix the code too.
         </p>
       </PageHero>
 
-      <HeroImage src="/images/services/wordpress.jpg" alt="Illustration of a WordPress site layout being updated, with a security shield, maintenance tools, and a migration box" />
+      <HeroImage src="/images/services/wordpress.jpg" alt="Illustration of WordPress maintenance workflow showing staging updates, off-site backups, and security monitoring" />
 
       <section className="mb-16 max-w-3xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-4">
           What my WordPress maintenance services cover
         </h2>
-        <p className="text-zinc-600 leading-relaxed mb-4">
+        <p className="text-[#4B5563] leading-relaxed mb-4">
           WordPress maintenance services keep a site updated, backed up, secure, and working after every change. I test
           core, theme, and plugin updates on a staging copy before they go live. I keep off-site backups, test a restore,
           and watch uptime and security. Each month you get a short report of what changed.
         </p>
-        <p className="text-zinc-600 leading-relaxed">
+        <p className="text-[#4B5563] leading-relaxed">
           Clicking update is the easy part. The hard part is the update that breaks a template or a checkout, and that is
           where a developer helps. I build WordPress themes and plugins, so I can read the code behind the error and fix it.
         </p>
@@ -292,27 +291,30 @@ export default function WordPressMaintenancePage() {
 
       <section id="plan" className="mb-16 scroll-mt-32" aria-labelledby="plan-heading">
         <div className="text-center mb-10">
-          <h2 id="plan-heading" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <h2 id="plan-heading" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             What a WordPress maintenance plan <span className="gradient-text">includes</span>
           </h2>
-          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
+          <p className="text-sm text-[#4B5563] max-w-xl mx-auto">
             These are the recurring tasks I run on a site I look after.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {planTasks.map((item) => (
-            <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all group">
-              <div className="p-3 bg-zinc-100 rounded-xl w-fit mb-4 group-hover:bg-orange-100 transition-colors">
-                <item.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
+            <div
+              key={item.title}
+              className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6 md:p-7 group"
+            >
+              <div className="p-3 bg-[#EEF2FF] text-[#3A57FC] rounded-xl w-fit mb-4 group-hover:bg-[#3A57FC] group-hover:text-white transition-colors">
+                <item.icon className="w-5 h-5" />
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{item.description}</p>
+              <h3 className="font-display font-semibold text-[#0B0C0E] mb-2">{item.title}</h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.description}</p>
             </div>
           ))}
         </div>
 
-        <p className="text-sm text-zinc-500 text-center mt-6 max-w-2xl mx-auto">
+        <p className="text-sm text-[#4B5563] text-center mt-6 max-w-2xl mx-auto">
           Comparing plans from different developers? I wrote down{' '}
           <Link href="/blog/website-maintenance-cost" className={linkClass}>
             what a website maintenance plan should cover
@@ -321,27 +323,27 @@ export default function WordPressMaintenancePage() {
         </p>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
       <section className="mb-16 max-w-3xl mx-auto" aria-labelledby="scope">
-        <h2 id="scope" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+        <h2 id="scope" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-4">
           Where WordPress website maintenance stops
         </h2>
-        <p className="text-zinc-600 leading-relaxed mb-6">
+        <p className="text-[#4B5563] leading-relaxed mb-6">
           A maintenance plan keeps the site you have healthy. Bigger jobs get their own scope and price, so the monthly plan
           stays predictable. These sit outside it:
         </p>
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm mb-6">
+        <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-7 mb-6">
           <ul className="space-y-3">
             {outOfScope.map((item) => (
-              <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                <XCircle className="w-5 h-5 text-zinc-400 shrink-0" />
+              <li key={item} className="flex items-start gap-3 text-sm text-[#4B5563]">
+                <XCircle className="w-5 h-5 text-[#9CA3AF] shrink-0" />
                 {item}
               </li>
             ))}
           </ul>
         </div>
-        <p className="text-zinc-600 leading-relaxed">
+        <p className="text-[#4B5563] leading-relaxed">
           When one of these comes up, I quote it separately. See{' '}
           <Link href="/services/wordpress/redesign" className={linkClass}>WordPress redesign</Link>,{' '}
           <Link href="/services/wordpress/plugin-development" className={linkClass}>custom plugins</Link>,{' '}
@@ -352,64 +354,67 @@ export default function WordPressMaintenancePage() {
 
       <section id="hacked" className="mb-16 max-w-3xl mx-auto scroll-mt-32" aria-labelledby="malware">
         <div className="flex items-center gap-3 mb-4">
-          <div className="p-3 bg-zinc-100 rounded-xl">
-            <ShieldAlert className="w-5 h-5 text-orange-500" />
+          <div className="p-3 bg-[#EEF2FF] text-[#3A57FC] rounded-xl">
+            <ShieldAlert className="w-5 h-5" />
           </div>
-          <h2 id="malware" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter">
+          <h2 id="malware" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight">
             WordPress malware removal service
           </h2>
         </div>
-        <p className="text-zinc-600 leading-relaxed mb-6">
+        <p className="text-[#4B5563] leading-relaxed mb-6">
           A hacked site can redirect visitors to spam, send junk email, or show a red warning in Google. Here is what I do,
           in order. I do not promise a finish time, because a cleanup depends on how deep the infection goes and what backups
           exist.
         </p>
-        <ol className="space-y-3">
+        <ol className="space-y-4">
           {cleanupSteps.map((item, index) => (
-            <li key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm flex items-start gap-4">
-              <div className="w-8 h-8 rounded-full bg-orange-100 text-orange-500 font-bold text-sm flex items-center justify-center shrink-0">
-                {index + 1}
+            <li
+              key={item.title}
+              className="rounded-2xl border border-[#E5E7EB] bg-white p-6 flex items-start gap-4"
+            >
+              <div className="w-9 h-9 rounded-xl bg-[#EEF2FF] border border-[#DDE4FF] text-[#3A57FC] font-mono font-bold text-sm flex items-center justify-center shrink-0">
+                {String(index + 1).padStart(2, '0')}
               </div>
               <div>
-                <h3 className="font-semibold text-zinc-900 mb-1">{item.title}</h3>
-                <p className="text-sm text-zinc-600 leading-relaxed">{item.desc}</p>
+                <h3 className="font-display font-semibold text-[#0B0C0E] mb-1">{item.title}</h3>
+                <p className="text-sm text-[#4B5563] leading-relaxed">{item.desc}</p>
               </div>
             </li>
           ))}
         </ol>
-        <p className="text-zinc-600 leading-relaxed mt-6">
+        <p className="text-[#4B5563] leading-relaxed mt-6">
           Google decides when a warning comes off, so that last step is out of my hands. After the cleanup, the site can move
           onto a maintenance plan, or you get the hardening notes to follow yourself.
         </p>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
       <section className="mb-16" aria-labelledby="fit">
         <div className="text-center mb-10">
-          <h2 id="fit" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <h2 id="fit" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Do you need <span className="gradient-text">WordPress support services?</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-4">Good fit</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-7">
+            <h3 className="font-display font-semibold text-[#0B0C0E] mb-4">Good fit</h3>
             <ul className="space-y-3">
               {goodFit.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
+                <li key={item} className="flex items-start gap-3 text-sm text-[#4B5563]">
+                  <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
                   {item}
                 </li>
               ))}
             </ul>
           </div>
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-4">Probably not worth it</h3>
+          <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-7">
+            <h3 className="font-display font-semibold text-[#0B0C0E] mb-4">Probably not worth it</h3>
             <ul className="space-y-3">
               {poorFit.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                  <XCircle className="w-5 h-5 text-zinc-400 shrink-0" />
+                <li key={item} className="flex items-start gap-3 text-sm text-[#4B5563]">
+                  <XCircle className="w-5 h-5 text-[#9CA3AF] shrink-0" />
                   {item}
                 </li>
               ))}
@@ -420,45 +425,48 @@ export default function WordPressMaintenancePage() {
 
       <section className="mb-16" aria-labelledby="process">
         <div className="text-center mb-10">
-          <h2 id="process" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <h2 id="process" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             How I take over <span className="gradient-text">your site</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {processSteps.map((item) => (
-            <div key={item.step} className="bg-zinc-50 rounded-2xl p-5 text-center">
-              <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-500 font-bold text-lg flex items-center justify-center mx-auto mb-3">
-                {item.step}
+            <div
+              key={item.step}
+              className="rounded-2xl border border-[#E5E7EB] bg-[#F8FAFC] hover:border-[#3A57FC] transition-colors p-6 text-center"
+            >
+              <div className="w-10 h-10 rounded-xl bg-[#EEF2FF] border border-[#DDE4FF] text-[#3A57FC] font-mono font-bold text-sm flex items-center justify-center mx-auto mb-4">
+                {String(item.step).padStart(2, '0')}
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-1">{item.title}</h3>
-              <p className="text-sm text-zinc-500">{item.desc}</p>
+              <h3 className="font-display font-semibold text-[#0B0C0E] mb-1.5">{item.title}</h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
       <section className="mb-16" aria-labelledby="topics">
         <div className="text-center mb-10">
-          <h2 id="topics" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <h2 id="topics" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Related guides <span className="gradient-text">and WordPress services</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {topics.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="block bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm hover:shadow-lg transition-all group"
+              className="block rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6 md:p-7 group"
             >
-              <h3 className="font-semibold text-zinc-900 mb-1 flex items-center justify-between gap-3">
+              <h3 className="font-display font-semibold text-[#0B0C0E] group-hover:text-[#3A57FC] transition-colors mb-1.5 flex items-center justify-between gap-3">
                 {item.title}
-                <ArrowRight className="w-4 h-4 text-zinc-400 group-hover:text-orange-500 group-hover:translate-x-0.5 transition-all shrink-0" />
+                <ArrowRight className="w-4 h-4 text-[#9CA3AF] group-hover:text-[#3A57FC] group-hover:translate-x-0.5 transition-all shrink-0" />
               </h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{item.description}</p>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.description}</p>
             </Link>
           ))}
         </div>

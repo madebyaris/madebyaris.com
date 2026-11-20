@@ -6,12 +6,48 @@ import { productionAbsoluteUrl } from './config'
 // hreflang between them tells Google they are interchangeable.
 export const translationPairs: ReadonlyArray<{ en: string; id: string }> = [
   {
-    en: '/services/wordpress/woocommerce',
-    id: '/services/wordpress/jasa-woocommerce',
+    en: '/ai-implementation',
+    id: '/jasa-implementasi-ai',
   },
   {
     en: '/product-engineering',
     id: '/jasa-pengembangan-produk',
+  },
+  {
+    en: '/services/react-app-improvement',
+    id: '/services/jasa-optimasi-react',
+  },
+  {
+    en: '/services/vite-development',
+    id: '/services/jasa-vite',
+  },
+  {
+    en: '/services/fastify-development',
+    id: '/services/jasa-fastify',
+  },
+  {
+    en: '/services/database-optimization',
+    id: '/services/jasa-optimasi-database',
+  },
+  {
+    en: '/services/clean-code-for-teams-and-ai',
+    id: '/services/jasa-clean-code',
+  },
+  {
+    en: '/services/saas-development',
+    id: '/services/saas-development/jasa-pembuatan-aplikasi-web',
+  },
+  {
+    en: '/services/seo',
+    id: '/services/seo/jasa-seo',
+  },
+  {
+    en: '/services/wordpress',
+    id: '/services/wordpress/jasa-wordpress',
+  },
+  {
+    en: '/services/wordpress/woocommerce',
+    id: '/services/wordpress/jasa-woocommerce',
   },
 ]
 

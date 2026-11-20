@@ -1,6 +1,17 @@
 import type { Metadata } from 'next'
-import { Wrench, ArrowRight, ArrowUpRight, CheckCircle2, AlertCircle, Shield, FileCode, Receipt } from 'lucide-react'
 import Link from 'next/link'
+import {
+  AlertCircle,
+  ArrowRight,
+  ArrowUpRight,
+  CheckCircle2,
+  FileCode,
+  Shield,
+  Wrench,
+} from 'lucide-react'
+import { PageHero } from '@/components/page/hero'
+import { Faq } from '@/components/page/faq'
+import { CtaBand } from '@/components/page/cta-band'
 import { buildPageGraph, buildPageMetadata, type FaqItem } from '@/lib/seo'
 import { JsonLd } from '@/components/seo/json-ld'
 import { contactHref } from '@/lib/contact-services'
@@ -110,226 +121,172 @@ const structuredData = buildPageGraph({
   },
 })
 
+const linkClass =
+  'text-[#3A57FC] underline decoration-[#DDE4FF] underline-offset-4 hover:text-[#FF8800] hover:decoration-[#FF8800] transition-colors font-medium'
+const darkLinkClass =
+  'text-[#93A8FF] underline decoration-[#93A8FF]/40 underline-offset-4 hover:text-[#FFB866] hover:decoration-[#FFB866] transition-colors font-medium'
+
 export default function CodeFixingPage() {
   return (
     <>
       <JsonLd data={structuredData} />
 
-      {/* Breadcrumb */}
       <nav className="mb-8" aria-label="Breadcrumb">
-        <ol className="flex items-center space-x-2 text-sm text-zinc-500">
-          <li><Link href="/services" className="hover:text-orange-500 transition-colors">Services</Link></li>
-          <li><span className="px-2">/</span></li>
-          <li><Link href="/services/vibe-code-friend" className="hover:text-orange-500 transition-colors">Cursor mentoring</Link></li>
-          <li><span className="px-2">/</span></li>
-          <li className="text-zinc-900">Fix AI-generated code</li>
+        <ol className="flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-[0.08em] text-[#525660]">
+          <li>
+            <Link href="/services" className="hover:text-[#3A57FC] transition-colors">
+              Services
+            </Link>
+          </li>
+          <li className="text-[#CBD5E1]">/</li>
+          <li>
+            <Link href="/services/vibe-code-friend" className="hover:text-[#3A57FC] transition-colors">
+              Cursor mentoring
+            </Link>
+          </li>
+          <li className="text-[#CBD5E1]">/</li>
+          <li className="text-[#0B0C0E] font-semibold">Fix AI-generated code</li>
         </ol>
       </nav>
 
-      {/* Hero Section */}
-      <section className="text-center pt-4 pb-16">
-        <div
-          className="inline-flex bg-white/60 rounded-full mb-8 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2"
-          style={{
-            position: 'relative',
-            // @ts-expect-error CSS custom properties
-            '--border-gradient': 'linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0))',
-            '--border-radius-before': '9999px'
-          }}
-        >
-          <Wrench className="w-4 h-4 text-orange-500" />
-          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Level up · Code fixing</span>
-        </div>
-
-        <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
-          Fix AI-generated code
-          {' '}<span className="block gradient-text font-light">that stopped working</span>
-        </h1>
-
-        <p className="text-base md:text-lg text-zinc-600 max-w-2xl mx-auto mb-4 leading-relaxed font-medium">
+      <PageHero
+        eyebrow={{ icon: <Wrench className="w-3.5 h-3.5" />, label: 'Level up · Code fixing' }}
+        title="Fix AI-generated code"
+        accent="that stopped working"
+        actions={
+          <>
+            <Link
+              href={contactHref('code-fixing')}
+              className="btn-primary rounded-md py-3.5 px-6 text-sm font-bold inline-flex items-center gap-2.5 group"
+            >
+              <span>Send me the broken repo</span>
+              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </Link>
+            <a
+              href="#pricing"
+              className="btn-secondary rounded-md py-3.5 px-6 text-sm font-semibold inline-flex items-center gap-2 group"
+            >
+              <span>See how pricing works</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            </a>
+          </>
+        }
+      >
+        <p className="mb-4">
           For founders and European or Indonesian teams whose app was generated with Cursor, Claude, or ChatGPT and now breaks in ways nobody can explain. I am a senior AI software engineer with 13+ years shipping production codebases.
         </p>
-
-        <p className="text-sm text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed">
+        <p className="font-mono text-xs text-white/80 tracking-wide">
           Fixed price, quoted after I read your repo · English or Indonesian · CET/GMT morning overlap.
         </p>
+      </PageHero>
 
-        <div className="flex flex-wrap justify-center gap-3">
-          <Link
-            href={contactHref('code-fixing')}
-            className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
-          >
-            <span className="text-sm font-medium tracking-tight">Send me the broken repo</span>
-            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </Link>
-          <Link
-            href="#pricing"
-            className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
-            style={{ boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)' }}
-          >
-            <span className="text-sm font-medium text-black/60 tracking-tight">See how pricing works</span>
-            <ArrowRight className="w-4 h-4 text-zinc-500" />
-          </Link>
-        </div>
-      </section>
-
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
-
-      {/* Answer first */}
       <section className="mb-16 max-w-3xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+        <span className="section-index block mb-2">Approach</span>
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-4">
           How I fix AI-generated code
         </h2>
-        <p className="text-zinc-600 leading-relaxed mb-4">
+        <p className="text-[#374151] leading-relaxed mb-4">
           I read the code before I touch it. I find the real cause of the bug, fix it with the smallest change that holds, and check that nothing around it broke. Then I explain in writing what went wrong, so you or your AI editor don’t repeat it. You get a fixed quote before any work starts.
         </p>
-        <p className="text-zinc-600 leading-relaxed">
+        <p className="text-[#374151] leading-relaxed">
           To catch this kind of bug before it merges, use my{' '}
-          <Link href="/blog/pr-review-checklist-for-ai-generated-code" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors">
+          <Link href="/blog/pr-review-checklist-for-ai-generated-code" className={linkClass}>
             PR review checklist for AI-generated code
           </Link>
           .
         </p>
       </section>
 
-      {/* Symptoms */}
-      <section className="mb-16">
-        <div className="text-center mb-10">
-          <div className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
-            <AlertCircle className="w-4 h-4 text-orange-500" />
-            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Sound familiar?</span>
+      <section className="mb-16" aria-labelledby="symptoms">
+        <div className="rounded-2xl bg-[#0B0C0E] text-white border border-white/10 p-6 md:p-10 shadow-[0_24px_60px_-24px_rgba(11,12,14,0.45)]">
+          <div className="max-w-2xl mb-6">
+            <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#FFB866] block mb-2">
+              Sound familiar?
+            </span>
+            <h2 id="symptoms" className="font-display text-2xl md:text-3xl font-bold text-white tracking-tight mb-2">
+              When you need vibe coding cleanup
+            </h2>
+            <p className="text-sm text-white/75">
+              Baca juga:{' '}
+              <Link href="/blog/technical-debt-pada-aplikasi-buatan-ai" className={darkLinkClass}>
+                technical debt pada aplikasi buatan AI
+              </Link>
+              .
+            </p>
           </div>
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            When you need <span className="gradient-text">vibe coding cleanup</span>
-          </h2>
-          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
-            Baca juga:{' '}
-            <Link href="/blog/technical-debt-pada-aplikasi-buatan-ai" className="underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors">
-              technical debt pada aplikasi buatan AI
-            </Link>
-            .
-          </p>
-        </div>
 
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {symptoms.map((item) => (
-              <div key={item} className="flex items-start gap-3 p-4 bg-zinc-50 rounded-xl">
-                <AlertCircle className="w-5 h-5 text-orange-500 mt-0.5 shrink-0" />
-                <p className="text-sm text-zinc-700">{item}</p>
+              <div key={item} className="flex items-start gap-3 p-4 rounded-xl border border-white/10 bg-white/[0.04]">
+                <AlertCircle className="w-5 h-5 text-[#FFB866] mt-0.5 shrink-0" />
+                <p className="text-sm text-white/85 leading-relaxed">{item}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
-      {/* Deliverables */}
-      <section className="mb-16">
+      <section className="mb-16" aria-labelledby="deliverables">
         <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <span className="section-index block mb-2">Deliverables</span>
+          <h2 id="deliverables" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             What you <span className="gradient-text">get back</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {deliverables.map((item) => (
-            <div key={item.title} className="bg-zinc-50 rounded-2xl p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 bg-white rounded-xl shadow-sm">
-                  <item.icon className="w-5 h-5 text-orange-500" />
-                </div>
-                <h3 className="font-semibold text-zinc-900">{item.title}</h3>
+            <div
+              key={item.title}
+              className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6 md:p-7 group"
+            >
+              <div className="p-3 bg-[#EEF2FF] text-[#3A57FC] rounded-xl w-fit mb-4 group-hover:bg-[#3A57FC] group-hover:text-white transition-colors">
+                <item.icon className="w-5 h-5" />
               </div>
-              <p className="text-sm text-zinc-600 leading-relaxed">{item.description}</p>
+              <h3 className="font-display font-bold text-[#0B0C0E] mb-2">{item.title}</h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.description}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* How pricing works */}
-      <section id="pricing" className="mb-16 scroll-mt-24">
+      <section id="pricing" className="mb-16 scroll-mt-24" aria-labelledby="pricing-title">
         <div className="text-center mb-10">
-          <div className="inline-flex bg-white/60 rounded-full mb-4 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
-            <Receipt className="w-4 h-4 text-orange-500" />
-            <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Fixed quote</span>
-          </div>
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <span className="section-index block mb-2">Fixed quote</span>
+          <h2 id="pricing-title" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             How <span className="gradient-text">pricing works</span>
           </h2>
-          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
+          <p className="text-sm md:text-base text-[#4B5563] max-w-xl mx-auto">
             I look at the code first, then quote a fixed price for the fix. You know the cost before I start.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {pricingSteps.map((item) => (
-            <div key={item.step} className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 text-center shadow-sm">
-              <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-500 font-bold text-lg flex items-center justify-center mx-auto mb-3">
-                {item.step}
+            <div
+              key={item.step}
+              className="rounded-2xl border border-[#E5E7EB] bg-[#F8FAFC] hover:bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6"
+            >
+              <div className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#0B0C0E] text-[#FFB866] font-mono text-xs font-bold mb-4">
+                {String(item.step).padStart(2, '0')}
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-1">{item.title}</h3>
-              <p className="text-sm text-zinc-500">{item.desc}</p>
+              <h3 className="font-display font-bold text-[#0B0C0E] mb-1.5">{item.title}</h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="mb-16 max-w-3xl mx-auto" aria-labelledby="code-fixing-faq">
-        <h2 id="code-fixing-faq" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-6">
-          Questions about fixing AI-generated code
-        </h2>
-        <div className="space-y-3">
-          {faqs.map((faq) => (
-            <details key={faq.question} className="group bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm open:shadow-md">
-              <summary className="cursor-pointer list-none font-semibold text-zinc-900 flex items-center justify-between gap-4">
-                {faq.question}
-                <span className="text-orange-500 transition-transform group-open:rotate-45 text-xl leading-none">+</span>
-              </summary>
-              <p className="mt-3 text-sm text-zinc-600 leading-relaxed">{faq.answer}</p>
-            </details>
-          ))}
-        </div>
-      </section>
+      <Faq id="code-fixing-faq" title="Questions about fixing AI-generated code" faqs={faqs} />
 
-      {/* CTA Section */}
-      <section className="overflow-hidden shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
-        <div
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage: 'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)',
-            backgroundSize: '40px 40px'
-          }}
-        />
-
-        <div className="flex flex-col items-center justify-center text-center px-6 py-12 md:px-12 md:py-14 relative">
-          <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
-            Send me the code that broke
-          </h2>
-          <p className="text-zinc-400 mb-8 max-w-lg font-medium">
-            You’ll get a fixed quote after I read it, and you decide whether to go ahead. If the code isn’t worth fixing, or a rewrite would cost you less, I’ll tell you.
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link
-              href={contactHref('code-fixing')}
-              className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
-            >
-              <span>Send me the broken repo</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              href="/services/vibe-code-friend/ai-ide-tutoring"
-              className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3"
-            >
-              <span>Learn Cursor so it breaks less</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      <CtaBand
+        title="Send me the code that broke"
+        body="You’ll get a fixed quote after I read it, and you decide whether to go ahead. If the code isn’t worth fixing, or a rewrite would cost you less, I’ll tell you."
+        primary={{ href: contactHref('code-fixing'), label: 'Send me the broken repo' }}
+        secondary={{ href: '/services/vibe-code-friend/ai-ide-tutoring', label: 'Learn Cursor so it breaks less' }}
+      />
     </>
   )
 }

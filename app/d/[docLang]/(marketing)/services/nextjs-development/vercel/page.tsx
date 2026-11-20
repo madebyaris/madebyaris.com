@@ -1,6 +1,20 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowRight, ArrowUpRight, Rocket, Globe, Zap, Server, CheckCircle2, XCircle, Image as ImageIcon, RefreshCw } from 'lucide-react'
+import {
+  ArrowRight,
+  ArrowUpRight,
+  CheckCircle2,
+  Globe,
+  Image as ImageIcon,
+  RefreshCw,
+  Rocket,
+  Server,
+  XCircle,
+  Zap,
+} from 'lucide-react'
+import { PageHero } from '@/components/page/hero'
+import { Faq } from '@/components/page/faq'
+import { CtaBand } from '@/components/page/cta-band'
 import { buildPageGraph, buildPageMetadata, type FaqItem } from '@/lib/seo'
 import { JsonLd } from '@/components/seo/json-ld'
 import { contactHref } from '@/lib/contact-services'
@@ -130,76 +144,72 @@ const structuredData = buildPageGraph({
   },
 })
 
-const linkClass = 'underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors'
+const darkLinkClass =
+  'text-[#93A8FF] underline decoration-[#93A8FF]/40 underline-offset-4 hover:text-[#FFB866] hover:decoration-[#FFB866] transition-colors font-medium'
 
 export default function VercelDeploymentPage() {
   return (
     <>
       <JsonLd data={structuredData} />
 
-      {/* Breadcrumb */}
       <nav className="mb-8" aria-label="Breadcrumb">
-        <ol className="flex items-center space-x-2 text-sm text-zinc-500">
-          <li><Link href="/services" className="hover:text-orange-500 transition-colors">Services</Link></li>
-          <li><span className="px-2">/</span></li>
-          <li><Link href="/services/nextjs-development" className="hover:text-orange-500 transition-colors">Next.js Development</Link></li>
-          <li><span className="px-2">/</span></li>
-          <li className="text-zinc-900">Vercel</li>
+        <ol className="flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-[0.08em] text-[#525660]">
+          <li>
+            <Link href="/services" className="hover:text-[#3A57FC] transition-colors">
+              Services
+            </Link>
+          </li>
+          <li className="text-[#CBD5E1]">/</li>
+          <li>
+            <Link href="/services/nextjs-development" className="hover:text-[#3A57FC] transition-colors">
+              Next.js Development
+            </Link>
+          </li>
+          <li className="text-[#CBD5E1]">/</li>
+          <li className="text-[#0B0C0E] font-semibold">Vercel</li>
         </ol>
       </nav>
 
-      {/* Hero Section */}
-      <section className="text-center pt-4 pb-16">
-        <div className="inline-flex bg-white/60 rounded-full mb-8 py-1.5 pr-4 pl-3 shadow-sm backdrop-blur-sm items-center gap-2">
-          <Rocket className="w-4 h-4 text-orange-500" />
-          <span className="text-xs font-semibold tracking-wider uppercase text-zinc-600">Vercel hosting for Next.js</span>
-        </div>
-
-        <h1 className="leading-[0.95] lg:text-[4rem] text-4xl font-medium text-zinc-900 tracking-tighter mb-6">
-          Vercel pricing
-          {' '}<span className="block gradient-text font-light">for Next.js, under control</span>
-        </h1>
-
-        <p className="text-base md:text-lg text-zinc-500 max-w-2xl mx-auto mb-4 leading-relaxed font-medium">
+      <PageHero
+        eyebrow={{ icon: <Rocket className="w-3.5 h-3.5" />, label: 'Vercel hosting for Next.js' }}
+        title="Vercel pricing"
+        accent="for Next.js, under control"
+        actions={
+          <>
+            <Link
+              href={contactHref('vercel')}
+              className="btn-primary rounded-md py-3.5 px-6 text-sm font-bold inline-flex items-center gap-2.5 group"
+            >
+              <span>Ask about your Vercel bill</span>
+              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </Link>
+            <Link
+              href="/blog/nextjs-cache-on-vercel"
+              className="btn-secondary rounded-md py-3.5 px-6 text-sm font-semibold inline-flex items-center gap-2 group"
+            >
+              <span>How Next.js caching works on Vercel</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            </Link>
+          </>
+        }
+      >
+        <p className="mb-4">
           For European and Indonesian engineering teams whose Vercel bill grew faster than traffic,
           or who want to deploy Next.js and AI routes to Vercel without surprise compute costs. I
           trace the usage back to the exact routes and fix it in code.
         </p>
-
-        <p className="text-sm text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed">
+        <p className="font-mono text-xs text-white/80 tracking-wide">
           This site runs Next.js on Vercel. I cut its ISR writes by replacing 5-minute timed
           revalidation with publish webhooks.
         </p>
+      </PageHero>
 
-        <div className="flex flex-wrap justify-center gap-3">
-          <Link
-            href={contactHref('vercel')}
-            className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
-          >
-            <span className="text-sm font-medium tracking-tight">Ask about your Vercel bill</span>
-            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </Link>
-          <Link
-            href="/blog/nextjs-cache-on-vercel"
-            className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
-            style={{
-              boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)',
-            }}
-          >
-            <span className="text-sm font-medium text-black/60 tracking-tight">How Next.js caching works on Vercel</span>
-            <ArrowRight className="w-4 h-4 text-zinc-500" />
-          </Link>
-        </div>
-      </section>
-
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
-
-      {/* Answer first */}
       <section className="mb-16 max-w-3xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+        <span className="section-index block mb-2">Cost breakdown</span>
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-4">
           What drives Vercel pricing for Next.js
         </h2>
-        <p className="text-zinc-600 leading-relaxed">
+        <p className="text-[#374151] leading-relaxed">
           Vercel pricing for Next.js is your plan plus usage. The usage meters that grow fastest are
           function invocations and duration, ISR reads and writes, image optimization, and bandwidth.
           The usual causes are pages that revalidate on a timer, uncached API routes, and more image
@@ -207,43 +217,41 @@ export default function VercelDeploymentPage() {
         </p>
       </section>
 
-      {/* Cost drivers */}
       <section className="mb-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {costDrivers.map((item) => (
             <div
               key={item.title}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm hover:shadow-lg transition-all group"
+              className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6 md:p-7 group"
             >
-              <div className="p-3 bg-zinc-100 rounded-xl w-fit mb-4 group-hover:bg-orange-100 transition-colors">
-                <item.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
+              <div className="p-3 bg-[#EEF2FF] text-[#3A57FC] rounded-xl w-fit mb-4 group-hover:bg-[#3A57FC] group-hover:text-white transition-colors">
+                <item.icon className="w-5 h-5" />
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{item.description}</p>
+              <h3 className="font-display font-bold text-[#0B0C0E] mb-2">{item.title}</h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.description}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
-      {/* Proof */}
       <section className="mb-16 max-w-3xl mx-auto">
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-sm">
-          <div className="flex items-center gap-2 mb-3">
-            <Zap className="w-5 h-5 text-orange-500" />
-            <h2 className="text-xl font-semibold text-zinc-900">How I cut ISR writes on this site</h2>
+        <div className="rounded-2xl bg-[#0B0C0E] text-white border border-white/10 p-6 md:p-8 shadow-[0_24px_60px_-24px_rgba(11,12,14,0.45)]">
+          <div className="flex items-center gap-2.5 mb-3">
+            <Zap className="w-5 h-5 text-[#FFB866]" />
+            <h2 className="font-display text-xl md:text-2xl font-bold text-white">How I cut ISR writes on this site</h2>
           </div>
-          <p className="text-zinc-600 leading-relaxed mb-3">
+          <p className="text-sm md:text-base text-white/85 leading-relaxed mb-3">
             The blog here used to revalidate every 5 minutes, so pages were rebuilt each time the window
             ran out and someone visited, whether I had published or not. Now WordPress calls a webhook
             when a post goes live. Only that post,
             the blog index, the sitemap, and llms.txt refresh, and search engines get an IndexNow ping.
           </p>
-          <p className="text-zinc-600 leading-relaxed">
+          <p className="text-sm md:text-base text-white/80 leading-relaxed">
             Pages stay current and the cache only writes when content changes. The full setup is on
             my{' '}
-            <Link href="/services/wordpress/headless-development" className={linkClass}>
+            <Link href="/services/wordpress/headless-development" className={darkLinkClass}>
               headless WordPress page
             </Link>
             .
@@ -251,33 +259,33 @@ export default function VercelDeploymentPage() {
         </div>
       </section>
 
-      {/* Fit */}
-      <section className="mb-16">
+      <section className="mb-16" aria-labelledby="fit-title">
         <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <span className="section-index block mb-2">Qualification</span>
+          <h2 id="fit-title" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Vercel cost optimization: <span className="gradient-text">worth it for you?</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-4">Good fit</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="rounded-2xl border border-[#DDE4FF] bg-[#F3F5FF]/70 p-6 md:p-7">
+            <h3 className="font-display font-bold text-[#0B0C0E] mb-4">Good fit</h3>
             <ul className="space-y-3">
               {goodFit.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
-                  {item}
+                <li key={item} className="flex items-start gap-3 text-sm text-[#1F2937]">
+                  <CheckCircle2 className="w-5 h-5 text-[#3A57FC] shrink-0 mt-0.5" />
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
           </div>
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-4">Probably not worth it</h3>
+          <div className="rounded-2xl border border-[#E5E7EB] bg-[#F8FAFC] p-6 md:p-7">
+            <h3 className="font-display font-bold text-[#0B0C0E] mb-4">Probably not worth it</h3>
             <ul className="space-y-3">
               {poorFit.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                  <XCircle className="w-5 h-5 text-zinc-400 shrink-0" />
-                  {item}
+                <li key={item} className="flex items-start gap-3 text-sm text-[#374151]">
+                  <XCircle className="w-5 h-5 text-[#64748B] shrink-0 mt-0.5" />
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
@@ -285,104 +293,60 @@ export default function VercelDeploymentPage() {
         </div>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
-      {/* Outcomes */}
-      <section className="mb-16">
+      <section className="mb-16" aria-labelledby="outcomes-title">
         <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <span className="section-index block mb-2">Deliverables</span>
+          <h2 id="outcomes-title" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             What you <span className="gradient-text">get</span>
           </h2>
         </div>
 
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-7">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {outcomes.map((item) => (
-              <div key={item} className="flex items-center gap-3 p-3 bg-zinc-50 rounded-xl">
-                <CheckCircle2 className="w-5 h-5 text-orange-500 shrink-0" />
-                <span className="text-sm text-zinc-700 font-medium">{item}</span>
+              <div key={item} className="flex items-center gap-3 p-4 bg-[#F8FAFC] border border-[#E5E7EB] rounded-xl">
+                <CheckCircle2 className="w-5 h-5 text-[#3A57FC] shrink-0" />
+                <span className="text-sm text-[#1F2937] font-medium">{item}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Process */}
-      <section className="mb-16">
+      <section className="mb-16" aria-labelledby="process-title">
         <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <span className="section-index block mb-2">Workflow</span>
+          <h2 id="process-title" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             How the <span className="gradient-text">review runs</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {processSteps.map((item) => (
-            <div key={item.step} className="bg-zinc-50 rounded-2xl p-5 text-center">
-              <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-500 font-bold text-lg flex items-center justify-center mx-auto mb-3">
-                {item.step}
+            <div
+              key={item.step}
+              className="rounded-2xl border border-[#E5E7EB] bg-[#F8FAFC] hover:bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6"
+            >
+              <div className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-[#0B0C0E] text-[#FFB866] font-mono text-xs font-bold mb-4">
+                {String(item.step).padStart(2, '0')}
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-1">{item.title}</h3>
-              <p className="text-sm text-zinc-500">{item.desc}</p>
+              <h3 className="font-display font-bold text-[#0B0C0E] mb-1.5">{item.title}</h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="mb-16 max-w-3xl mx-auto" aria-labelledby="vercel-faq">
-        <h2 id="vercel-faq" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-6">
-          Vercel hosting FAQ
-        </h2>
-        <div className="space-y-3">
-          {faqs.map((faq) => (
-            <details key={faq.question} className="group bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm open:shadow-md">
-              <summary className="cursor-pointer list-none font-semibold text-zinc-900 flex items-center justify-between gap-4">
-                {faq.question}
-                <span className="text-orange-500 transition-transform group-open:rotate-45 text-xl leading-none">+</span>
-              </summary>
-              <p className="mt-3 text-sm text-zinc-600 leading-relaxed">{faq.answer}</p>
-            </details>
-          ))}
-        </div>
-      </section>
+      <Faq id="vercel-faq" title="Vercel hosting FAQ" faqs={faqs} />
 
-      {/* CTA Section */}
-      <section className="overflow-hidden shadow-zinc-900/30 bg-zinc-900 rounded-4xl relative shadow-2xl mb-8">
-        <div
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage: 'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)',
-            backgroundSize: '40px 40px'
-          }}
-        />
-
-        <div className="flex flex-col items-center justify-center text-center px-6 py-12 md:px-12 md:py-14 relative">
-          <h2 className="md:text-4xl lg:text-5xl leading-tight text-3xl font-normal text-white tracking-tight mb-6 max-w-2xl">
-            Send me your Vercel usage
-          </h2>
-          <p className="text-zinc-400 mb-8 max-w-lg font-medium">
-            A screenshot of the usage page is enough to start. I&apos;ll tell you which meters drive the
-            bill and what I would change first. If the bill already fits your traffic, I&apos;ll say so.
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link
-              href={contactHref('vercel')}
-              className="group flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
-            >
-              <span>Ask about your Vercel bill</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              href="/services/nextjs-development"
-              className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 transition-all text-white text-sm font-medium rounded-full px-6 py-3"
-            >
-              <span>Need a full Next.js build?</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      <CtaBand
+        title="Send me your Vercel usage"
+        body="A screenshot of the usage page is enough to start. I'll tell you which meters drive the bill and what I would change first. If the bill already fits your traffic, I'll say so."
+        primary={{ href: contactHref('vercel'), label: 'Ask about your Vercel bill' }}
+        secondary={{ href: '/services/nextjs-development', label: 'Need a full Next.js build?' }}
+      />
     </>
   )
 }

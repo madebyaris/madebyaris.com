@@ -16,6 +16,7 @@ import {
 import { PageHero } from '@/components/page/hero'
 import { Faq } from '@/components/page/faq'
 import { CtaBand } from '@/components/page/cta-band'
+import { GeoDiagnosticShowcase } from '@/components/interactive/geo-diagnostic-showcase'
 import { buildPageGraph, buildPageMetadata, type FaqItem } from '@/lib/seo'
 import { JsonLd } from '@/components/seo/json-ld'
 import { contactHref } from '@/lib/contact-services'
@@ -46,7 +47,8 @@ export const metadata: Metadata = buildPageMetadata({
   ],
 })
 
-const linkClass = 'underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors'
+const linkClass =
+  'text-[#3A57FC] font-medium underline decoration-[#3A57FC]/35 underline-offset-4 hover:text-[#2944E0] hover:decoration-[#2944E0] transition-colors'
 
 const pillars = [
   {
@@ -219,163 +221,183 @@ export default function AiSearchGeoAeoPage() {
     <>
       <JsonLd data={structuredData} />
 
-      <nav className="mb-8" aria-label="Breadcrumb">
-        <ol className="flex items-center space-x-2 text-sm text-zinc-500">
-          <li><Link href="/services" className="hover:text-orange-500 transition-colors">Services</Link></li>
-          <li><span className="px-2">/</span></li>
-          <li><Link href="/services/seo" className="hover:text-orange-500 transition-colors">SEO</Link></li>
-          <li><span className="px-2">/</span></li>
-          <li className="text-zinc-900">AI Search (GEO &amp; AEO)</li>
-        </ol>
-      </nav>
-
       <PageHero
-        eyebrow={{ icon: <Sparkles className="w-4 h-4 text-[#D9481E]" />, label: 'GEO · AEO · Technical SEO · SG, ID & EU' }}
+        variant="cobalt"
+        breadcrumb={
+          <nav aria-label="Breadcrumb">
+            <ol className="flex items-center gap-2 font-mono text-xs text-white/75">
+              <li>
+                <Link href="/services" className="hover:text-white transition-colors">
+                  Services
+                </Link>
+              </li>
+              <li aria-hidden="true" className="text-white/40">/</li>
+              <li>
+                <Link href="/services/seo" className="hover:text-white transition-colors">
+                  SEO
+                </Link>
+              </li>
+              <li aria-hidden="true" className="text-white/40">/</li>
+              <li className="text-white">AI Search (GEO &amp; AEO)</li>
+            </ol>
+          </nav>
+        }
+        eyebrow={{ icon: <Sparkles className="w-3.5 h-3.5" />, label: 'GEO · AEO · Technical SEO · SG, ID & EU' }}
         title="AI search optimization"
         accent="engineered in your codebase"
         actions={
           <>
             <Link
               href={contactHref('geo-aeo')}
-              className="btn-primary hover:scale-[1.02] transition-all inline-flex group text-sm font-medium rounded-full py-3 px-6 gap-3 items-center"
+              className="inline-flex items-center justify-center gap-2 rounded-md bg-[#FF8800] hover:bg-[#E67600] text-white font-bold text-sm px-6 py-3.5 shadow-[0_12px_28px_-10px_rgba(0,0,0,0.35)] transition-all hover:-translate-y-0.5 group"
             >
-              <span className="text-sm font-medium tracking-tight">Request a free AI visibility snapshot</span>
+              <span>Request a free AI visibility snapshot</span>
               <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </Link>
             <a
               href="#comparison"
-              className="btn-secondary inline-flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-white/45 hover:border-white bg-white/10 hover:bg-white/18 text-white font-semibold text-sm px-6 py-3.5 transition-all group"
             >
-              <span className="text-sm font-medium tracking-tight">Compare with GEO agencies</span>
-              <ArrowRight className="w-4 h-4 text-[#525660]" />
+              <span>Compare with GEO agencies</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </a>
           </>
         }
+        bottomStrip={
+          <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 font-mono text-xs text-white/85">
+            <span>
+              13+ years shipping software · Built RankMySEO &amp; 24 open-source SEO/GEO agent skills · SG, ID &amp; EU mornings
+            </span>
+            <div className="flex flex-wrap items-center gap-5">
+              <a
+                href="https://github.com/rankmyseo/skills"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-[#FFB866] underline decoration-white/45 underline-offset-4 transition-colors"
+              >
+                github.com/rankmyseo/skills
+              </a>
+              <a
+                href="#snapshot"
+                className="text-[#FFB866] hover:text-white underline decoration-[#FFB866]/45 underline-offset-4 transition-colors"
+              >
+                See what the free benchmark includes
+              </a>
+            </div>
+          </div>
+        }
       >
-        <p className="mb-4">
+        <p>
           For B2B, SaaS, and digital teams in Singapore, Indonesia, and Europe who want their brand cited in ChatGPT,
           Gemini, Perplexity, Claude, and Google AI Overviews. I am Aris Setiawan, a senior AI software engineer and
           creator of RankMySEO. I audit your AI visibility, ship the schema and code fixes directly in your repo, and
           track every prompt and keyword.
         </p>
-        <p className="font-mono text-xs text-[#70747D]">
-          13+ years shipping software · Built RankMySEO · English or Indonesian · Direct overlap with SG, ID, and EU mornings.
-        </p>
       </PageHero>
 
-      {/* Architectural AI Visibility & Technical Diagnostic Preview */}
-      <section className="mb-16" aria-label="AI search diagnostic preview">
-        <div className="blueprint-surface rounded-2xl border border-[#232732] p-6 md:p-8 text-white">
-          <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-6 border-b border-white/10 font-mono text-xs">
-            <span className="inline-flex items-center gap-2 text-zinc-200">
-              <span className="h-2 w-2 rounded-full bg-emerald-400" />
-              rankmyseo · ai-visibility &amp; crawl inspection
-            </span>
-            <span className="text-zinc-400">ChatGPT · Gemini · Perplexity · Google AI Overviews</span>
+      {/* Band 1: Interactive RankMySEO & Agent Readiness Diagnostic Stage */}
+      <section
+        className="w-full ahrefs-dark-band py-14 md:py-20 border-t border-white/10"
+        aria-label="AI search diagnostic preview"
+      >
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+            <div className="max-w-2xl">
+              <span className="inline-flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#FFB866] mb-2">
+                Live Diagnostic Preview · RankMySEO + Agent Skills
+              </span>
+              <h2 className="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                See how AI engines cite your pages and read your codebase
+              </h2>
+            </div>
+            <p className="font-mono text-xs text-zinc-400">
+              Switch engines or buyer queries to inspect tracked signals
+            </p>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-            <div className="lg:col-span-7 bg-white/5 border border-white/10 rounded-xl p-5">
-              <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-[#E8714A] mb-2">
-                Sample buyer prompt check
-              </p>
-              <p className="font-mono text-sm text-white mb-4">
-                &ldquo;Who are the top technical SEO and AI engineering partners for Singapore &amp; EU SaaS teams?&rdquo;
-              </p>
-              <div className="grid grid-cols-3 gap-3 pt-4 border-t border-white/10 font-mono text-xs">
-                <div>
-                  <p className="text-zinc-400 text-[10px] uppercase">Tracked</p>
-                  <p className="text-white font-semibold mt-0.5">Brand mention</p>
+          <GeoDiagnosticShowcase />
+        </div>
+      </section>
+
+      {/* Band 2: White: GEO, AEO, and SEO pillars */}
+      <section className="w-full bg-white py-16 md:py-24" aria-labelledby="geo-aeo-seo">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-10">
+          <div className="max-w-2xl mb-10 md:mb-12">
+            <span className="section-index block mb-2">01 / Three layers</span>
+            <h2 id="geo-aeo-seo" className="font-display text-3xl sm:text-4xl font-bold text-[#0B0C0E] tracking-tight mb-3">
+              GEO, AEO, and SEO <span className="gradient-text">in one engineering practice</span>
+            </h2>
+            <p className="text-base text-[#4B5563] leading-relaxed">
+              Read my full breakdown in{' '}
+              <Link href="/blog/seo-for-ai-vs-geo" className={linkClass}>
+                SEO for AI search vs GEO
+              </Link>{' '}
+              and{' '}
+              <Link href="/blog/what-is-google-ai-mode" className={linkClass}>
+                Google AI Mode SEO
+              </Link>
+              .
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {pillars.map((item) => (
+              <div
+                key={item.title}
+                className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] p-6 md:p-7 transition-all"
+              >
+                <div className="flex items-center justify-between mb-5">
+                  <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#EEF2FF] border border-[#DDE4FF] text-[#3A57FC]">
+                    <item.icon className="w-5 h-5" />
+                  </div>
+                  <span className="rounded-md bg-[#EEF2FF] border border-[#DDE4FF] px-2.5 py-0.5 font-mono text-xs font-bold text-[#2944E0]">
+                    {item.badge}
+                  </span>
                 </div>
-                <div>
-                  <p className="text-zinc-400 text-[10px] uppercase">Tracked</p>
-                  <p className="text-white font-semibold mt-0.5">Cited URL</p>
-                </div>
-                <div>
-                  <p className="text-zinc-400 text-[10px] uppercase">Tracked</p>
-                  <p className="text-white font-semibold mt-0.5">Rival share</p>
-                </div>
+                <h3 className="font-display text-lg font-bold text-[#0B0C0E] tracking-tight mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-[#4B5563] leading-relaxed">{item.body}</p>
               </div>
-            </div>
-            <div className="lg:col-span-5 bg-white/5 border border-white/10 rounded-xl p-5 font-mono text-xs space-y-2.5">
-              <p className="text-[11px] uppercase tracking-[0.14em] text-zinc-400 mb-3">
-                Codebase signals inspected
-              </p>
-              <div className="flex items-center justify-between text-zinc-200">
-                <span>/robots.txt AI crawlers</span>
-                <span className="text-emerald-400">CHECKED</span>
-              </div>
-              <div className="flex items-center justify-between text-zinc-200">
-                <span>/llms.txt &amp; /llms-full.txt</span>
-                <span className="text-emerald-400">CHECKED</span>
-              </div>
-              <div className="flex items-center justify-between text-zinc-200">
-                <span>Unified @id JSON-LD graph</span>
-                <span className="text-emerald-400">CHECKED</span>
-              </div>
-              <div className="flex items-center justify-between text-zinc-200">
-                <span>SSR HTML &amp; Core Web Vitals</span>
-                <span className="text-emerald-400">CHECKED</span>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="mb-16" aria-labelledby="geo-aeo-seo">
-        <div className="max-w-2xl mb-8">
-          <h2 id="geo-aeo-seo" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            GEO, AEO, and SEO <span className="gradient-text">in one engineering practice</span>
-          </h2>
-          <p className="text-sm text-zinc-500 leading-relaxed">
-            Read my full breakdown in{' '}
-            <Link href="/blog/seo-for-ai-vs-geo" className={linkClass}>
-              SEO for AI search vs GEO
-            </Link>{' '}
-            and{' '}
-            <Link href="/blog/what-is-google-ai-mode" className={linkClass}>
-              Google AI Mode SEO
-            </Link>
-            .
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {pillars.map((item) => (
-            <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-              <div className="flex items-center justify-between mb-4">
-                <div className="p-2.5 bg-zinc-100 rounded-xl text-zinc-700">
-                  <item.icon className="w-5 h-5" />
-                </div>
-                <span className="px-2.5 py-0.5 bg-orange-50 text-orange-600 rounded-full text-xs font-semibold">
-                  {item.badge}
-                </span>
-              </div>
-              <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{item.body}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section id="snapshot" className="mb-16 scroll-mt-24" aria-labelledby="snapshot-heading">
-        <div className="bg-zinc-900 text-white rounded-[2rem] p-8 md:p-10 shadow-2xl shadow-zinc-900/20">
-          <div className="max-w-2xl mb-8">
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-xs font-semibold uppercase tracking-wider text-orange-300 mb-4">
+      {/* Band 3: Dark Proof Band: Free AI Visibility Snapshot */}
+      <section
+        id="snapshot"
+        className="w-full ahrefs-dark-band text-white py-16 md:py-24 scroll-mt-24"
+        aria-labelledby="snapshot-heading"
+      >
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-10">
+          <div className="max-w-2xl mb-10 md:mb-12">
+            <span className="inline-flex items-center gap-2 rounded-md bg-white/10 border border-white/15 px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-[#FFB866] mb-4">
               Free benchmark for qualifying teams
             </span>
-            <h2 id="snapshot-heading" className="text-2xl md:text-3xl font-medium tracking-tight mb-3">
+            <h2
+              id="snapshot-heading"
+              className="font-display text-3xl sm:text-4xl font-bold text-white tracking-tight mb-3"
+            >
               See where your brand stands in AI answers before you spend a dollar
             </h2>
-            <p className="text-sm text-zinc-300 leading-relaxed">
+            <p className="text-base text-zinc-300 leading-relaxed">
               Send your URL and up to three competitors. I run your site through RankMySEO and test real buyer prompts
               so you see exactly who gets cited today and what is blocking you.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-            {snapshotIncludes.map((item) => (
-              <div key={item.title} className="bg-white/5 border border-white/10 rounded-2xl p-5">
-                <h3 className="font-semibold text-white mb-2">{item.title}</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            {snapshotIncludes.map((item, idx) => (
+              <div
+                key={item.title}
+                className="rounded-2xl border border-white/12 bg-white/[0.04] hover:border-[#3A57FC]/70 p-6 md:p-7 transition-all"
+              >
+                <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#FFB866] block mb-2.5">
+                  {String(idx + 1).padStart(2, '0')}
+                </span>
+                <h3 className="font-display text-lg font-bold text-white tracking-tight mb-2">
+                  {item.title}
+                </h3>
                 <p className="text-sm text-zinc-300 leading-relaxed">{item.body}</p>
               </div>
             ))}
@@ -383,150 +405,228 @@ export default function AiSearchGeoAeoPage() {
 
           <Link
             href={contactHref('geo-aeo')}
-            className="inline-flex items-center gap-3 bg-white hover:bg-zinc-100 transition-all text-zinc-900 text-sm font-medium rounded-full px-6 py-3 shadow-lg"
+            className="inline-flex items-center gap-2.5 rounded-md bg-[#FF8800] hover:bg-[#E67600] text-white text-sm font-bold px-6 py-3.5 shadow-[0_14px_30px_-10px_rgba(0,0,0,0.4)] transition-all hover:-translate-y-0.5 group"
           >
             <span>Request my free AI visibility snapshot</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </Link>
         </div>
       </section>
 
-      <section id="comparison" className="mb-16 scroll-mt-24" aria-labelledby="comparison-heading">
-        <div className="max-w-2xl mb-8">
-          <h2 id="comparison-heading" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            AI engineer + RankMySEO <span className="gradient-text">vs agencies</span>
-          </h2>
-          <p className="text-sm text-zinc-500 leading-relaxed">
-            GEO-only consultancies hand over slide decks that stall in your backlog. Traditional SEO agencies rarely
-            touch AI architectures or modern TypeScript stacks. I ship both the search layer and the code.
-          </p>
-        </div>
+      {/* Band 4: White: Comparison Table */}
+      <section
+        id="comparison"
+        className="w-full bg-white py-16 md:py-24 scroll-mt-24"
+        aria-labelledby="comparison-heading"
+      >
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-10">
+          <div className="max-w-2xl mb-10 md:mb-12">
+            <span className="section-index block mb-2">02 / Comparison</span>
+            <h2
+              id="comparison-heading"
+              className="font-display text-3xl sm:text-4xl font-bold text-[#0B0C0E] tracking-tight mb-3"
+            >
+              AI engineer + RankMySEO <span className="gradient-text">vs agencies</span>
+            </h2>
+            <p className="text-base text-[#4B5563] leading-relaxed">
+              GEO-only consultancies hand over slide decks that stall in your backlog. Traditional SEO agencies rarely
+              touch AI architectures or modern TypeScript stacks. I ship both the search layer and the code.
+            </p>
+          </div>
 
-        <div className="overflow-x-auto bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm">
-          <table className="w-full text-left border-collapse text-sm">
-            <thead>
-              <tr className="border-b border-zinc-200 text-xs uppercase tracking-wider text-zinc-500">
-                <th className="p-4 font-semibold">Area</th>
-                <th className="p-4 font-semibold text-zinc-900 bg-orange-50/60">MadeByAris (AI Engineer + RankMySEO)</th>
-                <th className="p-4 font-semibold">GEO-only consultancy</th>
-                <th className="p-4 font-semibold">Traditional SEO agency</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-zinc-100">
-              {comparisonRows.map((row) => (
-                <tr key={row.aspect}>
-                  <td className="p-4 font-semibold text-zinc-900 align-top">{row.aspect}</td>
-                  <td className="p-4 text-zinc-800 bg-orange-50/40 font-medium align-top">{row.mine}</td>
-                  <td className="p-4 text-zinc-500 align-top">{row.geoOnly}</td>
-                  <td className="p-4 text-zinc-500 align-top">{row.classicSeo}</td>
+          <div className="overflow-x-auto rounded-2xl border border-[#E5E7EB] bg-white shadow-xs">
+            <table className="w-full text-left border-collapse text-sm">
+              <thead>
+                <tr className="border-b border-[#E5E7EB] font-mono text-xs uppercase tracking-[0.08em] text-[#6B7280] bg-[#F8FAFC]">
+                  <th className="p-4 md:p-5 font-semibold">Area</th>
+                  <th className="p-4 md:p-5 font-bold text-[#2944E0] bg-[#EEF2FF]">
+                    MadeByAris (AI Engineer + RankMySEO)
+                  </th>
+                  <th className="p-4 md:p-5 font-semibold">GEO-only consultancy</th>
+                  <th className="p-4 md:p-5 font-semibold">Traditional SEO agency</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-[#E5E7EB]">
+                {comparisonRows.map((row) => (
+                  <tr key={row.aspect}>
+                    <td className="p-4 md:p-5 font-semibold text-[#0B0C0E] align-top">{row.aspect}</td>
+                    <td className="p-4 md:p-5 text-[#0B0C0E] bg-[#F3F5FF]/70 font-medium align-top">{row.mine}</td>
+                    <td className="p-4 md:p-5 text-[#4B5563] align-top">{row.geoOnly}</td>
+                    <td className="p-4 md:p-5 text-[#4B5563] align-top">{row.classicSeo}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
 
-      <section className="mb-16" aria-labelledby="deliverables-heading">
-        <div className="text-center mb-10">
-          <h2 id="deliverables-heading" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            What I ship <span className="gradient-text">for your site</span>
-          </h2>
-        </div>
+      {/* Band 5: Subtle Gray: Deliverables */}
+      <section
+        className="w-full bg-[#F8FAFC] border-y border-[#E5E7EB] py-16 md:py-24"
+        aria-labelledby="deliverables-heading"
+      >
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-10">
+          <div className="max-w-2xl mb-10 md:mb-12">
+            <span className="section-index block mb-2">03 / Deliverables</span>
+            <h2
+              id="deliverables-heading"
+              className="font-display text-3xl sm:text-4xl font-bold text-[#0B0C0E] tracking-tight mb-3"
+            >
+              What I ship <span className="gradient-text">for your site</span>
+            </h2>
+          </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {deliverables.map((item) => (
-            <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-              <div className="p-3 bg-zinc-100 rounded-xl w-fit mb-4 text-zinc-700">
-                <item.icon className="w-5 h-5" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {deliverables.map((item) => (
+              <div
+                key={item.title}
+                className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] p-6 md:p-7 transition-all"
+              >
+                <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#EEF2FF] border border-[#DDE4FF] text-[#3A57FC] mb-4">
+                  <item.icon className="w-5 h-5" />
+                </div>
+                <h3 className="font-display text-lg font-bold text-[#0B0C0E] tracking-tight mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-[#4B5563] leading-relaxed">{item.description}</p>
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{item.description}</p>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Band 6: White: Proof you can inspect */}
+      <section className="w-full bg-white py-16 md:py-24" aria-labelledby="geo-proof">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-10">
+          <div className="max-w-2xl mb-10 md:mb-12">
+            <span className="section-index block mb-2">04 / Public proof</span>
+            <h2 id="geo-proof" className="font-display text-3xl sm:text-4xl font-bold text-[#0B0C0E] tracking-tight mb-3">
+              Proof you can inspect before we talk
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] p-6 md:p-7 transition-all">
+              <span className="font-mono text-xs font-bold text-[#3A57FC] block mb-2.5">01</span>
+              <h3 className="font-display text-lg font-bold text-[#0B0C0E] tracking-tight mb-2">
+                RankMySEO: the platform I built
+              </h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed">
+                I built and operate{' '}
+                <a href="https://rankmyseo.com" className={linkClass} target="_blank" rel="noopener noreferrer">
+                  RankMySEO
+                </a>{' '}
+                (with its{' '}
+                <a
+                  href="https://github.com/madebyaris/rankmyseo"
+                  className={linkClass}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  open-source toolkit on GitHub
+                </a>
+                ) to track daily Google rankings, on-page crawl health, Search Console queries, and AI assistant mentions in one place.
+              </p>
             </div>
-          ))}
-        </div>
-      </section>
 
-      <section className="mb-16 max-w-3xl mx-auto" aria-labelledby="geo-proof">
-        <h2 id="geo-proof" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
-          Proof you can inspect before we talk
-        </h2>
-        <div className="space-y-4">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-2">RankMySEO: the platform I built</h3>
-            <p className="text-sm text-zinc-600 leading-relaxed">
-              I built and operate{' '}
-              <a href="https://rankmyseo.com" className={linkClass} target="_blank" rel="noopener noreferrer">
-                RankMySEO
-              </a>{' '}
-              (with its{' '}
-              <a href="https://github.com/madebyaris/rankmyseo" className={linkClass} target="_blank" rel="noopener noreferrer">
-                open-source toolkit on GitHub
-              </a>
-              ) to track daily Google rankings, on-page crawl health, Search Console queries, and AI assistant mentions in one place.
-            </p>
-          </div>
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-2">Client search lift (anonymized under NDA)</h3>
-            <p className="text-sm text-zinc-600 leading-relaxed">
-              Grew one high-traffic content site from 700K to 1.8M Google impressions per 28 days while cutting page load
-              time from about 4 seconds to under 1 second, and grew an international industrial brand serving Singapore,
-              China, Italy, Germany, and the US from 2K to 20K impressions with CTR rising from 0.1% to 1%.
-            </p>
-          </div>
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-2">View source on this site</h3>
-            <p className="text-sm text-zinc-600 leading-relaxed">
-              Every page on madebyaris.com ships with one unified JSON-LD entity graph, explicit AI crawler rules in{' '}
-              <a href="/robots.txt" className={linkClass}>robots.txt</a>, a live{' '}
-              <a href="/sitemap.xml" className={linkClass}>sitemap.xml</a>, and AI-readable endpoints at{' '}
-              <a href="/llms.txt" className={linkClass}>llms.txt</a> and{' '}
-              <a href="/llms-full.txt" className={linkClass}>llms-full.txt</a>.
-            </p>
+            <div className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] p-6 md:p-7 transition-all">
+              <span className="font-mono text-xs font-bold text-[#3A57FC] block mb-2.5">02</span>
+              <h3 className="font-display text-lg font-bold text-[#0B0C0E] tracking-tight mb-2">
+                Client search lift (anonymized under NDA)
+              </h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed">
+                Grew one high-traffic content site from 700K to 1.8M Google impressions per 28 days while cutting page load
+                time from about 4 seconds to under 1 second, and grew an international industrial brand serving Singapore,
+                China, Italy, Germany, and the US from 2K to 20K impressions with CTR rising from 0.1% to 1%.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] p-6 md:p-7 transition-all">
+              <span className="font-mono text-xs font-bold text-[#3A57FC] block mb-2.5">03</span>
+              <h3 className="font-display text-lg font-bold text-[#0B0C0E] tracking-tight mb-2">
+                View source on this site
+              </h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed">
+                Every page on madebyaris.com ships with one unified JSON-LD entity graph, explicit AI crawler rules in{' '}
+                <a href="/robots.txt" className={linkClass}>
+                  robots.txt
+                </a>
+                , a live{' '}
+                <a href="/sitemap.xml" className={linkClass}>
+                  sitemap.xml
+                </a>
+                , and AI-readable endpoints at{' '}
+                <a href="/llms.txt" className={linkClass}>
+                  llms.txt
+                </a>{' '}
+                and{' '}
+                <a href="/llms-full.txt" className={linkClass}>
+                  llms-full.txt
+                </a>
+                .
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="mb-16" aria-labelledby="fit-heading">
-        <div className="text-center mb-10">
-          <h2 id="fit-heading" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
-            Good fit and <span className="gradient-text">poor fit</span>
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-4">Good fit</h3>
-            <ul className="space-y-3">
-              {goodFit.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
-                  {item}
-                </li>
-              ))}
-            </ul>
+      {/* Band 7: Subtle Gray: Good fit & poor fit */}
+      <section className="w-full bg-[#F8FAFC] border-y border-[#E5E7EB] py-16 md:py-24" aria-labelledby="fit-heading">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-10">
+          <div className="max-w-2xl mb-10 md:mb-12">
+            <span className="section-index block mb-2">05 / Qualification</span>
+            <h2 id="fit-heading" className="font-display text-3xl sm:text-4xl font-bold text-[#0B0C0E] tracking-tight mb-3">
+              Good fit and <span className="gradient-text">poor fit</span>
+            </h2>
           </div>
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-4">Look elsewhere</h3>
-            <ul className="space-y-3">
-              {poorFit.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                  <XCircle className="w-5 h-5 text-zinc-400 shrink-0" />
-                  {item}
-                </li>
-              ))}
-            </ul>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="rounded-2xl border border-[#DDE4FF] bg-white p-6 md:p-7 shadow-xs">
+              <h3 className="font-display text-lg font-bold text-[#0B0C0E] mb-4">Good fit</h3>
+              <ul className="space-y-3.5">
+                {goodFit.map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-sm text-[#4B5563] leading-relaxed">
+                    <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-7">
+              <h3 className="font-display text-lg font-bold text-[#0B0C0E] mb-4">Look elsewhere</h3>
+              <ul className="space-y-3.5">
+                {poorFit.map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-sm text-[#4B5563] leading-relaxed">
+                    <XCircle className="w-5 h-5 text-[#6B7280] shrink-0 mt-0.5" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
 
-      <Faq id="geo-aeo-faq" title="AI search (GEO & AEO) FAQ" faqs={faqs} />
+      {/* Band 8: White: FAQ */}
+      <section className="w-full bg-white py-16 md:py-24">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-10">
+          <Faq id="geo-aeo-faq" title="AI search (GEO & AEO) FAQ" faqs={faqs} className="mb-0" />
+        </div>
+      </section>
 
-      <CtaBand
-        title="Find out who AI assistants recommend instead of you"
-        body="Send your domain, your market, and up to three competitors. I reply within 24 hours with next steps for your free AI visibility snapshot or a plain answer if classic technical SEO should come first."
-        primary={{ href: contactHref('geo-aeo'), label: 'Request a free AI visibility snapshot' }}
-        secondary={{ href: '/services/seo', label: 'See technical SEO services' }}
-      />
+      {/* Band 9: Subtle Gray: CTA Band */}
+      <section className="w-full bg-[#F8FAFC] border-t border-[#E5E7EB] py-16 md:py-24">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-10">
+          <CtaBand
+            className="mb-0"
+            title="Find out who AI assistants recommend instead of you"
+            body="Send your domain, your market, and up to three competitors. I reply within 24 hours with next steps for your free AI visibility snapshot or a plain answer if classic technical SEO should come first."
+            primary={{ href: contactHref('geo-aeo'), label: 'Request a free AI visibility snapshot' }}
+            secondary={{ href: '/services/seo', label: 'See technical SEO services' }}
+          />
+        </div>
+      </section>
     </>
   )
 }

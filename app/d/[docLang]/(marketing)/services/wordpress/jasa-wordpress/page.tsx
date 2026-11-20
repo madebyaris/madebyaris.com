@@ -95,7 +95,7 @@ const offers = [
   {
     title: 'Plugin custom',
     description:
-      'Satu plugin untuk kebutuhan spesifik bisnis kamu, misalnya integrasi API atau layar admin khusus. Kalau sudah ada plugin bagus yang bisa, saya sebutkan namanya.',
+      'Satu plugin untuk kebutuhan spesifik bisnis kamu, misalnya integrasi API atau halaman admin khusus. Kalau sudah ada plugin bagus yang bisa dipakai, saya sebutkan namanya.',
     icon: Plug,
   },
 ]
@@ -135,9 +135,9 @@ const repairProblems = [
 
 const hardening = [
   'Update WordPress core, tema, dan plugin, lalu hapus yang tidak dipakai',
-  'Cek akun admin dan beri tiap orang role yang memang dia perlukan',
+  'Audit akun admin dan batasi hak akses tiap pengguna sesuai perannya',
   'Nyalakan login dua langkah untuk akun admin',
-  'Matikan file editor di wp-admin',
+  'Nonaktifkan file editor bawaan di wp-admin',
   'Pasang backup off-site dan uji restore-nya',
 ]
 
@@ -167,7 +167,7 @@ const goodFit = [
 ]
 
 const poorFit = [
-  'Kamu cuma butuh tema jadi dipasang dan beberapa pengaturan diubah',
+  'Kamu hanya butuh pasang tema siap pakai dengan sedikit penyesuaian',
   'Yang kamu cari input konten harian atau admin website sehari-hari',
   'Kamu butuh aplikasi dengan banyak logika bisnis, yang lebih cocok dibuat sebagai aplikasi web custom',
 ]
@@ -187,7 +187,7 @@ const detailPages = [
   },
   {
     title: 'Detail plugin custom (English)',
-    description: 'Integrasi API, layar admin, dan endpoint REST untuk WordPress.',
+    description: 'Integrasi API, halaman admin khusus, dan endpoint REST untuk WordPress.',
     href: '/services/wordpress/plugin-development',
   },
   {
@@ -260,7 +260,7 @@ const relatedPages = [
   },
 ]
 
-const linkClass = 'underline decoration-zinc-300 underline-offset-4 hover:text-orange-500 transition-colors'
+const linkClass = 'text-[#3A57FC] underline decoration-[#3A57FC]/35 underline-offset-4 hover:text-[#2944E0] hover:decoration-[#3A57FC] transition-colors'
 
 const faqs: FaqItem[] = [
   {
@@ -319,36 +319,35 @@ export default function JasaWordPressPage() {
     <div lang="id">
       <JsonLd data={structuredData} />
 
-      <nav className="mb-8" aria-label="Breadcrumb">
-        <ol className="flex items-center space-x-2 text-sm text-zinc-500">
-          <li><Link href="/services" className="hover:text-orange-500 transition-colors">Layanan</Link></li>
-          <li><span className="px-2">/</span></li>
-          <li><Link href="/services/wordpress" className="hover:text-orange-500 transition-colors">WordPress</Link></li>
-          <li><span className="px-2">/</span></li>
-          <li className="text-zinc-900">Jasa WordPress</li>
+      <nav className="mb-6" aria-label="Breadcrumb">
+        <ol className="flex flex-wrap items-center gap-1.5 text-sm text-[#4B5563]">
+          <li><Link href="/services" className="hover:text-[#3A57FC] transition-colors">Layanan</Link></li>
+          <li aria-hidden="true" className="text-[#9CA3AF]">/</li>
+          <li><Link href="/services/wordpress" className="hover:text-[#3A57FC] transition-colors">WordPress</Link></li>
+          <li aria-hidden="true" className="text-[#9CA3AF]">/</li>
+          <li className="font-medium text-[#0B0C0E]" aria-current="page">Jasa WordPress</li>
         </ol>
       </nav>
 
       <PageHero
-        eyebrow={{ icon: <Layout className="w-4 h-4 text-orange-500" />, label: 'Jasa WordPress developer Indonesia' }}
+        eyebrow={{ icon: <Layout className="w-3.5 h-3.5" />, label: 'Jasa WordPress developer Indonesia' }}
         title="Jasa pembuatan website WordPress"
-        accent="yang ringan dan gampang diurus tim kamu"
+        accent="yang ringan dan mudah dikelola tim kamu"
         actions={
           <>
             <Link
               href={contactHref('wordpress')}
-              className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
+              className="btn-primary inline-flex items-center gap-2.5 rounded-md py-3.5 px-6 text-sm font-bold group"
             >
-              <span className="text-sm font-medium tracking-tight">Kirim kebutuhan website kamu</span>
+              <span>Kirim kebutuhan website kamu</span>
               <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </Link>
             <a
               href="#perbaikan"
-              className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
-              style={{ boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)' }}
+              className="btn-secondary inline-flex items-center gap-2 rounded-md py-3.5 px-6 text-sm font-semibold group"
             >
-              <span className="text-sm font-medium text-black/60 tracking-tight">Website saya sedang bermasalah</span>
-              <ArrowRight className="w-4 h-4 text-zinc-500" />
+              <span>Website saya sedang bermasalah</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </a>
           </>
         }
@@ -358,7 +357,7 @@ export default function JasaWordPressPage() {
           Saya Aris, developer yang membuat website WordPress baru dengan tema custom dan memperbaiki website WordPress yang
           error, lambat, atau kena malware. Semua perubahan dikerjakan di staging dulu, jadi website live kamu tetap jalan.
         </p>
-        <p className="text-sm text-zinc-500 font-normal">
+        <p className="text-sm text-white/80">
           Saya membuat tema dan plugin WordPress custom, dan pernah mengerjakan performa WordPress di Hongkiat.com. Website
           ini sendiri berjalan di headless WordPress plus Next.js.
         </p>
@@ -367,16 +366,16 @@ export default function JasaWordPressPage() {
       <HeroImage src="/images/services/wordpress.jpg" alt="Ilustrasi tata letak website WordPress yang sedang diperbarui, dengan perisai keamanan, alat perawatan, dan kotak migrasi" />
 
       <section className="mb-16 max-w-3xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-4">
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-4">
           Apa yang kamu dapat dari jasa pembuatan website WordPress ini
         </h2>
-        <p className="text-zinc-600 leading-relaxed mb-4">
+        <p className="text-[#4B5563] leading-relaxed mb-4">
           Jasa pembuatan website WordPress ini saya pimpin langsung, dari tema custom sampai website online. Tema dibangun
           dari desain kamu supaya halaman tetap ringan di HP, dan tim kamu bisa update konten lewat wp-admin tanpa menunggu
           developer. Kalau website kamu sudah ada tapi error, lambat, atau kena malware, saya juga yang memimpin perbaikannya. Harga
           dihitung per proyek setelah saya lihat kebutuhannya.
         </p>
-        <p className="text-zinc-600 leading-relaxed">
+        <p className="text-[#4B5563] leading-relaxed">
           Semua perubahan saya coba di staging dulu, jadi website live kamu tetap jalan selama saya bekerja. Kamu bicara
           langsung dengan orang yang menulis kodenya, dan setiap proyek dimulai dengan scope tertulis.
         </p>
@@ -384,81 +383,87 @@ export default function JasaWordPressPage() {
 
       <section className="mb-16" aria-labelledby="layanan">
         <div className="text-center mb-10">
-          <h2 id="layanan" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <h2 id="layanan" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Layanan jasa WordPress <span className="gradient-text">yang saya kerjakan</span>
           </h2>
-          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
+          <p className="text-sm text-[#4B5563] max-w-xl mx-auto">
             Pilih satu, atau gabungkan. Kalau belum yakin butuh yang mana, ceritakan masalahnya dan saya bantu pilih.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {offers.map((item) => (
-            <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all group">
-              <div className="p-3 bg-zinc-100 rounded-xl w-fit mb-4 group-hover:bg-orange-100 transition-colors">
-                <item.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
+            <div
+              key={item.title}
+              className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6 md:p-7 group"
+            >
+              <div className="p-3 bg-[#EEF2FF] text-[#3A57FC] rounded-xl w-fit mb-4 group-hover:bg-[#3A57FC] group-hover:text-white transition-colors">
+                <item.icon className="w-5 h-5" />
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-2">
+              <h3 className="font-display font-semibold text-[#0B0C0E] mb-2">
                 {'href' in item && item.href ? (
-                  <Link href={item.href} className="hover:text-orange-500 transition-colors">
+                  <Link href={item.href} className="hover:text-[#3A57FC] transition-colors">
                     {item.title}
                   </Link>
                 ) : (
                   item.title
                 )}
               </h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{item.description}</p>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.description}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
       <section id="perbaikan" className="mb-16 scroll-mt-32" aria-labelledby="perbaikan-title">
         <div className="text-center mb-10 max-w-3xl mx-auto">
-          <h2 id="perbaikan-title" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <h2 id="perbaikan-title" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Jasa perbaikan website WordPress <span className="gradient-text">yang error, lambat, atau kena hack</span>
           </h2>
-          <p className="text-zinc-600 leading-relaxed">
+          <p className="text-[#4B5563] leading-relaxed">
             Jasa perbaikan website ini untuk WordPress yang sudah online tapi bermasalah. Kirim link dan gejalanya. Saya cek
             dulu dan bilang perkiraan penyebabnya sebelum mulai kerja.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           {repairProblems.map((item) => (
-            <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm hover:shadow-lg transition-all group">
-              <div className="p-3 bg-zinc-100 rounded-xl w-fit mb-4 group-hover:bg-orange-100 transition-colors">
-                <item.icon className="w-5 h-5 text-zinc-600 group-hover:text-orange-500 transition-colors" />
+            <div
+              key={item.title}
+              className="rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6 md:p-7 group"
+            >
+              <div className="p-3 bg-[#EEF2FF] text-[#3A57FC] rounded-xl w-fit mb-4 group-hover:bg-[#3A57FC] group-hover:text-white transition-colors">
+                <item.icon className="w-5 h-5" />
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-2">{item.title}</h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{item.description}</p>
+              <h3 className="font-display font-semibold text-[#0B0C0E] mb-2">{item.title}</h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.description}</p>
             </div>
           ))}
         </div>
 
         <div className="max-w-3xl mx-auto">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm mb-6">
-            <div className="flex items-center gap-2 mb-4">
-              <ShieldCheck className="w-5 h-5 text-orange-500" />
-              <h3 className="font-semibold text-zinc-900">Setelah diperbaiki, celahnya saya tutup</h3>
+          <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-7 mb-6">
+            <div className="flex items-center gap-2.5 mb-4">
+              <ShieldCheck className="w-5 h-5 text-[#3A57FC]" />
+              <h3 className="font-display font-semibold text-[#0B0C0E]">Setelah diperbaiki, celahnya saya tutup</h3>
             </div>
             <ul className="space-y-3">
               {hardening.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                  <CheckCircle2 className="w-5 h-5 text-orange-500 shrink-0" />
+                <li key={item} className="flex items-start gap-3 text-sm text-[#4B5563]">
+                  <CheckCircle2 className="w-5 h-5 text-[#3A57FC] shrink-0" />
                   {item}
                 </li>
               ))}
             </ul>
           </div>
-          <p className="text-zinc-600 leading-relaxed mb-4">
+          <p className="text-[#4B5563] leading-relaxed mb-4">
             Saya tidak bisa menjamin website kamu tidak akan pernah kena hack lagi. Yang bisa saya lakukan: menutup jalan masuk
             yang paling sering dipakai, yaitu plugin usang dan login admin yang lemah, lalu memastikan ada backup yang bisa
             dipulihkan.
           </p>
-          <p className="text-zinc-600 leading-relaxed mb-6">
+          <p className="text-[#4B5563] leading-relaxed mb-6">
             Supaya masalah yang sama tidak balik lagi, jasa maintenance WordPress bulanan menjalankan update dan backup ini secara
             rutin. Kalau masalah utamanya lambat, lihat juga{' '}
             <Link href="/services/wordpress/optimization" className={linkClass}>
@@ -469,52 +474,51 @@ export default function JasaWordPressPage() {
           <div className="flex flex-wrap gap-3">
             <Link
               href={contactHref('wordpress-care')}
-              className="btn-primary hover:scale-[1.02] transition-all inline-flex group shadow-zinc-900/10 hover:shadow-2xl hover:shadow-zinc-900/20 hover:-translate-y-0.5 text-sm font-medium text-zinc-900 rounded-full py-3 px-6 gap-3 items-center"
+              className="btn-primary inline-flex items-center gap-2.5 rounded-md py-3.5 px-6 text-sm font-bold group"
             >
-              <span className="text-sm font-medium tracking-tight">Kirim link website yang bermasalah</span>
+              <span>Kirim link website yang bermasalah</span>
               <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </Link>
             <Link
               href="/services/wordpress/maintenance"
-              className="btn-secondary hover:bg-zinc-50 transition-all flex text-sm font-medium rounded-full py-3 px-6 gap-2 items-center"
-              style={{ boxShadow: '0 18px 35px rgba(31, 41, 55, 0.15), 0 0 0 1px rgba(209, 213, 219, 0.3)' }}
+              className="btn-secondary inline-flex items-center gap-2 rounded-md py-3.5 px-6 text-sm font-semibold group"
             >
-              <span className="text-sm font-medium text-black/60 tracking-tight">Detail maintenance (English)</span>
-              <ArrowRight className="w-4 h-4 text-zinc-500" />
+              <span>Detail maintenance (English)</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </Link>
           </div>
         </div>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
       <section className="mb-16" aria-labelledby="tema">
         <div className="text-center mb-10">
-          <h2 id="tema" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <h2 id="tema" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Tema custom, template, <span className="gradient-text">atau page builder?</span>
           </h2>
-          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
+          <p className="text-sm text-[#4B5563] max-w-xl mx-auto">
             Ketiganya bisa dipakai untuk jasa website WordPress. Masing-masing punya untung dan ruginya.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
           {buildOptions.map((item) => (
-            <div key={item.title} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-              <h3 className="font-semibold text-zinc-900 mb-4">{item.title}</h3>
-              <p className="flex items-start gap-3 text-sm text-zinc-700 mb-3">
-                <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
+            <div key={item.title} className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-7">
+              <h3 className="font-display font-semibold text-[#0B0C0E] mb-4">{item.title}</h3>
+              <p className="flex items-start gap-3 text-sm text-[#4B5563] mb-3">
+                <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
                 {item.plus}
               </p>
-              <p className="flex items-start gap-3 text-sm text-zinc-700">
-                <XCircle className="w-5 h-5 text-zinc-400 shrink-0" />
+              <p className="flex items-start gap-3 text-sm text-[#4B5563]">
+                <XCircle className="w-5 h-5 text-[#9CA3AF] shrink-0" />
                 {item.minus}
               </p>
             </div>
           ))}
         </div>
 
-        <p className="text-zinc-600 leading-relaxed max-w-3xl mx-auto">
+        <p className="text-[#4B5563] leading-relaxed max-w-3xl mx-auto">
           Untuk website yang jadi sumber pelanggan utama, saya biasanya menyarankan tema custom. Kalau kamu baru mulai dan butuh
           online cepat, template yang bagus sering sudah cukup, dan saya akan bilang begitu. Perbandingan lengkapnya ada di{' '}
           <Link href="/blog/jasa-website-company-profile-nextjs-vs-template" className={linkClass}>
@@ -524,41 +528,41 @@ export default function JasaWordPressPage() {
         </p>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
       <section className="mb-16" aria-labelledby="cocok">
         <div className="text-center mb-10">
-          <h2 id="cocok" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <h2 id="cocok" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Jasa website WordPress ini <span className="gradient-text">cocok untuk siapa?</span>
           </h2>
-          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
+          <p className="text-sm text-[#4B5563] max-w-xl mx-auto">
             Lebih baik saya bilang tidak dari awal daripada mengambil pekerjaan yang kurang pas.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-4">Cocok</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-7">
+            <h3 className="font-display font-semibold text-[#0B0C0E] mb-4">Cocok</h3>
             <ul className="space-y-3">
               {goodFit.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
+                <li key={item} className="flex items-start gap-3 text-sm text-[#4B5563]">
+                  <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
                   {item}
                 </li>
               ))}
             </ul>
           </div>
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
-            <h3 className="font-semibold text-zinc-900 mb-4">Kurang cocok</h3>
+          <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 md:p-7">
+            <h3 className="font-display font-semibold text-[#0B0C0E] mb-4">Kurang cocok</h3>
             <ul className="space-y-3">
               {poorFit.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-zinc-700">
-                  <XCircle className="w-5 h-5 text-zinc-400 shrink-0" />
+                <li key={item} className="flex items-start gap-3 text-sm text-[#4B5563]">
+                  <XCircle className="w-5 h-5 text-[#9CA3AF] shrink-0" />
                   {item}
                 </li>
               ))}
             </ul>
-            <p className="text-sm text-zinc-500 mt-4">
+            <p className="text-sm text-[#4B5563] mt-4">
               Untuk yang terakhir, lihat{' '}
               <Link href="/services/saas-development/jasa-pembuatan-aplikasi-web" className={linkClass}>
                 jasa pembuatan aplikasi web
@@ -571,67 +575,70 @@ export default function JasaWordPressPage() {
 
       <section className="mb-16" aria-labelledby="cara-kerja">
         <div className="text-center mb-10">
-          <h2 id="cara-kerja" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <h2 id="cara-kerja" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Cara <span className="gradient-text">kerja saya</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {processSteps.map((item) => (
-            <div key={item.step} className="bg-zinc-50 rounded-2xl p-5 text-center">
-              <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-500 font-bold text-lg flex items-center justify-center mx-auto mb-3">
-                {item.step}
+            <div
+              key={item.step}
+              className="rounded-2xl border border-[#E5E7EB] bg-[#F8FAFC] hover:border-[#3A57FC] transition-colors p-6 text-center"
+            >
+              <div className="w-10 h-10 rounded-xl bg-[#EEF2FF] border border-[#DDE4FF] text-[#3A57FC] font-mono font-bold text-sm flex items-center justify-center mx-auto mb-4">
+                {String(item.step).padStart(2, '0')}
               </div>
-              <h3 className="font-semibold text-zinc-900 mb-1">{item.title}</h3>
-              <p className="text-sm text-zinc-500">{item.desc}</p>
+              <h3 className="font-display font-semibold text-[#0B0C0E] mb-1.5">{item.title}</h3>
+              <p className="text-sm text-[#4B5563] leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <div className="w-full h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mb-16 opacity-60" />
+      <div className="w-full h-px bg-[#E5E7EB] mb-16" />
 
       <section className="mb-16" aria-labelledby="detail">
         <div className="text-center mb-10">
-          <h2 id="detail" className="text-2xl md:text-3xl font-medium text-zinc-900 tracking-tighter mb-3">
+          <h2 id="detail" className="font-display text-2xl md:text-3xl font-bold text-[#0B0C0E] tracking-tight mb-3">
             Detail tiap layanan <span className="gradient-text">dan bacaan terkait</span>
           </h2>
-          <p className="text-sm text-zinc-500 max-w-xl mx-auto">
+          <p className="text-sm text-[#4B5563] max-w-xl mx-auto">
             Halaman detail layanan WordPress ditulis dalam Bahasa Inggris. Yang lain di bawah ini dalam Bahasa Indonesia, kecuali
             yang ditandai.
           </p>
         </div>
 
-        <h3 className="font-semibold text-zinc-900 mb-4">Detail layanan WordPress</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
+        <h3 className="font-display font-semibold text-[#0B0C0E] mb-4">Detail layanan WordPress</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
           {detailPages.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="block bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm hover:shadow-lg transition-all group"
+              className="block rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6 md:p-7 group"
             >
-              <span className="font-semibold text-zinc-900 mb-1 flex items-center justify-between gap-3">
+              <span className="font-display font-semibold text-[#0B0C0E] group-hover:text-[#3A57FC] transition-colors mb-1.5 flex items-center justify-between gap-3">
                 {item.title}
-                <ArrowRight className="w-4 h-4 text-zinc-400 group-hover:text-orange-500 group-hover:translate-x-0.5 transition-all shrink-0" />
+                <ArrowRight className="w-4 h-4 text-[#9CA3AF] group-hover:text-[#3A57FC] group-hover:translate-x-0.5 transition-all shrink-0" />
               </span>
-              <span className="block text-sm text-zinc-500 leading-relaxed">{item.description}</span>
+              <span className="block text-sm text-[#4B5563] leading-relaxed">{item.description}</span>
             </Link>
           ))}
         </div>
 
-        <h3 className="font-semibold text-zinc-900 mb-4">Layanan dan artikel terkait</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <h3 className="font-display font-semibold text-[#0B0C0E] mb-4">Layanan dan artikel terkait</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {relatedPages.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="block bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm hover:shadow-lg transition-all group"
+              className="block rounded-2xl border border-[#E5E7EB] bg-white hover:border-[#3A57FC] hover:shadow-[0_20px_50px_-24px_rgba(58,87,252,0.22)] transition-all p-6 md:p-7 group"
             >
-              <span className="font-semibold text-zinc-900 mb-1 flex items-center justify-between gap-3">
+              <span className="font-display font-semibold text-[#0B0C0E] group-hover:text-[#3A57FC] transition-colors mb-1.5 flex items-center justify-between gap-3">
                 {item.title}
-                <ArrowRight className="w-4 h-4 text-zinc-400 group-hover:text-orange-500 group-hover:translate-x-0.5 transition-all shrink-0" />
+                <ArrowRight className="w-4 h-4 text-[#9CA3AF] group-hover:text-[#3A57FC] group-hover:translate-x-0.5 transition-all shrink-0" />
               </span>
-              <span className="block text-sm text-zinc-500 leading-relaxed">{item.description}</span>
+              <span className="block text-sm text-[#4B5563] leading-relaxed">{item.description}</span>
             </Link>
           ))}
         </div>
@@ -640,8 +647,9 @@ export default function JasaWordPressPage() {
       <Faq id="jasa-wordpress-faq" title="Pertanyaan soal jasa WordPress" faqs={faqs} />
 
       <CtaBand
+        badge="Diskusi langsung · Balas dalam 24 jam"
         title="Ceritakan website WordPress yang kamu butuhkan"
-        body="Kirim tujuan website, link website lama kalau ada, dan apa yang mengganggu kamu. Saya balas dengan pertanyaan atau gambaran scope. Kalau tema jadi sudah cukup untuk kebutuhan kamu, saya bilang terus terang."
+        body="Kirim tujuan website, link website lama kalau ada, dan kendala yang sedang dihadapi. Saya balas dengan pertanyaan lanjutan atau gambaran scope. Kalau tema jadi sudah cukup untuk kebutuhan kamu, saya bilang terus terang."
         primary={{ href: contactHref('wordpress'), label: 'Kirim kebutuhan website kamu' }}
         secondary={{ href: '/services/wordpress', label: 'Layanan WordPress (English)' }}
       />

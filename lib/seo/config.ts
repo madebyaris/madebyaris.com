@@ -5,7 +5,7 @@ export const siteConfig = {
   shortName: 'MadeByAris',
   url: process.env.NEXT_PUBLIC_SITE_URL ?? productionUrl,
   description:
-    'Aris Setiawan is a senior AI software engineer and AI consultant in Indonesia partnering with EU and local teams on AI agents, LLM systems, Rust, and web apps.',
+    'Founder-led AI development agency in Indonesia partnering with EU, UK, Singapore, and local teams on custom AI agents, LLM systems, Rust, Next.js, and GEO/SEO.',
   author: 'Aris Setiawan',
   titleSuffix: ' | Aris Setiawan',
   locale: 'en_US',
@@ -15,6 +15,8 @@ export const siteConfig = {
   email: 'arissetia.m@gmail.com',
   sameAs: [
     'https://github.com/madebyaris',
+    'https://github.com/rankmyseo',
+    'https://rankmyseo.com',
     'https://www.linkedin.com/in/arissetia',
     'https://www.upwork.com/freelancers/~0117c4a4c888d9e9fe',
     'https://x.com/arisberikut',
@@ -72,6 +74,8 @@ export const authorProfile = {
     'WordPress plugin and theme development',
     'PHP and Laravel',
     'Technical SEO',
+    'Generative Engine Optimization (GEO)',
+    'Answer Engine Optimization (AEO)',
     'Vercel',
     'Web performance',
   ],

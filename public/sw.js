@@ -1,9 +1,9 @@
 // Service Worker for Enhanced Performance
-// Version 1.0.0
+// Version 1.0.1
 
-const CACHE_NAME = 'madebyaris-v1.0.0';
-const STATIC_CACHE_NAME = 'madebyaris-static-v1.0.0';
-const DYNAMIC_CACHE_NAME = 'madebyaris-dynamic-v1.0.0';
+const CACHE_NAME = 'madebyaris-v1.0.3';
+const STATIC_CACHE_NAME = 'madebyaris-static-v1.0.3';
+const DYNAMIC_CACHE_NAME = 'madebyaris-dynamic-v1.0.3';
 
 // Assets to cache immediately
 const STATIC_ASSETS = [

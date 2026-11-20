@@ -36,7 +36,7 @@ export function RelatedPostCard({ post }: RelatedPostCardProps) {
               {(post.categories as unknown as Category[]).slice(0, 2).map((category) => (
                 <span
                   key={category.id}
-                  className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-orange-50 text-orange-600 text-xs font-medium border border-orange-100"
+                  className="inline-flex items-center px-2.5 py-0.5 rounded-md bg-[#EEF2FF] text-[#3A57FC] text-xs font-medium border border-[#DDE4FF]"
                 >
                   {category.name}
                 </span>
@@ -45,17 +45,17 @@ export function RelatedPostCard({ post }: RelatedPostCardProps) {
           )}
 
           <h3
-            className="text-lg font-semibold mb-2 line-clamp-2 text-zinc-900 group-hover:text-orange-500 transition-colors tracking-tight"
+            className="text-lg font-semibold mb-2 line-clamp-2 text-[#0B0C0E] group-hover:text-[#3A57FC] transition-colors tracking-tight"
             dangerouslySetInnerHTML={{ __html: post.title.rendered }}
           />
 
           <div
-            className="text-sm text-zinc-500 mb-4 line-clamp-2 leading-relaxed flex-grow"
+            className="text-sm text-[#4B5563] mb-4 line-clamp-2 leading-relaxed flex-grow"
             dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
           />
 
-          <div className="mt-auto pt-4 border-t border-zinc-100">
-            <span className="inline-flex items-center text-sm font-medium text-zinc-900 group-hover:text-orange-500 transition-colors">
+          <div className="mt-auto pt-4 border-t border-[#E5E7EB]">
+            <span className="inline-flex items-center text-sm font-semibold text-[#3A57FC] group-hover:text-[#2944E0] transition-colors">
               Read Article
               <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
             </span>

@@ -8,7 +8,7 @@ export const revalidate = 86400 // Revalidate daily
 const path = '/services/jasa-vite'
 const pageTitle = 'Jasa migrasi dan pengembangan Vite'
 const pageDescription =
-  'Pindahkan aplikasi React ke Vite, atau mulai dari awal dengannya: build lebih cepat, dev server lebih ringan, dan setup yang bisa dirawat tim. Mulai USD 5.000.'
+  'Pindahkan aplikasi React ke Vite, atau bangun proyek baru di atas Vite: build lebih cepat, dev server lebih ringan, dan setup yang rapi untuk tim. Mulai USD 5.000.'
 
 export const metadata: Metadata = buildPageMetadata({
   title: pageTitle,
@@ -45,60 +45,60 @@ export default function JasaVitePage() {
       description={pageDescription}
       serviceType="Vite development"
       breadcrumbName="Jasa Vite"
-      eyebrow={{ icon: <Zap className="w-4 h-4 text-orange-500" />, label: 'Jasa Vite' }}
+      eyebrow={{ icon: <Zap className="w-4 h-4 text-[#FFB866]" />, label: 'Jasa Vite' }}
       title="Pindah ke Vite,"
       accent="dan dapatkan build yang cepat lagi"
       intro={
         <p>
-          Vite adalah build tool dan dev server yang dipakai banyak aplikasi React modern. Kalau build kamu lambat, dev server
-          tersendat, atau tidak ada yang berani menyentuh setup build lama, saya pindahkan aplikasinya ke Vite, atau mulai yang
-          baru di atasnya. Hasilnya setup yang bisa dibaca tim kamu.
+          Vite adalah build tool dan dev server yang dipakai banyak aplikasi React saat ini. Kalau proses build kamu lambat,
+          dev server tersendat, atau tidak ada yang berani menyentuh konfigurasi build lama, saya bantu pindahkan ke Vite atau
+          bangun proyek baru di atasnya, dengan setup yang rapi dan mudah dipahami tim kamu.
         </p>
       }
       signsTitle="Tanda sudah waktunya pindah ke Vite"
       signs={[
-        'Build atau dev server butuh waktu berminit-menit',
+        'Proses build atau dev server butuh waktu bermenit-menit',
         'Aplikasi masih berjalan di Create React App atau setup Webpack lama',
-        'File konfigurasi build yang tidak ada yang berani mengubah',
-        'Kamu ingin fondasi modern untuk aplikasi React baru',
+        'File konfigurasi build sudah terlalu rumit sampai tidak ada yang berani mengubahnya',
+        'Kamu ingin fondasi yang cepat dan rapi untuk aplikasi React baru',
       ]}
       offersTitle="Yang saya kerjakan"
       offers={[
         {
           title: 'Migrasi ke Vite',
-          body: 'Memindahkan aplikasi dari Create React App atau Webpack ke Vite, di branch terpisah, dengan test kamu berjalan sebelum dan sesudah.',
+          body: 'Memindahkan aplikasi dari Create React App atau Webpack ke Vite di branch terpisah, dengan seluruh test berjalan sebelum dan sesudah migrasi.',
         },
         {
-          title: 'Penyetelan build dan dev server',
-          body: 'Chunking, penanganan dependency, dan pengaturan build, supaya build cepat dan bundle tetap kecil.',
+          title: 'Optimasi build dan dev server',
+          body: 'Mengatur chunking, manajemen dependency, dan konfigurasi build agar proses kompilasi cepat dan ukuran bundle tetap ringan.',
         },
         {
           title: 'Rapikan konfigurasi dan environment',
-          body: 'Satu setup yang jelas untuk environment variable, alias, dan script, ditulis untuk tim.',
+          body: 'Satu setup yang jelas untuk environment variable, path alias, dan script, lengkap dengan dokumentasi untuk tim.',
         },
         {
           title: 'Aplikasi baru di atas Vite',
-          body: 'Aplikasi React dan TypeScript baru dengan test, linting, dan deployment yang siap sejak commit pertama.',
+          body: 'Membangun aplikasi React dan TypeScript baru dengan test, linting, dan deployment siap pakai sejak commit pertama.',
         },
         {
-          title: 'Sekalian perbaiki aplikasi React-nya',
-          body: 'Build yang cepat tidak memperbaiki aplikasi yang lambat. Itu juga bisa saya ukur dan perbaiki.',
+          title: 'Sekalian optimasi aplikasi React-nya',
+          body: 'Build yang cepat belum tentu membuat aplikasinya cepat. Performa runtime juga bisa saya ukur dan perbaiki.',
           href: '/services/jasa-optimasi-react',
           cta: 'Lihat optimasi React',
         },
         {
           title: 'API Node.js di sampingnya',
-          body: 'Kalau aplikasi butuh back end, saya bangun di atas Fastify.',
+          body: 'Kalau aplikasi kamu butuh backend yang cepat, saya bangun di atas Fastify.',
           href: '/services/jasa-fastify',
           cta: 'Lihat jasa Fastify',
         },
       ]}
       sourceNote="Web app baru x.com dilaporkan dibangun di atas React, Vite, Fastify, dan TypeScript (laporan teknik X, diberitakan iTechPost, 5 November 2026)."
       steps={[
-        { title: 'Tinjau', desc: 'Saya baca setup build saat ini dan mendaftar apa saja yang akan berubah.' },
-        { title: 'Migrasi', desc: 'Saya pindahkan aplikasi ke Vite di branch terpisah dan menjalankan test kamu.' },
-        { title: 'Bandingkan', desc: 'Kita bandingkan waktu build, ukuran bundle, dan perilaku sebelum live.' },
-        { title: 'Serah terima', desc: 'Kamu menerima catatan setup baru yang bisa diikuti tim.' },
+        { title: 'Tinjau', desc: 'Saya audit setup build saat ini dan menyusun daftar bagian yang perlu disesuaikan.' },
+        { title: 'Migrasi', desc: 'Saya pindahkan aplikasi ke Vite di branch terpisah sambil memastikan test kamu lulus.' },
+        { title: 'Bandingkan', desc: 'Kita bandingkan waktu build, ukuran bundle, dan perilaku aplikasi sebelum rilis.' },
+        { title: 'Serah terima', desc: 'Kamu menerima catatan konfigurasi baru yang mudah diikuti seluruh tim.' },
       ]}
       faqTitle="Pertanyaan soal Vite"
       faqs={faqs}
@@ -108,9 +108,9 @@ export default function JasaVitePage() {
         { href: '/services/jasa-fastify', label: 'Jasa Fastify' },
         { href: '/services/nextjs-development/nextjs-indonesia', label: 'Jasa Next.js' },
       ]}
-      ctaTitle="Kirim setup build kamu"
-      ctaBody="Ceritakan apa yang kamu pakai sekarang dan apa yang bermasalah. Saya balas dalam 24 jam dengan pertanyaan atau jawaban jujur apakah Vite langkah yang tepat."
-      ctaLabel="Kirim setup build kamu"
+      ctaTitle="Diskusikan setup build kamu"
+      ctaBody="Ceritakan setup yang kamu pakai sekarang dan kendala utamanya. Saya balas dalam 24 jam dengan beberapa pertanyaan lanjutan, atau jawaban jujur apakah Vite langkah yang paling tepat."
+      ctaLabel="Konsultasi migrasi Vite"
     />
   )
 }
