@@ -177,6 +177,31 @@ function renderContent(post: ProcessedPost): string {
   }
 }
 
+function splitAfterFirstParagraph(html: string): { leadHtml: string; restHtml: string } {
+  const match = html.match(/<p\b[^>]*>[\s\S]*?<\/p>/i)
+  if (!match || match.index === undefined) {
+    return { leadHtml: '', restHtml: html }
+  }
+
+  // Only split when the first <p> is not nested inside a container block.
+  const before = html.slice(0, match.index)
+  if (/<(blockquote|div|figure|table|ul|ol|section|aside)\b/i.test(before)) {
+    return { leadHtml: '', restHtml: html }
+  }
+
+  const splitAt = match.index + match[0].length
+  const leadHtml = html.slice(0, splitAt).trim()
+  const restHtml = html.slice(splitAt).trim()
+  if (!restHtml) {
+    return { leadHtml: '', restHtml: html }
+  }
+
+  return { leadHtml, restHtml }
+}
+
+const BLOG_PROSE_CLASS =
+  '[&_.prose]:px-0 [&_.prose_a]:text-[#3A57FC] [&_.prose_a:hover]:text-[#2944E0] [&_.prose_blockquote]:border-[#3A57FC] [&_.prose_blockquote]:bg-[#F8FAFC] [&_.prose_code]:bg-[#F3F5FF] [&_.prose_code]:text-[#2944E0] [&_.prose_pre_code]:bg-transparent [&_.prose_pre_code]:text-[#e6e8ec] [&_.prose_table_tr:nth-child(even)_td]:bg-[#F8FAFC]'
+
 async function getRelatedPosts(post: ProcessedPost, categoryId: number | undefined): Promise<ProcessedPost[]> {
   const sameCategory = categoryId
     ? await getPosts({ categories: [categoryId], exclude: [post.id], per_page: RELATED_POSTS })
@@ -222,6 +247,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
   const relatedPosts = await getRelatedPosts(post, category?.id)
 
   const content = renderContent(post)
+  const { leadHtml, restHtml } = splitAfterFirstParagraph(content)
   const headings = extractHeadings(content)
   const readingTime = getReadingTime(content)
   const featuredMedia = post._embedded?.['wp:featuredmedia']?.[0]
@@ -358,12 +384,28 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
             )}
           </header>
 
+          {headings.length > 0 && (
+            <div className="[&_details]:border-[#E5E7EB] [&_details]:bg-[#F8FAFC] [&_details]:shadow-none [&_summary]:text-[#0B0C0E] [&_summary]:focus-visible:ring-[#3A57FC] [&_summary_svg:first-of-type]:text-[#3A57FC] [&_nav]:border-[#E5E7EB] [&_a]:text-[#4B5563] [&_a:hover]:text-[#3A57FC]">
+              <TableOfContents headings={headings} />
+            </div>
+          )}
+
+          {leadHtml && (
+            <div className={`${BLOG_PROSE_CLASS} [&_.prose>p:last-child]:mb-0`}>
+              <WordPressContent content={leadHtml} reserveHeight={false} />
+            </div>
+          )}
+
           {featuredImageUrl ? (
-            <div className="mb-10 overflow-hidden rounded-2xl border border-[#E5E7EB] shadow-[0_20px_50px_-28px_rgba(11,12,14,0.18)] [&>div]:mb-0 [&>div]:rounded-none [&>div]:shadow-none">
+            <div
+              className={`${leadHtml ? 'my-8' : 'mb-10'} overflow-hidden rounded-2xl border border-[#E5E7EB] shadow-[0_20px_50px_-28px_rgba(11,12,14,0.18)] [&>div]:mb-0 [&>div]:rounded-none [&>div]:shadow-none`}
+            >
               <FeaturedImage src={featuredImageUrl} alt={featuredImageAlt} width={800} height={450} />
             </div>
           ) : (
-            <div className="relative mb-10 aspect-[21/9] w-full overflow-hidden rounded-2xl border border-[#E5E7EB] bg-[#0B0C0E] shadow-[0_20px_50px_-28px_rgba(58,87,252,0.28)]">
+            <div
+              className={`relative ${leadHtml ? 'my-8' : 'mb-10'} aspect-[21/9] w-full overflow-hidden rounded-2xl border border-[#E5E7EB] bg-[#0B0C0E] shadow-[0_20px_50px_-28px_rgba(58,87,252,0.28)]`}
+            >
               <Image
                 src={blogDefaultCover}
                 alt={plainTitle}
@@ -389,14 +431,8 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
             </div>
           )}
 
-          {headings.length > 0 && (
-            <div className="[&_details]:border-[#E5E7EB] [&_details]:bg-[#F8FAFC] [&_details]:shadow-none [&_summary]:text-[#0B0C0E] [&_summary]:focus-visible:ring-[#3A57FC] [&_summary_svg:first-of-type]:text-[#3A57FC] [&_nav]:border-[#E5E7EB] [&_a]:text-[#4B5563] [&_a:hover]:text-[#3A57FC]">
-              <TableOfContents headings={headings} />
-            </div>
-          )}
-
-          <div className="[&_.prose]:px-0 [&_.prose_a]:text-[#3A57FC] [&_.prose_a:hover]:text-[#2944E0] [&_.prose_blockquote]:border-[#3A57FC] [&_.prose_blockquote]:bg-[#F8FAFC] [&_.prose_code]:bg-[#F3F5FF] [&_.prose_code]:text-[#2944E0] [&_.prose_pre_code]:bg-transparent [&_.prose_pre_code]:text-[#e6e8ec] [&_.prose_table_tr:nth-child(even)_td]:bg-[#F8FAFC]">
-            <WordPressContent content={content} estimatedReadTime={readingTime} />
+          <div className={BLOG_PROSE_CLASS}>
+            <WordPressContent content={restHtml} estimatedReadTime={readingTime} />
           </div>
 
           {archivedCategories.length > 0 && (

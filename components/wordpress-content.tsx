@@ -5,9 +5,14 @@ import { useEffect, useRef } from 'react'
 interface WordPressContentProps {
   content: string;
   estimatedReadTime?: number;
+  reserveHeight?: boolean;
 }
 
-export function WordPressContent({ content, estimatedReadTime = 5 }: WordPressContentProps) {
+export function WordPressContent({
+  content,
+  estimatedReadTime = 5,
+  reserveHeight = true,
+}: WordPressContentProps) {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -38,7 +43,7 @@ export function WordPressContent({ content, estimatedReadTime = 5 }: WordPressCo
   return (
     <div
       ref={containerRef}
-      style={{ minHeight: `${estimatedReadTime * 200}px` }}
+      style={reserveHeight ? { minHeight: `${estimatedReadTime * 200}px` } : undefined}
       className="prose prose-lg dark:prose-invert max-w-none"
       dangerouslySetInnerHTML={{ __html: content }}
     />
